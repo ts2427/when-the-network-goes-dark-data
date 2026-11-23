@@ -1231,7 +1231,7 @@ a larger share out ({MAP_SCALE_TEXT[MAP_SCALE]}); hatched light-grey counties we
 reported, not zero), and counties in the report with no sites out have a faint tint. Hover over or tap a county
 for its numbers, and the cause shares where the report gives them. The table under the map lists the same numbers for
 the chosen report. Drawn in your browser from the published data for all {n_s} storms, with county shapes from the
-Census Bureau; nothing is loaded from any other site. {data['note']}
+Census Bureau; the map's code, shapes and data are all served from this site. {data['note']}
 
 Across all {n0(data['distribution']['n_county_reports'])} county-reports, {100 * data['distribution']['share_zero']:.1f}%
 show 0% of sites out and {100 * data['distribution']['share_50_or_more']:.1f}% show 50% or more.
@@ -1476,8 +1476,8 @@ def lookup_section(data: dict) -> str:
 
 Choose any of the {n_c} counties in the FCC's reports to see each storm's share of the county's cell sites out, report
 by report, by days since the storm's 34-knot winds first reached a study-state county. Points are the FCC's reports;
-lines join only consecutive reports of that storm at most 1.5 days apart, so a missing or excluded report leaves a gap. Built in the browser from the published data, with nothing loaded
-from any other site. {data['note']}
+lines join only consecutive reports of that storm at most 1.5 days apart, so a missing or excluded report leaves a gap. Built in the browser from the published data, with its code and data
+served from this site. {data['note']}
 
 <div class="county-lookup" data-src="/static/data/{LOOKUP_JSON.name}">
 <label for="county-lookup-select">County</label>
