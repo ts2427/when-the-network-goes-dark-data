@@ -35,12 +35,6 @@ def test_seen_before_registration_is_taken_from_the_plan():
     assert step11.seen_before_registration(plan) == "line one\n- item"
 
 
-def test_snapshot_lists_exclude_raw_data_secrets_and_prompts():
-    allowed = set(step11.SNAPSHOT_DIRS) | set(step11.SNAPSHOT_DOCS) | set(step11.SNAPSHOT_RESULTS)
-    for bad in ("data", ".env", "CLAUDE.md", "KICKOFF_PROMPT.md", "interim", "raw"):
-        assert bad not in allowed
-
-
 @needs_results
 def test_page_wording_and_required_items():
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
@@ -204,3 +198,20 @@ def test_no_priority_or_preregistration_wording_on_the_page():
     for bad in ("pre-registered", "preregistered", "pre-registration", "for the first time", "the first to",
                 "first-ever", "first study of", "first analysis"):
         assert bad not in text, bad
+
+
+
+def test_pointer_readme_names_the_repository_and_both_dois(tmp_path, monkeypatch):
+    monkeypatch.setattr(step11, "OUTPUT", step11.OUTPUT)
+    dest = step11.write_pointer(tmp_path / "hurricane_resilience")
+    text = dest.read_text(encoding="utf-8")
+    assert [p.name for p in dest.parent.iterdir()] == ["README.md"]
+    for want in (step11.DATA_REPO, step11.CONCEPT_DOI, step11.VERSION_DOI):
+        assert want in text
+
+
+def test_dois_are_the_checked_concept_and_version_records():
+    assert step11.CONCEPT_DOI == "10.5281/zenodo.24477809" and step11.VERSION_DOI == "10.5281/zenodo.24477811"
+    c = step11.dataset_citations()
+    assert c["general"].endswith(step11.CONCEPT_DOI) and c["version"].endswith(step11.VERSION_DOI)
+    assert "Version 2.0.0" in c["version"]

@@ -57,38 +57,35 @@ def output(tmp_path, monkeypatch):
     return out
 
 
-def test_summary_is_copied_into_the_snapshot(output, tmp_path):
-    dest = step11.copy_validation_summary(tmp_path / "snapshot")
-    assert dest == tmp_path / "snapshot" / "validation_summary.csv"
-    assert dest.read_bytes() == (output / "validation_summary.csv").read_bytes()
-
-
 def test_default_snapshot_folder_uses_the_underscore_name():
     assert step11.SNAPSHOT.parts[-2:] == ("demos", "hurricane_resilience")
 
 
-def test_missing_summary_stops_publishing(output, tmp_path):
-    (output / "validation_summary.csv").unlink()
+def test_pointer_replaces_the_old_snapshot(output, tmp_path):
+    old = tmp_path / "snapshot"
+    (old / "src").mkdir(parents=True)
+    (old / "src" / "x.py").write_text("old", encoding="utf-8")
+    dest = step11.write_pointer(old)
+    assert sorted(p.name for p in old.iterdir()) == ["README.md"] and dest == old / "README.md"
+
+
+def test_missing_validation_stops_publishing(output, tmp_path):
+    (output / "validation_dirs.csv").unlink()
     with pytest.raises(FileNotFoundError):
-        step11.copy_validation_summary(tmp_path / "snapshot")
+        step11.write_pointer(tmp_path / "snapshot")
 
 
 def test_failed_validation_is_not_published(output, tmp_path):
     (output / "validation_dirs.csv").write_bytes(b"doc_id,status\nDOC-1A1,fail\n")
     with pytest.raises(ValueError):
-        step11.copy_validation_summary(tmp_path / "snapshot")
+        step11.write_pointer(tmp_path / "snapshot")
     assert not (tmp_path / "snapshot").exists()
 
 
-def test_publish_step_must_copy_the_summary_once_built():
-    src = (ROOT / "src" / "11_build_page.py").read_text(encoding="utf-8")
-    tree = ast.parse(src)
-    assert "validation_summary.csv" in ast.get_docstring(tree)
-    if "Not implemented yet" in src:
-        return
-    assert any(isinstance(n, ast.Call) and getattr(n.func, "id", "") == "copy_validation_summary"
-               for n in ast.walk(tree)), "step 11 must call copy_validation_summary"
-
+def test_publish_step_writes_the_pointer():
+    tree = ast.parse((ROOT / "src" / "11_build_page.py").read_text(encoding="utf-8"))
+    assert "validation" in ast.get_docstring(tree)
+    assert any(isinstance(n, ast.Call) and getattr(n.func, "id", "") == "write_pointer" for n in ast.walk(tree))
 
 
 def test_report_text_keeps_the_more_complete_of_txt_and_pdf(tmp_path, monkeypatch):

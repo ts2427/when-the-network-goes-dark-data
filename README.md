@@ -1,5 +1,7 @@
 # When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24477809.svg)](https://doi.org/10.5281/zenodo.24477809)
+
 Version 2.0.0 (2026-11-23). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
 
 The data and code behind the page *When the Network Goes Dark* (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 21 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in `data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.
@@ -109,7 +111,12 @@ Each section of the page, its figures (the figure CSVs are published with the pa
 
 ## How to cite
 
-See `CITATION.cff`. A DOI will be added when the repository is archived.
+The repository is archived on Zenodo. Cite the concept DOI for the data and code in general, and the version DOI when you use specific numbers:
+
+- In general (all versions; resolves to the latest): Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477809
+- These numbers (version 2.0.0): Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 2.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477811
+
+`CITATION.cff` has both, and GitHub's "Cite this repository" button reads it.
 
 ## Disclosure
 

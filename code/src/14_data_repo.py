@@ -419,13 +419,28 @@ def codebook_md(T: Path, pkg: dict) -> None:
 
 
 # ------------------------------------------------------------------------------------------- text files --
+def dois() -> tuple:
+    """(concept DOI, version DOI), from step 11, where they were checked against the Zenodo record."""
+    s11 = importlib.import_module("11_build_page")
+    return s11.CONCEPT_DOI, s11.VERSION_DOI
+
+
 def citation_cff(T: Path) -> None:
+    concept, version = dois()
     write(T / "CITATION.cff", f"""cff-version: 1.2.0
-message: "If you use these data or code, please cite them as below."
+message: "If you use these data or code, please cite them as below. Use the concept DOI for the work in general and the version DOI for specific numbers."
 type: dataset
 title: "{TITLE}"
 version: {VERSION}
 date-released: {RELEASE_DATE}
+doi: "{concept}"
+identifiers:
+  - type: doi
+    value: "{concept}"
+    description: "Concept DOI: all versions (resolves to the latest)"
+  - type: doi
+    value: "{version}"
+    description: "Version {VERSION}: the numbers on the page"
 license: CC-BY-4.0
 authors:
   - family-names: "{AUTHOR['family']}"
@@ -453,6 +468,17 @@ def changelog(T: Path) -> None:
 This project follows [Semantic Versioning](https://semver.org/): a major version changes a published number or a
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
+
+## [Unreleased]
+
+### Added
+- The Zenodo DOIs (concept {dois()[0]}; version {VERSION}: {dois()[1]}) in `CITATION.cff` and the README, with a DOI
+  badge and a How to cite section.
+
+### Changed
+- `code/src/11_build_page.py` (the page builder, not run by `run_all.py`): the page's How to cite box, Dataset
+  metadata and Reproduce it links; the site's old code folder is replaced by a pointer to this repository.
+  `code/src/14_data_repo.py` writes the DOIs. No input, pipeline step or output changed.
 
 ## [{VERSION}] - {RELEASE_DATE}
 
@@ -704,7 +730,9 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
         ("NHC HURDAT2 and Isaias best track", "data/input/nhc/", "NOAA/NHC", "Public domain", "yes",
          size("data/input/nhc/")),
     ]
+    concept, version = dois()
     L = [f"# {TITLE}", "",
+         f"[![DOI](https://zenodo.org/badge/DOI/{concept}.svg)](https://doi.org/{concept})", "",
          f"Version {VERSION} ({RELEASE_DATE}). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).", "",
          f"The data and code behind the page *When the Network Goes Dark* ({PAGE_URL}): a county-by-report panel of "
          "FCC DIRS cell-site outages for 21 storms in ten Gulf and Southeast states, 2017-2026, each report checked "
@@ -762,7 +790,13 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "| Page section | Figures | results.json key | Script |", "|---|---|---|---|"]
     L += [f"| {a} | {b} | {c} | {d} |" for a, b, c, d in PAGE_MAP]
     L += ["", "## How to cite", "",
-          "See `CITATION.cff`. A DOI will be added when the repository is archived.", "",
+          "The repository is archived on Zenodo. Cite the concept DOI for the data and code in general, and the "
+          "version DOI when you use specific numbers:", "",
+          f"- In general (all versions; resolves to the latest): Spivey, T. D. (2026). {TITLE} [Data set]. Zenodo. "
+          f"https://doi.org/{concept}",
+          f"- These numbers (version {VERSION}): Spivey, T. D. (2026). {TITLE} (Version {VERSION}) [Data set]. "
+          f"Zenodo. https://doi.org/{version}", "",
+          "`CITATION.cff` has both, and GitHub's \"Cite this repository\" button reads it.", "",
           "## Disclosure", "",
           "The author works in the telecommunications industry. This analysis was done independently, on personal "
           "time, using only publicly available government data. It uses no employer data or confidential "
@@ -861,6 +895,8 @@ def scripts(T: Path) -> None:
         "lifelines==0.30.3", "pdfplumber==0.11.11", "pdfminer.six==20260107", "geopandas==1.2.0", "shapely==2.2.0",
         "pyogrio==0.13.0", "pyproj==3.8.0", "pyarrow==26.0.1", "requests==2.34.2", "pytest==9.2.0"]) + "\n")
     write(T / ".gitignore", "build/\n__pycache__/\n.pytest_cache/\n.env\n.venv/\n")
+    write(T / ".gitattributes", "# Store every file byte for byte: INPUTS.csv and the reproduction test check SHA-256 "
+                                "hashes.\n* -text\n")
 
 
 # ------------------------------------------------------------------------------------------------ checks --
