@@ -1,0 +1,34 @@
+﻿
+								DA 21-1109
+Released September 3, 2021
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANE IDA
+
+DIRS deactivated in Alabama and Mississippi.  DIRS remains active in Louisiana.
+	
+At the request of the Department of Homeland Security, Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas affected by Hurricane Ida:
+
+Alabama: Baldwin, Clarke, Conecuh, Escambia, Mobile, Monroe, Washington.
+
+Mississippi: Adams, Amite, Attala, Choctaw, Claiborne, Clarke, Clay, Copiah, Covington, Forrest, Franklin, George, Greene, Hancock, Harrison, Hinds, Jackson, Jasper, Jefferson, Jefferson Davis, Jones, Kemper, Lamar, Lauderdale, Lawrence, Leake, Lincoln, Madison, Marion, Neshoba, Newton, Oktibbeha, Pearl River, Perry, Pike, Rankin, Scott, Simpson, Smith, Stone, Walthall, Warren, Wayne, Wilkinson, Winston.
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas in Alabama and Mississippi with respect to Hurricane Ida.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+	DIRS remains activated in the following counties in Louisiana:
+
+Louisiana: Acadia, Ascension, Assumption, Avoyelles, East Baton Rouge, East Feliciana, Evangeline, Iberia, Iberville, Jefferson, Lafayette, Lafourche, Livingston, Orleans, Plaquemines, Point Coupee, St, Martin, St, Mary, St. Bernard, St. Charles, St. Helena, St. James, St. John the Baptist, St. Landry, St. Martin, St. Tammany, Tangipahoa, Terrebonne, Vermillion, Washington, West Baton Rouge, West Feliciana.
+
+
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Ida.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Ida.
+
+All FCC releases in connection with Hurricane Ida may be found at https://www.fcc.gov/Ida
+
+	For further information, please contact Julia Tu of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at 202-418-0731 or Julia.Tu@fcc.gov.
+  
+
+
+2
+

@@ -1,0 +1,32 @@
+﻿
+								DA 18-1073
+Released October 18, 2018
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANE MICHAEL
+
+DIRS deactivated for all counties in Alabama and Georgia
+DIRS remains active in Florida
+	
+At the request of the Department of Homeland Security, National Coordinating Center for Communications and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas affected by Hurricane Michael:
+
+ALABAMA: Baldwin, Dale, Geneva, Henry, Houston
+
+GEORGIA: Appling, Atkinson, Bacon, Baker, Baldwin, Ben Hill, Berrien, Bibb, Bleckley, Brooks, Bulloch, Burke, Calhoun, Candler, Charlton, Clay, Clinch, Coffee, Colquitt, Columbia, Cook, Crawford, Crisp, Decatur, Dodge, Dooly, Dougherty, Early, Echols, Emanuel, Evans, Glascock, Grady, Hancock, Houston, Irwin, Jasper, Jeff Davis, Jefferson, Jenkins, Johnson, Jones, Lanier,  Laurens, Lee, Lowndes, Macon, Marion, McDuffie, Miller, Mitchell, Monroe, Montgomery, Peach, Pierce, Pulaski, Putnam, Quitman, Randolph, Richmond, Schley, Screven, Seminole, Stewart, Sumter, Tattnall, Taylor, Telfair, Terrell, Thomas, Tift, Toombs, Treutlen, Turner, Twiggs, Upson, Ware, Warren, Washington, Webster, Wheeler, Wilcox, Wilkinson, Worth
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas with respect to Hurricane Michael.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+	DIRS remains activated in the following areas:
+
+FLORIDA: Bay, Calhoun, Citrus, Dixie, Escambia, Franklin, Gadsden, Gulf, Hernando, Holmes, Jackson, Jefferson, Leon, Levy, Liberty, Okaloosa, Santa Rosa, Taylor, Wakulla, Walton, Washington
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Michael.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Michael.
+
+All FCC releases in connection with Hurricane Michael may be found at https://www.fcc.gov/Michael.
+
+	For further information, please contact John Healy of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at (215) 847-8094 or John.Healy@fcc.gov.  
+
+
+2
+

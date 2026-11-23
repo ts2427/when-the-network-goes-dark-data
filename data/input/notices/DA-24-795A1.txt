@@ -1,0 +1,40 @@
+﻿	
+DA 24-795
+Released:  August 9, 2024
+
+THE FEDERAL COMMUNICATIONS COMMISSION ANNOUNCES DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM AND THE MANDATORY DISASTER RESPONSE INITIATIVE FOR HURRICANE DEBBY IN NORTH CAROLINA AND SOUTH CAROLINA
+
+The Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) and Mandatory Disaster Response Initiative (MDRI) for Hurricane Debby at the request of the States of North Carolina and South Carolina, and in coordination with the Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency. DIRS is a mandatory, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, use to report communications infrastructure status and situational awareness information during times of crisis.  See 47 CFR § 4.18 (DIRS); 47 CFR § 4.17 (MDRI). 
+  During DIRS activations, communications providers that provide service to specified areas submit and update information through DIRS regarding, inter alia, the status of their communications equipment, restoration efforts, and power. See 47 CFR § 4.18(a) (requiring cable communications, wireline, wireless, and interconnected VoIP providers to report their infrastructure status in DIRS); FCC, Disaster Information Reporting System (DIRS), https://www.fcc.gov/dirs (last visited Aug. 9, 2024). 
+  During MDRI activations, the Commission requires facilities-based mobile
+wireless providers that offer service to the disaster-affected area to perform the following functions: (1) provide for reasonable roaming under disaster arrangements when technically feasible; (2) activate mutual aid arrangements with other facilities-based mobile wireless providers for providing aid upon request to those providers during emergencies; (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. See 47 CFR § 4.17(a)(3)(i)-(v).
+
+
+Effective today, no further reports to DIRS are requested in response to Hurricane Debby within the States of North Carolina and South Carolina.  Facilities-based mobile wireless providers are no longer required to perform MDRI-related functions for the States of North Carolina and South Carolina. Note that the MDRI has been activated in response to Tropical Storm Debby for the State of Virginia.  See FCC Activates MDRI in Virginia for Debby, Public Notice, DA 24-786 (Aug. 9, 2024). 
+  The Network Outage Reporting System reporting obligations under Part 4 of the Commission’s rules, which were suspended for providers reporting in DIRS while DIRS was activated, are now again in effect for any new network outages for the area covered by DIRS reporting for Hurricane Debby. 47 CFR § 4.9(a) (cable); 47 CFR § 4.9(e) (wireless); 47 CFR § 4.9(f) (wireline); 47 CFR § 4.9(g) (interconnected VoIP); see also 47 CFR § 4.18(a) (suspending NORS requirements for cable, wireless, wireline, and interconnection VoIP providers required to report in DIRS pertaining to any incidents arising during the DIRS activation and that are timely reported in DIRS).
+   
+
+The FCC will, however, continue to monitor the status of communications services and work with providers and government partners, as needed, to support remaining restoration efforts.
+
+If there are major changes, whether improvements or setbacks, to the status of communications in the affected area, the FCC asks communications providers to supply that information directly to FCC personnel at the contact information below as these events occur.  The FCC continues to be available to address emergency communications needs related to Hurricane Debby 24 hours per day, seven days per week through our 24-hour operations center, which can be reached at 202-418-1122 or fccops@fcc.gov. This combination of measures will provide the Commission with the necessary situational awareness as service restoration continues. 
+
+The FCC appreciates the cooperation of all the communications providers that submitted data to DIRS and that participated in the MDRI in the aftermath of Hurricane Debby.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts and participation in the MDRI ensures effective coordination and planning to maintain and restore network connectivity.  The FCC published its final daily communications status report for Hurricane Debby today, August 9, 2024.  
+
+For further information concerning DIRS, please contact:
+ 
+Michael Caiafa (202) 418-1311, (540) 834-7401 (cell), michael.caiafa@fcc.gov
+David Ahn (571) 232-8487 (cell), (202) 418-0853, david.ahn@fcc.gov
+FCC 24/7 Operations Center – (202) 418-1122
+
+For further information concerning the MDRI, please contact:  
+
+Justin Cain, (202) 853-7365, (202) 418-2924, justin.cain@fcc.gov
+Logan Bennett, (732) 425-5036, (202) 418-7790, logan.bennett@fcc.gov
+FCC 24/7 Operations Center, (202) 418-1122, fccops@fcc.gov
+
+For more information on the FCC’s response to Hurricane Debby, please go to www.fcc.gov/Debby
+
+
+- FCC -
+2
+

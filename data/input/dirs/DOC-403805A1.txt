@@ -1,0 +1,68 @@
+﻿
+
+Communications Status Report for 
+Areas Impacted by Hurricane Beryl
+July 9, 2024
+
+The following is a report on the status of communications services in geographic areas impacted by Hurricane Beryl as of July 9, 2024, at 10:00 a.m. EDT.  This report incorporates network outage data submitted by communications providers to the Federal Communications Commission (FCC) Disaster Information Reporting System (DIRS).  Note that the operational status of communications services during an event may evolve rapidly, and this report represents a snapshot in time.  
+The following counties in Texas are in the current geographic area that is part of DIRS (the “disaster area”) for today’s report.
+The area of interest for this activation includes the following counties in Texas. 
+TEXAS: Brazoria, Chambers, Fort Bend, Galveston, Harris, and Matagorda 
+
+
+
+911 Services 
+
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support Center, coordination with state 911 Administrators, and, if necessary, direct contact with individual PSAPs.
+
+Texas: Bay City Police Department and Matagorda County Sheriff’s Office have been rerouted to other PSAPs with no location information.
+	
+
+Wireless Services
+
+The following section describes the status of wireless communications services in the disaster area as reported in DIRS. 
+
+Percent Cell Sites Out-Of-Service By County
+
+
+
+The following table provides cell sites out of service by county.  28.7% of the cell sites in the affected area are out of service.  The information shown was provided by communications carriers providing services in Texas. 
+
+TEXAS
+
+StateAffected CountiesCell Sites ServedCell Sites OutPercent OutCell Sites Out Due to DamageCell Sites Out Due to TransportCell Sites Out Due to PowerCell Sites Up but On Back-up PowerTXBrazoria 2818831.3%117463TXChambers 571221.1%10115TXFort Bend 41914735.1%0813065TXGalveston 2455823.7%015224TXHarris 3606101928.3%641865319TXMatagorda 481122.9%04514TOTAL-4656133528.7%8551137490
+
+The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take other actions to maintain service to affected consumers during emergencies or other events that result in cell site outages. 
+
+Cable Systems and Wireline (Combined)
+
+Cable and wireline companies reported 803,501 subscribers out of service in the disaster area for Hurricane Beryl.  This includes the loss of telephone, television, and/or Internet services.  
+
+Broadcast: 
+Television stations status: 
+
+· No TV stations are reported as being out of service. 
+FM Radio stations status:  
+· 2 FM radio stations are reported as being out of service. (K237FS, KLTW-FM)
+
+AM Radio stations status:  
+· 2 AM station is reported as being out of service. (KIKK, KTEK)
+
+Mandatory Disaster Response Initiative
+
+The Mandatory Disaster Response Initiative was activated for Hurricane Beryl response activities on July 8, 2024.  As a reminder, all facilities-based mobile wireless providers operating in the above-referenced areas are hereby notified and required to: (1) provide for reasonable roaming under disaster arrangements when technically feasible; See 47 CFR § 4.17(a)(3)(i) (detailing criteria for activating roaming under disaster arrangements).  
+ (2) activate mutual aid arrangements with other facilities-based mobile wireless providers for providing aid upon request to those providers during emergencies; See 47 CFR § 4.17(a)(3)(ii) (explaining what mutual aid arrangements must include).  
+ (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. 47 CFR § 4.17(a)(3)(i)-(v); see also FCC, Wireless Network Resiliency During Disasters (June 4, 2024), https://www.fcc.gov/wireless-network-resiliency-during-disasters.  
+ 
+
+Special Temporary Authority (STA)/Waivers/Extensions
+
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, as well as waivers to support emergency communications and service restoration.
+
+
+
+
+
+
+
+

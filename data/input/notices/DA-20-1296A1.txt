@@ -1,0 +1,22 @@
+﻿
+								DA 20-1296
+Released November 1, 2020
+
+THE FCC’S PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM FOR HURRICANE ZETA 
+
+	The Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) for Hurricane Zeta, DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ at the request of the Department of Homeland Security Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency.  Communications providers do not need to provide any additional reporting in DIRS in connection with this event.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners as needed to support remaining restoration efforts.
+
+Effective today, no further reports to DIRS are requested in response to Hurricane Zeta.  Also, effective today, Network Outage Reporting System reporting obligations under Part 4 of the Commission’s rules, 47 C.F.R. Part 4.
+ which were suspended for providers reporting in DIRS while DIRS was activated, are now again in effect for new network outages for the area covered by DIRS reporting for Hurricane Zeta. 
+
+If there are major changes, whether improvements or setbacks, to the status of communications in the affected area, the FCC asks communications providers to supply that information directly to FCC personnel at the contact information below as events occur.  The FCC continues to be available to address emergency communications needs related to Hurricane Zeta 24 hours per day, seven days per week through our 24-hour operations center, which can be reached on 202-418-1122 or fccops@fcc.gov. See Federal Communications Commission Provides 24/7 Emergency Contact Information for Hurricane Zeta, Public Notice, DA-20-1274, rel. October 28, 2020, available at https://docs.fcc.gov/public/attachments/DA-20-1274A1.pdf.
+
+ This combination of measures will provide the Commission with the necessary situational awareness as service restoration continues. 
+
+The FCC appreciates the cooperation of all the communications providers that voluntarily submitted data to DIRS in the aftermath of Hurricane Zeta.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC published its final daily communications status report for Hurricane Zeta today, November 1.  
+
+	For further information, please contact Julia Tu at (202) 321-4399 or Michael Caiafa at (202) 418-1311 of the PSHSB’s Cybersecurity and Communications Reliability Division.  
+
+2
+

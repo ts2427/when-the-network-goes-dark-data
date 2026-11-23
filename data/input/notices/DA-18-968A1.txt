@@ -1,0 +1,34 @@
+﻿
+								DA 18-968
+Released September 19, 2018
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANE FLORENCE
+
+DIRS deactivated for all counties in Georgia, South Carolina and Virginia 
+DIRS remains active in North Carolina
+	
+At the request of the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas affected by Hurricane Florence:
+
+GEORGIA: Appling, Bacon, Bryan, Bulloch, Burke, Candler, Chatham, Effingham, Emanuel, Evans, Jeff Davis, Jefferson, Jenkins, Liberty, Long, Mcintosh, Montgomery, Screven, Tattnall, Toombs, Treutlen, Wayne
+
+SOUTH CAROLINA: Allendale, Bamberg, Barnwell, Beaufort, Berkeley, Calhoun, Charleston, Chesterfield, Clarendon, Colleton, Darlington, Dillon, Dorchester, Florence, Georgetown, Hampton, Horry, Jasper, Kershaw, Lee, Marion, Marlboro, Orangeburg, Richland, Sumter, Williamsburg
+
+VIRGINIA: Chesapeake City, Suffolk City, Virginia Beach City
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas with respect to Hurricane Florence.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+	DIRS remains activated in the following areas:
+
+NORTH CAROLINA: Anson, Beaufort, Bertie, Bladen, Brunswick, Camden, Carteret, Chatham, Chowan, Columbus, Craven, Cumberland, Currituck, Dare, Duplin, Edgecombe, Franklin, Gates, Greene, Halifax, Harnett, Hertford, Hoke, Hyde, Johnston, Jones, Lee, Lenoir, Martin, Moore, Nash, New Hanover, Northampton, Onslow, Pamlico, Pasquotank, Pender, Perquimans, Pitt, Richmond, Robeson, Sampson, Scotland, Tyrrell, Wake, Washington, Wayne, Wilson
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Florence.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Florence.
+
+All FCC releases in connection with Hurricane Florence may be found at https://www.fcc.gov/florence.
+
+	For further information, please contact John Healy of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at (215) 847-8094 or John.Healy@fcc.gov.  
+
+
+2
+

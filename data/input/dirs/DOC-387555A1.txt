@@ -1,0 +1,219 @@
+                            
+ 
+                      Communications Status Report for  
+                      Areas Impacted by Hurricane Fiona 
+                               September 24, 2022 
+ 
+The following is a report on the status of communications services in geographic areas impacted by Hurricane 
+Fiona as of September 24, 2022, at 12:00 p.m. EDT.1  This report incorporates network outage data submitted 
+by communications providers to the Federal Communications Commission (FCC) Disaster Information 
+Reporting System (DIRS).  Note that the operational status of communications services during an event may 
+evolve rapidly, and this report represents a snapshot in time.   
+
+The FCC deactivated DIRS for Hurricane Fiona in the U.S. Virgin Islands at 5:00 p.m. EDT on September 19, 
+2022.   
+
+The following counties/municipalities in Puerto Rico are in the current geographic area that is part of DIRS 
+(the “disaster area”) for today’s report. 
+
+Puerto Rico: Adjuntas, Aguada, Aguadilla, Aguas Buenas, Aibonito, Anasco, Arecibo, Arroyo, Barceloneta, 
+Barranquitas, Bayamon, Cabo Rojo, Caguas, Camuy, Canovanas, Carolina, Catano, Cayey, Ceiba, Ciales, Cidra, 
+Coamo, Comerio, Corozal, Culebra, Dorado, Fajardo, Florida, Guanica, Guayama, Guayanilla, Guaynabo, 
+Gurabo, Hatillo, Hormigueros, Humacao, Isabela, Jayuya, Juana Diaz, Juncos, Lajas, Lares, Las Marias, Las 
+Piedras, Loiza, Luquillo, Manati, Maricao, Maunabo, Mayaguez, Moca, Morovis, Naguabo, Naranjito, 
+Orocovis, Patillas, Penuelas, Ponce, Quebradillas, Rincon, Rio Grande, Sabana Grande, Salinas, San German, 
+San Juan, San Lorenzo, San Sebastian, Santa Isabel, Toa Alta, Toa Baja, Trujillo Alto, Utuado, Vega Alta, Vega 
+Baja, Vieques, Villalba, Yabucoa, and Yauco 
+
+ 
+
+
+ 
+                         
+1 The National Hurricane Center upgraded Tropical Storm Fiona to Hurricane Fiona on September 18, 2022. See National 
+Hurricane Center Advisory – Hurricane Fiona Advisory No. 17, 
+https://www.nhc.noaa.gov/archive/2022/al07/al072022.public.017.shtml (Sep 18, 2022) 
+                                                                                 1 
+                                          
+                            
+ 
+ 
+911 Services  
+ 
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering 
+Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support 
+Center, coordination with state 911 Administrators, and, if necessary, direct contact with individual PSAPs. 
+ 
+      Puerto Rico: No PSAPs are reported as being affected. 
+       
+
+Wireless Services 
+ 
+The following section describes the status of wireless communications services in the disaster area as 
+reported in DIRS.  
+ 
+
+
+                                                                                 2 
+                                          
+                                  
+ 
+                                                    
+ 
+ 
+The following table provides cell sites out of service by county.  22.1% of the cell sites in the affected area are 
+out of service.  The information shown was provided by communications carriers providing services in Puerto 
+Rico.  
+ 
+Puerto Rico 
+ 
+                                                                                   Cell    Cell Sites 
+                             Cell    Cell             Cell Sites   Cell Sites     Sites     Up but 
+             Affected       Sites    Sites  Percent   Out Due     Out Due to    Out Due    On Back-
+  State      Counties      Served    Out      Out    to Damage     Transport    to Power   up Power 
+   PR       ADJUNTAS          11       3    27.30%        0             0           3          4 
+   PR        AGUADA           18       4    22.20%        0             0           4          2 
+   PR      AGUADILLA          46      14    30.40%        0             1           13         8 
+   PR    AGUAS BUENAS         19       9    47.40%        0             1           8          3 
+   PR       AIBONITO          19       3    15.80%        0             0           3          2 
+   PR        ANASCO           23       3    13.00%        0             1           2          3 
+   PR        ARECIBO          47      11    23.40%        0             0           11         3 
+   PR        ARROYO           12       3    25.00%        0             0           3          2 
+   PR     BARCELONETA         21       1     4.80%        0             0           1          4 
+   PR    BARRANQUITAS         18       5    27.80%        0             0           5          3 
+   PR       BAYAMON          157      19    12.10%        0             0           19         8 
+   PR       CABO ROJO         46      20    43.50%        0             4           16         8 
+   PR        CAGUAS          107      19    17.80%        1             1           17         14 
+   PR        CAMUY            14       2    14.30%        0             0           2          4 
+   PR      CANOVANAS          24       2     8.30%        0             0           2          1 
+   PR       CAROLINA         120      11     9.20%        0             2           9          4 
+   PR        CATANO           23       0     0.00%        0             0           0          1 
+   PR         CAYEY           40      14    35.00%        0             2           12         8 
+   PR         CEIBA           11       0     0.00%        0             0           0          0 
+   PR         CIALES          13       2    15.40%        0             0           2          6 
+   PR         CIDRA           27       8    29.60%        0             0           8          5 
+   PR        COAMO            17       7    41.20%        0             0           7          2 
+   PR        COMERIO          16       1     6.30%        0             0           1          4 
+   PR       COROZAL           23       3    13.00%        0             0           3          1 
+   PR       CULEBRA           6        0     0.00%        0             0           0          0 
+   PR        DORADO           34       3     8.80%        0             0           3          4 
+   PR        FAJARDO          28       1     3.60%        0             0           1          3 
+   PR        FLORIDA          6        0     0.00%        0             0           0          0 
+                                                                                                     3 
+                                                    
+                               
+               
+PR        GUANICA          18       4    23.50%        0             0           4          3 
+PR       GUAYAMA           23       8    28.60%        0             1           7          3 
+PR     GUAYANILLA          29       6    75.00%        0             2           4          0 
+PR      GUAYNABO           70      16    19.00%        0             1           15         6 
+PR        GURABO           28      14    45.20%        0             0           14         1 
+PR        HATILLO          30      12    40.00%        0             1           11         8 
+PR     HORMIGUEROS         8        0     0.00%        0             0           0          2 
+PR       HUMACAO           41       7    17.10%        0             0           7          8 
+PR        ISABELA          29       5    17.20%        0             0           5          4 
+PR        JAYUYA           7        5    71.40%        0             4           1          1 
+PR      JUANA DIAZ         27       7    25.90%        0             0           7          4 
+PR        JUNCOS           21       8    38.10%        0             0           8          1 
+PR         LAJAS           12       7    58.30%        0             2           5          2 
+PR         LARES           20       9    45.00%        0             0           9          1 
+PR      LAS MARIAS         11       7    63.60%        0             1           6          3 
+PR      LAS PIEDRAS        15       5    33.30%        0             0           5          4 
+PR         LOIZA           14       2    14.30%        0             0           2          1 
+PR       LUQUILLO          14       2    14.30%        0             0           2          0 
+PR        MANATI           36       3     8.30%        0             0           3          3 
+PR       MARICAO           6        3    50.00%        0             1           2          2 
+PR       MAUNABO           11       3    27.30%        0             0           3          3 
+PR      MAYAGUEZ           63      14    22.20%        0             0           14         8 
+PR         MOCA            22       5    22.70%        0             0           5          4 
+PR        MOROVIS          18       5    27.80%        0             2           3          3 
+PR       NAGUABO           18       5    27.80%        0             0           5          5 
+PR      NARANJITO          23       4    17.40%        0             1           3          8 
+PR       OROCOVIS          15       6    40.00%        0             1           5          5 
+PR       PATILLAS          11       5    45.50%        0             1           4          0 
+PR       PENUELAS          15       7    46.70%        0             2           5          5 
+PR         PONCE           93      41    44.10%        1             4           36         15 
+PR    QUEBRADILLAS         19       7    36.80%        0             2           5          5 
+PR        RINCON           12       4    33.30%        0             0           4          3 
+PR      RIO GRANDE         38       1     2.60%        0             0           1          2 
+          SABANA           10       3    30.00%        0             1           2          2 
+PR        GRANDE 
+PR        SALINAS          22       5    22.70%        0             0           5          4 
+PR     SAN GERMAN          27      11    40.70%        0             4           7          2 
+PR       SAN JUAN         344      53    15.40%        1             0           52         13 
+PR     SAN LORENZO         25       8    32.00%        0             0           8          6 
+
+                                                                                                  4 
+                                                 
+                            
+ 
+   PR   SAN SEBASTIAN   22     10   45.50%     0          1         9        4 
+   PR   SANTA ISABEL    16     5    31.30%     0          0         5        5 
+   PR     TOA ALTA      35     3    8.60%      0          0         3        3 
+   PR     TOA BAJA      46     7    15.20%     0          2         5        3 
+   PR   TRUJILLO ALTO   55     2    3.60%      0          0         2        5 
+   PR      UTUADO       24     8    33.30%     0          2         6        2 
+   PR    VEGA ALTA      28     4    14.30%     0          0         4        3 
+   PR     VEGA BAJA     32     6    18.80%     0          0         6        1 
+   PR      VIEQUES      10     2    20.00%     0          0         2        1 
+   PR     VILLALBA      13     3    23.10%     0          0         3        2 
+   PR     YABUCOA       29     11   37.90%     0          0        11        6 
+   PR      YAUCO        21     12   57.10%     0          2        10        3 
+ TOTAL                 2,522  558   22.10%     3         50        505      295 
+ 
+The number of cell site outages in a specific area does not necessarily correspond to the availability of 
+wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications 
+Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the 
+ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed 
+with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an 
+individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-
+on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take 
+other actions to maintain service to affected consumers during emergencies or other events that result in cell 
+site outages.  
+ 
+Cable Systems and Wireline (Combined) 
+ 
+Cable and wireline companies reported 560,295 subscribers out of service in the disaster area for Hurricane 
+Fiona; this includes the loss of telephone, television, and/or Internet services.  This is down from 650,185 
+subscribers as of yesterday. 
+ 
+Broadcast:  
+
+Television stations status:  
+ 
+   •  No TV stations are reported as being out of service.  
+
+FM Radio stations status:   
+
+   •  5 FM stations are reported as being out of service.  
+
+AM Radio stations status:   
+
+   •  2 AM stations are reported as being out of service. 
+
+                                                                                 5 
+                                          
+                            
+ 
+Special Temporary Authority (STA)/Waivers/Extensions 
+ 
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit 
+immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, 
+as well as waivers to support emergency communications and service restoration. 
+ 
+      •  Extension of the Fiscal Year 2022 regulatory fee deadline date for regulatory fee payors in the 
+         affected areas of Puerto Rico and the U.S. Virgin Islands from 11:59 PM, Eastern Daylight Time, 
+         on September 28, 2022, to 11:59 PM, Eastern Daylight Time, on September 30, 2022. 
+      •  Extension of filing and regulatory deadlines in areas affected by Hurricane Fiona  
+      •  Waiver of number aging rule for providers affected by Hurricane Fiona 
+      •  Waiver offering relief for USF/Appropriated Programs participants in Puerto Rico that are 
+         affected by Hurricane Fiona 
+      •  Wireless Telecommunications Bureau conditionally grants Federated Wireless's request for an 
+         emergency waiver of sections 96.67(c)(2) and (3) of the Commission's rules 
+       
+
+ 
+
+
+                                                                                 6 
+                                          

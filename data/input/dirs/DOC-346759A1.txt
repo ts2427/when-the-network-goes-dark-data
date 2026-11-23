@@ -1,0 +1,199 @@
+ 
+ 
+As prepared by the Federal Communications Commission: September 16, 2017 11:30 a.m. 
+Communications Status Report for  
+Areas Impacted by Hurricane Irma  
+September 16, 2017 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Hurricane Irma as of September 16, 2017 at 11:00 AM EDT.  This report incorporates network outage 
+data submitted by communications providers to the Federal Communications Commission’s Disaster 
+Information Reporting System (DIRS).  DIRS is currently activated for all counties in Florida and the U.S. 
+Virgin Islands.  On September 14 DIRS was deactivated for all counties in Alabama, Georgia and Puerto 
+Rico.  Note that the operational status of communications services during a disaster may evolve rapidly, 
+and this report represents a snapshot in time.  It should also be noted that not all communications 
+providers have reported in DIRS, so some outage information may not be complete. 
+ 
+The following counties are in the geographic area that was covered by the DIRS activation as of this 
+morning (the “disaster area”). 
+ 
+Florida:  Alachua, Baker, Bay, Bradford, Brevard, Broward, Calhoun, Charlotte, Citrus, Clay, 
+Collier, Columbia, Desoto, Dixie, Duval, Escambia, Flagler, Franklin, Gadsden, Gilchrist, Glades, 
+Gulf, Hamilton, Hardee, Hendry, Hernando, Highlands, Hillsborough, Holmes, Indian River, 
+Jackson, Jefferson, Lafayette, Lake, Lee, Leon, Levy, Liberty, Madison, Manatee, Marion, Martin, 
+Miami-Dade, Monroe, Nassau, Okaloosa, Okeechobee, Orange, Osceola, Palm Beach, Pasco, 
+Pinellas, Polk, Putnam, Santa Rosa, Sarasota, Seminole, St. Johns, St. Lucie, Sumter, Suwannee, 
+Taylor, Union, Volusia, Wakulla, Walton, Washington 
+U.S. Virgin Islands:  St. Croix, St. John, St. Thomas 
+ 
+911 Services  
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety 
+Answering Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public 
+Safety Support Center (PSSC), coordination with state 911 Administrators, and, if necessary, from 
+individual PSAPs. 
+ 
+There are a total of 4 (down from 6 yesterday) PSAPs affected in Florida and 2 (same as yesterday) 
+PSAPs affected in the U.S. Virgin Islands.  For Florida: 
+ 
+? Down with no re-routes:  None 
+ 
+? Up without Automatic Location Information (ALI): None 
+ 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 16, 2017 11:30 a.m. 
+? Re-routed with ALI:  4 (Broward County, FL; Florida Atlantic University, FL; Marathon SO, FL; 
+and Sanibel Police Department, FL) 
+ 
+? Re-routed without ALI:  None 
+ 
+Two PSAPs in the U.S. Virgin Islands (St. Croix 9-1-1 Call Center and St. Thomas 9-1-1 Call Center) are 
+unable to retrieve Phase I and Phase II location information for wireless callers and Automatic Number 
+Identification (ANI)/ALI for VoIP Callers. 
+ 
+Wireless Services 
+The following section describes the status of wireless communications services and restoration in the 
+disaster area, including the percentage of cell sites out of service for each county. 
+ 
+The following map of the disaster area illustrates which counties in Florida are most affected: 
+ 
+  
+The information shown was provided by the signatories to the Wireless Resiliency Cooperative 
+Framework and several additional companies that agreed to allow us to include their data in the 
+aggregated data: 
+ 
+ 
+As prepared by the Federal Communications Commission: September 16, 2017 11:30 a.m. 
+Florida:  Overall, 5.8% (down from 8.5% yesterday) of cell sites in the disaster are out of service. 
+U.S. Virgin Islands:  Overall, 49.1% (down from 50.9% yesterday) of cell sites are out of service. 
+ 
+Counties with 50% or greater of cell sites out are: 
+ 
+Florida:  None 
+ 
+U.S. Virgin Islands:  St. John and St. Thomas 
+ 
+ 
+The tables below provide the percentage of cell sites out of service by county per state or territory.  
+ 
+Florida: 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+FL ALACHUA 279 5 1.8% 
+FL BAKER 22 2 9.1% 
+FL BAY 208 1 0.5% 
+FL BRADFORD 22 0 0.0% 
+FL BREVARD 316 13 4.1% 
+FL BROWARD 924 84 9.1% 
+FL CALHOUN 15 0 0.0% 
+FL CHARLOTTE 123 15 12.2% 
+FL CITRUS 111 5 4.5% 
+FL CLAY 178 6 3.4% 
+FL COLLIER 212 55 25.9% 
+FL COLUMBIA 73 0 0.0% 
+FL DESOTO 34 3 8.8% 
+FL DIXIE 18 2 11.1% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 16, 2017 11:30 a.m. 
+FL DUVAL 807 19 2.4% 
+FL ESCAMBIA 186 0 0.0% 
+FL FLAGLER 86 7 8.1% 
+FL FRANKLIN 28 0 0.0% 
+FL GADSDEN 62 0 0.0% 
+FL GILCHRIST 13 1 7.7% 
+FL GLADES 30 6 20.0% 
+FL GULF 22 0 0.0% 
+FL HAMILTON 18 1 5.6% 
+FL HARDEE 39 5 12.8% 
+FL HENDRY 46 15 32.6% 
+FL HERNANDO 117 2 1.7% 
+FL HIGHLANDS 80 16 20.0% 
+FL HILLSBOROUGH 1,140 20 1.8% 
+FL HOLMES 21 0 0.0% 
+FL INDIAN RIVER 105 7 6.7% 
+FL JACKSON 60 1 1.7% 
+FL JEFFERSON 41 0 0.0% 
+FL LAFAYETTE 14 1 7.1% 
+FL LAKE 218 13 6.0% 
+FL LEE 343 36 10.5% 
+FL LEON 440 7 1.6% 
+FL LEVY 76 1 1.3% 
+FL LIBERTY 9 0 0.0% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 16, 2017 11:30 a.m. 
+FL MADISON 37 0 0.0% 
+FL MANATEE 239 3 1.3% 
+FL MARION 274 17 6.2% 
+FL MARTIN 123 9 7.3% 
+FL MIAMI-DADE 1,434 160 11.2% 
+FL MONROE 108 25 23.1% 
+FL NASSAU 109 4 3.7% 
+FL OKALOOSA 194 0 0.0% 
+FL OKEECHOBEE 70 5 7.1% 
+FL ORANGE 1,152 36 3.1% 
+FL OSCEOLA 237 8 3.4% 
+FL PALM BEACH 727 70 9.6% 
+FL PASCO 321 15 4.7% 
+FL PINELLAS 596 29 4.9% 
+FL POLK 481 24 5.0% 
+FL PUTNAM 88 3 3.4% 
+FL ST. JOHNS 251 16 6.4% 
+FL ST. LUCIE 195 5 2.6% 
+FL SANTA ROSA 135 0 0.0% 
+FL SARASOTA 244 22 9.0% 
+FL SEMINOLE 314 9 2.9% 
+FL SUMTER 78 10 12.8% 
+FL SUWANNEE 56 1 1.8% 
+FL TAYLOR 51 0 0.0% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 16, 2017 11:30 a.m. 
+FL UNION 13 0 0.0% 
+FL VOLUSIA 474 29 6.1% 
+FL WAKULLA 38 1 2.6% 
+FL WALTON 120 0 0.0% 
+FL WASHINGTON 35 1 2.9% 
+TOTAL 
+ 
+14,730 851 5.8% 
+ 
+U.S. Virgin Islands: 
+ 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+VI ST. CROIX 39 8 20.5% 
+VI ST. JOHN 10 9 90.0% 
+VI ST. THOMAS 57 35 61.4% 
+TOTAL 
+ 
+106 52 49.1% 
+ 
+ 
+Cable Systems and Wireline (Combined) 
+ 
+There are at least 1,308,186 (down from at least 1,691,484 yesterday) subscribers out of service in the 
+affected areas in Florida.  This includes users who get service from cable system or wireline providers.  
+There are a total of 1,854 (down from 1,995 yesterday) non-mobile switching centers out in Florida.  
+Since there are widespread power outages in the U.S. Virgin Islands, the FCC has received reports that 
+large percentages of consumers are without either cable services or wireline service.  Companies are 
+actively working to restoring service. 
+ 
+Broadcast 
+ 
+TV stations out of service:  5 (same as yesterday) 
+? Florida:  WVFW, WXOD and WSBS  
+ 
+? U.S. Virgin Islands:  WTJX-TV and W05AWD  
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 16, 2017 11:30 a.m. 
+Radio stations out of service:  27 (up from 24 yesterday) 
+Florida:  WMFM, WWPR, WDOZ, W245AZ, W250BH, WAQV, WJFH, W251BM, WROK, WAOAFM, 
+WHKR, WLZR, WNPL, WYGC, W295BJ, WMEN, WARO, WNOG, WFFY, WWFR, WCNZ, WNWF, 
+WEJZ, WGNE-FM, WKYZ and W244CT  
+ 
+? U.S. Virgin Islands:  WTJX-FM  
+ 
+ 

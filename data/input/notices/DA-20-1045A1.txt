@@ -1,0 +1,30 @@
+﻿
+								DA 20-1045
+Released September 4, 2020
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANE LAURA
+
+DIRS deactivated for some counties in Louisiana.  DIRS remains active for 5 counties in Louisiana.
+	
+At the request of the Department of Homeland Security, Cybersecurity and Infrastructure Security Agency, and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas affected by Hurricane Laura:
+
+Louisiana: Allen, Avoyelles, Bienville, Caddo, Caldwell, Concordia, De Soto, East Feliciana, Evangeline, Franklin, Grant, Iberia, Iberville, Jackson, Jefferson Davis, La Salle, Lincoln, Morehouse, Natchitoches, Ouachita, Rapides, Red River, St. Landry, St. Martin, St. Mary, Union, Vermilion, Webster, Winn
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas inTexas with respect to Hurricane Laura.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+	DIRS remains activated in the following counties in Louisiana:
+
+Louisiana: Beauregard, Calcasieu, Cameron, Sabine, Vernon
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Laura.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Laura.
+
+All FCC releases in connection with Hurricane Laura may be found at https://www.fcc.gov/marco-laura
+
+	For further information, please contact Julia Tu of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at 202-418-0731 or Julia.Tu@fcc.gov.
+  
+
+
+2
+

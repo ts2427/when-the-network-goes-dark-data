@@ -1,0 +1,283 @@
+                            
+ 
+                      Communications Status Report for  
+                       Areas Impacted by Hurricane Ida 
+                                 August 30, 2021 
+ 
+The following is a report on the status of communications services in geographic areas impacted by Hurricane 
+Ida as of August 30, 2021 at 11:00 a.m. EDT.  This report incorporates network outage data submitted by 
+communications providers to the Federal Communications Commission’s (FCC) Disaster Information 
+Reporting System (DIRS).  Note that the operational status of communications services during a disaster may 
+evolve rapidly, and this report represents a snapshot in time.   
+
+The following counties are in the current geographic area that is part of DIRS (the “disaster area”) for today’s 
+report. 
+
+Alabama: Baldwin, Clarke, Conecuh, Escambia, Mobile, Monroe, Washington. 
+
+Louisiana: Acadia, Ascension, Assumption, Avoyelles, East Baton Rouge, East Feliciana, Evangeline, Iberia, 
+Iberville, Jefferson, Lafayette, Lafourche, Livingston, Orleans, Plaquemines, Point Coupee, St, Martin, St, 
+Mary, St. Bernard, St. Charles, St. Helena, St. James, St. John the Baptist, St. Landry, St. Martin, St. Tammany, 
+Tangipahoa, Terrebonne, Vermillion, Washington, West Baton Rouge, West Feliciana. 
+
+Mississippi: Adams, Alcorn, Amite, Attala, Benton, Bolivar, Calhoun, Carroll, Chickasaw, Choctaw, Claiborne, 
+Clay, Coahoma, Copiah, DeSoto, Forrest, Franklin, George, Greene, Grenada, Hancock, Harrison, Hinds, 
+Holmes, Humphreys, Issaquena, Itawamba, Jackson, Jefferson, Lafayette, Lamar, Lee, Leflore, Lincoln, 
+Madison, Marion, Marshall, Monroe, Montgomery, Panola, Pearl River, Perry, Pike, Pontotoc, Prentiss, 
+Quitman, Sharkey, Stone, Sunflower, Tallahatchie, Tate, Tippah, Tishomingo, Tunica, Union, Walthall, 
+Warren, Washington, Webster, Wilkinson, Yalobusha, Yazoo. 
+
+
+                                                                   
+                                                                                 1 
+                                          
+                            
+ 
+911 Services  
+ 
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering 
+Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support 
+Center, coordination with state 911 Administrators and, if necessary, direct contact with individual PSAPs. 
+ 
+      Alabama: No PSAPs are reported as being affected. 
+
+      Louisiana: 
+
+         •  Livingston Parish 911, St. Mary Parish, and Vermilion Parish 911 are reported as being 
+            operational with no location information.   
+         •  Orleans Parish and St. John Parish Sheriff’s Office have re-routed 911 calls to another PSAP 
+            with location information.   
+         •  St. Bernard Parish Fire, St. Bernard Parish Sheriff’s Office, and Terrebonne Parish have re-
+            routed 911 calls to the administrative lines without location information.   
+
+      Mississippi: No PSAPs are reported as being affected. 
+
+ 
+Wireless Services 
+                                          
+The current status of wireless communications services and restoration by county is shown by the following 
+map. 
+ 
+
+
+                                                                                 2 
+                                          
+                            
+ 
+
+
+                                                                                  
+                                          
+ 
+The following table provides cell sites out of service by county.  28.1% of the cell sites in the affected area are 
+out of service.  The information shown was provided by the signatories to the Wireless Network Resiliency 
+Framework Cooperative Agreement.   
+ 
+Alabama 
+ 
+                              Cell            Cell Sites  Cell Sites Out Cell Sites 
+          Affected   Cell Sites Sites Percent Out Due to     Due to     Out Due to 
+  State   Counties    Served   Out    Out     Damage       Transport1     Power 
+ AL    BALDWIN            329     4     1.2%           3              0          1 
+ AL    CLARKE              46     0     0.0%           0              0          0 
+ AL    CONECUH             39     0     0.0%           0              0          0 
+ AL    ESCAMBIA            55     0     0.0%           0              0          0 
+ AL    MOBILE             487     6     1.2%           0              3          3 
+                         
+1 These are cell sites that are out due to issues with the (typically wireline) networks that route communications traffic to 
+and from the cell sites. 
+                                                                                 3 
+                                          
+                                  
+ 
+ AL      MONROE                  31        0      0.0%              0                  0            0 
+ AL      WASHINGTON              32        0      0.0%              0                  0            0 
+ TOTAL                         1,019      10     1.0%               3                  3            4 
+ 
+Louisiana 
+ 
+                                       Cell               Cell Sites    Cell Sites Out    Cell Sites 
+             Affected     Cell Sites   Sites  Percent    Out Due to         Due to       Out Due to 
+  State      Counties       Served     Out      Out        Damage         Transport         Power 
+ LA      ACADIA                   45        1      2.2%              1                 0            0 
+ LA      ASCENSION                88       55     62.5%              4                14           48 
+ LA      ASSUMPTION               19       19    100.0%              2                 6           12 
+ LA      AVOYELLES                52        0      0.0%              0                 0            0 
+         EAST BATON 
+ LA      ROUGE                   360      216     60.0%             14                69          142 
+         EAST 
+ LA      FELICIANA                27       12     44.4%              0                 4           10 
+ LA      EVANGELINE               41        1      2.4%              1                 0            0 
+ LA      IBERIA                   46        1      2.2%              1                 0            0 
+ LA      IBERVILLE                42       19     45.2%              1                 8           11 
+ LA      JEFFERSON               289      202     69.9%             18                67          123 
+ LA      LAFAYETTE               154        0      0.0%              0                 0            0 
+ LA      LAFOURCHE                78       76     97.4%              5                26           48 
+ LA      LIVINGSTON              121       89     73.6%              5                25           66 
+ LA      ORLEANS                 348      185     53.2%             24                57          111 
+ LA      PLAQUEMINES              56       50     89.3%              5                19           26 
+ LA      POINTE COUPEE            25       15     60.0%              0                 8            6 
+ LA      ST. MARY                 56       18     32.1%              2                10            6 
+ LA      ST. BERNARD              36       13     36.1%              3                 0           10 
+ LA      ST. CHARLES              41       26     63.4%              3                 6           17 
+ LA      ST. HELENA               13        5     38.5%              0                 0            5 
+ LA      ST. JAMES                33       14     42.4%              3                 0           11 
+         ST. JOHN THE 
+ LA      BAPTIST                  27       19     70.4%              1                 1           17 
+ LA      ST. LANDRY               85        2      2.4%              1                 1            0 
+ LA      ST. MARTIN               48        2      4.2%              0                 2            0 
+ LA      ST. TAMMANY             260      152     58.5%             18                33          101 
+ LA      TANGIPAHOA              118      101     85.6%              7                26           79 
+ LA      TERREBONNE               81       81    100.0%              6                35           46 
+ LA      VERMILION                55        1      1.8%              1                 0            0 
+
+                                                                                                     4 
+                                                    
+                                  
+ 
+ LA      WASHINGTON               55       42     76.4%              1                13           29 
+         WEST BATON 
+ LA      ROUGE                    32       11     34.4%              0                 7            4 
+         WEST 
+ LA      FELICIANA                28        9     32.1%              1                 4            5 
+ TOTAL                          2,759   1,437    52.1%             128               441          933 
+ 
+Mississippi 
+ 
+                                       Cell               Cell Sites    Cell Sites Out    Cell Sites 
+             Affected      Cell Sites  Sites  Percent    Out Due to         Due to       Out Due to 
+  State      Counties       Served     Out      Out        Damage         Transport         Power 
+ MS      ADAMS                    41       25     61.0%              2                18            5 
+ MS      ALCORN                   34        0      0.0%              0                 0            0 
+ MS      AMITE                    24       11     45.8%              0                 5            6 
+ MS      ATTALA                   19        2     10.5%              0                 2            0 
+ MS      BENTON                   19        0      0.0%              0                 0            0 
+ MS      BOLIVAR                  28        0      0.0%              0                 0            0 
+ MS      CALHOUN                  19        0      0.0%              0                 0            0 
+ MS      CARROLL                  24        0      0.0%              0                 0            0 
+ MS      CHICKASAW                17        0      0.0%              0                 0            0 
+ MS      CHOCTAW                  15        0      0.0%              0                 0            0 
+ MS      CLAIBORNE                12        2     16.7%              1                 0            1 
+ MS      CLAY                     10        0      0.0%              0                 0            0 
+ MS      COAHOMA                  26        0      0.0%              0                 0            0 
+ MS      COPIAH                   37       12     32.4%              0                 8            4 
+ MS      DESOTO                  160        0      0.0%              0                 0            0 
+ MS      FORREST                  84       17     20.2%              2                14            1 
+ MS      FRANKLIN                 29       11     37.9%              0                 4            7 
+ MS      GEORGE                   40       21     52.5%              0                20            1 
+ MS      GREENE                   34       21     61.8%              0                21            0 
+ MS      GRENADA                  33        0      0.0%              0                 0            0 
+ MS      HANCOCK                  61        5      8.2%              0                 3            2 
+ MS      HARRISON                208        3      1.4%              0                 0            3 
+ MS      HINDS                   199       23     11.6%              1                16            6 
+ MS      HOLMES                   31        1      3.2%              1                 0            0 
+ MS      HUMPHREYS                  7       0      0.0%              0                 0            0 
+ MS      ISSAQUENA                  3       0      0.0%              0                 0            0 
+ MS      ITAWAMBA                 28        0      0.0%              0                 0            0 
+ MS      JACKSON                 132        2      1.5%              1                 1            0 
+
+                                                                                                     5 
+                                                    
+                                  
+ 
+ MS      JEFFERSON                45       20     44.4%              0                16            4 
+ MS      LAFAYETTE                83        0      0.0%              0                 0            0 
+ MS      LAMAR                    75       21     28.0%              0                18            3 
+ MS      LEE                      86        0      0.0%              0                 0            0 
+ MS      LEFLORE                  35        0      0.0%              0                 0            0 
+ MS      LINCOLN                  59       20     33.9%              2                10            8 
+ MS      MADISON                 120       24     20.0%              3                20            1 
+ MS      MARION                   25       10     40.0%              0                 8            2 
+ MS      MARSHALL                 56        0      0.0%              0                 0            0 
+ MS      MONROE                   52        1      1.9%              0                 1            0 
+ MS      MONTGOMERY               23        0      0.0%              0                 0            0 
+ MS      PANOLA                   40        1      2.5%              0                 1            0 
+ MS      PEARL RIVER              82       41     50.0%              1                28           14 
+ MS      PERRY                    25       12     48.0%              0                11            1 
+ MS      PIKE                     46       15     32.6%              1                 2           11 
+ MS      PONTOTOC                 37        0      0.0%              0                 0            0 
+ MS      PRENTISS                 17        0      0.0%              0                 0            0 
+ MS      QUITMAN                    8       0      0.0%              0                 0            0 
+ MS      SHARKEY                  11        3     27.3%              0                 3            0 
+ MS      STONE                    19        7     36.8%              1                 6            0 
+ MS      SUNFLOWER                24        0      0.0%              0                 0            0 
+ MS      TALLAHATCHIE             19        0      0.0%              0                 0            0 
+ MS      TATE                     35        0      0.0%              0                 0            0 
+ MS      TIPPAH                   22        0      0.0%              0                 0            0 
+ MS      TISHOMINGO               19        0      0.0%              0                 0            0 
+ MS      TUNICA                   31        1      3.2%              0                 1            0 
+ MS      UNION                    33        0      0.0%              0                 0            0 
+ MS      WALTHALL                 25        7     28.0%              0                 2            5 
+ MS      WARREN                   50       11     22.0%              0                10            1 
+ MS      WASHINGTON               35        4     11.4%              0                 4            0 
+ MS      WEBSTER                  22        0      0.0%              0                 0            0 
+ MS      WILKINSON                18       12     66.7%              0                 5            7 
+ MS      YALOBUSHA                26        0      0.0%              0                 0            0 
+ MS      YAZOO                    37       11     29.7%              0                11            0 
+ TOTAL                          2,714     377    13.9%              16               269           93 
+ 
+ 
+The number of cell site outages in a specific area does not necessarily correspond to the availability of 
+wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications 
+Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the 
+                                                                                                     6 
+                                                    
+                            
+ 
+ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed 
+with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an 
+individual site is inoperable.  In addition, wireless providers frequently use temporary facilities such as cells-
+on-wheels (also known as COWs), increased power at operational sites, roaming agreements, or take other 
+actions to maintain service to affected consumers during emergencies or other events that result in cell site 
+outages.  
+ 
+ 
+Cable Systems and Wireline (Combined) 
+ 
+Cable and wireline companies reported the following number of subscribers out of service by state in the 
+disaster area; this may include the loss of telephone, television, and/or Internet services: 
+ 
+                            Alabama  Louisiana Mississippi  
+                              478    338,115   16,106 
+ 
+ 
+ 
+Broadcast:  
+
+Television stations status:  
+ 
+   •  15 TV stations reported being operational (KATC, KBTR, KDCG, KLWB, KXKW, WALA-TV, WBRZ, 
+      WDBD, WEIQ, WJTV, WLAE-TV, WLBT, WTOK-TV, WVUE-DT, WXXV-TV). 
+   •  2 TV stations are reported as being out of service (WGNO, WNOL-TV). 
+
+FM Radio stations status:   
+
+   •  19 FM radio stations reported being operational (KFXZ, KLFT, KLWB, KOGM, KRVE, KSALU, KSLO, 
+      KYMK, WFFF-FM, WFMF, WKSO, WQNZ, WQRG-LP, WQRZ-LP, WQUE-FM, WWUU, WWUU, WYLD-
+      FM, WYNK-FM). 
+   •  3 AM stations reported being out of service (KVDU, WNOE, WRNO-FM). 
+
+AM Radio stations status:   
+
+   •  6 AM radio stations reported being operational (KFXZ, KSLO, KVOL, WFFF, WJBO, WNAT). 
+   •  2 AM radio stations reported being out of service (WODT, WYLD). 
+       
+Special Temporary Authority (STA)/Waivers 
+ 
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit 
+immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, 
+as well as waivers to support emergency communications and service restoration. 
+ 
+
+                                                                                 7 
+                                          
+                            
+ 
+During Hurricane Ida, there have been no STAs granted as of 11 am August 30. The FCC granted an ARRL 
+emergency request for a temporary waiver to permit higher symbol rate data transmissions for Hurricane Ida 
+traffic.  The FCC also granted a temporary waiver to allow carriers in affected areas greater flexibility in 
+number portability, to assist in restoring service to affected customers more quickly.  
+
+
+                                                                                 8 
+                                          

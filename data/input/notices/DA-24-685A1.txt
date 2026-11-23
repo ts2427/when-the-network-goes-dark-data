@@ -1,0 +1,25 @@
+﻿	
+DA 24-685
+Released:  July 15, 2024
+
+THE FEDERAL COMMUNICATIONS COMMISSION ANNOUNCES DEACTIVATION OF THE MANDATORY DISASTER RESPONSE INITIATIVE FOR HURRICANE BERYL 
+
+The Federal Communications Commission (FCC or Commission) has deactivated the Mandatory Disaster Response Initiative (MDRI) for Hurricane Beryl at the request of the State of Texas, and in coordination with the Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency. See FCC, Wireless Network Resiliency During Disasters, https://www.fcc.gov/wireless-network-resiliency-during-disasters (last visited July 16, 2024).
+  During MDRI activations, the Commission requires facilities-based mobile wireless providers that offer service to the disaster-affected area to perform the following functions: (1) provide for reasonable roaming under disaster arrangements when technically feasible; (2) activate mutual aid arrangements with other facilities-based mobile wireless providers for providing aid upon request to those providers during emergencies; (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. 47 CFR § 4.17(a)(3)(i)-(v). 
+  Effective today, facilities-based mobile wireless providers are no longer required to perform these functions for the Texas counties impacted by Hurricane Beryl and subject to this MDRI activation: Brazoria, Chambers, Fort Bend, Galveston, Harris, and Matagorda. See FCC Activates Mandatory Disaster Response Initiative for Beryl, Public Notice, DA 24-662 (July 8, 2024).
+
+
+We hereby require facilities-based mobile wireless providers offering service to the disaster-affected areas of Brazoria, Chambers, Fort Bend, Galveston, Harris, and Matagorda, Texas to submit a report to the Commission detailing the timing, duration, and effectiveness of their implementation of the MDRI’s provisions within 60 days of the Bureau’s issuance of this Public Notice (i.e., by September 13, 2024). See 47 CFR § 4.17(c); Resilient Networks, et al., PS Docket Nos. 21-346, 15-80, and ET Docket No. 04-35, Report and Order and Further Notice of Proposed Rulemaking, 37 FCC Rcd 8059, 8070-71, para. 32 (2022) (Resilient Networks R&O and FNPRM). 
+  As the Commission has stated, “relevant details may include whether a provider roamed, the other providers it roamed with, the time period involved and, if relevant, the time it took for a provider to perform a health assessment and activate roaming.” Resilient Networks R&O and FNPRM, 37 FCC Rcd at 8077, para. 51.
+  Reports must be submitted via email to MDRI@fcc.gov.  Receipt of these reports will allow the Commission to gauge the effectiveness of the MDRI during its inaugural activation.
+
+The FCC continues to be available to address emergency communications needs related to Hurricane Beryl 24 hours per day, seven days per week through our 24-hour operations center, which can be reached on 202-418-1122 or fccops@fcc.gov. For further information concerning this MDRI activation, please contact the following PSHSB staff and the FCC 24/7 Operations Center:
+ 
+Justin Cain, (202) 853-7365, (202) 418-2924, justin.cain@fcc.gov  
+James Wiley, (202) 418-1678, james.wiley@fcc.gov 
+FCC 24/7 Operations Center, (202) 418-1122, fccoperationcenter@fcc.gov
+
+
+- FCC -
+2
+

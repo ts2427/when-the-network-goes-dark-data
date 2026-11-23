@@ -1,0 +1,43 @@
+﻿	Federal Communications Commission	DA 26-XXX
+
+
+
+DA 26-1104
+Released:  October 12, 2026
+
+THE FEDERAL COMMUNICATIONS COMMISSION DEACTIVATES THE DISASTER INFORMATION REPORTING SYSTEM AND THE MANDATORY DISASTER RESPONSE INITIATIVE FOR STATES IMPACTED BY HURRICANE ISAIAS
+
+On October 8, 2026, the Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission), at the request of the States of Alabama, Florida, and Mississippi, and in coordination with the Federal Emergency Management Agency (FEMA), activated the Disaster Information Reporting System (DIRS) and the Mandatory Disaster Response Initiative (MDRI) for counties and independent municipalities in states impacted by Hurricane Isaias. The Federal Communications Commission Announces the Activation of the Disaster Information Reporting System (DIRS) and the Mandatory Disaster Response Initiative (MDRI) for Communications Impacts from Hurricane Isaias, Public Notice DA 26-1091 (PSHSB) (rel. October 8, 2026).
+ 
+
+DEACTIVATION OF THE DIRS AND THE MDRI IN ALABAMA, FLORIDA, AND MISSISSIPPI
+
+By this Public Notice, at the request of the States of Alabama, Florida, and Mississippi, PSHSB deactivates the DIRS and the MDRI for all areas impacted by Hurricane Isaias where they had been active, which includes the following:
+
+Alabama: Baldwin, Butler, Choctaw, Clarke, Conecuh, Covington, Crenshaw, Escambia, Geneva, Mobile, Monroe, and Washington. 
+
+Florida: Baker, Bay, Calhoun, Columbia, Dixie, Escambia, Franklin, Gadsden, Gilchrist, Gulf, Hamilton, Holmes, Jackson, Jefferson, Lafayette, Leon, Liberty, Madison, Okaloosa, Santa Rosa, Suwannee, Taylor, Wakulla, Walton, and Washington. 
+
+Mississippi: George, Greene, Hancock, Harrison, Jackson, Pearl River, and Stone.
+
+Cable communications providers, wireless service providers, wireline communications providers, and interconnected Voice over Internet Protocol (VoIP) providers that own or operate their own facilities and that provide service in the above-referenced areas are no longer required to report their infrastructure status daily in the DIRS for this event. See 47 CFR § 4.18(a)(1).
+  As of the release of this Public Notice, all such providers must resume making submissions in the Network Outage Reporting System (NORS) concerning any incidents that are reportable under those rules. See 47 CFR § 4.18(b).
+
+
+For further information on this DIRS deactivation, please contact:
+
+Michael Caiafa, (202) 418-1311, michael.caiafa@fcc.gov
+Juan Chapa, (202) 418-0431, juan.chapa@fcc.gov
+John Healy, (215) 847-8094, john.healy@fcc.gov
+FCC 24/7 Operations Center, (202) 418-1122, FCCOPS@fcc.gov
+
+For further information concerning this MDRI deactivation, please contact:
+
+Justin Cain, (202) 853-7365, (202) 418-2924, justin.cain@fcc.gov
+Logan Bennett, (202) 418-7790, logan.bennett@fcc.gov 
+FCC 24/7 Operations Center, (202) 418-1122, FCCOPS@fcc.gov
+
+PSHSB published its final daily communications status report for Hurricane Isaias on October 12, 2026.
+
+For more information on the Commission’s response to Hurricane Isaias, please visit https://www.fcc.gov/isaias. 
+2

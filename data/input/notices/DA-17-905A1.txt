@@ -1,0 +1,32 @@
+PUBLIC NOTICE
+Federal Communications Commission
+445 12th St., S.W.
+Washington, D.C. 20554
+News Media Information 202 / 418-0500
+Internet: http://www.fcc.gov
+TTY: 1-888-835-5322
+DA 17-905
+Released September 18, 2017
+THE FCC’S PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES 
+DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM FOR 
+HURRICANE IRMA
+At the request of the Federal Emergency Management Agency (FEMA), the Federal 
+Communications Commission (FCC) has deactivated its Disaster Information Reporting 
+System (DIRS) for Hurricane Irma.1 Communications providers do not need to provide 
+any additional reporting in DIRS in connection with this event.  The FCC will, however, 
+continue to monitor the status of communications services and work with providers and 
+government partners as needed to support remaining restoration efforts.  
+The FCC anticipates that, within the next couple of days, FEMA will likely request 
+activation of DIRS for Hurricane Maria in Puerto Rico and the U.S. Virgin Islands, and if that 
+occurs, the FCC will issue a separate activation public notice specific to that event.
+The FCC appreciates the cooperation of all the communications providers that voluntarily 
+submitted data to DIRS in the aftermath of Hurricane Irma.  In disaster situations, information on 
+the operational status of communications services provides critical situational awareness and 
+supports effective emergency response and restoration efforts.  The FCC published its final daily 
+communications status report for Hurricane Irma today, September 18. 
+For further information, please contact John Healy of the PSHSB’s Cybersecurity and 
+Communications Reliability Division at (215) 847-8094 or John.Healy@fcc.gov.  
+  
+1 DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice 
+over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information 
+during times of crisis.

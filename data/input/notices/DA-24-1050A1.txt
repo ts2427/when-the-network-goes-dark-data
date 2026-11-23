@@ -1,0 +1,58 @@
+﻿	
+DA 24-1050
+Released: October 7, 2024
+
+THE FEDERAL COMMUNICATIONS COMMISSION ANNOUNCES THE ACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM (DIRS)
+AND THE MANDATORY DISASTER RESPONSE INITIATIVE (MDRI) 
+FOR COMMUNICATIONS IMPACTS FROM HURRICANE MILTON IN FLORIDA
+
+The Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission), at the request of the State of Florida, and in coordination with the Department of Homeland Security Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, has announced that the Disaster Information Reporting System (DIRS) will be activated on Wednesday, October 9, 2024, in preparation for communications impacts by Hurricane Milton.  DIRS is a web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, and satellite providers use to report communications infrastructure status and situational awareness information during times of crisis.
+
+	The Commission requests that communications providers that provide service to any areas listed below expeditiously submit and update information through DIRS regarding, inter alia, the status of their communications equipment, restoration efforts, and power (i.e., whether they are using commercial power or back-up power).  Communications providers can accomplish this by accessing DIRS at https://www.fcc.gov/dirs.  If any user has any problems accessing DIRS, please contact any of the numbers listed below.  
+
+In DIRS, this activation will have the following name:  Hurricane Milton.  Communications providers are advised that for providers that participate in DIRS, PSHSB hereby waives the separate Network Outage Reporting System (NORS) obligations for the duration of the DIRS activation with respect to outages in the geographic areas where DIRS has been activated.  Providers that participate in DIRS remain required, where applicable, to report incidents in NORS that have reportable effects that fall outside the DIRS activation areas. Reports are requested at 9:00 a.m. (EDT) on October 10, 2024 and every day after that by 9:00 a.m. (EDT) until DIRS is deactivated. 
+
+Communications providers that serve an area listed below and that have already provided contact information in DIRS will be sent an e-mail requesting that they provide the above-referenced status information through DIRS.  For any communications providers that have not already logged onto DIRS to input their contact information, the Commission encourages them to do so as soon as possible.
+
+JURISDICTIONS OF INTEREST FOR THIS DIRS ACTIVATION INCLUDE THE FOLLOWING:  
+
+Florida: Alachua, Baker, Bradford, Brevard, Broward, Charlotte, Citrus, Clay, Collier, Columbia, DeSoto, Dixie, Duval, Flagler, Gilchrist, Glades, Hamilton, Hardee, Hendry, Hernando, Highlands, Hillsborough, Indian River, Jefferson, Lafayette, Lake, Lee, Levy, Madison, Manatee, Marion, Martin, Miami-Dade, Monroe, Nassau, Okeechobee, Orange, Osceola, Palm Beach, Pasco, Pinellas, Polk, Putnam, St. Johns, St. Lucie, Sarasota, Seminole, Sumter, Suwannee, Taylor, Union, and Volusia.
+
+Further, as the result of a DIRS activation, the PSHSB hereby notifies the public of the activation of the Mandatory Disaster Response Initiative (MDRI). Section 4.17(a)(2) authorizes the Chief of the Public Safety and Homeland Security Bureau to issue a Public Notice activating the MDRI in response to an activation of the Disaster Information Reporting System.  47 CFR § 4.17(a)(2).  
+ 
+
+JURISDICTIONS OF INTEREST FOR THIS MDRI ACTIVATION INCLUDE THE FOLLOWING: 
+
+Florida: Alachua, Baker, Bradford, Brevard, Broward, Charlotte, Citrus, Clay, Collier, Columbia, DeSoto, Dixie, Duval, Flagler, Gilchrist, Glades, Hamilton, Hardee, Hendry, Hernando, Highlands, Hillsborough, Indian River, Jefferson, Lafayette, Lake, Lee, Levy, Madison, Manatee, Marion, Martin, Miami-Dade, Monroe, Nassau, Okeechobee, Orange, Osceola, Palm Beach, Pasco, Pinellas, Polk, Putnam, St. Johns, St. Lucie, Sarasota, Seminole, Sumter, Suwannee, Taylor, Union, and Volusia.
+ 
+Upon the release of this Public Notice, all facilities-based mobile wireless providers operating in the above-referenced areas are hereby notified and required to: (1) provide for reasonable roaming under disaster arrangements when technically feasible; See 47 CFR § 4.17(a)(3)(i) (detailing criteria for activating roaming under disaster arrangements).  
+ (2) activate mutual aid arrangements with other facilities-based mobile wireless providers for providing aid upon request to those providers during emergencies; See 47 CFR § 4.17(a)(3)(ii) (explaining what mutual aid arrangements must include).  
+ (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. 47 CFR § 4.17(a)(3)(i)-(v); see also FCC, Wireless Network Resiliency During Disasters (June 4, 2024), https://www.fcc.gov/wireless-network-resiliency-during-disasters.  
+  
+	Facilities-based mobile wireless providers that serve the above-referenced areas and that have provided contact information in DIRS prior to Hurricane Milton will be individually notified that the MDRI has been activated in their area.  
+PSHSB will announce when the MDRI has been deactivated by subsequent Public Notice.  Such Public Notice will also announce any deadlines for facilities-based mobile wireless providers to report the timing and effectiveness of their MDRI provisions to the Commission. See 47 CFR § 4.17(c).
+  Providers should familiarize themselves with the Commission’s MDRI requirements. See generally 47 CFR § 4.17(a)(3)(i)-(v).
+  
+For more information on the FCC’s response to Hurricane Milton, please go to https://www.fcc.gov/Milton.
+The FCC continues to monitor this event and may amend the DIRS or MDRI activation area in the coming days.
+
+For further information on DIRS, please contact:
+ 
+Michael Caiafa (202) 418-1311, michael.caiafa@fcc.gov
+Juan Chapa (202) 418-0431, juan.chapa@fcc.gov
+John Healy (215) 847-8094, john.healy@fcc.gov
+FCC 24/7 Operations Center (202) 418-1122, fccoperationcenter@fcc.gov
+
+Details on the Mandatory Disaster Response Initiative can be found on the FCC website at https://www.fcc.gov/wireless-network-resiliency-during-disasters.  
+
+For further information concerning this MDRI activation, please contact:
+ 
+Justin Cain, (202) 853-7365, (202) 418-2924, justin.cain@fcc.gov  
+Logan Bennett, (732) 425-5036, (202) 418-7790, logan.bennett@fcc.gov 
+FCC 24/7 Operations Center, (202) 418-1122, fccops@fcc.gov
+
+
+- FCC -
+       
+2
+

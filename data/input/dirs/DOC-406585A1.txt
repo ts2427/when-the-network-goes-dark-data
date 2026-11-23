@@ -1,0 +1,111 @@
+﻿
+
+Communications Status Report for 
+Areas Impacted by Hurricane Helene
+October 15, 2024
+
+The following is a report on the status of communications services in geographic areas impacted by Hurricane Helene as of October 15, 2024, at 9:00 a.m. EDT.  This report incorporates network outage data submitted by communications providers to the Federal Communications Commission (FCC) Disaster Information Reporting System (DIRS).  Hurricane Helene made landfall in Florida on Thursday, September 26, 2024.  Note that the operational status of communications services during an event may evolve rapidly, and this report represents a snapshot in time.  
+On September 27, 2024, the activation area for Hurricane Helene was expanded to include additional counties in South Carolina, Tennessee, and Virginia.
+On September 30, 2024, the FCC reduced reporting for certain counties in Florida and Georgia.  
+On October 3, 2024 the FCC reduced reporting for all counties in Florida and Virginia and certain counties in Georgia and Tennessee.
+On October 7, 2024 the FCC reduced reporting for all counties in Georgia and South Carolina
+On October 12, 2024 the FCC reduced reporting for certain counties North Carolina.
+The following counties in North Carolina and Tennessee are in the current geographic area that is part of the DIRS activation area (the “disaster area”) for today’s report.
+North Carolina: Buncombe, Haywood, Henderson, Madison, McDowell, Mitchell, Polk, Rutherford, and Yancey.
+Tennessee: Carter, Cocke, Greene, Jefferson, Johnson, Unicoi, and Washington.
+
+
+
+911 Services 
+
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of services provided to each Public Safety Answering Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support Center, coordination with state and territory 911 Administrators, and, if necessary, direct contact with individual PSAPs.
+
+North Carolina: 
+The following PSAP has been rerouted with ALI:  Madison County.
+Tennessee: 
+There are no PSAPs reported in DIRS as being affected by Hurricane Helene in Tennessee.
+Wireless Services
+The following section describes the status of wireless communications services in the disaster area as reported in DIRS. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Percent of Cell Sites Out of Service by County
+
+
+The following tables provide cell sites out of service by county.  10.6% (up from 7.2% yesterday) of the cell sites in the affected area are out of service.  The information shown was provided by communications carriers providing services in the disaster area.
+North Carolina:
+StateAffected CountyCell Sites ServedCell Sites OutPercent OutCell Sites Out Due to DamageCell Sites Out Due to TransportCell Sites Out Due to PowerCell Sites Up but On Back-up PowerNCBuncombe 3486217.8%05644NCHaywood 10687.6%01600NCHenderson 1582213.9%01934NCMadison 4349.3%0400NCMcDowell 8356.0%0410NCMitchell 20315.0%0101NCPolk 2713.7%0100NCRutherford 9499.6%0720NCYancey 22940.9%0721TOTAL-90112313.7%01151210
+There are 13.7% (up from 8.9% yesterday) of cell sites reported as being out of service in the areas of North Carolina impacted by Hurricane Helene. 
+
+Tennessee:
+StateAffected CountiesCell Sites ServedCell Sites OutPercent OutCell Sites Out Due to DamageCell Sites Out Due to TransportCell Sites Out Due to PowerCell Sites Up but On Back-up PowerTNCarter 6700%0000TNCocke 691318.8%01300TNGreene 6911.5%0010TNJefferson 5911.7%0100TNJohnson 1200%0000TNUnicoi 1700%0000TNWashington 13221.5%0200TOTAL-425174.0%01610
+There are 4% (up from 3.8% yesterday) of cell sites reported as being out of service in the areas of Tennessee impacted by Hurricane Helene. 
+
+The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take other actions to maintain service to affected consumers during emergencies or other events that result in cell site outages. 
+
+Cable Systems and Wireline (Combined)
+Cable and wireline companies reported 40,963 (down from 43,696 yesterday) subscribers out of service in the disaster area.  This includes the loss of telephone, television, and/or Internet services.  
+
+
+
+
+Broadcast Radio and Television Information: The following provides broadcast status based on data collected from DIRS input and FCC scans.
+Broadcast: 
+Television station status:
+
+North Carolina: There is 1 TV station reported as being out of service in the area affected by Hurricane Helene.
+Tennessee: There are no TV stations reported as being out of service in the area affected by Hurricane Helene.
+FM Radio station status:  
+North Carolina: There are no FM stations reported as being out of service in the area affected by Hurricane Helene.
+Tennessee: There are no FM stations reported as being out of service in the area affected by Hurricane Helene.
+AM Radio station status:  
+North Carolina: There are no AM stations reported as being out of service in the area affected by Hurricane Helene.
+Tennessee: There are no AM stations reported as being out of service in the area affected by Hurricane Helene.
+
+Mandatory Disaster Response Initiative
+
+The Mandatory Disaster Response Initiative was activated for Hurricane Helene response activities on September 26, 2024.  As a reminder, all facilities-based mobile wireless providers operating in the above-referenced areas are hereby notified and required to: (1) provide for reasonable roaming under disaster arrangements when technically feasible; See 47 CFR § 4.17(a)(3)(i) (detailing criteria for activating roaming under disaster arrangements).  
+ (2) activate mutual aid arrangements with other facilities-based mobile wireless providers for providing aid upon request to those providers during emergencies; See 47 CFR § 4.17(a)(3)(ii) (explaining what mutual aid arrangements must include).  
+ (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. 47 CFR § 4.17(a)(3)(i)-(v); see also FCC, Wireless Network Resiliency During Disasters (June 4, 2024), https://www.fcc.gov/wireless-network-resiliency-during-disasters.  
+ 
+
+Special Temporary Authority (STA)/Waivers/Extensions
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, as well as waivers to support emergency communications and service restoration.
+
+· The Wireless Telecommunications Bureau grants Federated Wireless’ request for a precautionary, limited, and conditional emergency waiver of sections 96.67(c)(2) and (3) of the Commission’s rules governing the Citizens Broadband Radio Service. This waiver may be accessed using the following links: DA-24-985A1.docx, DA-24-985A1.pdf, and DA-24-985A1.txt 
+
+· The Wireless Telecommunications Bureau grants Google LLC’s request for a precautionary, limited, and conditional emergency waiver of sections 96.67(c)(2) and (3) of the Commission’s rules governing the Citizens Broadband Radio Service. This waiver may be accessed using the following links: DA-24-989A1.docx, DA-24-989A1.pdf, and DA-24-989A1.txt
+
+· The Wireless Telecommunications Bureau and the Public Safety and Homeland Security Bureau extend filing and regulatory deadlines in areas affected by Hurricane Helene. This waiver may be accessed using the following links: DA-24-1011A1.docx, DA-24-1011A1.pdf, and DA-24-1011A1.txt.
+
+· The Public Safety and Homeland Security Bureau extends the deadline for Emergency Alert System (EAS) Participants—i.e., radio and TV broadcasters, cable TV, wireless cable systems, satellite and wireline operators who transmit emergency alerts from public safety authorities—to submit required annual filings concerning their EAS equipment from October 4 to October 18, 2024, in recognition of the burdens on communications providers of responding to Hurricane Helene. This waiver may be accessed using the following links: DA-24-1022.docx, DA-24-1022.pdf, and DA-24-1022.txt.
+
+· The Wireline Competition Bureau issues a temporary, partial waiver of the Commission’s telephone number “aging” rule for Hurricane Helene. This waiver may be accessed using the following links: DA-24-1024.docx, DA-24-1024.pdf, and DA-24-1024.txt
+
+· The Federal Communications Commission waives certain Lifeline, E-Rate, Emergency Connectivity Fund, Rural Health Care, and High Cost rules and deadlines to assist participants and service providers, including Universal Service Fund contributors, located in the areas affected by Hurricane Helene: This waiver may be accessed using the following links: DA-24-1025.docx, DA-24-1025.pdf, and DA-24-1025.txt.
+
+· The Wireless Telecommunications Bureau and Public Safety and Homeland Security Bureau extend filing and regulatory deadlines for licensees and applicants in areas affected by Hurricane Helene. Information regarding this extension may be accessed using the following links: DA-24-1028A1.docx, DA-24-1028A1.pdf, DA-24-1028A1.txt
+
+· The Federal Communications Commission temporarily waives certain Lifeline eligibility requirements to permit households not already enrolled in the Lifeline program to enter the program if they are receiving individual assistance from the Federal Emergency Management Agency’s Individuals and Households Program as a result of the impacts of the Hurricane Helene. This waiver may be accessed using the following links: FCC-24-107.docx, FCC-24-107.pdf, and FCC-24.107.txt.
+
+· Space Bureau grants a temporary and limited STA enabling SpaceX to operate Supplemental Coverage from Space (SCS) in the 1910–1915 MHz and 1990–1995 MHz frequency bands leased from T‐Mobile in areas affected by the Hurricane Helene. This STA may be accessed using the following links: SAT-STA-20241007-00215
+
+· Space Bureau grants a Special Temporary Authority to SES Networks Lux, S.a.r.l. to operate during Hurricane Helene restoration in Ashville, NC.  This STA may be accessed using the following link: SES-STA-20241002-02052 
+
+· The Media Bureau grants 14 requests for Silent Special Temporary Authority and 2 Engineering Special Temporary Authority to stations impacted by Hurricane Helene.  
+
+· The Wireless Telecommunications Bureau grants emergency Special Temporary Authority requests to provide microwave backhaul to wireless facilities destroyed by Hurricane Helene.   
+o 52 to Verizon 
+o 18 to T-Mobile
+
+

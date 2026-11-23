@@ -1,0 +1,66 @@
+﻿
+								DA 20-987
+Released August 28, 2020
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANE LAURA
+
+DIRS deactivated for all counties in Illinois, Indiana, Mississippi, Missouri, and Oklahoma 
+DIRS remains active in Arkansas, Delaware, Kentucky, Louisiana, Maryland, North Carolina, New Jersey, New York, Pennsylvania, Tennessee, Texas, Virginia, Washington DC, and West Virginia 
+	
+At the request of the Department of Homeland Security, Cybersecurity and Infrastructure Security Agency, and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas affected by Hurricane Laura:
+
+Illinois: Alexander, Edwards, Franklin, Gallatin, Hamilton, Hardin, Jackson, Jefferson, Johnson, Massac, Perry, Pope, Pulaski, Randolph, Saline, Union, Wabash, Washington, Wayne, White, Williamson
+
+Indiana: Clark, Crawford, Dubois, Floyd, Gibson, Harrison, Jefferson, Ohio, Orange, Perry, Pike, Posey, Scott, Spencer, Switzerland, Vanderburgh, Warrick, Washington
+
+Mississippi: Adams, Amite, Attala, Bolivar, Carroll, Claiborne, Coahoma, Copiah, Covington, Forrest, Franklin, George, Greene, Grenada, Hancock, Harrison, Hinds, Holmes, Humphreys, Issaquena, Jackson, Jasper, Jefferson, Jefferson Davis, Jones, Lamar, Lawrence, Leake, Leflore, Lincoln, Madison, Marion, Montgomery, Newton, Pearl River, Perry, Pike, Quitman, Rankin, Scott, Sharkey, Simpson, Smith, Stone, Sunflower, Tallahatchie, Tunica, Walthall, Warren, Washington, Wilkinson, Yazoo
+
+Missouri: Barry, Bollinger, Butler, Cape Girardeau, Carter, Christian, Crawford, Dent, Douglas, Dunklin, Howell, Iron, Madison, McDonald, Mississippi, New Madrid, Newton, Oregon, Ozark, Pemiscot, Perry, Reynolds, Ripley, Scott, Shannon, St. Francois, Ste. Genevieve, Stoddard, Stone, Taney, Texas, Washington, Wayne, Wright
+
+Oklahoma: Adair, Atoka, Bryan, Carter, Cherokee, Choctaw, Coal, Delaware, Haskell, Hughes, Johnston, Latimer, Le Flore, Love, Marshall, Mayes, McCurtain, McIntosh, Murray, Muskogee, Okfuskee, Okmulgee, Ottawa, Pittsburg, Pontotoc, Pushmataha, Sequoyah, Wagoner
+
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas with respect to Hurricane Laura.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+	DIRS remains activated in the following areas:
+
+Arkansas: Arkansas, Ashley, Baxter, Benton, Boone, Bradley, Calhoun, Carroll, Chicot, Clark, Clay, Cleburne, Cleveland, Columbia, Conway, Craighead, Crawford, Crittenden, Cross, Dallas, Desha, Drew, Faulkner, Franklin, Fulton, Garland, Grant, Greene, Hempstead, Hot Spring, Howard, Independence, Izard, Jackson, Jefferson, Johnson, Lafayette, Lawrence, Lee, Lincoln, Little River, Logan, Lonoke, Madison, Marion, Miller, Mississippi, Monroe, Montgomery, Nevada, Newton, Ouachita, Perry, Phillips, Pike, Poinsett, Polk, Pope, Prairie, Pulaski, Randolph, Saline, Scott, Searcy, Sebastian, Sevier, Sharp, St. Francis, Stone, Union, Van Buren, Washington, White, Woodruff, Yell
+
+Delaware: Kent, New Castle, Sussex
+
+Kentucky: Adair, Allen, Anderson, Ballard, Barren, Bath, Bell, Boone, Bourbon, Boyd, Boyle, Bracken, Breathitt, Breckinridge, Bullitt, Butler, Caldwell, Calloway, Campbell, Carlisle, Carroll, Carter, Casey, Christian, Clark, Clay, Clinton, Crittenden, Cumberland, Daviess, Edmonson, Elliott, Estill, Fayette, Fleming, Floyd, Franklin, Fulton, Gallatin, Garrard, Grant, Graves, Grayson, Green, Greenup, Hancock, Hardin, Harlan, Harrison, Hart, Henderson, Henry, Hickman, Hopkins, Jackson, Jefferson, Jessamine, Johnson, Kenton, Knott, Knox, Larue, Laurel, Lawrence, Lee, Leslie, Letcher, Lewis, Lincoln, Livingston, Logan, Lyon, Madison, Magoffin, Marion, Marshall, Martin, Mason, McCracken, McCreary, McLean, Meade, Menifee, Mercer, Metcalfe, Monroe, Montgomery, Morgan, Muhlenberg, Nelson, Nicholas, Ohio, Oldham, Owen, Owsley, Pendleton, Perry, Pike, Powell, Pulaski, Robertson, Rockcastle, Rowan, Russell, Scott, Shelby, Simpson, Spencer, Taylor, Todd, Trigg, Trimble, Union, Warren, Washington, Wayne, Webster, Whitley, Wolfe, Woodford
+
+Louisiana: Acadia, Allen, Ascension, Assumption, Avoyelles, Beauregard, Bienville, Bossier, Caddo, Calcasieu, Caldwell, Cameron, Catahoula, Claiborne, Concordia, De Soto, East Baton Rouge, East Carroll, East Feliciana, Evangeline, Franklin, Grant, Iberia, Iberville, Jackson, Jefferson, Jefferson Davis, La Salle, Lafayette, Lafourche, Lincoln, Livingston, Madison, Morehouse, Natchitoches, Orleans, Ouachita, Plaquemines, Pointe Coupee, Rapides, Red River, Richland, Sabine, St. Bernard, St. Charles, St. Helena, St. James, St. John The Baptist, St. Landry, St. Martin, St. Mary, St. Tammany, Tangipahoa, Tensas, Terrebonne, Union, Vermilion, Vernon, Washington, Webster, West Baton Rouge, West Carroll, West Feliciana, Winn
+
+Maryland: Allegany, Anne Arundel, Baltimore, Baltimore City, Calvert, Caroline, Carroll, Cecil, Charles, Dorchester, Frederick, Garrett, Harford, Howard, Kent, Montgomery, Prince George`s, Queen Anne`s, Somerset, St. Mary`s, Talbot, Washington, Wicomico, Worcester
+
+North Carolina: Alamance, Alexander, Alleghany, Ashe, Avery, Beaufort, Bertie, Buncombe, Burke, Cabarrus, Caldwell, Camden, Carteret, Caswell, Catawba, Chatham, Cherokee, Chowan, Cleveland, Craven, Currituck, Dare, Davidson, Davie, Durham, Edgecombe, Forsyth, Franklin, Gaston, Gates, Graham, Granville, Greene, Guilford, Halifax, Harnett, Haywood, Henderson, Hertford, Hyde, Iredell, Jackson, Johnston, Jones, Lee, Lenoir, Lincoln, Macon, Madison, Martin, McDowell, Mecklenburg, Mitchell, Montgomery, Moore, Nash, Northampton, Orange, Pamlico, Pasquotank, Perquimans, Person, Pitt, Polk, Randolph, Rockingham, Rowan, Rutherford, Stanly, Stokes, Surry, Swain, Transylvania, Tyrrell, Vance, Wake, Warren, Washington, Watauga, Wayne, Wilkes, Wilson, Yadkin, Yancey
+
+New Jersey: Atlantic, Bergen, Burlington, Camden, Cape May, Cumberland, Essex, Gloucester, Hudson, Hunterdon, Mercer, Middlesex, Monmouth, Morris, Ocean, Passaic, Salem, Somerset, Sussex, Union
+
+New York: Kings, New York, Richmond
+
+Pennsylvania: Delaware, Philadelphia
+
+Tennessee: Anderson, Bedford, Benton, Bledsoe, Blount, Bradley, Campbell, Cannon, Carroll, Carter, Cheatham, Chester, Claiborne, Clay, Cocke, Coffee, Crockett, Cumberland, Davidson, Decatur, Dekalb, Dickson, Dyer, Fayette, Fentress, Franklin, Gibson, Giles, Grainger, Greene, Grundy, Hamblen, Hamilton, Hancock, Hardeman, Hardin, Hawkins, Haywood, Henderson, Henry, Hickman, Houston, Humphreys, Jackson, Jefferson, Johnson, Knox, Lake, Lauderdale, Lawrence, Lewis, Lincoln, Loudon, Macon, Madison, Marion, Marshall, Maury, McMinn, McNairy, Meigs, Monroe, Montgomery, Moore, Morgan, Obion, Overton, Perry, Pickett, Polk, Putnam, Rhea, Roane, Robertson, Rutherford, Scott, Sequatchie, Sevier, Shelby, Smith, Stewart, Sullivan, Sumner, Tipton, Trousdale, Unicoi, Union, Van Buren, Warren, Washington, Wayne, Weakley, White, Williamson, Wilson
+
+Texas: Anderson, Angelina, Aransas, Austin, Bastrop, Bee, Bell, Bexar, Blanco, Bosque, Bowie, Brazoria, Brazos, Burleson, Burnet, Caldwell, Calhoun, Camp, Cass, Chambers, Cherokee, Collin, Colorado, Comal, Cooke, Coryell, Dallas, Delta, Denton, Dewitt, Ellis, Erath, Falls, Fannin, Fayette, Fort Bend, Franklin, Freestone, Galveston, Goliad, Gonzales, Grayson, Gregg, Grimes, Guadalupe, Hamilton, Hardin, Harris, Harrison, Hays, Henderson, Hill, Hood, Hopkins, Houston, Hunt, Jackson, Jasper, Jefferson, Johnson, Karnes, Kaufman, Lamar, Lampasas, Lavaca, Lee, Leon, Liberty, Limestone, Madison, Marion, Matagorda, McLennan, Milam, Montague, Montgomery, Morris, Nacogdoches, Navarro, Newton, Nueces, Orange, Panola, Parker, Polk, Rains, Red River, Refugio, Robertson, Rockwall, Rusk, Sabine, San Augustine, San Jacinto, San Patricio, Shelby, Smith, Somervell, Tarrant, Titus, Travis, Trinity, Tyler, Upshur, Van Zandt, Victoria, Walker, Waller, Washington, Wharton, Williamson, Wilson, Wise, Wood
+
+Virginia: Accomack, Albemarle, Alexandria City, Alleghany, Amelia, Amherst, Appomattox, Arlington, Augusta, Bath, Bedford, Bland, Botetourt, Bristol City, Brunswick, Buchanan, Buckingham, Buena Vista City, Campbell, Caroline, Carroll, Charles City, Charlotte, Charlottesville City, Chesapeake City, Chesterfield, Clarke, Colonial Heights City, Covington City, Craig, Culpeper, Cumberland, Danville City, Dickenson, Dinwiddie, Emporia City, Essex, Fairfax, Fairfax City, Falls Church City, Fauquier, Floyd, Fluvanna, Franklin, Franklin City, Frederick, Fredericksburg City, Galax City, Giles, Gloucester, Goochland, Grayson, Greene, Greensville, Halifax, Hampton City, Hanover, Harrisonburg City, Henrico, Henry, Highland, Hopewell City, Isle Of Wight, James City, King And Queen, King George, King William, Lancaster, Lee, Lexington City, Loudoun, Louisa, Lunenburg, Lynchburg City, Madison, Manassas City, Manassas Park City, Martinsville City, Mathews, Mecklenburg, Middlesex, Montgomery, Nelson, New Kent, Newport News City, Norfolk City, Northampton, Northumberland, Norton City, Nottoway, Orange, Page, Patrick, Petersburg City, Pittsylvania, Poquoson City, Portsmouth City, Powhatan, Prince Edward, Prince George, Prince William, Pulaski, Radford, Rappahannock, Richmond, Richmond City, Roanoke, Roanoke City, Rockbridge, Rockingham, Russell, Salem, Scott, Shenandoah, Smyth, Southampton, Spotsylvania, Stafford, Staunton City, Suffolk City, Surry, Sussex, Tazewell, Virginia Beach City, Warren, Washington, Waynesboro City, Westmoreland, Winchester City, Wise, Wythe, York
+
+Washington D.C: District of Columbia
+
+West Virginia: Barbour, Berkeley, Boone, Braxton, Cabell, Calhoun, Clay, Doddridge, Fayette, Gilmer, Grant, Greenbrier, Hampshire, Hardy, Harrison, Jefferson, Kanawha, Lewis, Lincoln, Logan, Marion, McDowell, Mercer, Mineral, Mingo, Monongalia, Monroe, Morgan, Nicholas, Pendleton, Pocahontas, Preston, Putnam, Raleigh, Randolph, Roane, Summers, Taylor, Tucker, Upshur, Wayne, Webster, Wyoming
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Laura.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Laura.
+
+All FCC releases in connection with Hurricane Laura may be found at https://www.fcc.gov/marco-laura
+
+	For further information, please contact Julia Tu of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at 202-418-0731 or Julia.Tu@fcc.gov.
+  
+
+
+2
+

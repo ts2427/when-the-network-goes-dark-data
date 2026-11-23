@@ -1,0 +1,164 @@
+ 
+ 
+As prepared by the Federal Communications Commission: September 02, 2017 11:30 a.m. 
+Communications Status Report for  
+Areas Impacted by Post-Tropical Cyclone Harvey  
+September 2, 2017 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Post-Tropical Cyclone Harvey as of September 2, 2017 at 11:00 a.m. EDT.  This report incorporates 
+network outage data submitted by communications providers to the Federal Communications 
+Commission’s Disaster Information Reporting System (DIRS).  DIRS currently covers areas of Texas and 
+Louisiana.  Note that the operational status of communications services during a disaster may evolve 
+rapidly, and this report represents a snapshot in time. 
+ 
+On August 31, FEMA asked the FCC to extend the DIRS disaster area to 9 additional counties in Texas, 
+and this report is the second to include these 9 new counties.   
+ 
+The following 64 counties are in the current geographic area that is part of DIRS (the “disaster area”).  
+ 
+Louisiana: Acadia, Assumption, Calcasieu, Cameron, Iberia, Jefferson, Jefferson Davis, Lafayette, 
+Lafourche, Orleans, Plaquemines, St. Bernard, St. Charles, St. James, St. John the Baptist, St. 
+Martin, St. Mary, Terrebonne, Vermilion 
+ 
+Texas: Aransas, Atascosa, Bee, Bexar, Brazoria, Brooks, Calhoun, Cameron, Chambers, Colorado, 
+DeWitt, Duval, Fayette, Fort Bend, Galveston, Goliad, Gonzales, Hardin, Harris, Hidalgo, Jackson, 
+Jasper, Jefferson, Jim Wells, Karnes, Kenedy, Kleberg, Lavaca, Liberty, Live Oak, Matagorda, 
+McMullen, Montgomery, Newton, Nueces, Orange, Refugio, Sabine, San Jacinto, San Patricio, 
+Victoria, Waller, Wharton, Willacy, Wilson 
+ 
+The following map shows the counties in the disaster area: 
+ 
+ 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 02, 2017 11:30 a.m. 
+ 
+911 Services  
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety 
+Answering Point (PSAP) through the filings of 911 Service Providers in the Disaster Information 
+Reporting System (DIRS), through reporting done to the FCC’s Public Safety Support Center (PSSC), 
+coordination with state 911 Administrators and, if necessary, individual PSAPs. 
+ 
+There are a total of 6 (down from 7 yesterday) PSAPs affected (all from Texas).  There are no PSAPs 
+which are down without a re-route.   
+ 
+? PSAP re-routed without ALI: Refugio County SO, TX; and Vidor PD, TX. 
+? PSAP re-routed with ALI: Harris County Neutral SO, TX; Houston EC Training, TX; Port Aransas 
+PD, TX; and West Columbia PD, TX. 
+ 
+Aransas County SO, TX is functioning normally and has been taken off the list from yesterday. 
+ 
+Wireless Services 
+The following section describes the status of wireless communications services and restoration in the 
+disaster area, including the percentage of cell sites out of service for each county. 
+ 
+The following map of the disaster area illustrates which counties are most affected: 
+  
+ 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 02, 2017 11:30 a.m. 
+The following table provides the percentage of cell sites out of service by county.  There are 2% of the 
+cell sites out of service in the affected area, down from 2.4% yesterday.  There are no counties with 
+greater than 35% of cell sites out of service.  There are six cell sites reported out of service in LA.  The 
+information shown was provided by the signatories to the Wireless Resiliency Cooperative Framework: 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+LA ACADIA 50 0 0.0% 
+LA ASSUMPTION 23 0 0.0% 
+LA CALCASIEU 154 3 1.9% 
+LA CAMERON 30 1 3.3% 
+LA IBERIA 45 0 0.0% 
+LA JEFFERSON 275 0 0.0% 
+LA JEFFERSON DAVIS 36 0 0.0% 
+LA LAFAYETTE 150 0 0.0% 
+LA LAFOURCHE 31 0 0.0% 
+LA ORLEANS 349 1 0.3% 
+LA PLAQUEMINES 48 1 2.1% 
+LA ST. BERNARD 35 0 0.0% 
+LA ST. CHARLES 48 0 0.0% 
+LA ST. JAMES 27 0 0.0% 
+LA ST. JOHN THE BAPTIST 33 0 0.0% 
+LA ST. MARTIN 53 0 0.0% 
+LA ST. MARY 60 0 0.0% 
+LA TERREBONNE 80 0 0.0% 
+LA VERMILION 56 0 0.0% 
+TX ARANSAS 19 3 15.8% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 02, 2017 11:30 a.m. 
+TX ATASCOSA 40 0 0.0% 
+TX BEE 40 0 0.0% 
+TX BRAZORIA 267 6 2.2% 
+TX BROOKS 15 0 0.0% 
+TX CALHOUN 28 2 7.1% 
+TX CAMERON 210 0 0.0% 
+TX CHAMBERS 54 3 5.6% 
+TX COLORADO 49 1 2.0% 
+TX DEWITT 31 0 0.0% 
+TX DUVAL 39 1 2.6% 
+TX FORT BEND 363 3 0.8% 
+TX GALVESTON 241 7 2.9% 
+TX GOLIAD 23 1 4.3% 
+TX GONZALES 41 0 0.0% 
+TX HARRIS 3,131 59 1.9% 
+TX HIDALGO 380 0 0.0% 
+TX JACKSON 17 0 0.0% 
+TX JEFFERSON 247 28 11.3% 
+TX JIM WELLS 35 0 0.0% 
+TX KARNES 17 0 0.0% 
+TX KENEDY 14 0 0.0% 
+TX KLEBERG 27 0 0.0% 
+TX LAVACA 33 0 0.0% 
+TX LIBERTY 108 1 0.9% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 02, 2017 11:30 a.m. 
+TX LIVE OAK 47 0 0.0% 
+TX MATAGORDA 58 3 5.2% 
+TX MCMULLEN 7 0 0.0% 
+TX NUECES 267 6 2.2% 
+TX ORANGE 85 26 30.6% 
+TX REFUGIO 26 0 0.0% 
+TX SAN PATRICIO 58 1 1.7% 
+TX VICTORIA 92 4 4.3% 
+TX WHARTON 63 4 6.3% 
+TX WILLACY 21 0 0.0% 
+TX WILSON 29 0 0.0% 
+TX BEXAR 989 1 0.1% 
+TX FAYETTE 68 0 0.0% 
+TX HARDIN 71 11 15.5% 
+TX JASPER 81 2 2.5% 
+TX MONTGOMERY 418 12 2.9% 
+TX NEWTON 45 0 0.0% 
+TX SABINE 24 0 0.0% 
+TX SAN JACINTO 54 2 3.7% 
+TX WALLER 56 0 0.0% 
+TOTAL 
+ 
+9,611 193 2.0% 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 02, 2017 11:30 a.m. 
+ 
+ 
+Cable Systems and Wireline (Combined) 
+There are at least 197,142 subscribers (down from at least 238,259 yesterday) out of service in the 
+affected area.  This includes users who get service from cable system or wireline providers.  There are 34 
+(down from 36 yesterday) non-mobile switching centers out of service and 29 (down from 37 yesterday) 
+switching centers on back-up power.   
+ 
+Broadcast 
+There are 7 (down from 9 yesterday) radio stations out of service:   
+TX – K224EH, KHJK, K251AL, K255BB, K237FS, KFNC, KTXB, KKWV, and KAYK.   
+KRVT was added to the list since yesterday and K224EH, KHJK, and K251AL have been restored and 
+removed from the list. 
+There are 2 (same as yesterday) TV stations out of service: 
+TX - KFDM and KBTV, all in TX.   

@@ -1,0 +1,56 @@
+PUBLIC NOTICE
+Federal Communications Commission
+445 12th St., S.W.
+Washington, D.C. 20554
+News Media Information 202 / 418-0500
+Internet: http://www.fcc.gov
+TTY: 1-888-835-5322
+DA 17-899
+Released September 14, 2017
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL 
+DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANE IRMA
+DIRS deactivated for all counties in Alabama, Georgia, and Puerto Rico
+At the request of the Federal Emergency Management Agency, the Federal 
+Communications Commission (FCC) has deactivated its Disaster Information Reporting 
+System (DIRS)1 for the following areas affected by Hurricane Irma:
+Alabama:  Geneva, Henry, Houston 
+Georgia:  Baker, Brooks, Camden, Charlton, Clinch, Colquitt, Decatur, Early, Echols, Glynn, 
+Grady, Lanier, Lowndes, Miller, Mitchell, Seminole, Thomas, Ware
+Puerto Rico: Adjuntas, Aguada, Aguadilla, Aguas Buenas, Aibonito, Anasco, Arecibo, Arroyo, 
+Barceloneta, Barranquitas, Bayamon, Cabo Rojo, Caguas, Camuy, Canovanas, Carolina, Catano, 
+Cayey, Ceiba, Ciales, Cidra, Coamo, Comerio, Corozal, Culebra, Dorado, Fajardo, Florida, 
+Guanica, Guayama, Guayanilla, Guaynabo, Gurabo, Hatillo, Hormigueros, Humacao, Isabela, 
+Jayuya, Juana Diaz, Juncos, Lajas, Lares, Las Marias, Las Piedras, Loiza, Luquillo, Manati, 
+Maricao, Maunabo, Mayaguez, Moca, Morovis, Naguabo, Naranjito, Orocovis, Patillas, 
+Penuelas, Ponce, Quebradillas, Rincon, Rio Grande, Sabana Grande, Salinas, San German, San 
+Juan, San Lorenzo, San Sebastian, Santa Isabel, Toa Alta, Toa Baja, Trujillo Alto, Utuado, Vega 
+Alta, Vega Baja, Vieques, Villalba, Yabucoa, Yauco
+Communications providers do not need to provide any additional reporting in DIRS 
+for these areas with respect to Hurricane Irma.  The FCC will, however, continue to monitor 
+the status of communications services and work with providers and government partners in these 
+areas as needed to support remaining restoration efforts.
+DIRS remains activated in the following areas:
+Florida:  Alachua, Baker, Bay, Bradford, Brevard, Broward, Calhoun, Charlotte, Citrus, Clay, 
+Collier, Columbia, Desoto, Dixie, Duval, Escambia, Flagler, Franklin, Gadsden, Gilchrist, 
+  
+1 DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice 
+over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information 
+during times of crisis.
+2Glades, Gulf, Hamilton, Hardee, Hendry, Hernando, Highlands, Hillsborough, Holmes, Indian 
+River, Jackson, Jefferson, Lafayette, Lake, Lee, Leon, Levy, Liberty, Madison, Manatee, 
+Marion, Martin, Miami-Dade, Monroe, Nassau, Okaloosa, Okeechobee, Orange, Osceola, Palm 
+Beach, Pasco, Pinellas, Polk, Putnam, St. Johns, St. Lucie, Santa Rosa, Sarasota, Seminole, 
+Sumter, Suwannee, Taylor, Union, Volusia, Wakulla, Walton, Washington
+U.S. Virgin Islands:  St. Croix, St. John, St. Thomas
+The FCC appreciates the cooperation of all the communications providers that have 
+voluntarily submitted data to DIRS in the aftermath of Hurricane Irma.  In disaster situations, 
+information on the operational status of communications services provides critical situational 
+awareness and supports effective emergency response and restoration efforts.  The FCC expects 
+to continue to publish daily communications status reports while DIRS remains active for any 
+area in connection with Hurricane Irma. 
+All FCC releases in connection with Hurricane Irma may be found at 
+https://www.fcc.gov/irma. 
+For further information, please contact John Healy of the Public Safety and Homeland 
+Security Bureau’s Cybersecurity and Communications Reliability Division at (215) 847-8094 or 
+John.Healy@fcc.gov.  

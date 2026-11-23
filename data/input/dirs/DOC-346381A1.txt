@@ -1,0 +1,151 @@
+ 
+ 
+As prepared by the Federal Communications Commission: August 28, 2017 11:30 a.m. 
+Communications Status Report for  
+Areas Impacted by Tropical Storm Harvey  
+August 28, 2017 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Tropical Storm Harvey as of August 28, 2017 at 11:00 a.m. EDT.  This report incorporates network 
+outage data submitted by communications providers to the Federal Communications Commission’s 
+Disaster Information Reporting System (DIRS).  DIRS currently covers areas of Texas and Louisiana.  Note 
+that the operational status of communications services during a disaster may evolve rapidly, and this 
+report represents a snapshot in time. 
+ 
+The following 55 counties are in the current geographic area that is part of DIRS (the “disaster area”).  
+ 
+Louisiana: Acadia, Assumption, Calcasieu, Cameron, Iberia, Jefferson, Jefferson Davis, Lafayette, 
+Lafourche, Orleans, Plaquemines, St. Bernard, St. Charles, St. James, St. John the Baptist, St. 
+Martin, St. Mary, Terrebonne, Vermilion 
+ 
+Texas: Aransas, Atascosa, Bee, Brazoria, Brooks, Calhoun, Cameron, Chambers, Colorado, 
+DeWitt, Duval, Fort Bend, Galveston, Goliad, Gonzales, Harris, Hidalgo, Jackson, Jefferson, Jim 
+Wells, Karnes, Kenedy, Kleberg, Lavaca, Liberty, Live Oak, Matagorda, McMullen, Nueces, 
+Orange, Refugio, San Patricio, Victoria, Wharton, Willacy, Wilson 
+ 
+The following map shows the counties in the disaster area: 
+ 
+ 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: August 28, 2017 11:30 a.m. 
+ 
+911 Services  
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety 
+Answering Point (PSAP) through the filings of 911 Service Providers in the Disaster Information 
+Reporting System (DIRS), through reporting done to the FCC’s Public Safety Support Center (PSSC), 
+coordination with state 911 Administrators and, if necessary, individual PSAPs. 
+ 
+There are a total of 16 (down from 17 yesterday) PSAPs affected (all from Texas). Six PSAPs from 
+yesterday were taken off the list, and five have been added. The ones added are in bold:  
+? PSAP down with no re-route: Calhoun County Sheriff, TX.   
+? PSAP re-routed without ALI: Aransas County SO, TX; Bee PD, TX; Beeville PD, TX; Harris County 
+Neutral SO, TX; Jackson County SO, TX; Kemah PD, TX; Kingsville PD, TX; Kleberg County SO, 
+TX; Mathis PD, TX; Port Aransas PD, TX; and Robstown PD, TX. 
+? PSAP re-routed with ALI: Aransas Pass PD, TX; Gonzales County SO, TX; Port Lavaca, TX; and 
+Wilson County SO, TX.  
+? Note: The following PSAPs were listed as affected yesterday but are now fully functional: 
+Cameron Parish SO, LA; Ingleside PD, TX; Portland Police Department, TX; Refugio County SO, 
+TX; Richmond PD, TX; and Victoria PD, TX. 
+ 
+Wireless Services 
+The following section describes the status of wireless communications services and restoration in the 
+disaster area, including the percentage of cell sites out of service for each county. 
+ 
+The following map of the disaster area illustrates which counties are most affected: 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: August 28, 2017 11:30 a.m. 
+  
+ 
+The following table provides cell sites out by county.  There are 4.7% of the cell sites down in the 
+affected area, up from 4.1% yesterday.  The counties with greater than 50% of cell sites out are Aransas, 
+Calhoun, and Refugio in TX.  Plaquemines is the only county in LA reporting any cell sites out.  The 
+information shown was provided by the signatories to the Wireless Network Resiliency Cooperative 
+Agreement: 
+ 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+LA ACADIA 50 0 0.0% 
+LA ASSUMPTION 23 0 0.0% 
+LA CALCASIEU 154 0 0.0% 
+LA CAMERON 30 0 0.0% 
+LA IBERIA 45 0 0.0% 
+LA JEFFERSON 275 0 0.0% 
+LA JEFFERSON DAVIS 36 0 0.0% 
+ 
+ 
+As prepared by the Federal Communications Commission: August 28, 2017 11:30 a.m. 
+LA LAFAYETTE 150 0 0.0% 
+LA LAFOURCHE 31 0 0.0% 
+LA ORLEANS 349 0 0.0% 
+LA PLAQUEMINES 48 3 6.3% 
+LA ST. BERNARD 35 0 0.0% 
+LA ST. CHARLES 48 0 0.0% 
+LA ST. JAMES 27 0 0.0% 
+LA ST. JOHN THE BAPTIST 33 0 0.0% 
+LA ST. MARTIN 53 0 0.0% 
+LA ST. MARY 60 0 0.0% 
+LA TERREBONNE 80 0 0.0% 
+LA VERMILION 56 0 0.0% 
+TX ARANSAS 19 18 94.7% 
+TX ATASCOSA 40 0 0.0% 
+TX BEE 40 1 2.5% 
+TX BRAZORIA 267 15 5.6% 
+TX BROOKS 15 0 0.0% 
+TX CALHOUN 27 20 74.1% 
+TX CAMERON 210 0 0.0% 
+TX CHAMBERS 54 2 3.7% 
+TX COLORADO 49 5 10.2% 
+TX DEWITT 31 1 3.2% 
+TX DUVAL 39 2 5.1% 
+TX FORT BEND 363 6 1.7% 
+ 
+ 
+As prepared by the Federal Communications Commission: August 28, 2017 11:30 a.m. 
+TX GALVESTON 241 15 6.2% 
+TX GOLIAD 23 8 34.8% 
+TX GONZALES 40 3 7.5% 
+TX HARRIS 3,131 110 3.5% 
+TX HIDALGO 380 1 0.3% 
+TX JACKSON 17 6 35.3% 
+TX JEFFERSON 247 7 2.8% 
+TX JIM WELLS 35 0 0.0% 
+TX KARNES 17 0 0.0% 
+TX KENEDY 14 0 0.0% 
+TX KLEBERG 27 0 0.0% 
+TX LAVACA 33 2 6.1% 
+TX LIBERTY 108 6 5.6% 
+TX LIVE OAK 47 3 6.4% 
+TX MATAGORDA 58 12 20.7% 
+TX MCMULLEN 7 0 0.0% 
+TX NUECES 267 51 19.1% 
+TX ORANGE 85 1 1.2% 
+TX REFUGIO 26 22 84.6% 
+TX SAN PATRICIO 58 25 43.1% 
+TX VICTORIA 92 15 16.3% 
+TX WHARTON 63 4 6.3% 
+TX WILLACY 21 0 0.0% 
+TX WILSON 29 0 0.0% 
+ 
+ 
+As prepared by the Federal Communications Commission: August 28, 2017 11:30 a.m. 
+TOTAL 
+ 
+7,803 364 4.7% 
+ 
+ 
+ 
+Cable Systems and Wireline (Combined) 
+There are at least 189,487 subscribers (up from at least 148,565 yesterday) out of service in the affected 
+area.  This includes users who get service from cable system or wireline providers. There are 19 (up from 
+11 yesterday) non-mobile switching centers out of service and 22 (up from 21 yesterday) switching 
+centers on back-up power.   
+ 
+ 
+Broadcast 
+There are 9 radio stations out of service.  This is the same number as yesterday: 
+TX – KKTX, KUNO, KPRC, KKWV, KAYK, KMKS, KZFM, KKBA and KEYS.  Note that KJOJ-FM has 
+been restored to service and KMKS has been added to the list since yesterday. 
+There are no TV stations reported as being out of service. 

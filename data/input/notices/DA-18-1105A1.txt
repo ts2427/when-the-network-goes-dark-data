@@ -1,0 +1,15 @@
+﻿
+								DA 18-1105
+Released October 26, 2018
+
+THE FCC’S PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM FOR HURRICANE MICHAEL
+
+	At the request of the U.S. Department of Homeland Security’s National Coordinating Center for Communications and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) for Hurricane Michael. DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+  Communications providers do not need to provide any additional reporting in DIRS in connection with this event.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners as needed to support remaining restoration efforts.  
+
+The FCC appreciates the cooperation of all the communications providers that voluntarily submitted data to DIRS in the aftermath of Hurricane Michael.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC published its final daily communications status report for Hurricane Michael today, October 26. 
+
+	For further information, please contact John Healy of the PSHSB’s Cybersecurity and Communications Reliability Division at (215) 847-8094 or John.Healy@fcc.gov.  
+
+2
+

@@ -1,0 +1,48 @@
+﻿								
+
+DA 18-943
+Released September 12, 2018
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES THE ACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM IN RESPONSE TO HURRICANE FLORENCE
+
+	The Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission) has announced the activation of the Disaster Information Reporting System (DIRS) in response to HURRICANE FLORENCE.  DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+
+	The Commission requests that communications providers that provide service to any areas listed below expeditiously submit and update information through DIRS regarding, inter alia, the status of their communications equipment, restoration efforts, and power (i.e., whether they are using commercial power or back-up power).  Communications providers can accomplish this by accessing DIRS at https://www.fcc.gov/nors/disaster/.  Providers that have not previously done so will be asked to first provide contact information and obtain a User ID when they access DIRS.  There is a link on the login page that will allow them to obtain the User ID and password.  If a user does not remember his/her password, he/she should use the forgotten password link on the login page. For any problems accessing DIRS, please refer to the contact numbers below.  
+
+Communications providers are reminded that for providers that participate in DIRS, the separate Network Outage Reporting System (NORS) obligations are suspended for the duration of the DIRS activation with respect to outages in the counties where DIRS has been activated.  Reports are requested beginning at 10:00 a.m. on September 13, 2018, and every day after that by 10:00 a.m. until DIRS is deactivated. 
+
+Communications providers that serve an area listed below and that have already provided contact information in DIRS will be sent an e-mail requesting that they provide the above-referenced status information through DIRS.  For any communications providers that have not already logged onto DIRS to input their contact information, the Commission encourages them to do so as soon as possible.
+
+
+
+
+
+COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE THE FOLLOWING:
+
+GEORGIA: Appling, Bacon, Bryan, Bulloch, Burke, Candler, Chatham, Effingham, Emanuel, Evans, Jeff Davis, Jefferson, Jenkins, Liberty, Long, Mcintosh, Montgomery, Screven, Tattnall, Toombs, Treutlen, Wayne
+
+NORTH CAROLINA: Anson, Beaufort, Bertie, Bladen, Brunswick, Camden, Carteret, Chatham, Chowan, Columbus, Craven, Cumberland, Currituck, Dare, Duplin, Edgecombe, Franklin, Gates, Greene, Halifax, Harnett, Hertford, Hoke, Hyde, Johnston, Jones, Lee, Lenoir, Martin, Moore, Nash, New Hanover, Northampton, Onslow, Pamlico, Pasquotank, Pender, Perquimans, Pitt, Richmond, Robeson, Sampson, Scotland, Tyrrell, Wake, Washington, Wayne, Wilson
+
+SOUTH CAROLINA: Allendale, Bamberg, Barnwell, Beaufort, Berkeley, Calhoun, Charleston, Chesterfield, Clarendon, Colleton, Darlington, Dillon, Dorchester, Florence, Georgetown, Hampton, Horry, Jasper, Kershaw, Lee, Marion, Marlboro, Orangeburg, Richland, Sumter, Williamsburg
+
+VIRGINIA: Chesapeake City, Suffolk City, Virginia Beach City
+
+A map of the activation area is given below:
+
+
+
+
+For further information, please contact:
+ 
+John Healy (215) 847-8094, or john.healy@fcc.gov
+Julia Tu (202) 418-0731, 202-321-4399 (cell), julia.tu@fcc.gov
+Michael Caiafa (202) 418-1311, (202) 277-5690 (cell), michael.caiafa@fcc.gov
+David Ahn (571) 232-8487 (cell), (202) 418-0853, david.ahn@fcc.gov
+FCC 24/7 Operations Center – 202-418-1122
+
+
+
+- FCC -
+       
+3
+

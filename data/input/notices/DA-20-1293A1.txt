@@ -1,0 +1,50 @@
+﻿
+								DA 20-1293
+Released October 30, 2020
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANE ZETA
+
+DIRS deactivated in Florida and South Carolina and most counties in Alabama, Georgia, Louisiana, Mississippi, and North Carolina.  DIRS remains active in some counties Alabama, Georgia, Louisiana, Mississippi, and North Carolina.
+	
+At the request of the Department of Homeland Security, Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas affected by Hurricane Zeta:
+
+Alabama: Autauga, Baldwin, Bibb, Bullock, Butler, Calhoun, Chambers, Cherokee, Chilton, Choctaw, Clay, Cleburne, Coffee, Conecuh, Covington, Crenshaw, DeKalb, Elmore, Escambia, Etowah, Greene, Hale, Jefferson, Lee, Lowndes, Macon, Marengo, Montgomery, Pickens, Pike, Randolph, Shelby, St. Clair, Sumter, Talladega, Tallapoosa, Tuscaloosa, Washington
+
+Florida: Escambia, Santa Rosa 
+
+Georgia: Banks, Bartow, Carroll, Catoosa, Chattooga, Cherokee, Clayton, Cobb, Coweta, Dade, DeKalb, Douglas, Fayette, Floyd, Forsyth, Franklin, Fulton, Gordon, Gwinnett, Hall, Heard, Jackson, Murray, Paulding, Pickens, Polk, Stephens, Towns, Troup, Union, Walker, Whitfield
+
+Louisiana: Ascension, Assumption, East Baton Rouge, East Feliciana, Iberia, Iberville, Jefferson, Lafourche, Livingston, Orleans, St. Charles, St. Helena, St. James, St. John the Baptist, St. Martin, St. Mary, St. Tammany, Tangipahoa, Terrebonne, Washington, West Baton Rouge
+
+Mississippi: Amite, Clarke, Covington, Forrest, George, Greene, Jackson, Jasper, Jefferson Davis, Jones, Kemper, Lamar, Lauderdale, Lawrence, Lincoln, Marion, Noxubee, Pearl River, Perry, Pike, Simpson, Smith, Stone, Walthall, Wayne
+
+North Carolina:  Alamance, Alexander, Alleghany, Anson, Ashe, Avery, Buncombe, Burke, Cabarrus, Caldwell, Caswell, Catawba, Chatham, Cherokee, Clay, Cleveland, Davidson, Davie, Durham, Eastern Band of Cherokee Indians and Jackson,2 Edgecombe, Forsyth, Franklin, Gaston, Graham, Granville, Guilford, Halifax, Harnett, Haywood, Henderson, Iredell, Johnston, Lee, Lincoln, Macon, Madison, McDowell, Mecklenburg, Mitchell, Montgomery, Moore, Nash, Northampton, Orange, Person, Randolph, Richmond, Rockingham, Rowan, Rutherford, Scotland, Stanly, Stokes, Surry, Swain, Transylvania, Union, Vance, Wake, Warren, Watauga, Wilkes, Wilson, Yadkin, Yancey
+
+South Carolina: Cherokee, Greenville, Oconee, Pickens, Spartanburg, York
+
+Communications providers do not need to provide any additional reporting in DIRS for the areas listed above with respect to Hurricane Zeta.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+	DIRS remains activated in the following counties in Alabama, Georgia, Louisiana, Mississippi and North Carolina:
+
+Alabama: Clarke, Coosa, Dallas, Mobile, Monroe, Perry, Wilcox
+
+Georgia: Dawson, Fannin, Gilmer, Habersham, Haralson, Lumpkin, Rabun, White
+
+Louisiana: Plaquemines, St. Bernard
+
+Mississippi: Hancock, Harrison
+
+North Carolina: Polk
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Zeta.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Zeta.
+
+All FCC releases in connection with Hurricane Zeta may be found at https://www.fcc.gov/zeta
+
+	For further information, please contact Julia Tu of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at 202-418-0731 or Julia.Tu@fcc.gov.
+  
+
+
+2
+

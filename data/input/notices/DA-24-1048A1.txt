@@ -1,0 +1,45 @@
+﻿	
+DA 24-1048
+Released:  October 7, 2024
+
+THE FEDERAL COMMUNICATIONS COMMISSION DEACTIVATES THE DISASTER INFORMATION REPORTING SYSTEM (DIRS) IN GEORGIA AND SOUTH CAROLINA FOR COMMUNICATIONS IMPACTED BY HURRICANE HELENE
+
+The Federal Communications Commission (FCC), at the request of the States of Georgia and South Carolina, and in coordination with the Department of Homeland Security’s Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, announces the deactivation of the Disaster Information Reporting System (DIRS) for the following counties in Georgia and South Carolina impacted by Hurricane Helene: The Federal Communications Commission Announces the Activation of the Disaster Information Reporting System (DIRS) and the Mandatory Disaster Response Initiative (MDRI) for Communications Impacts from Hurricane Helene in Florida, Georgia, North Carolina and South Carolina, Public Notice, DA 24-991 (rel. Sept. 25, 2024) (“DIRS and MDRI Activation PN”).
+  
+
+Georgia: Appling, Bacon, Berrien, Burke, Candler, Charlton, Clinch, Coffee, Columbia, Echols, Emanuel, Glascock, Grady, Jeff Davis, Jefferson, Lanier, Lincoln, Lowndes, McDuffie, Montgomery, Richmond, Screven, Taliaferro, Tattnall, Telfair, Toombs, Treutlen, Warren, Wayne, and Wheeler.
+
+South Carolina: Abbeville, Aiken, Allendale, Anderson, Bamberg, Barnwell, Beaufort, Berkeley, Calhoun, Charleston, Cherokee, Chester, Chesterfield, Clarendon, Colleton, Darlington, Dillon, Dorchester, Edgefield, Fairfield, Florence, Georgetown, Greenville, Greenwood, Hampton, Horry, Jasper, Kershaw, Lancaster, Laurens, Lee, Lexington, Marion, Marlboro, McCormick, Newberry, Oconee, Orangeburg, Pickens, Richland, Saluda, Spartanburg, Sumter, Union, Williamsburg, and York.
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas in Georgia and South Carolina with respect to Hurricane Helene.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.  The Network Outage Reporting System reporting obligations under Part 4 of the Commission’s rules, which were suspended for providers reporting in DIRS while DIRS was activated, are now again in effect for any new network outages for the areas in Georgia and South Carolina no longer covered by DIRS reporting for Hurricane Helene. 47 CFR § 4.9(a) (cable); 47 CFR § 4.9(e) (wireless); 47 CFR § 4.9(f) (wireline); 47 CFR § 4.9(g) (interconnected VoIP); see also 47 CFR § 4.18(a) (suspending NORS requirements for cable communications, wireless, wireline, and interconnected VoIP providers required to report in DIRS pertaining to any incidents arising during the DIRS activation and that are timely reported in DIRS).  
+   
+
+DIRS remains activated in the following counties:
+
+North Carolina: Ashe, Avery, Buncombe, Burke, Caldwell, Cherokee, Clay, Graham, Haywood, Henderson, Jackson, Macon, Madison, McDowell, Mitchell, Polk, Rutherford, Swain, Transylvania, Watauga, and Yancey.
+
+Tennessee: Carter, Cocke, Greene, Jefferson, Johnson, Unicoi, and Washington.
+
+Please continue to provide information for the impacted counties that are already in the disaster area.  DIRS deactivation does not release wireless providers from their responsibility to comply with MDRI requirements as noted in previous Hurricane Helene-related Public Notices. See DIRS and MDRI Activation PN; see also The Federal Communications Commission Announces the Expansion of the Disaster Information Reporting System and the Mandatory Disaster Response Initiative for Communications Impacted by Hurricane Helene, Public Notice, DA 24-1015 (rel. Sept. 27, 2024).
+  The FCC continues to monitor this event and may amend the DIRS and/or MDRI activation areas in the coming days.
+
+For further information concerning DIRS, please contact:
+ 
+Michael Caiafa (202) 418-1311, (540) 834-7401 (cell), michael.caiafa@fcc.gov
+Juan Chapa (202) 418-0431, juan.chapa@fcc.gov
+John Healy (202) 418-2448, john.healy@fcc.gov
+FCC 24/7 Operations Center (202) 418-1122, fccops@fcc.gov
+
+For further information concerning the MDRI, please contact:
+
+Justin Cain, (202) 853-7365, (202) 418-2924, justin.cain@fcc.gov 
+Logan Bennett, (732) 425-5036, (202) 418-7790, logan.bennett@fcc.gov 
+FCC 24/7 Operations Center, (202) 418-1122, fccops@fcc.gov  
+
+For more information on the FCC’s response to Hurricane Helene, please go to www.fcc.gov/Helene.  
+
+
+- FCC -
+       
+2
+

@@ -1,0 +1,25 @@
+﻿	
+DA 22-1071
+Released:  October 7, 2022
+
+THE PUBLIC SAFETY AND HOMELAND SECURITY BUREAU ANNOUNCES THE PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM FOR COMMUNICATIONS IMPACTED BY HURRICANE IAN
+
+The Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission), in coordination with the Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency has announced a partial deactivation of the Disaster Information Reporting System (DIRS)  DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following counties in Florida:
+
+Florida:  Baker, Bradford, Clay, Collier, Duval, Flagler, Glades, Hardee, Hendry, Highlands, Hillsborough, Lake, Manatee, Marion, Monroe, Nassau, Okeechobee, Orange, Osceola, Pinellas, Polk, Putnam, Sarasota, Seminole, St. Johns, Union, Volusia.
+
+ Communications providers do not need to provide any additional reporting in DIRS for these areas in Florida with respect to Hurricane Ian.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+DIRS remains activated in the following counties in Florida:
+
+Florida:  Charlotte, DeSoto, Lee.
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Ian.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Ian.
+
+All FCC releases in connection with Hurricane Ian may be found at https://www.fcc.gov/ian.
+
+For further information, please contact Michael Caiafa at (202) 418-1311 or Michael.Caiafa@fcc.gov or David Ahn at (571) 232-8487 or David.Ahn@fcc.gov of the Public Safety and Homeland Security Bureau Cybersecurity and Communications Reliability Division.
+
+2
+

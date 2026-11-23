@@ -1,0 +1,86 @@
+﻿
+
+Communications Status Report for 
+Areas Impacted by Hurricane Beryl
+July 14, 2024
+
+The following is a report on the status of communications services in geographic areas impacted by Hurricane Beryl as of July 14, 2024, at 10:00 a.m. EDT.  This report incorporates network outage data submitted by communications providers to the Federal Communications Commission (FCC) Disaster Information Reporting System (DIRS).  Note that the operational status of communications services during an event may evolve rapidly, and this report represents a snapshot in time.  
+The following counties in Texas are in the current geographic area that is part of DIRS (the “disaster area”) for today’s report.
+The area of interest for this activation includes the following counties in Texas. 
+TEXAS: Brazoria, Fort Bend, and Harris
+
+
+
+
+
+911 Services 
+
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support Center, coordination with state 911 Administrators, and, if necessary, direct contact with individual PSAPs.
+
+Texas: 
+There are no PSAPs reported as being down/out of service in the areas impacted by Hurricane Beryl for which DIRS is activated.
+	
+The following chart shows trends in the number of PSAPs affected:
+
+
+
+
+Wireless Services
+
+The current status of wireless communications services is shown by the following chart and map. 
+
+
+
+Percent Cell Sites Out-Of-Service By County
+
+
+
+The following table provides cell sites out of service by county.  The information shown was provided by communications carriers providing services in Texas. 4.8% of the cell sites in the affected area are out of service. The number of total cell sites out may differ from the sum of numbers of cell sites out by cause. This is due to sites being out due to multiple causes or because providers are still assessing the causes of some sites being out of service.
+
+TEXAS
+
+StateAffected CountiesCell Sites ServedCell Sites OutPercent OutCell Sites Out Due to DamageCell Sites Out Due to TransportCell Sites Out Due to PowerCell Sites Up but On Back-up PowerTXBrazoria 281124.3%11430TXFort Bend 419194.5%001029TXHarris 36061764.9%111101263TOTAL-43062074.8%212115322
+
+The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take other actions to maintain service to affected consumers during emergencies or other events that result in cell site outages. 
+
+Cable Systems and Wireline (Combined)
+
+Cable and wireline companies reported 290,117 subscribers out of service in the disaster area for Hurricane Beryl.  This includes the loss of telephone, television, and/or Internet services.  
+
+
+The following chart shows the trends in the number of subscribers out of service:
+
+
+
+Broadcast: 
+Television station status: 
+
+· No TV stations are reported as being out of service. 
+FM Radio station status:  
+· 3 FM stations are reported as being out of service. (K222CX, K241CM, and K245CQ)
+AM Radio station status:  
+· No AM stations are reported as being out of service.  
+
+Mandatory Disaster Response Initiative
+
+The Mandatory Disaster Response Initiative was activated for Hurricane Beryl response activities on July 8, 2024.  As a reminder, all facilities-based mobile wireless providers operating in the above-referenced areas are hereby notified and required to: (1) provide for reasonable roaming under disaster arrangements when technically feasible; See 47 CFR § 4.17(a)(3)(i) (detailing criteria for activating roaming under disaster arrangements).  
+ (2) activate mutual aid arrangements with other facilities-based mobile wireless providers for providing aid upon request to those providers during emergencies; See 47 CFR § 4.17(a)(3)(ii) (explaining what mutual aid arrangements must include).  
+ (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. 47 CFR § 4.17(a)(3)(i)-(v); see also FCC, Wireless Network Resiliency During Disasters (June 4, 2024), https://www.fcc.gov/wireless-network-resiliency-during-disasters.  
+ 
+
+Special Temporary Authority (STA)/Waivers/Extensions
+
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, as well as waivers to support emergency communications and service restoration.
+
+· FCC Wireless Telecommunications Bureau granted a conditional waiver for Federated Wireless for the 3.5 GHz ESC rules.  The waiver is emergency relief to enable continued 3.5 GHz operations despite power outages caused by Hurricane Beryl.  More information on this conditional waiver is available by accessing the following links: DA-24-652A1.docx , DA-24-652A1.pdf , DA-24-652A1.txt
+
+· FCC Wireless Telecommunications Bureau granted a conditional waiver of CBRS Incumbent Protection Rules to Google, granting relief from the impacts of Hurricane Beryl.  More information on this conditional waiver is available by accessing the following link: DA-24-677A1.pdf
+
+
+
+
+
+
+
+
+

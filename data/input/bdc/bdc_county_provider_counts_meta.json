@@ -1,0 +1,36 @@
+{
+ "n_near_universal_providers": 5,
+ "near_universal_rule": "fixed providers reporting any residential service in at least 95% of the study-state counties of some release",
+ "measures": {
+  "mobile_half": [
+   "Mobile Broadband",
+   0.5,
+   false
+  ],
+  "mobile_any": [
+   "Mobile Broadband",
+   0.0,
+   false
+  ],
+  "fixed_any_excl_near_universal": [
+   "Fixed Broadband",
+   0.0,
+   true
+  ],
+  "fixed_any": [
+   "Fixed Broadband",
+   0.0,
+   false
+  ],
+  "fixed_half": [
+   "Fixed Broadband",
+   0.5,
+   false
+  ],
+  "fixed_half_excl_near_universal": [
+   "Fixed Broadband",
+   0.5,
+   true
+  ]
+ }
+}

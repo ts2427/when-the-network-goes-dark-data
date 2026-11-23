@@ -1,0 +1,84 @@
+﻿
+
+Communications Status Report for 
+Areas Impacted by Hurricane Idalia
+September 2, 2023
+
+The following is a report on the status of communications services in geographic areas impacted by Hurricane Idalia as of September 2, 2023, at 12:00 p.m. (EDT).  This report incorporates network outage data submitted by communications providers to the Federal Communications Commission (FCC) Disaster Information Reporting System (DIRS).  Note that the operational status of communications services during an event may evolve rapidly, and this report represents a snapshot in time.  
+The following counties in Florida are in the current geographic area that is part of DIRS (the “disaster area”) for today’s report.
+FLORIDA: Alachua, Baker, Bradford, Columbia, Dixie, Gilchrist, Hamilton, Jefferson, Lafayette, Levy, Madison, Suwannee, and Union.
+
+Affected Counties
+
+
+
+911 Services 
+
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support Center, coordination with state 911 Administrators, and, if necessary, direct contact with individual PSAPs.
+
+Florida: 
+There are no PSAPs reported as being affected in the disaster area.
+
+The following chart shows trends in the number of PSAPs affected:
+
+
+
+
+
+Wireless Services
+
+The current status of wireless communications services is shown by the following chart and map.
+
+
+
+
+
+
+
+The following tables provide cell sites out of service by state and county.  The information shown was provided by communications carriers providing services in Florida.  4.1% of cell sites in Florida are out of service.  The number of total cell sites out may differ from the sum of numbers of cell sites out by cause.  This is due to sites being out due to multiple causes or because providers are still assessing the causes of some sites being out of service.
+
+Florida
+
+StateAffected CountiesCell Sites ServedCell Sites OutPercent OutCell Sites Out Due to DamageCell Sites Out Due to TransportCell Sites Out Due to PowerCell Sites Up but On Back-up PowerFLALACHUA18663.2%0602FLBAKER1800.0%0001FLBRADFORD3113.2%0100FLCOLUMBIA6600.0%0008FLDIXIE2000.0%0002FLGILCHRIST1700.0%0000FLHAMILTON22627.3%1147FLJEFFERSON2900.0%0006FLLAFAYETTE15320.0%0034FLLEVY6711.5%1001FLMADISON34411.8%10212FLSUWANNEE4212.4%01012FLUNION1218.3%0100TOTAL559234.1%310955
+
+The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take other actions to maintain service to affected consumers during emergencies or other events that result in cell site outages. 
+
+Cable Systems and Wireline (Combined)
+
+Cable and wireline companies reported 4,736 subscribers out of service in the disaster area for Hurricane Idalia; this includes the loss of telephone, television, and/or Internet services.  
+
+The following chart shows the trends in number of subscribers out of service:
+
+
+
+
+
+Broadcast: 
+Television station status: 
+
+· No TV stations are reported as being out of service. 
+FM Radio station status:  
+· 2 FM stations are reported as being out of service (WNFB, WJZS).
+AM Radio station status:  
+· No AM stations are reported as being out of service.
+
+Special Temporary Authority (STA)/Waivers/Extensions
+
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, as well as waivers to support emergency communications and service restoration.
+
+· Aug 28, 2023 – FCC Office of Engineering and Technology granted STAs in support of Idalia damage mitigation and recovery operations in Alabama, Florida, Georgia, Louisiana, Mississippi, North Carolina, South Carolina, and Puerto Rico.
+
+· Aug 29, 2023 – The FCC Public Safety and Homeland Security Bureau granted a STA for use of 700 and 800 MHz interoperability channels.
+
+· Aug 30, 2023 – The FCC Wireless Telecommunications Bureau and Public Safety and Homeland Security Bureau extended filing and regulatory deadlines from August 28, 2023, to September 28, 2023, for affected licensees and applicants in areas impacted by Hurricane Idalia.
+
+· Aug 30, 2023 – The FCC Wireless Telecommunications Bureau granted waivers of Citizens Band Radio Service (CBRS) Incumbent Protection Rules.
+
+· Aug 30, 2023 – The FCC Wireless Telecommunications Bureau granted a waiver of Amateur Radio Symbol Rate requirements.
+
+· Aug 30, 2023 – The FCC Office of Engineering and Technology granted STAs in support of FEMA search and rescue operations in Georgia, North Carolina, and South Carolina.
+
+· Sep 1, 2023 – The FCC Wireline Competition Bureau waived certain E-Rate, Emergency Connectivity Fund, Rural Health Care, Lifeline, Affordable Connectivity Program, and High-Cost rules to assist participants and service providers located in areas affected by Hurricane Idalia.
+
+
+

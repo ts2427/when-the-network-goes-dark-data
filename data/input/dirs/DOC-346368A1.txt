@@ -1,0 +1,148 @@
+ 
+ 
+As prepared by the Federal Communications Commission: August 26, 2017 11:30 a.m. 
+Communications Status Report for  
+Areas Impacted by Hurricane Harvey  
+August 26, 2017 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Hurricane Harvey as of August 26, 2017 at 10:30 a.m. EDT.  This report incorporates network outage 
+data submitted by communications providers to the Federal Communications Commission’s Disaster 
+Information Reporting System (DIRS).  DIRS currently covers areas of Texas and Louisiana.  Note that the 
+operational status of communications services during a disaster may evolve rapidly, and this report 
+represents a snapshot in time. 
+ 
+The following 55 counties are in the current geographic area that is part of DIRS (the “disaster area”).  
+ 
+Louisiana: Acadia, Assumption, Calcasieu, Cameron, Iberia, Jefferson, Jefferson Davis, Lafayette, 
+Lafourche, Orleans, Plaquemines, St. Bernard, St. Charles, St. James, St. John the Baptist, St. 
+Martin, St. Mary, Terrebonne, Vermilion 
+ 
+Texas: Aransas, Atascosa, Bee, Brazoria, Brooks, Calhoun, Cameron, Chambers, Colorado, 
+DeWitt, Duval, Fort Bend, Galveston, Goliad, Gonzales, Harris, Hidalgo, Jackson, Jefferson, Jim 
+Wells, Karnes, Kenedy, Kleberg, Lavaca, Liberty, Live Oak, Matagorda, McMullen, Nueces, 
+Orange, Refugio, San Patricio, Victoria, Wharton, Willacy, Wilson 
+ 
+The following map shows the counties in the disaster area: 
+ 
+ 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: August 26, 2017 11:30 a.m. 
+ 
+911 Services  
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety 
+Answering Point (PSAP) through the filings of 911 Service Providers in the Disaster Information 
+Reporting System (DIRS), through reporting done to the FCC’s Public Safety Support Center (PSSC), 
+coordination with state 911 Administrators and, if necessary, individual PSAPs. 
+ 
+There are a total of 9 PSAPs affected:  
+? Portland Police Department, TX is down with no re-routes.   
+? Calhoun County Sheriff, TX is up without Automatic Location Information (ALI).  
+? Port Aransas Police Department, TX; Cameron Parish Sheriff’s Office, LA; Victoria Police 
+Department, TX; Mathis Police Department, TX; Refugio County Sheriff’s Office, TX; Ingleside 
+Police, TX; and Robstown Police Department, TX have either been re-routed to administrative 
+lines or re-routed to another PSAP.  Cameron Parish Sheriff’s Office and Victoria Police 
+Department have been re-routed with ALI, all other re-routes are without ALI. 
+ 
+Wireless Services 
+The following section describes the status of wireless communications services and restoration in the 
+disaster area, including the percentage of cell sites out of service for each county. 
+ 
+The following map of the disaster area illustrates which counties are most affected: 
+ 
+  
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: August 26, 2017 11:30 a.m. 
+The following table provides cell sites out by county.  The information shown was provided by the 
+signatories to the Wireless Network Resiliency Cooperative Agreement and a regional carrier: 
+ 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+LA ACADIA 50 0 0.0% 
+LA ASSUMPTION 23 0 0.0% 
+LA CALCASIEU 154 0 0.0% 
+LA CAMERON 30 0 0.0% 
+LA IBERIA 45 0 0.0% 
+LA JEFFERSON 275 0 0.0% 
+LA JEFFERSON DAVIS 36 0 0.0% 
+LA LAFAYETTE 150 0 0.0% 
+LA LAFOURCHE 31 0 0.0% 
+LA ORLEANS 349 0 0.0% 
+LA PLAQUEMINES 48 0 0.0% 
+LA ST. BERNARD 35 0 0.0% 
+LA ST. CHARLES 48 0 0.0% 
+LA ST. JAMES 27 0 0.0% 
+LA ST. JOHN THE BAPTIST 33 0 0.0% 
+LA ST. MARTIN 53 0 0.0% 
+LA ST. MARY 60 0 0.0% 
+LA TERREBONNE 80 0 0.0% 
+LA VERMILION 56 0 0.0% 
+TX ARANSAS 19 18 94.7% 
+TX ATASCOSA 40 0 0.0% 
+ 
+ 
+As prepared by the Federal Communications Commission: August 26, 2017 11:30 a.m. 
+TX BEE 40 9 22.5% 
+TX BRAZORIA 267 12 4.5% 
+TX BROOKS 15 6 40.0% 
+TX CALHOUN 27 11 40.7% 
+TX CAMERON 210 0 0.0% 
+TX CHAMBERS 54 0 0.0% 
+TX COLORADO 49 1 2.0% 
+TX DEWITT 31 2 6.5% 
+TX DUVAL 36 8 22.2% 
+TX FORT BEND 363 7 1.9% 
+TX GALVESTON 241 3 1.2% 
+TX GOLIAD 23 5 21.7% 
+TX GONZALES 41 1 2.4% 
+TX HARRIS 3,131 11 0.4% 
+TX HIDALGO 380 0 0.0% 
+TX JACKSON 17 6 35.3% 
+TX JEFFERSON 247 0 0.0% 
+TX JIM WELLS 35 13 37.1% 
+TX KARNES 17 0 0.0% 
+TX KENEDY 14 2 14.3% 
+TX KLEBERG 27 1 3.7% 
+TX LAVACA 33 3 9.1% 
+TX LIBERTY 108 1 0.9% 
+TX LIVE OAK 47 2 4.3% 
+ 
+ 
+As prepared by the Federal Communications Commission: August 26, 2017 11:30 a.m. 
+TX MATAGORDA 58 13 22.4% 
+TX MCMULLEN 7 0 0.0% 
+TX NUECES 267 103 38.6% 
+TX ORANGE 85 0 0.0% 
+TX REFUGIO 26 15 57.7% 
+TX SAN PATRICIO 58 38 65.5% 
+TX VICTORIA 92 20 21.7% 
+TX WHARTON 63 3 4.8% 
+TX WILLACY 21 0 0.0% 
+TX WILSON 29 1 3.4% 
+TOTAL 
+ 
+7,801 315 4.0% 
+ 
+ 
+ 
+There are 4% of the cell sites down in the affected area.  The counties with greater than 50% of cell sites 
+out are Aransas, Refugio, and San Patricio in TX.  There are no cell sites affected in LA. 
+ 
+ 
+Cable Systems and Wireline (Combined) 
+While we don’t have reports for all counties yet, there are at least 149,909 subscribers out of service in 
+the affected area.  This includes users who get service from cable system or wireline providers. There 
+are 5 switching centers out of service and 38 switching centers on back-up power.   
+ 
+ 
+Broadcast 
+There are 5 radio stations out of service: 
+ 
+TX – WKNC, KKTX, KUNO, KKWV, and KAYK 
+ 
+There are no TV stations reported as being out of service. 
+ 
+ 

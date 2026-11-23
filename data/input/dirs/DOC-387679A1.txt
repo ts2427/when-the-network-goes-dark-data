@@ -1,0 +1,198 @@
+                            
+ 
+                      Communications Status Report for  
+                       Areas Impacted by Hurricane Ian 
+                               September 28, 2022 
+ 
+The following is a report on the status of communications services in geographic areas impacted by Hurricane 
+Ian as of September 28, 2022, at 12:00 p.m. EDT.  This report incorporates network outage data submitted by 
+communications providers to the Federal Communications Commission (FCC) Disaster Information Reporting 
+System (DIRS).  Note that the operational status of communications services during an event may evolve 
+rapidly, and this report represents a snapshot in time.   
+
+The following counties in Florida are in the current geographic area that is part of DIRS (the “disaster area”) 
+for today’s report. 
+
+The area of interest for this activation includes the following counties in Florida.  
+
+FLORIDA: Alachua, Baker, Bay, Bradford, Brevard, Broward, Calhoun, Charlotte, Citrus, Clay, Collier, 
+Columbia, Desoto, Dixie, Duval, Flagler, Franklin, Gadsden, Gilchrist, Glades, Gulf, Hamilton, Hardee, Hendry, 
+Hernando, Highlands, Hillsborough, Holmes, Indian River, Jackson, Jefferson, Lafayette, Lake, Lee, Leon, Levy, 
+Liberty, Madison, Manatee, Marion, Martin, Miami-Dade, Monroe, Nassau, Okeechobee, Orange, Osceola, 
+Palm Beach, Pasco, Pinellas, Polk, Putnam, Sarasota, Seminole, St. Johns, St. Lucie, Sumter, Suwannee, Taylor, 
+Union, Volusia, Wakulla, and Washington. 
+
+
+                                                                         
+
+                                                                                 1 
+                                          
+                            
+ 
+ 
+911 Services  
+ 
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering 
+Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support 
+Center, coordination with state 911 Administrators, and, if necessary, direct contact with individual PSAPs. 
+ 
+      Florida: Sanibel Police Department Headquarters has been rerouted to another PSAP with location 
+      information. 
+             
+
+Wireless Services 
+ 
+The following section describes the status of wireless communications services in the disaster area as 
+reported in DIRS.  
+ 
+
+
+                                                                                 2 
+                                          
+                                  
+ 
+                                                    
+ 
+ 
+The following table provides cell sites out of service by county.  1.4% of the cell sites in the affected area are 
+out of service.  The information shown was provided by communications carriers providing services in 
+Florida.  
+ 
+Florida 
+ 
+                                                                                   Cell    Cell Sites 
+                             Cell    Cell             Cell Sites   Cell Sites     Sites     Up but 
+             Affected       Sites    Sites Percent    Out Due     Out Due to    Out Due    On Back-
+  State      Counties      Served    Out     Out     to Damage     Transport    to Power   up Power 
+   FL       ALACHUA          273       1     0.4%         0             1           0          0 
+   FL         BAKER           26       0     0.0%         0             0           0          0 
+   FL          BAY           279       4     1.4%         0             4           0          0 
+   FL       BRADFORD          35       3     8.6%         0             3           0          0 
+   FL       BREVARD          321       5     1.6%         0             4           1          1 
+   FL       BROWARD          878      11     1.3%         2             7           2          4 
+   FL       CALHOUN           22       1     4.5%         0             1           0          0 
+   FL      CHARLOTTE         114       0     0.0%         0             0           0          0 
+   FL         CITRUS         123       0     0.0%         0             0           0          0 
+   FL         CLAY           169       4     2.4%         0             4           0          0 
+   FL        COLLIER         219      13     5.9%         0            12           1          9 
+   FL       COLUMBIA          88       1     1.1%         0             1           0          0 
+   FL        DESOTO           26       1     3.8%         0             1           0          2 
+   FL         DIXIE           30       1     3.3%         0             1           0          0 
+   FL         DUVAL          755      12     1.6%         1            10           1          0 
+   FL        FLAGLER          90       5     5.6%         0             5           0          0 
+   FL       FRANKLIN          32       0     0.0%         0             0           0          0 
+   FL       GADSDEN           58       0     0.0%         0             0           0          1 
+   FL       GILCHRIST         19       1     5.3%         0             1           0          0 
+   FL        GLADES           29       1     3.4%         0             1           0          0 
+   FL          GULF           25       0     0.0%         0             0           0          0 
+   FL       HAMILTON          28       0     0.0%         0             0           0          0 
+   FL        HARDEE           39       0     0.0%         0             0           0          0 
+   FL        HENDRY           56       2     3.6%         0             2           0          0 
+   FL      HERNANDO          114       0     0.0%         0             0           0          0 
+   FL      HIGHLANDS          80       0     0.0%         0             0           0          0 
+
+                                                                                                     3 
+                                                    
+                               
+               
+FL    HILLSBOROUGH       1,297     10     0.8%         0            10           0          6 
+FL        HOLMES           34       0     0.0%         0             0           0          0 
+FL     INDIAN RIVER        97       2     2.1%         0             2           0          0 
+FL        JACKSON          83       0     0.0%         0             0           0          1 
+FL       JEFFERSON         38       1     2.6%         0             1           0          0 
+FL      LAFAYETTE          19       0     0.0%         0             0           0          0 
+FL         LAKE           204       0     0.0%         0             0           0          1 
+FL          LEE           394      13     3.3%         0            13           0          1 
+FL         LEON           266       1     0.4%         0             1           0          2 
+FL         LEVY            81       1     1.2%         0             1           0          0 
+FL        LIBERTY          10       0     0.0%         0             0           0          0 
+FL       MADISON           39       1     2.6%         0             1           0          0 
+FL       MANATEE          222       3     1.4%         0             3           0          4 
+FL        MARION          250       2     0.8%         0             2           0          0 
+FL        MARTIN          103       0     0.0%         0             0           0          0 
+FL      MIAMI-DADE       1,359     23     1.7%         2            21           0          2 
+FL        MONROE           99      12     12.1%        2             7           3          1 
+FL        NASSAU          103       1     1.0%         0             1           0          0 
+FL     OKEECHOBEE          59       0     0.0%         0             0           0          0 
+FL        ORANGE         1,059      4     0.4%         0             2           2          4 
+FL       OSCEOLA          236       5     2.1%         0             4           1          0 
+FL      PALM BEACH        683       8     1.2%         0             7           1          8 
+FL         PASCO          329       3     0.9%         0             3           0          1 
+FL       PINELLAS         587       5     0.9%         0             5           0          1 
+FL          POLK          486       0     0.0%         0             0           0          0 
+FL        PUTNAM           85       3     3.5%         0             3           0          0 
+FL       SARASOTA         225       1     0.4%         0             1           0          1 
+FL       SEMINOLE         267       3     1.1%         0             3           0          0 
+FL       ST. JOHNS        239       8     3.3%         0             7           1          0 
+FL       ST. LUCIE        161       0     0.0%         0             0           0          0 
+FL        SUMTER           97       2     2.1%         0             2           0          1 
+FL      SUWANNEE           61       0     0.0%         0             0           0          0 
+FL        TAYLOR           49       2     4.1%         0             2           0          0 
+FL         UNION           16       0     0.0%         0             0           0          0 
+FL        VOLUSIA         375       6     1.6%         1             5           0          0 
+FL       WAKULLA           38       0     0.0%         0             0           0          0 
+FL     WASHINGTON          51       2     3.9%         0             2           0          0 
+
+                                                                                                  4 
+                                                 
+                            
+ 
+   FL     OKALOOSA      103    0     0.0%      0          0         0        4 
+ TOTAL                 13,832 188    1.4%      8         167       13       55 
+ 
+ 
+The number of cell site outages in a specific area does not necessarily correspond to the availability of 
+wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications 
+Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the 
+ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed 
+with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an 
+individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-
+on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take 
+other actions to maintain service to affected consumers during emergencies or other events that result in cell 
+site outages.  
+ 
+Cable Systems and Wireline (Combined) 
+ 
+Cable and wireline companies reported 26,716 subscribers out of service in the disaster area for Hurricane 
+Ian; this includes the loss of telephone, television, and/or Internet services.   
+ 
+Broadcast:  
+
+Television stations status:  
+ 
+   •  No TV stations are reported as being out of service.  
+
+FM Radio stations status:   
+
+   •  1 FM station is reported as being out of service.  
+
+AM Radio stations status:   
+
+   •  No AM station is reported as being out of service. 
+
+Special Temporary Authority (STA)/Waivers/Extensions 
+ 
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit 
+immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, 
+as well as waivers to support emergency communications and service restoration. 
+ 
+   •  Wireless Telecommunications Bureau grants the American Radio Relay League (ARRL) an emergency 
+      request for a temporary waiver of Section 97.307(f) of the Commission’s Rules 
+   •  Wireless Telecommunications Bureau and the Public Safety and Homeland Security Bureau extends 
+      filing and regulatory deadlines in areas affected by Hurricane Ian 
+ 
+
+ 
+                                                                                 5 
+                                          
+                                                
+               
+               
+                          
+                       
+
+               
+
+
+6 
+                                                                  

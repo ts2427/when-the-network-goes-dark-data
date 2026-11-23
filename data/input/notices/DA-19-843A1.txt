@@ -1,0 +1,24 @@
+﻿	Federal Communications Commission	DA 19-843
+
+
+DA 19-843
+Released: August 27, 2019
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES THE ACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM IN RESPONSE TO TROPICAL STORM DORIAN
+
+The Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission) has announced the activation of the Disaster Information Reporting System (DIRS) in response to TROPICAL STORM DORIAN.  DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+The Commission requests that communications providers that provide service to any areas listed below expeditiously submit and update information through DIRS regarding, inter alia, the status of their communications equipment, restoration efforts, and power (i.e., whether they are using commercial power or back-up power) Because the information that communications companies input to DIRS is sensitive, for national security and/or commercial reasons, DIRS filings shall be treated as presumptively confidential upon filing.  See The FCC’s Public Safety & Homeland Security Bureau Launches the Disaster Information Reporting System (DIRS), Public Notice, DA 07-3871, 22 FCC Rcd 16757 (2007).  To improve the utility of DIRS and facilitate Federal restoration efforts, the Commission will disseminate DIRS information to other Federal agencies that are authorized participants on the Emergency Support Function-2 (ESF-2) team.
+
+.  Communications providers can accomplish this by accessing DIRS at https://www.fcc.gov/nors/disaster/.  Providers that have not previously done so will be asked to first provide contact information and obtain a User ID when they access DIRS.  There is a link on the login page that will allow them to obtain a User ID and password.  If a user does not remember his/her password, he/she should use the forgotten password link on the login page.  
+Communications providers are reminded that for providers that participate in DIRS, the separate Network Outage Reporting System (NORS) obligations are suspended for the duration of the DIRS activation with respect to outages in the counties/municipalities where DIRS has been activated.  Reports are requested beginning at 10:00 a.m. on August 29, 2019, and every day after that by 10:00 a.m. until DIRS is deactivated. 
+Communications providers that serve an area listed below and that have already provided contact information in DIRS will be sent an e-mail requesting that they provide the above-referenced status information through DIRS.  For any communications providers that have not already logged onto DIRS to input their contact information, the Commission encourages them to do so as soon as possible.
+MUNICIPALITIES OF INTEREST FOR THIS ACTIVATION INCLUDE ALL OF PUERTO RICO:
+Puerto Rico: Adjuntas, Aguada, Aguadilla, Aguas Buenas, Aibonito, Anasco, Arecibo, Arroyo, Barceloneta, Barranquitas, Bayamon, Cabo Rojo, Caguas, Camuy, Canovanas, Carolina, Catano, Cayey, Ceiba, Ciales, Cidra, Coamo, Comerio, Corozal, Culebra, Dorado, Fajardo, Florida, Guanica, Guayama, Guayanilla, Guaynabo, Gurabo, Hatillo, Hormigueros, Humacao, Isabela, Jayuya, Juana Diaz, Juncos, Lajas, Lares, Las Marias, Las Piedras, Loiza, Luquillo, Manati, Maricao, Maunabo, Mayaguez, Moca, Morovis, Naguabo, Naranjito, Orocovis, Patillas, Penuelas, Ponce, Quebradillas, Rincon, Rio Grande, Sabana Grande, Salinas, San German, San Juan, San Lorenzo, San Sebastian, Santa Isabel, Toa Alta, Toa Baja, Trujillo Alto, Utuado, Vega Alta, Vega Baja, Vieques, Villalba, Yabucoa and Yauco
+For further information, please contact:
+John Healy (215) 847-8094, or john.healy@fcc.gov
+Julia Tu (202) 418-0731, 202-321-4399 (cell), julia.tu@fcc.gov
+Michael Caiafa (202) 418-1311, (cell), michael.caiafa@fcc.gov
+David Ahn (571) 232-8487 (cell), (202) 418-0853, david.ahn@fcc.gov
+
+- FCC -
+2

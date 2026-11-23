@@ -1,0 +1,7 @@
+release,file_id,file_name,file_type,record_count
+2022-06-30,558679,bdc_us_provider_summary_by_geography_J22_10may2024,csv,462401
+2022-12-31,1067636,bdc_us_provider_summary_by_geography_D22_02may2025,csv,469352
+2023-06-30,1347982,bdc_us_provider_summary_by_geography_J23_24dec2025,csv,487807
+2024-06-30,1702412,bdc_us_provider_summary_by_geography_J24_27jul2026,csv,512136
+2024-12-31,1713871,bdc_us_provider_summary_by_geography_D24_29jul2026,csv,515055
+2026-06-30,1885005,bdc_us_provider_summary_by_geography_J26_10nov2026,csv,487708

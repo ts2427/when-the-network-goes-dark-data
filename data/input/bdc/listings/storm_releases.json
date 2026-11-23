@@ -1,0 +1,86 @@
+{
+ "Harvey": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Irma": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Florence": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Michael": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Laura": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Sally": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Delta": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Zeta": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Ida": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Ian": {
+  "release": "2022-06-30",
+  "role": "main"
+ },
+ "Nicole": {
+  "release": "2022-06-30",
+  "role": "main"
+ },
+ "Idalia": {
+  "release": "2023-06-30",
+  "role": "main"
+ },
+ "Beryl": {
+  "release": "2024-06-30",
+  "role": "main"
+ },
+ "Debby": {
+  "release": "2024-06-30",
+  "role": "main"
+ },
+ "Francine": {
+  "release": "2024-06-30",
+  "role": "main"
+ },
+ "Helene": {
+  "release": "2024-06-30",
+  "role": "main"
+ },
+ "Milton": {
+  "release": "2024-06-30",
+  "role": "main"
+ },
+ "Isaias": {
+  "release": "2026-06-30",
+  "role": "main"
+ },
+ "Barry": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Dorian": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
+ "Nicholas": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ }
+}

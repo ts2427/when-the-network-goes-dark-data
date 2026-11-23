@@ -1,0 +1,135 @@
+ 
+ 
+As prepared by the Federal Communications Commission: September 07, 2017 12:30 p.m. 
+Communications Status Report for  
+Areas Impacted by Hurricane Irma  
+September 7, 2017 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Hurricane Irma as of September 7, 2017 at 12:00 p.m. EDT.  This report incorporates network outage 
+data submitted by communications providers to the Federal Communications Commission’s Disaster 
+Information Reporting System (DIRS).  DIRS is currently activated for areas of Puerto Rico and the US 
+Virgin Islands.  Note that the operational status of communications services during a disaster may evolve 
+rapidly, and this report represents a snapshot in time.  It should also be noted that not all 
+communications providers have reported in DIRS, so some outage information may be missing. 
+ 
+The following 44 counties are in the current geographic area that is covered by the DIRS activation (the 
+“disaster area”).  
+ 
+Puerto Rico: Aguadilla, Aguas Buenas, Arecibo, Barceloneta, Bayamon, Caguas, Camuy, 
+Canovanas, Carolina, Catano, Ceiba, Corozal, Culebra, Dorado, Fajardo, Florida, Guaynabo, 
+Gurabo, Hatillo, Humacao, Isabela, Juncos, Las Piedras, Loiza, Luquillo, Manati, Maunabo, 
+Morovis, Naguabo, Naranjito, Quebradillas, Rio Grande, San Juan, San Lorenzo, Toa Alta, Toa 
+Baja, Trujillo Alto, Vega Alta, Vega Baja, Vieques, Yabucoa 
+Virgin Islands: St. Croix, St. John, St. Thomas 
+ 
+The following map shows the counties in the disaster area: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 07, 2017 12:30 p.m. 
+ 
+ 
+911 Services  
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety 
+Answering Point (PSAP) through the filings of 911 Service Providers in the Disaster Information 
+Reporting System (DIRS), reporting to the FCC’s Public Safety Support Center (PSSC), coordination with 
+state 911 Administrators, and, if necessary, from individual PSAPs. 
+ 
+There are a total of 4 PSAPs affected in the reporting area:  
+ 
+? Operational without Automatic Location Information (ALI):  2 (Centro de Guaynabo, PR and 
+Centro de Hato Rey, PR)  
+? Operational without ALI or Automatic Numbering Information (ANI):  2 (both PSAPs in the US 
+Virgin Islands) 
+ 
+Wireless Services 
+The following section describes the status of wireless communications services and restoration in the 
+disaster area, including the percentage of cell sites out of service for each county. 
+ 
+The following map of the disaster area illustrates which counties are most affected: 
+  
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 07, 2017 12:30 p.m. 
+ 
+The following table provides the percentage of cell sites out of service by county.  55.2% of cell sites are 
+out of service in the affected area.  Over 50% of cell sites are out of service in the following counties:   
+? Puerto Rico:  Aguas Buenas, Arecibo, Barceloneta, Camuy, Canovanas, Carolina, Catano, Ceiba, 
+Corozal, Culebra, Dorado, Fajardo, Florida, Hatillo, Isabela, Luquillo, Manati, Morovis, Naguabo, 
+San Juan, Toa Alta, Trujillo Alto, Vega Alta, Vega Baja, Vieques 
+ 
+? US Virgin Islands:  St. John  
+The information shown was provided by the signatories to the Wireless Resiliency Cooperative 
+Framework and one additional company that agreed to allow us to include its data in the aggregated 
+data: 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+PR AGUADILLA 15 5 33.3% 
+PR AGUAS BUENAS 5 5 100.0% 
+PR ARECIBO 22 19 86.4% 
+PR BARCELONETA 7 6 85.7% 
+PR BAYAMON 54 24 44.4% 
+PR CAGUAS 32 13 40.6% 
+PR CAMUY 5 5 100.0% 
+PR CANOVANAS 9 7 77.8% 
+PR CAROLINA 39 32 82.1% 
+PR CATANO 8 5 62.5% 
+PR CEIBA 4 2 50.0% 
+PR COROZAL 6 3 50.0% 
+PR CULEBRA 3 2 66.7% 
+PR DORADO 14 9 64.3% 
+PR FAJARDO 11 9 81.8% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 07, 2017 12:30 p.m. 
+PR FLORIDA 1 1 100.0% 
+PR GUAYNABO 34 12 35.3% 
+PR GURABO 9 4 44.4% 
+PR HATILLO 10 9 90.0% 
+PR HUMACAO 15 7 46.7% 
+PR ISABELA 9 6 66.7% 
+PR JUNCOS 6 2 33.3% 
+PR LAS PIEDRAS 7 1 14.3% 
+PR LOIZA 4 0 0.0% 
+PR LUQUILLO 6 3 50.0% 
+PR MANATI 10 10 100.0% 
+PR MAUNABO 5 1 20.0% 
+PR MOROVIS 5 5 100.0% 
+PR NAGUABO 7 6 85.7% 
+PR NARANJITO 7 3 42.9% 
+PR QUEBRADILLAS 9 4 44.4% 
+PR RIO GRANDE 15 6 40.0% 
+PR SAN JUAN 137 72 52.6% 
+PR SAN LORENZO 6 0 0.0% 
+PR TOA ALTA 15 8 53.3% 
+PR TOA BAJA 19 9 47.4% 
+PR TRUJILLO ALTO 14 8 57.1% 
+PR VEGA ALTA 11 8 72.7% 
+PR VEGA BAJA 13 11 84.6% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 07, 2017 12:30 p.m. 
+PR VIEQUES 5 5 100.0% 
+PR YABUCOA 10 3 30.0% 
+VI ST. CROIX 19 4 21.1% 
+VI ST. JOHN 12 11 91.7% 
+VI ST. THOMAS 65 32 49.2% 
+TOTAL 
+ 
+719 397 55.2% 
+ 
+ 
+Cable Systems and Wireline (Combined) 
+Since there are widespread power outages over Puerto Rico and the US Virgin Islands, the FCC has 
+received reports that large percentages of consumers are without either cable services or wireline 
+service.   
+ 
+Broadcast 
+Based on the limited input into DIRS, there are no stations reported out of service.   
+ 
+ 

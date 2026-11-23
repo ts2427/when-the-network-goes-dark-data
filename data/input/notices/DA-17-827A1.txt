@@ -1,0 +1,47 @@
+PUBLIC NOTICE
+Federal Communications Commission
+445 12th St., S.W.
+Washington, D.C. 20554
+News Media Information 202 / 418-0500
+Internet: http://www.fcc.gov
+TTY: 1-888-835-5322
+DA 17-827
+Released August 31, 2017
+THE FCC’S PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES 
+THE EXTENSION OF DISASTER INFORMATION REPORTING SYSTEM FOR 
+HURRICANE HARVEY
+Disaster data collection has been extended to nine additional counties in the disaster 
+area for HURRICANE Harvey. On August 25, 2017, the Federal Communications 
+Commission (FCC or Commission) activated Disaster Information Reporting System (DIRS) to 
+receive information on the status of communications equipment in 19 counties in Louisiana and 
+36 counties in Texas.1 FEMA has asked the Commission to extend the data collection to nine 
+additional counties in Texas. 
+The Commission requests that communications providers that provide service to any 
+areas listed below expeditiously submit and update information through DIRS regarding, inter 
+alia, the status of their communications equipment, restoration efforts, and power (i.e., whether 
+they are using commercial power or back-up power).  Communications providers can access 
+DIRS at https://www.fcc.gov/nors/disaster/.  Providers that have not previously done so will be 
+asked to first provide contact information and obtain a User ID when they access DIRS.  
+Communications providers are reminded that for providers that participate in DIRS, the separate 
+Network Outage Reporting System (NORS) obligations are suspended for the duration of the 
+DIRS activation with respect to outages in the counties where DIRS has been activated.  Reports 
+are requested by 10:00 a.m. Friday, September 1, 2017, and every day after that by 10:00 
+a.m. until DIRS is deactivated.
+Communications providers that serve an area listed below and that have already provided 
+contact information in DIRS will be sent an e-mail requesting that they provide the above-
+referenced status information through DIRS.  The Commission encourages all communications 
+providers that have not already logged onto DIRS to input their contact information do so as 
+soon as possible.
+THE ADDITIONAL COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE:
+Texas: Bexar, Fayette, Hardin, Jasper, Montgomery, Newton, Sabine, San Jacinto, and Waller
+  
+1 The FCC’s Public Safety and Homeland Security Bureau Announces the Activation of the Disaster 
+Information Reporting System in Response to Hurricane Harvey, Public Notice, DA 17-806 (rel. Aug. 25, 
+2017)
+2For further information, please contact:
+John Healy (215) 847-8094, or john.healy@fcc.gov
+Julia Tu (202) 418-0731, 202-321-4399 (cell), julia.tu@fcc.gov
+Michael Caiafa (202) 418-1311, (202) 277-5690 (cell), michael.caiafa@fcc.gov
+David Ahn (571) 232-8487 (cell), (202) 418-0853, david.ahn@fcc.gov
+- FCC -
+ 

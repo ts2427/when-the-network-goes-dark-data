@@ -1,0 +1,29 @@
+﻿	
+DA 24-1085
+Released:  October 19, 2024
+
+THE FEDERAL COMMUNICATIONS COMMISSION ANNOUNCES DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM FOR NORTH CAROLINA AND TENNESSEE FOR HURRICANE HELENE 
+
+The Federal Communications Commission (the Commission), at the request of the States of North Carolina and Tennessee, and in coordination with the Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, has deactivated its Disaster Information Reporting System (DIRS) for Hurricane Helene. While DIRS was initially voluntary, effective April 11, 2024, the Commission’s rules were updated to require that certain communications providers, including cable communications, wireless, wireline, and interconnected Voice over Internet Protocol providers, report communications infrastructure status information during times of crisis into DIRS.  See 47 CFR 4.18.  Compliance with this new requirement by subject communications providers occurs “at the later of (i) 30 days after the Commission issues a Public Notice announcing that [the Office of Management and Budget] has completed review of any new information collection requirements associated with today’s Second Report and Order or (ii) November 30, 2024.”  See Resilient Networks; Amendments to 4 of the Commission’s Rules Concerning Disruptions to Communications; New Part 4 of the Commission’s Rules Concerning Disruptions to Communications, PS Docket Nos. 21-346 and 15-80, ET Docket No. 04-35, Second Report and Order and Second Further Notice of Proposed Rulemaking, para. 36 (2024).  
+  Communications providers do not need to provide any additional reporting in DIRS in connection with this event.  The Commission will instead commence periodic individual conference calls with relevant communications providers to discuss the status of their restoration efforts as well as lessons learned to prepare for the coming hurricane season.
+
+Effective today, no further reports to DIRS are requested in response to Hurricane Helene.  Also, effective today, Network Outage Reporting System reporting obligations under Part 4 of the Commission’s rules, 47 CFR Part 4.
+ which were suspended for providers reporting in DIRS while DIRS was activated, are now again in effect for new network outages for the area covered by DIRS reporting for Hurricane Helene. See The Federal Communications Commission Announces the Activation of the Disaster Information Reporting System (DIRS) and the Mandatory Disaster Response Initiative (MDRI) for Communications Impacts from Hurricane Helene in Florida, Georgia, North Carolina and South Carolina, Public Notice, DA 24-991 (PSHSB Sept. 25, 2024).
+
+
+
+If there are major changes, whether improvements or setbacks, to the status of communications in the affected area, the Commission asks communications providers to supply that information directly to Commission personnel at the contact information below as events occur.  The Commission continues to be available to address emergency communications needs related to Hurricane Helene 24 hours per day, seven days per week through our 24-hour operations center, which can be reached at 202-418-1122 or fccops@fcc.gov. This combination of measures will provide the Commission with the necessary situational awareness as service restoration continues. 
+
+The Commission appreciates the cooperation of all the communications providers that submitted data to DIRS in the aftermath of Hurricane Helene.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The Commission published its final daily communications status report for Hurricane Helene today, October 19, 2024.  
+
+For further information, please contact:
+ 
+Michael Caiafa (202) 418-1311, (540) 834-7401 (cell), michael.caiafa@fcc.gov
+Juan Chapa (202) 418-0431, juan.chapa@fcc.gov
+John Healy (202) 418-2448, john.healy@fcc.gov
+FCC 24/7 Operations Center (202) 418-1122, fccops@fcc.gov
+
+
+- FCC -
+2
+

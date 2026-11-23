@@ -1,0 +1,103 @@
+﻿    Federal Communications Commission                DA 26-948
+
+
+
+
+DA-26-1092
+Released: October 8, 2026
+
+THE PUBLIC SAFETY AND HOMELAND SECURITY BUREAU, IN COORDINATION WITH MULTIPLE OTHER BUREAUS, ISSUES PROCEDURES FOR PROVIDING EMERGENCY COMMUNICATIONS IN AREAS IMPACTED BY HURRICANE ISAIAS  
+The Public Safety and Homeland Security Bureau, in coordination with the Media Bureau, Office of International Affairs, Space Bureau, Wireless Telecommunications Bureau, and Wireline Competition Bureau, announces procedures to help communications service providers initiate, resume, and maintain operations in response to Hurricane Isaias.  Bureau-specific guidance is provided below.  For additional information, applicants should contact the appropriate Bureau-specific staff identified below.
+Those seeking special temporary authority (STA) are reminded of the need to conform to the requirements of section 1.2002 of our rules implementing the Anti-Drug Abuse Act of 1988. 47 CFR § 1.2002.
+ Specifically, requests shall include the following certification:  “Neither the applicant nor any party to this application is subject to a denial of federal benefits that includes FCC benefits pursuant to section 5301 of the Anti-Drug Abuse Act of 1988, 21 U.S.C. § 862.”  Presentations that directly relate to the emergency posed by Hurricane Isaias are exempt from the restrictions of the Commission’s ex parte rules, subject to the provisions of section 1.1204(a)(3) of those rules. 47 CFR § 1.1204(a)(3).
+
+· Media Bureau Guidance
+· Special Temporary Authority: Emergency requests for STA prompted by the effects of Hurricane Isaias and filed pursuant to section 73.1635 of the Commission’s rules 47 CFR § 73.1365.
+ may be submitted by informal letter or email or, if necessary, by telephone.  Licensees of AM and FM radio stations and TV stations may file requests electronically through the Licensing Management System (LMS).  All requests shall provide the technical parameters of the proposed operation and a point of contact.  These requests will be handled as expeditiously as possible.  To file STA requests via email or fax, or to receive an oral STA during regular business hours, licensees may contact the following personnel:
+· Media Bureau Contact During Business Hours:
+§ Part 73 (Radio Broadcast Services) Subparts A-H; J (as applicable): 
+§ For Television Services, Kevin Harding, 202-418-7077,  Kevin.Harding@fcc.gov
+§ For FM Radio Services, Rudy Bonacci, 202-418-2722, Rodolfo.Bonacci@fcc.gov
+§ For AM Radio Services, Jerome Manarchuck, 202-418-7226, Jerome.Manarchuck@fcc.gov
+§ Part 76 (Multichannel Video and Cable Television Service): 
+§ Sean Mirzadegan, 202-418-7111, Sean.Mirzadegan@fcc.gov
+§ Part 78 (Cable Television Relay Service): 
+§ Jeffrey Neumann, 202-418-2046, Jeffrey.Neumann@fcc.gov 
+· Media Bureau Contact During Non-Business Hours:
+§ FCC Operations Center, 202-418-1122, FCCOPS@fcc.gov
+· Licensees are reminded that the Commission’s rules address operations during periods of emergency for licensees authorized under each of the rule parts for Broadcast Television Services, Broadcast Radio Services, and Multichannel Video and Cable Services.  These service-specific rules allow licensees to provide emergency communications during a period of emergency in a manner or configuration not specified in the station authorization or in the rules governing such stations. 47 CFR §§ 73.1250, 73.1680, 73.3542.  
+  
+· Office of International Affairs Guidance
+· Special Temporary Authority (Submarine Cables, International 214s, and International High Frequency): Emergency requests for STA related to this event may be submitted by e-mail or, if necessary, by telephone.  Applicants also may file requests electronically through the International Communications Filing System (ICFS) at https://fccprod.servicenowservices.com/icfs.  The Office will handle all STA requests as expeditiously as possible. 
+· To ensure the Office has a complete record of the action, applicants that do not file through the ICFS should follow up the initial request with an electronic version submitted through the ICFS as soon as possible.  In this filing, operators shall note in the first description field on the electronic STA form that this is a Hurricane Isaias request and the date the initial request was granted.  
+· Office of International Affairs Contact During Business Hours:
+§ Submarine Cables and International 214s:
+§ Gabrielle Kim, 202-418-0730, Gabrielle.Kim@fcc.gov
+§ Stacey Wise-Ashton, 202-418-2214, Stacey.Ashton@fcc.gov
+§ Karen Johnson, 202-418-7706, Karen.Johnson@fcc.gov
+§ International High Frequency:
+§ James McLuckie, 202-418-2149, James.McLuckie@fcc.gov
+§ Shawna Prebble, 202-418-0740, Shawna.Prebble@fcc.gov  
+· Office of International Affairs Contact During Non-Business Hours:
+§ FCC Operations Center, 202-418-1122, FCCOPS@fcc.gov
+· Public Safety and Homeland Security Bureau Guidance
+· Special Temporary Authority: Emergency requests for STA prompted by the effects of Hurricane Isaias and filed pursuant to section 1.931 of the Commission’s rules 47 CFR § 1.931
+ may be submitted by email or, if necessary, by telephone.  Licensees may file requests electronically through the Universal Licensing System (ULS).  All requests shall provide the technical parameters of the proposed operation and a point of contact.  These requests will be handled as expeditiously as possible.  To file STA requests via email or to receive an oral STA during regular business hours, licensees may contact the following personnel:  After business hours, contact the FCC Operations Center, below.
+· Public Safety and Homeland Security Bureau Contact During Business Hours:
+§ Parts 90 (Public Safety only) and 101 (Public Safety only): 
+§ Tracy Simmons, 717-338-2657, Tracy.Simmons@fcc.gov
+§ Troy Sieg, 717-338-2567, Troy.Sieg@fcc.gov 
+· Public Safety and Homeland Security Bureau Contact During Non-Business Hours:
+§ FCC Operations Center, 202-418-1122, FCCOPS@fcc.gov
+· Space Bureau Guidance
+· Special Temporary Authority (Satellite Earth and Space Stations): Emergency requests for STA related to Hurricane Isaias event may be submitted by letter, e-mail or, if necessary, by telephone.  Applicants also may file requests electronically through the International Communications Filing System (ICFS) at http://licensing.fcc.gov/myibfs.  All requests shall provide the technical parameters of the proposed operation and a point of contact.  The Bureau will handle all STA requests on an expedited basis.  Consistent with section 309(c)(2)(G) of the Communications Act, as amended, the Bureau may grant STA requests for up to 30 days. 47 USC § 309(c)(2)(G).
+   
+· Space Bureau Contact During Business Hours: 
+§ Satellite Space Stations and Earth Stations:
+§ Franco Hinojosa, 202-418-7274, Franco.Hinojosa@fcc.gov 
+§ Kathyrn Medley, 202-418-1211, Kathyrn.Medley@fcc.gov 
+· Space Bureau Contact During Non-Business Hours: 
+§ FCC Operations Center, 202-418-1122, FCCOPS@fcc.gov
+· Wireline Competition Bureau Guidance
+· Special Temporary Authority: Emergency requests for relief, including STA, prompted by the effects of Hurricane Isaias may be submitted by email or, if necessary, by telephone.  Providers may file requests electronically through the Electronic Comment Filing System (ECFS) but should also provide copies of any submissions simultaneously via email to the appropriate FCC staff identified below.  Requests shall include supporting details concerning the relief requested, including any technical parameters and contact information.  
+· Wireline Competition Bureau Contact During Business Hours:
+§ Emergency Requests Pertaining to Discontinuance Under Section 214 of the Communications Act:
+§ Rodney McDonald, 202-418-7513, Rodney.McDonald@fcc.gov
+§ Emergency Requests Pertaining to Transfer of Control Under Section 214 of the Communications Act:
+§ Randall Sifers, 202-418-2325, Randall.Sifers@fcc.gov 
+§ Emergency Requests Pertaining to Numbering Resources: 
+§ Michelle Sclater, 202-418-0388, Michelle.Sclater@fcc.gov 
+§ All Other Wireline Provider Requests:  
+§ FCC Operations Center, 202-418-1122, FCCOPS@fcc.gov
+· Wireline Bureau Contact During Non-Business Hours:
+§ FCC Operations Center, 202-418-1122, FCCOPS@fcc.gov
+· Wireless Telecommunications Bureau Guidance
+· Special Temporary Authority: Emergency requests for STA prompted by the effects of Hurricane Isaias and filed pursuant to section 1.931 of the Commission’s rules may be submitted by informal letter or email or, if necessary, by telephone.  Licensees may file requests electronically through the Universal Licensing System (ULS).  All requests shall provide the technical parameters of the proposed operation and a point of contact.  These requests will be handled as expeditiously as possible.  To file STA requests via email or fax, or to receive an oral STA during regular business hours, licensees may contact the following personnel:
+· Wireless Telecommunications Bureau Contact During Business Hours:
+§ Parts 22, 24, and 27 (excluding the Broadband Radio Service and Educational Broadband Service): 
+§ Keith Harper, 202-418-2759, Keith.Harper@fcc.gov
+§ Parts 27 (Broadband Radio Service and Educational Broadband Service only), 74, and 101 (excluding Public Safety): 
+§ Paul Malmud, 202-418-0006, Paul.Malmud@fcc.gov
+§ Parts 80, 87, 90 (excluding Public Safety), 95, and 97: 
+§ Joshua Smith, 717-338-2502 or 202-436-6222, Joshua.Smith@fcc.gov
+§ Parts 90 (Public Safety only) and 101 (Public Safety only): 
+§ Tracy Simmons, 717-338-2657 or 202-391-2363, Tracy.Simmons@fcc.gov
+§ Troy Sieg, 717-338-2567, Troy.Sieg@fcc.gov 
+· Wireless Telecommunications Bureau Contact During Non-Business Hours:
+§ FCC Operations Center, 202-418-1122, FCCOPS@fcc.gov
+Licensees are reminded that sections 22.307, 90.407, and 101.205 of the Commission’s rules address operation during periods of emergency for licensees authorized under these rule parts.  These rules allow licensees to provide emergency communications during a period of emergency in a manner or configuration not specified in the station authorization or in the rules governing such stations.
+In addition, during evening hours, weekends, and holidays, licensees needing FCC emergency assistance or STA requests can call the FCC’s Operations Center, which is open 24 hours a day, 7 days a week, at 202-418-1122 or by email at FCCOPS@fcc.gov.  To request materials in accessible formats for people with disabilities (Braille, large print, electronic files, audio format), send an e-mail to FCC504@fcc.gov or call the Consumer and Governmental Affairs Bureau at 202-418-0530 (voice).
+
+Questions and information requests may be directed to the Commission’s main telephone numbers:
+· Voice (toll-free):  1-888-225-5322 (1-888-CALL-FCC)
+· American Sign Language Videophone (toll-free):  1-844-432-2275
+
+
+-FCC-
+
+
+
+
+
+
+2

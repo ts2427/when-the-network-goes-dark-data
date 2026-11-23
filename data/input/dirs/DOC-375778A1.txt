@@ -1,0 +1,244 @@
+                            
+ 
+                      Communications Status Report for  
+               Areas Impacted by Hurricanes Ida and Nicholas 
+                               September 15, 2021 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Hurricanes Ida and Nicholas as of September 15, 2021 at 11:00 a.m. EDT.  This report incorporates network 
+outage data submitted by communications providers to the Federal Communications Commission’s (FCC) 
+Disaster Information Reporting System (DIRS).  Note that the operational status of communications services 
+during a disaster may evolve rapidly, and this report represents a snapshot in time.  This report also 
+summarizes certain regulatory actions taken by the FCC to assist areas impacted by Hurricanes Ida and 
+Nicholas. 
+
+The following counties are in the current geographic area that is part of DIRS (the “disaster area”) for today’s 
+report. 
+
+Louisiana: Acadia, Ascension, Assumption, Avoyelles, Calcasieu, Cameron, East Baton Rouge, East Feliciana, 
+Evangeline, Iberia, Iberville, Jefferson, Jefferson Davis, Lafayette, Lafourche, Livingston, Orleans, 
+Plaquemines, Pointe Coupee, St. Bernard, St. Charles, St. Helena, St. James, St. John the Baptist, St. Landry, 
+St. Martin, St. Mary, St. Tammany, Tangipahoa, Terrebonne, Vermilion, Washington, West Baton Rouge, 
+West Feliciana. 
+
+Texas: Brazoria, Chambers, Fort Bend, Galveston, Hardin, Harris, Jefferson, Liberty, Matagorda, Orange, 
+Wharton 
+
+
+                                                                            
+ 
+ 
+ 
+ 
+
+                                                                                 1 
+                                          
+                            
+ 
+911 Services  
+ 
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering 
+Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support 
+Center, coordination with state 911 Administrators and, if necessary, direct contact with individual PSAPs. 
+ 
+      Louisiana: No PSAPs are reported as being affected. 
+
+      Texas: No PSAPs are reported as being affected.  
+
+ 
+Wireless Services 
+ 
+The following section describes the status of wireless communications services in the disaster area. The 
+current status of wireless communications services by county is shown by the following charts and map. 
+
+
+                                                                                 
+
+
+                                                                                 2 
+                                          
+                                           
+              
+
+
+                                                                                                      
+
+
+                                                                                                   
+
+3 
+                                                           
+                              
+ 
+The following table provides cell sites out of service by county.  2.5% of the cell sites in the affected area in 
+Louisiana and Texas are out of service.  The information shown was provided by the signatories to the 
+Wireless Network Resiliency Framework Cooperative Agreement.   
+ 
+Louisiana 
+ 
+                         Cell     Cell             Cell Sites   Cell Sites Out  Cell Sites 
+           Affected      Sites    Sites Percent   Out Due to       Due to      Out Due to 
+ State     Counties     Served    Out     Out      Damage        Transport1      Power 
+LA     ACADIA                 47      0     0.0%             0               0           0 
+LA     ASCENSION              93      0     0.0%             0               0           0 
+LA     ASSUMPTION             19      0     0.0%             0               0           0 
+LA     AVOYELLES              56      0     0.0%             0               0           0 
+LA     CALCASIEU             130      0     0.0%             0               0           0 
+LA     CAMERON                15      0     0.0%             0               0           0 
+       EAST BATON 
+LA     ROUGE                 384      1     0.3%             1               0           0 
+       EAST 
+LA     FELICIANA              31      0     0.0%             0               0           0 
+LA     EVANGELINE             42      0     0.0%             0               0           0 
+LA     IBERIA                 51      3     5.9%             1               1           1 
+LA     IBERVILLE              43      0     0.0%             0               0           0 
+LA     JEFFERSON             301      9     3.0%             1               4           4 
+       JEFFERSON 
+LA     DAVIS                  29      1     3.4%             0               1           0 
+LA     LAFAYETTE             163      0     0.0%             0               0           0 
+LA     LAFOURCHE              82     13    15.9%             1               5           7 
+LA     LIVINGSTON            125      6     4.8%             0               3           3 
+LA     ORLEANS               365     10     2.7%             3               4           3 
+LA     PLAQUEMINES            58      9    15.5%             2               5           2 
+LA     POINTE COUPEE          25      0     0.0%             0               0           0 
+LA     ST. BERNARD            39      2     5.1%             1               0           1 
+LA     ST. CHARLES            42      3     7.1%             1               0           1 
+LA     ST. HELENA             81      4     4.9%             0               2           1 
+LA     ST. JAMES              34      3     8.8%             3               0           0 
+       ST. JOHN THE 
+LA     BAPTIST                28      1     3.6%             1               0           0 
+LA     ST. LANDRY             89      1     1.1%             1               0           0 
+                           
+1 These are cell sites that are out due to issues with the (typically wireline) networks that route communications traffic to 
+and from the cell sites. 
+ 
+                                                                                         4 
+                                              
+                            
+ 
+ LA    ST. MARTIN           51     0     0.0%          0              0          0 
+ LA    ST. MARY             56     2     3.6%          0              2          0 
+ LA    ST. TAMMANY         263     2     0.8%          1              0          1 
+ LA    TANGIPAHOA          130     3     2.3%          0              1          2 
+ LA    TERREBONNE           86     9    10.5%          1              4          5 
+ LA    VERMILION            56     0     0.0%          0              0          0 
+ LA    WASHINGTON           62     1     1.6%          0              1          0 
+       WEST BATON 
+ LA    ROUGE                32     0     0.0%          0              0          0 
+       WEST 
+ LA    FELICIANA            28     0     0.0%          0              0          0 
+ TOTAL                    3,136   83    2.6%           18            33         31 
+ 
+Texas 
+ 
+                                     Cell          Cell Sites Cell Sites Out Cell Sites 
+                Affected   Cell Sites Sites Percent Out Due to  Due to    Out Due 
+    State       Counties    Served   Out    Out    Damage     Transport   to Power 
+ TX          BRAZORIA            283    14    4.9%         0            2       12 
+ TX          CHAMBERS             61    0     0.0%         0            0        0 
+ TX          FORT BEND           402    7     1.7%         1            4        2 
+ TX          GALVESTON           249    12    4.8%         2            6        4 
+ TX          HARDIN               76    0     0.0%         0            0        0 
+ TX          HARRIS            3,431    84    2.4%        21           34       30 
+ TX          HARRISON             80    0     0.0%         0            0        0 
+ TX          JEFFERSON           241    4     1.7%         1            2        1 
+ TX          LIBERTY             114    1     0.9%         0            0        1 
+ TX          MATAGORDA            62    2     3.2%         0            0        2 
+ TX          ORANGE               91    1     1.1%         1            0        0 
+ TX          WHARTON              65    2     3.1%         1            0        1 
+ TOTAL                         5,155   127   2.5%         27           48       53 
+ 
+ 
+The number of cell site outages in a specific area does not necessarily correspond to the availability of 
+wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications 
+Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the 
+ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed 
+with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an 
+individual site is inoperable.  In addition, wireless providers frequently use temporary facilities such as cells-
+on-wheels (also known as COWs), increased power at operational sites, roaming agreements, or take other 
+
+                                                                                 5 
+                                          
+                            
+ 
+actions to maintain service to affected consumers during emergencies or other events that result in cell site 
+outages.  
+ 
+Cable Systems and Wireline (Combined) 
+ 
+Cable and wireline companies reported the following number of subscribers out of service by state in the 
+disaster area in Louisiana and Texas; this may include the loss of telephone, television, and/or Internet 
+services: 
+ 
+                                 Louisiana Texas 
+                                 102,376   12,461 
+                                          
+ 
+Broadcast:  
+
+Television stations status:  
+ 
+   •  11 TV stations reported being operational (KFDM, KHOU, KLWB, KTBU, KZJL, WVUE-DT, KBTV-TV, 
+      WBRZ, KBTR, KXKW, KDCG). 
+ 
+   •  No TV station is reported as being out of service . 
+ 
+FM Radio stations status:   
+
+   •  42 FM radio stations reported being operational (K206DU, KAMA, KCOL-FM, KEPH-LP, KEUN, KFXZ, 
+      KHJK, KIKL, KIOC, KITA, KKMY, KKND, KLCJ, KLFT, KLTN, KLWB, KLXH, KMEZ, KNOL day, KNOL night, 
+      KNTE, KNXX, KODA, KOGM, KOVE, KPLV, KQBU-FM, KQQK, KRLR, KSLO, KTBZ-FM, KTJM, KTXB, KVLU, 
+      KXAI, KYKR, KYMK, W252AQ, WBRP, WDGL, WNXX, WTGE) 
+  
+   •  2 FM stations reported being out of service (KSLU, WNKV). 
+ 
+   •  1 FM radio station reported being down with programming sent to another station (WZRH). 
+ 
+
+AM Radio stations status:   
+
+   •  12 AM radio stations reported being operational (KFXZ, KLAT, KLVI, KSLO, KVOL, KEUN, KTRH, KBME, 
+      KPRC, KXYZ, WPYR, WQNO). 
+   •  No AM radio stations reported being out of service. 
+       
+Special Temporary Authority (STA)/Waivers/Extensions 
+ 
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit 
+immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, 
+as well as waivers to support emergency communications and service restoration. 
+                                                                                 6 
+                                          
+                            
+ 
+ 
+During Hurricane Ida, there have been 7 STAs granted as of 11 am September 15: a verbal STA to the Mutual 
+Aid Box Alarm System, an STA for station KVDU, and 2 STAs to ERA Helicopters LLC, 1 STA to K274DE - Coastal 
+Broadcasting of Larose, Inc, and 2 STAs to Verizon. 
+
+The FCC granted waivers as follows: 
+
+   •  ARRL emergency request for a temporary waiver to permit higher symbol rate data transmissions for 
+      Hurricane Ida traffic.   
+   •  Temporary waiver to allow carriers in affected areas greater flexibility in number portability, to assist 
+      in restoring service to affected customers more quickly.  
+   •  Waiver to extend the Form 477 deadline and the A110 Upfront Payment and App Resubmission 
+      deadline.   
+   •  Waived number aging rules to allow providers to hold disconnected numbers for more than the usual 
+      90 days for customers who wish to temporarily disconnect service and then reconnect after recovery 
+      is complete.  
+ 
+On September 3, the FCC took a series of actions to extend deadlines and waive rules to assist consumers, 
+licensees and communications providers in Louisiana and Mississippi impacted by Hurricane Ida, as follows: 
+ 
+   •  Waived certain rules and deadlines for the E-Rate, Rural Health Care, Lifeline, High Cost, Emergency 
+      Connectivity Fund, and Emergency Broadband Benefit programs. 
+   •  Released a Public Notice establishing October 1, 2021 as the new deadline for submission of Form 
+      477 data as of June 30, 2021 for affected filers in Louisiana and Mississippi.  For all other filers the 
+      deadline is September 15, 2021. 
+   •  Extended until October 1, 2021, certain deadlines that would occur between August 29, 2021 and 
+      September 30, 2021.  This includes construction deadlines and filing deadlines for certain license 
+      modifications, license renewals, and construction notifications. 
+
+
+                                                                                 7 
+                                          

@@ -1,0 +1,15 @@
+﻿DA 19-889
+Released:  September 7, 2019
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANE DORIAN
+
+At the request of the Department of Homeland Security, National Coordinating Center for Communications, and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+.  Communications providers do not need to provide any additional reporting in DIRS with respect to Hurricane Dorian.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Dorian.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  
+All FCC releases in connection with Hurricane Dorian may be found at https://www.fcc.gov/dorian.  The FCC published its final daily communications status report for Hurricane Dorian today, September 7.
+For further information, please contact John Healy of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at (215) 847-8094 or John.Healy@fcc.gov.  
+
+- FCC -
+2
+

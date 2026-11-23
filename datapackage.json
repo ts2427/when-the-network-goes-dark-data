@@ -1,0 +1,465 @@
+{
+  "profile": "tabular-data-package",
+  "name": "when-the-network-goes-dark-data",
+  "title": "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)",
+  "version": "2.0.0",
+  "created": "2026-11-23",
+  "homepage": "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/",
+  "description": "County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 21 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the inputs and code that rebuild it.",
+  "keywords": [
+    "hurricanes",
+    "cell sites",
+    "telecommunications outages",
+    "FCC DIRS",
+    "disaster resilience",
+    "power outages",
+    "EAGLE-I",
+    "Gulf Coast"
+  ],
+  "contributors": [
+    {
+      "title": "Timothy D. Spivey",
+      "role": "author",
+      "path": "https://orcid.org/0009-0009-8990-4308"
+    }
+  ],
+  "licenses": [
+    {
+      "name": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International (data)",
+      "path": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "name": "MIT",
+      "title": "MIT License (code)",
+      "path": "https://opensource.org/license/mit"
+    }
+  ],
+  "temporalCoverage": "2017-08-26/2026-10-12",
+  "spatialCoverage": "Texas, Louisiana, Mississippi, Alabama, Florida, Georgia, South Carolina, North Carolina, Tennessee, Virginia (United States), county level",
+  "resources": [
+    {
+      "name": "dirs_county_day",
+      "path": "data/analysis/dirs_county_day.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "FCC DIRS cell-site outages by county and report",
+      "description": "One row per county per FCC DIRS report in use (167 reports, 21 storms).",
+      "schema": {
+        "fields": [
+          {
+            "name": "storm_key",
+            "type": "string",
+            "description": "Storm key: NHC ID and DIRS activation date, joined by an underscore.",
+            "limitations": "Names repeat across years (Isaias 2020 and 2026); always join on this key, not the name."
+          },
+          {
+            "name": "nhc_id",
+            "type": "string",
+            "description": "National Hurricane Center storm ID (basin, number, year)."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm name.",
+            "limitations": "Not unique across years."
+          },
+          {
+            "name": "dirs_activation_date",
+            "type": "date",
+            "description": "Date the FCC activated DIRS for the storm."
+          },
+          {
+            "name": "rule_period",
+            "type": "string",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present).",
+            "limitations": "Descriptive grouping only; periods differ in storms, hazards and filers."
+          },
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "FCC EDOCS document number of the report."
+          },
+          {
+            "name": "report_date",
+            "type": "date",
+            "description": "Date of the report."
+          },
+          {
+            "name": "as_of_utc",
+            "type": "datetime",
+            "description": "The report's stated as-of time, in UTC.",
+            "unit": "UTC",
+            "limitations": "Where the report prints none, set to 12:00 Eastern on the report date (as_of_imputed).",
+            "format": "any"
+          },
+          {
+            "name": "as_of_imputed",
+            "type": "boolean",
+            "description": "True when as_of_utc was set to 12:00 Eastern because the report prints no time.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "report_status",
+            "type": "string",
+            "description": "Validation status of the report (step 4): ok, flagged (a check raised a note) or known_fcc_inconsistency (a stated total the FCC's own rows do not sum to, listed in code/manifest/known_fcc_inconsistencies.csv).",
+            "limitations": "Excluded reports are not in the file."
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "description": "State, as printed.",
+            "limitations": "Ten study states only."
+          },
+          {
+            "name": "county",
+            "type": "string",
+            "description": "County as printed by the FCC (upper case).",
+            "limitations": "Spellings vary between reports; use fips."
+          },
+          {
+            "name": "fips",
+            "type": "string",
+            "description": "Five-digit county FIPS code (with leading zero).",
+            "limitations": "Mapped from the printed name with code/manifest/fips_exceptions.csv.",
+            "constraints": {
+              "pattern": "^[0-9]{5}$",
+              "required": true
+            }
+          },
+          {
+            "name": "sites_served",
+            "type": "number",
+            "description": "Cell sites served in the county, as reported.",
+            "unit": "sites",
+            "limitations": "The denominator differs by storm and report; compare percentages with care. Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat)."
+          },
+          {
+            "name": "sites_out",
+            "type": "number",
+            "description": "Cell sites out of service in the county, as reported.",
+            "unit": "sites",
+            "limitations": "Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat)."
+          },
+          {
+            "name": "pct_out",
+            "type": "number",
+            "description": "Percent of sites out, as printed (computed from the two counts where not printed).",
+            "unit": "percent",
+            "limitations": "Where pct_printed is false the value is computed, not printed."
+          },
+          {
+            "name": "pct_printed",
+            "type": "boolean",
+            "description": "True when the report printed the percent column.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "out_damage",
+            "type": "number",
+            "description": "Sites out due to damage, as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns. Causes can overlap (see out_overattributed)."
+          },
+          {
+            "name": "out_transport",
+            "type": "number",
+            "description": "Sites out due to transport (backhaul), as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns."
+          },
+          {
+            "name": "out_power",
+            "type": "number",
+            "description": "Sites out due to power, as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns."
+          },
+          {
+            "name": "on_backup_power",
+            "type": "number",
+            "description": "Sites operating on backup power, as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no such column. Not a measure of sites about to fail."
+          },
+          {
+            "name": "out_unattributed",
+            "type": "number",
+            "description": "Sites out with no cause given: sites_out minus the three causes, never below 0.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns. Kept apart from out_overattributed; never net them."
+          },
+          {
+            "name": "out_overattributed",
+            "type": "number",
+            "description": "Causes in excess of sites out (sites counted under more than one cause).",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns. May print as -0.0, which equals 0."
+          },
+          {
+            "name": "area_status",
+            "type": "string",
+            "description": "Whether the county is in the FCC's notice area on the report date: inside, inside_spelling_variant, outside_notice_area or table_not_in_list.",
+            "limitations": "From the FCC's notices (code/manifest/reporting_areas.csv)."
+          },
+          {
+            "name": "fema_declared",
+            "type": "boolean",
+            "description": "True if OpenFEMA lists a declaration for the storm covering the county.",
+            "limitations": "Context for reuse only; no result uses it. This product uses the Federal Emergency Management Agency's OpenFEMA API, but is not endorsed by FEMA.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "time_flag",
+            "type": "string",
+            "description": "Blank, or pre_onset_likely_marco for Laura's Aug 25, 2020 report (the FCC's combined Marco and Laura report), which is kept but left out of every time-based result."
+          }
+        ],
+        "primaryKey": [
+          "storm_key",
+          "doc_id",
+          "fips"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:271c7735e8b22a90333b025ba4aff4773e567ace6e1f2d1ae00aaa52d6aad7ac",
+      "bytes": 1886462
+    },
+    {
+      "name": "storms",
+      "path": "data/analysis/storms.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "Storm table",
+      "description": "One row per storm with a DIRS activation in scope, including storms with no usable report.",
+      "schema": {
+        "fields": [
+          {
+            "name": "nhc_id",
+            "type": "string",
+            "description": "National Hurricane Center storm ID."
+          },
+          {
+            "name": "dirs_activation_date",
+            "type": "date",
+            "description": "Date the FCC activated DIRS."
+          },
+          {
+            "name": "storm_key",
+            "type": "string",
+            "description": "NHC ID and DIRS activation date."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm name.",
+            "limitations": "Not unique across years."
+          },
+          {
+            "name": "rule_period",
+            "type": "string",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present).",
+            "limitations": "Blank for storms not in the panel."
+          },
+          {
+            "name": "landfall_utc",
+            "type": "datetime",
+            "description": "Day 0: the first time the storm's 34-kt wind radii reach a study-state county (fallback: first study-state landfall at tropical-storm strength or above).",
+            "unit": "UTC",
+            "limitations": "Defined from NHC best-track radii; see docs/decisions.md (2026-11-23).",
+            "format": "any"
+          },
+          {
+            "name": "landfall_source",
+            "type": "string",
+            "description": "Which rule set day 0."
+          },
+          {
+            "name": "previous_landfall_utc",
+            "type": "datetime",
+            "description": "Day 0 under the original rule (kept for chapter 8's comparison).",
+            "unit": "UTC",
+            "limitations": "Superseded; not used for the main results.",
+            "format": "any"
+          },
+          {
+            "name": "interim_landfall_utc",
+            "type": "datetime",
+            "description": "Day 0 under the first 2026-11-23 rule (kept for comparison).",
+            "unit": "UTC",
+            "limitations": "Superseded; not used for the main results.",
+            "format": "any"
+          },
+          {
+            "name": "n_reports",
+            "type": "integer",
+            "description": "Reports in the panel.",
+            "unit": "reports",
+            "limitations": "Blank for storms not in the panel."
+          },
+          {
+            "name": "n_counties",
+            "type": "integer",
+            "description": "Counties in the panel.",
+            "unit": "counties",
+            "limitations": "Blank for storms not in the panel."
+          },
+          {
+            "name": "first_report",
+            "type": "date",
+            "description": "First report date in the panel."
+          },
+          {
+            "name": "last_report",
+            "type": "date",
+            "description": "Last report date in the panel.",
+            "limitations": "The FCC's last public report, not the end of outages."
+          },
+          {
+            "name": "excluded_reports",
+            "type": "string",
+            "description": "Reports left out, with date and reason."
+          },
+          {
+            "name": "in_panel",
+            "type": "boolean",
+            "description": "True if the storm has at least one report in the panel.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          }
+        ],
+        "primaryKey": [
+          "storm_key"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:9d49d0140bd8d408694a221cb670a6dc9bf29f114c534dd9f97ac09ccb22b9c9",
+      "bytes": 5422
+    },
+    {
+      "name": "bdc_county_provider_counts",
+      "path": "data/input/bdc/bdc_county_provider_counts.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "Broadband provider counts by county and BDC release (counts only)",
+      "description": "Derived from FCC Broadband Data Collection public data; no provider is named or identified.",
+      "schema": {
+        "fields": [
+          {
+            "name": "release",
+            "type": "date",
+            "description": "FCC Broadband Data Collection release (as-of date)."
+          },
+          {
+            "name": "fips",
+            "type": "string",
+            "description": "Five-digit county FIPS code.",
+            "limitations": "Study-state counties only.",
+            "constraints": {
+              "pattern": "^[0-9]{5}$",
+              "required": true
+            }
+          },
+          {
+            "name": "mobile_half",
+            "type": "integer",
+            "description": "Mobile broadband providers reporting coverage of at least half of the county.",
+            "unit": "providers",
+            "limitations": "Reported coverage, not which networks were out; providers are never named."
+          },
+          {
+            "name": "mobile_any",
+            "type": "integer",
+            "description": "Mobile broadband providers reporting any coverage in the county.",
+            "unit": "providers",
+            "limitations": "Reported coverage, not which networks were out."
+          },
+          {
+            "name": "fixed_any_excl_near_universal",
+            "type": "integer",
+            "description": "Fixed providers with any residential service, near-universal providers excluded.",
+            "unit": "providers",
+            "limitations": "Near-universal: service in at least 95% of study-state counties."
+          },
+          {
+            "name": "fixed_any",
+            "type": "integer",
+            "description": "Fixed providers with any residential service.",
+            "unit": "providers",
+            "limitations": "Includes near-universal (likely satellite or national fixed-wireless) providers."
+          },
+          {
+            "name": "fixed_half",
+            "type": "integer",
+            "description": "Fixed providers serving at least half of residential locations.",
+            "unit": "providers"
+          },
+          {
+            "name": "fixed_half_excl_near_universal",
+            "type": "integer",
+            "description": "As fixed_half, near-universal providers excluded.",
+            "unit": "providers"
+          }
+        ],
+        "primaryKey": [
+          "release",
+          "fips"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:2d1f5e0ced2c3b8cae29e1c61ef86701e2191ca6179f192a0375b42523cd4f5a",
+      "bytes": 127534
+    },
+    {
+      "name": "results",
+      "path": "data/analysis/results.json",
+      "format": "json",
+      "mediatype": "application/json",
+      "title": "Every number on the page",
+      "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-13).",
+      "hash": "sha256:cec7d7ee63270f3a12d0293d84964a37c3aa9b43c8abe6fedd9b5be8990079e9",
+      "bytes": 966377
+    },
+    {
+      "name": "analysis_plan_as_committed",
+      "path": "docs/analysis_plan_as_committed_9fc17a4.md",
+      "format": "md",
+      "mediatype": "text/markdown",
+      "title": "Analysis plan as committed",
+      "description": "Committed 2026-11-22T16:16:48-06:00 (commit 9fc17a4); SHA-256 d4aa966e3874d69bc256bbe1c8d1153da9fb35429551d2bae25403e61db1dd8e.",
+      "hash": "sha256:d4aa966e3874d69bc256bbe1c8d1153da9fb35429551d2bae25403e61db1dd8e",
+      "bytes": 10877
+    }
+  ]
+}

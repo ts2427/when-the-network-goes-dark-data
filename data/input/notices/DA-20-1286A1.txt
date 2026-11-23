@@ -1,0 +1,52 @@
+﻿	DA 20-1286
+Released:  October 29, 2020
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU EXTENDS THE DISASTER INFORMATION REPORTING SYSTEM FOR HURRICANE ZETA
+
+	The Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission) is extending its disaster data collection to 73 additional counties for HURRICANE ZETA.  
+
+On October 28, 2020, the Commission activated its Disaster Information Reporting System (DIRS) to receive information on the status of communications equipment in 137 counties in Alabama, Florida, Georgia, Louisiana, and Mississippi. The FCC’s Public Safety and Homeland Security Bureau Announces the Activation of the Disaster Information Reporting System in Response to Hurricane Zeta, Public Notice, DA-20-1273 (rel. Oct. 28, 2020).
+  Today, the Department of Homeland Security Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency has asked the Commission to extend the data collection to 73 additional counties in North Carolina and South Carolina. 
+
+	The Commission requests that communications providers that provide service to any areas listed below expeditiously submit and update information through DIRS regarding, inter alia, the status of their communications equipment, restoration efforts, and power (i.e., whether they are using commercial power or back-up power).  Communications providers can access DIRS at https://www.fcc.gov/nors/disaster/.  Providers that have not previously done so will be asked to first provide contact information and obtain a User ID when they access DIRS.  Communications providers are reminded that for providers that participate in DIRS, the separate Network Outage Reporting System obligations are suspended for the duration of the DIRS activation with respect to outages in the counties where DIRS has been activated.  Reports are requested by 10:00 a.m. EDT, Friday, October 30, 2020, and every day after that by 10:00 a.m. EDT until DIRS is deactivated. 
+
+Communications providers that serve an area listed below and that have already provided contact information in DIRS will be sent an e-mail requesting that they provide the above-referenced status information through DIRS.  The Commission encourages all communications providers that have not already logged onto DIRS to input their contact information do so as soon as possible.
+
+THE ADDITIONAL COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE:
+
+North Carolina:  Alamance, Alexander, Alleghany, Anson, Ashe, Avery, Buncombe, Burke, Cabarrus, Caldwell, Caswell, Catawba, Chatham, Cherokee, Clay, Cleveland, Davidson, Davie, Durham, Eastern Band of Cherokee Indians and Jackson, For DIRS reporting, combine status for Eastern Band of Cherokee Indians and Jackson as a single entry for Jackson County 
+ Edgecombe, Forsyth, Franklin, Gaston, Graham, Granville, Guilford, Halifax, Harnett, Haywood, Henderson, Iredell, Johnston, Lee, Lincoln, Macon, Madison, McDowell, Mecklenburg, Mitchell, Montgomery, Moore, Nash, Northampton, Orange, Person, Polk, Randolph, Richmond, Rockingham, Rowan, Rutherford, Scotland, Stanly, Stokes, Surry, Swain, Transylvania, Union, Vance, Wake, Warren, Watauga, Wilkes, Wilson, Yadkin, Yancey
+
+South Carolina: Cherokee, Greenville, Oconee, Pickens, Spartanburg, York
+
+COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE THE FOLLOWING:
+
+Alabama: Autauga, Baldwin, Bibb, Bullock, Butler, Calhoun, Chambers, Cherokee, Chilton, Choctaw, Clarke, Clay, Cleburne, Coffee, Conecuh, Coosa, Covington, Crenshaw, Dallas, DeKalb, Elmore, Escambia, Etowah, Greene, Hale, Jefferson, Lee, Lowndes, Macon, Marengo, Mobile, Monroe, Montgomery, Perry, Pickens, Pike, Randolph, Shelby, St. Clair, Sumter, Talladega, Tallapoosa, Tuscaloosa, Washington, Wilcox
+
+Florida: Escambia, Santa Rosa 
+
+Georgia: Banks, Bartow, Carroll, Catoosa, Chattooga, Cherokee, Clayton, Cobb, Coweta, Dade, Dawson, DeKalb, Douglas, Fannin, Fayette, Floyd, Forsyth, Franklin, Fulton, Gilmer, Gordon, Gwinnett, Habersham, Hall, Haralson, Heard, Jackson, Lumpkin, Murray, Paulding, Pickens, Polk, Rabun, Stephens, Towns, Troup, Union, Walker, White, Whitfield
+
+Louisiana: Ascension, Assumption, East Baton Rouge, East Feliciana, Iberia, Iberville, Jefferson, Lafourche, Livingston, Orleans, Plaquemines, St. Bernard, St. Charles, St. Helena, St. James, St. John the Baptist, St. Martin, St. Mary, St. Tammany, Tangipahoa, Terrebonne, Washington, West Baton Rouge
+
+Mississippi: Amite, Clarke, Covington, Forrest, George, Greene, Hancock, Harrison, Jackson, Jasper, Jefferson Davis, Jones, Kemper, Lamar, Lauderdale, Lawrence, Lincoln, Marion, Noxubee, Pearl River, Perry, Pike, Simpson, Smith, Stone, Walthall, Wayne
+
+North Carolina:  Alamance, Alexander, Alleghany, Anson, Ashe, Avery, Buncombe, Burke, Cabarrus, Caldwell, Caswell, Catawba, Chatham, Cherokee, Clay, Cleveland, Davidson, Davie, Durham, Eastern Band of Cherokee Indians and Jackson,2 Edgecombe, Forsyth, Franklin, Gaston, Graham, Granville, Guilford, Halifax, Harnett, Haywood, Henderson, Iredell, Johnston, Lee, Lincoln, Macon, Madison, McDowell, Mecklenburg, Mitchell, Montgomery, Moore, Nash, Northampton, Orange, Person, Polk, Randolph, Richmond, Rockingham, Rowan, Rutherford, Scotland, Stanly, Stokes, Surry, Swain, Transylvania, Union, Vance, Wake, Warren, Watauga, Wilkes, Wilson, Yadkin, Yancey
+
+South Carolina: Cherokee, Greenville, Oconee, Pickens, Spartanburg, York
+
+The FCC continues to monitor the storm and may amend the DIRS activation area in the coming days.
+
+For further information, please contact:
+ 
+Julia Tu (202) 418-0731, 202-321-4399 (cell), julia.tu@fcc.gov
+Michael Caiafa (202) 418-1311, (202) 277-5690 (cell), michael.caiafa@fcc.gov
+David Ahn (571) 232-8487 (cell), (202) 418-0853, david.ahn@fcc.gov
+FCC 24/7 Operations Center – 202-418-1122
+
+
+
+- FCC -
+       
+2
+

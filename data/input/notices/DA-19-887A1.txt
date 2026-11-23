@@ -1,0 +1,24 @@
+﻿	Federal Communications Commission	DA 19-887
+
+
+DA 19-887
+Released:  September 6, 2019
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM FOR HURRICANE DORIAN
+
+DIRS deactivated for all counties Georgia
+DIRS remains active in North Carolina and South Carolina
+
+At the request of the Department of Homeland Security, National Coordinating Center for Communications, and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas:
+Georgia:  Appling, Atkinson, Bacon, Brantley, Bryan, Bulloch, Burke, Camden, Candler, Charlton, Chatham, Clinch, Coffee, Echols, Effingham, Emanuel, Evans, Glynn, Jeff Davis, Jenkins, Liberty, Long, Mcintosh, Montgomery, Pierce, Richmond, Screven, Tattnall, Telfair, Toombs, Ware, Wayne and Wheeler
+Communications providers do not need to provide any additional reporting in DIRS for these areas in Georgia with respect to Hurricane Dorian.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+DIRS remains activated in the following areas:
+North Carolina:  Beaufort, Bertie, Bladen, Brunswick, Camden, Carteret, Chowan, Columbus, Craven, Cumberland, Currituck, Dare, Duplin, Edgecombe, Gates, Greene, Halifax, Hertford, Hoke, Hyde, Johnston, Jones, Lenoir, Martin, New Hanover, Onslow, Pamlico, Pasquotank, Pender, Perquimans, Pitt, Robeson, Sampson, Scotland, Tyrrell, Washington, Wayne and Wilson
+South Carolina:  Aiken, Allendale, Bamberg, Barnwell, Beaufort, Berkeley, Calhoun, Charleston, Clarendon, Colleton, Darlington, Dillon, Dorchester, Florence, Georgetown, Hampton, Horry, Jasper, Lee, Lexington, Marion, Marlboro, Orangeburg, Richland, Sumter and Williamsburg
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Dorian.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Dorian.
+All FCC releases in connection with Hurricane Dorian may be found at https://www.fcc.gov/dorian
+For further information, please contact John Healy of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at (215) 847-8094 or John.Healy@fcc.gov.  
+
+- FCC -
+2

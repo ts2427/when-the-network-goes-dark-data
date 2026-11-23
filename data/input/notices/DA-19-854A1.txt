@@ -1,0 +1,28 @@
+﻿	Federal Communications Commission	"FCC/DA  XX-XXX"
+
+
+
+DA 19-854
+Released:  August 29, 2019
+
+THE FCC’S PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM
+ IN PUERTO RICO AND U.S. VIRGIN ISLANDS FOR HURRICANE DORIAN
+
+
+	At the request of the U.S. Department of Homeland Security’s National Coordinating Center for Communications and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) for Hurricane Dorian in Puerto Rico and the U.S. Virgin Islands. DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers can use to report communications infrastructure status and situational awareness information during times of crisis.
+  Communications providers do not need to provide any additional reporting in DIRS in connection with this portion of Hurricane Dorian.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners as needed to support remaining restoration efforts.  
+
+There is a strong possibility that DIRS will be reactivated for Hurricane Dorian if current projections concerning the path and intensity of this storm are correct.
+
+The FCC appreciates the cooperation of all the communications providers that voluntarily submitted data to DIRS for Hurricane Dorian in Puerto Rico and the U.S. Virgin Islands.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  
+
+	For further information, please contact John Healy of the PSHSB’s Cybersecurity and Communications Reliability Division at (215) 847-8094 or John.Healy@fcc.gov.  
+
+
+
+
+- FCC -
+       
+
+
+2

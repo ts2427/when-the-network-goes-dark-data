@@ -1,0 +1,92 @@
+﻿
+
+Communications Status Report for 
+Areas Impacted by Hurricane Isaias
+
+October 12, 2026
+
+This report provides information on the status of communications services in geographic areas impacted by Hurricane Isaias as of 9:00 a.m. EDT on October 12, 2026.  This report incorporates network outage data submitted by communications providers to the Federal Communications Commission’s (FCC) Disaster Information Reporting System (DIRS). On October 8, 2026 the Commission activated the Disaster Information Reporting System for communications impacted by the severe related to Hurricane Isaias. 
+  We note that the operational status of communications services may evolve rapidly during a disaster.  The FCC will provide daily updates to this report until the DIRS data collection is deactivated for this region. 
+
+On October 10, 2026, the DIRS data collection was expanded to include Geneva County in Alabama for Hurricane Isaias.
+
+The following counties and municipalities are in the current geographic area that is part of the DIRS activation area (the “disaster area”) for today’s report.
+
+Alabama: Baldwin, Butler, Choctaw, Clarke, Conecuh, Covington, Crenshaw, Escambia, Geneva, Mobile, Monroe, and Washington.
+
+Florida: Baker, Bay, Calhoun, Columbia, Dixie, Escambia, Franklin, Gadsden, Gilchrist, Gulf, Hamilton, Holmes, Jackson, Jefferson, Lafayette, Leon, Liberty, Madison, Okaloosa, Santa Rosa, Suwannee, Taylor, Wakulla, Walton, and Washington.
+
+Mississippi: George, Greene, Hancock, Harrison, Jackson, Pearl River, and Stone.
+
+
+
+911 Services 
+
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of communications services provided to each Public Safety Answering Point (PSAP) through the filings of 911 Service Providers in the DIRS, reporting to the FCC’s Public Safety Support Center, coordination with state and territory 911 Administrators, and, if necessary, direct contact with individual PSAPs.
+
+There are no PSAPs reported in the DIRS as being affected.
+
+Wireless Services
+
+The following section describes the status of wireless communications services in the disaster area as reported in the DIRS. 
+
+
+
+The following table provides information on cell sites out of service by county.  Overall, there is 1.8% (down from 9.8% yesterday) of the cell sites in the affected area reported in the DIRS as being out of service.
+
+
+Alabama:
+
+StateAffected CountiesCell Sites ServedCell Sites OutPercent OutCell Sites Out Due to DamageCell Sites Out Due to TransportCell Sites Out Due to PowerCell Sites Up but On Back-up PowerALBALDWIN29410.3%00124ALBUTLER5100%00010ALCHOCTAW4100%0003ALCLARKE5000%0008ALCONECUH33515.2%01314ALCOVINGTON5835.2%0039ALCRENSHAW3600%0002ALESCAMBIA6569.2%12213ALGENEVA5523.6%00218ALMOBILE41410.2%00117ALMONROE3738.1%10111ALWASHINGTON3900%0003TOTAL-1173211.8%2313132
+There is 1.8% (down from 11.5% yesterday) reported in the DIRS as being out of service in the areas of Alabama impacted by Hurricane Isaias. 
+
+Florida:
+
+StateAffected CountiesCell Sites ServedCell Sites OutPercent OutCell Sites Out Due to DamageCell Sites Out Due to TransportCell Sites Out Due to PowerCell Sites Up but On Back-up PowerFLBAKER2800%0001FLBAY38400%00020FLCALHOUN2600%0002FLCOLUMBIA8500%0001FLDIXIE2900%0001FLESCAMBIA408286.9%2141266FLFRANKLIN2900%0001FLGADSDEN6800%0002FLGILCHRIST2400%0000FLGULF2700%0001FLHAMILTON3000%0000FLHOLMES3100%00013FLJACKSON7800%0005FLJEFFERSON4000%0005FLLAFAYETTE1600%0000FLLEON34500%0009FLLIBERTY1700%0000FLMADISON3900%0000FLOKALOOSA18542.2%01322FLSANTA ROSA1601610%041244FLSUWANNEE5300%0001FLTAYLOR4400%0000FLWAKULLA4300%0002FLWALTON14564.1%13124FLWASHINGTON4800%0009TOTAL-2382542.3%32228229
+There is 2.3% (down from 11.0% yesterday) reported in the DIRS as being out of service in the areas of Florida impacted by Hurricane Isaias. 
+
+
+Mississippi:
+
+StateAffected CountiesCell Sites ServedCell Sites OutPercent OutCell Sites Out Due to DamageCell Sites Out Due to TransportCell Sites Out Due to PowerCell Sites Up but On Back-up PowerMSGEORGE3700%0000MSGREENE4000%0002MSHANCOCK5500%0000MSHARRISON19100%0000MSJACKSON11900%0001MSPEARL RIVER7200%0000MSSTONE2000%0001TOTAL-53400%0004
+There is 0.0% (down from 0.7% yesterday) of the cell sites reported in the DIRS as being out of service in the areas of Mississippi impacted by Hurricane Isaias. 
+
+
+The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take other actions to maintain service to affected consumers during emergencies or other events that result in cell site outages. 
+
+
+Cable Systems and Wireline (Combined)
+
+Cable and wireline companies reported in the DIRS that there are 155,813 (down from 193,964 yesterday) subscribers out of service in the disaster area.  This includes the loss of telephone, television, and/or Internet services.  
+
+
+Broadcast: 
+
+Television station status: 
+
+· There is 1 TV station reported in the DIRS as being out of service.
+
+FM Radio station status: 
+
+· There are 3 FM stations reported in the DIRS as being out of service.
+
+AM Radio station status:  
+
+· There are no AM stations reported in the DIRS as being out of service.  
+
+
+Mandatory Disaster Response Initiative
+
+The Mandatory Disaster Response Initiative was activated for Hurricane Isaias response activities on October 8, 2026.  As a reminder, all facilities-based mobile wireless providers operating in the above-referenced areas are hereby notified and required to: (1) provide for reasonable roaming under disaster arrangements when technically feasible; See 47 CFR § 4.17(a)(3)(i) (detailing criteria for activating roaming under disaster arrangements).  
+ (2) activate mutual aid arrangements with other facilities-based mobile wireless providers for providing aid upon request to those providers during emergencies; See 47 CFR § 4.17(a)(3)(ii) (explaining what mutual aid arrangements must include).  
+ (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. 47 CFR § 4.17(a)(3)(i)-(v); see also FCC, Wireless Network Resiliency During Disasters (June 4, 2024), https://www.fcc.gov/wireless-network-resiliency-during-disasters.  
+ 
+
+
+Special Temporary Authority (STA)/Waivers/Extensions
+
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, as well as waivers to support emergency communications and service restoration, or to provide relief.
+
+· On Thursday, October 8, 2026, the Wireless Telecommunications Bureau, Mobility Division, conditionally granted Federated Wireless, Inc.’s request for a precautionary, limited, and conditional emergency waiver of certain Commission rules governing the Citizens Broadband Radio Service in response to Hurricane Isaias. More information on this emergency waiver for relief can be accessed using the following link(s): DA-26-1095A1.docx , DA-26-1095A1.pdf , DA-26-1095A1.txt.
+
+

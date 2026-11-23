@@ -1,0 +1,60 @@
+﻿	Federal Communications Commission	DA 26-XXX
+
+
+
+DA 26-1103
+Released:  October 10, 2026
+
+THE FEDERAL COMMUNICATIONS COMMISSION ANNOUNCES THE EXPANSION OF THE ACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM AND THE MANDATORY DISASTER RESPONSE INTITIATIVE IN RESPONSE TO HURRICANE ISAIAS
+
+The Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission) is expanding its disaster data collection to include Geneva County in Alabama.
+
+On October 8, 2026, PSHSB, at the request of the States of Alabama, Florida, and Mississippi and in coordination with the Federal Emergency Management Agency (FEMA), announced the activation of the Disaster Information Reporting System (DIRS) and the Mandatory Disaster Response Initiative (MDRI) in counties and independent municipalities impacted by Hurricane Isaias. The Federal Communications Commission Announces the Activation of the Disaster Information Reporting System (DIRS) and the Mandatory Disaster Response Initiative (MDRI) for Communications Impacts from Hurricane Isaias, Public Notice DA 26-1091 (PSHSB) (rel. October 8, 2026).
+  The State of Alabama has asked that the Commission expand the data collection to include Geneva County with initial reports due on Sunday, October 11, 2026. 
+
+DIRS is a web-based system that communications providers, including wireless, wireline, broadcast, cable, and interconnected Voice over Internet Protocol (VoIP) providers use to report communications infrastructure status and situational awareness information during times of crisis.
+
+PSHSB requests that communications providers that provide service to any areas listed above expeditiously submit and update information through DIRS regarding, inter alia, the status of their communications equipment, restoration efforts, and power (i.e., whether they are using commercial power or back-up power).  Communications providers can accomplish this by accessing DIRS at https://www.dirs.fcc.gov.  Providers that have not previously done so will be asked to first provide contact information and obtain a User ID when they access DIRS.  There is a link on the login page that will allow a new user to obtain a User ID and a password.  If a user does not remember their password, they should use the forgotten password link on the login page.  If a user has any problems accessing DIRS, please reach out to any of the contact numbers listed below.
+
+In the DIRS, this activation has the following name: Hurricane Isaias.  DIRS reports are due each day by 10:00 a.m. (EDT) until DIRS is deactivated.   Cable communications providers, wireless service providers, wireline communications providers, and interconnected VoIP providers are not required to make submissions in the Network Outage Reporting System (NORS) pertaining to any incidents that arise during the DIRS activation that are timely reported in DIRS. See 47 CFR § 4.18(b).
+  To promote a comprehensive and effective disaster response, PSHSB encourages other communications providers to voluntarily report in DIRS using forms applicable to their infrastructure.
+
+MDRI EXPANDED TO INCLUDE GUAM:
+
+As a result of PSHSB’s expansion of the DIRS activation area, the MDRI has also been expanded to include Geneva County in Alabama in response to Hurricane Isaias.
+
+Upon the release of this Public Notice, all facilities-based mobile wireless providers operating in such areas are required to: (1) provide for reasonable roaming under disaster arrangements when technically feasible; (2) activate mutual aid arrangements with other facilities-based mobile wireless providers; (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. 47 CFR § 4.17(a)(3)(i)-(v); see also FCC, Wireless Network Resiliency During Disasters (June 4, 2024), https://www.fcc.gov/wireless-network-resiliency-during-disasters.
+
+
+Facilities-based mobile wireless providers that serve the above-referenced areas and that have provided contact information in DIRS will be individually notified that the MDRI has been activated in their area.
+
+PSHSB will announce when the MDRI has been deactivated by subsequent Public Notice.  Providers should familiarize themselves with the Commission’s MDRI requirements. 47 CFR § 4.17.
+  Details on the Mandatory Disaster Response Initiative can be found on the Commission’s website at https://www.fcc.gov/wireless-network-resiliency-during-disasters.
+
+DIRS AND THE MDRI REMAIN ACTIVATED IN THE FOLLOWING GEOGRAPHIC AREAS:
+
+State of Alabama: Baldwin, Butler, Choctaw, Clarke, Conecuh, Covington, Crenshaw, Escambia, Mobile, Monroe, and Washington. 
+
+State of Florida: Baker, Bay, Calhoun, Columbia, Dixie, Escambia, Franklin, Gadsden, Gilchrist, Gulf, Hamilton, Holmes, Jackson, Jefferson, Lafayette, Leon, Liberty, Madison, Okaloosa, Santa Rosa, Suwannee, Taylor, Wakulla, Walton, and Washington. 
+
+State of Mississippi: George, Greene, Hancock, Harrison, Jackson, Pearl River, and Stone.
+
+Please continue to provide information to the Commission for the impacted geographic areas that are already located in the disaster area.
+
+The Commission continues to monitor this event and may amend the DIRS or the MDRI activation area in the coming days.
+
+For further information on this DIRS activation, please contact:
+
+Michael Caiafa, (202) 418-1311, michael.caiafa@fcc.gov
+Juan Chapa, (202) 418-0431, juan.chapa@fcc.gov
+John Healy, (215) 847-8094, john.healy@fcc.gov
+FCC 24/7 Operations Center, (202) 418-1122, FCCOPS@fcc.gov
+
+For further information concerning this MDRI activation, please contact:
+
+Justin Cain, (202) 853-7365, (202) 418-2924, justin.cain@fcc.gov
+Logan Bennett, (202) 418-7790, logan.bennett@fcc.gov
+FCC 24/7 Operations Center, (202) 418-1122, FCCOPS@fcc.gov
+
+For more information on the Commission’s response to Hurricane Isaias, please visit https://www.fcc.gov/isaias. 
+2

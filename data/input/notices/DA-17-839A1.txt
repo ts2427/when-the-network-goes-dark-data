@@ -1,0 +1,53 @@
+PUBLIC NOTICE
+Federal Communications Commission
+445 12
+th
+St., S.W.
+Washington, D.C. 20554
+News Media Information 202 / 418-0500
+Internet: http://www.fcc.gov
+TTY: 1-888-835-5322
+DA 17-839
+Released: September 2, 2017
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES THAT THE 
+DISASTER INFORMATION REPORTING SYSTEM IS DEACTIVATED
+IN LOUISIANA AND ALL COUNTIES IN TEXAS EXCEPT ARANSAS, CALHOUN, 
+CHAMBERS, HARDIN, HARRIS, JEFFERSON, MATAGORDA, NUECES, ORANGE, 
+REFUGIO, SAN PATRICIO, VICTORIA, AND WHARTON 
+The Federal Communications Commission’s (FCC) Public Safety and Homeland 
+Security Bureau today has deactivated the Disaster Information Reporting System (DIRS)
+1
+for 
+Hurricane Harvey for all counties in Louisiana and Texas, except the Texas counties of Aransas, 
+Calhoun, Chambers, Hardin, Harris, Jefferson, Matagorda, Nueces, Orange, Refugio, San 
+Patricio, Victoria, and Wharton.  The FCC, in coordination with the Department of Homeland 
+Security (DHS) National Coordinating Center (NCC) and Federal Emergency Management 
+Agency (FEMA), activated the DIRS on August 25, 2017 to receive information on the status of 
+communications equipment in 55 counties in Louisiana and Texas. The disaster area was later
+extended on August 31, 2017 to nine additional counties in Texas.
+For those counties where DIRS remains activated, the Commission requests that 
+communications providers expeditiously submit and update information through DIRS 
+regarding, inter alia, the status of their communications equipment, restoration efforts, power 
+(i.e., whether they are using commercial power, generator or battery), and access to fuel, if they 
+provide service to any areas listed below.  Communications providers can accomplish this by 
+accessing DIRS at https://www.fcc.gov/nors/disaster/ or PSHSB webpage (www.fcc.gov/pshs).  
+Reports are requested at 10:00 a.m. on Sunday, September 3 and every day after that by 10:00 
+a.m. until DIRS is deactivated. Note that NORS reporting obligations are suspended when 
+companies report in DIRS.
+        Communications providers that serve an area listed below and that have already provided 
+contact information in DIRS have been sent an e-mail requesting that they provide the above-
+referenced status information through DIRS.  We encourage all communications providers that 
+have not already logged onto DIRS to input their contact information, to do so as soon as
+possible.
+                                                     
+1
+DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice 
+over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information 
+during times of crisis.
+2The counties where DIRS remains active are:
+Texas: Aransas, Calhoun, Chambers, Hardin, Harris, Jefferson, Matagorda, Nueces, Orange, 
+Refugio, San Patricio, Victoria, and Wharton
+Note that if providers do not provide service in these counties, they do not need to report.
+        For further information, please contact John Healy of the PSHSB’s Cybersecurity and 
+Communications Reliability Division at (215) 847-8094 or John.Healy@fcc.gov.  
+       

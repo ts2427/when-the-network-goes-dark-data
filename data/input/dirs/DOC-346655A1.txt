@@ -1,0 +1,345 @@
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+Communications Status Report for  
+Areas Impacted by Hurricane Irma  
+September 11, 2017 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Hurricane Irma as of September 11, 2017 at 11:00 AM EDT.  This report incorporates network outage 
+data submitted by communications providers to the Federal Communications Commission’s Disaster 
+Information Reporting System (DIRS).  DIRS is currently activated for all areas of Florida, Puerto Rico and 
+the U.S. Virgin Islands.  Note that the operational status of communications services during a disaster 
+may evolve rapidly, and this report represents a snapshot in time.  It should also be noted that not all 
+communications providers have reported in DIRS, so some outage information may not be complete. 
+ 
+The following counties are in the geographic area that was covered by the DIRS activation as of this 
+morning (the “disaster area”).   
+ 
+Florida:  Alachua, Baker, Bay, Bradford, Brevard, Broward, Calhoun, Charlotte, Citrus, Clay, 
+Collier, Columbia, Desoto, Dixie, Duval, Escambia, Flagler, Franklin, Gadsden, Gilchrist, Glades, 
+Gulf, Hamilton, Hardee, Hendry, Hernando, Highlands, Hillsborough, Holmes, Indian River, 
+Jackson, Jefferson, Lafayette, Lake, Lee, Leon, Levy, Liberty, Madison, Manatee, Marion, Martin, 
+Miami-Dade, Monroe, Nassau, Okaloosa, Okeechobee, Orange, Osceola, Palm Beach, Pasco, 
+Pinellas, Polk, Putnam, Santa Rosa, Sarasota, Seminole, St. Johns, St. Lucie, Sumter, Suwannee, 
+Taylor, Union, Volusia, Wakulla, Walton, Washington 
+Puerto Rico:  Adjuntas, Aguada, Aguadilla, Aguas Buenas, Aibonito, Anasco, Arecibo, Arroyo, 
+Barceloneta, Barranquitas, Bayamon, Cabo Rojo, Caguas, Camuy, Canovanas, Carolina, Catano, 
+Cayey, Ceiba, Ciales, Cidra, Coamo, Comerio, Corozal, Culebra, Dorado, Fajardo, Florida, 
+Guanica, Guayama, Guayanilla, Guaynabo, Gurabo, Hatillo, Hormigueros, Humacao, Isabela, 
+Jayuya, Juana Diaz, Juncos, Lajas, Lares, Las Marias, Las Piedras, Loiza, Luquillo, Manati, Maricao, 
+Maunabo, Mayaguez, Moca, Morovis, Naguabo, Naranjito, Orocovis, Patillas, Penuelas, Ponce, 
+Quebradillas, Rincon, Rio Grande, Sabana Grande, Salinas, San German, San Juan, San Lorenzo, 
+San Sebastian, Santa Isabel, Toa Alta, Toa Baja, Trujillo Alto, Utuado, Vega Alta, Vega Baja, 
+Vieques, Villalba, Yabucoa, Yauco 
+U.S. Virgin Islands:  St. Croix, St. John, St. Thomas 
+ 
+911 Services  
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety 
+Answering Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public 
+Safety Support Center (PSSC), coordination with state 911 Administrators, and, if necessary, from 
+individual PSAPs. 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+There are a total of 27 PSAPs affected in the reporting area in Florida and 2 PSAPs affected in the US 
+Virgin Islands.  
+ 
+In Florida:  
+ 
+? Down with no re-routes:  14 (Big Cypress Indian Reservation, Collier County EOC, Ft. Myers 
+Police Department, Glades County Sheriff, Glades County Sheriff Back Up, Hardee County Back 
+Up, Hendry County Sheriff, Highlands County Sheriff, Lee County Emergency Dispatch Center 
+EOC, Naples PD, Okeechobee County Sheriff’s Department, Homestead Air Force, Marathon SO, 
+and Ocean Reef) 
+? Up without Automatic Location Information (ALI):  2 (Hardee County Sheriff and Lee County 
+Sheriff) 
+? Re-routed with ALI:  7 (Atlantic Beach PD, Belle Glade PD, Indian River SO, Manalapan PD, 
+Miami Beach PD, Neptune Beach PD, and St. Augustine PD) 
+? Re-routed without ALI:  4 (Clewiston Police Department, Desoto County Sheriff, Lee County 
+Backup, and Sanibel Police Department) 
+ 
+In addition, the Broward County South Region, FL PSAP lost power as of 9/10/17 at 2:28PM EDT.  CPE 
+equipment is unavailable.  We do not know if 911 calls are being rerouted. 
+ 
+In the U.S. Virgin Islands: Both PSAPs are operational without ALI or Automatic Numbering Information 
+(ANI). 
+ 
+ 
+ 
+Wireless Services 
+The following section describes the status of wireless communications services and restoration in the 
+disaster area, including the percentage of cell sites out of service for each county. 
+ 
+The following maps of the disaster area illustrate which counties in Florida and Puerto Rico are most 
+affected: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+ 
+ 
+ 
+Florida: 
+ 
+ 
+Puerto Rico: 
+  
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+ 
+ 
+The tables below provide the percentage of cell sites out of service by county per state or territory.  
+Florida: Overall, 27.4% of the cell sites in the disaster area are out of service. 
+Puerto Rico/U.S. Virgin Islands:  Overall, 21.5% (down from 26.9% yesterday) of the cell sites in 
+the disaster area are out of service.  19.4% (down from 25% yesterday) of cell sites are out of 
+service in Puerto Rico, and 55.1% (down from 57.9%) of cell sites are out of service in the U.S. 
+Virgin Islands.   
+50% or more of cell sites are out of service in the following counties:   
+Florida:  Collier, Hendry, Highlands, Lee, Miami-Dade, and Monroe. 
+ 
+Puerto Rico:  Aguas Buenas, Corozal, Culebra, Fajardo, Juncos, Luquillo, Morovis and Jayuya 
+ 
+US Virgin Islands:  St. John and St. Thomas 
+ 
+The information shown was provided by the signatories to the Wireless Resiliency Cooperative 
+Framework and several additional companies that agreed to allow us to include their data in the 
+aggregated data: 
+ 
+Florida: 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+FL ALACHUA 279 36 12.9% 
+FL BAKER 22 1 4.5% 
+FL BAY 208 0 0.0% 
+FL BRADFORD 22 2 9.1% 
+FL BREVARD 316 117 37.0% 
+FL BROWARD 924 443 47.9% 
+FL CALHOUN 15 0 0.0% 
+FL CHARLOTTE 123 36 29.3% 
+FL CITRUS 111 24 21.6% 
+FL CLAY 178 34 19.1% 
+FL COLLIER 212 160 75.5% 
+FL COLUMBIA 73 7 9.6% 
+FL DESOTO 34 10 29.4% 
+FL DIXIE 18 2 11.1% 
+FL DUVAL 798 150 18.8% 
+FL ESCAMBIA 186 0 0.0% 
+FL FLAGLER 86 16 18.6% 
+FL FRANKLIN 28 12 42.9% 
+FL GADSDEN 62 0 0.0% 
+FL GILCHRIST 13 0 0.0% 
+FL GLADES 30 11 36.7% 
+FL GULF 22 0 0.0% 
+FL HAMILTON 18 1 5.6% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+FL HARDEE 39 15 38.5% 
+FL HENDRY 46 31 67.4% 
+FL HERNANDO 117 23 19.7% 
+FL HIGHLANDS 80 42 52.5% 
+FL HILLSBOROUGH 1,140 191 16.8% 
+FL HOLMES 21 0 0.0% 
+FL INDIAN RIVER 105 41 39.0% 
+FL JACKSON 60 0 0.0% 
+FL JEFFERSON 41 3 7.3% 
+FL LAFAYETTE 14 1 7.1% 
+FL LAKE 218 48 22.0% 
+FL LEE 343 186 54.2% 
+FL LEON 304 3 1.0% 
+FL LEVY 76 9 11.8% 
+FL LIBERTY 9 0 0.0% 
+FL MADISON 37 7 18.9% 
+FL MANATEE 239 57 23.8% 
+FL MARION 274 51 18.6% 
+FL MARTIN 123 47 38.2% 
+FL MIAMI-DADE 1,435 739 51.5% 
+FL MONROE 108 87 80.6% 
+FL NASSAU 107 16 15.0% 
+FL OKALOOSA 194 0 0.0% 
+FL OKEECHOBEE 70 20 28.6% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+FL ORANGE 1,054 191 18.1% 
+FL OSCEOLA 237 61 25.7% 
+FL PALM BEACH 726 311 42.8% 
+FL PASCO 321 53 16.5% 
+FL PINELLAS 596 145 24.3% 
+FL POLK 481 137 28.5% 
+FL PUTNAM 88 20 22.7% 
+FL ST. JOHNS 251 50 19.9% 
+FL ST. LUCIE 195 52 26.7% 
+FL SANTA ROSA 135 0 0.0% 
+FL SARASOTA 244 87 35.7% 
+FL SEMINOLE 314 72 22.9% 
+FL SUMTER 78 18 23.1% 
+FL SUWANNEE 56 5 8.9% 
+FL TAYLOR 51 6 11.8% 
+FL UNION 13 0 0.0% 
+FL VOLUSIA 491 86 17.5% 
+FL WAKULLA 38 0 0.0% 
+FL WALTON 120 0 0.0% 
+FL WASHINGTON 35 0 0.0% 
+TOTAL 
+ 
+14,502 3,973 27.4% 
+ 
+ 
+Puerto Rico: 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+PR AGUADILLA 34 0 0.0% 
+PR AGUAS BUENAS 11 8 72.7% 
+PR ARECIBO 43 5 11.6% 
+PR BARCELONETA 15 2 13.3% 
+PR BAYAMON 103 17 16.5% 
+PR CAGUAS 67 14 20.9% 
+PR CAMUY 11 1 9.1% 
+PR CANOVANAS 20 6 30.0% 
+PR CAROLINA 86 17 19.8% 
+PR CATANO 14 0 0.0% 
+PR CEIBA 8 2 25.0% 
+PR COROZAL 12 6 50.0% 
+PR CULEBRA 5 4 80.0% 
+PR DORADO 28 3 10.7% 
+PR FAJARDO 25 17 68.0% 
+PR FLORIDA 4 0 0.0% 
+PR GUAYNABO 66 19 28.8% 
+PR GURABO 22 3 13.6% 
+PR HATILLO 19 4 21.1% 
+PR HUMACAO 29 3 10.3% 
+PR ISABELA 20 2 10.0% 
+PR JUNCOS 14 8 57.1% 
+PR LAS PIEDRAS 12 1 8.3% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+PR LOIZA 7 3 42.9% 
+PR LUQUILLO 9 5 55.6% 
+PR MANATI 21 2 9.5% 
+PR MAUNABO 8 0 0.0% 
+PR MOROVIS 11 7 63.6% 
+PR NAGUABO 16 5 31.3% 
+PR NARANJITO 15 7 46.7% 
+PR QUEBRADILLAS 13 1 7.7% 
+PR RIO GRANDE 29 12 41.4% 
+PR SAN JUAN 249 92 36.9% 
+PR SAN LORENZO 13 6 46.2% 
+PR TOA ALTA 31 5 16.1% 
+PR TOA BAJA 40 7 17.5% 
+PR TRUJILLO ALTO 31 6 19.4% 
+PR VEGA ALTA 22 6 27.3% 
+PR VEGA BAJA 25 1 4.0% 
+PR VIEQUES 8 3 37.5% 
+PR YABUCOA 17 4 23.5% 
+PR ADJUNTAS 5 0 0.0% 
+PR AGUADA 11 0 0.0% 
+PR AIBONITO 13 1 7.7% 
+PR ANASCO 9 0 0.0% 
+PR ARROYO 6 0 0.0% 
+PR BARRANQUITAS 8 0 0.0% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+PR CABO ROJO 34 0 0.0% 
+PR CAYEY 26 2 7.7% 
+PR CIALES 9 2 22.2% 
+PR CIDRA 16 1 6.3% 
+PR COAMO 11 1 9.1% 
+PR COMERIO 13 4 30.8% 
+PR GUANICA 9 0 0.0% 
+PR GUAYAMA 16 0 0.0% 
+PR GUAYANILLA 5 0 0.0% 
+PR HORMIGUEROS 8 0 0.0% 
+PR JAYUYA 4 3 75.0% 
+PR JUANA DIAZ 21 0 0.0% 
+PR LAJAS 11 0 0.0% 
+PR LARES 6 0 0.0% 
+PR LAS MARIAS 5 1 20.0% 
+PR MARICAO 3 0 0.0% 
+PR MAYAGUEZ 44 0 0.0% 
+PR MOCA 9 0 0.0% 
+PR OROCOVIS 8 3 37.5% 
+PR PATILLAS 10 0 0.0% 
+PR PENUELAS 12 1 8.3% 
+PR PONCE 74 3 4.1% 
+PR RINCON 10 0 0.0% 
+PR SABANA GRANDE 7 0 0.0% 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+PR SALINAS 23 0 0.0% 
+PR SAN GERMAN 13 0 0.0% 
+PR SAN SEBASTIAN 13 0 0.0% 
+PR SANTA ISABEL 11 0 0.0% 
+PR UTUADO 10 2 20.0% 
+PR VILLALBA 4 0 0.0% 
+PR YAUCO 13 0 0.0% 
+TOTAL 
+ 
+1,743 338 19.4% 
+ 
+ 
+ 
+ 
+ 
+Virgin Islands: 
+ 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+VI ST. CROIX 40 9 22.5% 
+VI ST. JOHN 10 9 90.0% 
+VI ST. THOMAS 57 41 71.9% 
+TOTAL 
+ 
+107 59 55.1% 
+ 
+ 
+Cable Systems and Wireline (Combined) 
+ 
+There are at least 7,597,945 subscribers out of service in the affected area in Florida.  This includes users 
+who get service from cable system or wireline providers.  There are a total of 390 non-mobile switching 
+centers out in Florida. 
+ 
+Since there are widespread power outages in Puerto Rico and the U.S. Virgin Islands, the FCC has 
+received reports that large percentages of consumers are without either cable services or wireline 
+service.  Companies are actively working to restoring service. 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 11, 2017 11:30 a.m. 
+ 
+Broadcast 
+ 
+TV stations out of service:  8  
+? Florida - WVFW, WZVN 
+? Puerto Rico - WOST, WMEI, WQQZ, and WWKQ (same as yesterday) 
+? U.S. Virgin Islands - WTJX-TV and W05AWD (same as yesterday) 
+ 
+Radio stations out of service:  26 
+? Florida:  W227CP, W300CL, W222AW, WROK, WAOA-FM, WHKR, WLZR, WIOD, WOLZ, WINZ, 
+WBTT, WCKT, WRUM, WQOL, WZZR, WSWN, WOTW, WMFQ, WXUS, WYCG, WEAT, WTIR, 
+WMYR, WCNZ, and W294AN 
+? U.S. Virgin Islands:  As was the case yesterday, WTJF-FM is the only radio station reporting out 
+of service. 
+ 

@@ -1,0 +1,36 @@
+﻿	
+DA 24-657
+Released:  July 8, 2024
+
+THE PUBLIC SAFETY AND HOMELAND SECURITY BUREAU ANNOUNCES THE ACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM FOR COMMUNICATIONS IMPACTED BY HURRICANE BERYL IN TEXAS
+
+The Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission), in coordination with the Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, has announced the activation of the Disaster Information Reporting System (DIRS) in response to communications impacted by Hurricane Beryl.  DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, and satellite providers can use to report communications infrastructure status and situational awareness information during times of crisis.
+
+	The Commission requests that communications providers that provide service to any areas listed below expeditiously submit and update information through DIRS regarding, inter alia, the status of their communications equipment, restoration efforts, and power (i.e., whether they are using commercial power or back-up power).  Communications providers can accomplish this by accessing DIRS at https://www.dirs.fcc.gov.  If any user has any problems accessing DIRS, please contact any of the numbers listed below.  
+
+In DIRS, this activation will have the following name: HURRICANE BERYL.  Communications providers are reminded that for providers that participate in DIRS, the separate Network Outage Reporting System (NORS) obligations are suspended for the duration of the DIRS activation with respect to outages in the municipalities where DIRS has been activated.  Reports are requested at 10:00 a.m. (CDT) on Tuesday, July 9th and every day after that by 10:00 a.m. (CDT) until DIRS is deactivated. 
+
+Communications providers that serve an area listed below and that have already provided contact information in DIRS will be sent an e-mail requesting that they provide the above-referenced status information through DIRS.  For any communications providers that have not already logged onto DIRS to input their contact information, the Commission encourages them to do so as soon as possible.
+
+COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE THE FOLLOWING COUNTIES IN TEXAS:
+
+Texas:  Brazoria, Chambers, Fort Bend, Galveston, Harris, and Matagorda
+
+The FCC continues to monitor this event and may amend the DIRS activation area in the coming days.
+
+For further information, please contact:
+ 
+Michael Caiafa (202) 418-1311, michael.caiafa@fcc.gov
+John Healy (215) 847-8094 john.healy@fcc.gov
+David Ahn (202) 418-0853, david.ahn@fcc.gov
+FCC 24/7 Operations Center – 202-418-1122
+
+For more information on the FCC’s response to Hurricane Beryl in Texas, please go to https://www.fcc.gov/beryl
+
+
+
+
+- FCC -
+       
+2
+

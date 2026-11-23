@@ -1,0 +1,32 @@
+﻿
+								DA 21-1166
+Released September 16, 2021
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANES IDA AND NICHOLAS
+
+DIRS deactivated in Texas and some counties in Louisiana.  DIRS remains active in twelve counties Louisiana.
+	
+At the request of the Department of Homeland Security, Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas affected by Hurricanes Ida and Nicholas:
+
+Louisiana: Acadia, Ascension, Assumption, Avoyelles, Calcasieu, Cameron, East Baton Rouge, East Feliciana, Evangeline, Iberia, Iberville, Jefferson Davis, Lafayette, Orleans, Pointe Coupee, St. Landry, St. Martin, St. Tammany, Vermilion, Washington, West Baton Rouge, West Feliciana
+
+Texas: Brazoria, Chambers, Fort Bend, Galveston, Hardin, Harris, Jefferson, Liberty, Matagorda, Orange, Wharton
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas in Louisiana and Texas with respect to Hurricanes Ida and Nicholas.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+	DIRS remains activated in the following counties in Louisiana:
+
+Louisiana: Jefferson, Lafourche, Livingston, Plaquemines, St. Bernard, St. Charles, St. Helena, St. James, St. John the Baptish, St. Mary, Tangipahoa, Terrebonne.
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricanes Ida and Nicholas.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricanes Ida and Nicholas.
+
+All FCC releases in connection with Hurricanes Ida and Nicholas may be found at https://www.fcc.gov/Ida
+
+	For further information, please contact Julia Tu of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at 202-418-0731 or Julia.Tu@fcc.gov.
+  
+
+
+2
+

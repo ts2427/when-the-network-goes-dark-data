@@ -1,0 +1,33 @@
+﻿
+DA 24-766
+Released: August 4, 2024
+
+THE FEDERAL COMMUNICATIONS COMMISSION ANNOUNCES THE ACTIVATION OF THE MANDATORY DISASTER RESPONSE INITIATIVE (MDRI) 
+FOR COMMUNICATIONS IMPACTS FROM TROPICAL STORM DEBBY IN FLORIDA
+
+The Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission) hereby notifies the public of the activation of the Mandatory Disaster Response Initiative (MDRI) in the following locations as a result of a Disaster Information Reporting System (DIRS) activation in the State of Florida as a result of Tropical Storm Debby: Section 4.17(a)(3) authorizes the Chief of the Public Safety and Homeland Security Bureau to issue a Public Notice activating the MDRI in response to a state request.  47 CFR § 4.17(a)(3).  
+ 
+
+COUNTIES OF INTEREST FOR THIS MDRI ACTIVATION INCLUDE THE FOLLOWING: 
+
+Florida: Alachua, Baker, Bay, Bradford, Calhoun, Citrus, Clay, Columbia, Dixie, Duval, Escambia, Flagler, Franklin, Gadsden, Gilchrist, Gulf, Hamilton, Hernando, Hillsborough, Holmes, Jackson, Jefferson, Lafayette, Lake, Leon, Levy, Liberty, Madison, Marion, Nassau, Orange, Pasco, Pinellas, Putnam, Seminole, St. Johns, Sumter, Suwannee, Taylor, Union, Volusia, Wakulla, Walton, and Washington.
+
+Upon the release of this Public Notice, all facilities-based mobile wireless providers operating in the above-referenced areas are hereby notified and required to: (1) provide for reasonable roaming under disaster arrangements when technically feasible; See 47 CFR § 4.17(a)(3)(i) (detailing criteria for activating roaming under disaster arrangements).  
+ (2) activate mutual aid arrangements with other facilities-based mobile wireless providers for providing aid upon request to those providers during emergencies; See 47 CFR § 4.17(a)(3)(ii) (explaining what mutual aid arrangements must include).  
+ (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. 47 CFR § 4.17(a)(3)(i)-(v); see also FCC, Wireless Network Resiliency During Disasters (June 4, 2024), https://www.fcc.gov/wireless-network-resiliency-during-disasters.  
+  
+Facilities-based mobile wireless providers that serve the above-referenced areas and that have provided contact information in DIRS prior to Tropical Storm Debby will be individually notified that the MDRI has been activated in their area.  
+PSHSB will announce when the MDRI has been deactivated by subsequent Public Notice.  Such Public Notice will also announce any deadlines for facilities-based mobile wireless providers to report the timing and effectiveness of their MDRI provisions to the Commission. See 47 CFR § 4.17(c).
+  Providers should familiarize themselves with the Commission’s MDRI requirements. 47 CFR § 4.17.
+  
+Details on the Mandatory Disaster Response Initiative can be found on the FCC website at https://www.fcc.gov/wireless-network-resiliency-during-disasters.  For further information concerning this MDRI activation, please contact the following PSHSB staff and the FCC 24/7 Operations Center:
+
+Justin Cain, (202) 853-7365, (202) 418-2924, justin.cain@fcc.gov  
+Logan Bennett, (732) 425-5036, (202) 418-7790, logan.bennett@fcc.gov 
+FCC 24/7 Operations Center, (202) 418-1122, fccoperationcenter@fcc.gov
+
+
+- FCC -
+
+2
+

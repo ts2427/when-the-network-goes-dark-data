@@ -1,0 +1,281 @@
+                              
+ 
+                        Communications Status Report for  
+                         Areas Impacted by Hurricane Ian 
+                                   October 6, 2022 
+ 
+The following is a report on the status of communications services in geographic areas impacted by Hurricane 
+Ian as of October 6, 2022, at 12:00 p.m. EDT.  This report incorporates network outage data submitted by 
+communications providers to the Federal Communications Commission (FCC) Disaster Information Reporting 
+System (DIRS).  Note that the operational status of communications services during an event may evolve 
+rapidly, and this report represents a snapshot in time.   
+
+The following counties in Florida are in the current geographic area that is part of DIRS (the “disaster area”) 
+for today’s report. 
+
+The area of interest for this activation includes the following counties in Florida.  
+
+Florida: Baker, Bradford, Charlotte, Clay, Collier, Desoto, Duval, Flagler, Glades, Hardee, Hendry, Highlands, 
+Hillsborough, Lake, Lee, Manatee, Marion, Monroe, Nassau, Okeechobee, Orange, Osceola, Pinellas, Polk, 
+Putnam, Sarasota, Seminole, St. Johns, Union, Volusia. 
+
+ 
+
+
+                                                                          
+                                              
+ 
+                                                                                         1 
+                                              
+                              
+ 
+911 Services  
+ 
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering 
+Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support 
+Center, coordination with state 911 Administrators, and, if necessary, direct contact with individual PSAPs. 
+ 
+             Florida: 
+
+             Sanibel Police Department Headquarters has been rerouted to another PSAP with location 
+             information.1 
+
+ 
+The following chart shows the trend in the effects on PSAPs since the storm’s landfall: 
+ 
+                  Number of PSAPs Affected in the Disaster Area by 
+                                          Date
+
+        6
+
+        5
+
+        4
+
+        3
+
+        2
+
+        1
+
+        0
+            28-Sep  29-Sep  30-Sep  1-Oct   2-Oct  3-Oct   4-Oct   5-Oct   6-Oct
+
+             911 Unavailable Available W/O Location Rerouted W/O Location Rerouted with Location
+                                                                                   
+ 
+ 
+Wireless Services 
+ 
+The following section describes the status of wireless communications services in the disaster area as 
+reported in DIRS. The chart below shows trends:  
+
+ 
+
+                           
+1 Sanibel Police Department PSAP is fully functional, but operating from its alternate location as annotated in its 
+contingency planning. 
+                                                                                         2 
+                                              
+                              
+ 
+                   Percent of Cell Sites Out of Service in the Disaster  
+                                 Area by State and Date
+
+        20%
+        18%
+        16%
+        14%
+        12%
+        10%
+         8%
+         6%
+         4%
+         2%
+         0%
+              28-Sep  29-Sep 30-Sep  1-Oct   2-Oct  3-Oct   4-Oct  5-Oct   6-Oct
+
+                                              FL
+                                                                                   
+                                              
+The current status of wireless communications services by county is shown by the following chart and map. 
+
+                                              
+                                              
+                                              
+                                   Percentage of Cell Sites Out of Service by County
+                                              10/6/2022
+18%
+16%
+                                                        Yesterday Today
+14%
+12%
+10%
+ 8%
+ 6%
+ 4%
+ 2%
+ 0%
+
+                                                                                           
+
+
+                                                                                         3 
+                                              
+                              
+ 
+
+
+                                                                                         
+The following table provides cell sites out of service by county.  1.5% of the cell sites in the affected area are 
+out of service.  The information shown was provided by communications carriers providing services in 
+Florida.  
+ 
+Florida 
+ 
+                                                                               Cell Sites Up 
+                         Cell   Cell          Cell Sites Cell Sites Out Cell Sites but On 
+                        Sites   Sites Percent Out Due to    Due to   Out Due to  Back-up 
+ State  Affected Counties Served Out   Out     Damage     Transport    Power      Power 
+  FL        BAKER        26      0     0.0%       0           0          0          0 
+  FL      BRADFORD       35      0     0.0%       0           0          0          0 
+  FL      CALHOUN         5      0     0.0%       0           0          0          0 
+  FL     CHARLOTTE       114     6     5.3%       1           5          0         13 
+  FL        CLAY         169     0     0.0%       0           0          0          0 
+  FL       COLLIER       219     5     2.3%       0           1          4          7 
+  FL       DESOTO        26      4    15.4%       1           0          3          2 
+  FL       DUVAL         754     2     0.3%       2           0          0          3 
+  FL      FLAGLER        91      2     2.2%       0           1          1          0 
+  FL       GLADES        29      1     3.4%       0           0          1          0 
+  FL       HARDEE        39      1     2.6%       0           0          1          0 
+
+                                                                                         4 
+                                              
+                              
+ 
+  FL       HENDRY        56      2     3.6%       0           0          2          2 
+  FL     HIGHLANDS       80      3     3.8%       0           2          1          1 
+  FL   HILLSBOROUGH     1,297    4     0.3%       2           1          1          8 
+  FL        LAKE         235     3     1.3%       0           0          3          0 
+  FL         LEE         394     24    6.1%       0           6          18        35 
+  FL      MANATEE        222     5     2.3%       1           2          2          8 
+  FL       MARION        306     5     1.6%       0           1          4          3 
+  FL       MONROE        99      0     0.0%       0           0          0          2 
+  FL       NASSAU        103     1     1.0%       0           1          0          0 
+  FL    OKEECHOBEE       59      0     0.0%       0           0          0          2 
+  FL       ORANGE       1,126    17    1.5%       2           0          15        22 
+  FL      OSCEOLA        257     4     1.6%       0           1          3          0 
+  FL      PINELLAS       587     7     1.2%       1           4          2          1 
+  FL        POLK         486     3     0.6%       2           0          1          2 
+  FL       PUTNAM        85      2     2.4%       0           2          0          0 
+  FL      SARASOTA       225     4     1.8%       0           1          3         10 
+  FL      SEMINOLE       296     7     2.4%       1           0          6          6 
+  FL      ST. JOHNS      239     2     0.8%       1           1          0          0 
+  FL        UNION        16      0     0.0%       0           0          0          0 
+  FL       VOLUSIA       422     8     1.9%       1           0          7          5 
+TOTAL                   8,097   122   1.5%       15          29          78        132 
+ 
+The number of cell site outages in a specific area does not necessarily correspond to the availability of 
+wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications 
+Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the 
+ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed 
+with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an 
+individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-
+on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take 
+other actions to maintain service to affected consumers during emergencies or other events that result in cell 
+site outages.  
+ 
+Cable Systems and Wireline (Combined) 
+ 
+Cable and wireline companies reported 277,687 subscribers out of service the disaster area; this may include 
+the loss of telephone, television, and/or Internet services.  
+  
+       
+                           
+
+
+                                                                                         5 
+                                              
+                              
+ 
+The following chart illustrates the trends in the number of subscribers out of service in the disaster area: 
+ 
+
+                  Total Number of Wireline/Cable Users Affected in the 
+                              Disaster Area By State and Date
+        900,000
+
+        800,000
+
+        700,000
+
+        600,000
+
+        500,000
+
+        400,000
+
+        300,000
+
+        200,000
+
+        100,000
+
+             0
+                 28-Sep 29-Sep 30-Sep  1-Oct  2-Oct  3-Oct  4-Oct   5-Oct  6-Oct
+
+                                              FL
+                                                                                   
+ 
+Broadcast:  
+
+Television stations status:  
+ 
+   •  There are no TV stations reported as being out of service.  
+
+FM Radio stations status:   
+
+   •  4 FM stations are reported as being out of service.  
+
+AM Radio stations status:   
+
+   •  2 AM stations are reported as being out of service. 
+
+Special Temporary Authority (STA)/Waivers/Extensions 
+ 
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit 
+immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, 
+as well as waivers to support emergency communications and service restoration. 
+ 
+   •  Wireless Telecommunications Bureau grants the American Radio Relay League (ARRL) an emergency 
+      request for a temporary waiver of Section 97.307(f) of the Commission’s Rules 
+
+                                                                                         6 
+                                              
+                           
+              
+•  Wireless Telecommunications Bureau and the Public Safety and Homeland Security Bureau extend 
+   licensing and regulatory deadlines for 30 days following President Biden’s declaration of emergency 
+   for the State of Florida 
+•  Wireless Telecommunications Bureau grants an emergency waiver of sections 96.67(c)(2) and (3) of 
+   the Commission’s rules governing the Citizen’s Broadband Radio Service to Federated Wireless, 
+   CommScope, Inc., and Google LLC 
+•  Wireless Telecommunications Bureau and Public Safety and Homeland Security Bureau Extend Filing 
+   and Regulatory Deadlines in Additional Areas (SC and GA) Affected by Hurricane Ian  
+•  Public Safety and Homeland Security Bureau issue a verbal waiver for Florida public safety officials to 
+   use 700 - 800 MHz interoperability channels 
+•  International Bureau grants verbal special Temporary Authority (STA) for two weeks to repair of 
+   antennas and other facilities.  The purpose of this STA is to allow the provider to operate with 
+   facilities that are not covered by their current authorization while they are fixing facilities caused by 
+   Hurricane IAN 
+•  Due to damage associated with Hurricane Ian caused to broadcasters in Florida and South Carolina, 
+   for these stations, the Media Bureau extends the October 11, 2022 deadline for placing material 
+   covering the previous calendar quarter in their public inspection file to December 12, 2022 
+•  Wireless Telecommunications Bureau issues multiple STAs to Verizon and T-Mobile in Florida to 
+   restore communications in the aftermath of Hurricane Ian 
+    
+              
+
+
+                                                                                      7 
+                                           

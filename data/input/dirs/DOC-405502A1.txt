@@ -1,0 +1,69 @@
+﻿
+
+Communications Status Report for 
+Areas Impacted by Hurricane Francine
+September 14, 2024
+
+The following is a report on the status of communications services in geographic areas impacted by Hurricane Francine as of September 14, 2024, at 10:00 a.m. EDT.  This report incorporates network outage data submitted by communications providers to the Federal Communications Commission (FCC) Disaster Information Reporting System (DIRS).  Note that the operational status of communications services during an event may evolve rapidly, and this report represents a snapshot in time.  
+On September 12, 2024, DIRS and the MDRI were deactivated for all counties in Mississippi.
+The following parishes in Louisiana are in the current geographic area that is part of the DIRS activation area (the “disaster area”) for today’s report.
+Louisiana: Acadia, Ascension, Assumption, East Baton Rouge, East Feliciana, Evangeline, Iberia, Iberville, Jefferson, Lafayette, Lafourche, Livingston, Orleans, Plaquemines, Pointe Coupee, St. Bernard, St. Charles, St. Helena, St. James, St. John the Baptist, St. Landry, St. Martin, St. Mary, St. Tammany, Tangipahoa, Terrebonne, Vermilion, Washington, West Baton Rouge, and West Feliciana.  
+
+
+
+911 Services 
+
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of services provided to each Public Safety Answering Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support Center, coordination with state and territory 911 Administrators, and, if necessary, direct contact with individual PSAPs.
+
+Louisiana: There are no PSAPs reported in DIRS as being affected.	
+Wireless Services
+The following section describes the status of wireless communications services in the disaster area as reported in DIRS. 
+
+
+
+Percent Cell Sites Out-Of-Service By Parish
+
+
+The following table provides cell sites out of service by parish.  0.9% (down from 1.6% yesterday) of the cell sites in the affected area are out of service.  The information shown was provided by communications carriers providing services in Louisiana.
+
+Louisiana:
+
+StateAffected ParishCell Sites ServedCell Sites OutPercent OutCell Sites Out Due to DamageCell Sites Out Due to TransportCell Sites Out Due to PowerCell Sites Up but On Back-up PowerLAAcadia 3200%0000LAAscension 6911.5%01014LAAssumption 18211.1%0024LAEast Baton Rouge 22300%0001LAEast Feliciana 2000%0000LAEvangeline 3200%0000LAIberia 3300%0002LAIberville 3300%0002LAJefferson 22010.5%00010LALafayette 10600%0001LALafourche 6534.6%02116LALivingston 9844.1%0048LAOrleans 31731.0%1004LAPlaquemines 3700%0000LAPointe Coupee 2200%0000LASt. Bernard 2500%0000LASt. Charles 2800%0001LASt. Helena 1000%0000LASt. James 2500%0003LASt. John the Baptist 2913.5%0014LASt. Landry 6100%0000LASt. Martin 3400%0000LASt. Mary 4200%0002LASt. Tammany 19410.5%0010LATangipahoa 10810.9%0013LATerrebonne 6511.5%00119LAVermilion 3700%0000LAWashington 4600%0001LAWest Baton Rouge 2300%0000LAWest Feliciana 2100%0000TOTAL-2073180.9%131195
+
+The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take other actions to maintain service to affected consumers during emergencies or other events that result in cell site outages. 
+
+Cable Systems and Wireline (Combined)
+
+Cable and wireline companies reported 42,261 (down from 72,939 yesterday) subscribers out of service in the disaster area.  This includes the loss of telephone, television, and/or Internet services.  
+
+
+
+
+Broadcast: 
+Television station status: 
+
+· There are no TV stations reported as being out of service.
+FM Radio station status: 
+· There are 4 (no change from yesterday) FM stations reported as being out of service. 
+(KDLC, KCIL, K284CU, WYLK)
+AM Radio station status:  
+· There is 1 (no change from yesterday) AM station reported as being out of service.
+(KJIN)
+
+Mandatory Disaster Response Initiative
+
+The Mandatory Disaster Response Initiative was activated for Hurricane Francine response activities on September 11, 2024.  As a reminder, all facilities-based mobile wireless providers operating in the above-referenced areas are hereby notified and required to: (1) provide for reasonable roaming under disaster arrangements when technically feasible; See 47 CFR § 4.17(a)(3)(i) (detailing criteria for activating roaming under disaster arrangements).  
+ (2) activate mutual aid arrangements with other facilities-based mobile wireless providers for providing aid upon request to those providers during emergencies; See 47 CFR § 4.17(a)(3)(ii) (explaining what mutual aid arrangements must include).  
+ (3) take reasonable measures to enhance municipal preparedness and restoration; (4) take reasonable measures to increase consumer readiness and preparation; and (5) take reasonable measures to improve public awareness and stakeholder communications on service and restoration status. 47 CFR § 4.17(a)(3)(i)-(v); see also FCC, Wireless Network Resiliency During Disasters (June 4, 2024), https://www.fcc.gov/wireless-network-resiliency-during-disasters.  
+ 
+
+Special Temporary Authority (STA)/Waivers/Extensions
+
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, as well as waivers to support emergency communications and service restoration.
+
+· The Wireless Telecommunications Bureau grants Federated Wireless’ request for a precautionary, limited, and conditional emergency waiver of sections 96.67(c)(2) and (3) of the Commission’s rules governing the Citizens Broadband Radio Service.  This waiver may be accessed using the following links: DA-24-915A1.docx, DA-24-915A1.pdf, and DA-24-915A1.txt
+
+· The Wireless Telecommunications Bureau conditionally grants Google LLC’s request for a precautionary, limited, and conditional emergency waiver of sections 96.67(c)(2) and (3) of the Commission’s rules governing the Citizens Broadband Radio Service.  waiver may be accessed using the following links: DA-24-948A1.docx , DA-24-948A1.pdf , DA-24-948A1.txt
+
+
+

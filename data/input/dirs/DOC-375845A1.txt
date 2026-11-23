@@ -1,0 +1,170 @@
+                              
+ 
+                        Communications Status Report for  
+                Areas Impacted by Hurricanes Ida and Nicholas 
+                                  September 17, 2021 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Hurricanes Ida and Nicholas as of September 17, 2021 at 11:00 a.m. EDT.  This report incorporates network 
+outage data submitted by communications providers to the Federal Communications Commission’s (FCC) 
+Disaster Information Reporting System (DIRS).  Note that the operational status of communications services 
+during a disaster may evolve rapidly, and this report represents a snapshot in time.  This report also 
+summarizes certain regulatory actions taken by the FCC to assist areas impacted by Hurricanes Ida and 
+Nicholas. 
+
+The following counties are in the current geographic area that is part of DIRS (the “disaster area”) for today’s 
+report. 
+
+Louisiana: Jefferson, Lafourche, Livingston, Plaquemines, St. Bernard, St. Charles, St. Helena, St. James, St. 
+John the Baptist, St. Mary, Tangipahoa, Terrebonne. 
+
+ 
+
+
+                                                                                 
+ 
+
+                                              
+
+ 
+ 
+ 
+                                                                                         1 
+                                              
+                              
+ 
+911 Services  
+ 
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering 
+Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support 
+Center, coordination with state 911 Administrators and, if necessary, direct contact with individual PSAPs. 
+ 
+      Louisiana: No PSAPs are reported as being affected. 
+
+ 
+Wireless Services 
+ 
+The following section describes the status of wireless communications services in the disaster area. The 
+current status of wireless communications services by county is shown by the following chart and map. 
+ 
+
+
+                                                                                        
+
+
+                                                                                         2 
+                                              
+                              
+ 
+
+
+                                                                                        
+The following table provides cell sites out of service by county.  4.6% of the cell sites in the affected area in 
+Louisiana are out of service.  The information shown was provided by the signatories to the Wireless Network 
+Resiliency Framework Cooperative Agreement.   
+ 
+ 
+Louisiana 
+ 
+                         Cell     Cell             Cell Sites   Cell Sites Out  Cell Sites 
+           Affected      Sites    Sites Percent   Out Due to       Due to      Out Due to 
+ State     Counties     Served    Out     Out      Damage        Transport1      Power 
+LA     JEFFERSON             301      6     2.0%             1               2           3 
+LA     LAFOURCHE              82      7     8.5%             1               3           3 
+LA     LIVINGSTON            125      3     2.4%             0               1           1 
+LA     PLAQUEMINES            58      9    15.5%             4               4           1 
+
+                           
+1 These are cell sites that are out due to issues with the (typically wireline) networks that route communications traffic to 
+and from the cell sites. 
+ 
+                                                                                         3 
+                                              
+                              
+ 
+LA     ST. MARY               56      1     1.8%             0               1           0 
+LA     ST. BERNARD            39      1     2.6%             1               0           0 
+LA     ST. CHARLES            42      1     2.4%             1               0           0 
+LA     ST. HELENA             14      3    21.4%             0               1           2 
+LA     ST. JAMES              34      3     8.8%             3               0           0 
+       ST. JOHN THE 
+LA     BAPTIST                28      4    14.3%             1               3           0 
+LA     TANGIPAHOA            130      1     0.8%             0               0           1 
+LA     TERREBONNE             86      7     8.1%             2               4           2 
+TOTAL                        995     46     4.6%            14              19          13 
+ 
+The number of cell site outages in a specific area does not necessarily correspond to the availability of 
+wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications 
+Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the 
+ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed 
+with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an 
+individual site is inoperable.  In addition, wireless providers frequently use temporary facilities such as cells-
+on-wheels (also known as COWs), increased power at operational sites, roaming agreements, or take other 
+actions to maintain service to affected consumers during emergencies or other events that result in cell site 
+outages.  
+ 
+Cable Systems and Wireline (Combined) 
+ 
+Cable and wireline companies reported 86,935 subscribers out of service in the disaster area in Louisiana; 
+this may include the loss of telephone, television, and/or Internet services: 
+ 
+ 
+Broadcast:  
+ 
+Television stations status:  
+ 
+   •  4 TV stations reported being operational (WGNO, WLAE-TV, WNOL-TV, WVUE-DT). 
+   •  No TV station is reported as being out of service . 
+ 
+FM Radio stations status:   
+
+   •  6 FM radio stations reported being operational (KKND, KLXH, KMEZ, WEMX, WRQQ, W208FC). 
+   •  2 FM stations reported being out of service (KSLU, WNKV). 
+
+AM Radio stations status:   
+
+   •  2 AM radio stations reported being operational (WQNO, WSHO). 
+   •  No AM radio stations reported being out of service.  
+
+                                                                                         4 
+                                              
+                              
+ 
+       
+Special Temporary Authority (STA)/Waivers/Extensions 
+ 
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit 
+immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, 
+as well as waivers to support emergency communications and service restoration. 
+ 
+During Hurricane Ida, there have been 7 STAs granted as of 11 am September 17: a verbal STA to the Mutual 
+Aid Box Alarm System, an STA for station KVDU, and 2 STAs to ERA Helicopters LLC, 1 STA to K274DE - Coastal 
+Broadcasting of Larose, Inc, and 2 STAs to Verizon. 
+
+The FCC granted waivers as follows: 
+
+   •  ARRL emergency request for a temporary waiver to permit higher symbol rate data transmissions for 
+      Hurricane Ida traffic.   
+   •  Temporary waiver to allow carriers in affected areas greater flexibility in number portability, to assist 
+      in restoring service to affected customers more quickly.  
+   •  Waiver to extend the Form 477 deadline and the A110 Upfront Payment and App Resubmission 
+      deadline.   
+   •  Waived number aging rules to allow providers to hold disconnected numbers for more than the usual 
+      90 days for customers who wish to temporarily disconnect service and then reconnect after recovery 
+      is complete.  
+ 
+On September 3, the FCC took a series of actions to extend deadlines and waive rules to assist consumers, 
+licensees and communications providers in Louisiana and Mississippi impacted by Hurricane Ida, as follows: 
+ 
+   •  Waived certain rules and deadlines for the E-Rate, Rural Health Care, Lifeline, High Cost, Emergency 
+      Connectivity Fund, and Emergency Broadband Benefit programs. 
+   •  Released a Public Notice establishing October 1, 2021 as the new deadline for submission of Form 
+      477 data as of June 30, 2021 for affected filers in Louisiana and Mississippi.  For all other filers the 
+      deadline is September 15, 2021. 
+   •  Extended until October 1, 2021, certain deadlines that would occur between August 29, 2021 and 
+      September 30, 2021.  This includes construction deadlines and filing deadlines for certain license 
+      modifications, license renewals, and construction notifications. 
+
+
+                                                                                         5 
+                                              

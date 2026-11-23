@@ -1,0 +1,35 @@
+﻿	Federal Communications Commission	DA-26-950
+
+
+DA-26-1093
+Released: October 8, 2026
+
+THE PUBLIC SAFETY AND HOMELAND SECURITY BUREAU REMINDS ENROLLED USERS ABOUT THE AVAILABILITY OF PRIORITY SERVICES IN AREAS IMPACTED BY HURRICANE ISAIAS
+	The Public Safety and Homeland Security Bureau (PSHSB) reminds enrolled users about the availability of priority services, which help support communications and continuity of operations.  Current users should understand how to activate the priority treatment so they are prepared to use the services, if necessary, during emergency response activities related to Hurricane Isaias.    
+The Department of Homeland Security’s Cybersecurity and Infrastructure Security Agency manages three programs that enable National Security and Emergency Preparedness (NSEP) personnel to effectively communicate when networks are damaged, degraded, or congested.  These programs include: 
+· Government Emergency Telecommunications Service (GETS) for wireline voice communications; 
+· Wireless Priority Service (WPS) for wireless communications; and
+· Telecommunications Service Priority (TSP) for prioritized restoration and provisioning of communications facilities.
+PSHSB reminds current users of the following information and best practices, which will increase the effectiveness of the programs:  
+· Make regular practice/test calls for GETS and WPS.
+· Preprogram *272 for key numbers in your phone’s contact list.
+· Download the GETS/WPS dialer application for smartphones. 
+· Do not use GETS or WPS to dial 911.
+· Test WPS after all phone changes. 
+· Keep your GETS card with you at all times.  
+· You may experience silence after entering your destination number.
+· Using WPS and GETS together may help in certain circumstances.  
+For other helpful information, please see CISA's Helpful Tips for Users of WPS and GETS. 
+PSHSB also encourages other entities and organizations that are not currently enrolled, but that may qualify, to consider participating in the priority services programs.  These programs are available to qualified personnel from both the public and private sectors that perform NSEP functions.  Entities from the following categories may qualify to participate: 
+· All levels of government (federal, state, local, tribal, territorial);
+· Non-governmental organizations; and
+· Organizations within critical infrastructure sectors, including certain private sector entities.  
+For more information about the priority services programs, please visit: https://www.fcc.gov/general/public-safety-homeland-security-policy-areas-priority-services and https://www.cisa.gov/priority-telecommunications-services. 
+
+
+
+
+
+
+
+2

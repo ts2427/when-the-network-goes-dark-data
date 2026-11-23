@@ -1,0 +1,119 @@
+ 
+ 
+As prepared by the Federal Communications Commission: September 03, 2017 11:30 a.m. 
+Communications Status Report for  
+Areas Impacted by Post-Tropical Cyclone Harvey  
+September 3, 2017 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Post-Tropical Cyclone Harvey as of September 3, 2017 at 11:00 a.m. EDT.  This report incorporates 
+network outage data submitted by communications providers to the Federal Communications 
+Commission’s Disaster Information Reporting System (DIRS).  DIRS currently covers a reduced area of 13 
+counties in Texas only.  Note that the operational status of communications services during a disaster 
+may evolve rapidly, and this report represents a snapshot in time. 
+ 
+On August 31, FEMA asked the FCC to extend the DIRS disaster area to 9 additional counties in Texas.  
+ 
+On September 3, FEMA and the FCC decided to reduce the DIRS disaster area to 13 counties in Texas; 
+this report is the first for these 13 counties only.   
+ 
+The following 13 counties are in the current DIRS disaster area:  
+ 
+Texas: Aransas, Calhoun, Chambers, Hardin, Harris, Jefferson, Matagorda, Nueces, Orange, 
+Refugio, San Patricio, Victoria and Wharton County  
+ 
+The following map shows the counties in the disaster area: 
+ 
+  
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: September 03, 2017 11:30 a.m. 
+ 
+ 
+911 Services  
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety 
+Answering Point (PSAP) through the filings of 911 Service Providers in the Disaster Information 
+Reporting System (DIRS), through reporting done to the FCC’s Public Safety Support Center (PSSC), 
+coordination with state 911 Administrators and, if necessary, individual PSAPs. 
+ 
+There are a total of 6 (same as yesterday) PSAPs affected.  There are no PSAPs which are down without a 
+re-route.   
+ 
+? PSAP re-routed without ALI: Refugio County SO, TX; and Vidor PD, TX. 
+? PSAP re-routed with ALI: Harris County Neutral SO, TX; Houston EC Training, TX; Port Aransas 
+PD, TX; and West Columbia PD, TX. 
+ 
+Wireless Services 
+The following section describes the status of wireless communications services and restoration in the 
+disaster area, including the percentage of cell sites out of service for each county. 
+ 
+The following map of the disaster area illustrates which counties are most affected: 
+  
+ 
+ 
+As prepared by the Federal Communications Commission: September 03, 2017 11:30 a.m. 
+ 
+ 
+The following table provides the percentage of cell sites out of service by county.  In the 13 counties 
+remaining in the disaster area, 2.4% of cell sites remain out of service; compared to 3.6% in the same 13 
+counties yesterday.  There are no counties with greater than 25% of cell sites out.  Only three counties 
+have greater than 10% of their cell sites out of service: Aransas, Calhoun and Orange.  The information 
+shown was provided by the signatories to the Wireless Resiliency Cooperative Framework: 
+ 
+ 
+As prepared by the Federal Communications Commission: September 03, 2017 11:30 a.m. 
+ 
+ 
+ 
+Cable Systems and Wireline (Combined) 
+There are at least 164,544 subscribers (down from at least 179,981 yesterday) out of service in the 
+affected area.  This includes users who get service from cable system or wireline providers.   
+ 
+Broadcast 
+There are 7 (same as yesterday) radio stations out of service:   
+TX – K255BB, K237FS, KFNC, KTXB, KKWV, KRVT, and KAYK.  
+There are 2 (same as yesterday) TV stations out of service: 
+TX - KFDM and KBTV, all in TX.   
+State
+Affected 
+Counties
+Cell 
+Sites 
+Served
+Cell 
+Sites 
+Out on 
+09/02
+Percent 
+Out on 
+09/02
+Cell 
+Sites 
+Out 
+Today 
+(09/03)
+Percent 
+Out 
+Today 
+(09/03)
+TX ARANSAS 19 3 15.80% 2 10.50%
+TX CALHOUN 28 2 7.10% 3 10.70%
+TX CHAMBERS 54 3 5.60% 3 5.60%
+TX HARRIS 3,131 59 1.90% 44 1.40%
+TX JEFFERSON 247 28 11.30% 14 5.70%
+TX
+MATAGORD
+A
+58 3 5.20% 1 1.70%
+TX NUECES 267 6 2.20% 5 1.90%
+TX ORANGE 85 26 30.60% 20 23.50%
+TX REFUGIO 26 0 0.00% 0 0.00%
+TX
+SAN 
+PATRICIO
+58 1 1.70% 1 1.70%
+TX VICTORIA 92 4 4.30% 2 2.20%
+TX WHARTON 63 4 6.30% 2 3.20%
+TX HARDIN 71 11 15.50% 5 7.00%
+Total 4,199 150 3.60% 102 2.40%

@@ -1,0 +1,37 @@
+﻿
+DA 23-816
+Released:  August 31, 2023
+
+THE FEDERAL COMMUNICATIONS COMMISSION ANNOUNCES THE PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM FOR HURRICANE IDALIA
+
+DIRS deactivated in South Carolina and parts of Florida
+
+The Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (FCC), in coordination with the Department of Homeland Security Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, has announced a partial deactivation of the Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas affected by Hurricane Idalia:
+
+Florida: Bay, Calhoun, Charlotte, Citrus, Clay, DeSoto, Duval, Flagler, Franklin, Gadsden, Gulf, Hardee, Hernando, Hillsborough, Lake, Lee, Leon, Liberty, Manatee, Marion, Pasco, Pinellas, Polk, Putnam, Sarasota, Seminole, St. Johns, Sumter, Taylor, Volusia, and Wakulla.
+
+South Carolina: Allendale, Bamberg, Barnwell, Beaufort, Berkeley, Calhoun, Charleston, Clarendon, Colleton, Dorchester, Georgetown, Hampton, Horry, Jasper, Marion, and Orangeburg.
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas in Florida and South Carolina with respect to Hurricane Idalia.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+DIRS remains activated in the following counties in Florida:
+
+Florida: Alachua, Baker, Bradford, Columbia, Dixie, Gilchrist, Hamilton, Jefferson, Lafayette, Levy, Madison, Suwannee, and Union.
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Idalia.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Idalia.
+
+For further information, please contact: 
+
+Michael Caiafa (202) 418-1311, (540) 834-7401 (cell), michael.caiafa@fcc.gov 
+David Ahn  (202) 418-0853, david.ahn@fcc.gov 
+John Healy (215) 847-8094 (cell), (202) 418-2448, john.healy@fcc.gov 
+FCC 24/7 Operations Center – 202-418-1122, fccops@fcc.gov 
+
+For more information on the FCC’s response to Hurricane Idalia in Florida, please go to https://www.fcc.gov/Idalia 
+
+
+
+- FCC -
+2
+

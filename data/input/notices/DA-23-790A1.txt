@@ -1,0 +1,43 @@
+﻿	
+DA 23-790
+Released:  August 30, 2023
+
+THE FEDERAL COMMUNICATIONS COMMISSION ANNOUNCES THE EXPANSION OF THE DISASTER INFORMATION REPORTING SYSTEM FOR COMMUNICATIONS IMPACTED BY HURRICANE IDALIA IN SOUTH CAROLINA
+
+The FCC is expanding its disaster data collection to counties in South Carolina impacted by Hurricane Idalia.
+
+On August 29, 2023, the Public Safety and Homeland Security Bureau (PSHSB) of the Federal Communications Commission (Commission), in coordination with the State of Florida, the Cybersecurity and Infrastructure Security Agency (CISA) and the Federal Emergency Management Agency (FEMA), announced the activation of the Disaster Information Reporting System (DIRS) in response to Hurricane Idalia. The Federal Communications Commission Announces the Activation of the Disaster Information Reporting System for Communications Impacted by Hurricane Idalia in Florida, Public Notice, DA-23-776 (rel. August 29, 2023)
+  The State of Florida, CISA, and FEMA have asked the Commission to expand the data collection to include counties in South Carolina with phased dates for first reports aligned with the projected path of Hurricane Idalia.
+
+DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, and satellite providers can use to report communications infrastructure status and situational awareness information during times of crisis.
+
+	The Commission requests that communications providers that provide service to any areas listed below expeditiously submit and update information through DIRS regarding, inter alia, the status of their communications equipment, restoration efforts, and power (i.e., whether they are using commercial power or back-up power).  Communications providers can accomplish this by accessing DIRS at https://www.fcc.gov/nors/disaster/.  Providers that have not previously done so will be asked to first provide contact information and obtain a User ID when they access DIRS.  There is a link on the login page that will allow them to obtain the User ID and password.  If a user does not remember their password, they should use the forgotten password link on the login page.  If any user has any problems accessing DIRS, please contact any of the numbers listed below.  
+
+In DIRS, this activation has the following name: HURRICANE IDALIA.  Communications providers are reminded that for providers that participate in DIRS, the separate Network Outage Reporting System (NORS) obligations are suspended for the duration of the DIRS activation with respect to outages in the municipalities where DIRS has been activated.  Reports are requested at 9:00 a.m. (EDT) on Thursday August 31, and every day after that by 9:00 a.m. (EDT) until DIRS is deactivated. 
+
+Communications providers that serve an area listed below and that have already provided contact information in DIRS will be sent an e-mail requesting that they provide the above-referenced status information through DIRS.  For any communications providers that have not already logged onto DIRS to input their contact information, the Commission encourages them to do so as soon as possible.
+
+ADDITIONAL COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE:
+
+South Carolina:  Allendale, Bamberg, Barnwell, Beaufort, Berkeley, Calhoun, Charleston, Clarendon, Colleton, Dorchester, Georgetown, Hampton, Horry, Jasper, Marion, and Orangeburg.
+
+Please continue to provide information for the counties that are already in the disaster area.
+
+The FCC continues to monitor this event and may amend the DIRS activation area in the coming days.
+
+For further information, please contact:
+ 
+Michael Caiafa (202) 418-1311, (540) 834-7401 (cell), michael.caiafa@fcc.gov
+David Ahn  (202) 418-0853, david.ahn@fcc.gov
+John Healy (215) 847-8094 (cell), (202) 418-2448, john.healy@fcc.gov
+FCC 24/7 Operations Center – 202-418-1122, fccoperationcenter@fcc.gov
+
+For more information on the FCC’s response to Hurricane Idalia in Florida, please go to https://www.fcc.gov/Idalia
+
+
+
+
+- FCC -
+       
+2
+

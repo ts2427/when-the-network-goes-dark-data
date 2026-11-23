@@ -1,0 +1,33 @@
+﻿
+								DA 20-1190
+Released October 11, 2020
+
+PUBLIC SAFETY & HOMELAND SECURITY BUREAU ANNOUNCES PARTIAL DEACTIVATION OF THE DISASTER INFORMATION REPORTING SYSTEM 
+FOR HURRICANE DELTA
+
+DIRS deactivated in Texas and some counties in Louisiana.  DIRS remains active in some counties in Louisiana.
+	
+At the request of the Department of Homeland Security, Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, the Federal Communications Commission (FCC) has deactivated its Disaster Information Reporting System (DIRS) DIRS is a voluntary, web-based system that communications providers, including wireless, wireline, broadcast, cable and Voice over Internet Protocol providers, can use to report communications infrastructure status and situational awareness information during times of crisis.
+ for the following areas affected by Hurricane Delta:
+
+Louisiana: Ascension, Assumption, Avoyelles, Bienville, Bossier, Caddo, Caldwell, Claiborne, Concordia, De Soto, East Baton Rouge, East Carroll, East Feliciana, Grant, Iberia, Iberville, Jackson, Jefferson, Lafourche, Lincoln, Livingston, Madison, Natchitoches, Orleans, Ouachita, Plaquemines, Richland, Sabine, St. Bernard, St. Charles, St. Helena, St. James, St. John The Baptist, St. Mary, St. Tammany, Tangipahoa, Tensas, Terrebonne, Union, Washington, Webster, West Feliciana, Winn
+
+Texas: Jefferson, Newton, Orange
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas in Louisiana with respect to Hurricane Delta.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.
+
+	DIRS remains activated in the following counties in Louisiana:
+
+Louisiana: Acadia, Allen, Beauregard, Calcasieu, Cameron, Catahoula, Evangeline, Franklin, Jefferson Davis, Lafayette, La Salle, Morehouse, Pointe Coupee, Rapides, Red River, St. Landry, St. Martin, Vermilion, Vernon, West Baton Rouge, West Carroll
+
+
+The FCC appreciates the cooperation of all the communications providers that have voluntarily submitted data to DIRS in the aftermath of Hurricane Delta.  In disaster situations, information on the operational status of communications services provides critical situational awareness and supports effective emergency response and restoration efforts.  The FCC expects to continue to publish daily communications status reports while DIRS remains active for any area in connection with Hurricane Delta.
+
+All FCC releases in connection with Hurricane Delta may be found at https://www.fcc.gov/Delta
+
+	For further information, please contact Julia Tu of the Public Safety and Homeland Security Bureau’s Cybersecurity and Communications Reliability Division at 202-418-0731 or Julia.Tu@fcc.gov.
+  
+
+
+2
+

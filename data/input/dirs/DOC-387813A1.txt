@@ -1,0 +1,496 @@
+                            
+ 
+                      Communications Status Report for  
+                       Areas Impacted by Hurricane Ian 
+                                October 2, 2022 
+ 
+The following is a report on the status of communications services in geographic areas impacted by Hurricane 
+Ian as of October 2, 2022, at 12:00 p.m. EDT.  This report incorporates network outage data submitted by 
+communications providers to the Federal Communications Commission (FCC) Disaster Information Reporting 
+System (DIRS).  Note that the operational status of communications services during an event may evolve 
+rapidly, and this report represents a snapshot in time.   
+
+The following counties in Florida and South Carolina are in the current geographic area that is part of DIRS 
+(the “disaster area”) for today’s report. 
+
+The area of interest for this activation includes the following counties in Florida and South Carolina.  
+
+Florida: Baker, Bradford, Charlotte, Clay, Collier, Desoto, Duval, Flagler, Glades, Hardee, Hendry, Highlands, 
+Hillsborough, Lake, Lee, Manatee, Marion, Monroe, Nassau, Okeechobee, Orange, Osceola, Pinellas, Polk, 
+Putnam, Sarasota, Seminole, St. Johns, Union, Volusia. 
+
+South Carolina:  Allendale, Bamberg, Barnwell, Beaufort, Berkeley, Calhoun, Charleston, Chester, 
+Chesterfield, Clarendon, Colleton, Darlington, Dorchester, Fairfield, Florence, Georgetown, Hampton, Horry, 
+Jasper, Kershaw, Lancaster, Lee, Lexington, Marion, Marlboro, Orangeburg, Richland, Sumter, Williamsburg, 
+York. 
+
+
+                                                              
+                                          
+
+                                                                                 1 
+                                          
+                            
+ 
+ 
+911 Services  
+ 
+The Public Safety and Homeland Security Bureau (PSHSB) learns the status of each Public Safety Answering 
+Point (PSAP) through the filings of 911 Service Providers in DIRS, reporting to the FCC’s Public Safety Support 
+Center, coordination with state 911 Administrators, and, if necessary, direct contact with individual PSAPs. 
+ 
+            Florida: 
+
+            Sanibel Police Department Headquarters has been rerouted to another PSAP with location 
+            information. 
+
+            Hardee County Sheriff’s Department and Highlands County Sheriff’s Department have been 
+            rerouted to admin lines without location information. 
+
+             
+            South Carolina: No PSAPs affected 
+ 
+ 
+The following chart shows the trend in the effects on PSAPs since the storm’s landfall: 
+ 
+                 Number of PSAPs Affected in the Disaster Area by Date
+
+        6
+
+        5
+
+        4
+
+        3
+
+        2
+
+        1
+
+        0
+               28-Sep      29-Sep       30-Sep       1-Oct       2-Oct
+
+             911 Unavailable Available W/O Location Rerouted W/O Location Rerouted with Location
+                                                                            
+ 
+
+ 
+ 
+
+                                                                                 2 
+                                          
+                                                                   
+ 
+Wireless Services 
+ 
+The following section describes the status of wireless communications services in the disaster area as 
+reported in DIRS. The chart below shows trends:  
+ 
+                                            Percent of Cell Sites Out of Service in the Disaster  
+                                                                            Area by State and Date
+
+                    20%
+                    18%
+                    16%
+                    14%
+                    12%
+                    10%
+                     8%
+                     6%
+                     4%
+                     2%
+                     0%
+                                       28-Sep                         29-Sep                        30-Sep                          1-Oct                         2-Oct
+
+                                                                                                 FL             SC
+                                                                                                                                                                                           
+                                                                                                       
+The current status of wireless communications services by county is shown by the following chart and map. 
+
+                                                                                                       
+
+                                                                                                       
+
+                                                                                                       
+
+                                                                                Percentage of Cell Sites Out of Service by County
+                                                                                                      10/2/2022
+45%
+40%
+35%
+30%
+25%
+20%
+15%
+10%
+  5%
+
+
+  0%
+
+
+                  FL-LEE
+
+
+                                                                                                                                                                      SC-LEE
+
+
+                                                                  FL-LAKE
+
+
+                                                                                                    FL-CLAY
+
+
+                                                           FL-POLK
+
+
+                                                                                                 FL-BAKER
+
+
+                                                                                              FL-DUVAL
+
+
+                                                                                                       FL-UNION
+
+
+                                                                                           SC-HORRY
+
+
+                                                                                                                                                             SC-JASPER
+
+
+                     FL-GLADES
+
+
+                                            FL-COLLIER
+
+
+            FL-HARDEE
+
+
+                                                                                     FL-NASSAU
+
+
+         FL-DESOTO
+
+
+                                               FL-HENDRY
+
+
+                                                                                 FL-MARION
+
+
+                                                     FL-FLAGLER
+
+
+                                                  FL-ORANGE
+
+
+                            FL-VOLUSIA
+
+
+                                                                                                                                                                                         SC-SUMTER
+
+
+                                                                                                                                                                             SC-MARION
+
+
+                                                                     FL-PUTNAM
+
+
+                                                                                                                                 SC-CHESTER
+
+
+                                                                           FL-PINELLAS
+
+
+                                                        FL-OSCEOLA
+
+
+                                                              FL-MONROE
+
+
+                                                                                                                       SC-BERKELEY
+
+
+                               FL-MANATEE
+
+
+                                                                                                                                                                                                FL-ST.JOHNS 
+
+
+                                                                                                                                                    SC-FAIRFIELD
+
+
+                                                                                                                                                                SC-KERSHAW
+
+
+                                                                                                                          SC-CALHOUN
+
+
+                                        FL-SEMINOLE
+
+
+                                                                                                              SC-BAMBERG
+
+
+                                                                                                                                                                                      SC-RICHLAND
+
+
+                                  FL-SARASOTA
+
+
+                                                                                                                                                       SC-FLORENCE
+
+
+                                                                                                                                          SC-COLLETON
+
+
+                                                                                                                                                          SC-HAMPTON
+
+
+                                                                                                                    SC-BEAUFORT
+
+
+                                     FL-BRADFORD
+
+
+                                                                                                                 SC-BARNWELL
+
+
+                                                                                                           SC-ALLENDALE
+
+
+               FL-CHARLOTTE
+
+
+                         FL-HIGHLANDS                                                                                                                              SC-LANCASTER
+
+
+                                                                                                                                                                          SC-LEXINGTON
+
+
+                                                                                                                                                                                SC-MARLBORO
+
+
+                                                                                                                                       SC-CLARENDON
+
+
+                                                                              FL-OKEECHOBEE
+
+
+                                                                                                                             SC-CHARLESTON
+
+
+                                                                                                                                                SC-DORCHESTER
+
+
+                                                                                                                                             SC-DARLINGTON
+
+
+                                                                                                                                    SC-CHESTERFIELD
+
+
+                                                                                                                                                                                   SC-ORANGEBURG
+
+
+                                                                                        SC-GEORGETOWN
+                                                                        FL-HILLSBOROUGH
+                                                                                                                                                                                            SC-WILLIAMSBURG  
+
+
+                                                                                                                                                                                                         3 
+                                                                                                       
+                                  
+ 
+
+
+                                                                                                       
+The following table provides cell sites out of service by county.  3.6% of the cell sites in the affected area are 
+out of service.  The information shown was provided by communications carriers providing services in Florida 
+and South Carolina.  
+ 
+Florida 
+ 
+                                                                                      Cell    Cell Sites 
+                                            Cell             Cell Sites  Cell Sites Sites Out  Up but 
+                               Cell Sites  Sites   Percent  Out Due to  Out Due to   Due to  On Back-
+ State     Affected Counties    Served      Out      Out     Damage      Transport   Power   up Power 
+  FL           BAKER               26        0      0.0%         0           0         0         0 
+  FL         BRADFORD              35        3      8.6%         0           3         0         0 
+  FL        CHARLOTTE             114       23      20.2%        2           8         13        40 
+  FL            CLAY              169        0      0.0%         0           0         0         0 
+  FL          COLLIER             219       16      7.3%         0           5         11        23 
+  FL           DESOTO              26       10      38.5%        0           3         7         1 
+  FL           DUVAL              754        2      0.3%         2           0         0         4 
+  FL          FLAGLER              90        4      4.4%         0           1         3         2 
+  FL           GLADES              29        5      17.2%        0           0         5         5 
+                                                                                                     4 
+                                                    
+                                  
+ 
+  FL          HARDEE               39       13      33.3%        0           5         8         9 
+  FL          HENDRY               56        3      5.4%         0           0         3         3 
+  FL         HIGHLANDS             80       13      16.3%        0           8         5         7 
+  FL       HILLSBOROUGH          1,297      26      2.0%         0          13         13        25 
+  FL            LAKE              235        8      3.4%         0           0         8         6 
+  FL             LEE              394       77      19.5%        1          50         26        67 
+  FL          MANATEE             222       21      9.5%         1           8         12        14 
+  FL          MARION              306        4      1.3%         0           1         3         2 
+  FL          MONROE               99        4      4.0%         0           3         1         1 
+  FL           NASSAU             103        1      1.0%         0           1         0         0 
+  FL        OKEECHOBEE             59        1      1.7%         0           1         0         5 
+  FL          ORANGE             1,128      53      4.7%         4           4         45        41 
+  FL          OSCEOLA             257       11      4.3%         0           5         6         4 
+  FL          PINELLAS            587       11      1.9%         0          10         1         3 
+  FL            POLK              486       20      4.1%         0          13         7         20 
+  FL          PUTNAM               85        2      2.4%         0           2         0         0 
+  FL         SARASOTA             225       20      8.9%         0          10         10        29 
+  FL         SEMINOLE             296       24      8.1%         1           1         22        6 
+  FL          ST. JOHNS           239        6      2.5%         0           5         1         1 
+  FL           UNION               16        0      0.0%         0           0         0         0 
+  FL          VOLUSIA             421       63      15.0%        0          13         50        38 
+TOTAL                            8092       444     5.5%        11          173       260       356 
+ 
+ 
+South Carolina 
+ 
+                                                                                          Cell Sites Up 
+                            Cell    Cell             Cell Sites Cell Sites Out Cell Sites   but On 
+                            Sites   Sites  Percent  Out Due to      Due to    Out Due to    Back-up 
+  State  Affected Counties Served    Out    Out      Damage       Transport     Power       Power 
+   SC      ALLENDALE         14       0     0.0%        0             0            0           0 
+   SC       BAMBERG          26       0     0.0%        0             0            0           0 
+   SC      BARNWELL          40       0     0.0%        0             0            0           0 
+   SC       BEAUFORT         233      0     0.0%        0             0            0           0 
+   SC       BERKELEY         228      0     0.0%        0             0            0           4 
+   SC       CALHOUN          37       0     0.0%        0             0            0           0 
+   SC     CHARLESTON         581      0     0.0%        0             0            0           3 
+   SC       CHESTER          53       0     0.0%        0             0            0           0 
+   SC    CHESTERFIELD        75       0     0.0%        0             0            0           0 
+   SC      CLARENDON         67       0     0.0%        0             0            0           0 
+
+                                                                                                     5 
+                                                    
+                            
+ 
+   SC     COLLETON     106    0    0.0%      0          0          0        0 
+   SC   DARLINGTON      63    0    0.0%      0          0          0        0 
+   SC   DORCHESTER     152    0    0.0%      0          0          0        0 
+   SC     FAIRFIELD     75    0    0.0%      0          0          0        0 
+   SC     FLORENCE     153    0    0.0%      0          0          0        7 
+   SC   GEORGETOWN     104    1    1.0%      0          1          0        2 
+   SC     HAMPTON       32    0    0.0%      0          0          0        0 
+   SC      HORRY       449    4    0.9%      0          3          1        2 
+   SC      JASPER       85    0    0.0%      0          0          0        0 
+   SC     KERSHAW       96    0    0.0%      0          0          0        0 
+   SC    LANCASTER     104    0    0.0%      0          0          0        1 
+   SC       LEE         52    0    0.0%      0          0          0        0 
+   SC    LEXINGTON     388    0    0.0%      0          0          0        0 
+   SC      MARION       43    0    0.0%      0          0          0        1 
+   SC    MARLBORO       44    0    0.0%      0          0          0        2 
+   SC   ORANGEBURG     148    0    0.0%      0          0          0        0 
+   SC     RICHLAND     590    0    0.0%      0          0          0        1 
+   SC      SUMTER      143    0    0.0%      0          0          0        0 
+   SC  WILLIAMSBURG     99    0    0.0%      0          0          0        1 
+   SC       YORK       234    0    0.0%      0          0          0        0 
+ TOTAL                 4,514  5    0.1%      0          4          1        24 
+ 
+ 
+The number of cell site outages in a specific area does not necessarily correspond to the availability of 
+wireless service to consumers in that area.  See Improving the Resiliency of Mobile Wireless Communications 
+Networks, Order, 31 FCC Rcd 13745, para. 10 (2016) (recognizing the difficulties in accurately depicting the 
+ongoing status of a wireless provider’s service during emergencies).  Wireless networks are often designed 
+with numerous, overlapping cell sites that provide maximum capacity and continuity of service even when an 
+individual site is inoperable.  In addition, wireless providers frequently use temporary facilities, such as cells-
+on-wheels (also known as COWs), increase power at operational sites, initiate roaming agreements, or take 
+other actions to maintain service to affected consumers during emergencies or other events that result in cell 
+site outages.  
+ 
+Cable Systems and Wireline (Combined) 
+ 
+Cable and wireline companies reported the following number of subscribers out of service by state in the 
+disaster area; this may include the loss of telephone, television, and/or Internet services:  
+  
+      Florida: 606,553 
+      South Carolina: 9,845 
+ 
+
+                                                                                 6 
+                                          
+                            
+ 
+The following chart illustrates the trends in the number of subscribers out of service in the disaster area: 
+ 
+                 Total Number of Wireline/Cable Users Affected in the 
+                            Disaster Area By State and Date
+        900,000
+
+        800,000
+
+        700,000
+
+        600,000
+
+        500,000
+
+        400,000
+
+        300,000
+
+        200,000
+
+        100,000
+
+            0
+                  28-Sep      29-Sep      30-Sep      1-Oct       2-Oct
+
+                                       FL    SC
+                                                                            
+ 
+Broadcast:  
+
+Television stations status:  
+ 
+   •  1 TV station is reported as being out of service.  
+
+FM Radio stations status:   
+
+   •  12 FM stations are reported as being out of service.  
+
+AM Radio stations status:   
+
+   •  4 AM stations are reported as being out of service. 
+
+Special Temporary Authority (STA)/Waivers/Extensions 
+ 
+The Federal Communications Commission (FCC) may grant Special Temporary Authority (STA) to permit 
+immediate or temporary operation of certain radio facilities during emergencies or other urgent conditions, 
+as well as waivers to support emergency communications and service restoration. 
+ 
+   •  Wireless Telecommunications Bureau grants the American Radio Relay League (ARRL) an emergency 
+      request for a temporary waiver of Section 97.307(f) of the Commission’s Rules 
+
+                                                                                 7 
+                                          
+                         
+            
+•  Wireless Telecommunications Bureau and the Public Safety and Homeland Security Bureau extend 
+   licensing and regulatory deadlines for 30 days following President Biden’s declaration of emergency 
+   for the State of Florida 
+•  Wireless Telecommunications Bureau grants an emergency waiver of sections 96.67(c)(2) and (3) of 
+   the Commission’s rules governing the Citizen’s Broadband Radio Service to Federated Wireless, 
+   CommScope, Inc., and Google LLC 
+•  Wireless Telecommunications Bureau and Public Safety and Homeland Security Bureau Extend Filing 
+   and Regulatory Deadlines in Additional Areas (SC and GA) Affected by Hurricane Ian  
+•  Public Safety and Homeland Security Bureau issue a verbal waiver for Florida public safety officials to 
+   use 700 - 800 MHz interoperability channels 
+•  International Bureau grants verbal special Temporary Authority (STA) for two weeks to repair of 
+   antennas and other facilities.  The purpose of this STA is to allow the provider to operate with 
+   facilities that are not covered by their current authorization while they are fixing facilities caused by 
+   Hurricane IAN. 
+            
+
+
+                                                                              8 
+                                       

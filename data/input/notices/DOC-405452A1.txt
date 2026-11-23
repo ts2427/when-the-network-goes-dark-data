@@ -1,0 +1,48 @@
+﻿	
+DA 24-XXX
+Released:  September 12, 2024
+
+THE FEDERAL COMMUNICATIONS COMMISSION REFINES SCOPE OF THE DISASTER INFORMATION REPORTING SYSTEM AND THE MANDATORY DISASTER RESPONSE INITIATIVE FOR COMMUNICATIONS IMPACTED BY HURRICANE FRANCINE
+
+The Federal Communications Commission (FCC), at the request of the State of Mississippi, and in coordination with the Department of Homeland Security’s Cybersecurity and Infrastructure Security Agency and the Federal Emergency Management Agency, has announced a deactivation of the Disaster Information Reporting System (DIRS) and the Mandatory Disaster Response Initiative (MDRI) for the following counties in Mississippi affected by Hurricane Francine:
+
+Mississippi: Adams, Amite, Forrest, Franklin, George, Greene, Hancock, Harrison, Jackson, Lincoln, Marion, Pearl River, Pike, Stone, and Wilkinson. The Federal Communications Commission Announces the Expansion of the Disaster Information Reporting System and the Mandatory Disaster Response Initiative for Communications Impacted by Hurricane Francine in Mississippi, Public Notice, DA 24-932 (rel. Sept. 11, 2024) (“DIRS and MDRI Activation PN”).
+  
+
+Communications providers do not need to provide any additional reporting in DIRS for these areas in Mississippi with respect to Hurricane Francine.  The FCC will, however, continue to monitor the status of communications services and work with providers and government partners in these areas as needed to support remaining restoration efforts.  Facilities-based mobile wireless providers are no longer required to perform MDRI-related functions for the state of Mississippi. Note that the MDRI had been activated in response to Hurricane Francine for the State of Mississippi.  See DIRS and MDRI Activation PN at 1.  
+  The Network Outage Reporting System reporting obligations under Part 4 of the Commission’s rules, which were suspended for providers reporting in DIRS while DIRS was activated, are now again in effect for any new network outages for the areas in Mississippi covered by DIRS reporting for Hurricane Francine. 47 CFR § 4.9(a) (cable); 47 CFR § 4.9(e) (wireless); 47 CFR § 4.9(f) (wireline); 47 CFR § 4.9(g) (interconnected VoIP); see also 47 CFR § 4.18(a) (suspending NORS requirements for cable communications, wireless, wireline, and interconnected VoIP providers required to report in DIRS pertaining to any incidents arising during the DIRS activation and that are timely reported in DIRS).  
+   
+
+DIRS remains activated in the following parishes in Louisiana:
+
+Louisiana:  Acadia, Ascension, Assumption, Baton Rouge (East), Baton Rouge (West), Evangeline, Feliciana (East), Feliciana (West), Iberia, Iberville, Jefferson, Lafayette, Lafourche, Livingston, Orleans, Plaquemines, Pointe Coupee, St. Bernard, St. Charles, St. Helena, St. James, St. John the Baptist, St. Landry, St. Martin, St. Mary, St. Tammany, Tangipahoa, Terrebonne, Vermilion, and Washington.
+
+Please continue to provide information for the impacted parishes that are already in the disaster area.  
+The MDRI remains activated in the following parishes in Louisiana:
+
+Louisiana:  Acadia, Ascension, Assumption, Baton Rouge (East), Baton Rouge (West), Evangeline, Feliciana (East), Feliciana (West), Iberia, Iberville, Jefferson, Lafayette, Lafourche, Livingston, Orleans, Plaquemines, Pointe Coupee, St. Bernard, St. Charles, St. Helena, St. James, St. John the Baptist, St. Landry, St. Martin, St. Mary, St. Tammany, Tangipahoa, Terrebonne, Vermilion, and Washington.
+
+The FCC continues to monitor this event and may amend the DIRS and/or MDRI activation areas in the coming days.
+
+For further information concerning DIRS, please contact:
+ 
+Michael Caiafa (202) 418-1311, (540) 834-7401 (cell), michael.caiafa@fcc.gov
+David Ahn (202) 418-0853, david.ahn@fcc.gov
+John Healy (215) 847-8094 (cell), (202) 418-2448, john.healy@fcc.gov
+FCC 24/7 Operations Center (202) 418-1122, fccops@fcc.gov 
+
+For further information concerning the MDRI, please contact:
+
+Justin Cain, (202) 853-7365, (202) 418-2924, justin.cain@fcc.gov 
+Logan Bennett, (732) 425-5036, (202) 418-7790, logan.bennett@fcc.gov 
+FCC 24/7 Operations Center, (202) 418-1122, fccops@fcc.gov  
+
+For more information on the FCC’s response to Hurricane Francine, please go to www.fcc.gov/Francine.  
+
+
+
+
+- FCC -
+       
+2
+

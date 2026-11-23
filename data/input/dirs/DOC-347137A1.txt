@@ -1,0 +1,80 @@
+ 
+ 
+As prepared by the Federal Communications Commission: October 09, 2017 11:30 a.m. 
+Communications Status Report for  
+Areas Impacted by Hurricane Nate  
+October 9, 2017 
+ 
+The following is a report on the status of communications services in geographic areas impacted by 
+Hurricane Nate as of October 9, 2017 at 11:00 AM EDT.  This report incorporates network outage data 
+submitted by communications providers to the Federal Communications Commission’s Disaster 
+Information Reporting System (DIRS).  DIRS is currently activated for affected counties in Alabama, 
+Florida, and Mississippi.  There has been virtually no effect on communications at any time during or 
+after the storm.   
+The following counties are in the geographic area that was covered by the DIRS activation as of this 
+morning (the “disaster area”). 
+ 
+Alabama: Baldwin, Mobile 
+Florida: Escambia, Okaloosa, Santa Rosa  
+Mississippi:  Hancock, Harrison, Jackson 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+As prepared by the Federal Communications Commission: October 09, 2017 11:30 a.m. 
+ 
+911 Services  
+No PSAPs are reported as being affected. 
+ 
+Wireless Services 
+The following section describes the status of wireless communications services and restoration in the 
+disaster area, including the percentage of cell sites out of service for each county. 
+ 
+The following map of the disaster area illustrates the county that was affected: 
+ 
+ 
+ 
+ 
+The information shown was provided by the signatories to the Wireless Resiliency Cooperative 
+Framework and several additional companies that agreed to allow us to include their data in the 
+aggregated data: 
+ 
+Alabama:  One cell site reported down. 
+ 
+ 
+As prepared by the Federal Communications Commission: October 09, 2017 11:30 a.m. 
+ 
+Florida:  No cell sites reported down. 
+ 
+Mississippi:  No cell sites reported down. 
+The tables below provide the percentage of cell sites out of service by county: 
+ 
+State Affected Counties Cell Sites Served Cell Sites Out Percent Out 
+AL BALDWIN 295 0 0.0% 
+AL MOBILE 398 1 0.3% 
+FL ESCAMBIA 194 0 0.0% 
+FL OKALOOSA 195 0 0.0% 
+FL SANTA ROSA 136 0 0.0% 
+MS HANCOCK 61 0 0.0% 
+MS HARRISON 216 0 0.0% 
+MS JACKSON 149 0 0.0% 
+TOTAL 
+ 
+1,644 1 0.06% 
+ 
+ 
+Cable Systems and Wireline (Combined) 
+ 
+There are at least 1,589 subscribers out of service in the affected area.  This includes users who get 
+service from cable system or wireline providers.   
+ 
+Broadcast 
+ 
+No television of radio stations are reported down in DIRS. 
+ 
+ 
+ 
+ 
