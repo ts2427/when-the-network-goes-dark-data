@@ -28,7 +28,7 @@ import pandas as pd
 from config import (BDC_COUNTS, BDC_COUNTS_META, DOWNLOADS_LOG, EAGLEI_EXTRACT, EAGLEI_RAW_DIR, OUTPUT, PROCESSED,
                     RAW, REGIMES, ROOT)
 
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 RELEASE_DATE = "2026-11-23"
 REPO_NAME = "when-the-network-goes-dark-data"
 TITLE = "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)"
@@ -412,7 +412,7 @@ def codebook_md(T: Path, pkg: dict) -> None:
         L.append("")
     L += ["## `data/analysis/results.json`", "",
           "Nested JSON, one key per chapter (`chapter_1` to `chapter_9`, then `v2_1_public_record_misses`, "
-          "`v2_2_backup_power`, `v2_3_power_cell_timing`, `v2_5_groups`, `v2_5_network_redundancy`). Each number is "
+          "`v2_2_backup_power`, `v2_3_power_cell_timing`, `v2_5_groups`, `v2_5_network_redundancy`, `v2_1_1_report_card`). Each number is "
           "stored with its interval (`lo`, `hi`), `n`, `unit` and `method` where it has them. The README maps each "
           "page section and figure to its key and script.", ""]
     write(T / "CODEBOOK.md", "\n".join(L))
@@ -420,13 +420,22 @@ def codebook_md(T: Path, pkg: dict) -> None:
 
 # ------------------------------------------------------------------------------------------- text files --
 def dois() -> tuple:
-    """(concept DOI, version DOI), from step 11, where they were checked against the Zenodo record."""
+    """(concept DOI, the latest archived version's DOI), from step 11, where each was checked on its Zenodo record."""
     s11 = importlib.import_module("11_build_page")
     return s11.CONCEPT_DOI, s11.VERSION_DOI
 
 
+def version_dois() -> dict:
+    """{version: DOI} for every archived version (step 11's record; a new version has none until it is released)."""
+    return dict(importlib.import_module("11_build_page").VERSION_DOIS)
+
+
 def citation_cff(T: Path) -> None:
-    concept, version = dois()
+    concept, _ = dois()
+    ids = "".join(f'''  - type: doi
+    value: "{doi}"
+    description: "Version {ver}"
+''' for ver, doi in version_dois().items())
     write(T / "CITATION.cff", f"""cff-version: 1.2.0
 message: "If you use these data or code, please cite them as below. Use the concept DOI for the work in general and the version DOI for specific numbers."
 type: dataset
@@ -438,10 +447,7 @@ identifiers:
   - type: doi
     value: "{concept}"
     description: "Concept DOI: all versions (resolves to the latest)"
-  - type: doi
-    value: "{version}"
-    description: "Version {VERSION}: the numbers on the page"
-license: CC-BY-4.0
+{ids}license: CC-BY-4.0
 authors:
   - family-names: "{AUTHOR['family']}"
     given-names: "{AUTHOR['given']}"
@@ -469,18 +475,27 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
-## [Unreleased]
+## [{VERSION}] - {RELEASE_DATE}
 
 ### Added
-- The Zenodo DOIs (concept {dois()[0]}; version {VERSION}: {dois()[1]}) in `CITATION.cff` and the README, with a DOI
+- Chapter 14, "How complete are the FCC's public reports?" (exploratory: a descriptive summary of the existing
+  validation results; addendum entry V2.1-1, committed before it was computed). For each storm and each year:
+  reports with cause columns, causes short of or above sites out, headline mismatches, missing state totals, counties
+  in the table but not the county list, counties outside the notice area, the backup-power column, and excluded
+  reports, each with its denominator, plus a one-line summary per year. New key `v2_1_1_report_card` in
+  `results.json`, written by `code/src/12_v2_analysis.py report_card` from the validation outputs; no new data.
+- The Zenodo DOIs (concept {dois()[0]}; version 2.0.0: {dois()[1]}) in `CITATION.cff` and the README, with a DOI
   badge and a How to cite section.
+- `docs/update_procedure.md`: how a new season and a new version are added and released.
 
 ### Changed
-- `code/src/11_build_page.py` (the page builder, not run by `run_all.py`): the page's How to cite box, Dataset
-  metadata and Reproduce it links; the site's old code folder is replaced by a pointer to this repository.
-  `code/src/14_data_repo.py` writes the DOIs. No input, pipeline step or output changed.
+- `code/src/11_build_page.py` (the page builder, not run by `run_all.py`): chapter 14; the page's How to cite box,
+  Dataset metadata and Reproduce it links; the site's old code folder is replaced by a pointer to this repository.
 
-## [{VERSION}] - {RELEASE_DATE}
+### Unchanged
+- Every input, the panel, the storm table, the validation tables, and every other key of `results.json`.
+
+## [2.0.0] - 2026-11-23
 
 First release of this repository. The analysis is version 2 of the page.
 
@@ -525,7 +540,7 @@ The author's data in this repository (everything in `data/analysis/`, the derive
 Creative Commons Attribution 4.0 International license (CC BY 4.0):
 https://creativecommons.org/licenses/by/4.0/ (legal code: https://creativecommons.org/licenses/by/4.0/legalcode).
 
-Attribute: Timothy D. Spivey, "When the Network Goes Dark" data, version 2.0.0 (2026). See `CITATION.cff`.
+Attribute: Timothy D. Spivey, "When the Network Goes Dark" data, version """ + VERSION + """ (2026). See `CITATION.cff`.
 
 The third-party inputs in `data/input/` keep their own terms, listed with the exact attribution for each in
 `SOURCES.md`. U.S. federal government works (FCC, Census, NOAA/NHC, CDC/ATSDR, FEMA) are in the public domain in the
@@ -680,6 +695,8 @@ PAGE_MAP = [  # page section, figures (figure id: published CSV), results.json k
     ("12. Which comes back first: power or cell service?", "", "v2_3_power_cell_timing", "12_v2_analysis.py v2_3"),
     ("13. Do counties with more mobile providers recover differently?", "",
      "v2_5_groups, v2_5_network_redundancy", "12_v2_analysis.py v2_5_groups v2_5 (counts: 06e, 06f)"),
+    ("14. How complete are the FCC's public reports?", "", "v2_1_1_report_card",
+     "12_v2_analysis.py report_card (from the validation outputs)"),
     ("Look up a county", "county lookup (hurricane-county-lookup.json)", "panel", "11_build_page.py"),
     ("Methods, data and licenses", "validation tables", "chapter_1, validation/*.csv", "04_validate_dirs.py, 10_analysis.py"),
 ]
@@ -695,7 +712,7 @@ RUN_ORDER = [
     ("09_build_panel.py", "", "the panel, the storm table and dirs_county_day.csv"),
     ("10_analysis.py", "3 4 5 6 7 8 9", "chapters 3-9 to results.json"),
     ("10_analysis.py", "1 2", "chapters 1 and 2 (run second so results.json keeps the published key order)"),
-    ("12_v2_analysis.py", "v2_1 v2_2 v2_3 v2_5_groups v2_5", "chapters 10-13 to results.json"),
+    ("12_v2_analysis.py", "v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card", "chapters 10-14 to results.json"),
 ]
 
 
@@ -795,8 +812,11 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "version DOI when you use specific numbers:", "",
           f"- In general (all versions; resolves to the latest): Spivey, T. D. (2026). {TITLE} [Data set]. Zenodo. "
           f"https://doi.org/{concept}",
-          f"- These numbers (version {VERSION}): Spivey, T. D. (2026). {TITLE} (Version {VERSION}) [Data set]. "
-          f"Zenodo. https://doi.org/{version}", "",
+          *[f"- Version {ver}: Spivey, T. D. (2026). {TITLE} (Version {ver}) [Data set]. Zenodo. "
+            f"https://doi.org/{doi}" for ver, doi in version_dois().items()],
+          *([] if VERSION in version_dois() else
+            [f"- Version {VERSION} (this one) gets its own DOI when it is released; until then, cite the concept DOI."]),
+          "",
           "`CITATION.cff` has both, and GitHub's \"Cite this repository\" button reads it.", "",
           "## Disclosure", "",
           "The author works in the telecommunications industry. This analysis was done independently, on personal "

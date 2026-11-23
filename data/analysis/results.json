@@ -29102,5 +29102,1934 @@
       "limits": "Provider counts describe reported coverage (mobile providers covering at least half the county's area, in the FCC's Broadband Data Collection release before the storm), not which networks were out. No provider is named.",
       "near_universal": "near-universal providers (likely satellite or national fixed-wireless; this file doesn't identify technology)"
     }
+  },
+  "v2_1_1_report_card": {
+    "label": "Exploratory: descriptive summary of validation results (added in version 2.1.0).",
+    "wording": "Descriptive only: properties of the reports as published, not of the networks or of the providers that filed. Never 'improved' or 'worsened' unless the year table shows a clear pattern, and then only 'in these reports'. No ranking of storms.",
+    "measures": [
+      {
+        "key": "cause_columns",
+        "label": "cause columns printed",
+        "denominator": "reports with county rows"
+      },
+      {
+        "key": "causes_short",
+        "label": "causes short of sites out in at least one county",
+        "denominator": "reports with cause columns"
+      },
+      {
+        "key": "causes_above",
+        "label": "causes above sites out in at least one county",
+        "denominator": "reports with cause columns"
+      },
+      {
+        "key": "headline_mismatch",
+        "label": "headline % out differs from the county rows by more than 0.2 points",
+        "denominator": "reports with a printed headline"
+      },
+      {
+        "key": "headline_not_printed",
+        "label": "no headline % out printed",
+        "denominator": "reports"
+      },
+      {
+        "key": "missing_state_total",
+        "label": "a state total missing",
+        "denominator": "reports"
+      },
+      {
+        "key": "not_in_list",
+        "label": "counties in the table but not in the report's county list",
+        "denominator": "reports"
+      },
+      {
+        "key": "out_of_area",
+        "label": "counties outside the storm's notice area",
+        "denominator": "reports"
+      },
+      {
+        "key": "backup_printed",
+        "label": "backup-power column printed",
+        "denominator": "reports in the panel"
+      },
+      {
+        "key": "excluded",
+        "label": "excluded from the analysis",
+        "denominator": "reports"
+      }
+    ],
+    "all_reports": {
+      "n_storms": 22,
+      "n_reports": 178,
+      "cause_columns": {
+        "count": 127,
+        "of": 178,
+        "share_pct": 71.3
+      },
+      "causes_short": {
+        "count": 89,
+        "of": 127,
+        "share_pct": 70.1
+      },
+      "causes_above": {
+        "count": 38,
+        "of": 127,
+        "share_pct": 29.9
+      },
+      "headline_mismatch": {
+        "count": 13,
+        "of": 177,
+        "share_pct": 7.3
+      },
+      "headline_not_printed": {
+        "count": 1,
+        "of": 178,
+        "share_pct": 0.6
+      },
+      "missing_state_total": {
+        "count": 2,
+        "of": 178,
+        "share_pct": 1.1
+      },
+      "not_in_list": {
+        "count": 36,
+        "of": 178,
+        "share_pct": 20.2
+      },
+      "out_of_area": {
+        "count": 16,
+        "of": 178,
+        "share_pct": 9.0
+      },
+      "backup_printed": {
+        "count": 68,
+        "of": 167,
+        "share_pct": 40.7
+      },
+      "excluded": {
+        "count": 7,
+        "of": 178,
+        "share_pct": 3.9
+      }
+    },
+    "by_year": [
+      {
+        "year": 2017,
+        "n_storms": 3,
+        "n_reports": 24,
+        "cause_columns": {
+          "count": 0,
+          "of": 24,
+          "share_pct": 0.0
+        },
+        "causes_short": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "headline_mismatch": {
+          "count": 10,
+          "of": 23,
+          "share_pct": 43.5
+        },
+        "headline_not_printed": {
+          "count": 1,
+          "of": 24,
+          "share_pct": 4.2
+        },
+        "missing_state_total": {
+          "count": 1,
+          "of": 24,
+          "share_pct": 4.2
+        },
+        "not_in_list": {
+          "count": 3,
+          "of": 24,
+          "share_pct": 12.5
+        },
+        "out_of_area": {
+          "count": 11,
+          "of": 24,
+          "share_pct": 45.8
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 18,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 2,
+          "of": 24,
+          "share_pct": 8.3
+        },
+        "summary": "2017: 3 storms, 24 reports (2 excluded). Cause columns in 0 of 24; causes short of sites out: not applicable (no cause columns); causes above sites out: not applicable (no cause columns); headline mismatch in 10 of 23; a state total missing in 1 of 24; table counties not in the county list in 3 of 24; counties outside the notice area in 11 of 24; backup-power column in 0 of 18."
+      },
+      {
+        "year": 2018,
+        "n_storms": 2,
+        "n_reports": 27,
+        "cause_columns": {
+          "count": 0,
+          "of": 27,
+          "share_pct": 0.0
+        },
+        "causes_short": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 27,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 27,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 27,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 5,
+          "of": 27,
+          "share_pct": 18.5
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 27,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 27,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 27,
+          "share_pct": 0.0
+        },
+        "summary": "2018: 2 storms, 27 reports (0 excluded). Cause columns in 0 of 27; causes short of sites out: not applicable (no cause columns); causes above sites out: not applicable (no cause columns); headline mismatch in 0 of 27; a state total missing in 0 of 27; table counties not in the county list in 5 of 27; counties outside the notice area in 0 of 27; backup-power column in 0 of 27."
+      },
+      {
+        "year": 2019,
+        "n_storms": 2,
+        "n_reports": 7,
+        "cause_columns": {
+          "count": 7,
+          "of": 7,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 6,
+          "of": 7,
+          "share_pct": 85.7
+        },
+        "causes_above": {
+          "count": 1,
+          "of": 7,
+          "share_pct": 14.3
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 5,
+          "of": 7,
+          "share_pct": 71.4
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "summary": "2019: 2 storms, 7 reports (0 excluded). Cause columns in 7 of 7; causes short of sites out in 6 of 7; causes above sites out in 1 of 7; headline mismatch in 0 of 7; a state total missing in 0 of 7; table counties not in the county list in 5 of 7; counties outside the notice area in 0 of 7; backup-power column in 0 of 7."
+      },
+      {
+        "year": 2020,
+        "n_storms": 4,
+        "n_reports": 31,
+        "cause_columns": {
+          "count": 31,
+          "of": 31,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 24,
+          "of": 31,
+          "share_pct": 77.4
+        },
+        "causes_above": {
+          "count": 13,
+          "of": 31,
+          "share_pct": 41.9
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 31,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 31,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 31,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 3,
+          "of": 31,
+          "share_pct": 9.7
+        },
+        "out_of_area": {
+          "count": 2,
+          "of": 31,
+          "share_pct": 6.5
+        },
+        "backup_printed": {
+          "count": 3,
+          "of": 28,
+          "share_pct": 10.7
+        },
+        "excluded": {
+          "count": 3,
+          "of": 31,
+          "share_pct": 9.7
+        },
+        "summary": "2020: 4 storms, 31 reports (3 excluded). Cause columns in 31 of 31; causes short of sites out in 24 of 31; causes above sites out in 13 of 31; headline mismatch in 0 of 31; a state total missing in 0 of 31; table counties not in the county list in 3 of 31; counties outside the notice area in 2 of 31; backup-power column in 3 of 28."
+      },
+      {
+        "year": 2021,
+        "n_storms": 2,
+        "n_reports": 22,
+        "cause_columns": {
+          "count": 22,
+          "of": 22,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 10,
+          "of": 22,
+          "share_pct": 45.5
+        },
+        "causes_above": {
+          "count": 17,
+          "of": 22,
+          "share_pct": 77.3
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 2,
+          "of": 22,
+          "share_pct": 9.1
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "summary": "2021: 2 storms, 22 reports (0 excluded). Cause columns in 22 of 22; causes short of sites out in 10 of 22; causes above sites out in 17 of 22; headline mismatch in 0 of 22; a state total missing in 0 of 22; table counties not in the county list in 2 of 22; counties outside the notice area in 0 of 22; backup-power column in 0 of 22."
+      },
+      {
+        "year": 2022,
+        "n_storms": 2,
+        "n_reports": 15,
+        "cause_columns": {
+          "count": 15,
+          "of": 15,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 2,
+          "of": 15,
+          "share_pct": 13.3
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 15,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 15,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 15,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 15,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 9,
+          "of": 15,
+          "share_pct": 60.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 15,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 15,
+          "of": 15,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 15,
+          "share_pct": 0.0
+        },
+        "summary": "2022: 2 storms, 15 reports (0 excluded). Cause columns in 15 of 15; causes short of sites out in 2 of 15; causes above sites out in 0 of 15; headline mismatch in 0 of 15; a state total missing in 0 of 15; table counties not in the county list in 9 of 15; counties outside the notice area in 0 of 15; backup-power column in 15 of 15."
+      },
+      {
+        "year": 2023,
+        "n_storms": 1,
+        "n_reports": 6,
+        "cause_columns": {
+          "count": 6,
+          "of": 6,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 4,
+          "of": 6,
+          "share_pct": 66.7
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 1,
+          "of": 6,
+          "share_pct": 16.7
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 1,
+          "of": 6,
+          "share_pct": 16.7
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 6,
+          "of": 6,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "summary": "2023: 1 storm, 6 reports (0 excluded). Cause columns in 6 of 6; causes short of sites out in 4 of 6; causes above sites out in 0 of 6; headline mismatch in 1 of 6; a state total missing in 0 of 6; table counties not in the county list in 1 of 6; counties outside the notice area in 0 of 6; backup-power column in 6 of 6."
+      },
+      {
+        "year": 2024,
+        "n_storms": 5,
+        "n_reports": 43,
+        "cause_columns": {
+          "count": 43,
+          "of": 43,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 40,
+          "of": 43,
+          "share_pct": 93.0
+        },
+        "causes_above": {
+          "count": 7,
+          "of": 43,
+          "share_pct": 16.3
+        },
+        "headline_mismatch": {
+          "count": 2,
+          "of": 43,
+          "share_pct": 4.7
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 43,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 1,
+          "of": 43,
+          "share_pct": 2.3
+        },
+        "not_in_list": {
+          "count": 8,
+          "of": 43,
+          "share_pct": 18.6
+        },
+        "out_of_area": {
+          "count": 3,
+          "of": 43,
+          "share_pct": 7.0
+        },
+        "backup_printed": {
+          "count": 41,
+          "of": 41,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 2,
+          "of": 43,
+          "share_pct": 4.7
+        },
+        "summary": "2024: 5 storms, 43 reports (2 excluded). Cause columns in 43 of 43; causes short of sites out in 40 of 43; causes above sites out in 7 of 43; headline mismatch in 2 of 43; a state total missing in 1 of 43; table counties not in the county list in 8 of 43; counties outside the notice area in 3 of 43; backup-power column in 41 of 41."
+      },
+      {
+        "year": 2026,
+        "n_storms": 1,
+        "n_reports": 3,
+        "cause_columns": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "summary": "2026: 1 storm, 3 reports (0 excluded). Cause columns in 3 of 3; causes short of sites out in 3 of 3; causes above sites out in 0 of 3; headline mismatch in 0 of 3; a state total missing in 0 of 3; table counties not in the county list in 0 of 3; counties outside the notice area in 0 of 3; backup-power column in 3 of 3."
+      }
+    ],
+    "by_storm": [
+      {
+        "storm_key": "AL092017_2017-08-25",
+        "storm": "Harvey",
+        "year": 2017,
+        "n_reports": 11,
+        "cause_columns": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "causes_short": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "headline_mismatch": {
+          "count": 2,
+          "of": 11,
+          "share_pct": 18.2
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 1,
+          "of": 11,
+          "share_pct": 9.1
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 3,
+          "of": 11,
+          "share_pct": 27.3
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 10,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 1,
+          "of": 11,
+          "share_pct": 9.1
+        },
+        "excluded_reports": [
+          {
+            "doc_id": "DOC-346478A1",
+            "report_date": "2017-09-03",
+            "reason": "Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed); no Texas total"
+          }
+        ]
+      },
+      {
+        "storm_key": "AL112017_2017-09-06",
+        "storm": "Irma",
+        "year": 2017,
+        "n_reports": 12,
+        "cause_columns": {
+          "count": 0,
+          "of": 12,
+          "share_pct": 0.0
+        },
+        "causes_short": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "headline_mismatch": {
+          "count": 8,
+          "of": 12,
+          "share_pct": 66.7
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 12,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 12,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 3,
+          "of": 12,
+          "share_pct": 25.0
+        },
+        "out_of_area": {
+          "count": 8,
+          "of": 12,
+          "share_pct": 66.7
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 8,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 12,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL162017_2017-10-08",
+        "storm": "Nate",
+        "year": 2017,
+        "n_reports": 1,
+        "cause_columns": {
+          "count": 0,
+          "of": 1,
+          "share_pct": 0.0
+        },
+        "causes_short": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "headline_not_printed": {
+          "count": 1,
+          "of": 1,
+          "share_pct": 100.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 1,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 1,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 1,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "excluded": {
+          "count": 1,
+          "of": 1,
+          "share_pct": 100.0
+        },
+        "excluded_reports": [
+          {
+            "doc_id": "DOC-347137A1",
+            "report_date": "2017-10-09",
+            "reason": "No headline percent printed (and no totals)"
+          }
+        ]
+      },
+      {
+        "storm_key": "AL062018_2018-09-12",
+        "storm": "Florence",
+        "year": 2018,
+        "n_reports": 11,
+        "cause_columns": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "causes_short": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 5,
+          "of": 11,
+          "share_pct": 45.5
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 11,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL142018_2018-10-09",
+        "storm": "Michael",
+        "year": 2018,
+        "n_reports": 16,
+        "cause_columns": {
+          "count": 0,
+          "of": 16,
+          "share_pct": 0.0
+        },
+        "causes_short": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 0,
+          "share_pct": null
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 16,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 16,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 16,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 16,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 16,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 16,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 16,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL022019_2019-07-12",
+        "storm": "Barry",
+        "year": 2019,
+        "n_reports": 2,
+        "cause_columns": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL052019_2019-08-27",
+        "storm": "Dorian",
+        "year": 2019,
+        "n_reports": 5,
+        "cause_columns": {
+          "count": 5,
+          "of": 5,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 4,
+          "of": 5,
+          "share_pct": 80.0
+        },
+        "causes_above": {
+          "count": 1,
+          "of": 5,
+          "share_pct": 20.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 3,
+          "of": 5,
+          "share_pct": 60.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL132020_2020-08-24",
+        "storm": "Laura",
+        "year": 2020,
+        "n_reports": 15,
+        "cause_columns": {
+          "count": 15,
+          "of": 15,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 13,
+          "of": 15,
+          "share_pct": 86.7
+        },
+        "causes_above": {
+          "count": 6,
+          "of": 15,
+          "share_pct": 40.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 15,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 15,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 15,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 2,
+          "of": 15,
+          "share_pct": 13.3
+        },
+        "out_of_area": {
+          "count": 1,
+          "of": 15,
+          "share_pct": 6.7
+        },
+        "backup_printed": {
+          "count": 2,
+          "of": 12,
+          "share_pct": 16.7
+        },
+        "excluded": {
+          "count": 3,
+          "of": 15,
+          "share_pct": 20.0
+        },
+        "excluded_reports": [
+          {
+            "doc_id": "DOC-366519A1",
+            "report_date": "2020-08-28",
+            "reason": "San Augustine, Texas row not confirmed by the second reading"
+          },
+          {
+            "doc_id": "DOC-366524A1",
+            "report_date": "2020-08-29",
+            "reason": "Maryland served does not reconcile (5,521 vs 6,522 printed); San Augustine not confirmed; names with backquotes not matched"
+          },
+          {
+            "doc_id": "DOC-366526A1",
+            "report_date": "2020-08-30",
+            "reason": "San Augustine, Texas row not confirmed by the second reading"
+          }
+        ]
+      },
+      {
+        "storm_key": "AL192020_2020-09-14",
+        "storm": "Sally",
+        "year": 2020,
+        "n_reports": 7,
+        "cause_columns": {
+          "count": 7,
+          "of": 7,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 5,
+          "of": 7,
+          "share_pct": 71.4
+        },
+        "causes_above": {
+          "count": 2,
+          "of": 7,
+          "share_pct": 28.6
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 7,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL262020_2020-10-08",
+        "storm": "Delta",
+        "year": 2020,
+        "n_reports": 5,
+        "cause_columns": {
+          "count": 5,
+          "of": 5,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 3,
+          "of": 5,
+          "share_pct": 60.0
+        },
+        "causes_above": {
+          "count": 2,
+          "of": 5,
+          "share_pct": 40.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 1,
+          "of": 5,
+          "share_pct": 20.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 1,
+          "of": 5,
+          "share_pct": 20.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL282020_2020-10-28",
+        "storm": "Zeta",
+        "year": 2020,
+        "n_reports": 4,
+        "cause_columns": {
+          "count": 4,
+          "of": 4,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 3,
+          "of": 4,
+          "share_pct": 75.0
+        },
+        "causes_above": {
+          "count": 3,
+          "of": 4,
+          "share_pct": 75.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 4,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 4,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 4,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 4,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 1,
+          "of": 4,
+          "share_pct": 25.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 4,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 4,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL092021_2021-08-29",
+        "storm": "Ida",
+        "year": 2021,
+        "n_reports": 22,
+        "cause_columns": {
+          "count": 22,
+          "of": 22,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 10,
+          "of": 22,
+          "share_pct": 45.5
+        },
+        "causes_above": {
+          "count": 17,
+          "of": 22,
+          "share_pct": 77.3
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 2,
+          "of": 22,
+          "share_pct": 9.1
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 22,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL142021_2021-09-14",
+        "storm": "Nicholas",
+        "year": 2021,
+        "n_reports": 2,
+        "cause_columns": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "causes_above": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL092022_2022-09-27",
+        "storm": "Ian",
+        "year": 2022,
+        "n_reports": 13,
+        "cause_columns": {
+          "count": 13,
+          "of": 13,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 0,
+          "of": 13,
+          "share_pct": 0.0
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 13,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 13,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 13,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 13,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 9,
+          "of": 13,
+          "share_pct": 69.2
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 13,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 13,
+          "of": 13,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 13,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL172022_2022-11-09",
+        "storm": "Nicole",
+        "year": 2022,
+        "n_reports": 2,
+        "cause_columns": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 2,
+          "of": 2,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 2,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL102023_2023-08-29",
+        "storm": "Idalia",
+        "year": 2023,
+        "n_reports": 6,
+        "cause_columns": {
+          "count": 6,
+          "of": 6,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 4,
+          "of": 6,
+          "share_pct": 66.7
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 1,
+          "of": 6,
+          "share_pct": 16.7
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 1,
+          "of": 6,
+          "share_pct": 16.7
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 6,
+          "of": 6,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL022024_2024-07-08",
+        "storm": "Beryl",
+        "year": 2024,
+        "n_reports": 6,
+        "cause_columns": {
+          "count": 6,
+          "of": 6,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 6,
+          "of": 6,
+          "share_pct": 100.0
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 6,
+          "of": 6,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 6,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL042024_2024-08-04",
+        "storm": "Debby",
+        "year": 2024,
+        "n_reports": 5,
+        "cause_columns": {
+          "count": 5,
+          "of": 5,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 5,
+          "of": 5,
+          "share_pct": 100.0
+        },
+        "causes_above": {
+          "count": 2,
+          "of": 5,
+          "share_pct": 40.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 3,
+          "of": 5,
+          "share_pct": 60.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 5,
+          "of": 5,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL062024_2024-09-11",
+        "storm": "Francine",
+        "year": 2024,
+        "n_reports": 3,
+        "cause_columns": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "backup_printed": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL092024_2024-09-25",
+        "storm": "Helene",
+        "year": 2024,
+        "n_reports": 24,
+        "cause_columns": {
+          "count": 24,
+          "of": 24,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 21,
+          "of": 24,
+          "share_pct": 87.5
+        },
+        "causes_above": {
+          "count": 5,
+          "of": 24,
+          "share_pct": 20.8
+        },
+        "headline_mismatch": {
+          "count": 2,
+          "of": 24,
+          "share_pct": 8.3
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 24,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 1,
+          "of": 24,
+          "share_pct": 4.2
+        },
+        "not_in_list": {
+          "count": 5,
+          "of": 24,
+          "share_pct": 20.8
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 24,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 22,
+          "of": 22,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 2,
+          "of": 24,
+          "share_pct": 8.3
+        },
+        "excluded_reports": [
+          {
+            "doc_id": "DOC-406144A1",
+            "report_date": "2024-10-03",
+            "reason": "FCC inconsistency: Hamilton row prints transport 0, Florida total prints 1"
+          },
+          {
+            "doc_id": "DOC-406197A1",
+            "report_date": "2024-10-04",
+            "reason": "Washington County, Tennessee row not confirmed by the second reading"
+          }
+        ]
+      },
+      {
+        "storm_key": "AL142024_2024-10-07",
+        "storm": "Milton",
+        "year": 2024,
+        "n_reports": 5,
+        "cause_columns": {
+          "count": 5,
+          "of": 5,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 5,
+          "of": 5,
+          "share_pct": 100.0
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 5,
+          "of": 5,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 5,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      },
+      {
+        "storm_key": "AL092026_2026-10-08",
+        "storm": "Isaias",
+        "year": 2026,
+        "n_reports": 3,
+        "cause_columns": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "causes_short": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "causes_above": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "headline_mismatch": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "headline_not_printed": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "missing_state_total": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "not_in_list": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "out_of_area": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "backup_printed": {
+          "count": 3,
+          "of": 3,
+          "share_pct": 100.0
+        },
+        "excluded": {
+          "count": 0,
+          "of": 3,
+          "share_pct": 0.0
+        },
+        "excluded_reports": []
+      }
+    ],
+    "shared_reports": [
+      "DOC-375778A1",
+      "DOC-375808A1"
+    ],
+    "no_study_state_rows": [
+      "DOC-346607A1",
+      "DOC-346626A1",
+      "DOC-346632A1",
+      "DOC-346634A1"
+    ],
+    "headline_tolerance_points": 0.2,
+    "sources": [
+      "output/validation_dirs.csv",
+      "output/area_status_counts.csv",
+      "output/excluded_reports.csv",
+      "manifest/dirs_reports.csv",
+      "panel (storm keys; backup column, checked against results.json v2_2_backup_power)"
+    ]
   }
 }

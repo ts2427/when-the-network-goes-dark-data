@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24477809.svg)](https://doi.org/10.5281/zenodo.24477809)
 
-Version 2.0.0 (2026-11-23). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
+Version 2.1.0 (2026-11-23). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
 
 The data and code behind the page *When the Network Goes Dark* (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 21 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in `data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.
 
@@ -82,7 +82,7 @@ python -m pytest code/tests/test_reproduction.py   # compare build/ with data/an
 | 8 | `09_build_panel.py` |  | the panel, the storm table and dirs_county_day.csv |
 | 9 | `10_analysis.py` | 3 4 5 6 7 8 9 | chapters 3-9 to results.json |
 | 10 | `10_analysis.py` | 1 2 | chapters 1 and 2 (run second so results.json keeps the published key order) |
-| 11 | `12_v2_analysis.py` | v2_1 v2_2 v2_3 v2_5_groups v2_5 | chapters 10-13 to results.json |
+| 11 | `12_v2_analysis.py` | v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card | chapters 10-14 to results.json |
 
 Then it writes `build/processed/storms.csv` and the test compares `build/processed/dirs_county_day.csv`, `storms.csv` and `build/output/results.json` with `data/analysis/` (byte for byte).
 
@@ -107,6 +107,7 @@ Each section of the page, its figures (the figure CSVs are published with the pa
 | 11. Sites on backup power |  | v2_2_backup_power | 12_v2_analysis.py v2_2 |
 | 12. Which comes back first: power or cell service? |  | v2_3_power_cell_timing | 12_v2_analysis.py v2_3 |
 | 13. Do counties with more mobile providers recover differently? |  | v2_5_groups, v2_5_network_redundancy | 12_v2_analysis.py v2_5_groups v2_5 (counts: 06e, 06f) |
+| 14. How complete are the FCC's public reports? |  | v2_1_1_report_card | 12_v2_analysis.py report_card (from the validation outputs) |
 | Look up a county | county lookup (hurricane-county-lookup.json) | panel | 11_build_page.py |
 | Methods, data and licenses | validation tables | chapter_1, validation/*.csv | 04_validate_dirs.py, 10_analysis.py |
 
@@ -115,7 +116,8 @@ Each section of the page, its figures (the figure CSVs are published with the pa
 The repository is archived on Zenodo. Cite the concept DOI for the data and code in general, and the version DOI when you use specific numbers:
 
 - In general (all versions; resolves to the latest): Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477809
-- These numbers (version 2.0.0): Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 2.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477811
+- Version 2.0.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 2.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477811
+- Version 2.1.0 (this one) gets its own DOI when it is released; until then, cite the concept DOI.
 
 `CITATION.cff` has both, and GitHub's "Cite this repository" button reads it.
 

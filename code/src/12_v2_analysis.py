@@ -675,6 +675,131 @@ def v2_5(panel: pd.DataFrame, results: dict) -> dict:
     return out
 
 
+# ------------------------------------------------------------------------------------------- V2.1-1 report card --
+RC_LABEL = "Exploratory: descriptive summary of validation results (added in version 2.1.0)."
+RC_WORDING = ("Descriptive only: properties of the reports as published, not of the networks or of the providers "
+              "that filed. Never 'improved' or 'worsened' unless the year table shows a clear pattern, and then only "
+              "'in these reports'. No ranking of storms.")
+RC_MEASURES = [  # key, label, denominator
+    ("cause_columns", "cause columns printed", "reports with county rows"),
+    ("causes_short", "causes short of sites out in at least one county", "reports with cause columns"),
+    ("causes_above", "causes above sites out in at least one county", "reports with cause columns"),
+    ("headline_mismatch", "headline % out differs from the county rows by more than 0.2 points",
+     "reports with a printed headline"),
+    ("headline_not_printed", "no headline % out printed", "reports"),
+    ("missing_state_total", "a state total missing", "reports"),
+    ("not_in_list", "counties in the table but not in the report's county list", "reports"),
+    ("out_of_area", "counties outside the storm's notice area", "reports"),
+    ("backup_printed", "backup-power column printed", "reports in the panel"),
+    ("excluded", "excluded from the analysis", "reports"),
+]
+
+
+def report_records(results: dict) -> pd.DataFrame:
+    """One row per report and storm (a report shared by two storms counts for both, as in the panel), from the
+    validation outputs, the report list and results.json's per-report backup-power records. No new data."""
+    from config import MANIFEST
+    step4 = importlib.import_module("04_validate_dirs")
+    v = pd.read_csv(OUTPUT / "validation_dirs.csv", keep_default_na=False)
+    area = pd.read_csv(OUTPUT / "area_status_counts.csv").set_index("doc_id")
+    excl = pd.read_csv(OUTPUT / "excluded_reports.csv", dtype=str, keep_default_na=False).set_index("doc_id")
+    man = pd.read_csv(MANIFEST, dtype=str, keep_default_na=False).set_index("doc_id")
+    storms = pd.read_parquet(PROCESSED / "storms.parquet")[["storm_key", "storm", "nhc_id", "dirs_activation_date"]]
+    pr = pd.read_parquet(PROCESSED / "panel.parquet", columns=["doc_id", "storm_key", "on_backup_power"])
+    in_panel = pr[["doc_id", "storm_key"]].drop_duplicates()
+    panel_docs = set(in_panel.doc_id)
+    # Backup column: printed if any of the report's panel rows has a value. This equals v2_2_backup_power's per-report
+    # "collected" for every report it lists (checked below); it also covers the report v2_2 keeps off the timelines.
+    printed = pr.groupby("doc_id").on_backup_power.apply(lambda s: bool(s.notna().any())).to_dict()
+    for s in results["v2_2_backup_power"]["storms"]:
+        for x in s["by_report"]:
+            if bool(x["collected"]) != printed[x["doc_id"]]:
+                raise ValueError(f"backup column disagrees with v2_2 for {x['doc_id']}")
+    key_of = {(r.nhc_id, str(r.dirs_activation_date)): r.storm_key for r in storms.itertuples()}
+    name_of = dict(zip(storms.storm_key, storms.storm))
+    rows = []
+    for r in v.itertuples():
+        mm = man.loc[r.doc_id]
+        keys = sorted(in_panel[in_panel.doc_id == r.doc_id].storm_key) or [key_of[(mm.nhc_id, mm.dirs_activation_date)]]
+        text = f"{r.flag_reasons}; {r.failures}"
+        stated = None if r.stated_pct_out == "" else float(r.stated_pct_out)
+        computed = None if r.computed_pct_out == "" else float(r.computed_pct_out)
+        a = area.loc[r.doc_id] if r.doc_id in area.index else None
+        has_causes = r.sites_unattributed != ""
+        for k in keys:
+            backup = printed[r.doc_id] if r.doc_id in panel_docs else None  # measure 8: reports in the panel
+            rows.append({
+                "doc_id": r.doc_id, "storm_key": k, "storm": name_of[k], "year": int(k.split("_")[1][:4]),
+                "report_date": mm.report_date, "status": r.status, "has_rows": r.n_rows > 0,
+                "cause_columns": has_causes if r.n_rows > 0 else None,
+                "causes_short": (float(r.sites_unattributed) > 0) if has_causes else None,
+                "causes_above": (float(r.sites_overattributed) > 0) if has_causes else None,
+                "headline_mismatch": (abs(stated - computed) > step4.PCT_TOLERANCE + 1e-9)
+                if stated is not None and computed is not None else None,
+                "headline_not_printed": stated is None,
+                "missing_state_total": ("missing state total" in text) or ("state_total_missing" in text),
+                "not_in_list": bool(a is not None and a.table_not_in_list > 0),
+                "out_of_area": bool(a is not None and a.outside_notice_area > 0),
+                "backup_printed": backup, "in_panel": r.doc_id in panel_docs,
+                "excluded": r.status == "excluded",
+                "excluded_reason": excl.reason[r.doc_id] if r.doc_id in excl.index else "",
+            })
+    return pd.DataFrame(rows).sort_values(["year", "storm", "report_date", "doc_id"], ignore_index=True)
+
+
+def _counts(g: pd.DataFrame) -> dict:
+    out = {"n_reports": int(g.doc_id.nunique())}
+    for key, _, _ in RC_MEASURES:
+        col = g.drop_duplicates("doc_id")[key]
+        known = col.dropna()
+        n_yes = int(known.astype(bool).sum())
+        out[key] = {"count": n_yes, "of": int(len(known)),
+                    "share_pct": round(100 * n_yes / len(known), 1) if len(known) else None}
+    return out
+
+
+def _year_line(year: int, g: pd.DataFrame, c: dict) -> str:
+    def part(key, text):
+        x = c[key]
+        return f"{text}: not applicable (no cause columns)" if x["of"] == 0 else f"{text} in {x['count']} of {x['of']}"
+    storms = sorted(g.storm.unique())
+    return (f"{year}: {len(storms)} storm{'s' if len(storms) != 1 else ''}, {c['n_reports']} reports "
+            f"({c['excluded']['count']} excluded). "
+            + "; ".join([part("cause_columns", "Cause columns"), part("causes_short", "causes short of sites out"),
+                         part("causes_above", "causes above sites out"),
+                         part("headline_mismatch", "headline mismatch"),
+                         part("missing_state_total", "a state total missing"),
+                         part("not_in_list", "table counties not in the county list"),
+                         part("out_of_area", "counties outside the notice area"),
+                         part("backup_printed", "backup-power column")]) + ".")
+
+
+def report_card(results: dict) -> dict:
+    rec = report_records(results)
+    by_storm = []
+    for k, g in rec.groupby("storm_key", sort=False):
+        by_storm.append({"storm_key": k, "storm": g.storm.iloc[0], "year": int(g.year.iloc[0]), **_counts(g),
+                         "excluded_reports": [{"doc_id": x.doc_id, "report_date": x.report_date,
+                                               "reason": x.excluded_reason}
+                                              for x in g[g.excluded].drop_duplicates("doc_id").itertuples()]})
+    by_storm.sort(key=lambda s: (s["year"], s["storm_key"]))
+    by_year = []
+    for y, g in rec.groupby("year"):
+        c = _counts(g)
+        by_year.append({"year": int(y), "n_storms": int(g.storm_key.nunique()), **c, "summary": _year_line(int(y), g, c)})
+    shared = rec.groupby("doc_id").storm_key.nunique()
+    return {"label": RC_LABEL, "wording": RC_WORDING,
+            "measures": [{"key": k, "label": lab, "denominator": d} for k, lab, d in RC_MEASURES],
+            "all_reports": {"n_storms": int(rec.storm_key.nunique()), **_counts(rec)},
+            "by_year": by_year, "by_storm": by_storm,
+            "shared_reports": sorted(shared[shared > 1].index),
+            "no_study_state_rows": sorted(rec[~rec.in_panel & ~rec.excluded].doc_id.unique()),
+            "headline_tolerance_points": importlib.import_module("04_validate_dirs").PCT_TOLERANCE,
+            "sources": ["output/validation_dirs.csv", "output/area_status_counts.csv", "output/excluded_reports.csv",
+                        "manifest/dirs_reports.csv", "panel (storm keys; backup column, checked against "
+                        "results.json v2_2_backup_power)"]}
+
+
 def main():
     panel = pd.read_parquet(PROCESSED / "panel.parquet")
     storms = pd.read_parquet(PROCESSED / "storms.parquet")
@@ -691,6 +816,9 @@ def main():
     if "v2_5" in items:
         step10.write_chapter(RESULTS, "v2_5_network_redundancy",
                              v2_5(panel, json.loads(RESULTS.read_text(encoding="utf-8"))))
+    if "report_card" in items:  # V2.1-1: from the validation outputs and results.json only
+        step10.write_chapter(RESULTS, "v2_1_1_report_card",
+                             report_card(json.loads(RESULTS.read_text(encoding="utf-8"))))
     print("written:", ", ".join(items))
 
 

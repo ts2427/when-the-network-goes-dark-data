@@ -21,7 +21,7 @@ STEPS = [
     ('09_build_panel.py', []),
     ('10_analysis.py', ['3', '4', '5', '6', '7', '8', '9']),
     ('10_analysis.py', ['1', '2']),
-    ('12_v2_analysis.py', ['v2_1', 'v2_2', 'v2_3', 'v2_5_groups', 'v2_5']),
+    ('12_v2_analysis.py', ['v2_1', 'v2_2', 'v2_3', 'v2_5_groups', 'v2_5', 'report_card']),
 ]
 
 

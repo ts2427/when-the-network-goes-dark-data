@@ -80,4 +80,4 @@ Primary key: `release`, `fips`. Missing value code: empty cell.
 
 ## `data/analysis/results.json`
 
-Nested JSON, one key per chapter (`chapter_1` to `chapter_9`, then `v2_1_public_record_misses`, `v2_2_backup_power`, `v2_3_power_cell_timing`, `v2_5_groups`, `v2_5_network_redundancy`). Each number is stored with its interval (`lo`, `hi`), `n`, `unit` and `method` where it has them. The README maps each page section and figure to its key and script.
+Nested JSON, one key per chapter (`chapter_1` to `chapter_9`, then `v2_1_public_record_misses`, `v2_2_backup_power`, `v2_3_power_cell_timing`, `v2_5_groups`, `v2_5_network_redundancy`, `v2_1_1_report_card`). Each number is stored with its interval (`lo`, `hi`), `n`, `unit` and `method` where it has them. The README maps each page section and figure to its key and script.

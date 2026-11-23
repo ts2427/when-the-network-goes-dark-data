@@ -149,3 +149,35 @@ proposals for Tim's approval at checkpoint B1; once approved they are fixed, and
 
 When all items are built: an independent check of every new number, figure and claim, reported to Tim with the local
 preview before anything is merged or pushed.
+
+## V2.1-1. How complete are the FCC's public reports? (version 2.1.0)
+
+- **Label.** Exploratory: descriptive summary of validation results. Added 2026-11-23, after versions 1 and 2 were
+  published and before any of the summaries below was computed. The validation outputs themselves were seen while
+  building versions 1 and 2 (see "Seen before the plan was committed").
+- **Question.** Report by report, what do the FCC's public DIRS reports print, and where do they not add up?
+- **Data.** Existing outputs only, no new data: `output/validation_dirs.csv`, `output/area_status_counts.csv`,
+  `manifest/excluded_reports.csv` (via `output/excluded_reports.csv`), `manifest/dirs_reports.csv` for storm and
+  report date, and `results.json` (`v2_2_backup_power`, per report) for the backup-power column.
+- **Unit.** Every in-scope report (all rows of `validation_dirs.csv`, excluded reports included), grouped by storm
+  (NHC ID plus DIRS activation date) and by year (the storm's DIRS activation year).
+- **Measures, per report.**
+  1. Cause columns printed: the report has damage, transport and power columns (`sites_unattributed` not blank).
+  2. Causes short of sites out: among reports with cause columns, at least one county row where the causes sum to
+     less than sites out (`sites_unattributed` > 0).
+  3. Causes above sites out: among reports with cause columns, at least one county row where the causes sum to more
+     than sites out (`sites_overattributed` > 0).
+  4. Headline mismatch: the printed headline % out differs from the % computed from the report's own county rows by
+     more than 0.2 points (step 4's tolerance); reports with no printed headline are counted separately.
+  5. Missing state total: step 4 records a missing state total.
+  6. Counties in the table but not in the report's county list (`table_not_in_list` > 0).
+  7. Counties outside the storm's notice area (`outside_notice_area` > 0).
+  8. Backup-power column printed (from `v2_2_backup_power`; reports in the panel only, since excluded reports have
+     no panel rows).
+  9. Excluded from the analysis (`status` = excluded), with the reason.
+- **Outputs.** Counts and shares per storm and per year, with the denominator for each measure, and a one-line
+  generated summary per year. Generated from `results.json`; no hand-typed number.
+- **Wording limits.** Descriptive only. These are properties of the reports as published, not of the networks or of
+  the providers that filed. Never say the FCC's reporting "improved" or "worsened" unless the year table shows a clear
+  pattern, and even then "in these reports". No storm-to-storm ranking of quality.
+- **Thresholds and sensitivity displays.** None beyond step 4's existing tolerances.

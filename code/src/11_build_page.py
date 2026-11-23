@@ -49,7 +49,9 @@ DATA_REPO = "https://github.com/ts2427/when-the-network-goes-dark-data"
 DATA_VERSION = "2.0.0"
 REPO_URL = f"{DATA_REPO}/tree/v{DATA_VERSION}"  # the files that produced the numbers on this page
 CONCEPT_DOI = "10.5281/zenodo.24477809"  # every version; resolves to the latest
-VERSION_DOI = "10.5281/zenodo.24477811"  # version 2.0.0: these numbers
+# Every archived version and its DOI, each read from its Zenodo record. Add a version only after its release.
+VERSION_DOIS = {"2.0.0": "10.5281/zenodo.24477811"}
+VERSION_DOI = VERSION_DOIS[DATA_VERSION]  # the version whose files produced the numbers on this page
 ZENODO_FILE = {"url": "https://zenodo.org/api/records/24477811/files/ts2427/when-the-network-goes-dark-data-v2.0.0.zip/content",
                "bytes": 120229296, "md5": "ca2226bf951cf1d280d54b87faa93f84"}
 DATASET_TITLE = ("When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)")
@@ -1402,6 +1404,69 @@ def v2_sections(r: dict) -> str:
         f"{n['sensitivity']['release_within_12_months']['note'].capitalize()}.\n")
     add("**What it means.** Association only: these counts describe reported coverage before the storm, not which "
         "networks were out or how they were restored.\n")
+    if "v2_1_1_report_card" in r:
+        add(report_card_section(r))
+    return "\n".join(L)
+
+
+def report_card_section(r: dict) -> str:
+    """Chapter 14 (V2.1-1): how complete the FCC's public reports are, from the validation outputs."""
+    rc = r["v2_1_1_report_card"]
+    t = rc["all_reports"]
+    L = []
+    add = L.append
+
+    def frac(c):
+        return f"{c['count']} of {c['of']}" if c["of"] else "n/a"
+
+    def frac_pct(c):  # whole percent from the count itself (halves up), never from the rounded share
+        return f"{c['count']} of {c['of']} ({(200 * c['count'] + c['of']) // (2 * c['of'])}%)" if c["of"] else "n/a"
+
+    add("## 14. How complete are the FCC's public reports?\n")
+    add(f"*{rc['label']}*\n")
+    add(f"**Claim.** Across {t['n_reports']} reports for {t['n_storms']} storms, the FCC printed cause columns in "
+        f"{frac_pct(t['cause_columns'])} reports with county rows. Where it did, the causes fell short of sites out "
+        f"in at least one county in {frac_pct(t['causes_short'])}, and exceeded sites out in "
+        f"{frac_pct(t['causes_above'])}. The "
+        f"printed headline % out differed from the report's own county rows by more than "
+        f"{f1(rc['headline_tolerance_points'])} points in {frac(t['headline_mismatch'])} reports with a headline; "
+        f"{t['headline_not_printed']['count']} printed no headline. {frac(t['missing_state_total'])} reports lack a "
+        f"state total, {frac(t['not_in_list'])} list a county in the table but not in the report's own county list, "
+        f"and {frac(t['out_of_area'])} include counties outside the storm's notice area. The backup-power column is "
+        f"printed in {frac(t['backup_printed'])} reports in the panel, and {frac(t['excluded'])} reports were "
+        f"excluded from the analysis.\n")
+    add("**Exhibit.** By year (the storm's DIRS activation year). Each cell is reports with the feature, of the "
+        "reports it applies to, and the share.\n")
+    cols = [("cause_columns", "Cause columns"), ("causes_short", "Causes short"), ("causes_above", "Causes above"),
+            ("headline_mismatch", "Headline mismatch"), ("missing_state_total", "State total missing"),
+            ("not_in_list", "Not in county list"), ("out_of_area", "Outside notice area"),
+            ("backup_printed", "Backup column"), ("excluded", "Excluded")]
+    add(table(["Year", "Storms", "Reports", *[c[1] for c in cols]],
+              [(y["year"], y["n_storms"], y["n_reports"], *[frac_pct(y[k]) for k, _ in cols]) for y in rc["by_year"]]))
+    add("")
+    for y in rc["by_year"]:
+        add(f"- {y['summary']}")
+    add("\nBy storm (counts; the shares are in `results.json`):\n")
+    add(table(["Storm", "Year", "Reports", *[c[1] for c in cols]],
+              [(s["storm"], s["year"], s["n_reports"], *[frac(s[k]) for k, _ in cols]) for s in rc["by_storm"]]))
+    excl = [f"{s['storm']} {x['report_date']} ({x['doc_id']}): {x['reason']}" for s in rc["by_storm"]
+            for x in s["excluded_reports"]]
+    if excl:
+        add("\nExcluded reports: " + "; ".join(excl) + ".\n")
+    notes = []
+    if rc["shared_reports"]:
+        notes.append(f"{len(rc['shared_reports'])} reports are shared by two storms and count for both")
+    if rc["no_study_state_rows"]:
+        k = len(rc["no_study_state_rows"])
+        notes.append(f"{k} report{'s' if k != 1 else ''} with county rows only outside the ten study states "
+                     f"{'are' if k != 1 else 'is'} counted in every check except the backup column, which covers "
+                     f"reports in the panel")
+    add(f"**What it means.** These are properties of the reports as the FCC published them, not of the networks or of "
+        f"the providers that filed. A shortfall in causes means some sites out have no cause given. An excess is "
+        f"consistent with sites counted under more than one cause; the FCC says this can happen in some of its other "
+        f"reports, but none of the reports with an excess says so. Each check is the "
+        f"one described in the methods (validation); the counts come from its outputs, with no new data."
+        + (f" {'; '.join(notes).capitalize()}." if notes else "") + "\n")
     return "\n".join(L)
 
 

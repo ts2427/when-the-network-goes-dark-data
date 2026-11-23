@@ -4,16 +4,25 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
-## [Unreleased]
+## [2.1.0] - 2026-11-23
 
 ### Added
+- Chapter 14, "How complete are the FCC's public reports?" (exploratory: a descriptive summary of the existing
+  validation results; addendum entry V2.1-1, committed before it was computed). For each storm and each year:
+  reports with cause columns, causes short of or above sites out, headline mismatches, missing state totals, counties
+  in the table but not the county list, counties outside the notice area, the backup-power column, and excluded
+  reports, each with its denominator, plus a one-line summary per year. New key `v2_1_1_report_card` in
+  `results.json`, written by `code/src/12_v2_analysis.py report_card` from the validation outputs; no new data.
 - The Zenodo DOIs (concept 10.5281/zenodo.24477809; version 2.0.0: 10.5281/zenodo.24477811) in `CITATION.cff` and the README, with a DOI
   badge and a How to cite section.
+- `docs/update_procedure.md`: how a new season and a new version are added and released.
 
 ### Changed
-- `code/src/11_build_page.py` (the page builder, not run by `run_all.py`): the page's How to cite box, Dataset
-  metadata and Reproduce it links; the site's old code folder is replaced by a pointer to this repository.
-  `code/src/14_data_repo.py` writes the DOIs. No input, pipeline step or output changed.
+- `code/src/11_build_page.py` (the page builder, not run by `run_all.py`): chapter 14; the page's How to cite box,
+  Dataset metadata and Reproduce it links; the site's old code folder is replaced by a pointer to this repository.
+
+### Unchanged
+- Every input, the panel, the storm table, the validation tables, and every other key of `results.json`.
 
 ## [2.0.0] - 2026-11-23
 
