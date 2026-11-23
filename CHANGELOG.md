@@ -4,6 +4,12 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
+## [Unreleased]
+
+### Added
+- The version 2.1.0 DOI (10.5281/zenodo.24480432) in `CITATION.cff` and the README, added after the
+  release. Documentation only.
+
 ## [2.1.0] - 2026-11-23
 
 ### Added
@@ -13,7 +19,7 @@ any output.
   in the table but not the county list, counties outside the notice area, the backup-power column, and excluded
   reports, each with its denominator, plus a one-line summary per year. New key `v2_1_1_report_card` in
   `results.json`, written by `code/src/12_v2_analysis.py report_card` from the validation outputs; no new data.
-- The Zenodo DOIs (concept 10.5281/zenodo.24477809; version 2.0.0: 10.5281/zenodo.24477811) in `CITATION.cff` and the README, with a DOI
+- The Zenodo DOIs (concept 10.5281/zenodo.24477809; version 2.0.0: 10.5281/zenodo.24480432) in `CITATION.cff` and the README, with a DOI
   badge and a How to cite section.
 - `docs/update_procedure.md`: how a new season and a new version are added and released.
 

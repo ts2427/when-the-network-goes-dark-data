@@ -43,17 +43,18 @@ UPDATED = "2026-11-23"
 DRAFT = False  # published 2026-11-23 (Tim's decision); the site build's guards apply to a published page
 WORK_YAML = SITE / "content" / "work.yaml"
 WORK_URL = f"/analysis/{SLUG}/"
-# Public data repository and its Zenodo archive (DOIs read from the Zenodo record, 2026-11-23: concept record
-# 24477809 resolves to version record 24477811, "v2.0.0", which archives tag v2.0.0 = commit f587207).
+# Public data repository and its Zenodo archive (DOIs read from the Zenodo records, 2026-11-23: v2.0.0 is record
+# 24477811, archiving tag v2.0.0 = commit f587207; v2.1.0 is record 24480432, archiving tag v2.1.0 = commit 0311a8b;
+# concept record 24477809 resolves to the latest).
 DATA_REPO = "https://github.com/ts2427/when-the-network-goes-dark-data"
-DATA_VERSION = "2.0.0"
+DATA_VERSION = "2.1.0"
 REPO_URL = f"{DATA_REPO}/tree/v{DATA_VERSION}"  # the files that produced the numbers on this page
 CONCEPT_DOI = "10.5281/zenodo.24477809"  # every version; resolves to the latest
 # Every archived version and its DOI, each read from its Zenodo record. Add a version only after its release.
-VERSION_DOIS = {"2.0.0": "10.5281/zenodo.24477811"}
+VERSION_DOIS = {"2.0.0": "10.5281/zenodo.24477811", "2.1.0": "10.5281/zenodo.24480432"}
 VERSION_DOI = VERSION_DOIS[DATA_VERSION]  # the version whose files produced the numbers on this page
-ZENODO_FILE = {"url": "https://zenodo.org/api/records/24477811/files/ts2427/when-the-network-goes-dark-data-v2.0.0.zip/content",
-               "bytes": 120229296, "md5": "ca2226bf951cf1d280d54b87faa93f84"}
+ZENODO_FILE = {"url": "https://zenodo.org/api/records/24480432/files/ts2427/when-the-network-goes-dark-data-v2.1.0.zip/content",
+               "bytes": 120248159, "md5": "e8acfe396c601a799a7b406276e4e0c1"}
 DATASET_TITLE = ("When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)")
 TOLERANCE = 0.051  # figure values are rounded to one decimal
 EAGLEI_DOIS = ["10.1038/s41597-024-03095-5", "10.6084/m9.figshare.24237376", "10.13139/ORNLNCCS/3012826"]

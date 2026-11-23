@@ -475,6 +475,12 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
+## [Unreleased]
+
+### Added
+- The version 2.1.0 DOI ({version_dois().get("2.1.0", "")}) in `CITATION.cff` and the README, added after the
+  release. Documentation only.
+
 ## [{VERSION}] - {RELEASE_DATE}
 
 ### Added
@@ -817,7 +823,7 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           *([] if VERSION in version_dois() else
             [f"- Version {VERSION} (this one) gets its own DOI when it is released; until then, cite the concept DOI."]),
           "",
-          "`CITATION.cff` has both, and GitHub's \"Cite this repository\" button reads it.", "",
+          "`CITATION.cff` lists every DOI, and GitHub's \"Cite this repository\" button reads it.", "",
           "## Disclosure", "",
           "The author works in the telecommunications industry. This analysis was done independently, on personal "
           "time, using only publicly available government data. It uses no employer data or confidential "
