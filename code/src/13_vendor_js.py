@@ -3,7 +3,8 @@
 For each package: the npm registry's metadata gives the tarball URL and its SHA-512 integrity; the tarball is
 downloaded and checked against it; the dist file is fetched from jsDelivr and must equal, byte for byte, the file in
 the verified tarball; the LICENSE comes from the verified tarball. Files go to threshold-site/static/js/vendor/, so
-the page loads them from its own site (no third-party request; the privacy page stays true).
+the map's code loads from the site itself (no third-party request for it; the site's privacy page lists the
+only third-party script, Google Analytics).
 Conduct: generic User-Agent, at least 3 s between requests, any non-200 (403/429 included) stops with no retry; every
 request is logged in manifest/downloads.csv with its SHA-256. Tarballs stay in data/raw/vendor/ (git-ignored).
 """

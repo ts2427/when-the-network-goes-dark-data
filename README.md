@@ -22,7 +22,8 @@ Associations, not causes. A site out is a site out: the FCC's counts describe th
 data/input/      every input, with INPUTS.csv (source, URL, retrieval time, SHA-256)
 data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/
 code/src/        numbered pipeline steps; code/manifest/ hand-made tables; code/tests/
-docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes
+docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes,
+                 update_procedure.md (how a new season and a new version are added and released)
 run_all.py       one command: rebuild the panel and results.json into build/
 ```
 

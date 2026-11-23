@@ -302,7 +302,7 @@ def plan_as_committed(T: Path) -> dict:
 
 def copy_docs(T: Path) -> None:
     for name in ("analysis_plan.md", "analysis_plan_addendum_v2.md", "decisions.md", "data_sources.md",
-                 "literature.md"):
+                 "literature.md", "update_procedure.md"):
         copy(ROOT / "docs" / name, T / "docs" / name)
 
 
@@ -751,7 +751,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "data/input/      every input, with INPUTS.csv (source, URL, retrieval time, SHA-256)",
          "data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/",
          "code/src/        numbered pipeline steps; code/manifest/ hand-made tables; code/tests/",
-         "docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes",
+         "docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes,",
+         "                 update_procedure.md (how a new season and a new version are added and released)",
          "run_all.py       one command: rebuild the panel and results.json into build/",
          "```", "",
          "## Analysis plan", "",
