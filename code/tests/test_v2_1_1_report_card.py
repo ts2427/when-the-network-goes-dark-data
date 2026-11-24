@@ -50,7 +50,7 @@ def test_backup_column_agrees_with_the_panel():
 
 def test_page_wording_is_descriptive():
     if not RESULTS.exists() or "v2_1_1_report_card" not in json.loads(RESULTS.read_text(encoding="utf-8")):
-        pytest.skip("report card not computed")
+        pytest.skip("needs results.json with the report card from a build: run python run_all.py first")
     text = step11.report_card_section(json.loads(RESULTS.read_text(encoding="utf-8"))).lower()
     for bad in ("improved", "worsened", "better", "worse", "deteriorat", "quality"):
         assert bad not in text, bad
@@ -79,7 +79,7 @@ def test_whole_percents_on_the_page_come_from_the_counts():
     import re
     from decimal import Decimal, ROUND_HALF_UP
     if not RESULTS.exists() or "v2_1_1_report_card" not in json.loads(RESULTS.read_text(encoding="utf-8")):
-        pytest.skip("report card not computed")
+        pytest.skip("needs results.json with the report card from a build: run python run_all.py first")
     text = step11.report_card_section(json.loads(RESULTS.read_text(encoding="utf-8")))
     cells = re.findall(r"(\d+) of (\d+) \((\d+)%\)", text)
     assert cells

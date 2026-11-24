@@ -95,6 +95,7 @@ def test_neutral_keeps_the_reason_inside_an_attributing_parenthesis():
 
 
 
+@needs_results
 def test_opening_numbers_come_from_results():
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
     n = step11.opening_numbers(r)
@@ -158,6 +159,7 @@ def test_map_topology_rings_wind_clockwise_for_d3():
     assert all(not LinearRing(step11.decode_arc(topo["arcs"][i], tr)).is_ccw for i in first_rings)
 
 
+@needs_results
 def test_v2_sections_wording_and_generated_numbers():
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
     if "v2_5_network_redundancy" not in r:
@@ -192,6 +194,7 @@ def test_fcc_caveat_is_quoted_verbatim_from_the_reports():
     assert len(hits) >= 1
 
 
+@needs_results
 def test_no_priority_or_preregistration_wording_on_the_page():
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
     text = step11.build_page(r).lower() + step11.v2_sections(r).lower()
@@ -201,6 +204,7 @@ def test_no_priority_or_preregistration_wording_on_the_page():
 
 
 
+@needs_results
 def test_pointer_readme_names_the_repository_and_both_dois(tmp_path, monkeypatch):
     monkeypatch.setattr(step11, "OUTPUT", step11.OUTPUT)
     dest = step11.write_pointer(tmp_path / "hurricane_resilience")
