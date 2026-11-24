@@ -27,12 +27,14 @@ Outputs: data/processed/panel.parquet, data/processed/storms.parquet, and data/p
 keep out_unattributed and out_overattributed.
 """
 from datetime import datetime
+import re
+import unicodedata
 from zoneinfo import ZoneInfo
 
 import pandas as pd
 
 from carried import require_carried
-from config import INTERIM, OUTPUT, PROCESSED, REGIMES, ROOT, STUDY_STATES, TIME_FLAGS
+from config import INTERIM, OUTPUT, PROCESSED, RAW, REGIMES, ROOT, STUDY_STATES, TIME_FLAGS
 from tables import write_csv
 
 EXCLUDED = ROOT / "manifest" / "excluded_reports.csv"
@@ -105,6 +107,42 @@ def county_spans(panel: pd.DataFrame) -> pd.DataFrame:
 def report_area_flags(all_rows: pd.DataFrame, study_states) -> pd.DataFrame:
     f = all_rows.assign(out=~all_rows.state.isin(study_states)).groupby("doc_id").out.any()
     return f.rename("area_includes_out_of_scope").reset_index()
+
+
+SPELLING_VARIANTS = ROOT / "manifest" / "county_spelling_variants.csv"
+CENSUS_COUNTIES = RAW / "census" / "national_county2020.txt"
+
+
+def strict_name(name) -> str:
+    """Case, punctuation, accents and a trailing County/Parish don't matter; the spaces between words do (so a name
+    broken inside a word, "MATAGORD A", does not match "Matagorda")."""
+    t = unicodedata.normalize("NFKD", str(name)).casefold().strip()
+    t = re.sub(r"\s+(county|parish)$", "", t)
+    return re.sub(r"\s+", " ", re.sub(r"[^\w\s]", "", t)).strip()
+
+
+def check_county_names(panel: pd.DataFrame, lists: pd.DataFrame, variants: pd.DataFrame,
+                       census: pd.DataFrame) -> list:
+    """Build check (2026-11-24): every county name in the panel matches its report's own county list, or a checked
+    spelling variant (manifest/county_spelling_variants.csv); a county the FCC put in the table but not in its list
+    (table_not_in_list) must match the Census name for its FIPS. Returns the problems; an unused variant is one."""
+    listed = set(zip(lists.doc_id, lists.state, lists.county.map(strict_name)))
+    var = {(v.state, strict_name(v.table_name)): strict_name(v.list_name) for v in variants.itertuples()}
+    cname = dict(zip(census.STATEFP + census.COUNTYFP, census.COUNTYNAME.map(strict_name)))
+    bad, used = [], set()
+    for r in panel.drop_duplicates(["doc_id", "state", "county"]).itertuples():
+        k = strict_name(r.county)
+        if (r.doc_id, r.state, k) in listed:
+            continue
+        alt = var.get((r.state, k))
+        if alt and (r.doc_id, r.state, alt) in listed:
+            used.add((r.state, k))
+            continue
+        if r.area_status == "table_not_in_list" and cname.get(r.fips) == k:
+            continue
+        bad.append(f"{r.doc_id} {r.state}/{r.county}")
+    bad += [f"spelling variant used by no row: {s}/{t}" for s, t in var if (s, t) not in used]
+    return bad
 
 
 def main():
@@ -182,6 +220,12 @@ def main():
 
     pub = p[PUBLIC_COLUMNS].sort_values(["storm_key", "report_date", "state", "county"])
     require_carried(pub, "dirs_county_day.csv")
+    names = check_county_names(p, pd.read_parquet(INTERIM / "dirs_county_lists.parquet"),
+                               pd.read_csv(SPELLING_VARIANTS, dtype=str),
+                               pd.read_csv(CENSUS_COUNTIES, sep="|", dtype=str, encoding="latin-1"))
+    if names:
+        raise SystemExit("county names that match neither the report's list, a checked spelling variant nor the "
+                         "Census name:\n  " + "\n  ".join(names))
     write_csv(pub, PROCESSED / "dirs_county_day.csv", PANEL_COUNTS)
     print(f"panel {len(p):,} rows, {p.doc_id.nunique()} reports, {p.storm_key.nunique()} storms, {p.fips.nunique()} counties")
     print("storms not in the panel:", s[~s.in_panel][["storm", "excluded_reports"]].values.tolist())

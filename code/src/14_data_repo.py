@@ -632,6 +632,17 @@ Harvey's 2017 reports that also restores two excluded reports, and engineering h
   where the rows are confirmed and the printed totals reconcile. Nate joins the peak tables; with one report it is
   left out of the recovery summaries, as Nicole is. Its BDC release (the earliest, as for every storm before 2022)
   is added to `storm_releases.json` from the saved release list, with no new download.
+- Notice areas: the reader of the FCC's DIRS notices had glued text onto some county names ("Wharton Note that
+  ...", "York Washington D.C: ...", "Baton Rouge (East)", footnote digits, a sentence read as a name, two names with
+  no comma), so those counties counted as outside the storm's reporting area. Fixed, with tests from the real
+  notices (`code/tests/test_notices.py`) and one checked correction (`code/manifest/notice_name_corrections.csv`).
+  Every notice county name in the study states now matches a Census county or a listed FCC misspelling. Reports
+  with counties outside the notice area go from 16 to 9; validation from 134 flagged and 36 ok to 126 and 44. No
+  headline result changes.
+- County names: a name broken across lines in Harvey Sep 3's table ("MATAGORD A") takes the spelling of the
+  report's own county list ("MATAGORDA"). A build check requires every county name in the panel to match its
+  report's list, a checked spelling variant (`code/manifest/county_spelling_variants.csv`: three misspellings in
+  the FCC's lists) or, for a county in the table but not the list, its Census name.
 - Counts: storms {N_STORMS_210} to {N_STORMS}, reports in use 167 to {N_REPORTS}, excluded reports 7 to 5.
 - Numbers that change (2.1.0, then {VERSION}): the median peak share 10.3% to 9.8%; Harvey's site-days lost 1,474 to
   1,424 and its share restored by its last report 74.8% to 74.0%; the median site-days lost 2,124 to 2,099; sites

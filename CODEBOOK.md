@@ -149,7 +149,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
 ## `data/analysis/panel_analysis_ready.parquet`
 
-The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 61d4e774417ecc16dde2e8cf09042dab3bfa35ad7f3c1b5b48551a5faba9e041; 666933 bytes.
+The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 042ea83e34970618063b08b2f04db4e398b09f4d0dd35c06ff75b78f54a7ee50; 666879 bytes.
 
 Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 

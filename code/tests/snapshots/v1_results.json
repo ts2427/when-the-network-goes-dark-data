@@ -1995,8 +1995,8 @@
   },
   "validation": {
    "status_counts": {
-    "flagged": 134,
-    "ok": 36,
+    "flagged": 126,
+    "ok": 44,
     "excluded": 5,
     "known_fcc_inconsistency": 3
    },
@@ -2007,14 +2007,14 @@
      "n_reports": 34
     },
     {
-     "flag": "County rows outside the FCC notice's area",
-     "class": "serious",
-     "n_reports": 11
-    },
-    {
      "flag": "Stated headline differs from the computed share (computed used)",
      "class": "serious",
      "n_reports": 10
+    },
+    {
+     "flag": "County rows outside the FCC notice's area",
+     "class": "serious",
+     "n_reports": 5
     },
     {
      "flag": "One state printed no total (its rows all confirmed)",
@@ -2039,7 +2039,7 @@
     {
      "flag": "County name spelling variant",
      "class": "benign",
-     "n_reports": 31
+     "n_reports": 23
     },
     {
      "flag": "County listed twice in the report's list",
@@ -2083,13 +2083,13 @@
      "doc_id": "DOC-346482A1",
      "storm": "Harvey",
      "report_date": "2017-09-04",
-     "detail": "Texas sites_served: printed total 4,200 vs 4,199 from its rows (checked, every row confirmed); 1 rows outside_notice_area"
+     "detail": "Texas sites_served: printed total 4,200 vs 4,199 from its rows (checked, every row confirmed)"
     },
     {
      "doc_id": "DOC-346499A1",
      "storm": "Harvey",
      "report_date": "2017-09-05",
-     "detail": "Texas sites_served: printed total 4,200 vs 4,199 from its rows (checked, every row confirmed); 1 rows outside_notice_area"
+     "detail": "Texas sites_served: printed total 4,200 vs 4,199 from its rows (checked, every row confirmed)"
     }
    ]
   }
@@ -2758,7 +2758,7 @@
     "n_counties": 64,
     "peak_doc_id": "DOC-346419A1",
     "peak_report_date": "2017-08-29",
-    "peak_report_status": "flagged",
+    "peak_report_status": "ok",
     "peak_sites_out": {
      "value": 365.0,
      "ci_low": 191.975,
@@ -4086,10 +4086,10 @@
      },
      "AL092017_2017-08-25": {
       "storm": "Harvey",
-      "peak_report_date": "2017-09-05",
-      "peak_sites_out": 73.0,
-      "peak_pct_out": 1.738509169,
-      "n_reports": 2
+      "peak_report_date": "2017-08-29",
+      "peak_sites_out": 365.0,
+      "peak_pct_out": 4.67648943,
+      "n_reports": 10
      },
      "AL092022_2022-09-27": {
       "storm": "Ian",
@@ -4148,10 +4148,10 @@
       "n_reports": 1
      }
     },
-    "median_peak_pct_out": 2.894540101
+    "median_peak_pct_out": 3.711932468
    },
    "without_serious_flag_reports": {
-    "n_storms": 17,
+    "n_storms": 18,
     "storms": {
      "AL022024_2024-07-08": {
       "storm": "Beryl",
@@ -4181,12 +4181,19 @@
       "peak_pct_out": 2.227284232,
       "n_reports": 6
      },
+     "AL062024_2024-09-11": {
+      "storm": "Francine",
+      "peak_report_date": "2024-09-12",
+      "peak_sites_out": 255.0,
+      "peak_pct_out": 9.337239107,
+      "n_reports": 3
+     },
      "AL092017_2017-08-25": {
       "storm": "Harvey",
       "peak_report_date": "2017-08-29",
       "peak_sites_out": 365.0,
       "peak_pct_out": 4.67648943,
-      "n_reports": 8
+      "n_reports": 11
      },
      "AL092021_2021-08-29": {
       "storm": "Ida",
@@ -4273,7 +4280,7 @@
       "n_reports": 3
      }
     },
-    "median_peak_pct_out": 5.463812436,
+    "median_peak_pct_out": 7.400525771,
     "note": "deviation 5b, added after the chapter 3 result was seen"
    },
    "without_state_total_missing_reports": {
@@ -7212,11 +7219,11 @@
     },
     "AL092017_2017-08-25": {
      "storm": "Harvey",
-     "n_reports": 2,
-     "t50": null,
+     "n_reports": 10,
+     "t50": 4.0,
      "t90": null,
      "t90_censored": true,
-     "site_days_lost": 0.0
+     "site_days_lost": 1429.5
     },
     "AL092022_2022-09-27": {
      "storm": "Ian",
@@ -7316,13 +7323,21 @@
      "t90_censored": true,
      "site_days_lost": 703.1354167
     },
+    "AL062024_2024-09-11": {
+     "storm": "Francine",
+     "n_reports": 3,
+     "t50": 1.0,
+     "t90": null,
+     "t90_censored": true,
+     "site_days_lost": 193.0
+    },
     "AL092017_2017-08-25": {
      "storm": "Harvey",
-     "n_reports": 8,
+     "n_reports": 11,
      "t50": 4.0,
      "t90": null,
      "t90_censored": true,
-     "site_days_lost": 1079.0
+     "site_days_lost": 1424.0
     },
     "AL092021_2021-08-29": {
      "storm": "Ida",
@@ -11281,15 +11296,15 @@
    },
    "without_serious_flag_reports": {
     "pooled_all_storms": {
-     "damage": 7.208065152,
-     "transport": 30.39209247,
-     "power": 56.52502299,
-     "unattributed": 6.511887561,
-     "overattributed": 0.6370681729,
-     "sites_out": 30452.0
+     "damage": 7.155629247,
+     "transport": 30.16027829,
+     "power": 56.81589128,
+     "unattributed": 6.498910888,
+     "overattributed": 0.630709711,
+     "sites_out": 30759.0
     },
-    "n_storms": 14,
-    "n_reports": 92
+    "n_storms": 15,
+    "n_reports": 95
    },
    "without_state_total_missing_reports": {
     "pooled_all_storms": {
@@ -13859,10 +13874,10 @@
    },
    "without_flagged_reports": {
     "pct_sites_out": {
-     "value": 0.4452309356,
-     "ci_low": 0.04451492398,
+     "value": 0.4497754753,
+     "ci_low": -0.06889314168,
      "ci_high": 0.6502959408,
-     "n": 8,
+     "n": 9,
      "unit": "Spearman rank correlation",
      "method": "median across storms; storm bootstrap 95%",
      "min": -0.1472850253,
@@ -13881,20 +13896,20 @@
    },
    "without_serious_flag_reports": {
     "pct_sites_out": {
-     "value": 0.5775639125,
-     "ci_low": 0.4712058141,
+     "value": 0.5916333482,
+     "ci_low": 0.4762502556,
      "ci_high": 0.6679082156,
-     "n": 16,
+     "n": 17,
      "unit": "Spearman rank correlation",
      "method": "median across storms; storm bootstrap 95%",
      "min": 0.31199268,
      "max": 0.8692383775
     },
     "pct_sites_out_power": {
-     "value": 0.5226521514,
-     "ci_low": 0.4656776765,
-     "ci_high": 0.6920824849,
-     "n": 13,
+     "value": 0.5503020278,
+     "ci_low": 0.4660503959,
+     "ci_high": 0.7082794826,
+     "n": 14,
      "unit": "Spearman rank correlation",
      "method": "median across storms; storm bootstrap 95%",
      "min": 0.2778528381,
@@ -16156,108 +16171,108 @@
    },
    "without_flagged_reports": {
     "n_storms": 10,
-    "n": 663,
+    "n": 714,
     "odds_ratios": {
      "log1p_dist_km": {
-      "value": 0.778053804,
-      "ci_low": 0.6142904185,
-      "ci_high": 0.9854747912,
-      "n": 663,
+      "value": 0.7691083378,
+      "ci_low": 0.6188322059,
+      "ci_high": 0.9558772631,
+      "n": 714,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "wind_per_10kt": {
-      "value": 1.057015938,
-      "ci_low": 0.8060665367,
-      "ci_high": 1.386092392,
-      "n": 663,
+      "value": 1.055296521,
+      "ci_low": 0.8404752169,
+      "ci_high": 1.325025086,
+      "n": 714,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_inside 64 kt": {
-      "value": 15.77585995,
-      "ci_low": 7.241048686,
-      "ci_high": 34.37040241,
-      "n": 663,
+      "value": 15.17667969,
+      "ci_low": 7.079632949,
+      "ci_high": 32.53439947,
+      "n": 714,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_50-64 kt": {
-      "value": 11.17113075,
-      "ci_low": 4.505752847,
-      "ci_high": 27.69662838,
-      "n": 663,
+      "value": 11.08864327,
+      "ci_low": 4.806112749,
+      "ci_high": 25.58367145,
+      "n": 714,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_34-50 kt": {
-      "value": 10.03426502,
-      "ci_low": 4.879623125,
-      "ci_high": 20.63406782,
-      "n": 663,
+      "value": 9.587411966,
+      "ci_low": 5.237064466,
+      "ci_high": 17.55152506,
+      "n": 714,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      }
     },
     "held_out_calibration_slope": {
-     "value": -0.005926084221,
-     "ci_low": -0.347161633,
-     "ci_high": 0.3353094645,
-     "n": 663,
+     "value": 0.2125454356,
+     "ci_low": -0.1595146562,
+     "ci_high": 0.5846055273,
+     "n": 714,
      "unit": "calibration slope (1 is ideal)",
      "method": "GLM of observed counts on logit(prediction); storm-clustered 95%"
     }
    },
    "without_serious_flag_reports": {
-    "n_storms": 17,
-    "n": 1494,
+    "n_storms": 18,
+    "n": 1539,
     "odds_ratios": {
      "log1p_dist_km": {
-      "value": 0.7119146537,
-      "ci_low": 0.5562019982,
-      "ci_high": 0.9112201605,
-      "n": 1494,
+      "value": 0.71027314,
+      "ci_low": 0.5567058369,
+      "ci_high": 0.9062019831,
+      "n": 1539,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "wind_per_10kt": {
-      "value": 1.119250775,
-      "ci_low": 0.9836960231,
-      "ci_high": 1.27348517,
-      "n": 1494,
+      "value": 1.117593743,
+      "ci_low": 0.9839992947,
+      "ci_high": 1.269325884,
+      "n": 1539,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_inside 64 kt": {
-      "value": 25.58980037,
-      "ci_low": 10.06284267,
-      "ci_high": 65.07484061,
-      "n": 1494,
+      "value": 25.44584675,
+      "ci_low": 10.14378719,
+      "ci_high": 63.8312994,
+      "n": 1539,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_50-64 kt": {
-      "value": 17.01567155,
-      "ci_low": 8.002233366,
-      "ci_high": 36.18153398,
-      "n": 1494,
+      "value": 17.07875575,
+      "ci_low": 8.112866322,
+      "ci_high": 35.95324839,
+      "n": 1539,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_34-50 kt": {
-      "value": 7.820284345,
-      "ci_low": 4.011241452,
-      "ci_high": 15.24636399,
-      "n": 1494,
+      "value": 7.754670112,
+      "ci_low": 4.010034854,
+      "ci_high": 14.9961062,
+      "n": 1539,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      }
     },
     "held_out_calibration_slope": {
-     "value": 0.875501,
-     "ci_low": 0.5427807652,
-     "ci_high": 1.208221235,
-     "n": 1494,
+     "value": 0.8796263848,
+     "ci_low": 0.554019799,
+     "ci_high": 1.205232971,
+     "n": 1539,
      "unit": "calibration slope (1 is ideal)",
      "method": "GLM of observed counts on logit(prediction); storm-clustered 95%"
     }
@@ -17840,68 +17855,68 @@
    "without_flagged_reports": {
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 0.392232648,
-      "ci_low": 0.2033116459,
-      "ci_high": 0.7567025955,
-      "n": 343,
+      "value": 0.4408658984,
+      "ci_low": 0.2510703934,
+      "ci_high": 0.7741364392,
+      "n": 467,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 0.4599288125,
-      "ci_low": 0.2268688354,
-      "ci_high": 0.9324088615,
-      "n": 343,
+      "value": 0.9167895162,
+      "ci_low": 0.5047123768,
+      "ci_high": 1.665310889,
+      "n": 467,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 0.2534459543,
-      "ci_low": 0.1309234951,
-      "ci_high": 0.4906289103,
-      "n": 343,
+      "value": 0.4412516843,
+      "ci_low": 0.2429096319,
+      "ci_high": 0.8015451975,
+      "n": 467,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      }
     },
     "storms_in_model": [
      "AL062018_2018-09-12",
+     "AL092017_2017-08-25",
      "AL092024_2024-09-25",
      "AL102023_2023-08-29",
      "AL142018_2018-10-09"
     ],
     "storms_left_out": [
-     "AL092017_2017-08-25",
      "AL092022_2022-09-27"
     ],
-    "n_intervals": 343,
-    "n_events": 102,
-    "n_counties": 112,
+    "n_intervals": 467,
+    "n_events": 131,
+    "n_counties": 145,
     "optimizer": "IRLS"
    },
    "without_serious_flag_reports": {
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 1.017183885,
-      "ci_low": 0.7294567224,
-      "ci_high": 1.418402249,
-      "n": 1448,
+      "value": 0.9228788374,
+      "ci_low": 0.6657402576,
+      "ci_high": 1.279335805,
+      "n": 1488,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 1.250161748,
-      "ci_low": 0.8808374988,
-      "ci_high": 1.774339078,
-      "n": 1448,
+      "value": 1.27641993,
+      "ci_low": 0.9138453717,
+      "ci_high": 1.782848486,
+      "n": 1488,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 1.072032114,
-      "ci_low": 0.7529025842,
-      "ci_high": 1.526429683,
-      "n": 1448,
+      "value": 1.118380261,
+      "ci_low": 0.8053046383,
+      "ci_high": 1.553169259,
+      "n": 1488,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      }
@@ -17910,6 +17925,7 @@
      "AL022024_2024-07-08",
      "AL052019_2019-08-27",
      "AL062018_2018-09-12",
+     "AL062024_2024-09-11",
      "AL092017_2017-08-25",
      "AL092021_2021-08-29",
      "AL092024_2024-09-25",
@@ -17926,8 +17942,8 @@
      "AL172022_2022-11-09",
      "AL192020_2020-09-14"
     ],
-    "n_intervals": 1448,
-    "n_events": 332,
+    "n_intervals": 1488,
+    "n_events": 352,
     "n_counties": 350,
     "optimizer": "IRLS"
    },

@@ -286,7 +286,21 @@ def parse_text(text: str) -> ParsedReport:
             table_rows.append(row)
     if not rep.rows:
         rep.warnings.append("no county rows found")
+    rejoin_broken_names(rep)
     return rep
+
+
+def rejoin_broken_names(rep: ParsedReport) -> None:
+    """A county name broken across lines in the table ("MATAGORD A", Harvey Sep 3, 2017) takes the spelling of the
+    report's own county list when the two differ only by spaces (correction, 2026-11-24). Noted in warnings."""
+    listed = {(c["state"].lower(), re.sub(r"\W", "", c["county"].lower())): c["county"] for c in rep.county_list}
+    for r in rep.rows:
+        name = listed.get((r["state"].lower(), re.sub(r"\W", "", r["county"].lower())))
+        words = lambda s: re.sub(r"[^\w\s]", "", s.lower()).split()  # noqa: E731  (punctuation is not a break)
+        if name and " " in r["county"] and words(r["county"]) != words(name):
+            new = name.upper() if r["county"].isupper() else name
+            rep.warnings.append(f"county name rejoined from the report's list: {r['state']}/{r['county']} -> {new}")
+            r["county"] = new
 
 
 def reconcile(rep: ParsedReport, tol: float = 0.5) -> list[str]:

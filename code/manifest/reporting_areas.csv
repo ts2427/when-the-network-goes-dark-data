@@ -138,7 +138,6 @@ debby,North Carolina,Duplin,Duplin,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Durham,Durham,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Edgecombe,Edgecombe,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Forsyth,Forsyth,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
-debby,North Carolina,Further,Further,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Greene,Greene,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Guilford,Guilford,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Harnett,Harnett,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
@@ -166,7 +165,6 @@ debby,North Carolina,Rowan,Rowan,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Sampson,Sampson,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Scotland,Scotland,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Stanly,Stanly,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
-debby,North Carolina,the FCC is expanding its disaster data collection to include the following counties in North Carolina impacted by Hurricane Debby,the FCC is expanding its disaster data collection to include the following counties in North Carolina impacted by Hurricane Debby,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Union,Union,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Wake,Wake,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
 debby,North Carolina,Wayne,Wayne,2024-08-07,DA-24-797A1,2024-08-09,DA-24-795A1
@@ -620,11 +618,9 @@ florence,Virginia,Virginia Beach City,Virginia Beach City,2018-09-12,DA-18-943A1
 francine,Louisiana,Acadia,Acadia,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
 francine,Louisiana,Ascension,Ascension,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
 francine,Louisiana,Assumption,Assumption,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
-francine,Louisiana,Baton Rouge (East),Baton Rouge (East),2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
-francine,Louisiana,Baton Rouge (West),Baton Rouge (West),2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
+francine,Louisiana,East Baton Rouge,East Baton Rouge,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
+francine,Louisiana,East Feliciana,East Feliciana,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
 francine,Louisiana,Evangeline,Evangeline,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
-francine,Louisiana,Feliciana (East),Feliciana (East),2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
-francine,Louisiana,Feliciana (West),Feliciana (West),2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
 francine,Louisiana,Iberia,Iberia,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
 francine,Louisiana,Iberville,Iberville,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
 francine,Louisiana,Jefferson,Jefferson,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
@@ -647,6 +643,8 @@ francine,Louisiana,Tangipahoa,Tangipahoa,2024-09-11,DA-24-919A1,2024-09-14,DOC-4
 francine,Louisiana,Terrebonne,Terrebonne,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
 francine,Louisiana,Vermilion,Vermilion,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
 francine,Louisiana,Washington,Washington,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
+francine,Louisiana,West Baton Rouge,West Baton Rouge,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
+francine,Louisiana,West Feliciana,West Feliciana,2024-09-11,DA-24-919A1,2024-09-14,DOC-405503A1
 francine,Mississippi,Adams,Adams,2024-09-11,DA-24-932A1,2024-09-12,DOC-405452A1
 francine,Mississippi,Amite,Amite,2024-09-11,DA-24-932A1,2024-09-12,DOC-405452A1
 francine,Mississippi,Forrest,Forrest,2024-09-11,DA-24-932A1,2024-09-12,DOC-405452A1
@@ -680,7 +678,7 @@ harvey,Louisiana,St. John the Baptist,St. John the Baptist,2017-08-25,DA-17-806A
 harvey,Louisiana,St. Martin,St. Martin,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
 harvey,Louisiana,St. Mary,St. Mary,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
 harvey,Louisiana,Terrebonne,Terrebonne,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
-harvey,Louisiana,Vermilion 2,Vermilion 2,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
+harvey,Louisiana,Vermilion,Vermilion,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
 harvey,Texas,Aransas,Aransas,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
 harvey,Texas,Atascosa,Atascosa,2017-08-25,DA-17-806A1,2017-09-02,DA-17-839A1
 harvey,Texas,Bee,Bee,2017-08-25,DA-17-806A1,2017-09-02,DA-17-839A1
@@ -721,11 +719,9 @@ harvey,Texas,Refugio,Refugio,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
 harvey,Texas,Sabine,Sabine,2017-08-31,DA-17-827A1,2017-09-02,DA-17-839A1
 harvey,Texas,San Jacinto,San Jacinto,2017-08-31,DA-17-827A1,2017-09-02,DA-17-839A1
 harvey,Texas,San Patricio,San Patricio,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
-harvey,Texas,they do not need to report,they do not need to report,2017-09-02,DA-17-839A1,2017-09-05,DA-17-844A1
 harvey,Texas,Victoria,Victoria,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
-harvey,Texas,Waller 1,Waller 1,2017-08-31,DA-17-827A1,2017-09-02,DA-17-839A1
-harvey,Texas,Wharton,Wharton,2017-08-25,DA-17-806A1,2017-09-02,DA-17-839A1
-harvey,Texas,Wharton Note that if providers do not provide service in these counties,Wharton Note that if providers do not provide service in these counties,2017-09-02,DA-17-839A1,2017-09-05,DA-17-844A1
+harvey,Texas,Waller,Waller,2017-08-31,DA-17-827A1,2017-09-02,DA-17-839A1
+harvey,Texas,Wharton,Wharton,2017-08-25,DA-17-806A1,2017-09-05,DA-17-844A1
 harvey,Texas,Willacy,Willacy,2017-08-25,DA-17-806A1,2017-09-02,DA-17-839A1
 harvey,Texas,Wilson,Wilson,2017-08-25,DA-17-806A1,2017-09-02,DA-17-839A1
 helene,Florida,Alachua,Alachua,2024-09-25,DA-24-991A1,2024-09-30,DA-24-1021A1
@@ -1409,7 +1405,8 @@ irma,Georgia,Grady,Grady,2017-09-11,DA-17-878A1,2017-09-14,DA-17-899A1
 irma,Georgia,Lanier,Lanier,2017-09-11,DA-17-878A1,2017-09-14,DA-17-899A1
 irma,Georgia,Lowndes,Lowndes,2017-09-11,DA-17-878A1,2017-09-14,DA-17-899A1
 irma,Georgia,Miller,Miller,2017-09-11,DA-17-878A1,2017-09-14,DA-17-899A1
-irma,Georgia,Mitchell Seminole,Mitchell Seminole,2017-09-11,DA-17-878A1,2017-09-14,DA-17-899A1
+irma,Georgia,Mitchell,Mitchell,2017-09-11,DA-17-878A1,2017-09-14,DA-17-899A1
+irma,Georgia,Seminole,Seminole,2017-09-11,DA-17-878A1,2017-09-14,DA-17-899A1
 irma,Georgia,Thomas,Thomas,2017-09-11,DA-17-878A1,2017-09-14,DA-17-899A1
 irma,Georgia,Ware,Ware,2017-09-11,DA-17-878A1,2017-09-14,DA-17-899A1
 irma,Puerto Rico,Aguada,Aguada,2017-09-07,DA-17-862A1,2017-09-14,DA-17-899A1
@@ -2428,8 +2425,7 @@ marco-laura,Virginia,Westmoreland,Westmoreland,2020-08-26,DA-20-962A1,2020-08-29
 marco-laura,Virginia,Winchester City,Winchester City,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
 marco-laura,Virginia,Wise,Wise,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
 marco-laura,Virginia,Wythe,Wythe,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
-marco-laura,Virginia,York,York,2020-08-26,DA-20-962A1,2020-08-28,DA-20-987A1
-marco-laura,Virginia,York Washington D.C: District of Columbia,York Washington D.C: District of Columbia,2020-08-28,DA-20-987A1,2020-08-29,DA-20-988A1
+marco-laura,Virginia,York,York,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
 marco-laura,West Virginia,Barbour,Barbour,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
 marco-laura,West Virginia,Berkeley,Berkeley,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
 marco-laura,West Virginia,Boone,Boone,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
@@ -2472,8 +2468,7 @@ marco-laura,West Virginia,Tucker,Tucker,2020-08-26,DA-20-962A1,2020-08-29,DA-20-
 marco-laura,West Virginia,Upshur,Upshur,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
 marco-laura,West Virginia,Wayne,Wayne,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
 marco-laura,West Virginia,Webster,Webster,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
-marco-laura,West Virginia,Wyoming,Wyoming,2020-08-28,DA-20-987A1,2020-08-29,DA-20-988A1
-marco-laura,West Virginia,Wyoming Washington D.C: District of Columbia,Wyoming Washington D.C: District of Columbia,2020-08-26,DA-20-962A1,2020-08-28,DA-20-987A1
+marco-laura,West Virginia,Wyoming,Wyoming,2020-08-26,DA-20-962A1,2020-08-29,DA-20-988A1
 michael,Alabama,Baldwin,Baldwin,2018-10-09,DA-18-1037A1,2018-10-18,DA-18-1073A1
 michael,Alabama,Dale,Dale,2018-10-09,DA-18-1037A1,2018-10-18,DA-18-1073A1
 michael,Alabama,Geneva,Geneva,2018-10-09,DA-18-1037A1,2018-10-18,DA-18-1073A1
@@ -2877,7 +2872,6 @@ zeta,North Carolina,Cleveland,Cleveland,2020-10-29,DA-20-1286A1,2020-10-30,DA-20
 zeta,North Carolina,Davidson,Davidson,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Davie,Davie,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Durham,Durham,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
-zeta,North Carolina,Eastern Band of Cherokee Indians and Jackson,Eastern Band of Cherokee Indians and Jackson,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Forsyth,Forsyth,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Franklin,Franklin,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Gaston,Gaston,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
@@ -2889,6 +2883,7 @@ zeta,North Carolina,Harnett,Harnett,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-129
 zeta,North Carolina,Haywood,Haywood,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Henderson,Henderson,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Iredell,Iredell,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
+zeta,North Carolina,Jackson,Jackson,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Johnston,Johnston,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Lee,Lee,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,North Carolina,Lincoln,Lincoln,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
@@ -2931,4 +2926,3 @@ zeta,South Carolina,Oconee,Oconee,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A
 zeta,South Carolina,Pickens,Pickens,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,South Carolina,Spartanburg,Spartanburg,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
 zeta,South Carolina,York,York,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1
-zeta,South Carolina,York COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE THE FOLLOWING:,York COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE THE FOLLOWING:,2020-10-29,DA-20-1286A1,2020-10-30,DA-20-1293A1

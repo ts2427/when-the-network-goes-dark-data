@@ -193,3 +193,62 @@ def test_a_map_sentence_ends_a_list():  # DA-18-943A1
     text = ("COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE: VIRGINIA: Chesapeake City, Suffolk City, Virginia Beach "
             "City A map of the activation area is given below:")
     assert ops(text, "activation") == [("add", "Virginia", ["Chesapeake City", "Suffolk City", "Virginia Beach City"])]
+
+
+# --- correction, 2026-11-24: names with text run into them (snippets from the real notices, whitespace collapsed) ---
+HARVEY_839 = ("Texas: Aransas, Calhoun, Chambers, Hardin, Harris, Jefferson, Matagorda, Nueces, Orange, Refugio, "
+              "San Patricio, Victoria, and Wharton Note that if providers do not provide service in these counties, "
+              "they do not need to report.")  # DA-17-839A1, Sep 2, 2017
+LAURA_962 = ("West Virginia: Wayne, Webster, Wyoming Washington D.C: District of Columbia The FCC continues to "
+             "monitor the storm.")  # DA-20-962A1, Aug 26, 2020
+ZETA_1286 = ("North Carolina: Durham, Eastern Band of Cherokee Indians and Jackson, For DIRS reporting, combine status "
+             "South Carolina: Spartanburg, York COUNTIES OF INTEREST FOR THIS ACTIVATION INCLUDE THE FOLLOWING: "
+             "Alabama: Baldwin.")  # DA-20-1286A1, Oct 29, 2020
+DEBBY_797 = ("Expansion of DIRS to include counties in North Carolina: Further, the FCC is expanding its disaster data "
+             "collection to include the following counties in North Carolina impacted by Hurricane Debby. North "
+             "Carolina: Alamance, Anson.")  # DA-24-797A1, Aug 7, 2024
+FRANCINE_919 = "Louisiana: Acadia, Baton Rouge (East), Baton Rouge (West), Feliciana (East)."  # DA-24-919A1
+
+
+def _names(text):
+    return [c for o in read_notice(text, "activation", "FCC Activates DIRS").ops for c in o.counties]
+
+
+def test_a_sentence_after_the_last_name_is_not_part_of_it():
+    names = _names(HARVEY_839)
+    assert names[-1] == "Wharton" and "they do not need to report" not in names
+
+
+def test_a_list_ends_at_washington_dc_and_at_the_next_heading():
+    assert _names(LAURA_962)[-1] == "Wyoming"
+    names = _names(ZETA_1286)
+    assert "York" in names and not any("COUNTIES" in n for n in names)
+
+
+def test_the_eastern_band_of_cherokee_indians_is_reported_with_jackson():
+    assert "Jackson" in _names(ZETA_1286)
+
+
+def test_a_sentence_after_a_state_label_is_not_a_county():
+    names = _names(DEBBY_797)
+    assert names == ["Alamance", "Anson"]
+
+
+def test_direction_in_parentheses_comes_first_and_footnote_digits_go():
+    from notices import split_names
+    assert _names(FRANCINE_919) == ["Acadia", "East Baton Rouge", "West Baton Rouge", "East Feliciana"]
+    assert split_names("Waller 1, and Vermilion 2") == ["Waller", "Vermilion"]
+
+
+@pytest.mark.parametrize("doc, state, want, never", [
+    ("DA-17-839A1", "Texas", "Wharton", "Note that"), ("DA-20-962A1", "West Virginia", "Wyoming", "Washington D"),
+    ("DA-20-987A1", "Virginia", "York", "Washington D"), ("DA-20-1286A1", "North Carolina", "Jackson", "Eastern Band"),
+    ("DA-20-1286A1", "South Carolina", "York", "COUNTIES")])
+def test_real_notices(doc, state, want, never):
+    from config import RAW
+    path = RAW / "notices" / f"{doc}.txt"
+    if not path.exists():
+        pytest.skip(f"needs {path.name}")
+    ops = read_notice(path.read_text(encoding="utf-8-sig", errors="replace"), "activation", "FCC Activates DIRS").ops
+    names = [c for o in ops if o.state == state for c in o.counties]
+    assert want in names and not any(never in n for n in names)

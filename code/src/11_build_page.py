@@ -1660,16 +1660,18 @@ def work_summary(r: dict) -> str:
     return (f"Cell-site outages and recovery in {r['chapter_1']['headlines']['n_storms']['value']} Gulf and Southeast "
             f"hurricanes, 2017–2026: half the sites out at the peak were back within a median of {f1(t50['value'], 0)} "
             f"days, only {t90['value']} of {t90['n']} storms with a report after their peak reach 90% before the FCC's "
-            f"reports end, and cell outages tend to rise and fall with power outages." + v2_work_line(r))
+            f"reports end, {'' if last_report_clause(r) else 'and '}cell outages tend to rise and fall with power "
+            f"outages{last_report_clause(r)}.")
 
 
-def v2_work_line(r: dict) -> str:
-    """The Work page's version 2 line, generated from results.json."""
+def last_report_clause(r: dict) -> str:
+    """The Work page's last clause (version-free since 3.0.0), generated from results.json."""
     if "v2_1_public_record_misses" not in r:
         return ""
     h = r["v2_1_public_record_misses"]["headlines"]
-    return (f" Version 2 adds that in all {h['n_storms']} storms the FCC's last public report still showed cell sites "
-            f"out: {h['sites_out_at_last_reports_headline']['value']:,.0f} in total.")
+    every = "all " if h["n_storms_with_sites_out_at_last_report"] == h["n_storms"] else ""
+    return (f", and in {every}{h['n_storms']} storms the FCC's last public report still showed cell sites out: "
+            f"{h['sites_out_at_last_reports_headline']['value']:,.0f} in total")
 
 
 def update_work_entry(r: dict, path: Path = WORK_YAML) -> None:

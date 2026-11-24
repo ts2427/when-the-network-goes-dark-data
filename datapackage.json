@@ -241,8 +241,8 @@
           ""
         ]
       },
-      "hash": "sha256:8bbcab37feca040d71e544e50ac6c609d136cc617a2950f134342cf1780ef447",
-      "bytes": 1765372
+      "hash": "sha256:ee5b93f582765c79d84a64dfc59aee1416ca45c8667556b69254e7c542539944",
+      "bytes": 1762625
     },
     {
       "name": "storms",
@@ -903,8 +903,8 @@
           ""
         ]
       },
-      "hash": "sha256:4b436114a3769881a8fa8e0dd45f28c4a4a008056c166ddb21b78ef08861d24f",
-      "bytes": 6397344
+      "hash": "sha256:59dd06ea74bc549921ff800799ee788b8871394111e3b375ab4eda7582e52258",
+      "bytes": 6394597
     },
     {
       "name": "panel_analysis_ready_parquet",
@@ -913,7 +913,7 @@
       "format": "parquet",
       "mediatype": "application/vnd.apache.parquet",
       "title": "Analysis-ready panel (Parquet)",
-      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 61d4e774417ecc16dde2e8cf09042dab3bfa35ad7f3c1b5b48551a5faba9e041; 666933 bytes.",
+      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 042ea83e34970618063b08b2f04db4e398b09f4d0dd35c06ff75b78f54a7ee50; 666879 bytes.",
       "schema": {
         "fields": [
           {
@@ -1531,8 +1531,8 @@
       "mediatype": "application/json",
       "title": "Every number on the page",
       "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant digits.",
-      "hash": "sha256:ac422b2603d0788a361894f1843c0a7b2be91570e2a7c9084f8739f0b549c193",
-      "bytes": 997340
+      "hash": "sha256:9420ee24dc949d144af72ed859c087596d321e59f17dbcf0d1a8b60881eae69f",
+      "bytes": 997875
     },
     {
       "name": "analysis_plan_as_committed",

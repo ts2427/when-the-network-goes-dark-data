@@ -183,3 +183,25 @@ def test_only_harvey_sep_3_needs_the_next_report_rule():
     nate = v[v.doc_id == "DOC-347137A1"].iloc[0]
     assert nate.status == "flagged" and nate.flag_reasons.startswith("headline_missing")
     assert v.status.eq("excluded").sum() == 5
+
+
+def test_a_name_broken_inside_a_word_is_rejoined_from_the_reports_own_list():
+    text = ("Texas: Aransas, Matagorda, St. Charles\nTX MATAGORD A 58 1 1.70%\nTX ST. CHARLES 10 0 0.00%\n")
+    rep = parse_text(text)
+    assert [r["county"] for r in rep.rows] == ["MATAGORDA", "ST. CHARLES"]  # punctuation alone is not a break
+    assert rep.warnings == ["county name rejoined from the report's list: Texas/MATAGORD A -> MATAGORDA"]
+
+
+def test_county_names_must_match_the_list_a_checked_variant_or_the_census():
+    step9 = importlib.import_module("09_build_panel")
+    lists = pd.DataFrame({"doc_id": ["D", "D"], "state": "Louisiana", "county": ["Vermillion", "Acadia"]})
+    variants = pd.DataFrame({"state": ["Louisiana"], "table_name": ["VERMILION"], "list_name": ["Vermillion"]})
+    census = pd.DataFrame({"STATEFP": ["22"], "COUNTYFP": ["001"], "COUNTYNAME": ["Allen Parish"]})
+    ok = pd.DataFrame({"doc_id": "D", "state": "Louisiana", "county": ["ACADIA", "VERMILION", "ALLEN"],
+                       "area_status": ["inside", "inside_spelling_variant", "table_not_in_list"],
+                       "fips": ["22001", "22113", "22001"]})
+    assert step9.check_county_names(ok, lists, variants, census) == []
+    broken = ok.assign(county=["ACAD IA", "VERMILION", "ALLEN"])
+    assert step9.check_county_names(broken, lists, variants, census) == ["D Louisiana/ACAD IA"]
+    unused = step9.check_county_names(ok[ok.county != "VERMILION"], lists, variants, census)
+    assert unused == ["spelling variant used by no row: Louisiana/vermilion"]

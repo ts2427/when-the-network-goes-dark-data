@@ -1,0 +1,4 @@
+state,table_name,list_name,storm,checked_on,note
+Louisiana,POINTE COUPEE,Point Coupee,Ida,2026-11-24,"The report's county list misspells Pointe Coupee Parish; the table has it right"
+Louisiana,VERMILION,Vermillion,Ida,2026-11-24,"The report's county list misspells Vermilion Parish; the table has it right"
+South Carolina,Dillon,Dillion,Debby,2026-11-24,"The report's county list misspells Dillon County; the table has it right"

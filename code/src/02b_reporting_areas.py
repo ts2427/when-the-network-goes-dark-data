@@ -28,6 +28,8 @@ from notices import Op, read_notice
 MANIFEST_DIR = ROOT / "manifest"
 DOCUMENT_LIST = MANIFEST_DIR / "fcc_storm_documents.csv"
 STORMS = MANIFEST_DIR / "storms.csv"
+# A name the FCC printed that is two counties run together (correction, 2026-11-24); each entry must be used once.
+NAME_CORRECTIONS = MANIFEST_DIR / "notice_name_corrections.csv"
 NOTICE_KINDS = ("activation", "area_change", "deactivation")
 DIRS_TITLE = r"DIRS|Disaster"
 SPELLING_CUTOFF = 0.9  # "Point Coupee" ~ "Pointe Coupee"; "East" vs "West Feliciana" stays apart (0.85)
@@ -167,15 +169,27 @@ def load_notices() -> dict[str, list[dict]]:
     keep = docs[docs.storm_page.isin(pages) & docs.kind.isin(NOTICE_KINDS)
                 & docs.title.str.contains(DIRS_TITLE, regex=True)]
     by_page, unread = {}, []
+    fixes, used = {}, set()
+    for c in pd.read_csv(NAME_CORRECTIONS, dtype=str, keep_default_na=False).itertuples():
+        fixes.setdefault((c.doc_id, c.state), []).append(c)
     for d in keep.itertuples():
         path = RAW / "notices" / f"{d.doc_id}.txt"
         if not path.exists():
             raise SystemExit(f"notice not downloaded: {d.doc_id} (run step 2)")
         notice = read_notice(path.read_text(encoding="utf-8-sig", errors="replace"), d.kind, d.title)
+        for op in notice.ops:
+            for c in fixes.get((d.doc_id, op.state), []):
+                if c.printed in op.counties:
+                    i = op.counties.index(c.printed)
+                    op.counties[i:i + 1] = c.names.split(";")
+                    used.add((d.doc_id, op.state, c.printed))
         if notice.unread:
             unread.append(f"{d.storm_page} {d.released} {d.doc_id} [{d.kind}] {d.title}")
         by_page.setdefault(d.storm_page, []).append(
             {"date": pd.Timestamp(d.released), "doc_id": d.doc_id, "kind": d.kind, "ops": notice.ops})
+    unused = [k for k, v in fixes.items() for c in v if (k[0], k[1], c.printed) not in used]
+    if unused:
+        raise SystemExit(f"{NAME_CORRECTIONS.name}: entries that match no notice: {unused}")
     return by_page, unread
 
 

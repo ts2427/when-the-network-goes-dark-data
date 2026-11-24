@@ -27,7 +27,9 @@ LABEL_RE = re.compile(rf"(?<![A-Za-z])(?:State of |Commonwealth of )?(?P<state>{
                       re.I)
 END_RE = re.compile(r"(?<!\bSt)(?<!\bSte)(?<!\bFt)\.(?=\s|$)|\s+(?=(?:The (?:FCC|Commission|Federal|Public|following)|For|"
                     r"Communications|Upon|Further|DIRS|In DIRS|Facilities|Providers|PSHSB|This|At the|All FCC|Please|"
-                    r"Reports|Additionally|In addition|See|A map)\b)")
+                    r"Reports|Additionally|In addition|See|A map|Note that)\b)"
+                    # correction, 2026-11-24: lists that run into the next heading or line with no full stop
+                    r"|\s+(?=COUNTIES OF INTEREST\b|Washington,? D\.?\s?C\b)")
 # A footnote the FCC prints inside a list where a page breaks ("Gilchrist, 1 DIRS is a voluntary ... crisis. 2Glades")
 BOILERPLATE_RE = re.compile(r"\d*\s*DIRS is a voluntary, web-based system.*?during times of crisis\.\s*\d*")
 OPENING_RE = re.compile(r"DIRS deactivated (?P<what>.*?)(?=\.|DIRS remains|At the request|$)")
@@ -62,6 +64,12 @@ def canonical_state(name: str) -> str:
     return _CANON[name.lower()]
 
 
+# correction, 2026-11-24 (notice-area parser): forms the FCC prints that are not a county name as such
+DIRECTION_RE = re.compile(r"^(?P<name>.+?)\s*\((?P<dir>East|West|North|South)\)$")  # "Baton Rouge (East)" (Francine)
+COMBINED_RE = re.compile(r"^Eastern Band of Cherokee Indians and (?P<name>\w+)$")  # reported as Jackson County (Zeta)
+SENTENCE_WORDS = {"Further", "Additionally", "However", "Also"}  # a sentence after a label, not a county
+
+
 def split_names(content: str) -> list[str]:
     parts = [p.strip() for p in content.split(",")]
     names, i = [], 0
@@ -73,10 +81,13 @@ def split_names(content: str) -> list[str]:
         names.append(p)
         i += 1
     names = [re.sub(r"^and\s+", "", n).strip().rstrip(".").strip() for n in names]
-    names = [re.sub(r"\s*\(\d+\)$", "", n) for n in names]  # footnote markers, e.g. "Washington (3)"
+    names = [re.sub(r"\s*\(\d+\)$|\s+\d+$", "", n) for n in names]  # footnote markers: "Washington (3)", "Waller 1"
+    names = [f"{m['dir']} {m['name']}" if (m := DIRECTION_RE.match(n)) else n for n in names]
+    names = [m["name"] if (m := COMBINED_RE.match(n)) else n for n in names]
     if names and " and " in names[-1] and names[-1] != "King and Queen":
         names[-1:] = names[-1].rsplit(" and ", 1)
-    return [n for n in names if n and n[0].isalpha()]
+    # a name starts with a capital letter; lower-case text ("they do not need to report") is a sentence
+    return [n for n in names if n and n[0].isupper() and n not in SENTENCE_WORDS]
 
 
 def opening_ends(text: str) -> list[Op]:
