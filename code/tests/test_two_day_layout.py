@@ -12,7 +12,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from config import RAW  # noqa: E402
+from config import OUTPUT, RAW  # noqa: E402
 from dirs_parser import parse_text  # noqa: E402
 
 step4 = importlib.import_module("04_validate_dirs")
@@ -174,7 +174,7 @@ def test_a_row_the_pdf_cannot_confirm_is_confirmed_by_the_next_reports_reprint()
 
 
 def test_only_harvey_sep_3_needs_the_next_report_rule():
-    out = ROOT / "output" / "validation_dirs.csv"
+    out = OUTPUT / "validation_dirs.csv"
     if not out.exists():
         pytest.skip("needs the validation outputs from a build: run python run_all.py first")
     v = pd.read_csv(out)
