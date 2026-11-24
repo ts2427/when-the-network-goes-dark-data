@@ -24,7 +24,12 @@ CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("process
 @built
 @pytest.mark.parametrize("built_path, published", CSV_PAIRS)
 def test_csv_matches_published_byte_for_byte(built_path, published):
-    assert (BUILD / built_path).read_bytes() == (PUBLISHED / published).read_bytes(), built_path
+    got, want = (BUILD / built_path).read_bytes(), (PUBLISHED / published).read_bytes()
+    if got != want:
+        g, w = got.decode("utf-8").splitlines(), want.decode("utf-8").splitlines()
+        diff = [(i + 1, a, b) for i, (a, b) in enumerate(zip(g, w)) if a != b]
+        pytest.fail(f"{built_path}: {len(g)} vs {len(w)} lines, {len(diff)} differ; first: "
+                    + " | ".join(f"line {n}: built {a!r} published {b!r}" for n, a, b in diff[:3]))
 
 
 @built

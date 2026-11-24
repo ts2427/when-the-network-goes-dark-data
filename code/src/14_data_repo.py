@@ -1100,7 +1100,12 @@ CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("process
 @built
 @pytest.mark.parametrize("built_path, published", CSV_PAIRS)
 def test_csv_matches_published_byte_for_byte(built_path, published):
-    assert (BUILD / built_path).read_bytes() == (PUBLISHED / published).read_bytes(), built_path
+    got, want = (BUILD / built_path).read_bytes(), (PUBLISHED / published).read_bytes()
+    if got != want:
+        g, w = got.decode("utf-8").splitlines(), want.decode("utf-8").splitlines()
+        diff = [(i + 1, a, b) for i, (a, b) in enumerate(zip(g, w)) if a != b]
+        pytest.fail(f"{built_path}: {len(g)} vs {len(w)} lines, {len(diff)} differ; first: "
+                    + " | ".join(f"line {n}: built {a!r} published {b!r}" for n, a, b in diff[:3]))
 
 
 @built
@@ -1202,7 +1207,18 @@ jobs:
       - name: Rebuild everything from data/input
         run: python run_all.py
       - name: Reproduction tests (build/ vs data/analysis/)
-        run: python -m pytest code/tests -q -rs
+        run: python -m pytest code/tests -q -rs --junitxml=build/pytest.xml
+      - name: Report failures as annotations
+        if: failure()
+        shell: python
+        run: |
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+          p = Path("build/pytest.xml")
+          for case in (ET.parse(p).getroot().iter("testcase") if p.exists() else []):
+              for bad in list(case.findall("failure")) + list(case.findall("error")):
+                  msg = (bad.get("message") or bad.text or "")[:1800].replace("%", "%25").replace("\\r", "").replace("\\n", "%0A")
+                  print(f"::error title={case.get('name')}::{msg}")
       - name: Keep the rebuilt results for comparison
         if: always()
         uses: actions/upload-artifact@v4

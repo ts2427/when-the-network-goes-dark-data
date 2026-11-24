@@ -38,7 +38,18 @@ jobs:
       - name: Rebuild everything from data/input
         run: python run_all.py
       - name: Reproduction tests (build/ vs data/analysis/)
-        run: python -m pytest code/tests -q -rs
+        run: python -m pytest code/tests -q -rs --junitxml=build/pytest.xml
+      - name: Report failures as annotations
+        if: failure()
+        shell: python
+        run: |
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+          p = Path("build/pytest.xml")
+          for case in (ET.parse(p).getroot().iter("testcase") if p.exists() else []):
+              for bad in list(case.findall("failure")) + list(case.findall("error")):
+                  msg = (bad.get("message") or bad.text or "")[:1800].replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+                  print(f"::error title={case.get('name')}::{msg}")
       - name: Keep the rebuilt results for comparison
         if: always()
         uses: actions/upload-artifact@v4
