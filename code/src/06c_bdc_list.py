@@ -82,7 +82,26 @@ def call(session, path: str, params: dict | None, dest: Path, auth: dict) -> dic
     return r.json()
 
 
+def offline_releases() -> None:
+    """--offline (2026-11-24): rewrite storm_releases.json for every storm in the panel from the saved
+    listAsOfDates.json, with no API call and no credential. Used when Nate joined the panel (v3.0.0); its release
+    (the earliest, as for every storm before 2022) is one already listed and counted."""
+    storms = pd.read_parquet(PROCESSED / "storms.parquet")
+    dates = json.loads((OUT / "listAsOfDates.json").read_text(encoding="utf-8"))
+    releases = sorted(x["as_of_date"] for x in dates["data"] if x["data_type"] == "availability")
+    chosen = choose_releases(storms[storms.in_panel], releases)
+    files = set(pd.read_csv(OUT / "provider_summary_files.csv", dtype=str).release)
+    missing = sorted({r for r, _ in chosen.values()} - files)
+    if missing:
+        raise SystemExit(f"releases with no listed files (an API listing is needed first): {missing}")
+    with open(OUT / "storm_releases.json", "w", encoding="utf-8", newline="\n") as f:
+        json.dump({k: {"release": v[0], "role": v[1]} for k, v in chosen.items()}, f, indent=1)
+    print("storm -> release:", {k: v[0] for k, v in chosen.items()})
+
+
 def main():
+    if "--offline" in sys.argv:
+        return offline_releases()
     auth = credentials()
     storms = pd.read_parquet(PROCESSED / "storms.parquet")
     storms = storms[storms.in_panel]

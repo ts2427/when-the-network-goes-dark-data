@@ -163,3 +163,23 @@ def test_a_total_right_after_a_page_footer_is_read():
     footer_tz = parse_text("TX ARANSAS 19 4 21.1%\nAs prepared by the Federal Communications Commission: "
                            "August 28, 2017 11:30 a.m. EDT\nTOTAL 19 4 21.1%\n")
     assert [(t["sites_served"], t["sites_out"]) for t in footer_tz.state_totals] == [(19, 4)]
+
+
+def test_a_row_the_pdf_cannot_confirm_is_confirmed_by_the_next_reports_reprint():
+    rows = pd.DataFrame(_rows("D3", "2017-09-03", [("MATAGORD A", 1.0, 1.7), ("ARANSAS", 2.0, 10.5)])
+                        + _rows("D4", "2017-09-04", [("MATAGORDA", 0.0, 0.0, 1.0, 1.7), ("ARANSAS", 4.0, 21.1, 3.0, 15.8)],
+                                prev=True))
+    # Matagorda is reprinted exactly (the name differs only by the break); Aransas is not
+    assert step4.next_day_confirmations(rows, REPORTS) == {"D3": {"Texas/MATAGORD A"}}
+
+
+def test_only_harvey_sep_3_needs_the_next_report_rule():
+    out = ROOT / "output" / "validation_dirs.csv"
+    if not out.exists():
+        pytest.skip("needs the validation outputs from a build: run python run_all.py first")
+    v = pd.read_csv(out)
+    hit = v[v.flag_reasons.fillna("").str.contains("confirmed by the next report")]
+    assert hit.doc_id.tolist() == ["DOC-346478A1"]
+    nate = v[v.doc_id == "DOC-347137A1"].iloc[0]
+    assert nate.status == "flagged" and nate.flag_reasons.startswith("headline_missing")
+    assert v.status.eq("excluded").sum() == 5

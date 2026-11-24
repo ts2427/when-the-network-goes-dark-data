@@ -2,10 +2,10 @@
   "profile": "data-package",
   "name": "when-the-network-goes-dark-data",
   "title": "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "created": "2026-11-24T12:00:00-06:00",
   "homepage": "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/",
-  "description": "County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 21 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the inputs and code that rebuild it.",
+  "description": "County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 22 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the inputs and code that rebuild it.",
   "keywords": [
     "hurricanes",
     "cell sites",
@@ -46,7 +46,7 @@
       "mediatype": "text/csv",
       "encoding": "utf-8",
       "title": "FCC DIRS cell-site outages by county and report",
-      "description": "One row per county per FCC DIRS report in use (167 reports, 21 storms).",
+      "description": "One row per county per FCC DIRS report in use (169 reports, 22 storms).",
       "schema": {
         "fields": [
           {
@@ -241,8 +241,8 @@
           ""
         ]
       },
-      "hash": "sha256:4343544cbd8d7fb72fee981fa40d7712d61c1f4f66bdb0b63164e26edfab89bf",
-      "bytes": 1761809
+      "hash": "sha256:8bbcab37feca040d71e544e50ac6c609d136cc617a2950f134342cf1780ef447",
+      "bytes": 1765372
     },
     {
       "name": "storms",
@@ -360,8 +360,8 @@
           ""
         ]
       },
-      "hash": "sha256:05d236bec052c87be29c90a62c7b7ce70aee6e4ca59419bc9f8e7e0ca7c58804",
-      "bytes": 5306
+      "hash": "sha256:9cc9a0204fe1fba14cdcaf58b23f874192e0dcf54ba709a8be0abffb8829c1a9",
+      "bytes": 5266
     },
     {
       "name": "panel_analysis_ready",
@@ -903,8 +903,8 @@
           ""
         ]
       },
-      "hash": "sha256:cf275599be0f6576a065b53ef7469d3ca52fd8b80e0ba04a73f8f6b592fd1130",
-      "bytes": 6383738
+      "hash": "sha256:4b436114a3769881a8fa8e0dd45f28c4a4a008056c166ddb21b78ef08861d24f",
+      "bytes": 6397344
     },
     {
       "name": "panel_analysis_ready_parquet",
@@ -913,7 +913,7 @@
       "format": "parquet",
       "mediatype": "application/vnd.apache.parquet",
       "title": "Analysis-ready panel (Parquet)",
-      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 597be5374e5f20ac615240f8177e4c8dbe6ca90b16af7b20816fc33855ffda61; 665579 bytes.",
+      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 61d4e774417ecc16dde2e8cf09042dab3bfa35ad7f3c1b5b48551a5faba9e041; 666933 bytes.",
       "schema": {
         "fields": [
           {
@@ -1531,8 +1531,8 @@
       "mediatype": "application/json",
       "title": "Every number on the page",
       "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant digits.",
-      "hash": "sha256:731999cc2a4740590cbd224e9adacb0472b28627939d9347fce3fc4a5be09896",
-      "bytes": 985728
+      "hash": "sha256:ac422b2603d0788a361894f1843c0a7b2be91570e2a7c9084f8739f0b549c193",
+      "bytes": 997340
     },
     {
       "name": "analysis_plan_as_committed",

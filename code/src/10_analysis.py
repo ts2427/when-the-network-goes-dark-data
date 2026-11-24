@@ -41,12 +41,14 @@ CI = (2.5, 97.5)
 STATE_TOTAL_MISSING_DOCS = ("DOC-405893A1",)  # kept by the state_total_missing rule (Helene Sep 28, 2024)
 UNFLAGGED_STATUSES = ("ok", "known_fcc_inconsistency")
 # Flag types (deviation 5b, 2026-11-22). Fragments of the two longer messages count with them.
-SERIOUS_FLAGS = [r"^headline_mismatch", r"^state_total_missing", r"^no_printed_totals", r"rows outside_notice_area$",
+SERIOUS_FLAGS = [r"^headline_mismatch", r"^headline_missing", r"^state_total_missing", r"^no_printed_totals",
+                 r"rows outside_notice_area$",
                  r"rows table_not_in_list$", r"^in table, not in the report's county list"]
 BENIGN_FLAGS = [r"rows short of sites out", r"^FCC spelling", r"rows inside_spelling_variant$",
                 r"^causes exceed sites out, confirmed by second reading", r"^causes exceed sites out, listed exception",
                 r"^listed more than once by the FCC", r"^in table, not in the report's list, listed exception",
                 r"^headline [\d.]+% vs [\d.]+% from the report's own totals",
+                r"^rows confirmed by the next report's previous-day column",
                 # a printed state total off from its own rows, checked (manifest/known_fcc_inconsistencies.csv)
                 r": printed total [\d,]+ vs [\d,]+ from its rows \(checked, every row confirmed\)$",
                 r"^every row confirmed by second reading$", r"^other states reconcile\)$"]
@@ -1664,6 +1666,7 @@ def coverage_table(panel: pd.DataFrame, storms: pd.DataFrame) -> list:
 
 FLAG_TYPES = [  # (pattern, label, class) for the validation table by flag type (deviation, 2026-11-22)
     (r"^headline_mismatch", "Stated headline differs from the computed share (computed used)", "serious"),
+    (r"^headline_missing", "No headline % printed (rows confirmed, totals reconcile; computed used)", "serious"),
     (r"^state_total_missing", "One state printed no total (its rows all confirmed)", "serious"),
     (r"^no_printed_totals", "No totals printed (every row confirmed)", "serious"),
     (r"rows outside_notice_area$", "County rows outside the FCC notice's area", "serious"),
@@ -1678,6 +1681,8 @@ FLAG_TYPES = [  # (pattern, label, class) for the validation table by flag type 
     (r"^headline [\d.]+% vs [\d.]+% from the report's own totals", "Known FCC inconsistency in the headline", "benign"),
     (r": printed total [\d,]+ vs [\d,]+ from its rows \(checked, every row confirmed\)$",
      "Known FCC inconsistency in a printed state total (rows confirmed)", "benign"),
+    (r"^rows confirmed by the next report's previous-day column",
+     "Rows confirmed by the next report's reprint (PDF rows broken)", "benign"),
     (r"^every row confirmed by second reading$|^other states reconcile\)$", None, None),  # parts of longer flags
 ]
 

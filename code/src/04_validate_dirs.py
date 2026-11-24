@@ -8,11 +8,15 @@ A report FAILS on:
   * cause or backup columns only partly filled
   * a row's printed % out more than 0.1 points from out / served
   * a row that is not found, with the same county and values, in a second reading of the PDF. This catches
-    values swapped between counties with no sites out, where every sum and percent still agrees.
+    values swapped between counties with no sites out, where every sum and percent still agrees. A row the second
+    reading cannot confirm counts as confirmed, and is flagged, when the next report's previous-day column reprints
+    it exactly (correction, 2026-11-24).
   * a county in the report's own list with no row in its table, or no list to compare with. Names match when at
     least 90% alike; one unmatched list name and one unmatched row in the same state, at least 70% alike, are paired
   * causes exceeding sites out on a row the second reading does not confirm
   * a headline that disagrees, unless every row is confirmed and the totals reconcile (then flagged headline_mismatch)
+  * no headline % at all, unless every row is confirmed and printed totals reconcile (then flagged headline_missing;
+    correction, 2026-11-24)
   * no printed totals at all, unless every row is confirmed (then flagged no_printed_totals)
   * one state with no printed total, unless all its rows are confirmed and every other state reconciles (then
     flagged state_total_missing; decided 2026-11-22)
@@ -187,6 +191,27 @@ def previous_day_mismatches(rows: pd.DataFrame, reports: pd.DataFrame) -> tuple[
                                 f"{prev_docs.iloc[0]} says {p.at[k, 'sites_out']:g} ({p.at[k, 'pct_out']:g}%)")
         checked[doc] = (prev_docs.iloc[0], len(g))
     return problems, checked
+
+
+def next_day_confirmations(rows: pd.DataFrame, reports: pd.DataFrame) -> dict:
+    """{previous report: rows ("State/COUNTY" as that report prints them) that the next report's previous-day column
+    reprints exactly}. A row the PDF second reading cannot confirm counts as confirmed when it is listed here
+    (correction, 2026-11-24: Harvey Sep 3, 2017's Matagorda and San Patricio rows are broken in both sources)."""
+    out = {}
+    if "prev_sites_out" not in rows.columns:
+        return out
+    for doc, g in rows[rows.prev_sites_out.notna()].groupby("doc_id"):
+        day = (pd.Timestamp(g.report_date.iloc[0]) - pd.Timedelta(1, unit="D")).date().isoformat()
+        prev = reports[(reports.storm_name == g.storm_name.iloc[0]) & (reports.report_date == day)].doc_id
+        if len(prev) != 1:
+            continue
+        p = rows[rows.doc_id == prev.iloc[0]]
+        nxt = {f"{name_key(r.state)}|{name_key(r.county)}": r for r in g.itertuples()}
+        for r in p.itertuples():
+            n = nxt.get(f"{name_key(r.state)}|{name_key(r.county)}")
+            if n is not None and n.prev_sites_out == r.sites_out and abs(n.prev_pct_out - r.pct_out) <= 0.05:
+                out.setdefault(prev.iloc[0], set()).add(f"{r.state}/{r.county}")
+    return out
 
 
 def check_row_percent(g: pd.DataFrame) -> list[str]:
@@ -394,7 +419,8 @@ def report_label(report) -> str:
 
 
 def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlisted_allowed,
-             pdf_lines, overall_totals=None, excluded=None, total_allowed=None) -> tuple[pd.DataFrame, pd.DataFrame]:
+             pdf_lines, overall_totals=None, excluded=None, total_allowed=None,
+             next_confirmed=None) -> tuple[pd.DataFrame, pd.DataFrame]:
     excluded = excluded if excluded is not None else pd.DataFrame(columns=["doc_id"])
     results, summary = [], []
     for _, report in reports.iterrows():
@@ -407,6 +433,7 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
             t[col] = pd.to_numeric(t[col]).astype(float)
 
         fails, flags, unconfirmed, known_totals = [], [], set(), []
+        ov = pd.DataFrame(columns=["doc_id", "states", "sites_served", "sites_out"])
         total_entries = for_report(total_allowed if total_allowed is not None else pd.DataFrame(), doc, ["doc_id"])
         if g.empty:
             fails.append("zero county rows")
@@ -421,7 +448,12 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
                 fails.append(str(err))
             ov = for_report(overall_totals if overall_totals is not None else pd.DataFrame(), doc,
                             ["doc_id", "states", "sites_served", "sites_out"])
-            unconfirmed = set(unconfirmed_rows(g, for_report(pdf_lines, doc, ["doc_id", "line"])))
+            unconfirmed_list = unconfirmed_rows(g, for_report(pdf_lines, doc, ["doc_id", "line"]))
+            by_next = [u for u in unconfirmed_list if u in (next_confirmed or {}).get(doc, set())]
+            if by_next:  # correction, 2026-11-24: the next report reprints these rows exactly
+                flags.append(f"rows confirmed by the next report's previous-day column: {', '.join(by_next)}")
+            unconfirmed_list = [u for u in unconfirmed_list if u not in by_next]
+            unconfirmed = set(unconfirmed_list)
             if t.empty and ov.empty and not unconfirmed:
                 flags.append("no_printed_totals: the report prints no totals; every row confirmed by second reading")
                 more_fails, known_totals = apply_total_exceptions(
@@ -443,7 +475,8 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
                 counts = g.area_status.value_counts()
                 flags += [f"{counts[s]} rows {s}" for s in AREA_STATUSES[1:] if counts.get(s, 0)]
             fails += check_row_percent(g)
-            fails += check_second_reading(g, for_report(pdf_lines, doc, ["doc_id", "line"]))
+            if unconfirmed_list:
+                fails.append(f"not confirmed by second reading of the PDF: {', '.join(unconfirmed_list)}")
             more_fails, more_flags = check_names(g, listed, for_report(unlisted_allowed, doc, OVER_FIELDS))
             fails += more_fails
             flags += more_flags
@@ -460,7 +493,12 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
         more_fails, known = check_headline(stated, computed, t, for_report(headline_allowed, doc, HEADLINE_FIELDS))
         known = known_totals + known
         mismatch = [f for f in more_fails if f.startswith("overall % out")]
-        if mismatch and not fails and not unconfirmed:
+        if more_fails == ["stated % out not found"] and not fails and not unconfirmed and not (t.empty and ov.empty):
+            # correction, 2026-11-24 (Nate, Oct 9, 2017): a flag, not an exclusion, when the rows are confirmed and the
+            # printed totals reconcile; the share computed from the rows is used, as for every report
+            flags.append("headline_missing: the report prints no headline % of sites out (rows confirmed, totals "
+                         "reconcile, computed share used)")
+        elif mismatch and not fails and not unconfirmed:
             flags.append(f"headline_mismatch: stated {stated:.2f}, computed {computed:.2f} (computed used)")
         else:
             fails += more_fails
@@ -516,7 +554,8 @@ def main():
                                 pd.read_csv(OVER_EXCEPTIONS), known_inconsistencies("headline"),
                                 pd.read_csv(LIST_EXCEPTIONS), read["pdf_lines"], read["overall_totals"],
                                 pd.read_csv(EXCLUDED, dtype=str, keep_default_na=False),
-                                total_allowed=known_inconsistencies("state_total"))
+                                total_allowed=known_inconsistencies("state_total"),
+                                next_confirmed=next_day_confirmations(read["county_rows"], read["reports"]))
     OUTPUT.mkdir(exist_ok=True)
     write_csv(results, OUTPUT / "validation_dirs.csv", ["sites_unattributed", "sites_overattributed"])
     summary.to_csv(OUTPUT / "validation_summary.csv", index=False, lineterminator="\n")  # already whole; "n/a" text

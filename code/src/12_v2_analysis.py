@@ -120,6 +120,7 @@ def v2_1(panel: pd.DataFrame, storms: pd.DataFrame, results: dict) -> dict:
     # Headline: every storm. Median and upper bound: storms with a report after the peak (Nicole, whose share is 100%
     # by construction, is left out, as in chapter 4); footnoted storms are kept unless that rule removes them.
     main = [r for r in per if r["recovery_observed"]]
+    left_out = step10._and_list([r["storm"] for r in per if not r["recovery_observed"]])
     shares = [r["share_of_peak"]["value"] for r in main]
     total = sum(r["sites_out_at_last_report"]["value"] for r in per)
     upper = [r["carried_forward"]["share_of_peak"]["value"] for r in main]
@@ -151,7 +152,7 @@ def v2_1(panel: pd.DataFrame, storms: pd.DataFrame, results: dict) -> dict:
                                                                n=len(per), unit="cell sites out, summed over all storms"),
             "median_share_of_peak_still_out": step10.num(float(pd.Series(shares).median()), n=len(shares),
                                                          unit="share of peak", method="median across storms with a report "
-                                                         "after the peak (Nicole left out)",
+                                                         f"after the peak ({left_out} left out)",
                                                          min=min(shares), max=max(shares)),
         },
         "page_text": page,

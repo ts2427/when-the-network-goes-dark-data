@@ -4,7 +4,7 @@ Generated from `datapackage.json` by `code/src/14_data_repo.py`; edit the packag
 
 ## `data/analysis/dirs_county_day.csv`
 
-One row per county per FCC DIRS report in use (167 reports, 21 storms).
+One row per county per FCC DIRS report in use (169 reports, 22 storms).
 
 Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
@@ -149,7 +149,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
 ## `data/analysis/panel_analysis_ready.parquet`
 
-The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 597be5374e5f20ac615240f8177e4c8dbe6ca90b16af7b20816fc33855ffda61; 665579 bytes.
+The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 61d4e774417ecc16dde2e8cf09042dab3bfa35ad7f3c1b5b48551a5faba9e041; 666933 bytes.
 
 Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 

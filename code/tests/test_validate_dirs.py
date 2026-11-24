@@ -320,8 +320,22 @@ def test_headline_gap_fails_when_a_row_is_unconfirmed(case):
     case.fails_with("overall % out")
 
 
-def test_missing_headline_fails(case):
+def test_missing_headline_is_flagged_when_rows_are_confirmed_and_totals_reconcile(case):
+    # correction, 2026-11-24 (Nate, Oct 9, 2017): a flag, not an exclusion
     case.reports["pct_sites_out_stated"] = None
+    result = case.run()
+    assert result.status == "flagged" and "headline_missing: " in result.flag_reasons
+
+
+def test_missing_headline_fails_without_printed_totals(case):
+    case.reports["pct_sites_out_stated"] = None
+    case.totals = case.totals.iloc[0:0]
+    case.fails_with("stated % out not found")
+
+
+def test_missing_headline_fails_when_a_row_is_not_confirmed(case):
+    case.reports["pct_sites_out_stated"] = None
+    case.lines = case.lines[~case.lines.line.str.contains("BUTLER")]
     case.fails_with("stated % out not found")
 
 

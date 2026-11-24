@@ -1,6 +1,6 @@
 """The code reproduces the published files: run python run_all.py first (each check skips until then).
 
-CSVs must match byte for byte. results.json: numbers within a relative 1e-9 (or 1e-12 absolute, for values that are
+CSVs must match byte for byte. results.json: numbers within a relative 1e-8 (or 1e-12 absolute, for values that are
 zero up to floating-point noise), everything else exactly (platforms' math libraries differ in the last bits). The
 analysis-ready panel: value by value at the same tolerance."""
 import json

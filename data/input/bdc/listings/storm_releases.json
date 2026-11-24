@@ -71,6 +71,10 @@
   "release": "2026-06-30",
   "role": "main"
  },
+ "Nate": {
+  "release": "2022-06-30",
+  "role": "sensitivity: network data from after the storm"
+ },
  "Barry": {
   "release": "2022-06-30",
   "role": "sensitivity: network data from after the storm"

@@ -1364,7 +1364,8 @@ def v2_sections(r: dict) -> str:
     add("\nBy rule period, shown and not compared: " + "; ".join(p3["rule_periods_shown_not_compared"]) + ".\n")
     add(f"**What it means.** {p3['not_measured']} Storms without EAGLE-I data "
         f"({_and(t['storms_without_power_data'])}) are not included"
-        + (f", and {_and(t['storms_without_counties_at_risk'])} has no county at or above 5% of sites out"
+        + (f", and {_and(t['storms_without_counties_at_risk'])} "
+           f"{'has' if len(t['storms_without_counties_at_risk']) == 1 else 'have'} no county at or above 5% of sites out"
            if t.get("storms_without_counties_at_risk") else "") + ". \"Same report\" means within one report "
         "interval, not at the same moment.\n")
 

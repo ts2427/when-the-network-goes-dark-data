@@ -37,7 +37,7 @@ def test_write_chapter_rounds(tmp_path):
 def test_comparison_allows_last_digit_noise_but_not_changes():
     want = {"x": 1.234567891, "n": 5, "s": "a", "l": [0.5, None]}
     assert differences({"x": 1.234567891 * (1 + 5e-10), "n": 5.0, "s": "a", "l": [0.5, None]}, want) == []
-    assert differences({"x": 1.234567891 * (1 + 5e-9), "n": 5, "s": "a", "l": [0.5, None]}, want)
+    assert differences({"x": 1.234567891 * (1 + 5e-8), "n": 5, "s": "a", "l": [0.5, None]}, want)
     assert differences({"x": 1.234567891, "n": 5, "s": "b", "l": [0.5, None]}, want)  # strings exact
     assert differences({"x": 1.234567891, "n": 5, "s": "a", "l": [0.5]}, want)  # lengths exact
     assert differences({"x": 1.234567891, "n": True, "s": "a", "l": [0.5, None]}, want)  # bool is not a number
@@ -63,7 +63,7 @@ def test_overattributed_is_never_negative_zero():
 def test_analysis_ready_panel_loads_the_same_from_csv_and_parquet_and_matches_the_published_panel():
     a = load.load_panel(PROCESSED / f"{load.NAME}.parquet")
     b = load.load_panel(PROCESSED / f"{load.NAME}.csv")
-    pd.testing.assert_frame_equal(a, b, check_exact=False, rtol=1e-9)
+    pd.testing.assert_frame_equal(a, b, check_exact=False, rtol=1e-8)
     pub = pd.read_csv(PROCESSED / "dirs_county_day.csv", dtype=str, keep_default_na=False)
     assert list(a.columns[:len(pub.columns)]) == list(pub.columns)
     assert (a.doc_id.to_numpy() == pub.doc_id.to_numpy()).all() and (a.fips.to_numpy() == pub.fips.to_numpy()).all()

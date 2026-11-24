@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use these data or code, please cite them as below. Use the concept DOI for the work in general and the version DOI for specific numbers."
 type: dataset
 title: "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)"
-version: 2.2.0
+version: 3.0.0
 date-released: 2026-11-24
 doi: "10.5281/zenodo.24477809"
 identifiers:
@@ -29,7 +29,7 @@ keywords:
   - FCC DIRS
   - disaster resilience
 abstract: >-
-  A county-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 21 Atlantic
+  A county-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 22 Atlantic
   storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the public
   inputs and the code that rebuild the panel and every number on the page "When the Network Goes Dark".
   Data are CC BY 4.0; code is MIT.

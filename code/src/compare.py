@@ -1,11 +1,11 @@
 """Compare two results.json trees: numbers within a relative tolerance, everything else exactly (v2.2.0).
 
 Used by the reproduction test and the v1 results test, so that last-bit differences between platforms' floating-point
-libraries (up to about 1e-10 relative) do not fail them, while any real change does.
+libraries (up to about 1e-9 relative) do not fail them, while any real change does.
 """
 import math
 
-RTOL = 1e-9
+RTOL = 1e-8  # 1e-9 until 2026-11-24: Linux CI differed by 1.2e-9 in a chapter 8 sensitivity interval
 # Values that are zero by construction (e.g. an in-sample calibration-in-the-large) come out as floating-point noise
 # around 1e-15 that differs between machines; no relative tolerance can match them. Numbers within ATOL match.
 ATOL = 1e-12

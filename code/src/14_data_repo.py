@@ -31,7 +31,7 @@ import pandas as pd
 from config import (BDC_COUNTS, BDC_COUNTS_META, DOWNLOADS_LOG, EAGLEI_EXTRACT, EAGLEI_RAW_DIR, OUTPUT, PROCESSED,
                     RAW, REGIMES, ROOT)
 
-VERSION = "2.2.0"
+VERSION = "3.0.0"
 RELEASE_DATE = "2026-11-24"
 CREATED = f"{RELEASE_DATE}T12:00:00-06:00"  # datapackage.json created: ISO 8601 date-time (v2.2.0)
 # Set to True only after CI has passed on both ubuntu-latest and windows-latest (README then says so).
@@ -44,6 +44,9 @@ PUBLIC_REQUIREMENTS = [
     "pyogrio==0.13.0", "pyproj==3.8.0", "pyarrow==26.0.1", "requests==2.34.2", "pytest==9.2.0",
     "frictionless==5.21.0"]
 LOCKFILE = ROOT / "requirements.lock"  # uv pip compile requirements.txt --universal --generate-hashes (see README)
+_PANEL = pd.read_csv(PROCESSED / "dirs_county_day.csv", usecols=["storm_key", "doc_id"])
+N_STORMS, N_REPORTS = _PANEL.storm_key.nunique(), _PANEL.doc_id.nunique()  # from the panel, never typed
+N_STORMS_210 = 21  # storms in the panel as published in 2.1.0 (CHANGELOG history)
 REPO_NAME = "when-the-network-goes-dark-data"
 TITLE = "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)"
 AUTHOR = {"family": "Spivey", "given": "Timothy D.", "orcid": "0009-0009-8990-4308"}
@@ -456,7 +459,7 @@ def datapackage(T: Path, plan: dict) -> dict:
         "profile": "data-package", "name": REPO_NAME, "title": TITLE, "version": VERSION,
         "created": CREATED, "homepage": PAGE_URL,
         "description": ("County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages "
-                        "for 21 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, "
+                        f"for {N_STORMS} Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, "
                         "checked against each report's printed totals, with the inputs and code that rebuild it."),
         "keywords": ["hurricanes", "cell sites", "telecommunications outages", "FCC DIRS", "disaster resilience",
                      "power outages", "EAGLE-I", "Gulf Coast"],
@@ -471,7 +474,7 @@ def datapackage(T: Path, plan: dict) -> dict:
             {"name": "dirs_county_day", "path": "data/analysis/dirs_county_day.csv", "profile": "tabular-data-resource",
              "format": "csv", "mediatype": "text/csv", "encoding": "utf-8",
              "title": "FCC DIRS cell-site outages by county and report",
-             "description": "One row per county per FCC DIRS report in use (167 reports, 21 storms).",
+             "description": f"One row per county per FCC DIRS report in use ({N_REPORTS} reports, {N_STORMS} storms).",
              "schema": schema(PANEL_FIELDS, ["storm_key", "doc_id", "fips"])},
             {"name": "storms", "path": "data/analysis/storms.csv", "profile": "tabular-data-resource",
              "format": "csv", "mediatype": "text/csv", "encoding": "utf-8", "title": "Storm table",
@@ -586,7 +589,7 @@ keywords:
   - FCC DIRS
   - disaster resilience
 abstract: >-
-  A county-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 21 Atlantic
+  A county-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for {N_STORMS} Atlantic
   storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the public
   inputs and the code that rebuild the panel and every number on the page "When the Network Goes Dark".
   Data are CC BY 4.0; code is MIT.
@@ -602,8 +605,8 @@ any output.
 
 ## [{VERSION}] - {RELEASE_DATE}
 
-Two parts: a correction to Harvey's last two reports (2017), which changes some published numbers, and engineering
-hardening, which changes none.
+A major version, as this file's rule requires, because published numbers change. Two parts: a correction to
+Harvey's 2017 reports that also restores two excluded reports, and engineering hardening, which changes no finding.
 
 ### Correction: Harvey Sep 4-5, 2017 table layout
 - The FCC's Harvey reports for Sep 3, 4 and 5, 2017 print the previous day's sites out and % out before today's. The
@@ -616,32 +619,38 @@ hardening, which changes none.
   finds no other total line left unread; against the 2.1.0 parser only these four Harvey reports change. No report
   is flagged `no_printed_totals` any more (three reports in use had been, all through these misses).
 - Two new checks stop the build, for every report: a count that is not a whole number, and a previous-day column
-  that differs from the previous day's report for the same county. A sweep of all 178 reports finds only these three
-  reports affected (Sep 3 stays excluded for its original reason); every previous-day column matches.
+  that differs from the previous day's report for the same county. Only Harvey Sep 3-5 print a previous-day column,
+  and every one matches.
 - With their totals read, Sep 4 and Sep 5 print a Texas total of 4,200 sites served over county rows that add up to
   4,199 (the same rows as Sep 3, which prints 4,199). Recorded as checked FCC inconsistencies
   (`code/manifest/known_fcc_inconsistencies.csv`, kind `state_total`; the rows' sum is used, the printed value kept);
-  the reports' status is `known_fcc_inconsistency`.
-- The excluded reports are unchanged (7), but two reasons no longer say "no totals": Harvey Sep 3 (its total now
-  reads and reconciles; its Matagorda and San Patricio rows are still broken in both the text and the PDF) and Nate
-  Oct 9, 2017 (its total always read; it prints no headline percent). Storm and report counts are unchanged.
-- Numbers that change (2.1.0, then 2.2.0): Harvey's site-days lost 1,474 to 1,430; the median site-days lost across
-  storms 2,124 to 2,102; Harvey's share restored by its last report 74.8% to 74.0%; sites still out in the FCC's
-  last report 1,883 to 1,886 in total (Harvey 70 to 73); the power vs. cell order (cell first 158 to 159, power
-  first 66 to 65, same report 127 to 128, undetermined 148 to 147); chapter 8's hazard ratios move by at most 0.01
-  (2,761 to 2,759 intervals); validation counts, the chapter 14 report card for 2017, and the sensitivity displays
-  without flagged or seriously flagged reports, which now include Harvey's corrected reports. Every changed value is in
-  `docs/decisions.md` (2026-11-24) and on the page's Corrections list. No finding's wording changes.
+  the reports' status is `known_fcc_inconsistency`, which outranks a flag.
+- Restored after the parser fix: Harvey Sep 3, 2017, whose Matagorda and San Patricio rows are broken in both its
+  text and its PDF, is kept because a new rule counts a row as confirmed (and flags it) when the next report's
+  previous-day column reprints it exactly, as Sep 4 does for all 13 of Sep 3's counties. Nate, Oct 9, 2017, which
+  prints no headline %, is kept because a missing headline is now a flag (`headline_missing`), not an exclusion,
+  where the rows are confirmed and the printed totals reconcile. Nate joins the peak tables; with one report it is
+  left out of the recovery summaries, as Nicole is. Its BDC release (the earliest, as for every storm before 2022)
+  is added to `storm_releases.json` from the saved release list, with no new download.
+- Counts: storms {N_STORMS_210} to {N_STORMS}, reports in use 167 to {N_REPORTS}, excluded reports 7 to 5.
+- Numbers that change (2.1.0, then {VERSION}): the median peak share 10.3% to 9.8%; Harvey's site-days lost 1,474 to
+  1,424 and its share restored by its last report 74.8% to 74.0%; the median site-days lost 2,124 to 2,099; sites
+  still out in the FCC's last report 1,883 in 21 storms to 1,887 in 22 (Harvey 70 to 73); the power vs. cell order
+  (cell first 158 to 159, undetermined 148 to 147); chapter 7's and chapter 8's model estimates move slightly
+  (inside 64 knots 47.9 to 48.4; SVI Q4 interval 0.90 to 1.46 becomes 0.90 to 1.45); validation counts and the
+  chapter 14 report card. Every storm after Nate in date order has slightly different bootstrap intervals, because
+  each storm's seed is the base seed plus its position. Every changed value is in `docs/decisions.md` (2026-11-24)
+  and on the page's Corrections list. No finding's wording changes.
 - Three displayed numbers that are exact halves now round up, as the page's rule states (they had been stored just
   below the half): Nicholas's site-days lost 114 to 115, Irma's peak interval upper end 6,039 to 6,040, and
-  Harvey's site-days lost (now 1,430 after the correction).
+  Harvey's site-days lost (now 1,424 after the correction).
 
 ### Engineering hardening (no change to findings)
 - `results.json`: every float is written to 10 significant digits, so last-bit differences between platforms' math
   libraries do not show. Apart from the correction above, every number is within a relative 1e-9 of 2.1.0. The
-  reproduction test and the version 1 results test compare numbers with a relative tolerance of 1e-9 (with an
-  absolute floor of 1e-12 for values that are zero up to floating-point noise) and text exactly (the version 1 test's SHA-256 fingerprints are replaced by a snapshot of the values,
-  `code/tests/snapshots/v1_results.json`). The panel, storm and validation CSVs are still compared byte for byte.
+  reproduction test and the version 1 results test compare numbers with a relative tolerance of 1e-8 (with an
+  absolute floor of 1e-12 for values that are zero up to floating-point noise) and text exactly (the version 1
+  test's SHA-256 fingerprints are replaced by a snapshot of the values, `code/tests/snapshots/v1_results.json`). The panel, storm and validation CSVs are still compared byte for byte.
 - Counts are written as integers (42, not 42.0) in `dirs_county_day.csv` (sites_served, sites_out, the three cause
   columns, on_backup_power, out_unattributed, out_overattributed), `storms.csv` (n_reports, n_counties) and
   `validation/validation_dirs.csv` (sites_unattributed, sites_overattributed); `datapackage.json` types them as
@@ -951,7 +960,7 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          f"[![CI]({GITHUB}/actions/workflows/ci.yml/badge.svg)]({GITHUB}/actions/workflows/ci.yml)", "",
          f"Version {VERSION} ({RELEASE_DATE}). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).", "",
          f"The data and code behind the page *When the Network Goes Dark* ({PAGE_URL}): a county-by-report panel of "
-         "FCC DIRS cell-site outages for 21 storms in ten Gulf and Southeast states, 2017-2026, each report checked "
+         f"FCC DIRS cell-site outages for {N_STORMS} storms in ten Gulf and Southeast states, 2017-2026, each report checked "
          "against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability "
          "(CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in "
          "`data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.", "",
@@ -1012,9 +1021,9 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "- Random numbers: fixed seed 20261122 (bootstrap, 2,000 draws).",
           f"- Intervals: {BOOTSTRAP_NOTE}",
           "- Floating point: `results.json` stores floats to 10 significant digits, and the reproduction test "
-          "compares its numbers with a relative tolerance of 1e-9 and an absolute floor of 1e-12 (text exactly), because "
+          "compares its numbers with a relative tolerance of 1e-8 and an absolute floor of 1e-12 (text exactly), because "
           "platforms' math libraries "
-          "can differ in the last bits (about 1e-10 relative). The panel, storm and validation CSVs must match byte "
+          "can differ in the last bits (up to about 1e-9 relative, in model fits). The panel, storm and validation CSVs must match byte "
           "for byte; the analysis-ready panel is compared value by value at the same tolerance.", "",
           "## Run order", "",
           "```", "python -m pip install -r requirements.txt   # or: --require-hashes -r requirements.lock",
@@ -1027,7 +1036,7 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
     L += [f"| {i} | `{s}` | {a} | {d} |" for i, (s, a, d) in enumerate(RUN_ORDER, 1)]
     L += ["", "`code/tests/test_reproduction.py` then compares `build/` with `data/analysis/`: "
           "`dirs_county_day.csv`, `storms.csv` and the validation tables byte for byte, `results.json` with numbers "
-          "within a relative 1e-9 (absolute 1e-12 near zero) and everything else exactly, and the analysis-ready panel "
+          "within a relative 1e-8 (absolute 1e-12 near zero) and everything else exactly, and the analysis-ready panel "
           "value by value. "
           "`code/tests/test_datapackage.py` checks `datapackage.json` with frictionless (`frictionless validate "
           "datapackage.json`: 0 errors).", "",
@@ -1087,7 +1096,7 @@ if __name__ == "__main__":
 
 TEST_REPRO = '''"""The code reproduces the published files: run python run_all.py first (each check skips until then).
 
-CSVs must match byte for byte. results.json: numbers within a relative 1e-9 (or 1e-12 absolute, for values that are
+CSVs must match byte for byte. results.json: numbers within a relative 1e-8 (or 1e-12 absolute, for values that are
 zero up to floating-point noise), everything else exactly (platforms' math libraries differ in the last bits). The
 analysis-ready panel: value by value at the same tolerance."""
 import json
