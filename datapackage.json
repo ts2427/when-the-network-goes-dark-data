@@ -1531,8 +1531,8 @@
       "mediatype": "application/json",
       "title": "Every number on the page",
       "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant digits.",
-      "hash": "sha256:4b3ebc45b41e908da235d8418e3fce285362e4a29dd857aa71112ce29e34f50f",
-      "bytes": 985760
+      "hash": "sha256:731999cc2a4740590cbd224e9adacb0472b28627939d9347fce3fc4a5be09896",
+      "bytes": 985728
     },
     {
       "name": "analysis_plan_as_committed",

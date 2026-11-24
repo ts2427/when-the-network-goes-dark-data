@@ -29813,7 +29813,7 @@
           {
             "doc_id": "DOC-346478A1",
             "report_date": "2017-09-03",
-            "reason": "Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed); no Texas total"
+            "reason": "Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed)"
           }
         ]
       },
@@ -29933,7 +29933,7 @@
           {
             "doc_id": "DOC-347137A1",
             "report_date": "2017-10-09",
-            "reason": "No headline percent printed (and no totals)"
+            "reason": "No headline percent printed"
           }
         ]
       },
