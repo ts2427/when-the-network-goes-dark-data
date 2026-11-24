@@ -69,3 +69,9 @@ def test_analysis_ready_panel_loads_the_same_from_csv_and_parquet_and_matches_th
     assert (a.doc_id.to_numpy() == pub.doc_id.to_numpy()).all() and (a.fips.to_numpy() == pub.fips.to_numpy()).all()
     assert a.fips.str.fullmatch(r"\d{5}").all()
     assert set(a.wind_zone) <= set(step10.ZONES)
+
+
+def test_values_that_are_zero_up_to_noise_match():
+    # chapter 7's in-sample calibration-in-the-large: -2.35e-15 here, -2.67e-15 and -3.05e-15 on the CI machines
+    assert differences({"v": -2.669789202e-15}, {"v": -2.35065873e-15}) == []
+    assert differences({"v": 1e-11}, {"v": 0.0})  # above the floor it is a real difference

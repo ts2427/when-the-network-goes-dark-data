@@ -47,7 +47,7 @@ BENIGN_FLAGS = [r"rows short of sites out", r"^FCC spelling", r"rows inside_spel
                 r"^causes exceed sites out, confirmed by second reading", r"^causes exceed sites out, listed exception",
                 r"^listed more than once by the FCC", r"^in table, not in the report's list, listed exception",
                 r"^headline [\d.]+% vs [\d.]+% from the report's own totals",
-                # a printed state total off from its own rows, checked (manifest/known_total_inconsistencies.csv)
+                # a printed state total off from its own rows, checked (manifest/known_fcc_inconsistencies.csv)
                 r": printed total [\d,]+ vs [\d,]+ from its rows \(checked, every row confirmed\)$",
                 r"^every row confirmed by second reading$", r"^other states reconcile\)$"]
 PAGE_NOTE_UNDERSTATED = ("Laura",)  # author's instruction 2026-11-22: excluded reports right after the peak

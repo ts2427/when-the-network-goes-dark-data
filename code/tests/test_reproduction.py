@@ -1,7 +1,8 @@
 """The code reproduces the published files: run python run_all.py first (each check skips until then).
 
-CSVs must match byte for byte. results.json: numbers within a relative 1e-9, everything else exactly (platforms'
-math libraries differ in the last bits). The analysis-ready panel: value by value at the same tolerance."""
+CSVs must match byte for byte. results.json: numbers within a relative 1e-9 (or 1e-12 absolute, for values that are
+zero up to floating-point noise), everything else exactly (platforms' math libraries differ in the last bits). The
+analysis-ready panel: value by value at the same tolerance."""
 import json
 import sys
 from pathlib import Path
@@ -12,7 +13,7 @@ REPO = Path(__file__).resolve().parents[2]
 BUILD = REPO / "build"
 PUBLISHED = REPO / "data" / "analysis"
 sys.path.insert(0, str(REPO / "code" / "src"))
-from compare import RTOL, differences  # noqa: E402
+from compare import ATOL, RTOL, differences  # noqa: E402
 
 NOT_BUILT = "needs build/ (not committed): run python run_all.py first"
 built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason=NOT_BUILT)
@@ -47,7 +48,7 @@ def test_analysis_ready_panel_matches_published(ext):
     from load import load_panel
     got = load_panel(BUILD / "processed" / f"panel_analysis_ready.{ext}")
     want = load_panel(PUBLISHED / f"panel_analysis_ready.{ext}")
-    pd.testing.assert_frame_equal(got, want, check_exact=False, rtol=RTOL, atol=0)
+    pd.testing.assert_frame_equal(got, want, check_exact=False, rtol=RTOL, atol=ATOL)
 
 
 def test_inputs_match_their_hashes():

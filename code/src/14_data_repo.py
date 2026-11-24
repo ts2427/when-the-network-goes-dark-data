@@ -608,20 +608,29 @@ hardening, which changes none.
 ### Correction: Harvey Sep 4-5, 2017 table layout
 - The FCC's Harvey reports for Sep 3, 4 and 5, 2017 print the previous day's sites out and % out before today's. The
   parser had read the previous day as the report's own figures, and put today's count and % into the damage and
-  transport columns. It now detects the two-day header and reads today's columns; it also reads these reports'
-  totals (printed "Total", which it had missed, so they were never reconciled). Tests from the reports' own text:
+  transport columns. It now detects the two-day header and reads today's columns. Tests from the reports' own text:
   `code/tests/test_two_day_layout.py`.
+- Two parser misses had kept four Harvey reports' totals from being read, so they were never reconciled: Sep 3-5
+  print "Total" rather than "TOTAL", and in Aug 28 the page-footer pattern took "TOT" from the TOTAL line after it
+  (any three capitals counted as a time zone). Both are fixed. A sweep of every report, in its text and its PDF,
+  finds no other total line left unread; against the 2.1.0 parser only these four Harvey reports change. No report
+  is flagged `no_printed_totals` any more (three reports in use had been, all through these misses).
 - Two new checks stop the build, for every report: a count that is not a whole number, and a previous-day column
   that differs from the previous day's report for the same county. A sweep of all 178 reports finds only these three
   reports affected (Sep 3 stays excluded for its original reason); every previous-day column matches.
 - With their totals read, Sep 4 and Sep 5 print a Texas total of 4,200 sites served over county rows that add up to
-  4,199 (the same rows as Sep 3, which prints 4,199). Recorded as a checked FCC inconsistency
-  (`code/manifest/known_total_inconsistencies.csv`); the reports' status is `known_fcc_inconsistency`.
+  4,199 (the same rows as Sep 3, which prints 4,199). Recorded as checked FCC inconsistencies
+  (`code/manifest/known_fcc_inconsistencies.csv`, kind `state_total`; the rows' sum is used, the printed value kept);
+  the reports' status is `known_fcc_inconsistency`.
+- The excluded reports are unchanged (7), but two reasons no longer say "no totals": Harvey Sep 3 (its total now
+  reads and reconciles; its Matagorda and San Patricio rows are still broken in both the text and the PDF) and Nate
+  Oct 9, 2017 (its total always read; it prints no headline percent). Storm and report counts are unchanged.
 - Numbers that change (2.1.0, then 2.2.0): Harvey's site-days lost 1,474 to 1,430; the median site-days lost across
   storms 2,124 to 2,102; Harvey's share restored by its last report 74.8% to 74.0%; sites still out in the FCC's
   last report 1,883 to 1,886 in total (Harvey 70 to 73); the power vs. cell order (cell first 158 to 159, power
   first 66 to 65, same report 127 to 128, undetermined 148 to 147); chapter 8's hazard ratios move by at most 0.01
-  (2,761 to 2,759 intervals); validation counts and the chapter 14 report card for 2017. Every changed value is in
+  (2,761 to 2,759 intervals); validation counts, the chapter 14 report card for 2017, and the sensitivity displays
+  without flagged or seriously flagged reports, which now include Harvey's corrected reports. Every changed value is in
   `docs/decisions.md` (2026-11-24) and on the page's Corrections list. No finding's wording changes.
 - Three displayed numbers that are exact halves now round up, as the page's rule states (they had been stored just
   below the half): Nicholas's site-days lost 114 to 115, Irma's peak interval upper end 6,039 to 6,040, and
@@ -630,8 +639,8 @@ hardening, which changes none.
 ### Engineering hardening (no change to findings)
 - `results.json`: every float is written to 10 significant digits, so last-bit differences between platforms' math
   libraries do not show. Apart from the correction above, every number is within a relative 1e-9 of 2.1.0. The
-  reproduction test and the version 1 results test compare numbers with a relative tolerance of 1e-9 and text
-  exactly (the version 1 test's SHA-256 fingerprints are replaced by a snapshot of the values,
+  reproduction test and the version 1 results test compare numbers with a relative tolerance of 1e-9 (with an
+  absolute floor of 1e-12 for values that are zero up to floating-point noise) and text exactly (the version 1 test's SHA-256 fingerprints are replaced by a snapshot of the values,
   `code/tests/snapshots/v1_results.json`). The panel, storm and validation CSVs are still compared byte for byte.
 - Counts are written as integers (42, not 42.0) in `dirs_county_day.csv` (sites_served, sites_out, the three cause
   columns, on_backup_power, out_unattributed, out_overattributed), `storms.csv` (n_reports, n_counties) and
@@ -1003,7 +1012,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "- Random numbers: fixed seed 20261122 (bootstrap, 2,000 draws).",
           f"- Intervals: {BOOTSTRAP_NOTE}",
           "- Floating point: `results.json` stores floats to 10 significant digits, and the reproduction test "
-          "compares its numbers with a relative tolerance of 1e-9 (text exactly), because platforms' math libraries "
+          "compares its numbers with a relative tolerance of 1e-9 and an absolute floor of 1e-12 (text exactly), because "
+          "platforms' math libraries "
           "can differ in the last bits (about 1e-10 relative). The panel, storm and validation CSVs must match byte "
           "for byte; the analysis-ready panel is compared value by value at the same tolerance.", "",
           "## Run order", "",
@@ -1017,7 +1027,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
     L += [f"| {i} | `{s}` | {a} | {d} |" for i, (s, a, d) in enumerate(RUN_ORDER, 1)]
     L += ["", "`code/tests/test_reproduction.py` then compares `build/` with `data/analysis/`: "
           "`dirs_county_day.csv`, `storms.csv` and the validation tables byte for byte, `results.json` with numbers "
-          "within a relative 1e-9 and everything else exactly, and the analysis-ready panel value by value. "
+          "within a relative 1e-9 (absolute 1e-12 near zero) and everything else exactly, and the analysis-ready panel "
+          "value by value. "
           "`code/tests/test_datapackage.py` checks `datapackage.json` with frictionless (`frictionless validate "
           "datapackage.json`: 0 errors).", "",
           "## Page sections and figures", "",
@@ -1076,8 +1087,9 @@ if __name__ == "__main__":
 
 TEST_REPRO = '''"""The code reproduces the published files: run python run_all.py first (each check skips until then).
 
-CSVs must match byte for byte. results.json: numbers within a relative 1e-9, everything else exactly (platforms'
-math libraries differ in the last bits). The analysis-ready panel: value by value at the same tolerance."""
+CSVs must match byte for byte. results.json: numbers within a relative 1e-9 (or 1e-12 absolute, for values that are
+zero up to floating-point noise), everything else exactly (platforms' math libraries differ in the last bits). The
+analysis-ready panel: value by value at the same tolerance."""
 import json
 import sys
 from pathlib import Path
@@ -1088,7 +1100,7 @@ REPO = Path(__file__).resolve().parents[2]
 BUILD = REPO / "build"
 PUBLISHED = REPO / "data" / "analysis"
 sys.path.insert(0, str(REPO / "code" / "src"))
-from compare import RTOL, differences  # noqa: E402
+from compare import ATOL, RTOL, differences  # noqa: E402
 
 NOT_BUILT = "needs build/ (not committed): run python run_all.py first"
 built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason=NOT_BUILT)
@@ -1123,7 +1135,7 @@ def test_analysis_ready_panel_matches_published(ext):
     from load import load_panel
     got = load_panel(BUILD / "processed" / f"panel_analysis_ready.{ext}")
     want = load_panel(PUBLISHED / f"panel_analysis_ready.{ext}")
-    pd.testing.assert_frame_equal(got, want, check_exact=False, rtol=RTOL, atol=0)
+    pd.testing.assert_frame_equal(got, want, check_exact=False, rtol=RTOL, atol=ATOL)
 
 
 def test_inputs_match_their_hashes():

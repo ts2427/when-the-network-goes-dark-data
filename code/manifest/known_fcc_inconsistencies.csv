@@ -1,2 +1,4 @@
-doc_id,page,stated_pct,total_served,total_out,checked_on
-DOC-406055A1,3,21.7,13038,1889,2026-11-22
+doc_id,kind,page,stated_pct,total_served,total_out,state,column,printed_total,rows_sum,checked_on,note
+DOC-406055A1,headline,3,21.7,13038,1889,,,,,2026-11-22,
+DOC-346482A1,state_total,3,,,,Texas,sites_served,4200,4199,2026-11-24,"Same 13 county rows as Sep 3 (DOC-346478A1), which prints 4,199; the row sum is used"
+DOC-346499A1,state_total,4,,,,Texas,sites_served,4200,4199,2026-11-24,"Same 13 county rows as Sep 3 (DOC-346478A1), which prints 4,199; the row sum is used"

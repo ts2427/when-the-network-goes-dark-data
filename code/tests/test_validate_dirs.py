@@ -383,7 +383,7 @@ def run_main(case, tmp_path, monkeypatch):
                      ("dirs_pdf_lines", case.lines), ("dirs_overall_totals", case.overall)]:
         df.to_parquet(tmp_path / f"{name}.parquet", index=False)
     case.over.to_csv(tmp_path / "over.csv", index=False)
-    case.headlines.to_csv(tmp_path / "headlines.csv", index=False)
+    case.headlines.assign(kind="headline").to_csv(tmp_path / "headlines.csv", index=False)  # one table, kind column
     case.unlisted.to_csv(tmp_path / "unlisted.csv", index=False)
     case.excluded.to_csv(tmp_path / "excluded.csv", index=False)
     monkeypatch.setattr(step4, "EXCLUDED", tmp_path / "excluded.csv")
@@ -453,9 +453,16 @@ def test_only_the_two_helene_rows_are_excepted():
 
 
 def test_only_the_helene_oct_1_headline_is_known():
-    got = pd.read_csv(ROOT / "manifest" / "known_fcc_inconsistencies.csv")
+    got = step4.known_inconsistencies("headline")
     assert got.doc_id.tolist() == ["DOC-406055A1"]
     assert got[step4.HEADLINE_FIELDS].notna().all().all()
+
+
+def test_only_harvey_sep_4_and_5_texas_totals_are_known():
+    got = step4.known_inconsistencies("state_total")
+    assert sorted(zip(got.doc_id, got.state, got.column, got.printed_total, got.rows_sum)) == [
+        ("DOC-346482A1", "Texas", "sites_served", 4200, 4199), ("DOC-346499A1", "Texas", "sites_served", 4200, 4199)]
+    assert got[["page", "checked_on"]].notna().all().all()
 
 
 def test_only_the_three_checked_counties_are_excepted_from_the_list_check():

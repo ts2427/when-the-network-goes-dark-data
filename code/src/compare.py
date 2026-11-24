@@ -6,27 +6,30 @@ libraries (up to about 1e-10 relative) do not fail them, while any real change d
 import math
 
 RTOL = 1e-9
+# Values that are zero by construction (e.g. an in-sample calibration-in-the-large) come out as floating-point noise
+# around 1e-15 that differs between machines; no relative tolerance can match them. Numbers within ATOL match.
+ATOL = 1e-12
 
 
 def _is_num(x) -> bool:
     return isinstance(x, (int, float)) and not isinstance(x, bool)
 
 
-def differences(got, want, rtol: float = RTOL, path: str = "") -> list:
+def differences(got, want, rtol: float = RTOL, path: str = "", atol: float = ATOL) -> list:
     """Every place where got and want differ: a list of (path, got, want). Numbers compare with math.isclose(rel_tol=
-    rtol, abs_tol=0); an int and an equal float match. Strings, booleans, None, keys and list lengths must match."""
+    rtol, abs_tol=atol); an int and an equal float match. Strings, booleans, None, keys and list lengths must match."""
     if _is_num(got) and _is_num(want):
         both_nan = isinstance(got, float) and isinstance(want, float) and math.isnan(got) and math.isnan(want)
-        same = got == want or both_nan or math.isclose(got, want, rel_tol=rtol, abs_tol=0.0)
+        same = got == want or both_nan or math.isclose(got, want, rel_tol=rtol, abs_tol=atol)
         return [] if same else [(path, got, want)]
     if isinstance(got, dict) and isinstance(want, dict):
         if list(got) != list(want):
             return [(path + " (keys)", list(got), list(want))]
-        return [d for k in want for d in differences(got[k], want[k], rtol, f"{path}/{k}")]
+        return [d for k in want for d in differences(got[k], want[k], rtol, f"{path}/{k}", atol)]
     if isinstance(got, list) and isinstance(want, list):
         if len(got) != len(want):
             return [(path + " (length)", len(got), len(want))]
-        return [d for i, (a, b) in enumerate(zip(got, want)) for d in differences(a, b, rtol, f"{path}[{i}]")]
+        return [d for i, (a, b) in enumerate(zip(got, want)) for d in differences(a, b, rtol, f"{path}[{i}]", atol)]
     if type(got) is not type(want) or got != want:
         return [(path, got, want)]
     return []

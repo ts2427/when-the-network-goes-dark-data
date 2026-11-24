@@ -151,3 +151,15 @@ def test_total_exception_applies_only_to_the_checked_total():
     assert fails[0] == "Texas sites_served 4199 vs printed total 4200"
     fails, _ = step4.apply_total_exceptions(["Texas sites_out 70 vs printed total 71"], entries, set())
     assert "Texas sites_out 70 vs printed total 71" in fails and any("no longer matches" in f for f in fails)
+
+
+def test_a_total_right_after_a_page_footer_is_read():
+    """Harvey Aug 28, 2017 (DOC-346381A1, PDF text): the footer's time-zone pattern took 'TOT' from the next line."""
+    text = ("LA ASSUMPTION 23 0 0.0%\nTX ARANSAS 7,780 364 4.7%\n"
+            "As prepared by the Federal Communications Commission: August 28, 2017 11:30 a.m.\n"
+            "TOTAL  7,803 364 4.7%\n")
+    rep = parse_text(text)
+    assert [(t["sites_served"], t["sites_out"]) for t in rep.overall_totals] == [(7803, 364)]
+    footer_tz = parse_text("TX ARANSAS 19 4 21.1%\nAs prepared by the Federal Communications Commission: "
+                           "August 28, 2017 11:30 a.m. EDT\nTOTAL 19 4 21.1%\n")
+    assert [(t["sites_served"], t["sites_out"]) for t in footer_tz.state_totals] == [(19, 4)]

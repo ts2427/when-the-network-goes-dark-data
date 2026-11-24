@@ -360,8 +360,8 @@
           ""
         ]
       },
-      "hash": "sha256:a7c0270354119ec5b4d65d2da43e23b8bd1eb69ef26ced75cac66d68a3d54f56",
-      "bytes": 5338
+      "hash": "sha256:05d236bec052c87be29c90a62c7b7ce70aee6e4ca59419bc9f8e7e0ca7c58804",
+      "bytes": 5306
     },
     {
       "name": "panel_analysis_ready",
@@ -1531,8 +1531,8 @@
       "mediatype": "application/json",
       "title": "Every number on the page",
       "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant digits.",
-      "hash": "sha256:528943378d1373f662b9f4258f24bbad3d320f737d8d71198c442343cbe82336",
-      "bytes": 986019
+      "hash": "sha256:4b3ebc45b41e908da235d8418e3fce285362e4a29dd857aa71112ce29e34f50f",
+      "bytes": 985760
     },
     {
       "name": "analysis_plan_as_committed",

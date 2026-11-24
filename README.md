@@ -74,7 +74,7 @@ Exact attribution for each source: `SOURCES.md`. Variables: `CODEBOOK.md` and `d
 - No network access is needed: every step reads `data/input/`. Steps 02, 06a, 06c, 06d and 06e (downloads and raw BDC reading) are included for transparency but are not run; they need the original sources and, for BDC, an FCC account.
 - Random numbers: fixed seed 20261122 (bootstrap, 2,000 draws).
 - Intervals: The county bootstrap (chapters 3 to 6 within each storm; chapters 8 and 13 across storm-counties) resamples counties as if they were independent. Counties hit by the same storm share its wind, flooding, power grid and networks, so their outcomes are correlated, and these intervals may be somewhat narrow. The storm bootstrap (medians and pooled shares across storms, chapter 7's zone shares, chapter 12) resamples whole storms, and the models in chapters 7, 8 and 13 use storm- or county-clustered intervals. This is a note on the method, not a change to any result.
-- Floating point: `results.json` stores floats to 10 significant digits, and the reproduction test compares its numbers with a relative tolerance of 1e-9 (text exactly), because platforms' math libraries can differ in the last bits (about 1e-10 relative). The panel, storm and validation CSVs must match byte for byte; the analysis-ready panel is compared value by value at the same tolerance.
+- Floating point: `results.json` stores floats to 10 significant digits, and the reproduction test compares its numbers with a relative tolerance of 1e-9 and an absolute floor of 1e-12 (text exactly), because platforms' math libraries can differ in the last bits (about 1e-10 relative). The panel, storm and validation CSVs must match byte for byte; the analysis-ready panel is compared value by value at the same tolerance.
 
 ## Run order
 
@@ -102,7 +102,7 @@ python -m pytest code/tests        # now including the reproduction test (build/
 | 11 | `12_v2_analysis.py` | v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card | chapters 10-14 to results.json |
 | 12 | `12b_analysis_ready.py` |  | the analysis-ready panel (CSV and Parquet): the panel with every covariate |
 
-`code/tests/test_reproduction.py` then compares `build/` with `data/analysis/`: `dirs_county_day.csv`, `storms.csv` and the validation tables byte for byte, `results.json` with numbers within a relative 1e-9 and everything else exactly, and the analysis-ready panel value by value. `code/tests/test_datapackage.py` checks `datapackage.json` with frictionless (`frictionless validate datapackage.json`: 0 errors).
+`code/tests/test_reproduction.py` then compares `build/` with `data/analysis/`: `dirs_county_day.csv`, `storms.csv` and the validation tables byte for byte, `results.json` with numbers within a relative 1e-9 (absolute 1e-12 near zero) and everything else exactly, and the analysis-ready panel value by value. `code/tests/test_datapackage.py` checks `datapackage.json` with frictionless (`frictionless validate datapackage.json`: 0 errors).
 
 ## Page sections and figures
 

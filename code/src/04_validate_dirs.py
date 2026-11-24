@@ -61,11 +61,14 @@ from tables import write_csv
 OVER_EXCEPTIONS = ROOT / "manifest" / "cause_exceptions.csv"
 LIST_EXCEPTIONS = ROOT / "manifest" / "county_list_exceptions.csv"
 EXCLUDED = ROOT / "manifest" / "excluded_reports.csv"
+# Known FCC inconsistencies, each checked against the PDF, one table with a kind column:
+#   headline     a stated % out that the report's own totals do not give (Helene Oct 1, 2024)
+#   state_total  a printed state total that its own county rows do not add up to (2026-11-24: Harvey Sep 4 and 5,
+#                2017 print Texas sites served 4,200 over the same rows that Sep 3 totals 4,199). Applies only when
+#                every row of the state is confirmed by the second reading; the rows' sum is used and the printed
+#                value recorded. An entry that no longer matches fails.
+# Either gives the status known_fcc_inconsistency.
 HEADLINE_EXCEPTIONS = ROOT / "manifest" / "known_fcc_inconsistencies.csv"
-# A printed state total that its own county rows do not add up to, checked against the PDF (2026-11-24: Harvey Sep 4
-# and 5, 2017 print Texas sites served 4,200 over the same rows that Sep 3 totals 4,199). Applies only when every row
-# of the state is confirmed by the second reading; gives known_fcc_inconsistency. An entry that no longer matches fails.
-TOTAL_EXCEPTIONS = ROOT / "manifest" / "known_total_inconsistencies.csv"
 
 PRINTED = ["sites_served", "sites_out", "pct_out", *CAUSES, "on_backup_power"]
 OVER_FIELDS = ["doc_id", "page", "state", "county", *PRINTED, "checked_on"]
@@ -325,6 +328,13 @@ def check_causes(g: pd.DataFrame, gap: pd.Series, allowed: pd.DataFrame,
 TOTAL_FAIL_RE = re.compile(r"(?P<state>.+) (?P<col>[a-z_]+) (?P<sum>-?\d+) vs printed total (?P<printed>-?\d+)")
 
 
+def known_inconsistencies(kind: str) -> pd.DataFrame:
+    k = pd.read_csv(HEADLINE_EXCEPTIONS)
+    if not k.kind.isin(["headline", "state_total"]).all():
+        raise SystemExit(f"{HEADLINE_EXCEPTIONS.name}: unknown kind in {sorted(set(k.kind))}")
+    return k[k.kind == kind].reset_index(drop=True)
+
+
 def apply_total_exceptions(fails: list[str], entries: pd.DataFrame, unconfirmed: set) -> tuple[list[str], list[str]]:
     """Total failures matched by a checked entry (state, column, printed total, rows' sum), with every row of that
     state confirmed by the second reading, become known inconsistencies. Returns (failures, known). An entry that
@@ -503,10 +513,10 @@ def main():
     for doc, (prev, n) in prev_checked.items():
         print(f"{doc}: previous-day column matches {prev} for all {n} counties")
     results, summary = validate(read["county_rows"], read["state_totals"], read["reports"], read["county_lists"],
-                                pd.read_csv(OVER_EXCEPTIONS), pd.read_csv(HEADLINE_EXCEPTIONS),
+                                pd.read_csv(OVER_EXCEPTIONS), known_inconsistencies("headline"),
                                 pd.read_csv(LIST_EXCEPTIONS), read["pdf_lines"], read["overall_totals"],
                                 pd.read_csv(EXCLUDED, dtype=str, keep_default_na=False),
-                                total_allowed=pd.read_csv(TOTAL_EXCEPTIONS))
+                                total_allowed=known_inconsistencies("state_total"))
     OUTPUT.mkdir(exist_ok=True)
     write_csv(results, OUTPUT / "validation_dirs.csv", ["sites_unattributed", "sites_overattributed"])
     summary.to_csv(OUTPUT / "validation_summary.csv", index=False, lineterminator="\n")  # already whole; "n/a" text

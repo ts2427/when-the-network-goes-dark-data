@@ -49,7 +49,9 @@ ROW_RE = re.compile(rf"^\s*(?P<state>{_STATE_RE})\s+(?P<county>[A-Za-z][A-Za-z .
                     re.IGNORECASE)
 TOTAL_ROW_RE = re.compile(rf"^\s*(?:TOTAL|Total)\s+(?:-\s+)?(?P<nums>(?:{_NUM}\s+){{1,7}}{_NUM})\s*$")
 FOOTER_RE = re.compile(r"As prepared by the Federal Communications Commission:\s*\w+\s+\d{1,2},?\s*\d{4}\s*"
-                       r"(?:\d{1,2}:\d{2}\s*[ap]\.m\.\s*[A-Z]{3})?|Pa ge \| \d+")
+                       r"(?:\d{1,2}:\d{2}[ \t]*[ap]\.m\.(?:[ \t]*[ECMP][DS]T\b)?)?|Pa ge \| \d+")
+# (correction, 2026-11-24) the time zone must be a real one on the footer's own line: "[A-Z]{3}" after "\s*" had
+# taken "TOT" from a TOTAL line right after a footer (Harvey Aug 28, 2017), so that total was never read.
 TOTAL_ALONE_RE = re.compile(r"^\s*TOTAL\s*(?:-\s*)?$")
 NUMBERS_ONLY_RE = re.compile(rf"^\s*(?P<nums>(?:{_NUM}\s+){{1,7}}{_NUM})\s*$")
 THRESHOLD_RE = re.compile(r"(?:more|less|fewer)\s+than\s*$|\b(?:over|under|above|below)\s*$", re.IGNORECASE)

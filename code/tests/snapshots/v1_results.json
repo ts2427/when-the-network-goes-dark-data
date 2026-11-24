@@ -60,7 +60,7 @@
     "rule_period": "P0",
     "dirs_activation_date": "2017-08-25",
     "in_panel": true,
-    "excluded_reports": "DOC-346478A1 (2017-09-03): Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed); no Texas total",
+    "excluded_reports": "DOC-346478A1 (2017-09-03): Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed)",
     "n_reports": 10,
     "n_counties": 64,
     "county_days": 484,
@@ -99,7 +99,7 @@
     "rule_period": null,
     "dirs_activation_date": "2017-10-08",
     "in_panel": false,
-    "excluded_reports": "DOC-347137A1 (2017-10-09): No headline percent printed (and no totals)"
+    "excluded_reports": "DOC-347137A1 (2017-10-09): No headline percent printed"
    },
    {
     "storm": "Florence",
@@ -490,14 +490,14 @@
     "doc_id": "DOC-346478A1",
     "storm_name": "Harvey",
     "report_date": "2017-09-03",
-    "reason": "Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed); no Texas total",
+    "reason": "Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed)",
     "decided_on": "2026-11-22"
    },
    {
     "doc_id": "DOC-347137A1",
     "storm_name": "Nate",
     "report_date": "2017-10-09",
-    "reason": "No headline percent printed (and no totals)",
+    "reason": "No headline percent printed",
     "decided_on": "2026-11-22"
    },
    {
@@ -2002,11 +2002,6 @@
      "n_reports": 10
     },
     {
-     "flag": "No totals printed (every row confirmed)",
-     "class": "serious",
-     "n_reports": 1
-    },
-    {
      "flag": "One state printed no total (its rows all confirmed)",
      "class": "serious",
      "n_reports": 1
@@ -2689,7 +2684,7 @@
    "storms_without_peak": [
     {
      "storm": "Nate",
-     "excluded_reports": "DOC-347137A1 (2017-10-09): No headline percent printed (and no totals)"
+     "excluded_reports": "DOC-347137A1 (2017-10-09): No headline percent printed"
     }
    ],
    "largest_peak_sites_out": {
@@ -2739,7 +2734,7 @@
     "rule_period": "P0",
     "landfall_utc": "2017-08-25 11:45:00+00:00",
     "landfall_source": "34-kt winds first reach a study-state county",
-    "excluded_reports": "DOC-346478A1 (2017-09-03): Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed); no Texas total",
+    "excluded_reports": "DOC-346478A1 (2017-09-03): Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed)",
     "n_counties": 64,
     "peak_doc_id": "DOC-346419A1",
     "peak_report_date": "2017-08-29",
@@ -4113,7 +4108,7 @@
       "peak_report_date": "2017-08-29",
       "peak_sites_out": 365.0,
       "peak_pct_out": 4.67648943,
-      "n_reports": 7
+      "n_reports": 8
      },
      "AL092021_2021-08-29": {
       "storm": "Ida",
@@ -4395,7 +4390,7 @@
     "storm_key": "AL092017_2017-08-25",
     "storm": "Harvey",
     "rule_period": "P0",
-    "excluded_reports": "DOC-346478A1 (2017-09-03): Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed); no Texas total",
+    "excluded_reports": "DOC-346478A1 (2017-09-03): Texas rows broken across lines in both the .txt and the PDF (Matagorda, San Patricio not confirmed)",
     "affected_sites": {
      "value": 365.0,
      "ci_low": null,
@@ -7162,7 +7157,7 @@
     },
     "AL092017_2017-08-25": {
      "storm": "Harvey",
-     "n_reports": 7,
+     "n_reports": 8,
      "t50": 4.0,
      "t90": null,
      "t90_censored": true,
@@ -13633,7 +13628,7 @@
    "without_serious_flag_reports": {
     "pct_sites_out": {
      "value": 0.5775639125,
-     "ci_low": 0.4818916278,
+     "ci_low": 0.4712058141,
      "ci_high": 0.6679082156,
      "n": 16,
      "unit": "Spearman rank correlation",
@@ -15930,50 +15925,50 @@
     "n": 1494,
     "odds_ratios": {
      "log1p_dist_km": {
-      "value": 0.7117675424,
-      "ci_low": 0.5559573715,
-      "ci_high": 0.9112443873,
+      "value": 0.7119146537,
+      "ci_low": 0.5562019982,
+      "ci_high": 0.9112201605,
       "n": 1494,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "wind_per_10kt": {
-      "value": 1.119687577,
-      "ci_low": 0.9839599286,
-      "ci_high": 1.274137528,
+      "value": 1.119250775,
+      "ci_low": 0.9836960231,
+      "ci_high": 1.27348517,
       "n": 1494,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_inside 64 kt": {
-      "value": 25.82806067,
-      "ci_low": 10.15898966,
-      "ci_high": 65.66486828,
+      "value": 25.58980037,
+      "ci_low": 10.06284267,
+      "ci_high": 65.07484061,
       "n": 1494,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_50-64 kt": {
-      "value": 17.19389287,
-      "ci_low": 8.100719591,
-      "ci_high": 36.49428283,
+      "value": 17.01567155,
+      "ci_low": 8.002233366,
+      "ci_high": 36.18153398,
       "n": 1494,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_34-50 kt": {
-      "value": 7.901222661,
-      "ci_low": 4.064410806,
-      "ci_high": 15.35999251,
+      "value": 7.820284345,
+      "ci_low": 4.011241452,
+      "ci_high": 15.24636399,
       "n": 1494,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      }
     },
     "held_out_calibration_slope": {
-     "value": 0.8750426053,
-     "ci_low": 0.5424448875,
-     "ci_high": 1.207640323,
+     "value": 0.875501,
+     "ci_low": 0.5427807652,
+     "ci_high": 1.208221235,
      "n": 1494,
      "unit": "calibration slope (1 is ideal)",
      "method": "GLM of observed counts on logit(prediction); storm-clustered 95%"
@@ -17599,26 +17594,26 @@
    "without_serious_flag_reports": {
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 1.030049301,
-      "ci_low": 0.7401266183,
-      "ci_high": 1.433540607,
-      "n": 1429,
+      "value": 1.017183885,
+      "ci_low": 0.7294567224,
+      "ci_high": 1.418402249,
+      "n": 1448,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 1.282524657,
-      "ci_low": 0.901170826,
-      "ci_high": 1.825258263,
-      "n": 1429,
+      "value": 1.250161748,
+      "ci_low": 0.8808374988,
+      "ci_high": 1.774339078,
+      "n": 1448,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 1.098109529,
-      "ci_low": 0.7710079711,
-      "ci_high": 1.563984527,
-      "n": 1429,
+      "value": 1.072032114,
+      "ci_low": 0.7529025842,
+      "ci_high": 1.526429683,
+      "n": 1448,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      }
@@ -17643,9 +17638,9 @@
      "AL172022_2022-11-09",
      "AL192020_2020-09-14"
     ],
-    "n_intervals": 1429,
-    "n_events": 330,
-    "n_counties": 349,
+    "n_intervals": 1448,
+    "n_events": 332,
+    "n_counties": 350,
     "optimizer": "IRLS"
    },
    "without_state_total_missing_reports": {

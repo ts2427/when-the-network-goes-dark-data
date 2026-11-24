@@ -9,7 +9,7 @@ DOC-406099A1,flagged,148,False,11.430971288943189,11.3,11.430971288943189,122,7,
 DOC-406206A1,flagged,104,False,4.703288627595076,4.7,4.703288627595076,111,0,,19 rows short of sites out (111 sites unattributed)
 DOC-346368A1,flagged,55,False,4.037943853352134,4.0,4.037943853352134,,,,1 rows inside_spelling_variant
 DOC-346369A1,flagged,55,False,4.1004613018964635,4.1,4.1004613018964635,,,,1 rows inside_spelling_variant
-DOC-346381A1,flagged,55,False,4.664872484941689,4.7,4.664872484941689,,,,no_printed_totals: the report prints no totals; every row confirmed by second reading; 1 rows inside_spelling_variant
+DOC-346381A1,flagged,55,False,4.664872484941689,4.7,4.664872484941689,,,,1 rows inside_spelling_variant
 DOC-346419A1,flagged,55,False,4.6764894298526585,4.7,4.6764894298526585,,,,1 rows inside_spelling_variant
 DOC-346445A1,flagged,55,False,4.215786776012301,4.2,4.215786776012301,,,,1 rows inside_spelling_variant
 DOC-346455A1,flagged,55,False,3.7929267042542287,3.8,3.7929267042542287,,,,1 rows inside_spelling_variant
