@@ -39,7 +39,7 @@ MAP_SCALE = "steps"  # Tim's choice, 2026-11-23 (option B), from the panel's ove
 MAP_SCALE_TEXT = {"cap50": "the same fixed scale for every storm, from 0% to 50% and above",
                   "steps": "fixed steps for every storm: 0%, under 5%, 5–15%, 15–30%, 30–50% and 50% or more"}
 DATE = "2026-11-22"
-UPDATED = "2026-11-23"
+UPDATED = "2026-11-24"
 DRAFT = False  # published 2026-11-23 (Tim's decision); the site build's guards apply to a published page
 WORK_YAML = SITE / "content" / "work.yaml"
 WORK_URL = f"/analysis/{SLUG}/"
@@ -280,6 +280,16 @@ def excluded_days_text(r: dict) -> str:
                                                       else "days " + _and([str(v) for v in d]))
             parts.append(f"{storm} {span}")
     return _and(parts)
+
+
+def _verb(measure: dict, one: str, many: str) -> str:
+    """Agreement with "N of M reports": singular when N is 1."""
+    return one if measure["count"] == 1 else many
+
+
+def _status_label(key: str, n: int) -> str:
+    label = STATUS_LABELS.get(key, key.replace("_", " "))
+    return label.replace("inconsistency", "inconsistencies") if n != 1 else label
 
 
 def _and(items: list) -> str:
@@ -1448,9 +1458,10 @@ def report_card_section(r: dict) -> str:
         f"{frac_pct(t['causes_above'])}. The "
         f"printed headline % out differed from the report's own county rows by more than "
         f"{f1(rc['headline_tolerance_points'])} points in {frac(t['headline_mismatch'])} reports with a headline; "
-        f"{t['headline_not_printed']['count']} printed no headline. {frac(t['missing_state_total'])} reports lack a "
-        f"state total, {frac(t['not_in_list'])} list a county in the table but not in the report's own county list, "
-        f"and {frac(t['out_of_area'])} include counties outside the storm's notice area. The backup-power column is "
+        f"{t['headline_not_printed']['count']} printed no headline. {frac(t['missing_state_total'])} reports "
+        f"{_verb(t['missing_state_total'], 'lacks', 'lack')} a state total, {frac(t['not_in_list'])} "
+        f"{_verb(t['not_in_list'], 'lists', 'list')} a county in the table but not in the report's own county list, "
+        f"and {frac(t['out_of_area'])} {_verb(t['out_of_area'], 'includes', 'include')} counties outside the storm's notice area. The backup-power column is "
         f"printed in {frac(t['backup_printed'])} reports in the panel, and {frac(t['excluded'])} reports were "
         f"excluded from the analysis.\n")
     add("**Exhibit.** By year (the storm's DIRS activation year). Each cell is reports with the feature, of the "
@@ -1563,7 +1574,7 @@ def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame
 
     val = r["chapter_1"]["validation"]
     add("**Validation.** Every in-scope report was checked against its own printed totals: " +
-        ", ".join(f"{n0(v)} {STATUS_LABELS.get(k, k.replace('_', ' '))}" for k, v in val["status_counts"].items()) +
+        ", ".join(f"{n0(v)} {_status_label(k, v)}" for k, v in val["status_counts"].items()) +
         ". Flags on the reports used, by type (a report can carry several):\n")
     add(table(["Flag", "Kind", "Reports"], [(f["flag"], f["class"], f["n_reports"]) for f in val["flag_types_in_reports_used"]]))
     known = val["known_fcc_inconsistencies"]

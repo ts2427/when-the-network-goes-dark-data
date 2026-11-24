@@ -39,12 +39,14 @@ Harvey's 2017 reports that also restores two excluded reports, and engineering h
   still out in the FCC's last report 1,883 in 21 storms to 1,887 in 22 (Harvey 70 to 73); the power vs. cell order
   (cell first 158 to 159, undetermined 148 to 147); chapter 7's and chapter 8's model estimates move slightly
   (inside 64 knots 47.9 to 48.4; SVI Q4 interval 0.90 to 1.46 becomes 0.90 to 1.45); validation counts and the
-  chapter 14 report card. Every storm after Nate in date order has slightly different bootstrap intervals, because
-  each storm's seed is the base seed plus its position. Every changed value is in `docs/decisions.md` (2026-11-24)
-  and on the page's Corrections list. No finding's wording changes.
-- Three displayed numbers that are exact halves now round up, as the page's rule states (they had been stored just
-  below the half): Nicholas's site-days lost 114 to 115, Irma's peak interval upper end 6,039 to 6,040, and
-  Harvey's site-days lost (now 1,424 after the correction).
+  chapter 14 report card; and figures counted over storm-counties (chapter 9's P0 row, the map's county-reports,
+  chapter 7's calibration table). Every storm after Nate in date order has slightly different bootstrap intervals in
+  every chapter, because each storm's seed is the base seed plus its position in date order. The main changes are in
+  `docs/decisions.md` (2026-11-24) and on the page's Corrections list; `data/analysis/results.json` holds every
+  value. No finding's wording changes.
+- Two displayed numbers that are exact halves now round up, as the page's rule states (they had been stored just
+  below the half): Nicholas's site-days lost 114 to 115 and Irma's peak interval upper end 6,039 to 6,040. (A third,
+  Harvey's site-days lost, is now 1,424 after the correction.)
 
 ### Engineering hardening (no change to findings)
 - `results.json`: every float is written to 10 significant digits, so last-bit differences between platforms' math
