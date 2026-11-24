@@ -10,6 +10,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 v2 = importlib.import_module("12_v2_analysis")
+from config import OUTPUT  # noqa: E402
 
 
 def test_assign_group_uses_fixed_cut_points():
@@ -24,8 +25,8 @@ def test_counts_never_expose_provider_ids():
     assert c.loc[("R", "01001")] == 2 and c.name == "provider_id" and "111" not in str(c.to_dict())
 
 
-@pytest.mark.skipif(not (ROOT / "output" / "results.json").exists(), reason="no results")
+@pytest.mark.skipif(not (OUTPUT / "results.json").exists(), reason="needs results.json from a build: run python run_all.py first")
 def test_results_hold_no_provider_identifier_key():
-    r = json.loads((ROOT / "output" / "results.json").read_text(encoding="utf-8"))
+    r = json.loads((OUTPUT / "results.json").read_text(encoding="utf-8"))
     txt = json.dumps({k: v for k, v in r.items() if k.startswith("v2_5")})
     assert '"provider_id"' not in txt and "provider_name" not in txt

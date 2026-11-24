@@ -13,7 +13,7 @@ step11 = importlib.import_module("11_build_page")
 from config import DOCS, OUTPUT, RAW  # noqa: E402  (same layout in the private project and the public repository)
 RESULTS = OUTPUT / "results.json"
 needs_results = pytest.mark.skipif(not RESULTS.exists() or "chapter_9" not in RESULTS.read_text(encoding="utf-8"),
-                                   reason="needs output/results.json from step 10 (not committed)")
+                                   reason="needs results.json from a build (not committed): run python run_all.py first")
 
 
 def test_figure_verification_catches_a_changed_value(tmp_path):

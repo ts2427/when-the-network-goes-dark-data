@@ -33,7 +33,7 @@ from config import EAGLEI_EXTRACT, EAGLEI_RAW_DIR, INTERIM, ROOT
 
 STORMS = ROOT / "manifest" / "storms.csv"
 WINDOW_DAYS = 21
-TOLERANCE = pd.Timedelta(minutes=30)
+TOLERANCE = pd.Timedelta(30, unit="min")
 LAGS = (6, 12, 24)
 LAST_EAGLEI_YEAR = 2025
 STATE_NAMES = {"AL": "Alabama", "AR": "Arkansas", "DC": "District of Columbia", "DE": "Delaware", "FL": "Florida",
@@ -83,12 +83,12 @@ def match(rows: pd.DataFrame, e: pd.DataFrame, windows: pd.DataFrame | None = No
     out = rows.reset_index(drop=True).copy()
     out["as_of_utc"] = pd.to_datetime(out.as_of_utc, utc=True)
     out["_i"] = np.arange(len(out))
-    now = _nearest(out[["_i", "fips", "as_of_utc"]], e, pd.Timedelta(0)).set_index("_i")
+    now = _nearest(out[["_i", "fips", "as_of_utc"]], e, pd.Timedelta(0, unit="s")).set_index("_i")
     out["eaglei_time"] = out._i.map(now.eaglei_time)
     out["eaglei_customers_out"] = out._i.map(now.customers_out)
     out["eaglei_gap_min"] = ((out.eaglei_time - out.as_of_utc).abs().dt.total_seconds() / 60).round(1)
     for h in LAGS:
-        lag = _nearest(out[["_i", "fips", "as_of_utc"]], e, pd.Timedelta(hours=h)).set_index("_i")
+        lag = _nearest(out[["_i", "fips", "as_of_utc"]], e, pd.Timedelta(h, unit="h")).set_index("_i")
         out[f"eaglei_customers_out_{h}h"] = out._i.map(lag.customers_out)
     if windows is not None and "row_nhc_id" in out.columns:
         hits = e.merge(windows, on="fips")
@@ -136,8 +136,9 @@ def state_coverage(cov: pd.DataFrame) -> pd.DataFrame:
 
 
 def windows_for(rows: pd.DataFrame, storms: pd.DataFrame) -> pd.DataFrame:
-    s = storms.assign(start=pd.to_datetime(storms.dirs_activation_date, utc=True) - pd.Timedelta(days=WINDOW_DAYS),
-                      end=pd.to_datetime(storms.dirs_deactivation_date, utc=True) + pd.Timedelta(days=WINDOW_DAYS + 1))
+    before, after = pd.Timedelta(WINDOW_DAYS, unit="D"), pd.Timedelta(WINDOW_DAYS + 1, unit="D")
+    s = storms.assign(start=pd.to_datetime(storms.dirs_activation_date, utc=True) - before,
+                      end=pd.to_datetime(storms.dirs_deactivation_date, utc=True) + after)
     w = rows[["row_nhc_id", "fips"]].drop_duplicates().merge(s[["nhc_id", "start", "end"]], left_on="row_nhc_id",
                                                               right_on="nhc_id")
     return w[["nhc_id", "fips", "start", "end"]]

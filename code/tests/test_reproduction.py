@@ -1,26 +1,48 @@
-"""The code reproduces the published files: run python run_all.py first."""
+"""The code reproduces the published files: run python run_all.py first (each check skips until then).
+
+CSVs must match byte for byte. results.json: numbers within a relative 1e-9, everything else exactly (platforms'
+math libraries differ in the last bits). The analysis-ready panel: value by value at the same tolerance."""
 import json
+import sys
 from pathlib import Path
 
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]
 BUILD = REPO / "build"
-PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv"),
-         ("output/results.json", "results.json")]
+PUBLISHED = REPO / "data" / "analysis"
+sys.path.insert(0, str(REPO / "code" / "src"))
+from compare import RTOL, differences  # noqa: E402
+
+NOT_BUILT = "needs build/ (not committed): run python run_all.py first"
+built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason=NOT_BUILT)
+CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv")] + [
+    (f"output/{n}", f"validation/{n}") for n in ("validation_dirs.csv", "validation_summary.csv",
+                                                 "excluded_reports.csv", "area_status_counts.csv")]
 
 
-@pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason="run python run_all.py first")
-@pytest.mark.parametrize("built, published", PAIRS)
-def test_build_matches_published(built, published):
-    assert (BUILD / built).read_bytes() == (REPO / "data" / "analysis" / published).read_bytes(), built
+@built
+@pytest.mark.parametrize("built_path, published", CSV_PAIRS)
+def test_csv_matches_published_byte_for_byte(built_path, published):
+    assert (BUILD / built_path).read_bytes() == (PUBLISHED / published).read_bytes(), built_path
 
 
-@pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason="run python run_all.py first")
-@pytest.mark.parametrize("name", ["validation_dirs.csv", "validation_summary.csv", "excluded_reports.csv",
-                                  "area_status_counts.csv"])
-def test_validation_tables_match(name):
-    assert (BUILD / "output" / name).read_bytes() == (REPO / "data" / "analysis" / "validation" / name).read_bytes()
+@built
+def test_results_json_matches_published():
+    got = json.loads((BUILD / "output" / "results.json").read_text(encoding="utf-8"))
+    want = json.loads((PUBLISHED / "results.json").read_text(encoding="utf-8"))
+    diffs = differences(got, want, RTOL)
+    assert not diffs, f"{len(diffs)} differences, first: {diffs[:10]}"
+
+
+@built
+@pytest.mark.parametrize("ext", ["csv", "parquet"])
+def test_analysis_ready_panel_matches_published(ext):
+    import pandas as pd
+    from load import load_panel
+    got = load_panel(BUILD / "processed" / f"panel_analysis_ready.{ext}")
+    want = load_panel(PUBLISHED / f"panel_analysis_ready.{ext}")
+    pd.testing.assert_frame_equal(got, want, check_exact=False, rtol=RTOL, atol=0)
 
 
 def test_inputs_match_their_hashes():

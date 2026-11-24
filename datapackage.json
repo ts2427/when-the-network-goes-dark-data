@@ -1,9 +1,9 @@
 {
-  "profile": "tabular-data-package",
+  "profile": "data-package",
   "name": "when-the-network-goes-dark-data",
   "title": "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)",
-  "version": "2.1.0",
-  "created": "2026-11-23",
+  "version": "2.2.0",
+  "created": "2026-11-24T12:00:00-06:00",
   "homepage": "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/",
   "description": "County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 21 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the inputs and code that rebuild it.",
   "keywords": [
@@ -136,14 +136,14 @@
           },
           {
             "name": "sites_served",
-            "type": "number",
+            "type": "integer",
             "description": "Cell sites served in the county, as reported.",
             "unit": "sites",
             "limitations": "The denominator differs by storm and report; compare percentages with care. Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat)."
           },
           {
             "name": "sites_out",
-            "type": "number",
+            "type": "integer",
             "description": "Cell sites out of service in the county, as reported.",
             "unit": "sites",
             "limitations": "Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat)."
@@ -168,7 +168,7 @@
           },
           {
             "name": "out_damage",
-            "type": "number",
+            "type": "integer",
             "description": "Sites out due to damage, as reported.",
             "unit": "sites",
             "limitations": "Blank where the report has no cause columns. Causes can overlap (see out_overattributed)."
@@ -182,31 +182,31 @@
           },
           {
             "name": "out_power",
-            "type": "number",
+            "type": "integer",
             "description": "Sites out due to power, as reported.",
             "unit": "sites",
             "limitations": "Blank where the report has no cause columns."
           },
           {
             "name": "on_backup_power",
-            "type": "number",
+            "type": "integer",
             "description": "Sites operating on backup power, as reported.",
             "unit": "sites",
             "limitations": "Blank where the report has no such column. Not a measure of sites about to fail."
           },
           {
             "name": "out_unattributed",
-            "type": "number",
+            "type": "integer",
             "description": "Sites out with no cause given: sites_out minus the three causes, never below 0.",
             "unit": "sites",
             "limitations": "Blank where the report has no cause columns. Kept apart from out_overattributed; never net them."
           },
           {
             "name": "out_overattributed",
-            "type": "number",
+            "type": "integer",
             "description": "Causes in excess of sites out (sites counted under more than one cause).",
             "unit": "sites",
-            "limitations": "Blank where the report has no cause columns. May print as -0.0, which equals 0."
+            "limitations": "Blank where the report has no cause columns."
           },
           {
             "name": "area_status",
@@ -241,8 +241,8 @@
           ""
         ]
       },
-      "hash": "sha256:271c7735e8b22a90333b025ba4aff4773e567ace6e1f2d1ae00aaa52d6aad7ac",
-      "bytes": 1886462
+      "hash": "sha256:56374ee1179838962c5185393da63c1fe7b346b15dd74ae6eb672a5ee5d9b423",
+      "bytes": 1775618
     },
     {
       "name": "storms",
@@ -360,8 +360,1091 @@
           ""
         ]
       },
-      "hash": "sha256:9d49d0140bd8d408694a221cb670a6dc9bf29f114c534dd9f97ac09ccb22b9c9",
-      "bytes": 5422
+      "hash": "sha256:a7c0270354119ec5b4d65d2da43e23b8bd1eb69ef26ced75cac66d68a3d54f56",
+      "bytes": 5338
+    },
+    {
+      "name": "panel_analysis_ready",
+      "path": "data/analysis/panel_analysis_ready.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "Analysis-ready panel: the county-report panel with every covariate the analysis uses",
+      "description": "The rows of dirs_county_day.csv, in the same order, joined with EAGLE-I power outages and coverage flags, exposure and wind zone, day 0, SVI 2022, ACS 2022 and the BDC provider counts and chapter 13 group. Built by code/src/12b_analysis_ready.py; load it with load_panel() in code/src/load.py. Counts are integers; other numbers are written to 10 significant digits.",
+      "schema": {
+        "fields": [
+          {
+            "name": "storm_key",
+            "type": "string",
+            "description": "Storm key: NHC ID and DIRS activation date, joined by an underscore.",
+            "limitations": "Names repeat across years (Isaias 2020 and 2026); always join on this key, not the name."
+          },
+          {
+            "name": "nhc_id",
+            "type": "string",
+            "description": "National Hurricane Center storm ID (basin, number, year)."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm name.",
+            "limitations": "Not unique across years."
+          },
+          {
+            "name": "dirs_activation_date",
+            "type": "date",
+            "description": "Date the FCC activated DIRS for the storm."
+          },
+          {
+            "name": "rule_period",
+            "type": "string",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present).",
+            "limitations": "Descriptive grouping only; periods differ in storms, hazards and filers."
+          },
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "FCC EDOCS document number of the report."
+          },
+          {
+            "name": "report_date",
+            "type": "date",
+            "description": "Date of the report."
+          },
+          {
+            "name": "as_of_utc",
+            "type": "datetime",
+            "description": "The report's stated as-of time, in UTC.",
+            "unit": "UTC",
+            "limitations": "Where the report prints none, set to 12:00 Eastern on the report date (as_of_imputed).",
+            "format": "any"
+          },
+          {
+            "name": "as_of_imputed",
+            "type": "boolean",
+            "description": "True when as_of_utc was set to 12:00 Eastern because the report prints no time.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "report_status",
+            "type": "string",
+            "description": "Validation status of the report (step 4): ok, flagged (a check raised a note) or known_fcc_inconsistency (a stated total the FCC's own rows do not sum to, listed in code/manifest/known_fcc_inconsistencies.csv).",
+            "limitations": "Excluded reports are not in the file."
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "description": "State, as printed.",
+            "limitations": "Ten study states only."
+          },
+          {
+            "name": "county",
+            "type": "string",
+            "description": "County as printed by the FCC (upper case).",
+            "limitations": "Spellings vary between reports; use fips."
+          },
+          {
+            "name": "fips",
+            "type": "string",
+            "description": "Five-digit county FIPS code (with leading zero).",
+            "limitations": "Mapped from the printed name with code/manifest/fips_exceptions.csv.",
+            "constraints": {
+              "pattern": "^[0-9]{5}$",
+              "required": true
+            }
+          },
+          {
+            "name": "sites_served",
+            "type": "integer",
+            "description": "Cell sites served in the county, as reported.",
+            "unit": "sites",
+            "limitations": "The denominator differs by storm and report; compare percentages with care. Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat)."
+          },
+          {
+            "name": "sites_out",
+            "type": "integer",
+            "description": "Cell sites out of service in the county, as reported.",
+            "unit": "sites",
+            "limitations": "Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat)."
+          },
+          {
+            "name": "pct_out",
+            "type": "number",
+            "description": "Percent of sites out, as printed (computed from the two counts where not printed).",
+            "unit": "percent",
+            "limitations": "Where pct_printed is false the value is computed, not printed."
+          },
+          {
+            "name": "pct_printed",
+            "type": "boolean",
+            "description": "True when the report printed the percent column.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "out_damage",
+            "type": "integer",
+            "description": "Sites out due to damage, as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns. Causes can overlap (see out_overattributed)."
+          },
+          {
+            "name": "out_transport",
+            "type": "number",
+            "description": "Sites out due to transport (backhaul), as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns."
+          },
+          {
+            "name": "out_power",
+            "type": "integer",
+            "description": "Sites out due to power, as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns."
+          },
+          {
+            "name": "on_backup_power",
+            "type": "integer",
+            "description": "Sites operating on backup power, as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no such column. Not a measure of sites about to fail."
+          },
+          {
+            "name": "out_unattributed",
+            "type": "integer",
+            "description": "Sites out with no cause given: sites_out minus the three causes, never below 0.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns. Kept apart from out_overattributed; never net them."
+          },
+          {
+            "name": "out_overattributed",
+            "type": "integer",
+            "description": "Causes in excess of sites out (sites counted under more than one cause).",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns."
+          },
+          {
+            "name": "area_status",
+            "type": "string",
+            "description": "Whether the county is in the FCC's notice area on the report date: inside, inside_spelling_variant, outside_notice_area or table_not_in_list.",
+            "limitations": "From the FCC's notices (code/manifest/reporting_areas.csv)."
+          },
+          {
+            "name": "fema_declared",
+            "type": "boolean",
+            "description": "True if OpenFEMA lists a declaration for the storm covering the county.",
+            "limitations": "Context for reuse only; no result uses it. This product uses the Federal Emergency Management Agency's OpenFEMA API, but is not endorsed by FEMA.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "time_flag",
+            "type": "string",
+            "description": "Blank, or pre_onset_likely_marco for Laura's Aug 25, 2020 report (the FCC's combined Marco and Laura report), which is kept but left out of every time-based result."
+          },
+          {
+            "name": "eaglei_time",
+            "type": "datetime",
+            "description": "Time of the EAGLE-I record matched to the report's as-of time.",
+            "unit": "UTC",
+            "limitations": "Blank when no record lies within 30 minutes.",
+            "format": "any"
+          },
+          {
+            "name": "eaglei_match",
+            "type": "string",
+            "description": "EAGLE-I match at the as-of time: matched, no_record_within_30min, county_not_in_eaglei_window, no_as_of_time or no_eaglei_release (Isaias 2026; EAGLE-I ends in 2025)."
+          },
+          {
+            "name": "eaglei_gap_min",
+            "type": "number",
+            "description": "Minutes between the matched record and the as-of time.",
+            "unit": "minutes"
+          },
+          {
+            "name": "eaglei_customers_out",
+            "type": "integer",
+            "description": "Electricity customers out at the as-of time.",
+            "unit": "customers",
+            "limitations": "ORNL/DOE EAGLE-I (CC BY 4.0); 'customers' are meters. Blank where no EAGLE-I record lies within 30 minutes of the time (never set to zero); see eaglei_match."
+          },
+          {
+            "name": "eaglei_customers_out_6h",
+            "type": "integer",
+            "description": "Customers out 6 hours before the as-of time.",
+            "unit": "customers",
+            "limitations": "ORNL/DOE EAGLE-I (CC BY 4.0); 'customers' are meters. Blank where no EAGLE-I record lies within 30 minutes of the time (never set to zero); see eaglei_match."
+          },
+          {
+            "name": "eaglei_customers_out_12h",
+            "type": "integer",
+            "description": "Customers out 12 hours before.",
+            "unit": "customers",
+            "limitations": "ORNL/DOE EAGLE-I (CC BY 4.0); 'customers' are meters. Blank where no EAGLE-I record lies within 30 minutes of the time (never set to zero); see eaglei_match."
+          },
+          {
+            "name": "eaglei_customers_out_24h",
+            "type": "integer",
+            "description": "Customers out 24 hours before.",
+            "unit": "customers",
+            "limitations": "ORNL/DOE EAGLE-I (CC BY 4.0); 'customers' are meters. Blank where no EAGLE-I record lies within 30 minutes of the time (never set to zero); see eaglei_match."
+          },
+          {
+            "name": "eaglei_customers_out_zero_filled",
+            "type": "integer",
+            "description": "As eaglei_customers_out, with no record counted as 0 where the county has an EAGLE-I record in the storm's window.",
+            "unit": "customers",
+            "limitations": "Sensitivity display only."
+          },
+          {
+            "name": "eaglei_modeled_customers",
+            "type": "integer",
+            "description": "EAGLE-I modeled customers in the county (MCC.csv).",
+            "unit": "customers",
+            "limitations": "Below observed outages in some counties; see eaglei_mcc_flag."
+          },
+          {
+            "name": "eaglei_pct_out",
+            "type": "number",
+            "description": "eaglei_customers_out as a percent of eaglei_modeled_customers.",
+            "unit": "percent",
+            "limitations": "Not used where eaglei_mcc_flag is not ok."
+          },
+          {
+            "name": "eaglei_max_out_in_window",
+            "type": "integer",
+            "description": "Highest customers out in the storm's EAGLE-I window (21 days before activation to 21 days after deactivation).",
+            "unit": "customers"
+          },
+          {
+            "name": "eaglei_release",
+            "type": "boolean",
+            "description": "True if EAGLE-I covers the storm's year (through 2025).",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "eaglei_mcc_flag",
+            "type": "string",
+            "description": "ok, mcc_below_observed_outages (percent out not used) or no_mcc."
+          },
+          {
+            "name": "eaglei_coverage_flag",
+            "type": "string",
+            "description": "ok, low_coverage (state's minimum covered share below 0.75 that year; kept), coverage_unknown (no published coverage for the year) or no_eaglei_release.",
+            "limitations": "Coverage is published by state and year only (2018-2022)."
+          },
+          {
+            "name": "eaglei_state_min_covered",
+            "type": "number",
+            "description": "State's minimum share of customers covered by EAGLE-I in the storm year.",
+            "unit": "share (0-1)",
+            "limitations": "Blank when not published."
+          },
+          {
+            "name": "eaglei_state_max_covered",
+            "type": "number",
+            "description": "State's maximum share of customers covered in the storm year.",
+            "unit": "share (0-1)",
+            "limitations": "Blank when not published."
+          },
+          {
+            "name": "min_dist_km",
+            "type": "number",
+            "description": "Distance from the county's Census internal point to the storm's track (15-minute interpolation).",
+            "unit": "km",
+            "limitations": "NHC HURDAT2; Isaias 2026 from the GIS best track."
+          },
+          {
+            "name": "wind_kt_at_closest",
+            "type": "number",
+            "description": "Storm's maximum sustained wind at the track point closest to the county.",
+            "unit": "knots"
+          },
+          {
+            "name": "in_34kt",
+            "type": "boolean",
+            "description": "True if the county's internal point fell inside the 34-knot wind radii at some time.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "in_50kt",
+            "type": "boolean",
+            "description": "True if inside the 50-knot wind radii at some time.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "in_64kt",
+            "type": "boolean",
+            "description": "True if inside the 64-knot wind radii at some time.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "wind_zone",
+            "type": "string",
+            "description": "Chapter 7's wind zone from the three radii: inside 64 kt, 50-64 kt, 34-50 kt or outside 34 kt."
+          },
+          {
+            "name": "first_34kt_utc",
+            "type": "datetime",
+            "description": "First time the county was inside the 34-knot wind radii.",
+            "unit": "UTC",
+            "limitations": "Blank if never inside.",
+            "format": "any"
+          },
+          {
+            "name": "nearest_landfall_utc",
+            "type": "datetime",
+            "description": "The storm's HURDAT2 landfall nearest the county.",
+            "unit": "UTC",
+            "limitations": "Blank for Isaias 2026 (no landfall marker in the GIS best track).",
+            "format": "any"
+          },
+          {
+            "name": "nearest_landfall_km",
+            "type": "number",
+            "description": "Distance from the county to that landfall.",
+            "unit": "km"
+          },
+          {
+            "name": "track_source",
+            "type": "string",
+            "description": "HURDAT2 or GIS best track (Isaias 2026)."
+          },
+          {
+            "name": "landfall_utc",
+            "type": "datetime",
+            "description": "Day 0: the first time the storm's 34-knot wind radii reach a study-state county.",
+            "unit": "UTC",
+            "limitations": "Same for every county of a storm; see storms.csv.",
+            "format": "any"
+          },
+          {
+            "name": "landfall_source",
+            "type": "string",
+            "description": "Which rule set day 0."
+          },
+          {
+            "name": "days_since_landfall",
+            "type": "number",
+            "description": "Days from day 0 to the report's as-of time.",
+            "unit": "days"
+          },
+          {
+            "name": "svi_overall",
+            "type": "number",
+            "description": "CDC/ATSDR SVI 2022 overall national percentile rank (RPL_THEMES).",
+            "unit": "percentile (0-1)",
+            "limitations": "Chapter 8's quartiles are of the at-risk storm-counties, not of this column's national cut points."
+          },
+          {
+            "name": "svi_socioeconomic",
+            "type": "number",
+            "description": "SVI 2022 theme 1, socioeconomic status (RPL_THEME1).",
+            "unit": "percentile (0-1)"
+          },
+          {
+            "name": "svi_household",
+            "type": "number",
+            "description": "SVI 2022 theme 2, household characteristics (RPL_THEME2).",
+            "unit": "percentile (0-1)"
+          },
+          {
+            "name": "svi_minority_language",
+            "type": "number",
+            "description": "SVI 2022 theme 3, racial and ethnic minority status (RPL_THEME3).",
+            "unit": "percentile (0-1)"
+          },
+          {
+            "name": "svi_housing_transport",
+            "type": "number",
+            "description": "SVI 2022 theme 4, housing type and transportation (RPL_THEME4).",
+            "unit": "percentile (0-1)"
+          },
+          {
+            "name": "acs_households",
+            "type": "integer",
+            "description": "Households, ACS 2022 5-year (B11001_001E).",
+            "unit": "households"
+          },
+          {
+            "name": "acs_population",
+            "type": "integer",
+            "description": "Population, ACS 2022 5-year (B01001_001E).",
+            "unit": "people"
+          },
+          {
+            "name": "acs_pct_65plus",
+            "type": "number",
+            "description": "Percent of the population aged 65 or over, ACS 2022 5-year (B01001).",
+            "unit": "percent"
+          },
+          {
+            "name": "acs_pct_broadband",
+            "type": "number",
+            "description": "Percent of households with a broadband subscription, ACS 2022 5-year (B28002_004E / B28002_001E).",
+            "unit": "percent"
+          },
+          {
+            "name": "bdc_release",
+            "type": "date",
+            "description": "FCC Broadband Data Collection release matched to the storm: the latest on or before day 0, or the earliest for storms before 2022."
+          },
+          {
+            "name": "bdc_role",
+            "type": "string",
+            "description": "main (storms from 2022 on) or sensitivity: network data from after the storm."
+          },
+          {
+            "name": "bdc_mobile_half",
+            "type": "integer",
+            "description": "Mobile providers covering at least half the county's area (chapter 13's main measure).",
+            "unit": "providers",
+            "limitations": "Reported coverage, not which networks were out; providers are never named."
+          },
+          {
+            "name": "bdc_mobile_any",
+            "type": "integer",
+            "description": "Mobile providers with any coverage in the county.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_fixed_any_excl_near_universal",
+            "type": "integer",
+            "description": "Fixed providers with any residential service, near-universal providers excluded.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_fixed_any",
+            "type": "integer",
+            "description": "Fixed providers with any residential service.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_fixed_half",
+            "type": "integer",
+            "description": "Fixed providers serving at least half of residential locations.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_fixed_half_excl_near_universal",
+            "type": "integer",
+            "description": "As bdc_fixed_half, near-universal providers excluded.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_mobile_half_group",
+            "type": "string",
+            "description": "Chapter 13's group on bdc_mobile_half: 2 or fewer, 3, or 4 or more (cut points fixed from counts only; results.json v2_5_groups).",
+            "limitations": "For storms before 2022 (bdc_role 'sensitivity') the release postdates the storm; chapter 13's main analysis uses storms from 2022 on."
+          },
+          {
+            "name": "first_report_date",
+            "type": "date",
+            "description": "The county's first report in the storm's panel."
+          },
+          {
+            "name": "last_report_date",
+            "type": "date",
+            "description": "The county's last report in the storm's panel."
+          },
+          {
+            "name": "n_reports_county",
+            "type": "integer",
+            "description": "Reports in the storm's panel that list the county.",
+            "unit": "reports"
+          },
+          {
+            "name": "censoring",
+            "type": "string",
+            "description": "none, left_reports_while_out (left the reports before the storm's last report while still out) or out_at_last_report.",
+            "limitations": "Censored counties are not recovered."
+          }
+        ],
+        "primaryKey": [
+          "storm_key",
+          "doc_id",
+          "fips"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:be404099f0d3d69e8806789796af92779288b91db164b3aaabce3439031f4595",
+      "bytes": 6383287
+    },
+    {
+      "name": "panel_analysis_ready_parquet",
+      "path": "data/analysis/panel_analysis_ready.parquet",
+      "profile": "tabular-data-resource",
+      "format": "parquet",
+      "mediatype": "application/vnd.apache.parquet",
+      "title": "Analysis-ready panel (Parquet)",
+      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 cf493ac3b57c25acfdfd1d301be13cd493818879836932cd050929c27450441d; 665735 bytes.",
+      "schema": {
+        "fields": [
+          {
+            "name": "storm_key",
+            "type": "string",
+            "description": "Storm key: NHC ID and DIRS activation date, joined by an underscore.",
+            "limitations": "Names repeat across years (Isaias 2020 and 2026); always join on this key, not the name."
+          },
+          {
+            "name": "nhc_id",
+            "type": "string",
+            "description": "National Hurricane Center storm ID (basin, number, year)."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm name.",
+            "limitations": "Not unique across years."
+          },
+          {
+            "name": "dirs_activation_date",
+            "type": "date",
+            "description": "Date the FCC activated DIRS for the storm."
+          },
+          {
+            "name": "rule_period",
+            "type": "string",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present).",
+            "limitations": "Descriptive grouping only; periods differ in storms, hazards and filers."
+          },
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "FCC EDOCS document number of the report."
+          },
+          {
+            "name": "report_date",
+            "type": "date",
+            "description": "Date of the report."
+          },
+          {
+            "name": "as_of_utc",
+            "type": "datetime",
+            "description": "The report's stated as-of time, in UTC.",
+            "unit": "UTC",
+            "limitations": "Where the report prints none, set to 12:00 Eastern on the report date (as_of_imputed).",
+            "format": "any"
+          },
+          {
+            "name": "as_of_imputed",
+            "type": "boolean",
+            "description": "True when as_of_utc was set to 12:00 Eastern because the report prints no time.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "report_status",
+            "type": "string",
+            "description": "Validation status of the report (step 4): ok, flagged (a check raised a note) or known_fcc_inconsistency (a stated total the FCC's own rows do not sum to, listed in code/manifest/known_fcc_inconsistencies.csv).",
+            "limitations": "Excluded reports are not in the file."
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "description": "State, as printed.",
+            "limitations": "Ten study states only."
+          },
+          {
+            "name": "county",
+            "type": "string",
+            "description": "County as printed by the FCC (upper case).",
+            "limitations": "Spellings vary between reports; use fips."
+          },
+          {
+            "name": "fips",
+            "type": "string",
+            "description": "Five-digit county FIPS code (with leading zero).",
+            "limitations": "Mapped from the printed name with code/manifest/fips_exceptions.csv.",
+            "constraints": {
+              "pattern": "^[0-9]{5}$",
+              "required": true
+            }
+          },
+          {
+            "name": "sites_served",
+            "type": "integer",
+            "description": "Cell sites served in the county, as reported.",
+            "unit": "sites",
+            "limitations": "The denominator differs by storm and report; compare percentages with care. Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat)."
+          },
+          {
+            "name": "sites_out",
+            "type": "integer",
+            "description": "Cell sites out of service in the county, as reported.",
+            "unit": "sites",
+            "limitations": "Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat)."
+          },
+          {
+            "name": "pct_out",
+            "type": "number",
+            "description": "Percent of sites out, as printed (computed from the two counts where not printed).",
+            "unit": "percent",
+            "limitations": "Where pct_printed is false the value is computed, not printed."
+          },
+          {
+            "name": "pct_printed",
+            "type": "boolean",
+            "description": "True when the report printed the percent column.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "out_damage",
+            "type": "integer",
+            "description": "Sites out due to damage, as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns. Causes can overlap (see out_overattributed)."
+          },
+          {
+            "name": "out_transport",
+            "type": "number",
+            "description": "Sites out due to transport (backhaul), as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns."
+          },
+          {
+            "name": "out_power",
+            "type": "integer",
+            "description": "Sites out due to power, as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns."
+          },
+          {
+            "name": "on_backup_power",
+            "type": "integer",
+            "description": "Sites operating on backup power, as reported.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no such column. Not a measure of sites about to fail."
+          },
+          {
+            "name": "out_unattributed",
+            "type": "integer",
+            "description": "Sites out with no cause given: sites_out minus the three causes, never below 0.",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns. Kept apart from out_overattributed; never net them."
+          },
+          {
+            "name": "out_overattributed",
+            "type": "integer",
+            "description": "Causes in excess of sites out (sites counted under more than one cause).",
+            "unit": "sites",
+            "limitations": "Blank where the report has no cause columns."
+          },
+          {
+            "name": "area_status",
+            "type": "string",
+            "description": "Whether the county is in the FCC's notice area on the report date: inside, inside_spelling_variant, outside_notice_area or table_not_in_list.",
+            "limitations": "From the FCC's notices (code/manifest/reporting_areas.csv)."
+          },
+          {
+            "name": "fema_declared",
+            "type": "boolean",
+            "description": "True if OpenFEMA lists a declaration for the storm covering the county.",
+            "limitations": "Context for reuse only; no result uses it. This product uses the Federal Emergency Management Agency's OpenFEMA API, but is not endorsed by FEMA.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "time_flag",
+            "type": "string",
+            "description": "Blank, or pre_onset_likely_marco for Laura's Aug 25, 2020 report (the FCC's combined Marco and Laura report), which is kept but left out of every time-based result."
+          },
+          {
+            "name": "eaglei_time",
+            "type": "datetime",
+            "description": "Time of the EAGLE-I record matched to the report's as-of time.",
+            "unit": "UTC",
+            "limitations": "Blank when no record lies within 30 minutes.",
+            "format": "any"
+          },
+          {
+            "name": "eaglei_match",
+            "type": "string",
+            "description": "EAGLE-I match at the as-of time: matched, no_record_within_30min, county_not_in_eaglei_window, no_as_of_time or no_eaglei_release (Isaias 2026; EAGLE-I ends in 2025)."
+          },
+          {
+            "name": "eaglei_gap_min",
+            "type": "number",
+            "description": "Minutes between the matched record and the as-of time.",
+            "unit": "minutes"
+          },
+          {
+            "name": "eaglei_customers_out",
+            "type": "integer",
+            "description": "Electricity customers out at the as-of time.",
+            "unit": "customers",
+            "limitations": "ORNL/DOE EAGLE-I (CC BY 4.0); 'customers' are meters. Blank where no EAGLE-I record lies within 30 minutes of the time (never set to zero); see eaglei_match."
+          },
+          {
+            "name": "eaglei_customers_out_6h",
+            "type": "integer",
+            "description": "Customers out 6 hours before the as-of time.",
+            "unit": "customers",
+            "limitations": "ORNL/DOE EAGLE-I (CC BY 4.0); 'customers' are meters. Blank where no EAGLE-I record lies within 30 minutes of the time (never set to zero); see eaglei_match."
+          },
+          {
+            "name": "eaglei_customers_out_12h",
+            "type": "integer",
+            "description": "Customers out 12 hours before.",
+            "unit": "customers",
+            "limitations": "ORNL/DOE EAGLE-I (CC BY 4.0); 'customers' are meters. Blank where no EAGLE-I record lies within 30 minutes of the time (never set to zero); see eaglei_match."
+          },
+          {
+            "name": "eaglei_customers_out_24h",
+            "type": "integer",
+            "description": "Customers out 24 hours before.",
+            "unit": "customers",
+            "limitations": "ORNL/DOE EAGLE-I (CC BY 4.0); 'customers' are meters. Blank where no EAGLE-I record lies within 30 minutes of the time (never set to zero); see eaglei_match."
+          },
+          {
+            "name": "eaglei_customers_out_zero_filled",
+            "type": "integer",
+            "description": "As eaglei_customers_out, with no record counted as 0 where the county has an EAGLE-I record in the storm's window.",
+            "unit": "customers",
+            "limitations": "Sensitivity display only."
+          },
+          {
+            "name": "eaglei_modeled_customers",
+            "type": "integer",
+            "description": "EAGLE-I modeled customers in the county (MCC.csv).",
+            "unit": "customers",
+            "limitations": "Below observed outages in some counties; see eaglei_mcc_flag."
+          },
+          {
+            "name": "eaglei_pct_out",
+            "type": "number",
+            "description": "eaglei_customers_out as a percent of eaglei_modeled_customers.",
+            "unit": "percent",
+            "limitations": "Not used where eaglei_mcc_flag is not ok."
+          },
+          {
+            "name": "eaglei_max_out_in_window",
+            "type": "integer",
+            "description": "Highest customers out in the storm's EAGLE-I window (21 days before activation to 21 days after deactivation).",
+            "unit": "customers"
+          },
+          {
+            "name": "eaglei_release",
+            "type": "boolean",
+            "description": "True if EAGLE-I covers the storm's year (through 2025).",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "eaglei_mcc_flag",
+            "type": "string",
+            "description": "ok, mcc_below_observed_outages (percent out not used) or no_mcc."
+          },
+          {
+            "name": "eaglei_coverage_flag",
+            "type": "string",
+            "description": "ok, low_coverage (state's minimum covered share below 0.75 that year; kept), coverage_unknown (no published coverage for the year) or no_eaglei_release.",
+            "limitations": "Coverage is published by state and year only (2018-2022)."
+          },
+          {
+            "name": "eaglei_state_min_covered",
+            "type": "number",
+            "description": "State's minimum share of customers covered by EAGLE-I in the storm year.",
+            "unit": "share (0-1)",
+            "limitations": "Blank when not published."
+          },
+          {
+            "name": "eaglei_state_max_covered",
+            "type": "number",
+            "description": "State's maximum share of customers covered in the storm year.",
+            "unit": "share (0-1)",
+            "limitations": "Blank when not published."
+          },
+          {
+            "name": "min_dist_km",
+            "type": "number",
+            "description": "Distance from the county's Census internal point to the storm's track (15-minute interpolation).",
+            "unit": "km",
+            "limitations": "NHC HURDAT2; Isaias 2026 from the GIS best track."
+          },
+          {
+            "name": "wind_kt_at_closest",
+            "type": "number",
+            "description": "Storm's maximum sustained wind at the track point closest to the county.",
+            "unit": "knots"
+          },
+          {
+            "name": "in_34kt",
+            "type": "boolean",
+            "description": "True if the county's internal point fell inside the 34-knot wind radii at some time.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "in_50kt",
+            "type": "boolean",
+            "description": "True if inside the 50-knot wind radii at some time.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "in_64kt",
+            "type": "boolean",
+            "description": "True if inside the 64-knot wind radii at some time.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "wind_zone",
+            "type": "string",
+            "description": "Chapter 7's wind zone from the three radii: inside 64 kt, 50-64 kt, 34-50 kt or outside 34 kt."
+          },
+          {
+            "name": "first_34kt_utc",
+            "type": "datetime",
+            "description": "First time the county was inside the 34-knot wind radii.",
+            "unit": "UTC",
+            "limitations": "Blank if never inside.",
+            "format": "any"
+          },
+          {
+            "name": "nearest_landfall_utc",
+            "type": "datetime",
+            "description": "The storm's HURDAT2 landfall nearest the county.",
+            "unit": "UTC",
+            "limitations": "Blank for Isaias 2026 (no landfall marker in the GIS best track).",
+            "format": "any"
+          },
+          {
+            "name": "nearest_landfall_km",
+            "type": "number",
+            "description": "Distance from the county to that landfall.",
+            "unit": "km"
+          },
+          {
+            "name": "track_source",
+            "type": "string",
+            "description": "HURDAT2 or GIS best track (Isaias 2026)."
+          },
+          {
+            "name": "landfall_utc",
+            "type": "datetime",
+            "description": "Day 0: the first time the storm's 34-knot wind radii reach a study-state county.",
+            "unit": "UTC",
+            "limitations": "Same for every county of a storm; see storms.csv.",
+            "format": "any"
+          },
+          {
+            "name": "landfall_source",
+            "type": "string",
+            "description": "Which rule set day 0."
+          },
+          {
+            "name": "days_since_landfall",
+            "type": "number",
+            "description": "Days from day 0 to the report's as-of time.",
+            "unit": "days"
+          },
+          {
+            "name": "svi_overall",
+            "type": "number",
+            "description": "CDC/ATSDR SVI 2022 overall national percentile rank (RPL_THEMES).",
+            "unit": "percentile (0-1)",
+            "limitations": "Chapter 8's quartiles are of the at-risk storm-counties, not of this column's national cut points."
+          },
+          {
+            "name": "svi_socioeconomic",
+            "type": "number",
+            "description": "SVI 2022 theme 1, socioeconomic status (RPL_THEME1).",
+            "unit": "percentile (0-1)"
+          },
+          {
+            "name": "svi_household",
+            "type": "number",
+            "description": "SVI 2022 theme 2, household characteristics (RPL_THEME2).",
+            "unit": "percentile (0-1)"
+          },
+          {
+            "name": "svi_minority_language",
+            "type": "number",
+            "description": "SVI 2022 theme 3, racial and ethnic minority status (RPL_THEME3).",
+            "unit": "percentile (0-1)"
+          },
+          {
+            "name": "svi_housing_transport",
+            "type": "number",
+            "description": "SVI 2022 theme 4, housing type and transportation (RPL_THEME4).",
+            "unit": "percentile (0-1)"
+          },
+          {
+            "name": "acs_households",
+            "type": "integer",
+            "description": "Households, ACS 2022 5-year (B11001_001E).",
+            "unit": "households"
+          },
+          {
+            "name": "acs_population",
+            "type": "integer",
+            "description": "Population, ACS 2022 5-year (B01001_001E).",
+            "unit": "people"
+          },
+          {
+            "name": "acs_pct_65plus",
+            "type": "number",
+            "description": "Percent of the population aged 65 or over, ACS 2022 5-year (B01001).",
+            "unit": "percent"
+          },
+          {
+            "name": "acs_pct_broadband",
+            "type": "number",
+            "description": "Percent of households with a broadband subscription, ACS 2022 5-year (B28002_004E / B28002_001E).",
+            "unit": "percent"
+          },
+          {
+            "name": "bdc_release",
+            "type": "date",
+            "description": "FCC Broadband Data Collection release matched to the storm: the latest on or before day 0, or the earliest for storms before 2022."
+          },
+          {
+            "name": "bdc_role",
+            "type": "string",
+            "description": "main (storms from 2022 on) or sensitivity: network data from after the storm."
+          },
+          {
+            "name": "bdc_mobile_half",
+            "type": "integer",
+            "description": "Mobile providers covering at least half the county's area (chapter 13's main measure).",
+            "unit": "providers",
+            "limitations": "Reported coverage, not which networks were out; providers are never named."
+          },
+          {
+            "name": "bdc_mobile_any",
+            "type": "integer",
+            "description": "Mobile providers with any coverage in the county.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_fixed_any_excl_near_universal",
+            "type": "integer",
+            "description": "Fixed providers with any residential service, near-universal providers excluded.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_fixed_any",
+            "type": "integer",
+            "description": "Fixed providers with any residential service.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_fixed_half",
+            "type": "integer",
+            "description": "Fixed providers serving at least half of residential locations.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_fixed_half_excl_near_universal",
+            "type": "integer",
+            "description": "As bdc_fixed_half, near-universal providers excluded.",
+            "unit": "providers"
+          },
+          {
+            "name": "bdc_mobile_half_group",
+            "type": "string",
+            "description": "Chapter 13's group on bdc_mobile_half: 2 or fewer, 3, or 4 or more (cut points fixed from counts only; results.json v2_5_groups).",
+            "limitations": "For storms before 2022 (bdc_role 'sensitivity') the release postdates the storm; chapter 13's main analysis uses storms from 2022 on."
+          },
+          {
+            "name": "first_report_date",
+            "type": "date",
+            "description": "The county's first report in the storm's panel."
+          },
+          {
+            "name": "last_report_date",
+            "type": "date",
+            "description": "The county's last report in the storm's panel."
+          },
+          {
+            "name": "n_reports_county",
+            "type": "integer",
+            "description": "Reports in the storm's panel that list the county.",
+            "unit": "reports"
+          },
+          {
+            "name": "censoring",
+            "type": "string",
+            "description": "none, left_reports_while_out (left the reports before the storm's last report while still out) or out_at_last_report.",
+            "limitations": "Censored counties are not recovered."
+          }
+        ],
+        "primaryKey": [
+          "storm_key",
+          "doc_id",
+          "fips"
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
     },
     {
       "name": "bdc_county_provider_counts",
@@ -447,9 +1530,9 @@
       "format": "json",
       "mediatype": "application/json",
       "title": "Every number on the page",
-      "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-13).",
-      "hash": "sha256:b87cd433249c6317f6cf06c20f94637f28a1ad87f9b274ccf4857f6507b2402f",
-      "bytes": 1014373
+      "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant digits.",
+      "hash": "sha256:d8cb5076377ceb1491a67d1685800021eb46bec665fccc5930de6ce19d229cf9",
+      "bytes": 984627
     },
     {
       "name": "analysis_plan_as_committed",

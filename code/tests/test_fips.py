@@ -60,7 +60,7 @@ def test_exception_fips_must_be_a_census_county():
         match("Virginia", "RADFORD", bad)
 
 
-@pytest.mark.skipif(not (step5.INTERIM / "dirs_county_rows.parquet").exists(), reason="needs step 3 output (data, not committed)")
+@pytest.mark.skipif(not (step5.INTERIM / "dirs_county_rows.parquet").exists(), reason="needs step 3 output from a build (not committed): run python run_all.py first")
 def test_the_exception_table_covers_every_real_name():
     rows = pd.read_parquet(step5.INTERIM / "dirs_county_rows.parquet", columns=["row_nhc_id", "state", "county"])
     rows, _ = step5.apply_scope(rows, pd.read_csv(step5.SCOPE))  # as step 5 does

@@ -33,6 +33,7 @@ import pandas as pd
 
 from carried import require_carried
 from config import INTERIM, OUTPUT, PROCESSED, REGIMES, ROOT, STUDY_STATES, TIME_FLAGS
+from tables import write_csv
 
 EXCLUDED = ROOT / "manifest" / "excluded_reports.csv"
 STORMS = ROOT / "manifest" / "storms.csv"
@@ -42,6 +43,10 @@ PUBLIC_COLUMNS = ["storm_key", "nhc_id", "storm", "dirs_activation_date", "rule_
                   "as_of_utc", "as_of_imputed", "report_status", "state", "county", "fips", "sites_served", "sites_out",
                   "pct_out", "pct_printed", "out_damage", "out_transport", "out_power", "on_backup_power",
                   "out_unattributed", "out_overattributed", "area_status", "fema_declared", "time_flag"]
+# Written as integers in the CSV (v2.2.0). out_transport is not: it holds non-whole values in two Harvey 2017 reports.
+PANEL_COUNTS = ["sites_served", "sites_out", "out_damage", "out_power", "on_backup_power", "out_unattributed",
+                "out_overattributed"]
+STORM_COUNTS = ["n_reports", "n_counties"]
 
 
 def rule_period(activation_date: str) -> tuple[str, str]:
@@ -171,11 +176,13 @@ def main():
     s["storm"] = s.storm.fillna(s.storm_name)
     s["excluded_reports"] = s.nhc_id.map(ex_by_storm).fillna("")
     s["in_panel"] = s.n_reports.notna()
-    s.drop(columns="storm_name").to_parquet(PROCESSED / "storms.parquet", index=False)
+    s = s.drop(columns="storm_name")
+    s.to_parquet(PROCESSED / "storms.parquet", index=False)
+    write_csv(s, PROCESSED / "storms.csv", STORM_COUNTS)
 
     pub = p[PUBLIC_COLUMNS].sort_values(["storm_key", "report_date", "state", "county"])
     require_carried(pub, "dirs_county_day.csv")
-    pub.to_csv(PROCESSED / "dirs_county_day.csv", index=False, lineterminator="\n")
+    write_csv(pub, PROCESSED / "dirs_county_day.csv", PANEL_COUNTS)
     print(f"panel {len(p):,} rows, {p.doc_id.nunique()} reports, {p.storm_key.nunique()} storms, {p.fips.nunique()} counties")
     print("storms not in the panel:", s[~s.in_panel][["storm", "excluded_reports"]].values.tolist())
     print("censoring (storm-counties):", p.drop_duplicates(["storm_key", "fips"]).censoring.value_counts().to_dict())

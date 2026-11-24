@@ -1,8 +1,8 @@
 # When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24477809.svg)](https://doi.org/10.5281/zenodo.24477809)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24477809.svg)](https://doi.org/10.5281/zenodo.24477809) [![CI](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml/badge.svg)](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml)
 
-Version 2.1.0 (2026-11-23). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
+Version 2.2.0 (2026-11-24). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
 
 The data and code behind the page *When the Network Goes Dark* (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 21 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in `data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.
 
@@ -20,11 +20,25 @@ Associations, not causes. A site out is a site out: the FCC's counts describe th
 
 ```
 data/input/      every input, with INPUTS.csv (source, URL, retrieval time, SHA-256)
-data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/
-code/src/        numbered pipeline steps; code/manifest/ hand-made tables; code/tests/
+data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/,
+                 panel_analysis_ready.csv and .parquet (the panel with every covariate the analysis uses)
+code/src/        numbered pipeline steps, load.py (load_panel()); code/manifest/ hand-made tables;
+                 code/tests/
+.github/         CI: the tests and a full rebuild on Linux and Windows on every push
 docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes,
                  update_procedure.md (how a new season and a new version are added and released)
 run_all.py       one command: rebuild the panel and results.json into build/
+```
+
+## Analysis-ready panel
+
+`data/analysis/panel_analysis_ready.parquet` (and `.csv`) is `dirs_county_day.csv`, same rows and order, joined with every covariate the analysis uses: EAGLE-I power outages at each report's as-of time with its match and coverage flags, distance to the track, wind radii and chapter 7's wind zone, day 0 and days since day 0, SVI 2022, ACS 2022, and the storm's BDC release with its provider counts and chapter 13 group. Variables: `CODEBOOK.md`. To load it with its types:
+
+```python
+import sys
+sys.path.insert(0, "code/src")
+from load import load_panel
+p = load_panel()   # the Parquet if present, else the CSV, with the same types
 ```
 
 ## Analysis plan
@@ -53,19 +67,22 @@ Exact attribution for each source: `SOURCES.md`. Variables: `CODEBOOK.md` and `d
 
 ## Computational requirements
 
-- Python 3.13 (tested with 3.13.2) on Windows 11; the code uses no platform-specific calls.
-- Packages: `requirements.txt` (exact versions used).
+- Python 3.13 (tested with 3.13.2) on Windows 11; the code uses no platform-specific calls. CI runs the tests and a full rebuild on windows-latest and ubuntu-latest (badge above).
+- Packages: `requirements.txt` (exact versions of the packages used) and `requirements.lock` (every package, including dependencies, pinned with SHA-256 hashes for Windows, Linux and macOS; generated with `uv pip compile requirements.txt --universal --generate-hashes --python-version 3.13 -o requirements.lock`). For an exact environment: `python -m pip install --require-hashes -r requirements.lock`.
 - Memory: about 4 GB. Disk: about 200 MB for the repository and `build/`.
 - Run time: 12.4 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-23 (most of it is parsing the reports in step 3 and the bootstrap in step 10).
 - No network access is needed: every step reads `data/input/`. Steps 02, 06a, 06c, 06d and 06e (downloads and raw BDC reading) are included for transparency but are not run; they need the original sources and, for BDC, an FCC account.
 - Random numbers: fixed seed 20261122 (bootstrap, 2,000 draws).
+- Intervals: The county bootstrap (chapters 3 to 6 within each storm; chapters 8 and 13 across storm-counties) resamples counties as if they were independent. Counties hit by the same storm share its wind, flooding, power grid and networks, so their outcomes are correlated, and these intervals may be somewhat narrow. The storm bootstrap (medians and pooled shares across storms, chapter 7's zone shares, chapter 12) resamples whole storms, and the models in chapters 7, 8 and 13 use storm- or county-clustered intervals. This is a note on the method, not a change to any result.
+- Floating point: `results.json` stores floats to 10 significant digits, and the reproduction test compares its numbers with a relative tolerance of 1e-9 (text exactly), because platforms' math libraries can differ in the last bits (about 1e-10 relative). The panel, storm and validation CSVs must match byte for byte; the analysis-ready panel is compared value by value at the same tolerance.
 
 ## Run order
 
 ```
-python -m pip install -r requirements.txt
-python run_all.py        # rebuild into build/
-python -m pytest code/tests/test_reproduction.py   # compare build/ with data/analysis/
+python -m pip install -r requirements.txt   # or: --require-hashes -r requirements.lock
+python -m pytest code/tests        # unit tests; the build checks skip until run_all.py has run
+python run_all.py                   # rebuild into build/
+python -m pytest code/tests        # now including the reproduction test (build/ vs data/analysis/)
 ```
 
 `run_all.py` runs these steps in this order (all in `code/src/`):
@@ -83,8 +100,9 @@ python -m pytest code/tests/test_reproduction.py   # compare build/ with data/an
 | 9 | `10_analysis.py` | 3 4 5 6 7 8 9 | chapters 3-9 to results.json |
 | 10 | `10_analysis.py` | 1 2 | chapters 1 and 2 (run second so results.json keeps the published key order) |
 | 11 | `12_v2_analysis.py` | v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card | chapters 10-14 to results.json |
+| 12 | `12b_analysis_ready.py` |  | the analysis-ready panel (CSV and Parquet): the panel with every covariate |
 
-Then it writes `build/processed/storms.csv` and the test compares `build/processed/dirs_county_day.csv`, `storms.csv` and `build/output/results.json` with `data/analysis/` (byte for byte).
+`code/tests/test_reproduction.py` then compares `build/` with `data/analysis/`: `dirs_county_day.csv`, `storms.csv` and the validation tables byte for byte, `results.json` with numbers within a relative 1e-9 and everything else exactly, and the analysis-ready panel value by value. `code/tests/test_datapackage.py` checks `datapackage.json` with frictionless (`frictionless validate datapackage.json`: 0 errors).
 
 ## Page sections and figures
 
@@ -118,6 +136,7 @@ The repository is archived on Zenodo. Cite the concept DOI for the data and code
 - In general (all versions; resolves to the latest): Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477809
 - Version 2.0.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 2.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477811
 - Version 2.1.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 2.1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24480432
+- Version 2.2.0 (this one) gets its own DOI when it is released; until then, cite the concept DOI.
 
 `CITATION.cff` lists every DOI, and GitHub's "Cite this repository" button reads it.
 

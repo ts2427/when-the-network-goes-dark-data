@@ -9,12 +9,12 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from config import OUTPUT  # noqa: E402
+from config import OUTPUT, PROCESSED  # noqa: E402
 
 v2 = importlib.import_module("12_v2_analysis")
 step11 = importlib.import_module("11_build_page")
 RESULTS = OUTPUT / "results.json"
-needs = pytest.mark.skipif(not (OUTPUT / "validation_dirs.csv").exists(), reason="needs the validation outputs")
+needs = pytest.mark.skipif(not (OUTPUT / "validation_dirs.csv").exists(), reason="needs the validation outputs from a build: run python run_all.py first")
 
 
 @needs
@@ -41,10 +41,9 @@ def test_counts_never_exceed_their_denominators_and_years_add_up():
 def test_backup_column_agrees_with_the_panel():
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
     rec = v2.report_records(r).dropna(subset=["backup_printed"])
-    p = pd.read_parquet(OUTPUT.parent / "data" / "processed" / "panel.parquet", columns=["doc_id", "on_backup_power"]) \
-        if (OUTPUT.parent / "data" / "processed" / "panel.parquet").exists() else None
-    if p is None:
-        pytest.skip("needs the panel")
+    if not (PROCESSED / "panel.parquet").exists():
+        pytest.skip("needs panel.parquet from a build: run python run_all.py first")
+    p = pd.read_parquet(PROCESSED / "panel.parquet", columns=["doc_id", "on_backup_power"])
     printed = p.groupby("doc_id").on_backup_power.apply(lambda s: s.notna().any())
     assert all(bool(printed[d]) == bool(b) for d, b in zip(rec.doc_id, rec.backup_printed))
 

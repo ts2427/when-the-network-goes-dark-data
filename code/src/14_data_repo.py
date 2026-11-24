@@ -7,12 +7,15 @@ Copies only what may be published:
                   OpenFEMA pages, NHC files, EAGLE-I's filtered extract plus MCC.csv and coverage_history.csv (never a
                   year file), and the BDC county provider counts (counts only; never a raw BDC file or provider ID).
                   INPUTS.csv gives each file's source, URL, retrieval time and SHA-256.
-  data/analysis/  the published panel, the storm table and results.json (what the page shows).
+  data/analysis/  the published panel, the storm table, results.json (what the page shows) and, since 2.2.0, the
+                  analysis-ready panel (CSV and Parquet).
   code/           the pipeline (src/), its hand-made tables (manifest/) and tests, with a config.py that reads
                   data/input and writes build/.
   docs/           the analysis plan as committed (with its SHA-256), the addendum, the decision log, sources notes.
 Writes README.md, SOURCES.md, CITATION.cff, CHANGELOG.md, DEVIATIONS.md, AI_ASSISTANCE.md, LICENSE, LICENSE-DATA.md,
-datapackage.json and CODEBOOK.md (generated from datapackage.json), run_all.py and requirements.txt.
+datapackage.json and CODEBOOK.md (generated from datapackage.json), run_all.py, requirements.txt, requirements.lock
+(copied from this project, with hashes; uv pip compile) and the CI workflow (.github/workflows/ci.yml). Then checks
+datapackage.json with frictionless (0 errors or it stops).
 Never copies .env, .venv, data/interim, data/raw/bdc, the EAGLE-I year files or anything else not listed here.
 """
 import hashlib
@@ -28,8 +31,19 @@ import pandas as pd
 from config import (BDC_COUNTS, BDC_COUNTS_META, DOWNLOADS_LOG, EAGLEI_EXTRACT, EAGLEI_RAW_DIR, OUTPUT, PROCESSED,
                     RAW, REGIMES, ROOT)
 
-VERSION = "2.1.0"
-RELEASE_DATE = "2026-11-23"
+VERSION = "2.2.0"
+RELEASE_DATE = "2026-11-24"
+CREATED = f"{RELEASE_DATE}T12:00:00-06:00"  # datapackage.json created: ISO 8601 date-time (v2.2.0)
+# Set to True only after CI has passed on both ubuntu-latest and windows-latest (README then says so).
+CI_PASSED_ON_BOTH = False
+GITHUB = "https://github.com/ts2427/when-the-network-goes-dark-data"
+BOOTSTRAP_NOTE = importlib.import_module("11_build_page").BOOTSTRAP_METHODS
+PUBLIC_REQUIREMENTS = [
+    "pandas==2.3.3", "numpy==2.5.5", "scipy==1.18.1", "statsmodels==0.15.0", "scikit-learn==1.9.1",
+    "lifelines==0.30.3", "pdfplumber==0.11.11", "pdfminer.six==20260107", "geopandas==1.2.0", "shapely==2.2.0",
+    "pyogrio==0.13.0", "pyproj==3.8.0", "pyarrow==26.0.1", "requests==2.34.2", "pytest==9.2.0",
+    "frictionless==5.21.0"]
+LOCKFILE = ROOT / "requirements.lock"  # uv pip compile requirements.txt --universal --generate-hashes (see README)
 REPO_NAME = "when-the-network-goes-dark-data"
 TITLE = "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)"
 AUTHOR = {"family": "Spivey", "given": "Timothy D.", "orcid": "0009-0009-8990-4308"}
@@ -85,24 +99,24 @@ PANEL_FIELDS = [
      "Spellings vary between reports; use fips."),
     ("fips", "string", "Five-digit county FIPS code (with leading zero).", "",
      "Mapped from the printed name with code/manifest/fips_exceptions.csv."),
-    ("sites_served", "number", "Cell sites served in the county, as reported.", "sites",
+    ("sites_served", "integer", "Cell sites served in the county, as reported.", "sites",
      "The denominator differs by storm and report; compare percentages with care. " + SITE_LIMIT),
-    ("sites_out", "number", "Cell sites out of service in the county, as reported.", "sites", SITE_LIMIT),
+    ("sites_out", "integer", "Cell sites out of service in the county, as reported.", "sites", SITE_LIMIT),
     ("pct_out", "number", "Percent of sites out, as printed (computed from the two counts where not printed).",
      "percent", "Where pct_printed is false the value is computed, not printed."),
     ("pct_printed", "boolean", "True when the report printed the percent column.", "", ""),
-    ("out_damage", "number", "Sites out due to damage, as reported.", "sites",
+    ("out_damage", "integer", "Sites out due to damage, as reported.", "sites",
      "Blank where the report has no cause columns. Causes can overlap (see out_overattributed)."),
     ("out_transport", "number", "Sites out due to transport (backhaul), as reported.", "sites",
      "Blank where the report has no cause columns."),
-    ("out_power", "number", "Sites out due to power, as reported.", "sites",
+    ("out_power", "integer", "Sites out due to power, as reported.", "sites",
      "Blank where the report has no cause columns."),
-    ("on_backup_power", "number", "Sites operating on backup power, as reported.", "sites",
+    ("on_backup_power", "integer", "Sites operating on backup power, as reported.", "sites",
      "Blank where the report has no such column. Not a measure of sites about to fail."),
-    ("out_unattributed", "number", "Sites out with no cause given: sites_out minus the three causes, never below 0.",
+    ("out_unattributed", "integer", "Sites out with no cause given: sites_out minus the three causes, never below 0.",
      "sites", "Blank where the report has no cause columns. Kept apart from out_overattributed; never net them."),
-    ("out_overattributed", "number", "Causes in excess of sites out (sites counted under more than one cause).",
-     "sites", "Blank where the report has no cause columns. May print as -0.0, which equals 0."),
+    ("out_overattributed", "integer", "Causes in excess of sites out (sites counted under more than one cause).",
+     "sites", "Blank where the report has no cause columns."),
     ("area_status", "string", "Whether the county is in the FCC's notice area on the report date: inside, "
      "inside_spelling_variant, outside_notice_area or table_not_in_list.", "",
      "From the FCC's notices (code/manifest/reporting_areas.csv)."),
@@ -147,6 +161,92 @@ BDC_FIELDS = [
     ("fixed_half", "integer", "Fixed providers serving at least half of residential locations.", "providers", ""),
     ("fixed_half_excl_near_universal", "integer", "As fixed_half, near-universal providers excluded.", "providers", ""),
 ]
+
+_EAGLEI_LIMIT = ("ORNL/DOE EAGLE-I (CC BY 4.0); 'customers' are meters. Blank where no EAGLE-I record lies within 30 "
+                 "minutes of the time (never set to zero); see eaglei_match.")
+_GROUP_NOTE = ("For storms before 2022 (bdc_role 'sensitivity') the release postdates the storm; chapter 13's main "
+               "analysis uses storms from 2022 on.")
+ANALYSIS_READY_EXTRA = [  # v2.2.0: columns of panel_analysis_ready after the published panel's (PANEL_FIELDS)
+    ("eaglei_time", "datetime", "Time of the EAGLE-I record matched to the report's as-of time.", "UTC",
+     "Blank when no record lies within 30 minutes."),
+    ("eaglei_match", "string", "EAGLE-I match at the as-of time: matched, no_record_within_30min, "
+     "county_not_in_eaglei_window, no_as_of_time or no_eaglei_release (Isaias 2026; EAGLE-I ends in 2025).", "", ""),
+    ("eaglei_gap_min", "number", "Minutes between the matched record and the as-of time.", "minutes", ""),
+    ("eaglei_customers_out", "integer", "Electricity customers out at the as-of time.", "customers", _EAGLEI_LIMIT),
+    ("eaglei_customers_out_6h", "integer", "Customers out 6 hours before the as-of time.", "customers", _EAGLEI_LIMIT),
+    ("eaglei_customers_out_12h", "integer", "Customers out 12 hours before.", "customers", _EAGLEI_LIMIT),
+    ("eaglei_customers_out_24h", "integer", "Customers out 24 hours before.", "customers", _EAGLEI_LIMIT),
+    ("eaglei_customers_out_zero_filled", "integer", "As eaglei_customers_out, with no record counted as 0 where the "
+     "county has an EAGLE-I record in the storm's window.", "customers", "Sensitivity display only."),
+    ("eaglei_modeled_customers", "integer", "EAGLE-I modeled customers in the county (MCC.csv).", "customers",
+     "Below observed outages in some counties; see eaglei_mcc_flag."),
+    ("eaglei_pct_out", "number", "eaglei_customers_out as a percent of eaglei_modeled_customers.", "percent",
+     "Not used where eaglei_mcc_flag is not ok."),
+    ("eaglei_max_out_in_window", "integer", "Highest customers out in the storm's EAGLE-I window (21 days before "
+     "activation to 21 days after deactivation).", "customers", ""),
+    ("eaglei_release", "boolean", "True if EAGLE-I covers the storm's year (through 2025).", "", ""),
+    ("eaglei_mcc_flag", "string", "ok, mcc_below_observed_outages (percent out not used) or no_mcc.", "", ""),
+    ("eaglei_coverage_flag", "string", "ok, low_coverage (state's minimum covered share below 0.75 that year; kept), "
+     "coverage_unknown (no published coverage for the year) or no_eaglei_release.", "", "Coverage is published by "
+     "state and year only (2018-2022)."),
+    ("eaglei_state_min_covered", "number", "State's minimum share of customers covered by EAGLE-I in the storm year.",
+     "share (0-1)", "Blank when not published."),
+    ("eaglei_state_max_covered", "number", "State's maximum share of customers covered in the storm year.",
+     "share (0-1)", "Blank when not published."),
+    ("min_dist_km", "number", "Distance from the county's Census internal point to the storm's track (15-minute "
+     "interpolation).", "km", "NHC HURDAT2; Isaias 2026 from the GIS best track."),
+    ("wind_kt_at_closest", "number", "Storm's maximum sustained wind at the track point closest to the county.",
+     "knots", ""),
+    ("in_34kt", "boolean", "True if the county's internal point fell inside the 34-knot wind radii at some time.", "",
+     ""),
+    ("in_50kt", "boolean", "True if inside the 50-knot wind radii at some time.", "", ""),
+    ("in_64kt", "boolean", "True if inside the 64-knot wind radii at some time.", "", ""),
+    ("wind_zone", "string", "Chapter 7's wind zone from the three radii: inside 64 kt, 50-64 kt, 34-50 kt or outside "
+     "34 kt.", "", ""),
+    ("first_34kt_utc", "datetime", "First time the county was inside the 34-knot wind radii.", "UTC",
+     "Blank if never inside."),
+    ("nearest_landfall_utc", "datetime", "The storm's HURDAT2 landfall nearest the county.", "UTC",
+     "Blank for Isaias 2026 (no landfall marker in the GIS best track)."),
+    ("nearest_landfall_km", "number", "Distance from the county to that landfall.", "km", ""),
+    ("track_source", "string", "HURDAT2 or GIS best track (Isaias 2026).", "", ""),
+    ("landfall_utc", "datetime", "Day 0: the first time the storm's 34-knot wind radii reach a study-state county.",
+     "UTC", "Same for every county of a storm; see storms.csv."),
+    ("landfall_source", "string", "Which rule set day 0.", "", ""),
+    ("days_since_landfall", "number", "Days from day 0 to the report's as-of time.", "days", ""),
+    ("svi_overall", "number", "CDC/ATSDR SVI 2022 overall national percentile rank (RPL_THEMES).", "percentile (0-1)",
+     "Chapter 8's quartiles are of the at-risk storm-counties, not of this column's national cut points."),
+    ("svi_socioeconomic", "number", "SVI 2022 theme 1, socioeconomic status (RPL_THEME1).", "percentile (0-1)", ""),
+    ("svi_household", "number", "SVI 2022 theme 2, household characteristics (RPL_THEME2).", "percentile (0-1)", ""),
+    ("svi_minority_language", "number", "SVI 2022 theme 3, racial and ethnic minority status (RPL_THEME3).",
+     "percentile (0-1)", ""),
+    ("svi_housing_transport", "number", "SVI 2022 theme 4, housing type and transportation (RPL_THEME4).",
+     "percentile (0-1)", ""),
+    ("acs_households", "integer", "Households, ACS 2022 5-year (B11001_001E).", "households", ""),
+    ("acs_population", "integer", "Population, ACS 2022 5-year (B01001_001E).", "people", ""),
+    ("acs_pct_65plus", "number", "Percent of the population aged 65 or over, ACS 2022 5-year (B01001).", "percent", ""),
+    ("acs_pct_broadband", "number", "Percent of households with a broadband subscription, ACS 2022 5-year "
+     "(B28002_004E / B28002_001E).", "percent", ""),
+    ("bdc_release", "date", "FCC Broadband Data Collection release matched to the storm: the latest on or before day "
+     "0, or the earliest for storms before 2022.", "", ""),
+    ("bdc_role", "string", "main (storms from 2022 on) or sensitivity: network data from after the storm.", "", ""),
+    ("bdc_mobile_half", "integer", "Mobile providers covering at least half the county's area (chapter 13's main "
+     "measure).", "providers", "Reported coverage, not which networks were out; providers are never named."),
+    ("bdc_mobile_any", "integer", "Mobile providers with any coverage in the county.", "providers", ""),
+    ("bdc_fixed_any_excl_near_universal", "integer", "Fixed providers with any residential service, near-universal "
+     "providers excluded.", "providers", ""),
+    ("bdc_fixed_any", "integer", "Fixed providers with any residential service.", "providers", ""),
+    ("bdc_fixed_half", "integer", "Fixed providers serving at least half of residential locations.", "providers", ""),
+    ("bdc_fixed_half_excl_near_universal", "integer", "As bdc_fixed_half, near-universal providers excluded.",
+     "providers", ""),
+    ("bdc_mobile_half_group", "string", "Chapter 13's group on bdc_mobile_half: 2 or fewer, 3, or 4 or more "
+     "(cut points fixed from counts only; results.json v2_5_groups).", "", _GROUP_NOTE),
+    ("first_report_date", "date", "The county's first report in the storm's panel.", "", ""),
+    ("last_report_date", "date", "The county's last report in the storm's panel.", "", ""),
+    ("n_reports_county", "integer", "Reports in the storm's panel that list the county.", "reports", ""),
+    ("censoring", "string", "none, left_reports_while_out (left the reports before the storm's last report while "
+     "still out) or out_at_last_report.", "", "Censored counties are not recovered."),
+]
+ANALYSIS_READY_FIELDS = PANEL_FIELDS + ANALYSIS_READY_EXTRA
 
 
 def sha256(path: Path) -> str:
@@ -221,7 +321,9 @@ def copy_inputs(T: Path) -> pd.DataFrame:
 def copy_analysis(T: Path) -> None:
     a = T / "data" / "analysis"
     copy(PROCESSED / "dirs_county_day.csv", a / "dirs_county_day.csv")
-    pd.read_parquet(PROCESSED / "storms.parquet").to_csv(a / "storms.csv", index=False, lineterminator="\n")
+    copy(PROCESSED / "storms.csv", a / "storms.csv")  # written by step 9 (counts as integers) since v2.2.0
+    for ext in ("csv", "parquet"):
+        copy(PROCESSED / f"panel_analysis_ready.{ext}", a / f"panel_analysis_ready.{ext}")
     copy(OUTPUT / "results.json", a / "results.json")
     for f in ("validation_dirs.csv", "validation_summary.csv", "excluded_reports.csv", "area_status_counts.csv"):
         copy(OUTPUT / f, a / "validation" / f)
@@ -343,14 +445,16 @@ def datapackage(T: Path, plan: dict) -> dict:
     panel_cols = list(pd.read_csv(a / "dirs_county_day.csv", nrows=0).columns)
     storm_cols = list(pd.read_csv(a / "storms.csv", nrows=0).columns)
     bdc_cols = list(pd.read_csv(T / "data" / "input" / "bdc" / "bdc_county_provider_counts.csv", nrows=0).columns)
+    ready_cols = list(pd.read_csv(a / "panel_analysis_ready.csv", nrows=0).columns)
     dates = pd.read_csv(a / "dirs_county_day.csv", usecols=["report_date"]).report_date
     for cols, fields, name in ((panel_cols, PANEL_FIELDS, "panel"), (storm_cols, STORM_FIELDS, "storms"),
-                               (bdc_cols, BDC_FIELDS, "bdc")):
+                               (bdc_cols, BDC_FIELDS, "bdc"), (ready_cols, ANALYSIS_READY_FIELDS, "analysis-ready")):
         if cols != [f[0] for f in fields]:
             raise SystemExit(f"{name}: documented fields {[f[0] for f in fields]} differ from the file's {cols}")
     pkg = {
-        "profile": "tabular-data-package", "name": REPO_NAME, "title": TITLE, "version": VERSION,
-        "created": RELEASE_DATE, "homepage": PAGE_URL,
+        # "data-package", not "tabular-data-package": results.json, the parquet and the plan file are not tables
+        "profile": "data-package", "name": REPO_NAME, "title": TITLE, "version": VERSION,
+        "created": CREATED, "homepage": PAGE_URL,
         "description": ("County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages "
                         "for 21 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, "
                         "checked against each report's printed totals, with the inputs and code that rebuild it."),
@@ -373,6 +477,21 @@ def datapackage(T: Path, plan: dict) -> dict:
              "format": "csv", "mediatype": "text/csv", "encoding": "utf-8", "title": "Storm table",
              "description": "One row per storm with a DIRS activation in scope, including storms with no usable report.",
              "schema": schema(STORM_FIELDS, ["storm_key"])},
+            {"name": "panel_analysis_ready", "path": "data/analysis/panel_analysis_ready.csv",
+             "profile": "tabular-data-resource", "format": "csv", "mediatype": "text/csv", "encoding": "utf-8",
+             "title": "Analysis-ready panel: the county-report panel with every covariate the analysis uses",
+             "description": "The rows of dirs_county_day.csv, in the same order, joined with EAGLE-I power outages "
+                            "and coverage flags, exposure and wind zone, day 0, SVI 2022, ACS 2022 and the BDC "
+                            "provider counts and chapter 13 group. Built by code/src/12b_analysis_ready.py; load it "
+                            "with load_panel() in code/src/load.py. Counts are integers; other numbers are written "
+                            "to 10 significant digits.",
+             "schema": schema(ANALYSIS_READY_FIELDS, ["storm_key", "doc_id", "fips"])},
+            {"name": "panel_analysis_ready_parquet", "path": "data/analysis/panel_analysis_ready.parquet",
+             "profile": "tabular-data-resource", "format": "parquet", "mediatype": "application/vnd.apache.parquet",
+             "title": "Analysis-ready panel (Parquet)",
+             "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable "
+                            "integers) and full float precision.",
+             "schema": schema(ANALYSIS_READY_FIELDS, ["storm_key", "doc_id", "fips"])},
             {"name": "bdc_county_provider_counts", "path": "data/input/bdc/bdc_county_provider_counts.csv",
              "profile": "tabular-data-resource", "format": "csv", "mediatype": "text/csv", "encoding": "utf-8",
              "title": "Broadband provider counts by county and BDC release (counts only)",
@@ -381,7 +500,8 @@ def datapackage(T: Path, plan: dict) -> dict:
             {"name": "results", "path": "data/analysis/results.json", "format": "json", "mediatype": "application/json",
              "title": "Every number on the page",
              "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py "
-                            "(chapters 1-9) and 12_v2_analysis.py (chapters 10-13)."},
+                            "(chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant "
+                            "digits."},
             {"name": "analysis_plan_as_committed", "path": f"docs/{plan['file']}", "format": "md",
              "mediatype": "text/markdown", "title": "Analysis plan as committed",
              "description": f"Committed {plan['committed']} (commit {plan['commit']}); SHA-256 {plan['sha256']}.",
@@ -389,6 +509,9 @@ def datapackage(T: Path, plan: dict) -> dict:
         ],
     }
     for r in pkg["resources"]:
+        if r["format"] == "parquet":  # frictionless reads Parquet through pyarrow and cannot check bytes or hash
+            r["description"] += f" SHA-256 {sha256(T / r['path'])}; {(T / r['path']).stat().st_size} bytes."
+            continue
         if "hash" not in r:
             r["hash"] = "sha256:" + sha256(T / r["path"])
         r["bytes"] = (T / r["path"]).stat().st_size
@@ -413,8 +536,10 @@ def codebook_md(T: Path, pkg: dict) -> None:
     L += ["## `data/analysis/results.json`", "",
           "Nested JSON, one key per chapter (`chapter_1` to `chapter_9`, then `v2_1_public_record_misses`, "
           "`v2_2_backup_power`, `v2_3_power_cell_timing`, `v2_5_groups`, `v2_5_network_redundancy`, `v2_1_1_report_card`). Each number is "
-          "stored with its interval (`lo`, `hi`), `n`, `unit` and `method` where it has them. The README maps each "
-          "page section and figure to its key and script.", ""]
+          "stored with its interval (`ci_low`, `ci_high`), `n`, `unit` and `method` where it has them. Floats are "
+          "written to 10 significant digits (since 2.2.0). The README maps each page section and figure to its key "
+          "and script.", "",
+          f"Intervals: {BOOTSTRAP_NOTE}", ""]
     write(T / "CODEBOOK.md", "\n".join(L))
 
 
@@ -475,13 +600,56 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
-## [Unreleased]
+## [{VERSION}] - {RELEASE_DATE}
+
+Engineering hardening. No finding changes: every number in `results.json` is within a relative 1e-9 of version
+2.1.0 (largest change 9.6e-10), and every value in the panel, storm and validation tables is unchanged.
 
 ### Added
-- The version 2.1.0 DOI ({version_dois().get("2.1.0", "")}) in `CITATION.cff` and the README, added after the
-  release. Documentation only.
+- `data/analysis/panel_analysis_ready.csv` and `.parquet`: the county-report panel (same rows and order as
+  `dirs_county_day.csv`) joined with every covariate the analysis uses (EAGLE-I values and coverage flags, exposure,
+  wind zone, day 0, SVI, ACS, and the BDC release, provider counts and chapter 13 group). Written by the new step
+  `code/src/12b_analysis_ready.py`; documented in `datapackage.json` and `CODEBOOK.md`; loaded with `load_panel()` in
+  the new `code/src/load.py`.
+- Continuous integration (`.github/workflows/ci.yml`): on every push, on ubuntu-latest and windows-latest with
+  Python 3.13, install the locked environment, run the tests, validate `datapackage.json`, run `run_all.py`, then run
+  the reproduction tests. CI badge in the README.
+- `requirements.lock`: every package, including dependencies, pinned with SHA-256 hashes (uv pip compile,
+  universal), alongside `requirements.txt`.
+- `code/tests/test_datapackage.py`: `datapackage.json` must validate with frictionless with 0 errors; the builder
+  checks it as a build step too. `frictionless` added to `requirements.txt`.
+- A methods note wherever intervals appear (README, `CODEBOOK.md`, and the page's captions, How to read it and
+  methods): the county bootstrap treats counties within a storm as independent, so those intervals may be somewhat
+  narrow. A note on the method, not a change to any result.
+- The version 2.1.0 DOI ({version_dois().get("2.1.0", "")}) in `CITATION.cff` and the README (added after that
+  release).
 
-## [{VERSION}] - {RELEASE_DATE}
+### Changed
+- `results.json`: every float is written to 10 significant digits, so last-bit differences between platforms' math
+  libraries do not show. The reproduction test and the version 1 results test now compare numbers with a relative
+  tolerance of 1e-9 and text exactly (the version 1 test's SHA-256 fingerprints are replaced by a snapshot of the
+  values, `code/tests/snapshots/v1_results.json`). The panel, storm and validation CSVs are still compared byte for
+  byte.
+- Counts are written as integers (42, not 42.0) in `dirs_county_day.csv` (sites_served, sites_out, out_damage,
+  out_power, on_backup_power, out_unattributed, out_overattributed), `storms.csv` (n_reports, n_counties) and
+  `validation/validation_dirs.csv` (sites_unattributed, sites_overattributed); `datapackage.json` types them as
+  integers. out_transport stays a number: in two Harvey 2017 reports it holds non-whole values.
+- `out_overattributed` no longer has -0.0 values (they are 0); the codebook note about -0.0 is removed.
+- `datapackage.json` validates: `created` is a full ISO 8601 date-time and the profile is `data-package` (results.json,
+  the Parquet file and the plan file are not tables).
+- Every test that needs `build/` skips with a reason ("run python run_all.py first") on a fresh clone; two tests that
+  looked for build outputs in the wrong folder (and so always skipped here) now find them.
+- `storms.csv` is written by step 9; `run_all.py` no longer writes it separately.
+- Warnings: NumPy's 'generic' timedelta deprecation (steps 6 and 8) is fixed, and the expected 'invalid value
+  encountered in subtract' from bootstrap draws that never reach a threshold (inf - inf inside NumPy's percentile
+  interpolation; the bound is reported as none, as before) is no longer printed.
+- `CODEBOOK.md` names the interval fields `ci_low` and `ci_high` (it said `lo` and `hi`), and the 2.1.0 entry below
+  gives version 2.0.0's DOI (it had given 2.1.0's).
+
+### Unchanged
+- Every input, every value in the panel, storm table and validation tables, and every result.
+
+## [2.1.0] - 2026-11-23
 
 ### Added
 - Chapter 14, "How complete are the FCC's public reports?" (exploratory: a descriptive summary of the existing
@@ -490,7 +658,7 @@ any output.
   in the table but not the county list, counties outside the notice area, the backup-power column, and excluded
   reports, each with its denominator, plus a one-line summary per year. New key `v2_1_1_report_card` in
   `results.json`, written by `code/src/12_v2_analysis.py report_card` from the validation outputs; no new data.
-- The Zenodo DOIs (concept {dois()[0]}; version 2.0.0: {dois()[1]}) in `CITATION.cff` and the README, with a DOI
+- The Zenodo DOIs (concept {dois()[0]}; version 2.0.0: {version_dois()["2.0.0"]}) in `CITATION.cff` and the README, with a DOI
   badge and a How to cite section.
 - `docs/update_procedure.md`: how a new season and a new version are added and released.
 
@@ -719,6 +887,7 @@ RUN_ORDER = [
     ("10_analysis.py", "3 4 5 6 7 8 9", "chapters 3-9 to results.json"),
     ("10_analysis.py", "1 2", "chapters 1 and 2 (run second so results.json keeps the published key order)"),
     ("12_v2_analysis.py", "v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card", "chapters 10-14 to results.json"),
+    ("12b_analysis_ready.py", "", "the analysis-ready panel (CSV and Parquet): the panel with every covariate"),
 ]
 
 
@@ -755,7 +924,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
     ]
     concept, version = dois()
     L = [f"# {TITLE}", "",
-         f"[![DOI](https://zenodo.org/badge/DOI/{concept}.svg)](https://doi.org/{concept})", "",
+         f"[![DOI](https://zenodo.org/badge/DOI/{concept}.svg)](https://doi.org/{concept}) "
+         f"[![CI]({GITHUB}/actions/workflows/ci.yml/badge.svg)]({GITHUB}/actions/workflows/ci.yml)", "",
          f"Version {VERSION} ({RELEASE_DATE}). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).", "",
          f"The data and code behind the page *When the Network Goes Dark* ({PAGE_URL}): a county-by-report panel of "
          "FCC DIRS cell-site outages for 21 storms in ten Gulf and Southeast states, 2017-2026, each report checked "
@@ -772,12 +942,23 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "| Third-party inputs in `data/input/` | their own terms; see `SOURCES.md` |", "",
          "## Contents", "", "```",
          "data/input/      every input, with INPUTS.csv (source, URL, retrieval time, SHA-256)",
-         "data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/",
-         "code/src/        numbered pipeline steps; code/manifest/ hand-made tables; code/tests/",
+         "data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/,",
+         "                 panel_analysis_ready.csv and .parquet (the panel with every covariate the analysis uses)",
+         "code/src/        numbered pipeline steps, load.py (load_panel()); code/manifest/ hand-made tables;",
+         "                 code/tests/",
+         ".github/         CI: the tests and a full rebuild on Linux and Windows on every push",
          "docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes,",
          "                 update_procedure.md (how a new season and a new version are added and released)",
          "run_all.py       one command: rebuild the panel and results.json into build/",
          "```", "",
+         "## Analysis-ready panel", "",
+         "`data/analysis/panel_analysis_ready.parquet` (and `.csv`) is `dirs_county_day.csv`, same rows and order, "
+         "joined with every covariate the analysis uses: EAGLE-I power outages at each report's as-of time with its "
+         "match and coverage flags, distance to the track, wind radii and chapter 7's wind zone, day 0 and days since "
+         "day 0, SVI 2022, ACS 2022, and the storm's BDC release with its provider counts and chapter 13 group. "
+         "Variables: `CODEBOOK.md`. To load it with its types:", "",
+         "```python", "import sys", "sys.path.insert(0, \"code/src\")", "from load import load_panel",
+         "p = load_panel()   # the Parquet if present, else the CSV, with the same types", "```", "",
          "## Analysis plan", "",
          f"The analysis plan was committed on November 22, 2026, in the project's private version-controlled "
          f"repository (commit {plan['commit']}, {plan['committed']}), before any recovery outcome was computed. The "
@@ -790,23 +971,41 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           for a, b, c, d, e, f in avail]
     L += ["", "Exact attribution for each source: `SOURCES.md`. Variables: `CODEBOOK.md` and `datapackage.json`.", "",
           "## Computational requirements", "",
-          "- Python 3.13 (tested with 3.13.2) on Windows 11; the code uses no platform-specific calls.",
-          "- Packages: `requirements.txt` (exact versions used).",
+          ("- Python 3.13 (tested with 3.13.2 on Windows 11). Reproduced on Windows and Linux: CI rebuilds everything "
+           "and runs the reproduction tests on windows-latest and ubuntu-latest with Python 3.13 on every push "
+           "(badge above)." if CI_PASSED_ON_BOTH else
+           "- Python 3.13 (tested with 3.13.2) on Windows 11; the code uses no platform-specific calls. CI runs the "
+           "tests and a full rebuild on windows-latest and ubuntu-latest (badge above)."),
+          "- Packages: `requirements.txt` (exact versions of the packages used) and `requirements.lock` (every "
+          "package, including dependencies, pinned with SHA-256 hashes for Windows, Linux and macOS; generated with "
+          "`uv pip compile requirements.txt --universal --generate-hashes --python-version 3.13 -o requirements.lock`). "
+          "For an exact environment: `python -m pip install --require-hashes -r requirements.lock`.",
           "- Memory: about 4 GB. Disk: about 200 MB for the repository and `build/`.",
           "- Run time: 12.4 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-23 "
           "(most of it is parsing the reports in step 3 and the bootstrap in step 10).",
           "- No network access is needed: every step reads `data/input/`. Steps 02, 06a, 06c, 06d and 06e (downloads "
           "and raw BDC reading) are included for transparency but are not run; they need the original sources and, "
           "for BDC, an FCC account.",
-          "- Random numbers: fixed seed 20261122 (bootstrap, 2,000 draws).", "",
+          "- Random numbers: fixed seed 20261122 (bootstrap, 2,000 draws).",
+          f"- Intervals: {BOOTSTRAP_NOTE}",
+          "- Floating point: `results.json` stores floats to 10 significant digits, and the reproduction test "
+          "compares its numbers with a relative tolerance of 1e-9 (text exactly), because platforms' math libraries "
+          "can differ in the last bits (about 1e-10 relative). The panel, storm and validation CSVs must match byte "
+          "for byte; the analysis-ready panel is compared value by value at the same tolerance.", "",
           "## Run order", "",
-          "```", "python -m pip install -r requirements.txt", "python run_all.py        # rebuild into build/",
-          "python -m pytest code/tests/test_reproduction.py   # compare build/ with data/analysis/", "```", "",
+          "```", "python -m pip install -r requirements.txt   # or: --require-hashes -r requirements.lock",
+          "python -m pytest code/tests        # unit tests; the build checks skip until run_all.py has run",
+          "python run_all.py                   # rebuild into build/",
+          "python -m pytest code/tests        # now including the reproduction test (build/ vs data/analysis/)",
+          "```", "",
           "`run_all.py` runs these steps in this order (all in `code/src/`):", "",
           "| # | Script | Arguments | Does |", "|---|---|---|---|"]
     L += [f"| {i} | `{s}` | {a} | {d} |" for i, (s, a, d) in enumerate(RUN_ORDER, 1)]
-    L += ["", "Then it writes `build/processed/storms.csv` and the test compares `build/processed/dirs_county_day.csv`, "
-          "`storms.csv` and `build/output/results.json` with `data/analysis/` (byte for byte).", "",
+    L += ["", "`code/tests/test_reproduction.py` then compares `build/` with `data/analysis/`: "
+          "`dirs_county_day.csv`, `storms.csv` and the validation tables byte for byte, `results.json` with numbers "
+          "within a relative 1e-9 and everything else exactly, and the analysis-ready panel value by value. "
+          "`code/tests/test_datapackage.py` checks `datapackage.json` with frictionless (`frictionless validate "
+          "datapackage.json`: 0 errors).", "",
           "## Page sections and figures", "",
           "Each section of the page, its figures (the figure CSVs are published with the page), the key in "
           "`results.json` and the script that produces it. The page itself is built by `code/src/11_build_page.py`, "
@@ -835,7 +1034,7 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
 RUN_ALL = '''"""Rebuild the panel and results.json from data/input, into build/ (one command: python run_all.py).
 
 Runs the steps listed in README.md, in order, each in its own process, and stops at the first failure. Nothing is
-downloaded. Then writes build/processed/storms.csv. Compare with: python -m pytest code/tests/test_reproduction.py
+downloaded. Compare with: python -m pytest code/tests/test_reproduction.py
 """
 import subprocess
 import sys
@@ -854,10 +1053,6 @@ def main():
         r = subprocess.run([sys.executable, script, *args], cwd=SRC)
         if r.returncode:
             raise SystemExit(f"{script} failed (exit {r.returncode})")
-    sys.path.insert(0, str(SRC))
-    import pandas as pd
-    from config import PROCESSED
-    pd.read_parquet(PROCESSED / "storms.parquet").to_csv(PROCESSED / "storms.csv", index=False, lineterminator="\\n")
     print(f"done in {(time.time() - t0) / 60:.1f} min; outputs in build/")
 
 
@@ -865,29 +1060,51 @@ if __name__ == "__main__":
     main()
 '''
 
-TEST_REPRO = '''"""The code reproduces the published files: run python run_all.py first."""
+TEST_REPRO = '''"""The code reproduces the published files: run python run_all.py first (each check skips until then).
+
+CSVs must match byte for byte. results.json: numbers within a relative 1e-9, everything else exactly (platforms'
+math libraries differ in the last bits). The analysis-ready panel: value by value at the same tolerance."""
 import json
+import sys
 from pathlib import Path
 
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]
 BUILD = REPO / "build"
-PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv"),
-         ("output/results.json", "results.json")]
+PUBLISHED = REPO / "data" / "analysis"
+sys.path.insert(0, str(REPO / "code" / "src"))
+from compare import RTOL, differences  # noqa: E402
+
+NOT_BUILT = "needs build/ (not committed): run python run_all.py first"
+built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason=NOT_BUILT)
+CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv")] + [
+    (f"output/{n}", f"validation/{n}") for n in ("validation_dirs.csv", "validation_summary.csv",
+                                                 "excluded_reports.csv", "area_status_counts.csv")]
 
 
-@pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason="run python run_all.py first")
-@pytest.mark.parametrize("built, published", PAIRS)
-def test_build_matches_published(built, published):
-    assert (BUILD / built).read_bytes() == (REPO / "data" / "analysis" / published).read_bytes(), built
+@built
+@pytest.mark.parametrize("built_path, published", CSV_PAIRS)
+def test_csv_matches_published_byte_for_byte(built_path, published):
+    assert (BUILD / built_path).read_bytes() == (PUBLISHED / published).read_bytes(), built_path
 
 
-@pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason="run python run_all.py first")
-@pytest.mark.parametrize("name", ["validation_dirs.csv", "validation_summary.csv", "excluded_reports.csv",
-                                  "area_status_counts.csv"])
-def test_validation_tables_match(name):
-    assert (BUILD / "output" / name).read_bytes() == (REPO / "data" / "analysis" / "validation" / name).read_bytes()
+@built
+def test_results_json_matches_published():
+    got = json.loads((BUILD / "output" / "results.json").read_text(encoding="utf-8"))
+    want = json.loads((PUBLISHED / "results.json").read_text(encoding="utf-8"))
+    diffs = differences(got, want, RTOL)
+    assert not diffs, f"{len(diffs)} differences, first: {diffs[:10]}"
+
+
+@built
+@pytest.mark.parametrize("ext", ["csv", "parquet"])
+def test_analysis_ready_panel_matches_published(ext):
+    import pandas as pd
+    from load import load_panel
+    got = load_panel(BUILD / "processed" / f"panel_analysis_ready.{ext}")
+    want = load_panel(PUBLISHED / f"panel_analysis_ready.{ext}")
+    pd.testing.assert_frame_equal(got, want, check_exact=False, rtol=RTOL, atol=0)
 
 
 def test_inputs_match_their_hashes():
@@ -912,18 +1129,108 @@ def test_plan_as_committed_matches_its_hash():
     assert hashlib.sha256((REPO / "docs" / line[1]).read_bytes()).hexdigest() == line[0]
 '''
 
+TEST_DATAPACKAGE = '''"""datapackage.json is a valid Data Package: frictionless validate datapackage.json gives 0 errors (v2.2.0).
+
+Checks the descriptor and every tabular resource's rows against its schema (types, required values, primary keys)."""
+from pathlib import Path
+
+import pytest
+
+REPO = Path(__file__).resolve().parents[2]
+
+
+def test_datapackage_validates_with_no_errors():
+    frictionless = pytest.importorskip("frictionless", reason="pip install frictionless (in requirements.txt)")
+    report = frictionless.validate(str(REPO / "datapackage.json"))
+    errors = [e.message for e in report.errors]
+    for task in report.tasks:
+        errors += [f"{task.name}: {e.message}" for e in task.errors]
+    assert report.valid and not errors, errors[:20]
+'''
+
+CI_WORKFLOW = """name: CI
+
+# On every push: the tests, a full rebuild from data/input, then the reproduction tests (build/ vs data/analysis/),
+# on Linux and Windows. Nothing is downloaded except the Python packages.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    env:
+      PYTHONHASHSEED: "0"
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.lock
+      - name: Install the locked environment
+        run: python -m pip install --require-hashes -r requirements.lock
+      - name: Tests (build checks skip before the rebuild)
+        run: python -m pytest code/tests -q -rs
+      - name: Validate datapackage.json
+        run: frictionless validate datapackage.json
+      - name: Rebuild everything from data/input
+        run: python run_all.py
+      - name: Reproduction tests (build/ vs data/analysis/)
+        run: python -m pytest code/tests -q -rs
+      - name: Keep the rebuilt results for comparison
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.os }}
+          path: |
+            build/output/results.json
+            build/processed/dirs_county_day.csv
+            build/processed/storms.csv
+            build/processed/panel_analysis_ready.csv
+          if-no-files-found: warn
+"""
+
 
 def scripts(T: Path) -> None:
     write(T / "run_all.py", RUN_ALL.replace("STEPS_LITERAL", "[\n" + "".join(
         f"    ({s!r}, {a.split()!r}),\n" for s, a, _ in RUN_ORDER) + "]"))
     write(T / "code" / "tests" / "test_reproduction.py", TEST_REPRO)
-    write(T / "requirements.txt", "\n".join([
-        "pandas==2.3.3", "numpy==2.5.5", "scipy==1.18.1", "statsmodels==0.15.0", "scikit-learn==1.9.1",
-        "lifelines==0.30.3", "pdfplumber==0.11.11", "pdfminer.six==20260107", "geopandas==1.2.0", "shapely==2.2.0",
-        "pyogrio==0.13.0", "pyproj==3.8.0", "pyarrow==26.0.1", "requests==2.34.2", "pytest==9.2.0"]) + "\n")
+    write(T / "code" / "tests" / "test_datapackage.py", TEST_DATAPACKAGE)
+    write(T / ".github" / "workflows" / "ci.yml", CI_WORKFLOW)
+    write(T / "requirements.txt", "\n".join(PUBLIC_REQUIREMENTS) + "\n")
+    lock = LOCKFILE.read_text(encoding="utf-8")
+    norm = lambda x: x.lower().replace("_", "-").replace(".", "-")  # noqa: E731
+    pinned = {norm(line.split(" ")[0].split(";")[0]) for line in lock.splitlines()
+              if "==" in line and not line.startswith((" ", "#"))}
+    stale = [r for r in PUBLIC_REQUIREMENTS if norm(r) not in pinned]
+    if stale:  # the lockfile must pin exactly what requirements.txt asks for
+        raise SystemExit(f"requirements.lock is stale ({stale}); regenerate it (see README)")
+    write(T / "requirements.lock", lock)
     write(T / ".gitignore", "build/\n__pycache__/\n.pytest_cache/\n.env\n.venv/\n")
     write(T / ".gitattributes", "# Store every file byte for byte: INPUTS.csv and the reproduction test check SHA-256 "
                                 "hashes.\n* -text\n")
+
+
+def validate_datapackage(T: Path) -> None:
+    """Build step (v2.2.0): frictionless must find 0 errors in datapackage.json, or the build stops."""
+    import frictionless
+    report = frictionless.validate(str(T / "datapackage.json"))
+    errors = [e.message for e in report.errors] + [f"{t.name}: {e.message}" for t in report.tasks for e in t.errors]
+    if not report.valid or errors:
+        raise SystemExit("datapackage.json does not validate:\n" + "\n".join(errors[:30]))
+    print(f"datapackage.json: valid (frictionless {frictionless.__version__}, {len(report.tasks)} resources checked)")
 
 
 # ------------------------------------------------------------------------------------------------ checks --
@@ -1016,6 +1323,7 @@ def main():
     sources_md(T, idx)
     readme(T, idx, plan)
     scripts(T)
+    validate_datapackage(T)
     report = scan(T)
     write(ROOT / "output" / "data_repo_scan.json", json.dumps(report, indent=1) + "\n")
     print(json.dumps({k: v for k, v in report.items()}, indent=1)[:4000])

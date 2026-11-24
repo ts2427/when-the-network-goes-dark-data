@@ -115,7 +115,7 @@ def fema_by_county(d: pd.DataFrame, storms: pd.DataFrame) -> pd.DataFrame:
         d[col] = pd.to_datetime(d[col], utc=True)
     out = []
     for s in storms.itertuples():
-        start = pd.Timestamp(s.dirs_activation_date, tz="UTC") - pd.Timedelta(days=DAYS_BEFORE_ACTIVATION)
+        start = pd.Timestamp(s.dirs_activation_date, tz="UTC") - pd.Timedelta(DAYS_BEFORE_ACTIVATION, unit="D")
         end = pd.Timestamp(s.dirs_deactivation_date, tz="UTC")
         named = d.declarationTitle.str.upper().str.contains(rf"\b{re.escape(s.storm_name.upper())}\b")
         hit = d[named & d.incidentBeginDate.between(start, end) & (d.fipsCountyCode != "000")]

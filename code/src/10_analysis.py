@@ -75,9 +75,24 @@ def _plain(v):
     return v
 
 
+SIGNIFICANT_DIGITS = 10  # v2.2.0: results.json floats are written to 10 significant digits
+
+
+def round_floats(obj, digits: int = SIGNIFICANT_DIGITS):
+    """Every float rounded to `digits` significant digits (ints, bools, strings and None unchanged), so that
+    last-bit differences between platforms' floating-point libraries do not show in results.json."""
+    if isinstance(obj, float):
+        return float(f"{obj:.{digits}g}") if np.isfinite(obj) else obj
+    if isinstance(obj, dict):
+        return {k: round_floats(v, digits) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [round_floats(v, digits) for v in obj]
+    return obj
+
+
 def write_chapter(path, key: str, content: dict) -> None:
     results = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
-    results[key] = content
+    results[key] = round_floats(content)
     path.write_text(json.dumps(results, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
@@ -368,7 +383,11 @@ def bootstrap_recovery(p: pd.DataFrame, draws: int = BOOTSTRAP_DRAWS, seed: int 
 
 
 def _time_ci(draws: np.ndarray) -> tuple:
-    lo, hi = np.percentile(draws, CI)
+    """95% interval of bootstrap times. A draw that never reaches the threshold is inf. When a bound falls on or
+    between infinite draws, NumPy's interpolation computes inf - inf (NaN, with an 'invalid value encountered in
+    subtract' warning); that bound is not finite and is reported as None (no bound). The warning is expected here."""
+    with np.errstate(invalid="ignore"):
+        lo, hi = np.percentile(draws, CI)
     return (_plain(lo) if np.isfinite(lo) else None, _plain(hi) if np.isfinite(hi) else None)
 
 

@@ -50,6 +50,7 @@ from carried import CAUSES, require_carried
 AREA_STATUSES = ("inside", "inside_spelling_variant", "outside_notice_area", "table_not_in_list")
 from config import INTERIM, OUTPUT, ROOT
 from dirs_parser import CODE_TO_STATE
+from tables import write_csv
 
 OVER_EXCEPTIONS = ROOT / "manifest" / "cause_exceptions.csv"
 LIST_EXCEPTIONS = ROOT / "manifest" / "county_list_exceptions.csv"
@@ -414,8 +415,8 @@ def main():
                                 pd.read_csv(LIST_EXCEPTIONS), read["pdf_lines"], read["overall_totals"],
                                 pd.read_csv(EXCLUDED, dtype=str, keep_default_na=False))
     OUTPUT.mkdir(exist_ok=True)
-    results.to_csv(OUTPUT / "validation_dirs.csv", index=False, lineterminator="\n")
-    summary.to_csv(OUTPUT / "validation_summary.csv", index=False, lineterminator="\n")
+    write_csv(results, OUTPUT / "validation_dirs.csv", ["sites_unattributed", "sites_overattributed"])
+    summary.to_csv(OUTPUT / "validation_summary.csv", index=False, lineterminator="\n")  # already whole; "n/a" text
     gone = pd.read_csv(EXCLUDED, dtype=str, keep_default_na=False)  # for the page's methods section
     gone.merge(results[["doc_id", "status", "failures"]], on="doc_id", how="left").to_csv(
         OUTPUT / "excluded_reports.csv", index=False, lineterminator="\n")

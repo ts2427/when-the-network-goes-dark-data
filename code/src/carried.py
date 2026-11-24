@@ -20,7 +20,7 @@ def add_unattributed(df: pd.DataFrame) -> pd.DataFrame:
         df[col] = pd.to_numeric(df[col]).astype(float)
     gap = df["sites_out"].astype(float) - df[CAUSES].sum(axis=1, skipna=False)
     df["out_unattributed"] = gap.clip(lower=0)
-    df["out_overattributed"] = (-gap).clip(lower=0)
+    df["out_overattributed"] = (-gap).clip(lower=0) + 0.0  # + 0.0 turns -0.0 (from -gap where gap is 0) into 0.0
     return df
 
 

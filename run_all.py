@@ -1,7 +1,7 @@
 """Rebuild the panel and results.json from data/input, into build/ (one command: python run_all.py).
 
 Runs the steps listed in README.md, in order, each in its own process, and stops at the first failure. Nothing is
-downloaded. Then writes build/processed/storms.csv. Compare with: python -m pytest code/tests/test_reproduction.py
+downloaded. Compare with: python -m pytest code/tests/test_reproduction.py
 """
 import subprocess
 import sys
@@ -22,6 +22,7 @@ STEPS = [
     ('10_analysis.py', ['3', '4', '5', '6', '7', '8', '9']),
     ('10_analysis.py', ['1', '2']),
     ('12_v2_analysis.py', ['v2_1', 'v2_2', 'v2_3', 'v2_5_groups', 'v2_5', 'report_card']),
+    ('12b_analysis_ready.py', []),
 ]
 
 
@@ -32,10 +33,6 @@ def main():
         r = subprocess.run([sys.executable, script, *args], cwd=SRC)
         if r.returncode:
             raise SystemExit(f"{script} failed (exit {r.returncode})")
-    sys.path.insert(0, str(SRC))
-    import pandas as pd
-    from config import PROCESSED
-    pd.read_parquet(PROCESSED / "storms.parquet").to_csv(PROCESSED / "storms.csv", index=False, lineterminator="\n")
     print(f"done in {(time.time() - t0) / 60:.1f} min; outputs in build/")
 
 
