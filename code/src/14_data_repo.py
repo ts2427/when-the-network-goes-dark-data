@@ -657,15 +657,19 @@ and one county name.
   (cell first 158 to 159, undetermined 148 to 147); chapter 7's and chapter 8's model estimates move slightly
   (inside 64 knots 47.9 to 48.4; SVI Q4 interval 0.90 to 1.46 becomes 0.90 to 1.45); validation counts and the
   chapter 14 report card; and figures counted over storm-counties (chapter 9's P0 row, the map's county-reports,
-  chapter 7's calibration table). Every storm after Nate in date order has slightly different bootstrap intervals in
-  every chapter, because each storm's seed is the base seed plus its position in date order. The main changes are in
+  chapter 7's calibration table). Every per-storm bootstrap interval is also recomputed with the stable seed below.
+  The main changes are in
   `docs/decisions.md` (2026-11-24) and on the page's Corrections list; `data/analysis/results.json` holds every
   value. No finding's wording changes.
-- Two displayed numbers that are exact halves now round up, as the page's rule states (they had been stored just
-  below the half): Nicholas's site-days lost 114 to 115 and Irma's peak interval upper end 6,039 to 6,040. (A third,
-  Harvey's site-days lost, is now 1,424 after the correction.)
+- A displayed number that is an exact half now rounds up, as the page's rule states (it had been stored just below
+  the half): Nicholas's site-days lost 114 to 115. (Harvey's site-days lost is now 1,424 after the correction, and
+  Irma's peak interval is recomputed with the stable seed.)
 
 ### Engineering hardening (no change to findings)
+- Each storm's bootstrap seed is a stable hash of the global seed, the analysis stream and the storm key, not its
+  position in date order, so adding or removing a storm never changes another storm's numbers
+  (`code/tests/test_storm_seeds.py`). This recomputes every per-storm interval once (chapters 3 to 6); no estimate
+  changes.
 - `results.json`: every float is written to 10 significant digits, so last-bit differences between platforms' math
   libraries do not show. Apart from the correction above, every number is within a relative 1e-9 of 2.1.0. The
   reproduction test and the version 1 results test compare numbers with a relative tolerance of 1e-8 (with an

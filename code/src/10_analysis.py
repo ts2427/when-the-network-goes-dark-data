@@ -24,6 +24,7 @@ timing lies between the neighbouring snapshots. Cable and wireline subscribers o
 total, with no interval, flagged where that area included out-of-scope states or the report was shared by two
 storms. Across storms: median with a storm-bootstrap interval and the range.
 """
+import hashlib
 import json
 import math
 import re
@@ -36,6 +37,14 @@ from config import INTERIM, MANIFEST, OUTPUT, PROCESSED, REGIMES, STUDY_STATES
 
 # ---- config block: every threshold and setting ----
 SEED = 20261122
+
+
+def storm_seed(storm_key: str, stream: int) -> int:
+    """A storm's bootstrap seed, from a stable hash of the global seed, the analysis stream and the storm key (3.0.0).
+    It does not depend on the storm's position among the others, so adding or removing a storm never changes another
+    storm's draws (until 3.0.0 the seed was the stream plus the storm's position in date order)."""
+    digest = hashlib.sha256(f"{SEED}:{stream}:{storm_key}".encode("utf-8")).digest()
+    return int.from_bytes(digest[:8], "big")
 BOOTSTRAP_DRAWS = 2000
 CI = (2.5, 97.5)
 STATE_TOTAL_MISSING_DOCS = ("DOC-405893A1",)  # kept by the state_total_missing rule (Helene Sep 28, 2024)
@@ -260,14 +269,14 @@ def chapter_3_sensitivity(panel: pd.DataFrame, per_storm: list) -> dict:
 def chapter_3(panel: pd.DataFrame, storms: pd.DataFrame, manifest: pd.DataFrame) -> dict:
     in_scope = manifest[manifest.status != "out_of_scope"]
     per_storm, order = [], storms[storms.in_panel].sort_values("landfall_utc")
-    for i, s in enumerate(order.itertuples()):
+    for s in order.itertuples():
         p = panel[panel.storm_key == s.storm_key]
         rec = {"storm_key": s.storm_key, "storm": s.storm, "nhc_id": s.nhc_id, "rule_period": s.rule_period,
                "landfall_utc": str(s.landfall_utc), "landfall_source": s.landfall_source,
                "excluded_reports": s.excluded_reports, "n_counties": int(p.fips.nunique()),
-               **storm_peak(p, SEED + i)}
+               **storm_peak(p, storm_seed(s.storm_key, 0))}
         if s.storm == "Michael":
-            alt = storm_peak(p[p.fips != MICHAEL_JEFFERSON_FIPS], SEED + i)
+            alt = storm_peak(p[p.fips != MICHAEL_JEFFERSON_FIPS], storm_seed(s.storm_key, 0))
             j = panel[panel.fips == MICHAEL_JEFFERSON_FIPS]
             here, other = j[j.storm_key == s.storm_key].sites_served, j[j.storm_key != s.storm_key].sites_served
             rec["jefferson_fl_flag"] = {
@@ -473,10 +482,10 @@ def storms_reaching(per_storm: list, label: str) -> dict:
 def chapter_4(panel: pd.DataFrame, storms: pd.DataFrame) -> dict:
     per_storm = []
     order = storms[storms.in_panel].sort_values("landfall_utc")
-    for i, s in enumerate(order.itertuples()):
+    for s in order.itertuples():
         p = panel[panel.storm_key == s.storm_key]
         per_storm.append({"storm_key": s.storm_key, "storm": s.storm, "rule_period": s.rule_period,
-                          "excluded_reports": s.excluded_reports, **storm_recovery(p, SEED + 100 + i)})
+                          "excluded_reports": s.excluded_reports, **storm_recovery(p, storm_seed(s.storm_key, 100))})
     heads = {}
     seen = recovery_observed(per_storm)
     heads["storms_left_out_of_time_summaries"] = [{"storm": r["storm"], "note": NO_RECOVERY_NOTE.format(storm=r["storm"])}
@@ -637,12 +646,12 @@ def storm_causes(p: pd.DataFrame, seed: int) -> dict:
 def chapter_5(panel: pd.DataFrame, storms: pd.DataFrame) -> dict:
     order = storms[storms.in_panel].sort_values("landfall_utc")
     per_storm, not_collected = [], []
-    for i, s in enumerate(order.itertuples()):
+    for s in order.itertuples():
         p = panel[panel.storm_key == s.storm_key]
         if not has_causes(p):
             not_collected.append({"storm": s.storm, "storm_key": s.storm_key, "n_reports": int(p.doc_id.nunique())})
             continue
-        per_storm.append({"storm_key": s.storm_key, "storm": s.storm, **storm_causes(p, SEED + 200 + i)})
+        per_storm.append({"storm_key": s.storm_key, "storm": s.storm, **storm_causes(p, storm_seed(s.storm_key, 200))})
     keys = [r["storm_key"] for r in per_storm]
     reps = cause_by_report(panel[panel.storm_key.isin(keys)])
     reps = reps[reps.sites_out > 0]
@@ -767,8 +776,8 @@ def comovement_block(panel: pd.DataFrame, storms_keys: list, seed: int, denomina
         block = {}
         for y in ("pct_sites_out", "pct_sites_out_power"):
             per = {}
-            for i, (key, g) in enumerate(f.groupby("storm_key")):
-                per[g.storm.iloc[0]] = storm_comovement(g, y, seed=seed + 10 * lag + i)
+            for key, g in f.groupby("storm_key"):
+                per[g.storm.iloc[0]] = storm_comovement(g, y, seed=storm_seed(key, seed + 10 * lag))
             block[y] = {"by_storm": per, "median_across_storms": _summary_across(per, seed + lag),
                         "pooled": _pooled(f, y, seed + 1000 + lag)}
         out[f"lag_{lag}h"] = block

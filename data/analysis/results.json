@@ -21,8 +21,8 @@
       "largest_peak_sites_out": {
         "storm": "Helene",
         "value": 4562.0,
-        "ci_low": 3582.925,
-        "ci_high": 5685.2,
+        "ci_low": 3592.975,
+        "ci_high": 5651.1,
         "n": 322,
         "unit": "cell sites out",
         "method": "county bootstrap 95%, 2000 draws"
@@ -30,8 +30,8 @@
       "largest_peak_pct_out": {
         "storm": "Beryl",
         "value": 28.67268041,
-        "ci_low": 25.53802181,
-        "ci_high": 32.79631761,
+        "ci_low": 25.47770701,
+        "ci_high": 32.75747508,
         "n": 6,
         "unit": "% of sites served",
         "method": "county bootstrap 95%, 2000 draws"
@@ -72,16 +72,16 @@
         "peak_report_status": "ok",
         "peak_sites_out": {
           "value": 365.0,
-          "ci_low": 191.975,
-          "ci_high": 732.025,
+          "ci_low": 192.925,
+          "ci_high": 742.075,
           "n": 55,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 4.67648943,
-          "ci_low": 3.561177759,
-          "ci_high": 10.62277247,
+          "ci_low": 3.558677436,
+          "ci_high": 10.87841199,
           "n": 55,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -129,16 +129,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 3973.0,
-          "ci_low": 2461.725,
-          "ci_high": 6039.5,
+          "ci_low": 2348.975,
+          "ci_high": 6013.125,
           "n": 67,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 27.39622121,
-          "ci_low": 19.83284812,
-          "ci_high": 34.18940816,
+          "ci_low": 19.33065663,
+          "ci_high": 34.00116605,
           "n": 67,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -195,7 +195,7 @@
         "peak_pct_out": {
           "value": 0.06082725061,
           "ci_low": 0.0,
-          "ci_high": 0.1510593043,
+          "ci_high": 0.1522147395,
           "n": 8,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -243,16 +243,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 1278.0,
-          "ci_low": 839.0,
-          "ci_high": 1777.05,
+          "ci_low": 843.975,
+          "ci_high": 1769.025,
           "n": 102,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 10.71877883,
-          "ci_low": 7.115471667,
-          "ci_high": 14.8427553,
+          "ci_low": 7.293824369,
+          "ci_high": 14.61057849,
           "n": 102,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -300,16 +300,16 @@
         "peak_report_status": "ok",
         "peak_sites_out": {
           "value": 1357.0,
-          "ci_low": 832.975,
-          "ci_high": 2034.05,
+          "ci_low": 837.0,
+          "ci_high": 2043.125,
           "n": 101,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 18.81586245,
-          "ci_low": 12.38408373,
-          "ci_high": 26.26000502,
+          "ci_low": 12.16606934,
+          "ci_high": 26.93602633,
           "n": 101,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -369,16 +369,16 @@
         "without_jefferson_fl": {
           "peak_sites_out": {
             "value": 1342.0,
-            "ci_low": 822.975,
-            "ci_high": 2054.525,
+            "ci_low": 830.925,
+            "ci_high": 2062.15,
             "n": 100,
             "unit": "cell sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "peak_pct_out": {
             "value": 19.30657459,
-            "ci_low": 12.39082142,
-            "ci_high": 27.41369247,
+            "ci_low": 12.69086126,
+            "ci_high": 26.81356955,
             "n": 100,
             "unit": "% of sites served",
             "method": "county bootstrap 95%, 2000 draws"
@@ -399,16 +399,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 90.0,
-          "ci_low": 53.0,
-          "ci_high": 132.0,
+          "ci_low": 52.0,
+          "ci_high": 134.0,
           "n": 73,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 1.741149158,
-          "ci_low": 1.002057203,
-          "ci_high": 2.663429799,
+          "ci_low": 1.023911663,
+          "ci_high": 2.759659464,
           "n": 73,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -456,16 +456,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 281.0,
-          "ci_low": 137.0,
-          "ci_high": 515.0,
+          "ci_low": 134.0,
+          "ci_high": 507.05,
           "n": 97,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 3.440675891,
-          "ci_low": 1.797000068,
-          "ci_high": 5.587642311,
+          "ci_low": 1.806486133,
+          "ci_high": 5.524473134,
           "n": 97,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -513,16 +513,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 513.0,
-          "ci_low": 266.0,
-          "ci_high": 891.0,
+          "ci_low": 264.975,
+          "ci_high": 887.0,
           "n": 325,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 1.596340553,
-          "ci_low": 0.7991283182,
-          "ci_high": 2.910989373,
+          "ci_low": 0.7624833837,
+          "ci_high": 2.852700386,
           "n": 325,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -570,16 +570,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 454.0,
-          "ci_low": 145.975,
-          "ci_high": 853.025,
+          "ci_low": 147.975,
+          "ci_high": 870.025,
           "n": 22,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 17.074088,
-          "ci_low": 7.004367311,
-          "ci_high": 26.83238029,
+          "ci_low": 7.020765599,
+          "ci_high": 27.17831561,
           "n": 22,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -627,16 +627,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 674.0,
-          "ci_low": 468.975,
-          "ci_high": 927.0,
+          "ci_low": 477.975,
+          "ci_high": 928.025,
           "n": 110,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 5.592896855,
-          "ci_low": 3.27205368,
-          "ci_high": 9.734111999,
+          "ci_low": 3.203098346,
+          "ci_high": 9.838435925,
           "n": 110,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -684,16 +684,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 1555.0,
-          "ci_low": 936.975,
-          "ci_high": 2383.075,
+          "ci_low": 935.975,
+          "ci_high": 2340.15,
           "n": 137,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 10.3164599,
-          "ci_low": 7.310427096,
-          "ci_high": 13.03802268,
+          "ci_low": 7.498397129,
+          "ci_high": 12.99644986,
           "n": 137,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -741,16 +741,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 1824.0,
-          "ci_low": 1125.85,
-          "ci_high": 2667.25,
+          "ci_low": 1109.975,
+          "ci_high": 2633.125,
           "n": 100,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 28.0961183,
-          "ci_low": 18.86256931,
-          "ci_high": 37.62257311,
+          "ci_low": 18.90084268,
+          "ci_high": 37.43955797,
           "n": 100,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -798,16 +798,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 128.0,
-          "ci_low": 25.0,
-          "ci_high": 301.025,
+          "ci_low": 24.975,
+          "ci_high": 312.05,
           "n": 14,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 2.438559726,
-          "ci_low": 1.581496495,
-          "ci_high": 3.18178394,
+          "ci_low": 1.523647256,
+          "ci_high": 3.246090297,
           "n": 14,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -855,16 +855,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 1552.0,
-          "ci_low": 905.9,
-          "ci_high": 2340.15,
+          "ci_low": 912.975,
+          "ci_high": 2316.075,
           "n": 64,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 10.93882154,
-          "ci_low": 7.043691164,
-          "ci_high": 16.31345557,
+          "ci_low": 7.159091414,
+          "ci_high": 15.96575807,
           "n": 64,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -912,16 +912,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 103.0,
-          "ci_low": 55.0,
-          "ci_high": 186.0,
+          "ci_low": 52.0,
+          "ci_high": 183.0,
           "n": 34,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 0.8995633188,
-          "ci_low": 0.4968138912,
-          "ci_high": 1.732645788,
+          "ci_low": 0.4792301235,
+          "ci_high": 1.688700643,
           "n": 34,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -969,16 +969,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 157.0,
-          "ci_low": 94.975,
-          "ci_high": 226.0,
+          "ci_low": 98.0,
+          "ci_high": 227.0,
           "n": 64,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 1.898887276,
-          "ci_low": 1.055785199,
-          "ci_high": 3.199949322,
+          "ci_low": 1.053839941,
+          "ci_high": 3.17387375,
           "n": 64,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -1026,16 +1026,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 1335.0,
-          "ci_low": 204.0,
-          "ci_high": 3303.0,
+          "ci_low": 206.975,
+          "ci_high": 3273.0,
           "n": 6,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 28.67268041,
-          "ci_low": 25.53802181,
-          "ci_high": 32.79631761,
+          "ci_low": 25.47770701,
+          "ci_high": 32.75747508,
           "n": 6,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -1083,16 +1083,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 119.0,
-          "ci_low": 77.975,
-          "ci_high": 173.0,
+          "ci_low": 78.0,
+          "ci_high": 171.0,
           "n": 72,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 0.8837727442,
-          "ci_low": 0.5776698549,
-          "ci_high": 1.542251877,
+          "ci_low": 0.5709811797,
+          "ci_high": 1.542903815,
           "n": 72,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -1140,16 +1140,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 255.0,
-          "ci_low": 137.0,
-          "ci_high": 395.0,
+          "ci_low": 138.95,
+          "ci_high": 384.025,
           "n": 45,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 9.337239107,
-          "ci_low": 5.788692274,
-          "ci_high": 13.34121948,
+          "ci_low": 5.847162666,
+          "ci_high": 13.14674225,
           "n": 45,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -1197,16 +1197,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 4562.0,
-          "ci_low": 3582.925,
-          "ci_high": 5685.2,
+          "ci_low": 3592.975,
+          "ci_high": 5651.1,
           "n": 322,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 12.09534162,
-          "ci_low": 9.236950086,
-          "ci_high": 15.61601989,
+          "ci_low": 9.290813698,
+          "ci_high": 15.47052437,
           "n": 322,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -1254,16 +1254,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 1953.0,
-          "ci_low": 1091.825,
-          "ci_high": 3089.125,
+          "ci_low": 1071.95,
+          "ci_high": 3089.05,
           "n": 52,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 12.3008125,
-          "ci_low": 7.371428769,
-          "ci_high": 18.45895783,
+          "ci_low": 7.410907715,
+          "ci_high": 18.36335726,
           "n": 52,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -1311,16 +1311,16 @@
         "peak_report_status": "flagged",
         "peak_sites_out": {
           "value": 627.0,
-          "ci_low": 312.95,
-          "ci_high": 1020.0,
+          "ci_low": 302.95,
+          "ci_high": 1025.05,
           "n": 43,
           "unit": "cell sites out",
           "method": "county bootstrap 95%, 2000 draws"
         },
         "peak_pct_out": {
           "value": 15.5467394,
-          "ci_low": 9.295631785,
-          "ci_high": 21.95868452,
+          "ci_low": 9.182689088,
+          "ci_high": 21.96761183,
           "n": 43,
           "unit": "% of sites served",
           "method": "county bootstrap 95%, 2000 draws"
@@ -1814,8 +1814,8 @@
             "days_since_peak": 1.0,
             "sites_out": 329.0,
             "restored_share": 0.09863013699,
-            "ci_low": -0.1314447439,
-            "ci_high": 0.2803841904,
+            "ci_low": -0.09561308582,
+            "ci_high": 0.293113746,
             "restored_share_best": 0.09863013699,
             "n_counties_carried": 0
           },
@@ -1823,8 +1823,8 @@
             "days_since_peak": 2.0,
             "sites_out": 296.0,
             "restored_share": 0.1890410959,
-            "ci_low": -0.2400402685,
-            "ci_high": 0.3626418999,
+            "ci_low": -0.2407660193,
+            "ci_high": 0.3678017062,
             "restored_share_best": 0.1890410959,
             "n_counties_carried": 0
           },
@@ -1832,8 +1832,8 @@
             "days_since_peak": 3.0,
             "sites_out": 189.0,
             "restored_share": 0.4821917808,
-            "ci_low": 0.126404598,
-            "ci_high": 0.6421366147,
+            "ci_low": 0.1071132923,
+            "ci_high": 0.6383240321,
             "restored_share_best": 0.4821917808,
             "n_counties_carried": 0
           },
@@ -1841,8 +1841,8 @@
             "days_since_peak": 4.0,
             "sites_out": 165.0,
             "restored_share": 0.5479452055,
-            "ci_low": 0.1494708269,
-            "ci_high": 0.7391521739,
+            "ci_low": 0.1462340632,
+            "ci_high": 0.7364627037,
             "restored_share_best": 0.5479452055,
             "n_counties_carried": 0
           },
@@ -1850,8 +1850,8 @@
             "days_since_peak": 5.0,
             "sites_out": 123.0,
             "restored_share": 0.6630136986,
-            "ci_low": 0.397978591,
-            "ci_high": 0.783886306,
+            "ci_low": 0.3940849381,
+            "ci_high": 0.7848582918,
             "restored_share_best": 0.7342465753,
             "n_counties_carried": 43
           },
@@ -1859,8 +1859,8 @@
             "days_since_peak": 6.0,
             "sites_out": 92.0,
             "restored_share": 0.7479452055,
-            "ci_low": 0.5186888039,
-            "ci_high": 0.8333333333,
+            "ci_low": 0.5104079279,
+            "ci_high": 0.8304097213,
             "restored_share_best": 0.8191780822,
             "n_counties_carried": 43
           },
@@ -1868,8 +1868,8 @@
             "days_since_peak": 7.0,
             "sites_out": 95.0,
             "restored_share": 0.7397260274,
-            "ci_low": 0.5286871705,
-            "ci_high": 0.8172380415,
+            "ci_low": 0.5306045145,
+            "ci_high": 0.8195154617,
             "restored_share_best": 0.8109589041,
             "n_counties_carried": 43
           }
@@ -1884,7 +1884,7 @@
           "interval_low": 3.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.0145,
+          "share_of_draws_not_reached": 0.0155,
           "best_case": 4.0,
           "best_case_censored": false,
           "first_crossing": 4.0,
@@ -1908,8 +1908,8 @@
         },
         "site_days_lost": {
           "value": 1424.0,
-          "ci_low": 586.45,
-          "ci_high": 2770.0625,
+          "ci_low": 570.975,
+          "ci_high": 2709.9,
           "n": 55,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -1947,8 +1947,8 @@
             "days_since_peak": 1.0,
             "sites_out": 3618.0,
             "restored_share": 0.08935313365,
-            "ci_low": 0.01110360763,
-            "ci_high": 0.1389257879,
+            "ci_low": 0.00582147397,
+            "ci_high": 0.1401173366,
             "restored_share_best": 0.08935313365,
             "n_counties_carried": 0
           },
@@ -1956,8 +1956,8 @@
             "days_since_peak": 2.0,
             "sites_out": 2661.0,
             "restored_share": 0.3302290461,
-            "ci_low": 0.2594580115,
-            "ci_high": 0.3785883249,
+            "ci_low": 0.2610206256,
+            "ci_high": 0.3771598621,
             "restored_share_best": 0.3302290461,
             "n_counties_carried": 0
           },
@@ -1965,8 +1965,8 @@
             "days_since_peak": 3.0,
             "sites_out": 1972.0,
             "restored_share": 0.503649635,
-            "ci_low": 0.4381698298,
-            "ci_high": 0.5489500993,
+            "ci_low": 0.4408967574,
+            "ci_high": 0.5491131374,
             "restored_share_best": 0.503649635,
             "n_counties_carried": 0
           },
@@ -1974,8 +1974,8 @@
             "days_since_peak": 4.0,
             "sites_out": 1254.0,
             "restored_share": 0.6843694941,
-            "ci_low": 0.6408581034,
-            "ci_high": 0.719079131,
+            "ci_low": 0.6426011398,
+            "ci_high": 0.7190665839,
             "restored_share_best": 0.6843694941,
             "n_counties_carried": 0
           },
@@ -1983,8 +1983,8 @@
             "days_since_peak": 5.0,
             "sites_out": 851.0,
             "restored_share": 0.7858041782,
-            "ci_low": 0.7578048217,
-            "ci_high": 0.8092935641,
+            "ci_low": 0.7593049097,
+            "ci_high": 0.8083485803,
             "restored_share_best": 0.7858041782,
             "n_counties_carried": 0
           },
@@ -1992,8 +1992,8 @@
             "days_since_peak": 6.0,
             "sites_out": 584.0,
             "restored_share": 0.8530078027,
-            "ci_low": 0.8309910223,
-            "ci_high": 0.8736128544,
+            "ci_low": 0.8318944284,
+            "ci_high": 0.8742803633,
             "restored_share_best": 0.8530078027,
             "n_counties_carried": 0
           },
@@ -2001,8 +2001,8 @@
             "days_since_peak": 7.0,
             "sites_out": 437.0,
             "restored_share": 0.890007551,
-            "ci_low": 0.8697129395,
-            "ci_high": 0.9121822643,
+            "ci_low": 0.8697810361,
+            "ci_high": 0.9126412932,
             "restored_share_best": 0.890007551,
             "n_counties_carried": 0
           }
@@ -2033,7 +2033,7 @@
           "interval_low": null,
           "censored": true,
           "censored_at": 7.0,
-          "share_of_draws_not_reached": 0.811,
+          "share_of_draws_not_reached": 0.819,
           "best_case": null,
           "best_case_censored": true,
           "first_crossing": null,
@@ -2041,8 +2041,8 @@
         },
         "site_days_lost": {
           "value": 13145.0,
-          "ci_low": 8321.85,
-          "ci_high": 19453.4875,
+          "ci_low": 8038.225,
+          "ci_high": 19564.0625,
           "n": 67,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -2150,8 +2150,8 @@
             "days_since_peak": 1.0,
             "sites_out": 856.0,
             "restored_share": 0.3302034429,
-            "ci_low": 0.1999858223,
-            "ci_high": 0.4565642077,
+            "ci_low": 0.2111937726,
+            "ci_high": 0.4560850771,
             "restored_share_best": 0.3302034429,
             "n_counties_carried": 0
           },
@@ -2159,8 +2159,8 @@
             "days_since_peak": 2.0,
             "sites_out": 717.0,
             "restored_share": 0.4389671362,
-            "ci_low": 0.2746918055,
-            "ci_high": 0.5861654445,
+            "ci_low": 0.279446914,
+            "ci_high": 0.595437755,
             "restored_share_best": 0.4389671362,
             "n_counties_carried": 0
           },
@@ -2168,8 +2168,8 @@
             "days_since_peak": 3.0,
             "sites_out": 486.0,
             "restored_share": 0.6197183099,
-            "ci_low": 0.4939094913,
-            "ci_high": 0.7376846371,
+            "ci_low": 0.498368943,
+            "ci_high": 0.7398878226,
             "restored_share_best": 0.6197183099,
             "n_counties_carried": 0
           },
@@ -2177,8 +2177,8 @@
             "days_since_peak": 4.0,
             "sites_out": 264.0,
             "restored_share": 0.79342723,
-            "ci_low": 0.7157697615,
-            "ci_high": 0.8651290551,
+            "ci_low": 0.7169565361,
+            "ci_high": 0.8666292535,
             "restored_share_best": 0.79342723,
             "n_counties_carried": 3
           },
@@ -2186,8 +2186,8 @@
             "days_since_peak": 5.0,
             "sites_out": 233.0,
             "restored_share": 0.8176838811,
-            "ci_low": 0.7511717432,
-            "ci_high": 0.8824141398,
+            "ci_low": 0.7514368013,
+            "ci_high": 0.8829547,
             "restored_share_best": 0.8325508607,
             "n_counties_carried": 54
           },
@@ -2195,8 +2195,8 @@
             "days_since_peak": 5.979166667,
             "sites_out": 138.0,
             "restored_share": 0.8920187793,
-            "ci_low": 0.8502556032,
-            "ci_high": 0.9276088801,
+            "ci_low": 0.8511463884,
+            "ci_high": 0.9281666333,
             "restored_share_best": 0.906885759,
             "n_counties_carried": 54
           },
@@ -2204,8 +2204,8 @@
             "days_since_peak": 6.979166667,
             "sites_out": 85.0,
             "restored_share": 0.9334898279,
-            "ci_low": 0.9132529493,
-            "ci_high": 0.9506680062,
+            "ci_low": 0.9145720005,
+            "ci_high": 0.950511576,
             "restored_share_best": 0.9483568075,
             "n_counties_carried": 54
           },
@@ -2213,8 +2213,8 @@
             "days_since_peak": 7.979166667,
             "sites_out": 81.0,
             "restored_share": 0.9366197183,
-            "ci_low": 0.912859271,
-            "ci_high": 0.9554228778,
+            "ci_low": 0.91430459,
+            "ci_high": 0.9555892044,
             "restored_share_best": 0.951486698,
             "n_counties_carried": 54
           },
@@ -2222,8 +2222,8 @@
             "days_since_peak": 8.979166667,
             "sites_out": 76.0,
             "restored_share": 0.9405320814,
-            "ci_low": 0.9162503181,
-            "ci_high": 0.9582002438,
+            "ci_low": 0.9177091625,
+            "ci_high": 0.9588791448,
             "restored_share_best": 0.955399061,
             "n_counties_carried": 54
           }
@@ -2254,7 +2254,7 @@
           "interval_low": 5.979166667,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.001,
+          "share_of_draws_not_reached": 0.0005,
           "best_case": 5.979166667,
           "best_case_censored": false,
           "first_crossing": 6.979166667,
@@ -2262,8 +2262,8 @@
         },
         "site_days_lost": {
           "value": 3533.135417,
-          "ci_low": 2118.655729,
-          "ci_high": 5227.23724,
+          "ci_low": 2135.971094,
+          "ci_high": 5227.594792,
           "n": 102,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -2301,8 +2301,8 @@
             "days_since_peak": 1.0,
             "sites_out": 883.0,
             "restored_share": 0.3492999263,
-            "ci_low": 0.2331285506,
-            "ci_high": 0.4657361353,
+            "ci_low": 0.2320047436,
+            "ci_high": 0.4667056245,
             "restored_share_best": 0.3492999263,
             "n_counties_carried": 0
           },
@@ -2310,8 +2310,8 @@
             "days_since_peak": 2.0,
             "sites_out": 600.0,
             "restored_share": 0.5578481945,
-            "ci_low": 0.4016954631,
-            "ci_high": 0.7112157282,
+            "ci_low": 0.3986689145,
+            "ci_high": 0.7128852222,
             "restored_share_best": 0.5578481945,
             "n_counties_carried": 0
           },
@@ -2319,8 +2319,8 @@
             "days_since_peak": 3.0,
             "sites_out": 480.0,
             "restored_share": 0.6462785556,
-            "ci_low": 0.4781010167,
-            "ci_high": 0.8001546232,
+            "ci_low": 0.4753246652,
+            "ci_high": 0.8018697399,
             "restored_share_best": 0.6462785556,
             "n_counties_carried": 0
           },
@@ -2328,8 +2328,8 @@
             "days_since_peak": 4.0,
             "sites_out": 401.0,
             "restored_share": 0.70449521,
-            "ci_low": 0.5194894675,
-            "ci_high": 0.8660374553,
+            "ci_low": 0.5228707955,
+            "ci_high": 0.8671672048,
             "restored_share_best": 0.70449521,
             "n_counties_carried": 0
           },
@@ -2337,8 +2337,8 @@
             "days_since_peak": 5.0,
             "sites_out": 342.0,
             "restored_share": 0.7479734709,
-            "ci_low": 0.569402025,
-            "ci_high": 0.9095635117,
+            "ci_low": 0.5695327224,
+            "ci_high": 0.9112514011,
             "restored_share_best": 0.7479734709,
             "n_counties_carried": 0
           },
@@ -2346,8 +2346,8 @@
             "days_since_peak": 6.0,
             "sites_out": 250.0,
             "restored_share": 0.8157700811,
-            "ci_low": 0.6776141184,
-            "ci_high": 0.9494046581,
+            "ci_low": 0.6804053921,
+            "ci_high": 0.9487854067,
             "restored_share_best": 0.8157700811,
             "n_counties_carried": 0
           },
@@ -2355,8 +2355,8 @@
             "days_since_peak": 7.0,
             "sites_out": 210.0,
             "restored_share": 0.8452468681,
-            "ci_low": 0.677338364,
-            "ci_high": 0.9777039709,
+            "ci_low": 0.6819593161,
+            "ci_high": 0.9773935915,
             "restored_share_best": 0.8452468681,
             "n_counties_carried": 0
           },
@@ -2364,8 +2364,8 @@
             "days_since_peak": 8.0,
             "sites_out": 174.0,
             "restored_share": 0.8717759764,
-            "ci_low": 0.7243038426,
-            "ci_high": 0.9850622717,
+            "ci_low": 0.7312042848,
+            "ci_high": 0.9846189918,
             "restored_share_best": 0.8754605748,
             "n_counties_carried": 80
           },
@@ -2373,8 +2373,8 @@
             "days_since_peak": 9.0,
             "sites_out": 147.0,
             "restored_share": 0.8916728077,
-            "ci_low": 0.7699622929,
-            "ci_high": 0.9861637123,
+            "ci_low": 0.7736949558,
+            "ci_high": 0.9866674979,
             "restored_share_best": 0.895357406,
             "n_counties_carried": 80
           },
@@ -2382,8 +2382,8 @@
             "days_since_peak": 10.0,
             "sites_out": 147.0,
             "restored_share": 0.8916728077,
-            "ci_low": 0.7742276128,
-            "ci_high": 0.9855615451,
+            "ci_low": 0.7766513368,
+            "ci_high": 0.9861859627,
             "restored_share_best": 0.895357406,
             "n_counties_carried": 80
           },
@@ -2391,8 +2391,8 @@
             "days_since_peak": 11.0,
             "sites_out": 138.0,
             "restored_share": 0.8983050847,
-            "ci_low": 0.7902603533,
-            "ci_high": 0.9855294255,
+            "ci_low": 0.7938157718,
+            "ci_high": 0.9861388881,
             "restored_share_best": 0.9019896831,
             "n_counties_carried": 80
           },
@@ -2400,8 +2400,8 @@
             "days_since_peak": 12.0,
             "sites_out": 123.0,
             "restored_share": 0.9093588799,
-            "ci_low": 0.8074357646,
-            "ci_high": 0.9872744534,
+            "ci_low": 0.8111390248,
+            "ci_high": 0.9874394649,
             "restored_share_best": 0.9130434783,
             "n_counties_carried": 80
           },
@@ -2409,8 +2409,8 @@
             "days_since_peak": 13.0,
             "sites_out": 56.0,
             "restored_share": 0.9587324982,
-            "ci_low": 0.9249115011,
-            "ci_high": 0.9901540889,
+            "ci_low": 0.9260518161,
+            "ci_high": 0.9904521708,
             "restored_share_best": 0.9624170965,
             "n_counties_carried": 80
           },
@@ -2418,8 +2418,8 @@
             "days_since_peak": 14.0,
             "sites_out": 51.0,
             "restored_share": 0.9624170965,
-            "ci_low": 0.927633869,
-            "ci_high": 0.993389892,
+            "ci_low": 0.9281359071,
+            "ci_high": 0.9933481238,
             "restored_share_best": 0.9661016949,
             "n_counties_carried": 80
           },
@@ -2427,8 +2427,8 @@
             "days_since_peak": 15.0,
             "sites_out": 50.0,
             "restored_share": 0.9631540162,
-            "ci_low": 0.9332327731,
-            "ci_high": 0.9911198197,
+            "ci_low": 0.9338608458,
+            "ci_high": 0.9914965986,
             "restored_share_best": 0.9668386146,
             "n_counties_carried": 80
           }
@@ -2467,8 +2467,8 @@
         },
         "site_days_lost": {
           "value": 4705.5,
-          "ci_low": 1864.4375,
-          "ci_high": 9718.5875,
+          "ci_low": 1846.3625,
+          "ci_high": 9758.4875,
           "n": 101,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -2506,8 +2506,8 @@
             "days_since_peak": 1.0,
             "sites_out": 25.0,
             "restored_share": 0.7222222222,
-            "ci_low": 0.6176470588,
-            "ci_high": 0.8353072871,
+            "ci_low": 0.6213424841,
+            "ci_high": 0.8409389952,
             "restored_share_best": 0.7222222222,
             "n_counties_carried": 0
           }
@@ -2538,7 +2538,7 @@
           "interval_low": null,
           "censored": true,
           "censored_at": 1.0,
-          "share_of_draws_not_reached": 0.9975,
+          "share_of_draws_not_reached": 0.996,
           "best_case": null,
           "best_case_censored": true,
           "first_crossing": null,
@@ -2546,8 +2546,8 @@
         },
         "site_days_lost": {
           "value": 57.5,
-          "ci_low": 33.9875,
-          "ci_high": 87.5,
+          "ci_low": 32.0,
+          "ci_high": 87.0,
           "n": 73,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -2585,8 +2585,8 @@
             "days_since_peak": 1.0,
             "sites_out": 93.0,
             "restored_share": 0.6690391459,
-            "ci_low": 0.2962222222,
-            "ci_high": 0.8488457873,
+            "ci_low": 0.2651016746,
+            "ci_high": 0.8497907725,
             "restored_share_best": 0.6761565836,
             "n_counties_carried": 33
           }
@@ -2601,7 +2601,7 @@
           "interval_low": 0.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.1285,
+          "share_of_draws_not_reached": 0.123,
           "best_case": 1.0,
           "best_case_censored": false,
           "first_crossing": 1.0,
@@ -2625,8 +2625,8 @@
         },
         "site_days_lost": {
           "value": 187.0,
-          "ci_low": 91.5,
-          "ci_high": 316.025,
+          "ci_low": 94.9875,
+          "ci_high": 321.0,
           "n": 97,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -2664,8 +2664,8 @@
             "days_since_peak": 4.0,
             "sites_out": 361.0,
             "restored_share": 0.2962962963,
-            "ci_low": 0.1281929348,
-            "ci_high": 0.4562712071,
+            "ci_low": 0.1235377962,
+            "ci_high": 0.453087779,
             "restored_share_best": 0.4892787524,
             "n_counties_carried": 258
           },
@@ -2673,8 +2673,8 @@
             "days_since_peak": 5.0,
             "sites_out": 318.0,
             "restored_share": 0.3801169591,
-            "ci_low": 0.2433214372,
-            "ci_high": 0.5312525784,
+            "ci_low": 0.239913629,
+            "ci_high": 0.5248229886,
             "restored_share_best": 0.61208577,
             "n_counties_carried": 287
           },
@@ -2682,8 +2682,8 @@
             "days_since_peak": 6.0,
             "sites_out": 290.0,
             "restored_share": 0.4346978558,
-            "ci_low": 0.2994894836,
-            "ci_high": 0.5681836219,
+            "ci_low": 0.2987481807,
+            "ci_high": 0.5668833269,
             "restored_share_best": 0.6666666667,
             "n_counties_carried": 287
           },
@@ -2691,8 +2691,8 @@
             "days_since_peak": 7.0,
             "sites_out": 224.0,
             "restored_share": 0.5633528265,
-            "ci_low": 0.3809034573,
-            "ci_high": 0.6687531043,
+            "ci_low": 0.3904903699,
+            "ci_high": 0.6702245151,
             "restored_share_best": 0.7953216374,
             "n_counties_carried": 287
           },
@@ -2700,8 +2700,8 @@
             "days_since_peak": 8.0,
             "sites_out": 254.0,
             "restored_share": 0.5048732943,
-            "ci_low": 0.3562990676,
-            "ci_high": 0.6280195431,
+            "ci_low": 0.3592586617,
+            "ci_high": 0.6288652869,
             "restored_share_best": 0.7368421053,
             "n_counties_carried": 290
           },
@@ -2709,8 +2709,8 @@
             "days_since_peak": 9.0,
             "sites_out": 245.0,
             "restored_share": 0.522417154,
-            "ci_low": 0.3793717931,
-            "ci_high": 0.6454386036,
+            "ci_low": 0.3799720497,
+            "ci_high": 0.6482112084,
             "restored_share_best": 0.7953216374,
             "n_counties_carried": 320
           },
@@ -2718,8 +2718,8 @@
             "days_since_peak": 10.0,
             "sites_out": 238.0,
             "restored_share": 0.5360623782,
-            "ci_low": 0.381646974,
-            "ci_high": 0.6499322024,
+            "ci_low": 0.3807748344,
+            "ci_high": 0.6549122823,
             "restored_share_best": 0.8089668616,
             "n_counties_carried": 320
           },
@@ -2727,8 +2727,8 @@
             "days_since_peak": 11.0,
             "sites_out": 220.0,
             "restored_share": 0.5711500975,
-            "ci_low": 0.4016220437,
-            "ci_high": 0.6792572385,
+            "ci_low": 0.4049278784,
+            "ci_high": 0.6803984527,
             "restored_share_best": 0.8440545809,
             "n_counties_carried": 320
           },
@@ -2736,8 +2736,8 @@
             "days_since_peak": 12.0,
             "sites_out": 231.0,
             "restored_share": 0.5497076023,
-            "ci_low": 0.402462225,
-            "ci_high": 0.6699345163,
+            "ci_low": 0.4041140461,
+            "ci_high": 0.6698945473,
             "restored_share_best": 0.8226120858,
             "n_counties_carried": 320
           }
@@ -2752,7 +2752,7 @@
           "interval_low": 6.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.2185,
+          "share_of_draws_not_reached": 0.2155,
           "best_case": 5.0,
           "best_case_censored": false,
           "first_crossing": 7.0,
@@ -2776,8 +2776,8 @@
         },
         "site_days_lost": {
           "value": 3833.0,
-          "ci_low": 1896.1625,
-          "ci_high": 6260.6,
+          "ci_low": 1918.975,
+          "ci_high": 6604.5,
           "n": 325,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -2815,8 +2815,8 @@
             "days_since_peak": 1.0,
             "sites_out": 139.0,
             "restored_share": 0.6938325991,
-            "ci_low": 0.6013888889,
-            "ci_high": 0.8480940617,
+            "ci_low": 0.6117567328,
+            "ci_high": 0.861519808,
             "restored_share_best": 0.6982378855,
             "n_counties_carried": 9
           },
@@ -2824,8 +2824,8 @@
             "days_since_peak": 2.0,
             "sites_out": 66.0,
             "restored_share": 0.8546255507,
-            "ci_low": 0.8004193833,
-            "ci_high": 0.9430379747,
+            "ci_low": 0.8050125929,
+            "ci_high": 0.9444786535,
             "restored_share_best": 0.859030837,
             "n_counties_carried": 9
           },
@@ -2833,8 +2833,8 @@
             "days_since_peak": 3.0,
             "sites_out": 37.0,
             "restored_share": 0.9185022026,
-            "ci_low": 0.8672659762,
-            "ci_high": 0.9816855401,
+            "ci_low": 0.8700482673,
+            "ci_high": 0.9823795006,
             "restored_share_best": 0.922907489,
             "n_counties_carried": 9
           },
@@ -2842,8 +2842,8 @@
             "days_since_peak": 4.0,
             "sites_out": 23.0,
             "restored_share": 0.949339207,
-            "ci_low": 0.9121924417,
-            "ci_high": 0.9889710942,
+            "ci_low": 0.9141060294,
+            "ci_high": 0.9888655307,
             "restored_share_best": 0.9537444934,
             "n_counties_carried": 9
           }
@@ -2874,7 +2874,7 @@
           "interval_low": 2.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.0075,
+          "share_of_draws_not_reached": 0.005,
           "best_case": 3.0,
           "best_case_censored": false,
           "first_crossing": 3.0,
@@ -2882,8 +2882,8 @@
         },
         "site_days_lost": {
           "value": 480.5,
-          "ci_low": 122.9875,
-          "ci_high": 958.575,
+          "ci_low": 125.9875,
+          "ci_high": 1018.0375,
           "n": 22,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -2921,8 +2921,8 @@
             "days_since_peak": 1.0,
             "sites_out": 395.0,
             "restored_share": 0.4139465875,
-            "ci_low": 0.3222411948,
-            "ci_high": 0.4867646885,
+            "ci_low": 0.3273419204,
+            "ci_high": 0.4850647824,
             "restored_share_best": 0.6023738872,
             "n_counties_carried": 43
           },
@@ -2930,8 +2930,8 @@
             "days_since_peak": 2.0,
             "sites_out": 288.0,
             "restored_share": 0.5727002967,
-            "ci_low": 0.4631689257,
-            "ci_high": 0.652120204,
+            "ci_low": 0.4608773964,
+            "ci_high": 0.6490889205,
             "restored_share_best": 0.8738872404,
             "n_counties_carried": 89
           },
@@ -2939,8 +2939,8 @@
             "days_since_peak": 3.0,
             "sites_out": 257.0,
             "restored_share": 0.618694362,
-            "ci_low": 0.5105009327,
-            "ci_high": 0.6992541296,
+            "ci_low": 0.5108485913,
+            "ci_high": 0.6956815045,
             "restored_share_best": 0.9302670623,
             "n_counties_carried": 101
           },
@@ -2948,8 +2948,8 @@
             "days_since_peak": 4.0,
             "sites_out": 238.0,
             "restored_share": 0.646884273,
-            "ci_low": 0.5298676949,
-            "ci_high": 0.7313058026,
+            "ci_low": 0.5244469841,
+            "ci_high": 0.7306909427,
             "restored_share_best": 0.9584569733,
             "n_counties_carried": 101
           }
@@ -2964,7 +2964,7 @@
           "interval_low": 1.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.006,
+          "share_of_draws_not_reached": 0.009,
           "best_case": 1.0,
           "best_case_censored": false,
           "first_crossing": 2.0,
@@ -2988,8 +2988,8 @@
         },
         "site_days_lost": {
           "value": 1396.0,
-          "ci_low": 1013.9875,
-          "ci_high": 1861.0875,
+          "ci_low": 1002.4875,
+          "ci_high": 1851.675,
           "n": 110,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -3027,8 +3027,8 @@
             "days_since_peak": 1.0,
             "sites_out": 851.0,
             "restored_share": 0.452733119,
-            "ci_low": 0.3629009699,
-            "ci_high": 0.5141260312,
+            "ci_low": 0.3644886364,
+            "ci_high": 0.5144236942,
             "restored_share_best": 0.452733119,
             "n_counties_carried": 0
           },
@@ -3036,8 +3036,8 @@
             "days_since_peak": 2.0,
             "sites_out": 761.0,
             "restored_share": 0.5106109325,
-            "ci_low": 0.4330922464,
-            "ci_high": 0.5758193747,
+            "ci_low": 0.4328848728,
+            "ci_high": 0.5786013603,
             "restored_share_best": 0.9215434084,
             "n_counties_carried": 118
           },
@@ -3045,8 +3045,8 @@
             "days_since_peak": 3.041666667,
             "sites_out": 707.0,
             "restored_share": 0.5453376206,
-            "ci_low": 0.4666175726,
-            "ci_high": 0.6196090476,
+            "ci_low": 0.4720929973,
+            "ci_high": 0.6225690288,
             "restored_share_best": 0.9562700965,
             "n_counties_carried": 118
           }
@@ -3061,7 +3061,7 @@
           "interval_low": 1.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.111,
+          "share_of_draws_not_reached": 0.1,
           "best_case": 2.0,
           "best_case_censored": false,
           "first_crossing": 2.0,
@@ -3085,8 +3085,8 @@
         },
         "site_days_lost": {
           "value": 2773.583333,
-          "ci_low": 1783.441146,
-          "ci_high": 4157.892187,
+          "ci_low": 1772.774479,
+          "ci_high": 4246.786979,
           "n": 137,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -3124,8 +3124,8 @@
             "days_since_peak": 1.0,
             "sites_out": 1110.0,
             "restored_share": 0.3914473684,
-            "ci_low": 0.2655905089,
-            "ci_high": 0.5361897949,
+            "ci_low": 0.2752845202,
+            "ci_high": 0.5462327166,
             "restored_share_best": 0.3914473684,
             "n_counties_carried": 0
           },
@@ -3133,8 +3133,8 @@
             "days_since_peak": 2.0,
             "sites_out": 823.0,
             "restored_share": 0.5487938596,
-            "ci_low": 0.4650120011,
-            "ci_high": 0.646200546,
+            "ci_low": 0.4640273873,
+            "ci_high": 0.6538791695,
             "restored_share_best": 0.5487938596,
             "n_counties_carried": 0
           },
@@ -3142,8 +3142,8 @@
             "days_since_peak": 3.0,
             "sites_out": 765.0,
             "restored_share": 0.5805921053,
-            "ci_low": 0.4838719918,
-            "ci_high": 0.6807358157,
+            "ci_low": 0.484106439,
+            "ci_high": 0.6891031992,
             "restored_share_best": 0.5805921053,
             "n_counties_carried": 0
           },
@@ -3151,8 +3151,8 @@
             "days_since_peak": 4.0,
             "sites_out": 610.0,
             "restored_share": 0.6655701754,
-            "ci_low": 0.5791580309,
-            "ci_high": 0.7618335496,
+            "ci_low": 0.5849439346,
+            "ci_high": 0.7681300652,
             "restored_share_best": 0.6655701754,
             "n_counties_carried": 0
           },
@@ -3160,8 +3160,8 @@
             "days_since_peak": 5.0,
             "sites_out": 418.0,
             "restored_share": 0.7708333333,
-            "ci_low": 0.6996695999,
-            "ci_high": 0.842787334,
+            "ci_low": 0.704727142,
+            "ci_high": 0.8499272516,
             "restored_share_best": 0.7905701754,
             "n_counties_carried": 69
           },
@@ -3169,8 +3169,8 @@
             "days_since_peak": 6.0,
             "sites_out": 335.0,
             "restored_share": 0.8163377193,
-            "ci_low": 0.7561328223,
-            "ci_high": 0.8708715559,
+            "ci_low": 0.7601322281,
+            "ci_high": 0.8745926269,
             "restored_share_best": 0.8360745614,
             "n_counties_carried": 69
           },
@@ -3178,8 +3178,8 @@
             "days_since_peak": 7.0,
             "sites_out": 277.0,
             "restored_share": 0.8481359649,
-            "ci_low": 0.7943794683,
-            "ci_high": 0.8945428271,
+            "ci_low": 0.7980866763,
+            "ci_high": 0.897036899,
             "restored_share_best": 0.867872807,
             "n_counties_carried": 69
           },
@@ -3187,8 +3187,8 @@
             "days_since_peak": 8.0,
             "sites_out": 163.0,
             "restored_share": 0.9106359649,
-            "ci_low": 0.8736127426,
-            "ci_high": 0.9387211217,
+            "ci_low": 0.8745535086,
+            "ci_high": 0.9400670963,
             "restored_share_best": 0.930372807,
             "n_counties_carried": 69
           },
@@ -3196,8 +3196,8 @@
             "days_since_peak": 9.0,
             "sites_out": 137.0,
             "restored_share": 0.9248903509,
-            "ci_low": 0.8917627559,
-            "ci_high": 0.9471730289,
+            "ci_low": 0.8933412113,
+            "ci_high": 0.9482712977,
             "restored_share_best": 0.944627193,
             "n_counties_carried": 69
           },
@@ -3205,8 +3205,8 @@
             "days_since_peak": 10.0,
             "sites_out": 144.0,
             "restored_share": 0.9210526316,
-            "ci_low": 0.891609847,
-            "ci_high": 0.9410220317,
+            "ci_low": 0.8902407547,
+            "ci_high": 0.9414133413,
             "restored_share_best": 0.9407894737,
             "n_counties_carried": 69
           },
@@ -3214,8 +3214,8 @@
             "days_since_peak": 11.0,
             "sites_out": 123.0,
             "restored_share": 0.9325657895,
-            "ci_low": 0.9028806569,
-            "ci_high": 0.9539500672,
+            "ci_low": 0.901317477,
+            "ci_high": 0.954569024,
             "restored_share_best": 0.9523026316,
             "n_counties_carried": 69
           },
@@ -3223,8 +3223,8 @@
             "days_since_peak": 12.0,
             "sites_out": 108.0,
             "restored_share": 0.9407894737,
-            "ci_low": 0.9124618576,
-            "ci_high": 0.9606550178,
+            "ci_low": 0.9114040373,
+            "ci_high": 0.9615389679,
             "restored_share_best": 0.9605263158,
             "n_counties_carried": 69
           },
@@ -3232,8 +3232,8 @@
             "days_since_peak": 13.0,
             "sites_out": 94.0,
             "restored_share": 0.9484649123,
-            "ci_low": 0.9216850774,
-            "ci_high": 0.9656341503,
+            "ci_low": 0.9200199414,
+            "ci_high": 0.9653602636,
             "restored_share_best": 0.9682017544,
             "n_counties_carried": 69
           },
@@ -3241,8 +3241,8 @@
             "days_since_peak": 14.0,
             "sites_out": 87.0,
             "restored_share": 0.9523026316,
-            "ci_low": 0.9247205763,
-            "ci_high": 0.9696606284,
+            "ci_low": 0.9223882466,
+            "ci_high": 0.9693487429,
             "restored_share_best": 0.9720394737,
             "n_counties_carried": 69
           },
@@ -3250,8 +3250,8 @@
             "days_since_peak": 15.0,
             "sites_out": 91.0,
             "restored_share": 0.9501096491,
-            "ci_low": 0.9221804516,
-            "ci_high": 0.9681684995,
+            "ci_low": 0.9194694429,
+            "ci_high": 0.9676803646,
             "restored_share_best": 0.9698464912,
             "n_counties_carried": 69
           },
@@ -3259,8 +3259,8 @@
             "days_since_peak": 16.0,
             "sites_out": 118.0,
             "restored_share": 0.9353070175,
-            "ci_low": 0.9028305511,
-            "ci_high": 0.9561746038,
+            "ci_low": 0.9014756948,
+            "ci_high": 0.9577466672,
             "restored_share_best": 0.9550438596,
             "n_counties_carried": 69
           },
@@ -3268,8 +3268,8 @@
             "days_since_peak": 17.0,
             "sites_out": 107.0,
             "restored_share": 0.9413377193,
-            "ci_low": 0.9098662065,
-            "ci_high": 0.9622138221,
+            "ci_low": 0.908735332,
+            "ci_high": 0.9626223118,
             "restored_share_best": 0.9610745614,
             "n_counties_carried": 69
           },
@@ -3277,8 +3277,8 @@
             "days_since_peak": 18.0,
             "sites_out": 94.0,
             "restored_share": 0.9484649123,
-            "ci_low": 0.9201477133,
-            "ci_high": 0.9665514229,
+            "ci_low": 0.9167323498,
+            "ci_high": 0.9663774439,
             "restored_share_best": 0.9747807018,
             "n_counties_carried": 88
           },
@@ -3286,8 +3286,8 @@
             "days_since_peak": 19.0,
             "sites_out": 93.0,
             "restored_share": 0.9490131579,
-            "ci_low": 0.9207955308,
-            "ci_high": 0.9676225101,
+            "ci_low": 0.9181404756,
+            "ci_high": 0.9671601375,
             "restored_share_best": 0.9753289474,
             "n_counties_carried": 88
           },
@@ -3295,8 +3295,8 @@
             "days_since_peak": 20.0,
             "sites_out": 63.0,
             "restored_share": 0.9654605263,
-            "ci_low": 0.9426083837,
-            "ci_high": 0.9789013081,
+            "ci_low": 0.9420890823,
+            "ci_high": 0.9789489264,
             "restored_share_best": 0.9917763158,
             "n_counties_carried": 88
           },
@@ -3304,8 +3304,8 @@
             "days_since_peak": 21.0,
             "sites_out": 64.0,
             "restored_share": 0.9649122807,
-            "ci_low": 0.9415291629,
-            "ci_high": 0.9785778993,
+            "ci_low": 0.9404130163,
+            "ci_high": 0.9784656787,
             "restored_share_best": 0.9912280702,
             "n_counties_carried": 88
           }
@@ -3329,7 +3329,7 @@
         "time_to_90pct_restored": {
           "value": 8.0,
           "ci_low": 8.0,
-          "ci_high": 11.0,
+          "ci_high": 12.0,
           "n": 100,
           "unit": "days since peak",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -3344,8 +3344,8 @@
         },
         "site_days_lost": {
           "value": 6704.0,
-          "ci_low": 3974.9625,
-          "ci_high": 10074.6375,
+          "ci_low": 3984.2875,
+          "ci_high": 10053.6,
           "n": 100,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -3383,8 +3383,8 @@
             "days_since_peak": 1.0,
             "sites_out": 101.0,
             "restored_share": 0.2109375,
-            "ci_low": -0.03571428571,
-            "ci_high": 0.4310610898,
+            "ci_low": -0.04004166667,
+            "ci_high": 0.4592040816,
             "restored_share_best": 0.2109375,
             "n_counties_carried": 0
           }
@@ -3399,7 +3399,7 @@
           "interval_low": null,
           "censored": true,
           "censored_at": 1.0,
-          "share_of_draws_not_reached": 0.997,
+          "share_of_draws_not_reached": 0.993,
           "best_case": null,
           "best_case_censored": true,
           "first_crossing": null,
@@ -3423,8 +3423,8 @@
         },
         "site_days_lost": {
           "value": 114.5,
-          "ci_low": 23.0,
-          "ci_high": 273.0125,
+          "ci_low": 23.5,
+          "ci_high": 272.0,
           "n": 14,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -3462,8 +3462,8 @@
             "days_since_peak": 1.0,
             "sites_out": 1096.0,
             "restored_share": 0.293814433,
-            "ci_low": 0.1089652051,
-            "ci_high": 0.4170341521,
+            "ci_low": 0.120321829,
+            "ci_high": 0.4127166557,
             "restored_share_best": 0.293814433,
             "n_counties_carried": 0
           },
@@ -3471,8 +3471,8 @@
             "days_since_peak": 2.0,
             "sites_out": 751.0,
             "restored_share": 0.5161082474,
-            "ci_low": 0.4010126342,
-            "ci_high": 0.6143248663,
+            "ci_low": 0.3989241368,
+            "ci_high": 0.6142619785,
             "restored_share_best": 0.5161082474,
             "n_counties_carried": 0
           },
@@ -3480,8 +3480,8 @@
             "days_since_peak": 3.0,
             "sites_out": 505.0,
             "restored_share": 0.6746134021,
-            "ci_low": 0.5810210369,
-            "ci_high": 0.7397979259,
+            "ci_low": 0.5837043664,
+            "ci_high": 0.7382176565,
             "restored_share_best": 0.7139175258,
             "n_counties_carried": 34
           },
@@ -3489,8 +3489,8 @@
             "days_since_peak": 4.0,
             "sites_out": 365.0,
             "restored_share": 0.7648195876,
-            "ci_low": 0.7045831577,
-            "ci_high": 0.8190301065,
+            "ci_low": 0.7058968444,
+            "ci_high": 0.8172045396,
             "restored_share_best": 0.8034793814,
             "n_counties_carried": 33
           },
@@ -3498,8 +3498,8 @@
             "days_since_peak": 5.0,
             "sites_out": 309.0,
             "restored_share": 0.8009020619,
-            "ci_low": 0.7486708764,
-            "ci_high": 0.8464423114,
+            "ci_low": 0.7501949395,
+            "ci_high": 0.8434737765,
             "restored_share_best": 0.8395618557,
             "n_counties_carried": 33
           },
@@ -3507,8 +3507,8 @@
             "days_since_peak": 6.0,
             "sites_out": 213.0,
             "restored_share": 0.862757732,
-            "ci_low": 0.8136345315,
-            "ci_high": 0.8992206913,
+            "ci_low": 0.8143685266,
+            "ci_high": 0.9003090269,
             "restored_share_best": 0.9014175258,
             "n_counties_carried": 33
           },
@@ -3516,8 +3516,8 @@
             "days_since_peak": 7.0,
             "sites_out": 182.0,
             "restored_share": 0.8827319588,
-            "ci_low": 0.8367578181,
-            "ci_high": 0.9092238828,
+            "ci_low": 0.8375827059,
+            "ci_high": 0.9094830455,
             "restored_share_best": 0.9213917526,
             "n_counties_carried": 33
           },
@@ -3525,8 +3525,8 @@
             "days_since_peak": 8.0,
             "sites_out": 163.0,
             "restored_share": 0.8949742268,
-            "ci_low": 0.8466352377,
-            "ci_high": 0.9254172277,
+            "ci_low": 0.8488088324,
+            "ci_high": 0.926001548,
             "restored_share_best": 0.9336340206,
             "n_counties_carried": 33
           },
@@ -3534,8 +3534,8 @@
             "days_since_peak": 9.0,
             "sites_out": 157.0,
             "restored_share": 0.8988402062,
-            "ci_low": 0.8518929903,
-            "ci_high": 0.9286676172,
+            "ci_low": 0.8539147504,
+            "ci_high": 0.9292098094,
             "restored_share_best": 0.9832474227,
             "n_counties_carried": 61
           },
@@ -3543,8 +3543,8 @@
             "days_since_peak": 10.0,
             "sites_out": 151.0,
             "restored_share": 0.9027061856,
-            "ci_low": 0.8529715778,
-            "ci_high": 0.9318325193,
+            "ci_low": 0.8559939981,
+            "ci_high": 0.9325269238,
             "restored_share_best": 0.9871134021,
             "n_counties_carried": 61
           },
@@ -3552,8 +3552,8 @@
             "days_since_peak": 11.0,
             "sites_out": 152.0,
             "restored_share": 0.9020618557,
-            "ci_low": 0.8529715778,
-            "ci_high": 0.9307770299,
+            "ci_low": 0.8557509773,
+            "ci_high": 0.931591401,
             "restored_share_best": 0.9864690722,
             "n_counties_carried": 61
           }
@@ -3576,7 +3576,7 @@
         },
         "time_to_90pct_restored": {
           "value": 10.0,
-          "ci_low": 7.0,
+          "ci_low": 6.0,
           "ci_high": null,
           "n": 64,
           "unit": "days since peak",
@@ -3584,7 +3584,7 @@
           "interval_low": 9.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.466,
+          "share_of_draws_not_reached": 0.444,
           "best_case": 6.0,
           "best_case_censored": false,
           "first_crossing": 10.0,
@@ -3592,8 +3592,8 @@
         },
         "site_days_lost": {
           "value": 4744.0,
-          "ci_low": 2969.4625,
-          "ci_high": 7005.9,
+          "ci_low": 2999.4875,
+          "ci_high": 6840.275,
           "n": 64,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -3701,8 +3701,8 @@
             "days_since_peak": 1.0,
             "sites_out": 91.0,
             "restored_share": 0.4203821656,
-            "ci_low": 0.2316838649,
-            "ci_high": 0.5915353198,
+            "ci_low": 0.2307522124,
+            "ci_high": 0.5862424458,
             "restored_share_best": 0.8089171975,
             "n_counties_carried": 51
           },
@@ -3710,8 +3710,8 @@
             "days_since_peak": 2.0,
             "sites_out": 84.0,
             "restored_share": 0.4649681529,
-            "ci_low": 0.2397077195,
-            "ci_high": 0.6386890756,
+            "ci_low": 0.2524142148,
+            "ci_high": 0.6392948472,
             "restored_share_best": 0.8535031847,
             "n_counties_carried": 51
           },
@@ -3719,8 +3719,8 @@
             "days_since_peak": 3.0,
             "sites_out": 73.0,
             "restored_share": 0.5350318471,
-            "ci_low": 0.305938083,
-            "ci_high": 0.7054895246,
+            "ci_low": 0.3140813253,
+            "ci_high": 0.7054453368,
             "restored_share_best": 0.923566879,
             "n_counties_carried": 51
           },
@@ -3728,8 +3728,8 @@
             "days_since_peak": 4.0,
             "sites_out": 69.0,
             "restored_share": 0.5605095541,
-            "ci_low": 0.3208360973,
-            "ci_high": 0.7355497756,
+            "ci_low": 0.3332167832,
+            "ci_high": 0.7342090282,
             "restored_share_best": 0.949044586,
             "n_counties_carried": 51
           }
@@ -3744,7 +3744,7 @@
           "interval_low": 2.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.286,
+          "share_of_draws_not_reached": 0.2995,
           "best_case": 1.0,
           "best_case_censored": false,
           "first_crossing": 3.0,
@@ -3768,8 +3768,8 @@
         },
         "site_days_lost": {
           "value": 361.0,
-          "ci_low": 227.0,
-          "ci_high": 529.5125,
+          "ci_low": 228.9875,
+          "ci_high": 522.5,
           "n": 64,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -3807,8 +3807,8 @@
             "days_since_peak": 1.0,
             "sites_out": 913.0,
             "restored_share": 0.3161048689,
-            "ci_low": 0.2059308992,
-            "ci_high": 0.3349864743,
+            "ci_low": 0.2010051546,
+            "ci_high": 0.3340757238,
             "restored_share_best": 0.3161048689,
             "n_counties_carried": 0
           },
@@ -3817,7 +3817,7 @@
             "sites_out": 669.0,
             "restored_share": 0.4988764045,
             "ci_low": 0.3933054393,
-            "ci_high": 0.5289855072,
+            "ci_high": 0.5288461538,
             "restored_share_best": 0.4988764045,
             "n_counties_carried": 0
           },
@@ -3825,7 +3825,7 @@
             "days_since_peak": 3.0,
             "sites_out": 492.0,
             "restored_share": 0.6314606742,
-            "ci_low": 0.6126984127,
+            "ci_low": 0.611814346,
             "ci_high": 0.6619217082,
             "restored_share_best": 0.6314606742,
             "n_counties_carried": 0
@@ -3834,8 +3834,8 @@
             "days_since_peak": 4.0,
             "sites_out": 291.0,
             "restored_share": 0.7820224719,
-            "ci_low": 0.7670118343,
-            "ci_high": 0.8552971576,
+            "ci_low": 0.7657657658,
+            "ci_high": 0.8562091503,
             "restored_share_best": 0.7820224719,
             "n_counties_carried": 0
           },
@@ -3843,8 +3843,8 @@
             "days_since_peak": 5.0,
             "sites_out": 219.0,
             "restored_share": 0.8359550562,
-            "ci_low": 0.8275753769,
-            "ci_high": 0.8756476684,
+            "ci_low": 0.8277844311,
+            "ci_high": 0.876984127,
             "restored_share_best": 0.8449438202,
             "n_counties_carried": 3
           }
@@ -3875,7 +3875,7 @@
           "interval_low": null,
           "censored": true,
           "censored_at": 5.0,
-          "share_of_draws_not_reached": 0.9995,
+          "share_of_draws_not_reached": 0.9975,
           "best_case": null,
           "best_case_censored": true,
           "first_crossing": null,
@@ -3883,8 +3883,8 @@
         },
         "site_days_lost": {
           "value": 3142.0,
-          "ci_low": 531.5,
-          "ci_high": 7752.5,
+          "ci_low": 474.5,
+          "ci_high": 7757.4375,
           "n": 6,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -3922,8 +3922,8 @@
             "days_since_peak": 1.0,
             "sites_out": 50.0,
             "restored_share": 0.5798319328,
-            "ci_low": 0.3312296196,
-            "ci_high": 0.766369194,
+            "ci_low": 0.3416544118,
+            "ci_high": 0.7697412087,
             "restored_share_best": 0.5798319328,
             "n_counties_carried": 0
           },
@@ -3931,8 +3931,8 @@
             "days_since_peak": 2.0,
             "sites_out": 49.0,
             "restored_share": 0.5882352941,
-            "ci_low": 0.3414585753,
-            "ci_high": 0.7752105052,
+            "ci_low": 0.350968543,
+            "ci_high": 0.7770457958,
             "restored_share_best": 0.974789916,
             "n_counties_carried": 45
           },
@@ -3940,8 +3940,8 @@
             "days_since_peak": 3.0,
             "sites_out": 49.0,
             "restored_share": 0.5882352941,
-            "ci_low": 0.3420691151,
-            "ci_high": 0.7719298246,
+            "ci_low": 0.3622608696,
+            "ci_high": 0.779417996,
             "restored_share_best": 0.974789916,
             "n_counties_carried": 45
           }
@@ -3956,7 +3956,7 @@
           "interval_low": 0.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.2135,
+          "share_of_draws_not_reached": 0.206,
           "best_case": 1.0,
           "best_case_censored": false,
           "first_crossing": 1.0,
@@ -3980,8 +3980,8 @@
         },
         "site_days_lost": {
           "value": 183.0,
-          "ci_low": 105.9875,
-          "ci_high": 295.0125,
+          "ci_low": 102.4875,
+          "ci_high": 296.5125,
           "n": 72,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -4019,8 +4019,8 @@
             "days_since_peak": 1.0,
             "sites_out": 49.0,
             "restored_share": 0.8078431373,
-            "ci_low": 0.7022985622,
-            "ci_high": 0.875,
+            "ci_low": 0.6994551361,
+            "ci_high": 0.8731369561,
             "restored_share_best": 0.8666666667,
             "n_counties_carried": 15
           },
@@ -4028,8 +4028,8 @@
             "days_since_peak": 2.0,
             "sites_out": 33.0,
             "restored_share": 0.8705882353,
-            "ci_low": 0.7678467608,
-            "ci_high": 0.9311217416,
+            "ci_low": 0.7716393132,
+            "ci_high": 0.9270205226,
             "restored_share_best": 0.9294117647,
             "n_counties_carried": 15
           }
@@ -4044,7 +4044,7 @@
           "interval_low": 0.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.0005,
+          "share_of_draws_not_reached": 0.0,
           "best_case": 1.0,
           "best_case_censored": false,
           "first_crossing": 1.0,
@@ -4060,7 +4060,7 @@
           "interval_low": null,
           "censored": true,
           "censored_at": 2.0,
-          "share_of_draws_not_reached": 0.783,
+          "share_of_draws_not_reached": 0.789,
           "best_case": 2.0,
           "best_case_censored": false,
           "first_crossing": null,
@@ -4068,8 +4068,8 @@
         },
         "site_days_lost": {
           "value": 193.0,
-          "ci_low": 108.9875,
-          "ci_high": 283.5125,
+          "ci_low": 109.0,
+          "ci_high": 285.525,
           "n": 45,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -4107,8 +4107,8 @@
             "days_since_peak": 1.0,
             "sites_out": 3432.0,
             "restored_share": 0.2476983779,
-            "ci_low": 0.1710725811,
-            "ci_high": 0.3201667301,
+            "ci_low": 0.1667363996,
+            "ci_high": 0.3172533368,
             "restored_share_best": 0.2476983779,
             "n_counties_carried": 0
           },
@@ -4116,8 +4116,8 @@
             "days_since_peak": 2.0,
             "sites_out": 2516.0,
             "restored_share": 0.4484875055,
-            "ci_low": 0.3919652412,
-            "ci_high": 0.5126890369,
+            "ci_low": 0.3910240759,
+            "ci_high": 0.5125795526,
             "restored_share_best": 0.4484875055,
             "n_counties_carried": 0
           },
@@ -4125,8 +4125,8 @@
             "days_since_peak": 3.0,
             "sites_out": 2029.0,
             "restored_share": 0.5552389303,
-            "ci_low": 0.4963257599,
-            "ci_high": 0.6185936916,
+            "ci_low": 0.4919342551,
+            "ci_high": 0.6192158242,
             "restored_share_best": 0.5859272249,
             "n_counties_carried": 174
           },
@@ -4134,8 +4134,8 @@
             "days_since_peak": 4.0,
             "sites_out": 1637.0,
             "restored_share": 0.6411661552,
-            "ci_low": 0.5838805121,
-            "ci_high": 0.7010607517,
+            "ci_low": 0.5804223775,
+            "ci_high": 0.7005241039,
             "restored_share_best": 0.6718544498,
             "n_counties_carried": 174
           },
@@ -4143,8 +4143,8 @@
             "days_since_peak": 7.0,
             "sites_out": 815.0,
             "restored_share": 0.821350285,
-            "ci_low": 0.783399753,
-            "ci_high": 0.8566923663,
+            "ci_low": 0.7804645904,
+            "ci_high": 0.857180855,
             "restored_share_best": 0.8695747479,
             "n_counties_carried": 218
           },
@@ -4152,8 +4152,8 @@
             "days_since_peak": 8.0,
             "sites_out": 732.0,
             "restored_share": 0.8395440596,
-            "ci_low": 0.8077819517,
-            "ci_high": 0.869672896,
+            "ci_low": 0.8062006501,
+            "ci_high": 0.8697213859,
             "restored_share_best": 0.8877685226,
             "n_counties_carried": 218
           },
@@ -4161,8 +4161,8 @@
             "days_since_peak": 9.0,
             "sites_out": 654.0,
             "restored_share": 0.8566418238,
-            "ci_low": 0.8289179375,
-            "ci_high": 0.8838774756,
+            "ci_low": 0.8276798362,
+            "ci_high": 0.8827468238,
             "restored_share_best": 0.9048662867,
             "n_counties_carried": 218
           },
@@ -4170,8 +4170,8 @@
             "days_since_peak": 10.0,
             "sites_out": 641.0,
             "restored_share": 0.8594914511,
-            "ci_low": 0.8299546089,
-            "ci_high": 0.88702662,
+            "ci_low": 0.8298184125,
+            "ci_high": 0.8855252617,
             "restored_share_best": 0.9484875055,
             "n_counties_carried": 294
           },
@@ -4179,8 +4179,8 @@
             "days_since_peak": 11.0,
             "sites_out": 612.0,
             "restored_share": 0.8658483121,
-            "ci_low": 0.8398225851,
-            "ci_high": 0.8902973178,
+            "ci_low": 0.8403172471,
+            "ci_high": 0.8892091628,
             "restored_share_best": 0.9548443665,
             "n_counties_carried": 294
           },
@@ -4188,8 +4188,8 @@
             "days_since_peak": 12.0,
             "sites_out": 582.0,
             "restored_share": 0.8724243753,
-            "ci_low": 0.8515895408,
-            "ci_high": 0.8927128482,
+            "ci_low": 0.8521887494,
+            "ci_high": 0.8917232448,
             "restored_share_best": 0.9614204296,
             "n_counties_carried": 294
           },
@@ -4197,8 +4197,8 @@
             "days_since_peak": 13.0,
             "sites_out": 539.0,
             "restored_share": 0.8818500658,
-            "ci_low": 0.8636663779,
-            "ci_high": 0.8985319544,
+            "ci_low": 0.8638187451,
+            "ci_high": 0.8986634547,
             "restored_share_best": 0.9708461201,
             "n_counties_carried": 294
           },
@@ -4206,8 +4206,8 @@
             "days_since_peak": 14.0,
             "sites_out": 518.0,
             "restored_share": 0.88645331,
-            "ci_low": 0.8695614821,
-            "ci_high": 0.903031083,
+            "ci_low": 0.8687631154,
+            "ci_high": 0.9029135324,
             "restored_share_best": 0.9754493643,
             "n_counties_carried": 294
           },
@@ -4215,8 +4215,8 @@
             "days_since_peak": 15.0,
             "sites_out": 479.0,
             "restored_share": 0.895002192,
-            "ci_low": 0.8789819294,
-            "ci_high": 0.9097993723,
+            "ci_low": 0.8776923913,
+            "ci_high": 0.9099800865,
             "restored_share_best": 0.9850942569,
             "n_counties_carried": 306
           },
@@ -4224,8 +4224,8 @@
             "days_since_peak": 16.0,
             "sites_out": 507.0,
             "restored_share": 0.8888645331,
-            "ci_low": 0.8721419885,
-            "ci_high": 0.9051668689,
+            "ci_low": 0.8716944329,
+            "ci_high": 0.9042554123,
             "restored_share_best": 0.978956598,
             "n_counties_carried": 306
           },
@@ -4233,8 +4233,8 @@
             "days_since_peak": 17.0,
             "sites_out": 551.0,
             "restored_share": 0.8792196405,
-            "ci_low": 0.859024157,
-            "ci_high": 0.8992856708,
+            "ci_low": 0.858113618,
+            "ci_high": 0.8979706723,
             "restored_share_best": 0.9693117054,
             "n_counties_carried": 306
           },
@@ -4242,8 +4242,8 @@
             "days_since_peak": 18.0,
             "sites_out": 487.0,
             "restored_share": 0.8932485752,
-            "ci_low": 0.8767050285,
-            "ci_high": 0.9078088495,
+            "ci_low": 0.8762393874,
+            "ci_high": 0.9075606844,
             "restored_share_best": 0.9833406401,
             "n_counties_carried": 306
           },
@@ -4251,8 +4251,8 @@
             "days_since_peak": 19.0,
             "sites_out": 462.0,
             "restored_share": 0.8987286278,
-            "ci_low": 0.8799009034,
-            "ci_high": 0.9145674684,
+            "ci_low": 0.879001672,
+            "ci_high": 0.9141770473,
             "restored_share_best": 0.9888206927,
             "n_counties_carried": 306
           },
@@ -4260,8 +4260,8 @@
             "days_since_peak": 20.0,
             "sites_out": 451.0,
             "restored_share": 0.9011398509,
-            "ci_low": 0.8825085777,
-            "ci_high": 0.9171249699,
+            "ci_low": 0.8811393253,
+            "ci_high": 0.9172233406,
             "restored_share_best": 0.9912319158,
             "n_counties_carried": 306
           },
@@ -4269,8 +4269,8 @@
             "days_since_peak": 21.0,
             "sites_out": 434.0,
             "restored_share": 0.9048662867,
-            "ci_low": 0.8860005781,
-            "ci_high": 0.9219772176,
+            "ci_low": 0.8843756705,
+            "ci_high": 0.9215622901,
             "restored_share_best": 0.9949583516,
             "n_counties_carried": 306
           }
@@ -4301,7 +4301,7 @@
           "interval_low": 19.0,
           "censored": false,
           "censored_at": null,
-          "share_of_draws_not_reached": 0.322,
+          "share_of_draws_not_reached": 0.319,
           "best_case": 9.0,
           "best_case_censored": false,
           "first_crossing": 20.0,
@@ -4309,8 +4309,8 @@
         },
         "site_days_lost": {
           "value": 22594.0,
-          "ci_low": 16800.3125,
-          "ci_high": 29639.7875,
+          "ci_low": 16768.9125,
+          "ci_high": 29197.9875,
           "n": 322,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -4348,8 +4348,8 @@
             "days_since_peak": 1.0,
             "sites_out": 1922.0,
             "restored_share": 0.01587301587,
-            "ci_low": -0.1194452785,
-            "ci_high": 0.1625017893,
+            "ci_low": -0.1145330104,
+            "ci_high": 0.1563861217,
             "restored_share_best": 0.01587301587,
             "n_counties_carried": 0
           },
@@ -4357,8 +4357,8 @@
             "days_since_peak": 2.0,
             "sites_out": 1012.0,
             "restored_share": 0.4818228367,
-            "ci_low": 0.3428332587,
-            "ci_high": 0.609668062,
+            "ci_low": 0.3543719546,
+            "ci_high": 0.6131963499,
             "restored_share_best": 0.4818228367,
             "n_counties_carried": 0
           },
@@ -4366,8 +4366,8 @@
             "days_since_peak": 3.0,
             "sites_out": 690.0,
             "restored_share": 0.6466973886,
-            "ci_low": 0.5247682174,
-            "ci_high": 0.7688324431,
+            "ci_low": 0.5296393539,
+            "ci_high": 0.7732022782,
             "restored_share_best": 0.6466973886,
             "n_counties_carried": 0
           },
@@ -4375,8 +4375,8 @@
             "days_since_peak": 4.0,
             "sites_out": 341.0,
             "restored_share": 0.8253968254,
-            "ci_low": 0.760057484,
-            "ci_high": 0.8836083937,
+            "ci_low": 0.7640085,
+            "ci_high": 0.8858429523,
             "restored_share_best": 0.8253968254,
             "n_counties_carried": 0
           }
@@ -4415,8 +4415,8 @@
         },
         "site_days_lost": {
           "value": 4771.0,
-          "ci_low": 2462.5,
-          "ci_high": 7833.8125,
+          "ci_low": 2495.9375,
+          "ci_high": 7762.6125,
           "n": 52,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -4454,8 +4454,8 @@
             "days_since_peak": 0.9583333333,
             "sites_out": 396.0,
             "restored_share": 0.3684210526,
-            "ci_low": 0.2534457983,
-            "ci_high": 0.509473031,
+            "ci_low": 0.2528109148,
+            "ci_high": 0.5038748178,
             "restored_share_best": 0.3684210526,
             "n_counties_carried": 0
           },
@@ -4463,8 +4463,8 @@
             "days_since_peak": 1.958333333,
             "sites_out": 73.0,
             "restored_share": 0.8835725678,
-            "ci_low": 0.810611487,
-            "ci_high": 0.9547592921,
+            "ci_low": 0.810640092,
+            "ci_high": 0.9532468852,
             "restored_share_best": 0.8835725678,
             "n_counties_carried": 0
           }
@@ -4495,7 +4495,7 @@
           "interval_low": null,
           "censored": true,
           "censored_at": 1.958333333,
-          "share_of_draws_not_reached": 0.6385,
+          "share_of_draws_not_reached": 0.664,
           "best_case": null,
           "best_case_censored": true,
           "first_crossing": null,
@@ -4503,8 +4503,8 @@
         },
         "site_days_lost": {
           "value": 724.6875,
-          "ci_low": 335.2411458,
-          "ci_high": 1190.539583,
+          "ci_low": 358.2067708,
+          "ci_high": 1201.834375,
           "n": 43,
           "unit": "site-days, peak to last report",
           "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
@@ -5064,23 +5064,23 @@
           "damage": {
             "value": 0.8695652174,
             "ci_low": 0.0,
-            "ci_high": 2.857142857,
+            "ci_high": 2.912798526,
             "n": 73,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 25.2173913,
-            "ci_low": 13.17621816,
-            "ci_high": 43.18181818,
+            "ci_low": 12.67605634,
+            "ci_high": 42.62533821,
             "n": 73,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 72.17391304,
-            "ci_low": 54.54545455,
-            "ci_high": 83.63804714,
+            "ci_low": 55.87873674,
+            "ci_high": 84.31372549,
             "n": 73,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -5088,7 +5088,7 @@
           "unattributed": {
             "value": 1.739130435,
             "ci_low": 0.0,
-            "ci_high": 4.679050568,
+            "ci_high": 4.838709677,
             "n": 73,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -5196,40 +5196,40 @@
         "pooled_over_reports": {
           "damage": {
             "value": 5.695142379,
-            "ci_low": 3.056298712,
-            "ci_high": 10.74131343,
+            "ci_low": 3.035860195,
+            "ci_high": 10.4423508,
             "n": 132,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 30.15075377,
-            "ci_low": 23.9582217,
-            "ci_high": 39.85608856,
+            "ci_low": 24.41173002,
+            "ci_high": 40.35203904,
             "n": 132,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 60.97152429,
-            "ci_low": 47.36807296,
-            "ci_high": 69.51002117,
+            "ci_low": 46.66666667,
+            "ci_high": 68.83012214,
             "n": 132,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 4.522613065,
-            "ci_low": 2.580067651,
-            "ci_high": 8.050160568,
+            "ci_low": 2.496801068,
+            "ci_high": 8.430515705,
             "n": 132,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "overattributed": {
             "value": 1.340033501,
-            "ci_low": 0.4306262546,
-            "ci_high": 3.492310543,
+            "ci_low": 0.4548837365,
+            "ci_high": 3.292363853,
             "n": 132,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -5371,32 +5371,32 @@
         "pooled_over_reports": {
           "damage": {
             "value": 6.79662803,
-            "ci_low": 3.797486377,
-            "ci_high": 11.88506367,
+            "ci_low": 3.789430062,
+            "ci_high": 11.57816208,
             "n": 325,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 53.79346681,
-            "ci_low": 46.14500251,
-            "ci_high": 57.99975886,
+            "ci_low": 46.08288829,
+            "ci_high": 58.03162704,
             "n": 325,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 35.4056902,
-            "ci_low": 29.7014677,
-            "ci_high": 46.51090046,
+            "ci_low": 29.6801101,
+            "ci_high": 46.53567069,
             "n": 325,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 4.214963119,
-            "ci_low": 1.721184505,
-            "ci_high": 5.479562528,
+            "ci_low": 1.795066859,
+            "ci_high": 5.436191308,
             "n": 325,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -5404,7 +5404,7 @@
           "overattributed": {
             "value": 0.210748156,
             "ci_low": 0.0,
-            "ci_high": 0.7054264212,
+            "ci_high": 0.7151797882,
             "n": 325,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -5644,32 +5644,32 @@
         "pooled_over_reports": {
           "damage": {
             "value": 4.495504496,
-            "ci_low": 1.979833118,
-            "ci_high": 7.729110827,
+            "ci_low": 2.028372058,
+            "ci_high": 7.672797937,
             "n": 31,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 37.76223776,
-            "ci_low": 29.99617347,
-            "ci_high": 44.50996656,
+            "ci_low": 30.3591469,
+            "ci_high": 44.35438742,
             "n": 31,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 54.44555445,
-            "ci_low": 45.52993483,
-            "ci_high": 63.01121106,
+            "ci_low": 45.37202396,
+            "ci_high": 62.61370355,
             "n": 31,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 3.496503497,
-            "ci_low": 2.325305362,
-            "ci_high": 6.803335792,
+            "ci_low": 2.353942736,
+            "ci_high": 6.425253801,
             "n": 31,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -5677,7 +5677,7 @@
           "overattributed": {
             "value": 0.1998001998,
             "ci_low": 0.0,
-            "ci_high": 0.9757293161,
+            "ci_high": 0.9278171761,
             "n": 31,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -5847,32 +5847,32 @@
         "pooled_over_reports": {
           "damage": {
             "value": 37.74954628,
-            "ci_low": 32.0167004,
-            "ci_high": 41.80413316,
+            "ci_low": 31.75548285,
+            "ci_high": 41.88491856,
             "n": 110,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 13.79310345,
-            "ci_low": 10.09163189,
-            "ci_high": 17.29233048,
+            "ci_low": 9.904932448,
+            "ci_high": 17.18628368,
             "n": 110,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 46.09800363,
-            "ci_low": 42.28821037,
-            "ci_high": 51.35154468,
+            "ci_low": 42.12347517,
+            "ci_high": 51.40694297,
             "n": 110,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 2.994555354,
-            "ci_low": 1.646034162,
-            "ci_high": 4.823457121,
+            "ci_low": 1.6428456,
+            "ci_high": 4.850407051,
             "n": 110,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -5880,7 +5880,7 @@
           "overattributed": {
             "value": 0.6352087114,
             "ci_low": 0.0,
-            "ci_high": 1.547708303,
+            "ci_high": 1.606868309,
             "n": 110,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -6022,40 +6022,40 @@
         "pooled_over_reports": {
           "damage": {
             "value": 33.88728324,
-            "ci_low": 29.0743054,
-            "ci_high": 40.19652251,
+            "ci_low": 29.04668986,
+            "ci_high": 40.05039358,
             "n": 210,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 18.49710983,
-            "ci_low": 11.31629273,
-            "ci_high": 27.57207119,
+            "ci_low": 11.27740443,
+            "ci_high": 26.98642851,
             "n": 210,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 45.88150289,
-            "ci_low": 39.55394451,
-            "ci_high": 52.69484736,
+            "ci_low": 39.96967829,
+            "ci_high": 52.64290245,
             "n": 210,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 1.98699422,
-            "ci_low": 1.084370021,
-            "ci_high": 3.290511788,
+            "ci_low": 1.103838572,
+            "ci_high": 3.233779353,
             "n": 210,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "overattributed": {
             "value": 0.2528901734,
-            "ci_low": 0.04309928414,
-            "ci_high": 0.5660789322,
+            "ci_low": 0.0522264471,
+            "ci_high": 0.5643942238,
             "n": 210,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -6183,40 +6183,40 @@
         "pooled_over_reports": {
           "damage": {
             "value": 14.81110475,
-            "ci_low": 10.28706134,
-            "ci_high": 20.4151711,
+            "ci_low": 10.39563008,
+            "ci_high": 20.82016334,
             "n": 101,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 32.4127075,
-            "ci_low": 29.16881155,
-            "ci_high": 37.46375805,
+            "ci_low": 29.20703121,
+            "ci_high": 37.04764701,
             "n": 101,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 54.59358901,
-            "ci_low": 47.85937743,
-            "ci_high": 59.38733942,
+            "ci_low": 47.6853472,
+            "ci_high": 59.63272665,
             "n": 101,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 0.2575844305,
-            "ci_low": 0.1259001754,
-            "ci_high": 0.4779618394,
+            "ci_low": 0.1363783592,
+            "ci_high": 0.4669692431,
             "n": 101,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "overattributed": {
             "value": 2.07498569,
-            "ci_low": 1.135036,
-            "ci_high": 3.252811584,
+            "ci_low": 1.082722241,
+            "ci_high": 3.228548027,
             "n": 101,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -6597,23 +6597,23 @@
           "damage": {
             "value": 27.51091703,
             "ci_low": 8.333333333,
-            "ci_high": 32.58458005,
+            "ci_high": 32.60560129,
             "n": 14,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 35.80786026,
-            "ci_low": 21.90401786,
-            "ci_high": 47.54148341,
+            "ci_low": 22.21813725,
+            "ci_high": 46.380182,
             "n": 14,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 37.11790393,
-            "ci_low": 27.99736842,
-            "ci_high": 68.27136076,
+            "ci_low": 28.30188679,
+            "ci_high": 68.0,
             "n": 14,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -6629,7 +6629,7 @@
           "overattributed": {
             "value": 0.4366812227,
             "ci_low": 0.0,
-            "ci_high": 0.5928853755,
+            "ci_high": 0.5964214712,
             "n": 14,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -6729,24 +6729,24 @@
         "pooled_over_reports": {
           "damage": {
             "value": 5.927530524,
-            "ci_low": 4.325662537,
-            "ci_high": 7.713052599,
+            "ci_low": 4.282571055,
+            "ci_high": 7.787085914,
             "n": 101,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 36.90429303,
-            "ci_low": 27.80876096,
-            "ci_high": 45.32200679,
+            "ci_low": 28.03217055,
+            "ci_high": 45.18646255,
             "n": 101,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 57.16817645,
-            "ci_low": 49.1773708,
-            "ci_high": 65.31277258,
+            "ci_low": 49.60225384,
+            "ci_high": 65.05622411,
             "n": 101,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -7016,32 +7016,32 @@
         "pooled_over_reports": {
           "damage": {
             "value": 10.83743842,
-            "ci_low": 5.172211429,
-            "ci_high": 15.10579452,
+            "ci_low": 5.069619116,
+            "ci_high": 15.10446948,
             "n": 34,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 27.09359606,
-            "ci_low": 17.77688172,
-            "ci_high": 41.21306818,
+            "ci_low": 17.67373461,
+            "ci_high": 41.90592334,
             "n": 34,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 57.63546798,
-            "ci_low": 48.7173913,
-            "ci_high": 66.66666667,
+            "ci_low": 48.46145374,
+            "ci_high": 65.88302139,
             "n": 34,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 4.433497537,
-            "ci_low": 1.398601399,
-            "ci_high": 7.625972141,
+            "ci_low": 1.369630044,
+            "ci_high": 7.64348613,
             "n": 34,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -7149,32 +7149,32 @@
         "pooled_over_reports": {
           "damage": {
             "value": 7.843137255,
-            "ci_low": 4.614942529,
-            "ci_high": 11.11207898,
+            "ci_low": 4.668332998,
+            "ci_high": 11.27490512,
             "n": 64,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 22.54901961,
-            "ci_low": 14.77241278,
-            "ci_high": 31.34799348,
+            "ci_low": 14.99788136,
+            "ci_high": 31.16534916,
             "n": 64,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 65.03267974,
-            "ci_low": 56.01805556,
-            "ci_high": 73.28267982,
+            "ci_low": 56.19347749,
+            "ci_high": 73.07783019,
             "n": 64,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 4.575163399,
-            "ci_low": 1.76647449,
-            "ci_high": 8.243983615,
+            "ci_low": 1.71879684,
+            "ci_high": 8.24453096,
             "n": 64,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -7345,16 +7345,16 @@
         "pooled_over_reports": {
           "damage": {
             "value": 0.7678525723,
-            "ci_low": 0.445646665,
-            "ci_high": 2.404274265,
+            "ci_low": 0.4549135995,
+            "ci_high": 2.409638554,
             "n": 6,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 5.093422063,
-            "ci_low": 3.859407305,
-            "ci_high": 8.066173557,
+            "ci_low": 3.799185889,
+            "ci_high": 7.955542611,
             "n": 6,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -7362,15 +7362,15 @@
           "power": {
             "value": 80.26618889,
             "ci_low": 78.47478475,
-            "ci_high": 84.6366782,
+            "ci_high": 84.61142594,
             "n": 6,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 13.87253647,
-            "ci_low": 9.389671362,
-            "ci_high": 14.49802851,
+            "ci_low": 9.692671395,
+            "ci_high": 14.50931933,
             "n": 6,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -7540,32 +7540,32 @@
         "pooled_over_reports": {
           "damage": {
             "value": 6.371191136,
-            "ci_low": 2.594456249,
-            "ci_high": 11.26516173,
+            "ci_low": 2.580231596,
+            "ci_high": 11.25016361,
             "n": 120,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 13.85041551,
-            "ci_low": 8.910819961,
-            "ci_high": 20.42109202,
+            "ci_low": 8.601996488,
+            "ci_high": 20.25408182,
             "n": 120,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 41.55124654,
-            "ci_low": 31.39190866,
-            "ci_high": 52.77269165,
+            "ci_low": 32.01287129,
+            "ci_high": 53.23093525,
             "n": 120,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 40.4432133,
-            "ci_low": 26.87773884,
-            "ci_high": 52.6324206,
+            "ci_low": 26.68616003,
+            "ci_high": 53.25775194,
             "n": 120,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -7573,7 +7573,7 @@
           "overattributed": {
             "value": 2.216066482,
             "ci_low": 0.0,
-            "ci_high": 6.469042334,
+            "ci_high": 6.6266597,
             "n": 120,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -7715,32 +7715,32 @@
         "pooled_over_reports": {
           "damage": {
             "value": 1.954397394,
-            "ci_low": 0.3660714286,
-            "ci_high": 3.955569885,
+            "ci_low": 0.3571110829,
+            "ci_high": 3.804725242,
             "n": 45,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 7.166123779,
-            "ci_low": 3.309497524,
-            "ci_high": 13.92478658,
+            "ci_low": 3.19092748,
+            "ci_high": 14.15978735,
             "n": 45,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 85.66775244,
-            "ci_low": 78.23751162,
-            "ci_high": 90.98065713,
+            "ci_low": 78.35801662,
+            "ci_high": 91.09825256,
             "n": 45,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 5.211726384,
-            "ci_low": 1.741896315,
-            "ci_high": 8.522837385,
+            "ci_low": 1.576514683,
+            "ci_high": 8.571428571,
             "n": 45,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -7862,40 +7862,40 @@
         "pooled_over_reports": {
           "damage": {
             "value": 1.038919094,
-            "ci_low": 0.7691782048,
-            "ci_high": 1.42845094,
+            "ci_low": 0.7823799245,
+            "ci_high": 1.441997586,
             "n": 322,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 32.14727889,
-            "ci_low": 26.14538962,
-            "ci_high": 37.58921178,
+            "ci_low": 26.04690904,
+            "ci_high": 37.64496831,
             "n": 322,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 59.92894439,
-            "ci_low": 54.88168547,
-            "ci_high": 65.51517598,
+            "ci_low": 55.06544349,
+            "ci_high": 65.62039903,
             "n": 322,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 7.030198633,
-            "ci_low": 5.933615606,
-            "ci_high": 7.966323222,
+            "ci_low": 5.854381172,
+            "ci_high": 8.014168958,
             "n": 322,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "overattributed": {
             "value": 0.1453410131,
-            "ci_low": 0.0150859322,
-            "ci_high": 0.354043101,
+            "ci_low": 0.01426967735,
+            "ci_high": 0.3660072808,
             "n": 322,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -8275,32 +8275,32 @@
         "pooled_over_reports": {
           "damage": {
             "value": 1.165934437,
-            "ci_low": 0.4998826903,
-            "ci_high": 1.846719606,
+            "ci_low": 0.4655235178,
+            "ci_high": 1.845410541,
             "n": 52,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 23.94389997,
-            "ci_low": 17.71586963,
-            "ci_high": 32.3572895,
+            "ci_low": 17.65203906,
+            "ci_high": 31.70681921,
             "n": 52,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 68.28320379,
-            "ci_low": 61.17556211,
-            "ci_high": 73.90916782,
+            "ci_low": 61.4679818,
+            "ci_high": 73.92992759,
             "n": 52,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 6.606961811,
-            "ci_low": 5.159519614,
-            "ci_high": 8.279490452,
+            "ci_low": 5.123242882,
+            "ci_high": 8.176082157,
             "n": 52,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -8450,32 +8450,32 @@
         "pooled_over_reports": {
           "damage": {
             "value": 1.811594203,
-            "ci_low": 0.9657494669,
-            "ci_high": 2.815195154,
+            "ci_low": 0.9173505465,
+            "ci_high": 2.794194776,
             "n": 44,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "transport": {
             "value": 37.22826087,
-            "ci_low": 25.64013841,
-            "ci_high": 49.03859375,
+            "ci_low": 25.53789869,
+            "ci_high": 49.92307042,
             "n": 44,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "power": {
             "value": 55.16304348,
-            "ci_low": 45.22939731,
-            "ci_high": 64.84252236,
+            "ci_low": 44.53761002,
+            "ci_high": 64.93774048,
             "n": 44,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
           },
           "unattributed": {
             "value": 5.797101449,
-            "ci_low": 3.717006125,
-            "ci_high": 9.052038958,
+            "ci_low": 3.718956575,
+            "ci_high": 8.918208691,
             "n": 44,
             "unit": "% of sites out",
             "method": "county bootstrap 95%, 2000 draws"
@@ -8816,8 +8816,8 @@
           "by_storm": {
             "Barry": {
               "value": 0.4806286598,
-              "ci_low": 0.2953254623,
-              "ci_high": 0.6301954636,
+              "ci_low": 0.2835663114,
+              "ci_high": 0.6412221208,
               "n": 130,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8829,7 +8829,7 @@
             "Beryl": {
               "value": 0.6280388412,
               "ci_low": 0.5174825175,
-              "ci_high": 0.9719724589,
+              "ci_high": 0.9358192004,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8840,8 +8840,8 @@
             },
             "Debby": {
               "value": 0.4085187387,
-              "ci_low": 0.3042879839,
-              "ci_high": 0.5147000596,
+              "ci_low": 0.3017220359,
+              "ci_high": 0.5079929486,
               "n": 275,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8852,8 +8852,8 @@
             },
             "Dorian": {
               "value": 0.5453477461,
-              "ci_low": 0.4299337111,
-              "ci_high": 0.6408660514,
+              "ci_low": 0.4246888001,
+              "ci_high": 0.6479991846,
               "n": 257,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8864,8 +8864,8 @@
             },
             "Florence": {
               "value": 0.6737383107,
-              "ci_low": 0.5369833418,
-              "ci_high": 0.7611073361,
+              "ci_low": 0.5438855047,
+              "ci_high": 0.7637374605,
               "n": 353,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8876,8 +8876,8 @@
             },
             "Francine": {
               "value": 0.6464911077,
-              "ci_low": 0.468397596,
-              "ci_high": 0.7611565629,
+              "ci_low": 0.4606261436,
+              "ci_high": 0.7706489687,
               "n": 87,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8888,8 +8888,8 @@
             },
             "Harvey": {
               "value": 0.4359987792,
-              "ci_low": 0.2315352765,
-              "ci_high": 0.6245583869,
+              "ci_low": 0.2128260126,
+              "ci_high": 0.6246446719,
               "n": 224,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8900,8 +8900,8 @@
             },
             "Ida": {
               "value": 0.6766529085,
-              "ci_low": 0.5269468173,
-              "ci_high": 0.7719940656,
+              "ci_low": 0.5236840612,
+              "ci_high": 0.7667667174,
               "n": 604,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8913,8 +8913,8 @@
             },
             "Ian": {
               "value": 0.6556034176,
-              "ci_low": 0.5189718286,
-              "ci_high": 0.7541169053,
+              "ci_low": 0.5246614554,
+              "ci_high": 0.7584536194,
               "n": 423,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8925,8 +8925,8 @@
             },
             "Helene": {
               "value": 0.6606946187,
-              "ci_low": 0.5778514853,
-              "ci_high": 0.7300114523,
+              "ci_low": 0.5818220707,
+              "ci_high": 0.7277583155,
               "n": 1303,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8937,8 +8937,8 @@
             },
             "Idalia": {
               "value": 0.390430261,
-              "ci_low": 0.2050482665,
-              "ci_high": 0.5390708304,
+              "ci_low": 0.2004738537,
+              "ci_high": 0.5461838863,
               "n": 128,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8949,8 +8949,8 @@
             },
             "Irma": {
               "value": 0.7020169231,
-              "ci_low": 0.5867218971,
-              "ci_high": 0.7941106061,
+              "ci_low": 0.5896442902,
+              "ci_high": 0.7940468806,
               "n": 369,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8961,8 +8961,8 @@
             },
             "Laura": {
               "value": 0.4113668201,
-              "ci_low": 0.2186686856,
-              "ci_high": 0.5623912218,
+              "ci_low": 0.2107734815,
+              "ci_high": 0.5661663503,
               "n": 512,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8974,8 +8974,8 @@
             },
             "Michael": {
               "value": 0.5916333482,
-              "ci_low": 0.5094218359,
-              "ci_high": 0.6649801584,
+              "ci_low": 0.5039876814,
+              "ci_high": 0.6639397118,
               "n": 627,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -8987,8 +8987,8 @@
             },
             "Nicholas": {
               "value": 0.3638502073,
-              "ci_low": -0.279899524,
-              "ci_high": 0.8352815797,
+              "ci_low": -0.2875291303,
+              "ci_high": 0.847080815,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9000,8 +9000,8 @@
             },
             "Milton": {
               "value": 0.8692383775,
-              "ci_low": 0.8098417717,
-              "ci_high": 0.9101875136,
+              "ci_low": 0.8114859754,
+              "ci_high": 0.9091162787,
               "n": 219,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9024,8 +9024,8 @@
             },
             "Nicole": {
               "value": 0.3324738578,
-              "ci_low": 0.07574850544,
-              "ci_high": 0.5470571388,
+              "ci_low": 0.06433343648,
+              "ci_high": 0.5429708512,
               "n": 60,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9036,8 +9036,8 @@
             },
             "Sally": {
               "value": 0.7562454717,
-              "ci_low": 0.5833599989,
-              "ci_high": 0.8433808656,
+              "ci_low": 0.5959410923,
+              "ci_high": 0.8438612625,
               "n": 109,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9049,8 +9049,8 @@
             },
             "Delta": {
               "value": 0.5776156974,
-              "ci_low": 0.4498901492,
-              "ci_high": 0.686502371,
+              "ci_low": 0.4530717857,
+              "ci_high": 0.687731964,
               "n": 181,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9062,8 +9062,8 @@
             },
             "Zeta": {
               "value": 0.6885240981,
-              "ci_low": 0.6139094306,
-              "ci_high": 0.7547405332,
+              "ci_low": 0.6172264162,
+              "ci_high": 0.7501425206,
               "n": 297,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9103,8 +9103,8 @@
           "by_storm": {
             "Barry": {
               "value": 0.4304143926,
-              "ci_low": 0.2487271069,
-              "ci_high": 0.5863715588,
+              "ci_low": 0.2482796091,
+              "ci_high": 0.581131026,
               "n": 130,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9116,7 +9116,7 @@
             "Beryl": {
               "value": 0.5226521514,
               "ci_low": 0.4965034965,
-              "ci_high": 0.8862183222,
+              "ci_high": 0.864,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9127,8 +9127,8 @@
             },
             "Debby": {
               "value": 0.4516984233,
-              "ci_low": 0.3484531215,
-              "ci_high": 0.5458343169,
+              "ci_low": 0.344866026,
+              "ci_high": 0.5482526914,
               "n": 275,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9139,8 +9139,8 @@
             },
             "Dorian": {
               "value": 0.5414814355,
-              "ci_low": 0.4395990757,
-              "ci_high": 0.6255232436,
+              "ci_low": 0.4376994178,
+              "ci_high": 0.6322083871,
               "n": 257,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9161,8 +9161,8 @@
             },
             "Francine": {
               "value": 0.7239596615,
-              "ci_low": 0.5943561068,
-              "ci_high": 0.8075398586,
+              "ci_low": 0.5904037748,
+              "ci_high": 0.8109327746,
               "n": 87,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9183,8 +9183,8 @@
             },
             "Ida": {
               "value": 0.6822726216,
-              "ci_low": 0.5622764895,
-              "ci_high": 0.7720237816,
+              "ci_low": 0.5547555692,
+              "ci_high": 0.7671005582,
               "n": 604,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9196,8 +9196,8 @@
             },
             "Ian": {
               "value": 0.6754090155,
-              "ci_low": 0.5753553351,
-              "ci_high": 0.7571923984,
+              "ci_low": 0.5756474615,
+              "ci_high": 0.7545594908,
               "n": 423,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9208,8 +9208,8 @@
             },
             "Helene": {
               "value": 0.689708437,
-              "ci_low": 0.6363676375,
-              "ci_high": 0.73870064,
+              "ci_low": 0.6369590806,
+              "ci_high": 0.7378746285,
               "n": 1303,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9220,8 +9220,8 @@
             },
             "Idalia": {
               "value": 0.4084395667,
-              "ci_low": 0.1813271396,
-              "ci_high": 0.5810625296,
+              "ci_low": 0.158558916,
+              "ci_high": 0.5814343254,
               "n": 128,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9242,8 +9242,8 @@
             },
             "Laura": {
               "value": 0.4654736247,
-              "ci_low": 0.2830628424,
-              "ci_high": 0.6001429044,
+              "ci_low": 0.2757870669,
+              "ci_high": 0.6034741484,
               "n": 512,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9265,8 +9265,8 @@
             },
             "Nicholas": {
               "value": 0.7043949665,
-              "ci_low": 0.2300920369,
-              "ci_high": 0.934368617,
+              "ci_low": 0.2223004139,
+              "ci_high": 0.9369687229,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9278,8 +9278,8 @@
             },
             "Milton": {
               "value": 0.8356836921,
-              "ci_low": 0.7514303103,
-              "ci_high": 0.894472825,
+              "ci_low": 0.7519469924,
+              "ci_high": 0.8963046,
               "n": 219,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9300,8 +9300,8 @@
             },
             "Nicole": {
               "value": 0.2778528381,
-              "ci_low": 0.005598184128,
-              "ci_high": 0.5105674258,
+              "ci_low": -0.008258292962,
+              "ci_high": 0.5131966197,
               "n": 60,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9312,8 +9312,8 @@
             },
             "Sally": {
               "value": 0.7203514058,
-              "ci_low": 0.5106666923,
-              "ci_high": 0.8291594053,
+              "ci_low": 0.5216764509,
+              "ci_high": 0.8289498593,
               "n": 109,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9325,8 +9325,8 @@
             },
             "Delta": {
               "value": 0.5427947258,
-              "ci_low": 0.4206807839,
-              "ci_high": 0.6552494436,
+              "ci_low": 0.4184307356,
+              "ci_high": 0.6554782367,
               "n": 181,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9338,8 +9338,8 @@
             },
             "Zeta": {
               "value": 0.6018438808,
-              "ci_low": 0.502978352,
-              "ci_high": 0.6926637464,
+              "ci_low": 0.5087250448,
+              "ci_high": 0.6870735177,
               "n": 297,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9381,8 +9381,8 @@
           "by_storm": {
             "Barry": {
               "value": 0.4999748043,
-              "ci_low": 0.2942672906,
-              "ci_high": 0.6558119993,
+              "ci_low": 0.2937097141,
+              "ci_high": 0.6673150611,
               "n": 119,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9394,7 +9394,7 @@
             "Beryl": {
               "value": 0.6427364198,
               "ci_low": 0.5441030723,
-              "ci_high": 0.9358192004,
+              "ci_high": 0.9719724589,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9405,8 +9405,8 @@
             },
             "Debby": {
               "value": 0.3549266171,
-              "ci_low": 0.2270417532,
-              "ci_high": 0.4734158718,
+              "ci_low": 0.2220106562,
+              "ci_high": 0.4778532739,
               "n": 229,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9417,8 +9417,8 @@
             },
             "Dorian": {
               "value": 0.5563073619,
-              "ci_low": 0.4117038727,
-              "ci_high": 0.6735369542,
+              "ci_low": 0.4103313551,
+              "ci_high": 0.6734233811,
               "n": 188,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9429,8 +9429,8 @@
             },
             "Florence": {
               "value": 0.7413740112,
-              "ci_low": 0.6316649619,
-              "ci_high": 0.8104379471,
+              "ci_low": 0.6299365822,
+              "ci_high": 0.8112412042,
               "n": 239,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9441,8 +9441,8 @@
             },
             "Francine": {
               "value": 0.6661386299,
-              "ci_low": 0.5052124153,
-              "ci_high": 0.7754560821,
+              "ci_low": 0.5210992688,
+              "ci_high": 0.7743226161,
               "n": 82,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9453,8 +9453,8 @@
             },
             "Harvey": {
               "value": 0.3763677609,
-              "ci_low": 0.1263413475,
-              "ci_high": 0.6081332996,
+              "ci_low": 0.1353193881,
+              "ci_high": 0.6056158365,
               "n": 148,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9465,8 +9465,8 @@
             },
             "Ida": {
               "value": 0.6834548528,
-              "ci_low": 0.5446866164,
-              "ci_high": 0.7692168238,
+              "ci_low": 0.5260874856,
+              "ci_high": 0.7692957169,
               "n": 453,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9478,8 +9478,8 @@
             },
             "Ian": {
               "value": 0.62020861,
-              "ci_low": 0.4885264213,
-              "ci_high": 0.7243603192,
+              "ci_low": 0.4873851532,
+              "ci_high": 0.7166613088,
               "n": 346,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9490,8 +9490,8 @@
             },
             "Helene": {
               "value": 0.6756013989,
-              "ci_low": 0.5976539189,
-              "ci_high": 0.7416286658,
+              "ci_low": 0.5975772918,
+              "ci_high": 0.7409229279,
               "n": 1110,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9502,8 +9502,8 @@
             },
             "Idalia": {
               "value": 0.4134028017,
-              "ci_low": 0.2006137324,
-              "ci_high": 0.6028617497,
+              "ci_low": 0.2021149539,
+              "ci_high": 0.5930061529,
               "n": 119,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9514,8 +9514,8 @@
             },
             "Irma": {
               "value": 0.6621032616,
-              "ci_low": 0.5538083139,
-              "ci_high": 0.7666372025,
+              "ci_low": 0.55331948,
+              "ci_high": 0.7648989939,
               "n": 331,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9526,8 +9526,8 @@
             },
             "Laura": {
               "value": 0.6196669038,
-              "ci_low": 0.4180800708,
-              "ci_high": 0.7476970936,
+              "ci_low": 0.4139590766,
+              "ci_high": 0.7473348672,
               "n": 299,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9539,8 +9539,8 @@
             },
             "Michael": {
               "value": 0.5869547421,
-              "ci_low": 0.5018120261,
-              "ci_high": 0.6744311245,
+              "ci_low": 0.5010010178,
+              "ci_high": 0.6670524841,
               "n": 466,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9552,8 +9552,8 @@
             },
             "Nicholas": {
               "value": 0.4340686537,
-              "ci_low": -0.2727348863,
-              "ci_high": 0.9055817612,
+              "ci_low": -0.3111554637,
+              "ci_high": 0.9113665937,
               "n": 18,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9565,8 +9565,8 @@
             },
             "Milton": {
               "value": 0.8556919316,
-              "ci_low": 0.7901282583,
-              "ci_high": 0.9045599112,
+              "ci_low": 0.7935532906,
+              "ci_high": 0.9031160095,
               "n": 202,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9589,8 +9589,8 @@
             },
             "Nicole": {
               "value": 0.3087544098,
-              "ci_low": 0.03453615966,
-              "ci_high": 0.5365712267,
+              "ci_low": 0.009755744416,
+              "ci_high": 0.5299198589,
               "n": 60,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9601,8 +9601,8 @@
             },
             "Sally": {
               "value": 0.7645402641,
-              "ci_low": 0.6195740306,
-              "ci_high": 0.8445049921,
+              "ci_low": 0.6070991746,
+              "ci_high": 0.8504866486,
               "n": 82,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9614,8 +9614,8 @@
             },
             "Delta": {
               "value": 0.5714460476,
-              "ci_low": 0.4480924533,
-              "ci_high": 0.685780636,
+              "ci_low": 0.4419957924,
+              "ci_high": 0.6928110164,
               "n": 176,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9627,8 +9627,8 @@
             },
             "Zeta": {
               "value": 0.6788141894,
-              "ci_low": 0.5998409666,
-              "ci_high": 0.7485685689,
+              "ci_low": 0.6009653353,
+              "ci_high": 0.7459565339,
               "n": 284,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9668,8 +9668,8 @@
           "by_storm": {
             "Barry": {
               "value": 0.4872104588,
-              "ci_low": 0.3130351189,
-              "ci_high": 0.6313736267,
+              "ci_low": 0.3071547954,
+              "ci_high": 0.6398123353,
               "n": 119,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9681,7 +9681,7 @@
             "Beryl": {
               "value": 0.5356759862,
               "ci_low": 0.5356759862,
-              "ci_high": 0.879,
+              "ci_high": 0.8862183222,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9692,8 +9692,8 @@
             },
             "Debby": {
               "value": 0.3784177513,
-              "ci_low": 0.2488262111,
-              "ci_high": 0.5002579215,
+              "ci_low": 0.2430758557,
+              "ci_high": 0.5006717885,
               "n": 229,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9704,8 +9704,8 @@
             },
             "Dorian": {
               "value": 0.5941390201,
-              "ci_low": 0.4813014338,
-              "ci_high": 0.6871838386,
+              "ci_low": 0.4815315182,
+              "ci_high": 0.6860672995,
               "n": 188,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9726,8 +9726,8 @@
             },
             "Francine": {
               "value": 0.7101701911,
-              "ci_low": 0.5850322546,
-              "ci_high": 0.797350009,
+              "ci_low": 0.5851520527,
+              "ci_high": 0.7987259158,
               "n": 82,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9748,8 +9748,8 @@
             },
             "Ida": {
               "value": 0.6693085373,
-              "ci_low": 0.528567704,
-              "ci_high": 0.7630818974,
+              "ci_low": 0.5284509691,
+              "ci_high": 0.7712581928,
               "n": 453,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9761,8 +9761,8 @@
             },
             "Ian": {
               "value": 0.6366664336,
-              "ci_low": 0.5235786989,
-              "ci_high": 0.7242335432,
+              "ci_low": 0.5268826239,
+              "ci_high": 0.7231610873,
               "n": 346,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9773,8 +9773,8 @@
             },
             "Helene": {
               "value": 0.6949225776,
-              "ci_low": 0.6378936001,
-              "ci_high": 0.744144636,
+              "ci_low": 0.6389827421,
+              "ci_high": 0.745589907,
               "n": 1110,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9785,8 +9785,8 @@
             },
             "Idalia": {
               "value": 0.3896350514,
-              "ci_low": 0.1430820196,
-              "ci_high": 0.5856531904,
+              "ci_low": 0.1385331166,
+              "ci_high": 0.5752515291,
               "n": 119,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9807,8 +9807,8 @@
             },
             "Laura": {
               "value": 0.6200663157,
-              "ci_low": 0.4271668186,
-              "ci_high": 0.7414468505,
+              "ci_low": 0.4218220925,
+              "ci_high": 0.7379263959,
               "n": 299,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9830,8 +9830,8 @@
             },
             "Nicholas": {
               "value": 0.7235045703,
-              "ci_low": 0.2039119504,
-              "ci_high": 0.965421475,
+              "ci_low": 0.1482099203,
+              "ci_high": 0.9655668712,
               "n": 18,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9843,8 +9843,8 @@
             },
             "Milton": {
               "value": 0.8071904566,
-              "ci_low": 0.7032944008,
-              "ci_high": 0.8842842642,
+              "ci_low": 0.7095649868,
+              "ci_high": 0.8819276548,
               "n": 202,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9865,8 +9865,8 @@
             },
             "Nicole": {
               "value": 0.1751989156,
-              "ci_low": -0.1131031541,
-              "ci_high": 0.4309138021,
+              "ci_low": -0.1140990233,
+              "ci_high": 0.4481588226,
               "n": 60,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9877,8 +9877,8 @@
             },
             "Sally": {
               "value": 0.7118370744,
-              "ci_low": 0.4867414865,
-              "ci_high": 0.832483704,
+              "ci_low": 0.4839102002,
+              "ci_high": 0.8369348512,
               "n": 82,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9890,8 +9890,8 @@
             },
             "Delta": {
               "value": 0.5309166819,
-              "ci_low": 0.4057472821,
-              "ci_high": 0.6435886746,
+              "ci_low": 0.4057222176,
+              "ci_high": 0.6518522804,
               "n": 176,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9903,8 +9903,8 @@
             },
             "Zeta": {
               "value": 0.589168835,
-              "ci_low": 0.4869744143,
-              "ci_high": 0.6790980203,
+              "ci_low": 0.4890999998,
+              "ci_high": 0.6763186026,
               "n": 284,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9946,8 +9946,8 @@
           "by_storm": {
             "Barry": {
               "value": 0.4740035049,
-              "ci_low": 0.2564677363,
-              "ci_high": 0.6470442708,
+              "ci_low": 0.2630499212,
+              "ci_high": 0.6469861186,
               "n": 108,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9958,7 +9958,7 @@
             },
             "Beryl": {
               "value": 0.6676092452,
-              "ci_low": 0.6095143707,
+              "ci_low": 0.5174825175,
               "ci_high": 0.9358192004,
               "n": 22,
               "unit": "Spearman rank correlation",
@@ -9970,8 +9970,8 @@
             },
             "Debby": {
               "value": 0.1971119544,
-              "ci_low": 0.05020568162,
-              "ci_high": 0.3265906132,
+              "ci_low": 0.0536017088,
+              "ci_high": 0.3328987401,
               "n": 226,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9982,8 +9982,8 @@
             },
             "Dorian": {
               "value": 0.4860795084,
-              "ci_low": 0.35573195,
-              "ci_high": 0.5891052946,
+              "ci_low": 0.3573696358,
+              "ci_high": 0.5930717613,
               "n": 172,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -9994,8 +9994,8 @@
             },
             "Florence": {
               "value": 0.707235552,
-              "ci_low": 0.5755561193,
-              "ci_high": 0.796001095,
+              "ci_low": 0.5759419022,
+              "ci_high": 0.7991016538,
               "n": 205,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10006,8 +10006,8 @@
             },
             "Francine": {
               "value": 0.630129452,
-              "ci_low": 0.4746966215,
-              "ci_high": 0.7517962841,
+              "ci_low": 0.4558295473,
+              "ci_high": 0.7561068738,
               "n": 81,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10018,8 +10018,8 @@
             },
             "Harvey": {
               "value": 0.3076925881,
-              "ci_low": 0.07564098126,
-              "ci_high": 0.5157068201,
+              "ci_low": 0.08668400282,
+              "ci_high": 0.5274018559,
               "n": 151,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10030,8 +10030,8 @@
             },
             "Ida": {
               "value": 0.6470762536,
-              "ci_low": 0.4740726399,
-              "ci_high": 0.7455333215,
+              "ci_low": 0.4817996742,
+              "ci_high": 0.7449350084,
               "n": 473,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10043,8 +10043,8 @@
             },
             "Ian": {
               "value": 0.7062779041,
-              "ci_low": 0.5903034323,
-              "ci_high": 0.794796754,
+              "ci_low": 0.5783788541,
+              "ci_high": 0.7937262024,
               "n": 351,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10055,8 +10055,8 @@
             },
             "Helene": {
               "value": 0.6274436736,
-              "ci_low": 0.5575192667,
-              "ci_high": 0.6880574389,
+              "ci_low": 0.5563754297,
+              "ci_high": 0.6890585259,
               "n": 1113,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10067,8 +10067,8 @@
             },
             "Idalia": {
               "value": 0.3134416309,
-              "ci_low": 0.0776601891,
-              "ci_high": 0.5285050554,
+              "ci_low": 0.07209536911,
+              "ci_high": 0.5360138614,
               "n": 113,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10079,8 +10079,8 @@
             },
             "Irma": {
               "value": 0.6568253785,
-              "ci_low": 0.5445433098,
-              "ci_high": 0.7624398998,
+              "ci_low": 0.5362319302,
+              "ci_high": 0.7619787985,
               "n": 338,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10091,8 +10091,8 @@
             },
             "Laura": {
               "value": 0.4819291567,
-              "ci_low": 0.2376535725,
-              "ci_high": 0.649113663,
+              "ci_low": 0.2373724604,
+              "ci_high": 0.6481958784,
               "n": 300,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10104,8 +10104,8 @@
             },
             "Michael": {
               "value": 0.5765475447,
-              "ci_low": 0.4927799615,
-              "ci_high": 0.6607284354,
+              "ci_low": 0.489635662,
+              "ci_high": 0.6590944598,
               "n": 472,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10117,8 +10117,8 @@
             },
             "Nicholas": {
               "value": 0.2382752602,
-              "ci_low": -0.4940121561,
-              "ci_high": 0.8032892388,
+              "ci_low": -0.4833010516,
+              "ci_high": 0.7834204032,
               "n": 19,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10130,8 +10130,8 @@
             },
             "Milton": {
               "value": 0.7952922637,
-              "ci_low": 0.7122992705,
-              "ci_high": 0.8549654539,
+              "ci_low": 0.7081853995,
+              "ci_high": 0.8544958072,
               "n": 204,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10154,8 +10154,8 @@
             },
             "Nicole": {
               "value": 0.2965348396,
-              "ci_low": 0.007770143136,
-              "ci_high": 0.5448321114,
+              "ci_low": 0.007985181842,
+              "ci_high": 0.5478540168,
               "n": 57,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10166,8 +10166,8 @@
             },
             "Sally": {
               "value": 0.7732401257,
-              "ci_low": 0.643585398,
-              "ci_high": 0.8320762737,
+              "ci_low": 0.6434917626,
+              "ci_high": 0.8307198105,
               "n": 81,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10179,8 +10179,8 @@
             },
             "Delta": {
               "value": 0.5776420031,
-              "ci_low": 0.4649511541,
-              "ci_high": 0.6728538368,
+              "ci_low": 0.4726210064,
+              "ci_high": 0.671787773,
               "n": 175,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10192,8 +10192,8 @@
             },
             "Zeta": {
               "value": 0.5010915028,
-              "ci_low": 0.3752368564,
-              "ci_high": 0.6154166047,
+              "ci_low": 0.3760868587,
+              "ci_high": 0.6169734759,
               "n": 241,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10233,8 +10233,8 @@
           "by_storm": {
             "Barry": {
               "value": 0.4345646812,
-              "ci_low": 0.2282741938,
-              "ci_high": 0.6072406692,
+              "ci_low": 0.2308568131,
+              "ci_high": 0.6019261442,
               "n": 108,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10245,8 +10245,8 @@
             },
             "Beryl": {
               "value": 0.5747474905,
-              "ci_low": 0.5192588114,
-              "ci_high": 0.894,
+              "ci_low": 0.4965034965,
+              "ci_high": 0.8862183222,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10257,8 +10257,8 @@
             },
             "Debby": {
               "value": 0.2237442812,
-              "ci_low": 0.07475603516,
-              "ci_high": 0.3584562737,
+              "ci_low": 0.07343639951,
+              "ci_high": 0.3631171054,
               "n": 226,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10269,8 +10269,8 @@
             },
             "Dorian": {
               "value": 0.4874766845,
-              "ci_low": 0.3803617156,
-              "ci_high": 0.5774428975,
+              "ci_low": 0.3816846288,
+              "ci_high": 0.5774774106,
               "n": 172,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10291,8 +10291,8 @@
             },
             "Francine": {
               "value": 0.6970241912,
-              "ci_low": 0.5600454508,
-              "ci_high": 0.7971223334,
+              "ci_low": 0.5539596128,
+              "ci_high": 0.7992011212,
               "n": 81,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10313,8 +10313,8 @@
             },
             "Ida": {
               "value": 0.6376804383,
-              "ci_low": 0.4846356616,
-              "ci_high": 0.7381317832,
+              "ci_low": 0.4899004651,
+              "ci_high": 0.7431589362,
               "n": 473,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10326,8 +10326,8 @@
             },
             "Ian": {
               "value": 0.7412854165,
-              "ci_low": 0.6613370739,
-              "ci_high": 0.8036379927,
+              "ci_low": 0.6627292666,
+              "ci_high": 0.8025614014,
               "n": 351,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10338,8 +10338,8 @@
             },
             "Helene": {
               "value": 0.6434789457,
-              "ci_low": 0.5890399938,
-              "ci_high": 0.6917441225,
+              "ci_low": 0.5881141894,
+              "ci_high": 0.6924530681,
               "n": 1113,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10350,8 +10350,8 @@
             },
             "Idalia": {
               "value": 0.2643175588,
-              "ci_low": -0.00224230561,
-              "ci_high": 0.5009136379,
+              "ci_low": -0.008103211823,
+              "ci_high": 0.5009728615,
               "n": 113,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10372,8 +10372,8 @@
             },
             "Laura": {
               "value": 0.5028401089,
-              "ci_low": 0.2774553175,
-              "ci_high": 0.6502374295,
+              "ci_low": 0.2890754236,
+              "ci_high": 0.6495757028,
               "n": 300,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10395,8 +10395,8 @@
             },
             "Nicholas": {
               "value": 0.6250393864,
-              "ci_low": 0.0983414657,
-              "ci_high": 0.9343839477,
+              "ci_low": 0.06732583166,
+              "ci_high": 0.9282318499,
               "n": 19,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10408,8 +10408,8 @@
             },
             "Milton": {
               "value": 0.7511043476,
-              "ci_low": 0.6550121698,
-              "ci_high": 0.8311565253,
+              "ci_low": 0.6511388084,
+              "ci_high": 0.8239992513,
               "n": 204,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10430,8 +10430,8 @@
             },
             "Nicole": {
               "value": 0.1925826244,
-              "ci_low": -0.09391638862,
-              "ci_high": 0.4825684437,
+              "ci_low": -0.103285304,
+              "ci_high": 0.4679800696,
               "n": 57,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10442,8 +10442,8 @@
             },
             "Sally": {
               "value": 0.7317140315,
-              "ci_low": 0.5126532576,
-              "ci_high": 0.8282276496,
+              "ci_low": 0.5076094407,
+              "ci_high": 0.8278636008,
               "n": 81,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10455,8 +10455,8 @@
             },
             "Delta": {
               "value": 0.5286386853,
-              "ci_low": 0.4078877622,
-              "ci_high": 0.6320040684,
+              "ci_low": 0.4134343164,
+              "ci_high": 0.6280320057,
               "n": 175,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10468,8 +10468,8 @@
             },
             "Zeta": {
               "value": 0.4968015855,
-              "ci_low": 0.3715193437,
-              "ci_high": 0.6140185191,
+              "ci_low": 0.3660474261,
+              "ci_high": 0.6125445139,
               "n": 241,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10511,8 +10511,8 @@
           "by_storm": {
             "Barry": {
               "value": 0.3360094544,
-              "ci_low": 0.09795769047,
-              "ci_high": 0.5421235677,
+              "ci_low": 0.09290515123,
+              "ci_high": 0.5340999903,
               "n": 116,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10523,7 +10523,7 @@
             },
             "Beryl": {
               "value": 0.141888163,
-              "ci_low": -0.1019332162,
+              "ci_low": -0.1034058648,
               "ci_high": 0.6544350158,
               "n": 22,
               "unit": "Spearman rank correlation",
@@ -10535,8 +10535,8 @@
             },
             "Debby": {
               "value": 0.126348132,
-              "ci_low": -0.0163711226,
-              "ci_high": 0.2603288056,
+              "ci_low": -0.008631417534,
+              "ci_high": 0.2635791515,
               "n": 233,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10547,8 +10547,8 @@
             },
             "Dorian": {
               "value": 0.353368896,
-              "ci_low": 0.2104337807,
-              "ci_high": 0.4701001361,
+              "ci_low": 0.2202167048,
+              "ci_high": 0.464721283,
               "n": 210,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10559,8 +10559,8 @@
             },
             "Florence": {
               "value": 0.6658941351,
-              "ci_low": 0.5508803359,
-              "ci_high": 0.7414835834,
+              "ci_low": 0.541968063,
+              "ci_high": 0.7410248104,
               "n": 278,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10571,8 +10571,8 @@
             },
             "Francine": {
               "value": 0.0646859009,
-              "ci_low": -0.1978385003,
-              "ci_high": 0.2890255087,
+              "ci_low": -0.1861636279,
+              "ci_high": 0.295020298,
               "n": 63,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10583,8 +10583,8 @@
             },
             "Harvey": {
               "value": 0.3598418471,
-              "ci_low": 0.1071029865,
-              "ci_high": 0.5859378612,
+              "ci_low": 0.09266646702,
+              "ci_high": 0.588015546,
               "n": 172,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10595,8 +10595,8 @@
             },
             "Ida": {
               "value": 0.5387829107,
-              "ci_low": 0.3546104557,
-              "ci_high": 0.6528666567,
+              "ci_low": 0.3477399591,
+              "ci_high": 0.654329575,
               "n": 527,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10608,8 +10608,8 @@
             },
             "Ian": {
               "value": 0.5775587991,
-              "ci_low": 0.4415265303,
-              "ci_high": 0.6794211014,
+              "ci_low": 0.4371067655,
+              "ci_high": 0.6793473183,
               "n": 391,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10620,8 +10620,8 @@
             },
             "Helene": {
               "value": 0.5254517362,
-              "ci_low": 0.4402458407,
-              "ci_high": 0.5917492676,
+              "ci_low": 0.4417790221,
+              "ci_high": 0.5939130348,
               "n": 1140,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10632,8 +10632,8 @@
             },
             "Idalia": {
               "value": 0.1633337059,
-              "ci_low": -0.1087292736,
-              "ci_high": 0.4055521915,
+              "ci_low": -0.09568742176,
+              "ci_high": 0.4177138178,
               "n": 115,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10644,8 +10644,8 @@
             },
             "Irma": {
               "value": 0.503184414,
-              "ci_low": 0.3745402324,
-              "ci_high": 0.6112330109,
+              "ci_low": 0.3717563218,
+              "ci_high": 0.6211123452,
               "n": 356,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10656,8 +10656,8 @@
             },
             "Laura": {
               "value": 0.3525590061,
-              "ci_low": 0.1374327363,
-              "ci_high": 0.50189889,
+              "ci_low": 0.1371221078,
+              "ci_high": 0.509685528,
               "n": 407,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10669,8 +10669,8 @@
             },
             "Michael": {
               "value": 0.4077201938,
-              "ci_low": 0.3171126882,
-              "ci_high": 0.4940872279,
+              "ci_low": 0.3118821508,
+              "ci_high": 0.4913824666,
               "n": 507,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10682,8 +10682,8 @@
             },
             "Nicholas": {
               "value": 0.238709276,
-              "ci_low": -0.3722371361,
-              "ci_high": 0.7849811636,
+              "ci_low": -0.3467276919,
+              "ci_high": 0.7937592314,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10695,8 +10695,8 @@
             },
             "Milton": {
               "value": 0.4959770798,
-              "ci_low": 0.397770972,
-              "ci_high": 0.5755151323,
+              "ci_low": 0.3973695004,
+              "ci_high": 0.5730647758,
               "n": 208,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10719,8 +10719,8 @@
             },
             "Nicole": {
               "value": 0.2500098675,
-              "ci_low": -0.02975408203,
-              "ci_high": 0.4913408897,
+              "ci_low": -0.04300134041,
+              "ci_high": 0.487165612,
               "n": 55,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10731,8 +10731,8 @@
             },
             "Sally": {
               "value": 0.5881188415,
-              "ci_low": 0.4221424328,
-              "ci_high": 0.6890060906,
+              "ci_low": 0.4251949669,
+              "ci_high": 0.686115199,
               "n": 96,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10744,8 +10744,8 @@
             },
             "Delta": {
               "value": 0.1450254583,
-              "ci_low": -0.008580238171,
-              "ci_high": 0.2819256549,
+              "ci_low": -0.001519210028,
+              "ci_high": 0.2892752142,
               "n": 142,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10757,8 +10757,8 @@
             },
             "Zeta": {
               "value": 0.1691112933,
-              "ci_low": 0.05546382254,
-              "ci_high": 0.27508005,
+              "ci_low": 0.05362526851,
+              "ci_high": 0.2778271782,
               "n": 254,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10798,8 +10798,8 @@
           "by_storm": {
             "Barry": {
               "value": 0.3155865924,
-              "ci_low": 0.07839564976,
-              "ci_high": 0.5228775871,
+              "ci_low": 0.07868161635,
+              "ci_high": 0.5158235133,
               "n": 116,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10810,8 +10810,8 @@
             },
             "Beryl": {
               "value": 0.0458665485,
-              "ci_low": -0.1230228471,
-              "ci_high": 0.4734335078,
+              "ci_low": -0.1243179053,
+              "ci_high": 0.4710526316,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10822,8 +10822,8 @@
             },
             "Debby": {
               "value": 0.1638196221,
-              "ci_low": 0.0168275503,
-              "ci_high": 0.307879866,
+              "ci_low": 0.006561092039,
+              "ci_high": 0.3080900429,
               "n": 233,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10834,8 +10834,8 @@
             },
             "Dorian": {
               "value": 0.2773155158,
-              "ci_low": 0.1531656805,
-              "ci_high": 0.3897825126,
+              "ci_low": 0.1439921097,
+              "ci_high": 0.3859077402,
               "n": 210,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10856,8 +10856,8 @@
             },
             "Francine": {
               "value": 0.02836754272,
-              "ci_low": -0.2310034927,
-              "ci_high": 0.2654108501,
+              "ci_low": -0.2214366864,
+              "ci_high": 0.2772234653,
               "n": 63,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10878,8 +10878,8 @@
             },
             "Ida": {
               "value": 0.5540424046,
-              "ci_low": 0.4079612603,
-              "ci_high": 0.6629122481,
+              "ci_low": 0.3999847687,
+              "ci_high": 0.6590857247,
               "n": 527,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10891,8 +10891,8 @@
             },
             "Ian": {
               "value": 0.6078231648,
-              "ci_low": 0.4856455009,
-              "ci_high": 0.7004327547,
+              "ci_low": 0.4727674566,
+              "ci_high": 0.703290702,
               "n": 391,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10903,8 +10903,8 @@
             },
             "Helene": {
               "value": 0.5393335125,
-              "ci_low": 0.479976214,
-              "ci_high": 0.58985352,
+              "ci_low": 0.4804735952,
+              "ci_high": 0.5917490477,
               "n": 1140,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10915,8 +10915,8 @@
             },
             "Idalia": {
               "value": 0.2036703774,
-              "ci_low": -0.08162309092,
-              "ci_high": 0.4444084406,
+              "ci_low": -0.07615797156,
+              "ci_high": 0.4567234343,
               "n": 115,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10937,8 +10937,8 @@
             },
             "Laura": {
               "value": 0.3489927323,
-              "ci_low": 0.1328986271,
-              "ci_high": 0.4996223421,
+              "ci_low": 0.1258915604,
+              "ci_high": 0.5016125093,
               "n": 407,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10960,8 +10960,8 @@
             },
             "Nicholas": {
               "value": 0.7220784562,
-              "ci_low": 0.3299483422,
-              "ci_high": 0.9507009398,
+              "ci_low": 0.3514015241,
+              "ci_high": 0.951201081,
               "n": 22,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10973,8 +10973,8 @@
             },
             "Milton": {
               "value": 0.4498014114,
-              "ci_low": 0.343401345,
-              "ci_high": 0.5388706355,
+              "ci_low": 0.3422623746,
+              "ci_high": 0.5381416563,
               "n": 208,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -10995,8 +10995,8 @@
             },
             "Nicole": {
               "value": 0.1363427761,
-              "ci_low": -0.1556627335,
-              "ci_high": 0.4071345151,
+              "ci_low": -0.1717367866,
+              "ci_high": 0.3951465481,
               "n": 55,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -11007,8 +11007,8 @@
             },
             "Sally": {
               "value": 0.5855151064,
-              "ci_low": 0.3893826449,
-              "ci_high": 0.6937954242,
+              "ci_low": 0.3918163827,
+              "ci_high": 0.6912266482,
               "n": 96,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -11020,8 +11020,8 @@
             },
             "Delta": {
               "value": 0.1348288257,
-              "ci_low": -0.030471376,
-              "ci_high": 0.2876421925,
+              "ci_low": -0.01655609578,
+              "ci_high": 0.2839654396,
               "n": 142,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
@@ -11033,8 +11033,8 @@
             },
             "Zeta": {
               "value": 0.2361487028,
-              "ci_low": 0.1286772801,
-              "ci_high": 0.3382545108,
+              "ci_low": 0.1223343323,
+              "ci_high": 0.3452242081,
               "n": 254,
               "unit": "Spearman rank correlation",
               "method": "county bootstrap 95%, 2000 draws",
