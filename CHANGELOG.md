@@ -4,6 +4,12 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
+## [Unreleased]
+
+### Added
+- The version 3.0.0 DOI (10.5281/zenodo.24514963) in `CITATION.cff` and the README, added after the
+  release. Documentation only.
+
 ## [3.0.0] - 2026-11-24
 
 A major version, as this file's rule requires, because published numbers change. Two parts: corrections to how

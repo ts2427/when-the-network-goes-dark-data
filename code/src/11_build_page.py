@@ -43,18 +43,19 @@ UPDATED = "2026-11-24"
 DRAFT = False  # published 2026-11-23 (Tim's decision); the site build's guards apply to a published page
 WORK_YAML = SITE / "content" / "work.yaml"
 WORK_URL = f"/analysis/{SLUG}/"
-# Public data repository and its Zenodo archive (DOIs read from the Zenodo records, 2026-11-23: v2.0.0 is record
-# 24477811, archiving tag v2.0.0 = commit f587207; v2.1.0 is record 24480432, archiving tag v2.1.0 = commit 0311a8b;
-# concept record 24477809 resolves to the latest).
+# Public data repository and its Zenodo archive (DOIs read from the Zenodo records): v2.0.0 is record 24477811,
+# archiving tag v2.0.0 = commit f587207; v2.1.0 is record 24480432, tag v2.1.0 = commit 0311a8b (2026-11-23);
+# v3.0.0 is record 24514963, tag v3.0.0 = commit 7d54a2b (2026-11-24); concept record 24477809 resolves to the latest.
 DATA_REPO = "https://github.com/ts2427/when-the-network-goes-dark-data"
-DATA_VERSION = "2.1.0"
+DATA_VERSION = "3.0.0"
 REPO_URL = f"{DATA_REPO}/tree/v{DATA_VERSION}"  # the files that produced the numbers on this page
 CONCEPT_DOI = "10.5281/zenodo.24477809"  # every version; resolves to the latest
 # Every archived version and its DOI, each read from its Zenodo record. Add a version only after its release.
-VERSION_DOIS = {"2.0.0": "10.5281/zenodo.24477811", "2.1.0": "10.5281/zenodo.24480432"}
+VERSION_DOIS = {"2.0.0": "10.5281/zenodo.24477811", "2.1.0": "10.5281/zenodo.24480432",
+                "3.0.0": "10.5281/zenodo.24514963"}
 VERSION_DOI = VERSION_DOIS[DATA_VERSION]  # the version whose files produced the numbers on this page
-ZENODO_FILE = {"url": "https://zenodo.org/api/records/24480432/files/ts2427/when-the-network-goes-dark-data-v2.1.0.zip/content",
-               "bytes": 120248159, "md5": "e8acfe396c601a799a7b406276e4e0c1"}
+ZENODO_FILE = {"url": "https://zenodo.org/api/records/24514963/files/ts2427/when-the-network-goes-dark-data-v3.0.0.zip/content",
+               "bytes": 121834282, "md5": "9a2e8a73e8069abd818b9d5d503ebab2"}
 DATASET_TITLE = ("When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)")
 TOLERANCE = 0.051  # figure values are rounded to one decimal
 # Methods note, v2.2.0 (docs/decisions.md, 2026-11-24): wording only; no interval changes.

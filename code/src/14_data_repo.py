@@ -603,6 +603,12 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
+## [Unreleased]
+
+### Added
+- The version {VERSION} DOI ({version_dois().get(VERSION, "")}) in `CITATION.cff` and the README, added after the
+  release. Documentation only.
+
 ## [{VERSION}] - {RELEASE_DATE}
 
 A major version, as this file's rule requires, because published numbers change. Two parts: corrections to how

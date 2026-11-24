@@ -215,8 +215,9 @@ def test_pointer_readme_names_the_repository_and_both_dois(tmp_path, monkeypatch
 
 
 def test_dois_are_the_checked_concept_and_version_records():
-    assert step11.CONCEPT_DOI == "10.5281/zenodo.24477809" and step11.VERSION_DOI == "10.5281/zenodo.24480432"
+    assert step11.CONCEPT_DOI == "10.5281/zenodo.24477809" and step11.VERSION_DOI == "10.5281/zenodo.24514963"
     c = step11.dataset_citations()
     assert c["general"].endswith(step11.CONCEPT_DOI) and c["version"].endswith(step11.VERSION_DOI)
-    assert "Version 2.1.0" in c["version"]
+    assert "Version 3.0.0" in c["version"]
+    assert step11.VERSION_DOIS["2.1.0"] == "10.5281/zenodo.24480432"
     assert step11.VERSION_DOIS["2.0.0"] == "10.5281/zenodo.24477811"
