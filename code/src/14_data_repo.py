@@ -35,7 +35,7 @@ VERSION = "3.0.0"
 RELEASE_DATE = "2026-11-24"
 CREATED = f"{RELEASE_DATE}T12:00:00-06:00"  # datapackage.json created: ISO 8601 date-time (v2.2.0)
 # Set to True only after CI has passed on both ubuntu-latest and windows-latest (README then says so).
-CI_PASSED_ON_BOTH = False
+CI_PASSED_ON_BOTH = True  # CI passed on ubuntu-latest and windows-latest, commit 51b7632 (2026-11-24)
 GITHUB = "https://github.com/ts2427/when-the-network-goes-dark-data"
 BOOTSTRAP_NOTE = importlib.import_module("11_build_page").BOOTSTRAP_METHODS
 PUBLIC_REQUIREMENTS = [

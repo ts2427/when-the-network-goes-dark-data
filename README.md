@@ -67,7 +67,7 @@ Exact attribution for each source: `SOURCES.md`. Variables: `CODEBOOK.md` and `d
 
 ## Computational requirements
 
-- Python 3.13 (tested with 3.13.2) on Windows 11; the code uses no platform-specific calls. CI runs the tests and a full rebuild on windows-latest and ubuntu-latest (badge above).
+- Python 3.13 (tested with 3.13.2 on Windows 11). Reproduced on Windows and Linux: CI rebuilds everything and runs the reproduction tests on windows-latest and ubuntu-latest with Python 3.13 on every push (badge above).
 - Packages: `requirements.txt` (exact versions of the packages used) and `requirements.lock` (every package, including dependencies, pinned with SHA-256 hashes for Windows, Linux and macOS; generated with `uv pip compile requirements.txt --universal --generate-hashes --python-version 3.13 -o requirements.lock`). For an exact environment: `python -m pip install --require-hashes -r requirements.lock`.
 - Memory: about 4 GB. Disk: about 200 MB for the repository and `build/`.
 - Run time: 12.4 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-23 (most of it is parsing the reports in step 3 and the bootstrap in step 10).
