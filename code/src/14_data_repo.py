@@ -605,10 +605,16 @@ any output.
 
 ## [{VERSION}] - {RELEASE_DATE}
 
-A major version, as this file's rule requires, because published numbers change. Two parts: a correction to
-Harvey's 2017 reports that also restores two excluded reports, and engineering hardening, which changes no finding.
+A major version, as this file's rule requires, because published numbers change. Two parts: corrections to how
+the FCC's reports and notices were read, which change published numbers, and engineering hardening, which changes
+no finding.
 
 ### Correction: Harvey Sep 4-5, 2017 table layout
+
+The Harvey correction, and the corrections that followed from rechecking every report and notice after it: two
+restored reports (Harvey Sep 3 and Nate, 2017), the reporting areas read from the FCC's notices (several storms),
+and one county name.
+
 - The FCC's Harvey reports for Sep 3, 4 and 5, 2017 print the previous day's sites out and % out before today's. The
   parser had read the previous day as the report's own figures, and put today's count and % into the damage and
   transport columns. It now detects the two-day header and reads today's columns. Tests from the reports' own text:
@@ -636,7 +642,8 @@ Harvey's 2017 reports that also restores two excluded reports, and engineering h
   ...", "York Washington D.C: ...", "Baton Rouge (East)", footnote digits, a sentence read as a name, two names with
   no comma), so those counties counted as outside the storm's reporting area. Fixed, with tests from the real
   notices (`code/tests/test_notices.py`) and one checked correction (`code/manifest/notice_name_corrections.csv`).
-  Every notice county name in the study states now matches a Census county or a listed FCC misspelling. Reports
+  Every notice county name in the study states now matches a Census county (ignoring spacing and punctuation) or a
+  listed FCC misspelling. Reports
   with counties outside the notice area go from 16 to 9; validation from 134 flagged and 36 ok to 126 and 44. No
   headline result changes.
 - County names: a name broken across lines in Harvey Sep 3's table ("MATAGORD A") takes the spelling of the

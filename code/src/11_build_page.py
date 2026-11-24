@@ -1314,9 +1314,15 @@ def v2_sections(r: dict) -> str:
     none = [x["storm"] for x in sens if "note" in x]
     parts = [f"{x['storm']}'s last report without a serious flag is {x['last_report_date']}, with "
              f"{n0(x['sites_out_at_last_report'])} sites out ({pct1(x['share_of_peak'])} of its peak)" for x in moved]
-    add("\n**Sensitivity.** Without reports carrying a serious validation flag: " + "; ".join(parts) +
-        (f". {_and(none)} cannot be shown, because every one of their reports carries a serious flag." if none else ".") +
-        " Every other storm is unchanged.\n")
+    lead = "\n**Sensitivity.** Without reports carrying a serious validation flag: "
+    cannot = f"{_and(none)} cannot be shown, because every one of their reports carries a serious flag"
+    if parts:  # 2026-11-24: worded for each case (the sentence had kept a bare ': .' when no storm moved)
+        text = "; ".join(parts) + "." + (f" {cannot}." if none else "") + " Every other storm is unchanged."
+    elif none:
+        text = f"{cannot}; every other storm's last report is unchanged."
+    else:
+        text = "every storm's last report is unchanged."
+    add(lead + text + "\n")
     add("**What it means.** \"Still out in the FCC's last report\" counts sites at the moment the public reporting "
         f"stopped; it does not say how long they stayed out afterwards. {FINAL_REPORT_SENTENCE} The upper bound assumes every county that left the "
         "reports while still out stayed out, which the reports cannot confirm.\n")
@@ -1669,8 +1675,9 @@ def last_report_clause(r: dict) -> str:
     if "v2_1_public_record_misses" not in r:
         return ""
     h = r["v2_1_public_record_misses"]["headlines"]
-    every = "all " if h["n_storms_with_sites_out_at_last_report"] == h["n_storms"] else ""
-    return (f", and in {every}{h['n_storms']} storms the FCC's last public report still showed cell sites out: "
+    n_out, n = h["n_storms_with_sites_out_at_last_report"], h["n_storms"]
+    where = f"in all {n} storms" if n_out == n else f"in {n_out} of {n} storms"
+    return (f", and {where} the FCC's last public report still showed cell sites out: "
             f"{h['sites_out_at_last_reports_headline']['value']:,.0f} in total")
 
 
