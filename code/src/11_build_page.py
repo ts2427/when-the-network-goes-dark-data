@@ -1565,10 +1565,21 @@ def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame
         ", ".join(f"{n0(v)} {STATUS_LABELS.get(k, k.replace('_', ' '))}" for k, v in val["status_counts"].items()) +
         ". Flags on the reports used, by type (a report can carry several):\n")
     add(table(["Flag", "Kind", "Reports"], [(f["flag"], f["class"], f["n_reports"]) for f in val["flag_types_in_reports_used"]]))
-    for k in val["known_fcc_inconsistencies"]:
-        m = re.search(r"headline ([\d.]+)% vs ([\d.]+)%", k["detail"])
-        add(f"\nThe known FCC inconsistency: {k['storm']}, {k['report_date']} ({k['doc_id']}), whose headline states "
-            f"{m.group(1)}% of sites out against {m.group(2)}% computed from its own totals; the computed share is used.")
+    known = val["known_fcc_inconsistencies"]
+    if known:
+        add(f"\nThe known FCC inconsistenc{'y' if len(known) == 1 else 'ies'}, each checked against the PDF:")
+    for k in known:
+        head = re.search(r"headline ([\d.]+)% vs ([\d.]+)%", k["detail"])
+        total = re.search(r"(\w[\w ]*?) sites_served: printed total ([\d,]+) vs ([\d,]+) from its rows", k["detail"])
+        if head:
+            add(f"\n- {k['storm']}, {k['report_date']} ({k['doc_id']}): the headline states {head.group(1)}% of sites "
+                f"out against {head.group(2)}% computed from its own totals; the computed share is used.")
+        elif total:
+            add(f"\n- {k['storm']}, {k['report_date']} ({k['doc_id']}): the printed {total.group(1)} total of sites "
+                f"served is {total.group(2)}, while its county rows, each confirmed in the PDF, add up to "
+                f"{total.group(3)}; the rows are used.")
+        else:
+            raise ValueError(f"known FCC inconsistency with no page wording: {k['detail']}")
     add(f"\nEach report's flags and reasons are in the snapshot's "
         f"[`data/analysis/validation/validation_dirs.csv`]({DATA_REPO}/blob/v{DATA_VERSION}/data/analysis/validation/"
         f"validation_dirs.csv). Excluded reports:\n")

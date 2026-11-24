@@ -32,6 +32,12 @@ list, or when rows are outside the storm's notice area (decided 2026-11-22). Suc
 printed; the second reading above confirms each was read correctly. Rows with no printed % (Sally 2020) skip
 the two percent checks.
 
+Two checks stop the build outright, for every report including excluded ones (correction, 2026-11-24, after Harvey's
+Sep 4-5, 2017 two-day table was misread):
+  * a count that is not a whole number (sites served or out, a cause, backup power, in a county row or a total)
+  * a previous-day column (two-day layout) that differs from the previous day's report for the same county (sites
+    out and % out), or a two-day report whose previous day has no report or lacks one of its counties
+
 Status: fail > known_fcc_inconsistency > flagged > ok. Only "fail" stops the build.
 The page uses pct_out_used (always computed from county rows) and records stated_pct_out beside it.
 
@@ -56,6 +62,10 @@ OVER_EXCEPTIONS = ROOT / "manifest" / "cause_exceptions.csv"
 LIST_EXCEPTIONS = ROOT / "manifest" / "county_list_exceptions.csv"
 EXCLUDED = ROOT / "manifest" / "excluded_reports.csv"
 HEADLINE_EXCEPTIONS = ROOT / "manifest" / "known_fcc_inconsistencies.csv"
+# A printed state total that its own county rows do not add up to, checked against the PDF (2026-11-24: Harvey Sep 4
+# and 5, 2017 print Texas sites served 4,200 over the same rows that Sep 3 totals 4,199). Applies only when every row
+# of the state is confirmed by the second reading; gives known_fcc_inconsistency. An entry that no longer matches fails.
+TOTAL_EXCEPTIONS = ROOT / "manifest" / "known_total_inconsistencies.csv"
 
 PRINTED = ["sites_served", "sites_out", "pct_out", *CAUSES, "on_backup_power"]
 OVER_FIELDS = ["doc_id", "page", "state", "county", *PRINTED, "checked_on"]
@@ -137,6 +147,45 @@ def check_totals(g: pd.DataFrame, t: pd.DataFrame, overall: pd.DataFrame | None 
     return fails
 
 
+COUNT_COLUMNS = ["sites_served", "sites_out", *CAUSES, "on_backup_power"]
+
+
+def non_integer_counts(*tables: pd.DataFrame) -> list[str]:
+    """Every count that is not a whole number, in county rows and totals (build-stopping; 2026-11-24)."""
+    bad = []
+    for t in tables:
+        for col in [c for c in COUNT_COLUMNS if c in t.columns]:
+            v = pd.to_numeric(t[col], errors="coerce")
+            for r in t[v.notna() & (v % 1 != 0)].itertuples():
+                bad.append(f"{r.doc_id} {getattr(r, 'state', '')}/{getattr(r, 'county', 'TOTAL')} {col} = {getattr(r, col)}")
+    return bad
+
+
+def previous_day_mismatches(rows: pd.DataFrame, reports: pd.DataFrame) -> tuple[list[str], dict]:
+    """Two-day reports (prev_sites_out printed): each county's previous-day figures must equal the previous day's
+    report of the same storm (sites out exactly, % out within 0.05). Returns (problems, rows checked per report)."""
+    if "prev_sites_out" not in rows.columns:
+        return [], {}
+    problems, checked = [], {}
+    for doc, g in rows[rows.prev_sites_out.notna()].groupby("doc_id"):
+        day = (pd.Timestamp(g.report_date.iloc[0]) - pd.Timedelta(1, unit="D")).date().isoformat()
+        prev_docs = reports[(reports.storm_name == g.storm_name.iloc[0]) & (reports.report_date == day)].doc_id
+        if len(prev_docs) != 1:
+            problems.append(f"{doc}: {len(prev_docs)} reports on the previous day ({day}); expected 1")
+            continue
+        p = rows[rows.doc_id == prev_docs.iloc[0]].assign(_k=lambda d: d.state.map(name_key) + "|" + d.county.map(name_key))
+        p = p.drop_duplicates("_k").set_index("_k")
+        for r in g.itertuples():
+            k = f"{name_key(r.state)}|{name_key(r.county)}"
+            if k not in p.index:
+                problems.append(f"{doc} {r.state}/{r.county}: not in the previous day's report {prev_docs.iloc[0]}")
+            elif r.prev_sites_out != p.at[k, "sites_out"] or abs(r.prev_pct_out - p.at[k, "pct_out"]) > 0.05:
+                problems.append(f"{doc} {r.state}/{r.county}: previous day {r.prev_sites_out:g} ({r.prev_pct_out:g}%), "
+                                f"{prev_docs.iloc[0]} says {p.at[k, 'sites_out']:g} ({p.at[k, 'pct_out']:g}%)")
+        checked[doc] = (prev_docs.iloc[0], len(g))
+    return problems, checked
+
+
 def check_row_percent(g: pd.DataFrame) -> list[str]:
     bad = []
     for r in g.itertuples():
@@ -165,6 +214,9 @@ def unconfirmed_rows(g: pd.DataFrame, lines: pd.DataFrame) -> list[str]:
     for row in g.to_dict("records"):
         skip = {"pct_out"} if row.get("pct_printed", True) is False else set()
         want = [float(row[col]) for col in PRINTED if col not in skip and pd.notna(row[col])]
+        if pd.notna(row.get("prev_sites_out")):  # two-day layout: served, previous out and %, today's out and %
+            want = [float(row["sites_served"]), float(row["prev_sites_out"]), float(row["prev_pct_out"]),
+                    *want[1:]]
         for tokens in split:
             head, tail = tokens[:-len(want)], tokens[-len(want):]
             if not head or not all(NUMBER_RE.fullmatch(tok) for tok in tail):
@@ -270,6 +322,33 @@ def check_causes(g: pd.DataFrame, gap: pd.Series, allowed: pd.DataFrame,
     return fails, flags
 
 
+TOTAL_FAIL_RE = re.compile(r"(?P<state>.+) (?P<col>[a-z_]+) (?P<sum>-?\d+) vs printed total (?P<printed>-?\d+)")
+
+
+def apply_total_exceptions(fails: list[str], entries: pd.DataFrame, unconfirmed: set) -> tuple[list[str], list[str]]:
+    """Total failures matched by a checked entry (state, column, printed total, rows' sum), with every row of that
+    state confirmed by the second reading, become known inconsistencies. Returns (failures, known). An entry that
+    matches nothing, or lacks its page or check date, fails."""
+    kept, known, used = [], [], set()
+    rows = entries.to_dict("records")
+    for f in fails:
+        m = TOTAL_FAIL_RE.fullmatch(f)
+        hit = next((i for i, e in enumerate(rows) if m and name_key(e["state"]) == name_key(m["state"])
+                    and e["column"] == m["col"] and same(e["rows_sum"], float(m["sum"]))
+                    and same(e["printed_total"], float(m["printed"]))), None)
+        if hit is None or any(name_key(u.split("/")[0]) == name_key(m["state"]) for u in unconfirmed):
+            kept.append(f)
+        elif incomplete(rows[hit]):
+            kept.append(f"total exception lacks page or checked_on: {f}")
+        else:
+            used.add(hit)
+            known.append(f"{m['state']} {m['col']}: printed total {int(float(m['printed'])):,} vs "
+                         f"{int(float(m['sum'])):,} from its rows (checked, every row confirmed)")
+    kept += [f"total exception no longer matches: {e['state']} {e['column']} {e['printed_total']}"
+             for i, e in enumerate(rows) if i not in used]
+    return kept, known
+
+
 def check_headline(stated, computed, t: pd.DataFrame, known: pd.DataFrame) -> tuple[list[str], list[str]]:
     """Returns (failures, known inconsistencies)."""
     if pd.isna(stated):
@@ -305,7 +384,7 @@ def report_label(report) -> str:
 
 
 def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlisted_allowed,
-             pdf_lines, overall_totals=None, excluded=None) -> tuple[pd.DataFrame, pd.DataFrame]:
+             pdf_lines, overall_totals=None, excluded=None, total_allowed=None) -> tuple[pd.DataFrame, pd.DataFrame]:
     excluded = excluded if excluded is not None else pd.DataFrame(columns=["doc_id"])
     results, summary = [], []
     for _, report in reports.iterrows():
@@ -317,7 +396,8 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
             g[col] = pd.to_numeric(g[col]).astype(float)
             t[col] = pd.to_numeric(t[col]).astype(float)
 
-        fails, flags, unconfirmed = [], [], set()
+        fails, flags, unconfirmed, known_totals = [], [], set(), []
+        total_entries = for_report(total_allowed if total_allowed is not None else pd.DataFrame(), doc, ["doc_id"])
         if g.empty:
             fails.append("zero county rows")
         else:
@@ -334,9 +414,12 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
             unconfirmed = set(unconfirmed_rows(g, for_report(pdf_lines, doc, ["doc_id", "line"])))
             if t.empty and ov.empty and not unconfirmed:
                 flags.append("no_printed_totals: the report prints no totals; every row confirmed by second reading")
-                fails += [f for f in check_totals(g, t, ov) if not f.startswith("missing state total")]
+                more_fails, known_totals = apply_total_exceptions(
+                    [f for f in check_totals(g, t, ov) if not f.startswith("missing state total")], total_entries,
+                    unconfirmed)
+                fails += more_fails
             else:
-                total_fails = check_totals(g, t, ov)
+                total_fails, known_totals = apply_total_exceptions(check_totals(g, t, ov), total_entries, unconfirmed)
                 missing = [f for f in total_fails if f.startswith("missing state total: ")]
                 state = missing[0].split(": ", 1)[1] if len(missing) == 1 else None
                 confirmed = state and not any(u.startswith(f"{state}/") for u in unconfirmed)
@@ -365,6 +448,7 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
         computed = 100 * g.sites_out.sum() / served if served else None
         stated = report["pct_sites_out_stated"]
         more_fails, known = check_headline(stated, computed, t, for_report(headline_allowed, doc, HEADLINE_FIELDS))
+        known = known_totals + known
         mismatch = [f for f in more_fails if f.startswith("overall % out")]
         if mismatch and not fails and not unconfirmed:
             flags.append(f"headline_mismatch: stated {stated:.2f}, computed {computed:.2f} (computed used)")
@@ -410,10 +494,19 @@ def main():
     if read["reports"].empty:
         print("FAIL: no reports to validate")
         sys.exit(1)
+    stop = non_integer_counts(read["county_rows"], read["state_totals"], read["overall_totals"])
+    prev_problems, prev_checked = previous_day_mismatches(read["county_rows"], read["reports"])
+    stop += prev_problems
+    if stop:
+        print("FAIL (build stops): non-integer counts or previous-day columns that disagree:\n  " + "\n  ".join(stop))
+        sys.exit(1)
+    for doc, (prev, n) in prev_checked.items():
+        print(f"{doc}: previous-day column matches {prev} for all {n} counties")
     results, summary = validate(read["county_rows"], read["state_totals"], read["reports"], read["county_lists"],
                                 pd.read_csv(OVER_EXCEPTIONS), pd.read_csv(HEADLINE_EXCEPTIONS),
                                 pd.read_csv(LIST_EXCEPTIONS), read["pdf_lines"], read["overall_totals"],
-                                pd.read_csv(EXCLUDED, dtype=str, keep_default_na=False))
+                                pd.read_csv(EXCLUDED, dtype=str, keep_default_na=False),
+                                total_allowed=pd.read_csv(TOTAL_EXCEPTIONS))
     OUTPUT.mkdir(exist_ok=True)
     write_csv(results, OUTPUT / "validation_dirs.csv", ["sites_unattributed", "sites_overattributed"])
     summary.to_csv(OUTPUT / "validation_summary.csv", index=False, lineterminator="\n")  # already whole; "n/a" text

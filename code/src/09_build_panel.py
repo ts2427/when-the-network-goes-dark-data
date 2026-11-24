@@ -43,9 +43,9 @@ PUBLIC_COLUMNS = ["storm_key", "nhc_id", "storm", "dirs_activation_date", "rule_
                   "as_of_utc", "as_of_imputed", "report_status", "state", "county", "fips", "sites_served", "sites_out",
                   "pct_out", "pct_printed", "out_damage", "out_transport", "out_power", "on_backup_power",
                   "out_unattributed", "out_overattributed", "area_status", "fema_declared", "time_flag"]
-# Written as integers in the CSV (v2.2.0). out_transport is not: it holds non-whole values in two Harvey 2017 reports.
-PANEL_COUNTS = ["sites_served", "sites_out", "out_damage", "out_power", "on_backup_power", "out_unattributed",
-                "out_overattributed"]
+# Written as integers in the CSV (v2.2.0).
+PANEL_COUNTS = ["sites_served", "sites_out", "out_damage", "out_transport", "out_power", "on_backup_power",
+                "out_unattributed", "out_overattributed"]
 STORM_COUNTS = ["n_reports", "n_counties"]
 
 

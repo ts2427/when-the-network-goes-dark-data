@@ -28,7 +28,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `pct_out` | number | percent | Percent of sites out, as printed (computed from the two counts where not printed). | Where pct_printed is false the value is computed, not printed. |
 | `pct_printed` | boolean |  | True when the report printed the percent column. |  |
 | `out_damage` | integer | sites | Sites out due to damage, as reported. | Blank where the report has no cause columns. Causes can overlap (see out_overattributed). |
-| `out_transport` | number | sites | Sites out due to transport (backhaul), as reported. | Blank where the report has no cause columns. |
+| `out_transport` | integer | sites | Sites out due to transport (backhaul), as reported. | Blank where the report has no cause columns. |
 | `out_power` | integer | sites | Sites out due to power, as reported. | Blank where the report has no cause columns. |
 | `on_backup_power` | integer | sites | Sites operating on backup power, as reported. | Blank where the report has no such column. Not a measure of sites about to fail. |
 | `out_unattributed` | integer | sites | Sites out with no cause given: sites_out minus the three causes, never below 0. | Blank where the report has no cause columns. Kept apart from out_overattributed; never net them. |
@@ -87,7 +87,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `pct_out` | number | percent | Percent of sites out, as printed (computed from the two counts where not printed). | Where pct_printed is false the value is computed, not printed. |
 | `pct_printed` | boolean |  | True when the report printed the percent column. |  |
 | `out_damage` | integer | sites | Sites out due to damage, as reported. | Blank where the report has no cause columns. Causes can overlap (see out_overattributed). |
-| `out_transport` | number | sites | Sites out due to transport (backhaul), as reported. | Blank where the report has no cause columns. |
+| `out_transport` | integer | sites | Sites out due to transport (backhaul), as reported. | Blank where the report has no cause columns. |
 | `out_power` | integer | sites | Sites out due to power, as reported. | Blank where the report has no cause columns. |
 | `on_backup_power` | integer | sites | Sites operating on backup power, as reported. | Blank where the report has no such column. Not a measure of sites about to fail. |
 | `out_unattributed` | integer | sites | Sites out with no cause given: sites_out minus the three causes, never below 0. | Blank where the report has no cause columns. Kept apart from out_overattributed; never net them. |
@@ -149,7 +149,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
 ## `data/analysis/panel_analysis_ready.parquet`
 
-The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 cf493ac3b57c25acfdfd1d301be13cd493818879836932cd050929c27450441d; 665735 bytes.
+The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 597be5374e5f20ac615240f8177e4c8dbe6ca90b16af7b20816fc33855ffda61; 665579 bytes.
 
 Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
@@ -173,7 +173,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `pct_out` | number | percent | Percent of sites out, as printed (computed from the two counts where not printed). | Where pct_printed is false the value is computed, not printed. |
 | `pct_printed` | boolean |  | True when the report printed the percent column. |  |
 | `out_damage` | integer | sites | Sites out due to damage, as reported. | Blank where the report has no cause columns. Causes can overlap (see out_overattributed). |
-| `out_transport` | number | sites | Sites out due to transport (backhaul), as reported. | Blank where the report has no cause columns. |
+| `out_transport` | integer | sites | Sites out due to transport (backhaul), as reported. | Blank where the report has no cause columns. |
 | `out_power` | integer | sites | Sites out due to power, as reported. | Blank where the report has no cause columns. |
 | `on_backup_power` | integer | sites | Sites operating on backup power, as reported. | Blank where the report has no such column. Not a measure of sites about to fail. |
 | `out_unattributed` | integer | sites | Sites out with no cause given: sites_out minus the three causes, never below 0. | Blank where the report has no cause columns. Kept apart from out_overattributed; never net them. |

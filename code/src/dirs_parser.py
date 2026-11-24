@@ -47,7 +47,7 @@ _STATE_RE = ("|".join(sorted((re.escape(s) for s in STATES), key=len, reverse=Tr
 _NUM = r"-?[\d,]+(?:\.\d+)?%?"
 ROW_RE = re.compile(rf"^\s*(?P<state>{_STATE_RE})\s+(?P<county>[A-Za-z][A-Za-z .'\-]*?)\s+(?P<nums>(?:{_NUM}\s+){{1,7}}{_NUM})\s*$",
                     re.IGNORECASE)
-TOTAL_ROW_RE = re.compile(rf"^\s*TOTAL\s+(?:-\s+)?(?P<nums>(?:{_NUM}\s+){{1,7}}{_NUM})\s*$")
+TOTAL_ROW_RE = re.compile(rf"^\s*(?:TOTAL|Total)\s+(?:-\s+)?(?P<nums>(?:{_NUM}\s+){{1,7}}{_NUM})\s*$")
 FOOTER_RE = re.compile(r"As prepared by the Federal Communications Commission:\s*\w+\s+\d{1,2},?\s*\d{4}\s*"
                        r"(?:\d{1,2}:\d{2}\s*[ap]\.m\.\s*[A-Z]{3})?|Pa ge \| \d+")
 TOTAL_ALONE_RE = re.compile(r"^\s*TOTAL\s*(?:-\s*)?$")
@@ -92,6 +92,14 @@ class ParsedReport:
     as_of_date: str | None = None  # "as of September 28, 2024, at 9:00 a.m. EDT": the snapshot time, ISO date
     as_of_time: str | None = None  # 24-hour "HH:MM"
     as_of_tz: str = ""  # as printed (EDT, EST) or "" when not printed
+    previous_day: str | None = None  # two-day layout (Harvey Sep 3-5, 2017): the earlier column's date, "MM/DD"
+    today: str | None = None  # and the report day's, as printed in the header
+
+
+# Two-day layout (correction, 2026-11-24): "Cell Sites Out on 09/03 | Percent Out on 09/03 | Cell Sites Out Today
+# (09/04) | Percent Out Today (09/04)". Each row is served, previous out, previous %, today's out, today's %.
+TWO_DAY_RE = re.compile(r"Out\s+on\s+(?P<prev>\d{1,2}/\d{1,2})\b.{0,120}?Out\s+Today\s*\(?(?P<today>\d{1,2}/\d{1,2})",
+                        re.IGNORECASE | re.DOTALL)
 
 
 AS_OF_RE = re.compile(r"\bas of\s+(?:(?P<date>[A-Z][a-z]+\.? \d{1,2},? \d{4}),?\s+(?:at\s+)?)?"
@@ -160,10 +168,18 @@ def _to_num(tok: str) -> float:
     return float(tok.replace(",", "").replace("%", ""))
 
 
-def _row_from_tokens(state: str, county: str, toks: list[str]) -> dict | None:
+def _row_from_tokens(state: str, county: str, toks: list[str], two_day: bool = False) -> dict | None:
     pct_idx = [i for i, t in enumerate(toks) if t.endswith("%")]
     nums = [_to_num(t) for t in toks]
-    if pct_idx:
+    prev_out = prev_pct = None
+    if two_day:  # served, previous out, previous %, today's out, today's %: today's are the report's figures
+        if len(pct_idx) != 2 or pct_idx[0] < 2 or pct_idx[1] != pct_idx[0] + 2:
+            return None
+        i, k = pct_idx
+        served, prev_out, prev_pct, out, pct = nums[i - 2], nums[i - 1], nums[i], nums[k - 1], nums[k]
+        rest = [n for j, n in enumerate(nums) if j > k]
+        printed = True
+    elif pct_idx:
         i = pct_idx[0]
         if i < 2:
             return None
@@ -180,6 +196,8 @@ def _row_from_tokens(state: str, county: str, toks: list[str]) -> dict | None:
            "out_damage": None, "out_transport": None, "out_power": None, "on_backup_power": None}
     for key, val in zip(["out_damage", "out_transport", "out_power", "on_backup_power"], rest):
         row[key] = val
+    if two_day:
+        row["prev_sites_out"], row["prev_pct_out"] = prev_out, prev_pct
     return row
 
 
@@ -201,6 +219,10 @@ def parse_text(text: str) -> ParsedReport:
     m = CABLE_RE.search(text)
     if m:
         rep.cable_wireline_subs_out = int((m.group("n") or m.group("n2")).replace(",", ""))
+    m = TWO_DAY_RE.search(text)
+    if m:
+        rep.previous_day, rep.today = m.group("prev"), m.group("today")
+    two_day = rep.today is not None
     table_rows = []  # county rows since the last total
     lines = text.splitlines()
     listed_states = {c["state"] for c in rep.county_list}
@@ -228,7 +250,7 @@ def parse_text(text: str) -> ParsedReport:
         total = TOTAL_ROW_RE.match(line)
         if total:
             states = list(dict.fromkeys(r["state"] for r in table_rows))
-            row = _row_from_tokens(states[-1], "TOTAL", total.group("nums").split()) if states else None
+            row = _row_from_tokens(states[-1], "TOTAL", total.group("nums").split(), two_day) if states else None
             if row and len(states) > 1:
                 last = sum(r["sites_served"] for r in table_rows if r["state"] == states[-1])
                 every = sum(r["sites_served"] for r in table_rows)
@@ -249,7 +271,7 @@ def parse_text(text: str) -> ParsedReport:
         toks = m.group("nums").split()
         state = only_state or CODE_TO_STATE.get(m.group("state"), m.group("state"))
         county = f"{held} {m.group('county').strip()}" if held else m.group("county")
-        row = _row_from_tokens(state, county, toks)
+        row = _row_from_tokens(state, county, toks, two_day)
         if row is None:
             rep.warnings.append(f"unparsed row: {line.strip()}")
             continue

@@ -20,8 +20,8 @@ STRINGS = ["storm_key", "nhc_id", "storm", "dirs_activation_date", "rule_period"
            "report_status", "state", "county", "fips", "area_status", "time_flag", "eaglei_match", "eaglei_mcc_flag",
            "eaglei_coverage_flag", "wind_zone", "track_source", "landfall_source", "bdc_release", "bdc_role",
            "bdc_mobile_half_group", "first_report_date", "last_report_date", "censoring"]
-COUNTS = ["sites_served", "sites_out", "out_damage", "out_power", "on_backup_power", "out_unattributed",
-          "out_overattributed", "eaglei_customers_out", "eaglei_customers_out_6h", "eaglei_customers_out_12h",
+COUNTS = ["sites_served", "sites_out", "out_damage", "out_transport", "out_power", "on_backup_power",
+          "out_unattributed", "out_overattributed", "eaglei_customers_out", "eaglei_customers_out_6h", "eaglei_customers_out_12h",
           "eaglei_customers_out_24h", "eaglei_customers_out_zero_filled", "eaglei_modeled_customers",
           "eaglei_max_out_in_window", "acs_households", "acs_population", "bdc_mobile_half", "bdc_mobile_any",
           "bdc_fixed_any_excl_near_universal", "bdc_fixed_any", "bdc_fixed_half", "bdc_fixed_half_excl_near_universal",

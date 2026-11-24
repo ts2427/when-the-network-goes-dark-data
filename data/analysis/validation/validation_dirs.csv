@@ -15,9 +15,9 @@ DOC-346445A1,flagged,55,False,4.215786776012301,4.2,4.215786776012301,,,,1 rows 
 DOC-346455A1,flagged,55,False,3.7929267042542287,3.8,3.7929267042542287,,,,1 rows inside_spelling_variant
 DOC-346475A1,flagged,64,False,2.3826865050463013,2.4,2.3826865050463013,,,,2 rows inside_spelling_variant
 DOC-346477A1,flagged,64,False,2.0081157007595465,2.0,2.0081157007595465,,,,2 rows inside_spelling_variant
-DOC-346478A1,excluded,13,False,3.57227911407478,2.4,3.57227911407478,,,"missing state total: Texas; not confirmed by second reading of the PDF: Texas/MATAGORD A, Texas/SAN PATRICIO; overall % out 3.57 vs stated 2.40",1 rows outside_notice_area
-DOC-346482A1,flagged,13,False,2.42914979757085,1.6,2.42914979757085,,,,"no_printed_totals: the report prints no totals; every row confirmed by second reading; 1 rows outside_notice_area; headline_mismatch: stated 1.60, computed 2.43 (computed used)"
-DOC-346499A1,flagged,13,False,1.6670635865682306,1.73,1.6670635865682306,,,,no_printed_totals: the report prints no totals; every row confirmed by second reading; 1 rows outside_notice_area
+DOC-346478A1,excluded,13,False,2.42914979757085,2.4,2.42914979757085,,,"not confirmed by second reading of the PDF: Texas/MATAGORD A, Texas/SAN PATRICIO",1 rows outside_notice_area
+DOC-346482A1,known_fcc_inconsistency,13,False,1.6670635865682306,1.6,1.6670635865682306,,,,"Texas sites_served: printed total 4,200 vs 4,199 from its rows (checked, every row confirmed); 1 rows outside_notice_area"
+DOC-346499A1,known_fcc_inconsistency,13,False,1.738509168849726,1.73,1.738509168849726,,,,"Texas sites_served: printed total 4,200 vs 4,199 from its rows (checked, every row confirmed); 1 rows outside_notice_area"
 DOC-346607A1,flagged,44,False,55.21557719054242,55.2,55.21557719054242,,,,4 rows outside_notice_area
 DOC-346626A1,flagged,81,False,38.93008474576271,38.9,38.93008474576271,,,,5 rows outside_notice_area
 DOC-346632A1,flagged,81,False,31.135135135135137,31.1,31.135135135135137,,,,5 rows outside_notice_area

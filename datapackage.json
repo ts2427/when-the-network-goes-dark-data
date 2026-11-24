@@ -175,7 +175,7 @@
           },
           {
             "name": "out_transport",
-            "type": "number",
+            "type": "integer",
             "description": "Sites out due to transport (backhaul), as reported.",
             "unit": "sites",
             "limitations": "Blank where the report has no cause columns."
@@ -241,8 +241,8 @@
           ""
         ]
       },
-      "hash": "sha256:56374ee1179838962c5185393da63c1fe7b346b15dd74ae6eb672a5ee5d9b423",
-      "bytes": 1775618
+      "hash": "sha256:4343544cbd8d7fb72fee981fa40d7712d61c1f4f66bdb0b63164e26edfab89bf",
+      "bytes": 1761809
     },
     {
       "name": "storms",
@@ -500,7 +500,7 @@
           },
           {
             "name": "out_transport",
-            "type": "number",
+            "type": "integer",
             "description": "Sites out due to transport (backhaul), as reported.",
             "unit": "sites",
             "limitations": "Blank where the report has no cause columns."
@@ -903,8 +903,8 @@
           ""
         ]
       },
-      "hash": "sha256:be404099f0d3d69e8806789796af92779288b91db164b3aaabce3439031f4595",
-      "bytes": 6383287
+      "hash": "sha256:cf275599be0f6576a065b53ef7469d3ca52fd8b80e0ba04a73f8f6b592fd1130",
+      "bytes": 6383738
     },
     {
       "name": "panel_analysis_ready_parquet",
@@ -913,7 +913,7 @@
       "format": "parquet",
       "mediatype": "application/vnd.apache.parquet",
       "title": "Analysis-ready panel (Parquet)",
-      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 cf493ac3b57c25acfdfd1d301be13cd493818879836932cd050929c27450441d; 665735 bytes.",
+      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 597be5374e5f20ac615240f8177e4c8dbe6ca90b16af7b20816fc33855ffda61; 665579 bytes.",
       "schema": {
         "fields": [
           {
@@ -1042,7 +1042,7 @@
           },
           {
             "name": "out_transport",
-            "type": "number",
+            "type": "integer",
             "description": "Sites out due to transport (backhaul), as reported.",
             "unit": "sites",
             "limitations": "Blank where the report has no cause columns."
@@ -1531,8 +1531,8 @@
       "mediatype": "application/json",
       "title": "Every number on the page",
       "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant digits.",
-      "hash": "sha256:d8cb5076377ceb1491a67d1685800021eb46bec665fccc5930de6ce19d229cf9",
-      "bytes": 984627
+      "hash": "sha256:528943378d1373f662b9f4258f24bbad3d320f737d8d71198c442343cbe82336",
+      "bytes": 986019
     },
     {
       "name": "analysis_plan_as_committed",

@@ -606,17 +606,17 @@
      "doc_id": "DOC-346482A1",
      "report_date": "2017-09-04",
      "days_since_landfall": 10.13541667,
-     "sites_out": 102.0,
+     "sites_out": 70.0,
      "sites_served": 4199.0,
-     "pct_out": 2.429149798
+     "pct_out": 1.667063587
     },
     {
      "doc_id": "DOC-346499A1",
      "report_date": "2017-09-05",
      "days_since_landfall": 11.13541667,
-     "sites_out": 70.0,
+     "sites_out": 73.0,
      "sites_served": 4199.0,
-     "pct_out": 1.667063587
+     "pct_out": 1.738509169
     }
    ],
    "Irma": [
@@ -1980,10 +1980,10 @@
   },
   "validation": {
    "status_counts": {
-    "flagged": 134,
+    "flagged": 132,
     "ok": 36,
     "excluded": 7,
-    "known_fcc_inconsistency": 1
+    "known_fcc_inconsistency": 3
    },
    "flag_types_in_reports_used": [
     {
@@ -1992,19 +1992,19 @@
      "n_reports": 34
     },
     {
-     "flag": "Stated headline differs from the computed share (computed used)",
+     "flag": "County rows outside the FCC notice's area",
      "class": "serious",
-     "n_reports": 11
+     "n_reports": 10
     },
     {
-     "flag": "County rows outside the FCC notice's area",
+     "flag": "Stated headline differs from the computed share (computed used)",
      "class": "serious",
      "n_reports": 10
     },
     {
      "flag": "No totals printed (every row confirmed)",
      "class": "serious",
-     "n_reports": 3
+     "n_reports": 1
     },
     {
      "flag": "One state printed no total (its rows all confirmed)",
@@ -2037,6 +2037,11 @@
      "n_reports": 3
     },
     {
+     "flag": "Known FCC inconsistency in a printed state total (rows confirmed)",
+     "class": "benign",
+     "n_reports": 2
+    },
+    {
      "flag": "Known FCC inconsistency in the headline",
      "class": "benign",
      "n_reports": 1
@@ -2053,6 +2058,18 @@
      "storm": "Helene",
      "report_date": "2024-10-01",
      "detail": "headline 21.7% vs 14.49% from the report's own totals; listed more than once by the FCC: Virginia/Franklin; 39 rows short of sites out (142 sites unattributed)"
+    },
+    {
+     "doc_id": "DOC-346482A1",
+     "storm": "Harvey",
+     "report_date": "2017-09-04",
+     "detail": "Texas sites_served: printed total 4,200 vs 4,199 from its rows (checked, every row confirmed); 1 rows outside_notice_area"
+    },
+    {
+     "doc_id": "DOC-346499A1",
+     "storm": "Harvey",
+     "report_date": "2017-09-05",
+     "detail": "Texas sites_served: printed total 4,200 vs 4,199 from its rows (checked, every row confirmed); 1 rows outside_notice_area"
     }
    ]
   }
@@ -3985,7 +4002,7 @@
     "n": 21
    },
    "without_flagged_reports": {
-    "n_storms_with_an_unflagged_report": 9,
+    "n_storms_with_an_unflagged_report": 10,
     "storms": {
      "AL062018_2018-09-12": {
       "storm": "Florence",
@@ -3993,6 +4010,13 @@
       "peak_sites_out": 264.0,
       "peak_pct_out": 2.227284232,
       "n_reports": 6
+     },
+     "AL092017_2017-08-25": {
+      "storm": "Harvey",
+      "peak_report_date": "2017-09-05",
+      "peak_sites_out": 73.0,
+      "peak_pct_out": 1.738509169,
+      "n_reports": 2
      },
      "AL092022_2022-09-27": {
       "storm": "Ian",
@@ -4051,7 +4075,7 @@
       "n_reports": 1
      }
     },
-    "median_peak_pct_out": 3.56179597
+    "median_peak_pct_out": 2.894540101
    },
    "without_serious_flag_reports": {
     "n_storms": 17,
@@ -4356,7 +4380,7 @@
     "note": "The FCC's reporting area narrows as outages fall, so a county leaving the reports is consistent with recovery but does not prove it."
    },
    "median_site_days_lost": {
-    "value": 2124.041667,
+    "value": 2101.541667,
     "ci_low": 420.75,
     "ci_high": 4288.5,
     "n": 20,
@@ -4429,34 +4453,34 @@
      },
      {
       "days_since_peak": 6.0,
-      "sites_out": 123.0,
-      "restored_share": 0.6630136986,
-      "ci_low": 0.397978591,
-      "ci_high": 0.783886306,
-      "restored_share_best": 0.7342465753,
-      "n_counties_carried": 43
-     },
-     {
-      "days_since_peak": 7.0,
       "sites_out": 92.0,
       "restored_share": 0.7479452055,
       "ci_low": 0.5186888039,
       "ci_high": 0.8333333333,
       "restored_share_best": 0.8191780822,
       "n_counties_carried": 43
+     },
+     {
+      "days_since_peak": 7.0,
+      "sites_out": 95.0,
+      "restored_share": 0.7397260274,
+      "ci_low": 0.5286871705,
+      "ci_high": 0.8172380415,
+      "restored_share_best": 0.8109589041,
+      "n_counties_carried": 43
      }
     ],
     "time_to_50pct_restored": {
      "value": 4.0,
      "ci_low": 3.0,
-     "ci_high": 7.0,
+     "ci_high": 6.0,
      "n": 55,
      "unit": "days since peak",
      "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
      "interval_low": 3.0,
      "censored": false,
      "censored_at": null,
-     "share_of_draws_not_reached": 0.018,
+     "share_of_draws_not_reached": 0.0145,
      "best_case": 4.0,
      "best_case_censored": false,
      "first_crossing": 4.0,
@@ -4479,14 +4503,14 @@
      "first_crossing_censored": true
     },
     "site_days_lost": {
-     "value": 1474.5,
-     "ci_low": 601.5,
-     "ci_high": 2878.6625,
+     "value": 1429.5,
+     "ci_low": 588.5,
+     "ci_high": 2775.575,
      "n": 55,
      "unit": "site-days, peak to last report",
      "method": "county bootstrap 95% of the peak-report counties, 2000 draws",
-     "lower_bound": 1317.0,
-     "upper_bound": 1632.0,
+     "lower_bound": 1258.0,
+     "upper_bound": 1601.0,
      "gaps_over_one_day": 1,
      "days_covered": 7.0
     }
@@ -7029,6 +7053,14 @@
      "t90": null,
      "t90_censored": true,
      "site_days_lost": 703.1354167
+    },
+    "AL092017_2017-08-25": {
+     "storm": "Harvey",
+     "n_reports": 2,
+     "t50": null,
+     "t90": null,
+     "t90_censored": true,
+     "site_days_lost": 0.0
     },
     "AL092022_2022-09-27": {
      "storm": "Ian",
@@ -11182,7 +11214,7 @@
    },
    "comovement_at_as_of_time": {
     "value": 0.6098360947,
-    "ci_low": 0.467061797,
+    "ci_low": 0.4652020675,
     "ci_high": 0.6672164647,
     "n": 20,
     "unit": "Spearman rank correlation",
@@ -11204,7 +11236,7 @@
     "lag_0h": {
      "pct_sites_out": {
       "value": 0.6098360947,
-      "ci_low": 0.467061797,
+      "ci_low": 0.4652020675,
       "ci_high": 0.6672164647,
       "n": 20,
       "unit": "Spearman rank correlation",
@@ -11269,7 +11301,7 @@
     },
     "lag_24h": {
      "pct_sites_out": {
-      "value": 0.3529639511,
+      "value": 0.3507680839,
       "ci_low": 0.2039102847,
       "ci_high": 0.4995807469,
       "n": 20,
@@ -11368,9 +11400,9 @@
        }
       },
       "Harvey": {
-       "value": 0.4534949342,
-       "ci_low": 0.2525541603,
-       "ci_high": 0.6367503744,
+       "value": 0.4497754753,
+       "ci_low": 0.2455700743,
+       "ci_high": 0.6337871543,
        "n": 220,
        "unit": "Spearman rank correlation",
        "method": "county bootstrap 95%, 2000 draws",
@@ -11545,7 +11577,7 @@
      },
      "median_across_storms": {
       "value": 0.6098360947,
-      "ci_low": 0.467061797,
+      "ci_low": 0.4652020675,
       "ci_high": 0.6672164647,
       "n": 20,
       "unit": "Spearman rank correlation",
@@ -11554,9 +11586,9 @@
       "max": 0.8692383775
      },
      "pooled": {
-      "value": 0.6396231811,
-      "ci_low": 0.6069326793,
-      "ci_high": 0.6688491912,
+      "value": 0.6396281981,
+      "ci_low": 0.6068736604,
+      "ci_high": 0.6688952639,
       "n": 6198,
       "unit": "Spearman rank correlation",
       "method": "all storms pooled; storm-county cluster bootstrap 95%",
@@ -11911,9 +11943,9 @@
        }
       },
       "Harvey": {
-       "value": 0.3754945954,
-       "ci_low": 0.1206517242,
-       "ci_high": 0.6115189932,
+       "value": 0.3725061353,
+       "ci_low": 0.1190127287,
+       "ci_high": 0.6064272897,
        "n": 144,
        "unit": "Spearman rank correlation",
        "method": "county bootstrap 95%, 2000 draws",
@@ -12097,9 +12129,9 @@
       "max": 0.8556919316
      },
      "pooled": {
-      "value": 0.6517706216,
-      "ci_low": 0.6187568999,
-      "ci_high": 0.6842546117,
+      "value": 0.6518357611,
+      "ci_low": 0.6188678326,
+      "ci_high": 0.6844052649,
       "n": 4969,
       "unit": "Spearman rank correlation",
       "method": "all storms pooled; storm-county cluster bootstrap 95%",
@@ -12454,9 +12486,9 @@
        }
       },
       "Harvey": {
-       "value": 0.3060864376,
-       "ci_low": 0.07228980855,
-       "ci_high": 0.5181600156,
+       "value": 0.3039330428,
+       "ci_low": 0.07280903708,
+       "ci_high": 0.5135427121,
        "n": 147,
        "unit": "Spearman rank correlation",
        "method": "county bootstrap 95%, 2000 draws",
@@ -12640,9 +12672,9 @@
       "max": 0.7952922637
      },
      "pooled": {
-      "value": 0.6151865222,
-      "ci_low": 0.5818429832,
-      "ci_high": 0.6445582916,
+      "value": 0.6152422603,
+      "ci_low": 0.581906405,
+      "ci_high": 0.6446005436,
       "n": 4898,
       "unit": "Spearman rank correlation",
       "method": "all storms pooled; storm-county cluster bootstrap 95%",
@@ -12997,9 +13029,9 @@
        }
       },
       "Harvey": {
-       "value": 0.3554675852,
-       "ci_low": 0.1063491416,
-       "ci_high": 0.579389307,
+       "value": 0.3489771618,
+       "ci_low": 0.1024740516,
+       "ci_high": 0.5753153741,
        "n": 168,
        "unit": "Spearman rank correlation",
        "method": "county bootstrap 95%, 2000 draws",
@@ -13173,7 +13205,7 @@
       }
      },
      "median_across_storms": {
-      "value": 0.3529639511,
+      "value": 0.3507680839,
       "ci_low": 0.2039102847,
       "ci_high": 0.4995807469,
       "n": 20,
@@ -13183,9 +13215,9 @@
       "max": 0.6658941351
      },
      "pooled": {
-      "value": 0.4783347261,
-      "ci_low": 0.442349668,
-      "ci_high": 0.5107329986,
+      "value": 0.4783420905,
+      "ci_low": 0.4421417765,
+      "ci_high": 0.5107974822,
       "n": 5310,
       "unit": "Spearman rank correlation",
       "method": "all storms pooled; storm-county cluster bootstrap 95%",
@@ -13557,7 +13589,7 @@
    "households_denominator": {
     "pct_sites_out": {
      "value": 0.6415753511,
-     "ci_low": 0.4913351787,
+     "ci_low": 0.4892428306,
      "ci_high": 0.7195761109,
      "n": 20,
      "unit": "Spearman rank correlation",
@@ -13623,7 +13655,7 @@
    "without_state_total_missing_reports": {
     "pct_sites_out": {
      "value": 0.6081936996,
-     "ci_low": 0.467061797,
+     "ci_low": 0.4652020675,
      "ci_high": 0.6646708641,
      "n": 20,
      "unit": "Spearman rank correlation",
@@ -14043,7 +14075,7 @@
      "doc_id": "DOC-346482A1",
      "days_since_landfall": 10.13541667,
      "pct_customers_out": 0.2623316423,
-     "pct_sites_out": 1.784266018,
+     "pct_sites_out": 1.081373344,
      "n_counties": 4,
      "n_low_coverage": 0,
      "coverage_unknown": true
@@ -14052,7 +14084,7 @@
      "doc_id": "DOC-346499A1",
      "days_since_landfall": 11.13541667,
      "pct_customers_out": 2.326037976,
-     "pct_sites_out": 2.140077821,
+     "pct_sites_out": 3.112840467,
      "n_counties": 2,
      "n_low_coverage": 0,
      "coverage_unknown": true
@@ -15840,55 +15872,55 @@
     }
    },
    "without_flagged_reports": {
-    "n_storms": 9,
-    "n": 650,
+    "n_storms": 10,
+    "n": 663,
     "odds_ratios": {
      "log1p_dist_km": {
-      "value": 0.7925020397,
-      "ci_low": 0.6173917828,
-      "ci_high": 1.017278656,
-      "n": 650,
+      "value": 0.778053804,
+      "ci_low": 0.6142904185,
+      "ci_high": 0.9854747912,
+      "n": 663,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "wind_per_10kt": {
-      "value": 1.041751241,
-      "ci_low": 0.7727289216,
-      "ci_high": 1.404432547,
-      "n": 650,
+      "value": 1.057015938,
+      "ci_low": 0.8060665367,
+      "ci_high": 1.386092392,
+      "n": 663,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_inside 64 kt": {
-      "value": 16.57812726,
-      "ci_low": 8.030418419,
-      "ci_high": 34.22415735,
-      "n": 650,
+      "value": 15.77585995,
+      "ci_low": 7.241048686,
+      "ci_high": 34.37040241,
+      "n": 663,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_50-64 kt": {
-      "value": 11.24624244,
-      "ci_low": 4.423882628,
-      "ci_high": 28.58981119,
-      "n": 650,
+      "value": 11.17113075,
+      "ci_low": 4.505752847,
+      "ci_high": 27.69662838,
+      "n": 663,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      },
      "zone_34-50 kt": {
-      "value": 10.50502543,
-      "ci_low": 5.12941672,
-      "ci_high": 21.51425109,
-      "n": 650,
+      "value": 10.03426502,
+      "ci_low": 4.879623125,
+      "ci_high": 20.63406782,
+      "n": 663,
       "unit": "odds ratio",
       "method": "binomial GLM; storm-clustered 95%"
      }
     },
     "held_out_calibration_slope": {
-     "value": -0.04025208354,
-     "ci_low": -0.3308870361,
-     "ci_high": 0.250382869,
-     "n": 650,
+     "value": -0.005926084221,
+     "ci_low": -0.347161633,
+     "ci_high": 0.3353094645,
+     "n": 663,
      "unit": "calibration slope (1 is ideal)",
      "method": "GLM of observed counts on logit(prediction); storm-clustered 95%"
     }
@@ -16211,66 +16243,66 @@
    },
    "hazard_ratios": {
     "svi_Q2": {
-     "value": 0.9382776509,
-     "ci_low": 0.7329469652,
-     "ci_high": 1.201130494,
-     "n": 2761,
+     "value": 0.9326674059,
+     "ci_low": 0.7285701961,
+     "ci_high": 1.193939163,
+     "n": 2759,
      "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
      "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
     },
     "svi_Q3": {
-     "value": 1.211542367,
-     "ci_low": 0.9540211643,
-     "ci_high": 1.538576882,
-     "n": 2761,
+     "value": 1.207503034,
+     "ci_low": 0.9509305195,
+     "ci_high": 1.533301905,
+     "n": 2759,
      "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
      "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
     },
     "svi_Q4 (most)": {
-     "value": 1.141349423,
-     "ci_low": 0.8952344205,
-     "ci_high": 1.45512558,
-     "n": 2761,
+     "value": 1.138486266,
+     "ci_low": 0.8934791251,
+     "ci_high": 1.450678523,
+     "n": 2759,
      "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
      "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
     },
     "zone_inside 64 kt": {
-     "value": 0.08891273577,
-     "ci_low": 0.05168567301,
-     "ci_high": 0.1529529195,
-     "n": 2761,
+     "value": 0.08947200605,
+     "ci_low": 0.05202199282,
+     "ci_high": 0.1538818379,
+     "n": 2759,
      "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
      "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
     },
     "zone_50-64 kt": {
-     "value": 0.1633794148,
-     "ci_low": 0.1025486952,
-     "ci_high": 0.2602942255,
-     "n": 2761,
+     "value": 0.1643273021,
+     "ci_low": 0.1031574768,
+     "ci_high": 0.2617693169,
+     "n": 2759,
      "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
      "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
     },
     "zone_34-50 kt": {
-     "value": 0.3085705407,
-     "ci_low": 0.2009326437,
-     "ci_high": 0.4738691376,
-     "n": 2761,
+     "value": 0.3107198473,
+     "ci_low": 0.202333782,
+     "ci_high": 0.4771661093,
+     "n": 2759,
      "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
      "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
     },
     "log1p_dist_km": {
-     "value": 0.9979668155,
-     "ci_low": 0.883040027,
-     "ci_high": 1.127851212,
-     "n": 2761,
+     "value": 0.9995198932,
+     "ci_low": 0.8842075697,
+     "ci_high": 1.129870464,
+     "n": 2759,
      "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
      "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
     },
     "wind_per_10kt": {
-     "value": 0.9688908336,
-     "ci_low": 0.9131506969,
-     "ci_high": 1.028033435,
-     "n": 2761,
+     "value": 0.9679313889,
+     "ci_low": 0.912273279,
+     "ci_high": 1.026985219,
+     "n": 2759,
      "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
      "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
     }
@@ -16300,7 +16332,7 @@
      "AL172022_2022-11-09",
      "AL192020_2020-09-14"
     ],
-    "n_intervals": 2761,
+    "n_intervals": 2759,
     "n_events": 605,
     "n_counties": 465,
     "optimizer": "IRLS"
@@ -16511,26 +16543,26 @@
     },
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 1.552831768,
-      "ci_low": 0.8205456323,
-      "ci_high": 2.938637908,
-      "n": 2761,
+      "value": 1.556927804,
+      "ci_low": 0.823036346,
+      "ci_high": 2.945221312,
+      "n": 2759,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 1.259390201,
-      "ci_low": 0.6744180212,
-      "ci_high": 2.351751628,
-      "n": 2761,
+      "value": 1.252326111,
+      "ci_low": 0.6706611301,
+      "ci_high": 2.338469635,
+      "n": 2759,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 1.594670625,
-      "ci_low": 0.8682485578,
-      "ci_high": 2.928855316,
-      "n": 2761,
+      "value": 1.589780696,
+      "ci_low": 0.865642457,
+      "ci_high": 2.919684265,
+      "n": 2759,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      }
@@ -16559,7 +16591,7 @@
      "AL172022_2022-11-09",
      "AL192020_2020-09-14"
     ],
-    "n_intervals": 2761,
+    "n_intervals": 2759,
     "n_events": 605,
     "n_counties": 465,
     "optimizer": "IRLS",
@@ -16725,26 +16757,26 @@
    "hold_sites_served_at_peak": {
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 0.9301654247,
-      "ci_low": 0.7257325013,
-      "ci_high": 1.192185434,
-      "n": 2770,
+      "value": 0.9246660606,
+      "ci_low": 0.7214451666,
+      "ci_high": 1.185131404,
+      "n": 2768,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 1.206841423,
-      "ci_low": 0.950220772,
-      "ci_high": 1.532766136,
-      "n": 2770,
+      "value": 1.20284889,
+      "ci_low": 0.9471615716,
+      "ci_high": 1.527559283,
+      "n": 2768,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 1.122744453,
-      "ci_low": 0.8808038254,
-      "ci_high": 1.431141726,
-      "n": 2770,
+      "value": 1.119739971,
+      "ci_low": 0.8789194295,
+      "ci_high": 1.426544414,
+      "n": 2768,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      }
@@ -16773,7 +16805,7 @@
      "AL172022_2022-11-09",
      "AL192020_2020-09-14"
     ],
-    "n_intervals": 2770,
+    "n_intervals": 2768,
     "n_events": 603,
     "n_counties": 465,
     "optimizer": "IRLS",
@@ -16939,26 +16971,26 @@
    "censored_best_case": {
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 0.9960200814,
-      "ci_low": 0.7829073878,
-      "ci_high": 1.267143494,
-      "n": 2730,
+      "value": 0.9913255282,
+      "ci_low": 0.7787452677,
+      "ci_high": 1.261935505,
+      "n": 2728,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 1.352027202,
-      "ci_low": 1.068678323,
-      "ci_high": 1.710503072,
-      "n": 2730,
+      "value": 1.348933959,
+      "ci_low": 1.065812732,
+      "ci_high": 1.707263174,
+      "n": 2728,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 1.323556027,
-      "ci_low": 1.06037398,
-      "ci_high": 1.652059169,
-      "n": 2730,
+      "value": 1.321461579,
+      "ci_low": 1.058315843,
+      "ci_high": 1.650037384,
+      "n": 2728,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      }
@@ -16987,7 +17019,7 @@
      "AL172022_2022-11-09",
      "AL192020_2020-09-14"
     ],
-    "n_intervals": 2730,
+    "n_intervals": 2728,
     "n_events": 691,
     "n_counties": 473,
     "optimizer": "IRLS",
@@ -17153,26 +17185,26 @@
    "censored_worst_case": {
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 0.8709553776,
-      "ci_low": 0.6928465112,
-      "ci_high": 1.094850385,
-      "n": 2895,
+      "value": 0.8667909415,
+      "ci_low": 0.6897583157,
+      "ci_high": 1.08926057,
+      "n": 2893,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 1.041990078,
-      "ci_low": 0.8418996703,
-      "ci_high": 1.289635049,
-      "n": 2895,
+      "value": 1.039226305,
+      "ci_low": 0.8399467987,
+      "ci_high": 1.285785379,
+      "n": 2893,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 1.020322241,
-      "ci_low": 0.8091289996,
-      "ci_high": 1.286639677,
-      "n": 2895,
+      "value": 1.018216165,
+      "ci_low": 0.8082880044,
+      "ci_high": 1.282666764,
+      "n": 2893,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      }
@@ -17201,7 +17233,7 @@
      "AL172022_2022-11-09",
      "AL192020_2020-09-14"
     ],
-    "n_intervals": 2895,
+    "n_intervals": 2893,
     "n_events": 605,
     "n_counties": 474,
     "optimizer": "Newton's method (IRLS did not converge)",
@@ -17367,26 +17399,26 @@
    "first_crossing": {
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 0.9249781171,
-      "ci_low": 0.7121279926,
-      "ci_high": 1.20144767,
-      "n": 2293,
+      "value": 0.9183782612,
+      "ci_low": 0.7069710185,
+      "ci_high": 1.19300312,
+      "n": 2291,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 1.23009803,
-      "ci_low": 0.9507957373,
-      "ci_high": 1.591447147,
-      "n": 2293,
+      "value": 1.225336897,
+      "ci_low": 0.9472132333,
+      "ci_high": 1.585124087,
+      "n": 2291,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 1.260655422,
-      "ci_low": 0.9756423745,
-      "ci_high": 1.628928933,
-      "n": 2293,
+      "value": 1.257375121,
+      "ci_low": 0.9738409256,
+      "ci_high": 1.623460417,
+      "n": 2291,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      }
@@ -17415,41 +17447,41 @@
      "AL172022_2022-11-09",
      "AL192020_2020-09-14"
     ],
-    "n_intervals": 2293,
+    "n_intervals": 2291,
     "n_events": 568,
     "n_counties": 443,
     "optimizer": "IRLS"
    },
    "drop_one_storm_svi_hazard_ratios": {
     "Barry": {
-     "svi_Q2": 0.9427543932,
-     "svi_Q3": 1.227893709,
-     "svi_Q4 (most)": 1.143909161
+     "svi_Q2": 0.9370603544,
+     "svi_Q3": 1.223781367,
+     "svi_Q4 (most)": 1.141049152
     },
     "Beryl": {
-     "svi_Q2": 0.9319020443,
-     "svi_Q3": 1.208119262,
-     "svi_Q4 (most)": 1.14895731
+     "svi_Q2": 0.9263400396,
+     "svi_Q3": 1.204101543,
+     "svi_Q4 (most)": 1.146003977
     },
     "Debby": {
-     "svi_Q2": 0.9435603868,
-     "svi_Q3": 1.22924748,
-     "svi_Q4 (most)": 1.143478617
+     "svi_Q2": 0.937878185,
+     "svi_Q3": 1.225166861,
+     "svi_Q4 (most)": 1.140635417
     },
     "Dorian": {
-     "svi_Q2": 0.9521877626,
-     "svi_Q3": 1.213202588,
-     "svi_Q4 (most)": 1.133495145
+     "svi_Q2": 0.9464005728,
+     "svi_Q3": 1.209030867,
+     "svi_Q4 (most)": 1.130560887
     },
     "Florence": {
-     "svi_Q2": 0.9454534483,
-     "svi_Q3": 1.238416336,
-     "svi_Q4 (most)": 1.198654976
+     "svi_Q2": 0.9402019068,
+     "svi_Q3": 1.234595172,
+     "svi_Q4 (most)": 1.196041271
     },
     "Francine": {
-     "svi_Q2": 0.9628722194,
-     "svi_Q3": 1.201533141,
-     "svi_Q4 (most)": 1.136473675
+     "svi_Q2": 0.9569399677,
+     "svi_Q3": 1.197440553,
+     "svi_Q4 (most)": 1.133561514
     },
     "Harvey": {
      "svi_Q2": 0.9688526423,
@@ -17457,93 +17489,93 @@
      "svi_Q4 (most)": 1.149201429
     },
     "Ida": {
-     "svi_Q2": 0.9158339737,
-     "svi_Q3": 1.135249749,
-     "svi_Q4 (most)": 1.198014895
+     "svi_Q2": 0.9098862571,
+     "svi_Q3": 1.130791309,
+     "svi_Q4 (most)": 1.19444625
     },
     "Ian": {
-     "svi_Q2": 0.9621185264,
-     "svi_Q3": 1.268665605,
-     "svi_Q4 (most)": 1.194698293
+     "svi_Q2": 0.956500098,
+     "svi_Q3": 1.26484602,
+     "svi_Q4 (most)": 1.191830351
     },
     "Helene": {
-     "svi_Q2": 0.9022183782,
-     "svi_Q3": 1.128336009,
-     "svi_Q4 (most)": 0.9550016425
+     "svi_Q2": 0.8864554306,
+     "svi_Q3": 1.116276772,
+     "svi_Q4 (most)": 0.9467057324
     },
     "Isaias": {
-     "svi_Q2": 0.933774063,
-     "svi_Q3": 1.205322264,
-     "svi_Q4 (most)": 1.131041317
+     "svi_Q2": 0.9279429957,
+     "svi_Q3": 1.201043302,
+     "svi_Q4 (most)": 1.128127406
     },
     "Idalia": {
-     "svi_Q2": 0.9366185896,
-     "svi_Q3": 1.239566281,
-     "svi_Q4 (most)": 1.153333221
+     "svi_Q2": 0.9310088857,
+     "svi_Q3": 1.235477389,
+     "svi_Q4 (most)": 1.150529259
     },
     "Irma": {
-     "svi_Q2": 0.8987346916,
-     "svi_Q3": 1.175879662,
-     "svi_Q4 (most)": 1.101031157
+     "svi_Q2": 0.8936483772,
+     "svi_Q3": 1.171995473,
+     "svi_Q4 (most)": 1.098028536
     },
     "Laura": {
-     "svi_Q2": 0.9125968648,
-     "svi_Q3": 1.204286138,
-     "svi_Q4 (most)": 1.106705462
+     "svi_Q2": 0.9067987763,
+     "svi_Q3": 1.200153077,
+     "svi_Q4 (most)": 1.103886728
     },
     "Michael": {
-     "svi_Q2": 0.9188882406,
-     "svi_Q3": 1.331931728,
-     "svi_Q4 (most)": 1.09441026
+     "svi_Q2": 0.9137073709,
+     "svi_Q3": 1.327930607,
+     "svi_Q4 (most)": 1.092040106
     },
     "Milton": {
-     "svi_Q2": 0.9942030816,
-     "svi_Q3": 1.181438998,
-     "svi_Q4 (most)": 1.139110597
+     "svi_Q2": 0.9879567625,
+     "svi_Q3": 1.177323655,
+     "svi_Q4 (most)": 1.136199753
     },
     "Nicole": {
-     "svi_Q2": 0.9382776509,
-     "svi_Q3": 1.211542367,
-     "svi_Q4 (most)": 1.141349423
+     "svi_Q2": 0.9326674059,
+     "svi_Q3": 1.207503034,
+     "svi_Q4 (most)": 1.138486266
     },
     "Sally": {
-     "svi_Q2": 0.9382776509,
-     "svi_Q3": 1.211542367,
-     "svi_Q4 (most)": 1.141349423
+     "svi_Q2": 0.9326674059,
+     "svi_Q3": 1.207503034,
+     "svi_Q4 (most)": 1.138486266
     },
     "Delta": {
-     "svi_Q2": 0.9336396413,
-     "svi_Q3": 1.198951802,
-     "svi_Q4 (most)": 1.10959806
+     "svi_Q2": 0.9279714312,
+     "svi_Q3": 1.194929306,
+     "svi_Q4 (most)": 1.106845572
     },
     "Zeta": {
-     "svi_Q2": 0.8957912348,
-     "svi_Q3": 1.186389247,
-     "svi_Q4 (most)": 1.139327811
+     "svi_Q2": 0.8898233192,
+     "svi_Q3": 1.181925347,
+     "svi_Q4 (most)": 1.135944561
     }
    },
    "without_flagged_reports": {
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 0.4073730428,
-      "ci_low": 0.2116175309,
-      "ci_high": 0.7842110022,
+      "value": 0.392232648,
+      "ci_low": 0.2033116459,
+      "ci_high": 0.7567025955,
       "n": 343,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 0.4547743241,
-      "ci_low": 0.2211057982,
-      "ci_high": 0.935387889,
+      "value": 0.4599288125,
+      "ci_low": 0.2268688354,
+      "ci_high": 0.9324088615,
       "n": 343,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 0.2379866306,
-      "ci_low": 0.1237256239,
-      "ci_high": 0.4577680399,
+      "value": 0.2534459543,
+      "ci_low": 0.1309234951,
+      "ci_high": 0.4906289103,
       "n": 343,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
@@ -17556,6 +17588,7 @@
      "AL142018_2018-10-09"
     ],
     "storms_left_out": [
+     "AL092017_2017-08-25",
      "AL092022_2022-09-27"
     ],
     "n_intervals": 343,
@@ -17618,26 +17651,26 @@
    "without_state_total_missing_reports": {
     "hazard_ratios": {
      "svi_Q2": {
-      "value": 0.9073525226,
-      "ci_low": 0.7033818657,
-      "ci_high": 1.170471746,
-      "n": 2583,
+      "value": 0.9015753327,
+      "ci_low": 0.698979382,
+      "ci_high": 1.162892786,
+      "n": 2581,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q3": {
-      "value": 1.186239664,
-      "ci_low": 0.9302640472,
-      "ci_high": 1.512650677,
-      "n": 2583,
+      "value": 1.182001803,
+      "ci_low": 0.9271354373,
+      "ci_high": 1.506930062,
+      "n": 2581,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      },
      "svi_Q4 (most)": {
-      "value": 1.086793364,
-      "ci_low": 0.8493224115,
-      "ci_high": 1.390661307,
-      "n": 2583,
+      "value": 1.083758288,
+      "ci_low": 0.8475891864,
+      "ci_high": 1.385732671,
+      "n": 2581,
       "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
       "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
      }
@@ -17666,7 +17699,7 @@
      "AL172022_2022-11-09",
      "AL192020_2020-09-14"
     ],
-    "n_intervals": 2583,
+    "n_intervals": 2581,
     "n_events": 590,
     "n_counties": 453,
     "optimizer": "IRLS"
@@ -17675,66 +17708,66 @@
     "original": {
      "hazard_ratios": {
       "svi_Q2": {
-       "value": 0.9671473367,
-       "ci_low": 0.757224222,
-       "ci_high": 1.235266839,
-       "n": 2761,
+       "value": 0.9625177126,
+       "ci_low": 0.7535247271,
+       "ci_high": 1.229475708,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "svi_Q3": {
-       "value": 1.22417857,
-       "ci_low": 0.9655310242,
-       "ci_high": 1.552112914,
-       "n": 2761,
+       "value": 1.22085276,
+       "ci_low": 0.9629116982,
+       "ci_high": 1.547890076,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "svi_Q4 (most)": {
-       "value": 1.155432914,
-       "ci_low": 0.9079913233,
-       "ci_high": 1.47030614,
-       "n": 2761,
+       "value": 1.153222003,
+       "ci_low": 0.9065217353,
+       "ci_high": 1.467059129,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "zone_inside 64 kt": {
-       "value": 0.09167400388,
-       "ci_low": 0.05327328389,
-       "ci_high": 0.1577549266,
-       "n": 2761,
+       "value": 0.09204099717,
+       "ci_low": 0.05349340982,
+       "ci_high": 0.1583661462,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "zone_50-64 kt": {
-       "value": 0.1687789112,
-       "ci_low": 0.1065969876,
-       "ci_high": 0.2672338263,
-       "n": 2761,
+       "value": 0.1694167207,
+       "ci_low": 0.1070124995,
+       "ci_high": 0.2682118949,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "zone_34-50 kt": {
-       "value": 0.3134815858,
-       "ci_low": 0.2053054473,
-       "ci_high": 0.4786560995,
-       "n": 2761,
+       "value": 0.3150110246,
+       "ci_low": 0.206305235,
+       "ci_high": 0.4809957713,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "log1p_dist_km": {
-       "value": 0.9895862366,
-       "ci_low": 0.8773503344,
-       "ci_high": 1.116180027,
-       "n": 2761,
+       "value": 0.9907861012,
+       "ci_low": 0.8782017817,
+       "ci_high": 1.117803583,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "wind_per_10kt": {
-       "value": 0.9681553712,
-       "ci_low": 0.9121110045,
-       "ci_high": 1.027643366,
-       "n": 2761,
+       "value": 0.9674318629,
+       "ci_low": 0.9114311453,
+       "ci_high": 1.026873411,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       }
@@ -17764,7 +17797,7 @@
        "AL172022_2022-11-09",
        "AL192020_2020-09-14"
       ],
-      "n_intervals": 2761,
+      "n_intervals": 2759,
       "n_events": 605,
       "n_counties": 465,
       "optimizer": "IRLS"
@@ -17797,7 +17830,7 @@
         "method": "1 - Kaplan-Meier survival"
        },
        "share_below_5pct_by_day_14": {
-        "value": 0.8756600223,
+        "value": 0.8734396656,
         "ci_low": null,
         "ci_high": null,
         "n": 204,
@@ -17914,7 +17947,7 @@
         "method": "1 - Kaplan-Meier survival"
        },
        "share_below_5pct_by_day_14": {
-        "value": 0.9088540299,
+        "value": 0.9023436034,
         "ci_low": null,
         "ci_high": null,
         "n": 202,
@@ -17928,7 +17961,7 @@
       }
      },
      "headline": "In this data, counties with higher social vulnerability did not take measurably longer for cell outages to fall below 5% of sites. The estimates rule out a large delay for the most vulnerable quartile (a rate of recovery more than 10% slower), though they can't rule out a smaller one.",
-     "headline_bound": "For the most vulnerable quartile, the 95% interval for the hazard ratio runs from 0.91 to 1.47: a rate of falling below 5% more than 10% lower than the least vulnerable quartile's is outside it; a smaller shortfall, or a rate up to 47% higher, is not.",
+     "headline_bound": "For the most vulnerable quartile, the 95% interval for the hazard ratio runs from 0.91 to 1.47: a rate of falling below 5% more than 10% lower than the least vulnerable quartile's is outside it; a smaller shortfall, or a rate up to 46% higher, is not.",
      "svi_hazard_ratios_change_at_two_decimals": {
       "svi_Q2": true,
       "svi_Q3": true,
@@ -17941,66 +17974,66 @@
     "landfall_or_closest_approach": {
      "hazard_ratios": {
       "svi_Q2": {
-       "value": 0.9630634008,
-       "ci_low": 0.7533289048,
-       "ci_high": 1.231190132,
-       "n": 2761,
+       "value": 0.9579646657,
+       "ci_low": 0.7492532552,
+       "ci_high": 1.224814566,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "svi_Q3": {
-       "value": 1.218145686,
-       "ci_low": 0.9603000127,
-       "ci_high": 1.545224297,
-       "n": 2761,
+       "value": 1.214514886,
+       "ci_low": 0.9574252643,
+       "ci_high": 1.540638692,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "svi_Q4 (most)": {
-       "value": 1.159361985,
-       "ci_low": 0.910515694,
-       "ci_high": 1.476218611,
-       "n": 2761,
+       "value": 1.15688891,
+       "ci_low": 0.9088702634,
+       "ci_high": 1.472588557,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "zone_inside 64 kt": {
-       "value": 0.08803925677,
-       "ci_low": 0.05125996707,
-       "ci_high": 0.1512078758,
-       "n": 2761,
+       "value": 0.08845613324,
+       "ci_low": 0.05150604835,
+       "ci_high": 0.1519139549,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "zone_50-64 kt": {
-       "value": 0.1625639562,
-       "ci_low": 0.1028788744,
-       "ci_high": 0.2568752817,
-       "n": 2761,
+       "value": 0.1633115487,
+       "ci_low": 0.1033565526,
+       "ci_high": 0.2580451967,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "zone_34-50 kt": {
-       "value": 0.3008377245,
-       "ci_low": 0.1971273783,
-       "ci_high": 0.4591109425,
-       "n": 2761,
+       "value": 0.3025417791,
+       "ci_low": 0.198233943,
+       "ci_high": 0.4617348914,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "log1p_dist_km": {
-       "value": 0.9885561144,
-       "ci_low": 0.8756080065,
-       "ci_high": 1.116073841,
-       "n": 2761,
+       "value": 0.9899053039,
+       "ci_low": 0.8765558294,
+       "ci_high": 1.117912263,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       },
       "wind_per_10kt": {
-       "value": 0.9675341845,
-       "ci_low": 0.9113019437,
-       "ci_high": 1.027236258,
-       "n": 2761,
+       "value": 0.9667010072,
+       "ci_low": 0.9105174831,
+       "ci_high": 1.026351338,
+       "n": 2759,
        "unit": "hazard ratio (above 1 = reaches below 5% sooner)",
        "method": "discrete-time cloglog; storm fixed effects; county-clustered 95%"
       }
@@ -18030,7 +18063,7 @@
        "AL172022_2022-11-09",
        "AL192020_2020-09-14"
       ],
-      "n_intervals": 2761,
+      "n_intervals": 2759,
       "n_events": 605,
       "n_counties": 465,
       "optimizer": "IRLS"
@@ -18063,7 +18096,7 @@
         "method": "1 - Kaplan-Meier survival"
        },
        "share_below_5pct_by_day_14": {
-        "value": 0.8776838068,
+        "value": 0.8752077705,
         "ci_low": null,
         "ci_high": null,
         "n": 204,
@@ -18180,7 +18213,7 @@
         "method": "1 - Kaplan-Meier survival"
        },
        "share_below_5pct_by_day_14": {
-        "value": 0.915591916,
+        "value": 0.9080889751,
         "ci_low": null,
         "ci_high": null,
         "n": 202,
@@ -18193,8 +18226,8 @@
        ]
       }
      },
-     "headline": "In this data, counties with higher social vulnerability did not take measurably longer for cell outages to fall below 5% of sites. The estimates rule out a large delay for the most vulnerable quartile (a rate of recovery more than 9% slower), though they can't rule out a smaller one.",
-     "headline_bound": "For the most vulnerable quartile, the 95% interval for the hazard ratio runs from 0.91 to 1.48: a rate of falling below 5% more than 9% lower than the least vulnerable quartile's is outside it; a smaller shortfall, or a rate up to 47% higher, is not.",
+     "headline": "In this data, counties with higher social vulnerability did not take measurably longer for cell outages to fall below 5% of sites. The estimates rule out a large delay for the most vulnerable quartile (a rate of recovery more than 10% slower), though they can't rule out a smaller one.",
+     "headline_bound": "For the most vulnerable quartile, the 95% interval for the hazard ratio runs from 0.91 to 1.47: a rate of falling below 5% more than 10% lower than the least vulnerable quartile's is outside it; a smaller shortfall, or a rate up to 47% higher, is not.",
      "svi_hazard_ratios_change_at_two_decimals": {
       "svi_Q2": true,
       "svi_Q3": true,
@@ -18208,8 +18241,8 @@
   },
   "page_text": {
    "headline": "In this data, counties with higher social vulnerability did not take measurably longer for cell outages to fall below 5% of sites. The estimates rule out a large delay for the most vulnerable quartile (a rate of recovery more than 11% slower), though they can't rule out a smaller one.",
-   "headline_bound": "For the most vulnerable quartile, the 95% interval for the hazard ratio runs from 0.90 to 1.46: a rate of falling below 5% more than 11% lower than the least vulnerable quartile's is outside it; a smaller shortfall, or a rate up to 45% higher, is not.",
-   "best_case_sensitivity": "Sensitivity display, not a finding: if counties that leave the reports while still out are counted as having fallen below 5% at their next unreported report, the third and fourth quartiles reach it sooner (hazard ratios 1.35 [1.07, 1.71] and 1.32 [1.06, 1.65]). The difference disappears if those counties are instead kept at risk to the storm's last report (1.04 [0.84, 1.29] and 1.02 [0.81, 1.29]).",
+   "headline_bound": "For the most vulnerable quartile, the 95% interval for the hazard ratio runs from 0.89 to 1.45: a rate of falling below 5% more than 11% lower than the least vulnerable quartile's is outside it; a smaller shortfall, or a rate up to 45% higher, is not.",
+   "best_case_sensitivity": "Sensitivity display, not a finding: if counties that leave the reports while still out are counted as having fallen below 5% at their next unreported report, the third and fourth quartiles reach it sooner (hazard ratios 1.35 [1.07, 1.71] and 1.32 [1.06, 1.65]). The difference disappears if those counties are instead kept at risk to the storm's last report (1.04 [0.84, 1.29] and 1.02 [0.81, 1.28]).",
    "wording": "Associations only: these results describe how long counties in each SVI quartile took to fall below 5% of sites out. They do not show why, and say nothing about anyone's intent.",
    "cannot_rule_out": [
     "SVI is correlated with rurality, terrain and network density; any of these, or other differences between counties, may be associated with both SVI and restoration times.",
@@ -18263,13 +18296,13 @@
     "t90_best": NaN,
     "t90_best_censored": true,
     "censored_at": 7.0,
-    "site_days_lost": 1474.5,
+    "site_days_lost": 1429.5,
     "max_wind_kt": 115.0,
     "median_distance_km": 102.7993513,
     "counties_inside_64kt": 5,
     "n_counties": 64,
     "days_peak_to_last": 7.0,
-    "still_out_share_at_last": 0.2520547945,
+    "still_out_share_at_last": 0.2602739726,
     "recovery_observed": true
    },
    {
@@ -19039,7 +19072,7 @@
    "site_days_lost": {
     "P0": {
      "n_storms": 14,
-     "median": 2124.041667,
+     "median": 2101.541667,
      "min": 57.5,
      "max": 13145.0,
      "n_observed": 14,

@@ -47,6 +47,8 @@ BENIGN_FLAGS = [r"rows short of sites out", r"^FCC spelling", r"rows inside_spel
                 r"^causes exceed sites out, confirmed by second reading", r"^causes exceed sites out, listed exception",
                 r"^listed more than once by the FCC", r"^in table, not in the report's list, listed exception",
                 r"^headline [\d.]+% vs [\d.]+% from the report's own totals",
+                # a printed state total off from its own rows, checked (manifest/known_total_inconsistencies.csv)
+                r": printed total [\d,]+ vs [\d,]+ from its rows \(checked, every row confirmed\)$",
                 r"^every row confirmed by second reading$", r"^other states reconcile\)$"]
 PAGE_NOTE_UNDERSTATED = ("Laura",)  # author's instruction 2026-11-22: excluded reports right after the peak
 PAGE_NOTE_FEW_COUNTIES = ("Beryl",)  # author's instruction 2026-11-22
@@ -1674,6 +1676,8 @@ FLAG_TYPES = [  # (pattern, label, class) for the validation table by flag type 
     (r"^listed more than once by the FCC", "County listed twice in the report's list", "benign"),
     (r"^in table, not in the report's list, listed exception", "County not in the list (checked exception)", "benign"),
     (r"^headline [\d.]+% vs [\d.]+% from the report's own totals", "Known FCC inconsistency in the headline", "benign"),
+    (r": printed total [\d,]+ vs [\d,]+ from its rows \(checked, every row confirmed\)$",
+     "Known FCC inconsistency in a printed state total (rows confirmed)", "benign"),
     (r"^every row confirmed by second reading$|^other states reconcile\)$", None, None),  # parts of longer flags
 ]
 
