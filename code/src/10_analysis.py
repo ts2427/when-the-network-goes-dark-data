@@ -1521,10 +1521,10 @@ def red_flag_prior_trend(s: pd.DataFrame) -> dict:
 
     def med(g):
         return median_with_censoring(g.t50.where(~g.t50_censored.astype(bool), g.censored_at), g.t50_censored.astype(bool))
-    e, l, a, b = med(early), med(late), med(p0), med(p1)
-    if None in (e, l, a, b):
+    e, late_med, a, b = med(early), med(late), med(p0), med(p1)
+    if None in (e, late_med, a, b):
         return {"triggered": True, "reason": "a median cannot be given, so a prior trend cannot be ruled out"}
-    within, across = l - e, b - a
+    within, across = late_med - e, b - a
     hit = across != 0 and np.sign(within) == np.sign(across) and abs(within) >= 0.5 * abs(across)
     return {"triggered": bool(hit), "within_p0_change": _plain(within), "p0_to_p1_change": _plain(across),
             "reason": (f"median time to 50% changed by {within:+.1f} days within P0 and {across:+.1f} days from P0 to P1"

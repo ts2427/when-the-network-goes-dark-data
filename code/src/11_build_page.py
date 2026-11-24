@@ -412,7 +412,6 @@ def figures_front_matter(verified: dict, r: dict) -> list:
                f"first to last report), so late values describe only the counties still reported." if ov["narrow"] else "")
     ov_missing = (f" Reports with no power match are left out: {_and(ov['missing'])} (its Sep 1, 2020 report, which "
                   f"prints no as-of time)." if ov["missing"] else "")
-    bd = boundary_download()
     def fig(fid, ftype, data, x, y, title, caption, source, **extra):
         return {"id": fid, "type": ftype, "data": data, "x": x, "y": y, "title": title, "caption": caption,
                 "source": source, "source_url": "", "data_public": True, "verified": verified[data], **extra}
@@ -914,7 +913,7 @@ def build_page(r: dict, after_opening: str = "") -> str:
         f"county was {f1(e['max_wind_kt_at_nearest_track_point'], 0)} knots. {c2['notes'][1]} {c2['notes'][0]}\n")
 
     # 3
-    lp, lc, mp = h3["largest_peak_pct_out"], h3["largest_peak_sites_out"], h3["median_peak_pct_out"]
+    lc, mp = h3["largest_peak_sites_out"], h3["median_peak_pct_out"]
     add("## 3. How much goes dark\n")
     add(f"**Claim.** At their peaks, between {f1(mp['min'])}% and {f1(mp['max'])}% of the cell sites in storms' "
         f"reporting areas were out; the median across {mp['n']} storms is {f1(mp['value'])}% (95% interval {ci(mp)}). "
@@ -1029,7 +1028,7 @@ def build_page(r: dict, after_opening: str = "") -> str:
         f"coverage.\n")
 
     # 7
-    z, dd = c7["by_wind_zone"], c7["by_distance_band"]
+    z = c7["by_wind_zone"]
     add("## 7. Exposure\n")
     add(f"**Claim.** Counties inside a storm's 64-knot winds had a peak of {f1(z['inside 64 kt']['value'])}% of cell sites "
         f"out (95% interval {ci(z['inside 64 kt'])}); outside its 34-knot winds, {f1(z['outside 34 kt']['value'])}% "
@@ -1430,7 +1429,6 @@ def v2_sections(r: dict) -> str:
                       model_txt(fx["fixed_half_excl_near_universal_count_as_number"], "")))
     add("\n" + table(["Sensitivity display", "Hazard ratios (95% interval)"], sens_rows))
     m = n["model"]
-    left_out = sorted(set(n["storms_main"]) - {k.split("_")[0] for k in []})
     add(f"\nGroups were fixed from the counts alone, before any recovery data was joined: whole values as close to "
         f"thirds as ties allow, no group under 20% of storm-counties. Fixed broadband is shown only as sensitivity "
         f"displays; rows marked \"near-universal providers excluded\" leave out {p5['near_universal']}. The hazard "
@@ -1497,11 +1495,11 @@ def report_card_section(r: dict) -> str:
         notes.append(f"{k} report{'s' if k != 1 else ''} with county rows only outside the ten study states "
                      f"{'are' if k != 1 else 'is'} counted in every check except the backup column, which covers "
                      f"reports in the panel")
-    add(f"**What it means.** These are properties of the reports as the FCC published them, not of the networks or of "
-        f"the providers that filed. A shortfall in causes means some sites out have no cause given. An excess is "
-        f"consistent with sites counted under more than one cause; the FCC says this can happen in some of its other "
-        f"reports, but none of the reports with an excess says so. Each check is the "
-        f"one described in the methods (validation); the counts come from its outputs, with no new data."
+    add("**What it means.** These are properties of the reports as the FCC published them, not of the networks or of "
+        "the providers that filed. A shortfall in causes means some sites out have no cause given. An excess is "
+        "consistent with sites counted under more than one cause; the FCC says this can happen in some of its other "
+        "reports, but none of the reports with an excess says so. Each check is the "
+        "one described in the methods (validation); the counts come from its outputs, with no new data."
         + (f" {'; '.join(notes).capitalize()}." if notes else "") + "\n")
     return "\n".join(L)
 
@@ -1526,6 +1524,28 @@ served from this site. {data['note']}
 </div>
 <script src="/static/js/hurricane-county-lookup.js" defer></script>
 """
+
+
+def external_check_paragraph() -> str:
+    """The external check against the FCC's 2017 season report (step 15, v3.1.0), from its output table."""
+    ext = importlib.import_module("15_external_validation")
+    t = pd.read_csv(ext.OUT_CSV, dtype=str, keep_default_na=False)
+    ev = ext.summary(t)
+    compared = ev["n"] - ev["no panel field"]
+    unexplained = int(t.explanation.str.startswith("Not explained").sum())
+    rows = [(x.id, f"{x.where}: {x.fcc_text}", x.report_date or "all", x.fcc_value, x.ours, x.explanation)
+            for x in t[t.status == "differs"].itertuples()]
+    return (f"**External check.** The FCC's own summary of the 2017 season (DOC-353805A1, August 2018) gives "
+            f"{ev['n']} county or state figures for Harvey and Irma; {compared} can be set against the reports. Of "
+            f"those, {ev['match'] + ev['match after truncation'] + ev['consistent']} agree (including "
+            f"{ev['match after truncation']} where the FCC dropped decimals instead of rounding) and {ev['differs']} "
+            f"differ: {ev['differs'] - unexplained} are explained or have a likely explanation, for example a "
+            f"combined Puerto Rico and Virgin Islands figure given for the islands alone, and {unexplained} match no "
+            f"figure in their report. In each, the summary departs from what the DIRS report prints or from the total "
+            f"its rows reconcile to, so none points to an error in the panel, and no data were changed because of it. Every figure is in the snapshot's "
+            f"[`docs/external_validation.md`]({DATA_REPO}/blob/v{DATA_VERSION}/docs/external_validation.md). The "
+            f"differences:\n\n"
+            + table(["#", "FCC figure", "Report", "FCC", "Ours", "Explanation"], rows) + "\n")
 
 
 def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame, excluded: pd.DataFrame) -> str:
@@ -1599,6 +1619,7 @@ def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame
                 f"{total.group(3)}; the rows are used.")
         else:
             raise ValueError(f"known FCC inconsistency with no page wording: {k['detail']}")
+    add("\n" + external_check_paragraph())
     add(f"\nEach report's flags and reasons are in the snapshot's "
         f"[`data/analysis/validation/validation_dirs.csv`]({DATA_REPO}/blob/v{DATA_VERSION}/data/analysis/validation/"
         f"validation_dirs.csv). Excluded reports:\n")

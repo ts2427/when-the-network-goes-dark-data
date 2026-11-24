@@ -19,7 +19,8 @@ NOT_BUILT = "needs build/ (not committed): run python run_all.py first"
 built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason=NOT_BUILT)
 CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv")] + [
     (f"output/{n}", f"validation/{n}") for n in ("validation_dirs.csv", "validation_summary.csv",
-                                                 "excluded_reports.csv", "area_status_counts.csv")]
+                                                 "excluded_reports.csv", "area_status_counts.csv",
+                                                 "external_validation_fcc_2017.csv")]
 
 
 @built

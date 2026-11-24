@@ -28,21 +28,22 @@ from pathlib import Path
 
 import pandas as pd
 
+import load
 from config import (BDC_COUNTS, BDC_COUNTS_META, DOWNLOADS_LOG, EAGLEI_EXTRACT, EAGLEI_RAW_DIR, OUTPUT, PROCESSED,
                     RAW, REGIMES, ROOT)
 
-VERSION = "3.0.0"
+VERSION = "3.1.0"
 RELEASE_DATE = "2026-11-24"
 CREATED = f"{RELEASE_DATE}T12:00:00-06:00"  # datapackage.json created: ISO 8601 date-time (v2.2.0)
 # Set to True only after CI has passed on both ubuntu-latest and windows-latest (README then says so).
-CI_PASSED_ON_BOTH = True  # CI passed on ubuntu-latest and windows-latest, commit 51b7632 (2026-11-24)
+CI_PASSED_ON_BOTH = False  # 3.1.0: set to True once CI passes on both
 GITHUB = "https://github.com/ts2427/when-the-network-goes-dark-data"
 BOOTSTRAP_NOTE = importlib.import_module("11_build_page").BOOTSTRAP_METHODS
 PUBLIC_REQUIREMENTS = [
     "pandas==2.3.3", "numpy==2.5.5", "scipy==1.18.1", "statsmodels==0.15.0", "scikit-learn==1.9.1",
     "lifelines==0.30.3", "pdfplumber==0.11.11", "pdfminer.six==20260107", "geopandas==1.2.0", "shapely==2.2.0",
     "pyogrio==0.13.0", "pyproj==3.8.0", "pyarrow==26.0.1", "requests==2.34.2", "pytest==9.2.0",
-    "frictionless==5.21.0"]
+    "frictionless==5.21.0", "matplotlib==3.11.2", "nbmake==1.5.5", "ipykernel==7.4.0", "ruff==0.17.6"]
 LOCKFILE = ROOT / "requirements.lock"  # uv pip compile requirements.txt --universal --generate-hashes (see README)
 _PANEL = pd.read_csv(PROCESSED / "dirs_county_day.csv", usecols=["storm_key", "doc_id"])
 N_STORMS, N_REPORTS = _PANEL.storm_key.nunique(), _PANEL.doc_id.nunique()  # from the panel, never typed
@@ -66,6 +67,7 @@ INPUT_DIRS = {
 }
 NHC_FILES = ["hurdat2-1851-2025-092326.txt", "al092026_best_track.zip"]
 RULE_FILES = ["FCC-22-50A1_Rcd.pdf", "FCC-26-34A1.txt"]
+EXTERNAL_FILES = ["DOC-353805A1.pdf"]  # the FCC's 2017 season report, for the external check (step 15, v3.1.0)
 EAGLEI_FILES = ["MCC.csv", "coverage_history.csv"]  # unmodified EAGLE-I files; the year files are never copied
 BDC_LISTINGS = ["storm_releases.json", "provider_summary_files.csv"]
 STORM_PAGE_FILES = ["fcc_storm_documents.csv", "fcc_storm_documents_supplement.csv", "README_fcc_storm_documents.md"]
@@ -215,7 +217,9 @@ ANALYSIS_READY_EXTRA = [  # v2.2.0: columns of panel_analysis_ready after the pu
     ("landfall_utc", "datetime", "Day 0: the first time the storm's 34-knot wind radii reach a study-state county.",
      "UTC", "Same for every county of a storm; see storms.csv."),
     ("landfall_source", "string", "Which rule set day 0.", "", ""),
-    ("days_since_landfall", "number", "Days from day 0 to the report's as-of time.", "days", ""),
+    ("days_since_landfall", "number", "Deprecated alias of days_since_day0 (same values), kept until 4.0.0.",
+     "days", "Use days_since_day0: day 0 is not always a landfall (see landfall_source)."),
+    ("days_since_day0", "number", "Days from day 0 to the report's as-of time (since 3.1.0).", "days", ""),
     ("svi_overall", "number", "CDC/ATSDR SVI 2022 overall national percentile rank (RPL_THEMES).", "percentile (0-1)",
      "Chapter 8's quartiles are of the at-risk storm-counties, not of this column's national cut points."),
     ("svi_socioeconomic", "number", "SVI 2022 theme 1, socioeconomic status (RPL_THEME1).", "percentile (0-1)", ""),
@@ -297,6 +301,9 @@ def copy_inputs(T: Path) -> pd.DataFrame:
         add(RAW / "nhc" / name, f"nhc/{name}", "NOAA National Hurricane Center", f"data/raw/nhc/{name}")
     for name in RULE_FILES:
         add(RAW / "rules" / name, f"rules/{name}", "FCC orders (cited for rule dates)", f"data/raw/rules/{name}")
+    for name in EXTERNAL_FILES:
+        add(RAW / "rules" / name, f"rules/{name}", "FCC PSHSB report (external check, step 15)",
+            f"data/raw/rules/{name}")
     for name in STORM_PAGE_FILES:
         add(RAW / "storm_pages" / name, f"storm_pages/{name}", "FCC storm pages (document lists)",
             f"data/raw/storm_pages/{name}", "Compiled by reading the FCC storm pages (www.fcc.gov/<storm>) on "
@@ -328,7 +335,8 @@ def copy_analysis(T: Path) -> None:
     for ext in ("csv", "parquet"):
         copy(PROCESSED / f"panel_analysis_ready.{ext}", a / f"panel_analysis_ready.{ext}")
     copy(OUTPUT / "results.json", a / "results.json")
-    for f in ("validation_dirs.csv", "validation_summary.csv", "excluded_reports.csv", "area_status_counts.csv"):
+    for f in ("validation_dirs.csv", "validation_summary.csv", "excluded_reports.csv", "area_status_counts.csv",
+              "external_validation_fcc_2017.csv"):
         copy(OUTPUT / f, a / "validation" / f)
 
 
@@ -407,8 +415,10 @@ def plan_as_committed(T: Path) -> dict:
 
 def copy_docs(T: Path) -> None:
     for name in ("analysis_plan.md", "analysis_plan_addendum_v2.md", "decisions.md", "data_sources.md",
-                 "literature.md", "update_procedure.md"):
+                 "literature.md", "update_procedure.md", "external_validation.md", "restructure_plan.md"):
         copy(ROOT / "docs" / name, T / "docs" / name)
+    copy(ROOT / "examples" / "quickstart.ipynb", T / "examples" / "quickstart.ipynb")
+    copy(ROOT / "ruff.toml", T / "ruff.toml")
 
 
 def deviations_md(T: Path) -> None:
@@ -536,6 +546,13 @@ def codebook_md(T: Path, pkg: dict) -> None:
             L.append(f"| `{f['name']}` | {f['type']} | {f.get('unit', '')} | {f['description']} | "
                      f"{f.get('limitations', '')} |")
         L.append("")
+    L += ["## Cleaning levels (`clean_rows`)", "",
+          "`clean_rows(panel, level)` in `code/src/load.py` (since 3.1.0) drops rows of the analysis-ready panel at one "
+          "of two levels; it never changes a value. The main analysis uses every row except as noted; the flags behind "
+          "each report's status are in `data/analysis/validation/validation_dirs.csv`.", "",
+          "| Level | Drops | Why |", "|---|---|---|"]
+    L += [f"| `{k}` | {v['drops']} | {v['why']} |" for k, v in load.CLEAN_LEVELS.items()]
+    L += [""]
     L += ["## `data/analysis/results.json`", "",
           "Nested JSON, one key per chapter (`chapter_1` to `chapter_9`, then `v2_1_public_record_misses`, "
           "`v2_2_backup_power`, `v2_3_power_cell_timing`, `v2_5_groups`, `v2_5_network_redundancy`, `v2_1_1_report_card`). Each number is "
@@ -597,19 +614,71 @@ abstract: >-
 
 
 def changelog(T: Path) -> None:
+    ext = importlib.import_module("15_external_validation")
+    ev = ext.summary(pd.read_csv(ext.OUT_CSV, dtype=str, keep_default_na=False))
+    unreleased = (f"""## [Unreleased]
+
+### Added
+- The version {VERSION} DOI ({version_dois()[VERSION]}) in `CITATION.cff` and the README, added after the release.
+  Documentation only.
+
+""" if VERSION in version_dois() else "")
     write(T / "CHANGELOG.md", f"""# Changelog
 
 This project follows [Semantic Versioning](https://semver.org/): a major version changes a published number or a
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
-## [Unreleased]
+{unreleased}## [{VERSION}] - {RELEASE_DATE}
+
+Usability and maintenance. No published number changes: `dirs_county_day.csv`, `storms.csv`, the validation tables
+and `results.json` are as in 3.0.0 (the reproduction test compares them), and the analysis-ready panel differs only by
+its new column.
 
 ### Added
-- The version {VERSION} DOI ({version_dois().get(VERSION, "")}) in `CITATION.cff` and the README, added after the
-  release. Documentation only.
+- External validation against the FCC's own summary, the 2017 Atlantic Hurricane Season Impact on Communications
+  report (DOC-353805A1, August 2018; now in `data/input/rules/`). Every county or state figure it gives for Harvey and
+  Irma ({ev["n"]}) is transcribed with its page in `code/manifest/external_fcc_2017_report.csv` and compared with the
+  matching report by the new step `code/src/15_external_validation.py`: {ev["match"]} match, {ev["match after truncation"]}
+  match once the FCC's dropped decimals are allowed for, {ev["consistent"]} is consistent with a figure given in words,
+  {ev["differs"]} differ and {ev["no panel field"]} cannot be compared (switching centers, PSAPs, broadcast stations,
+  providers' filings). Every difference is explained or marked as not explained, and none points to an error in the
+  panel. Table: `data/analysis/validation/external_validation_fcc_2017.csv` and `docs/external_validation.md`; summary
+  in the README and the page's methods. No data were changed because of it.
+- `days_since_day0` in the analysis-ready panel: the documented name for `days_since_landfall` (same values), since
+  day 0 is not always a landfall. `days_since_landfall` stays as a deprecated alias until 4.0.0.
+- `clean_rows(panel, level="standard" | "strict")` in `code/src/load.py`, documented in `CODEBOOK.md` (Cleaning
+  levels): which rows each level drops and why.
+- `examples/quickstart.ipynb`: loads the panel and rebuilds two headline figures, the recovery curves with the
+  median time to 50% restored (chapter 4) and the pooled cause shares (chapter 5), checking each against
+  `results.json`. CI runs it with nbmake.
+- `CONTRIBUTING.md`; a "Report a data error" issue form (`.github/ISSUE_TEMPLATE/data_error.yml`: storm, report DOC,
+  county, what is wrong, evidence); `ERRATA.md`, generated from the CORRECTION entries of `docs/decisions.md`.
+- CI: a monthly scheduled run (the 1st of each month), a ruff lint step (`ruff.toml`: pyflakes and the pycodestyle
+  error and warning rules) and the notebook check. Dependabot (`.github/dependabot.yml`) proposes updates to the
+  Actions and the Python packages weekly.
+- `docs/restructure_plan.md`: the package layout planned for 4.0.0. No file is split or moved in this release.
 
-## [{VERSION}] - {RELEASE_DATE}
+### Changed
+- `load_panel()` parses `report_date` and `dirs_activation_date` as dates (pandas datetime64, no time zone), from
+  the CSV and the Parquet alike; they were text. Comparisons with "YYYY-MM-DD" strings still work; string methods on
+  those two columns no longer do.
+- Every GitHub Action is pinned to a commit SHA (checkout v4.4.0, setup-python v5.6.0, upload-artifact v4.6.2).
+- `requirements.txt` adds matplotlib (already a dependency), nbmake, ipykernel and ruff; `requirements.lock` is
+  regenerated, and no version already pinned changes.
+- Lint fixes, with no change in behavior: unused imports and variables removed, a constant moved below the imports,
+  a lambda given a name, one ambiguous variable renamed, f-strings without placeholders made plain strings.
+- The version 3.0.0 DOI ({version_dois().get("3.0.0", "")}) in `CITATION.cff` and the README (added after its
+  release).
+
+### Note on the 3.0.0 archive
+- The 3.0.0 archive on Zenodo ({version_dois().get("3.0.0", "")}) holds a decision log (`docs/decisions.md`) that
+  predates two wording fixes made on main after the release: the display-rounding correction entry now names only
+  Nicholas's site-days lost (114 to 115), and the word "correction" in a notes entry is in lower case, so that entry is
+  no longer listed among the page's corrections. Main also adds a log entry for the 3.0.0 release itself. No number
+  differs. This release's archive carries the fixed log.
+
+## [3.0.0] - 2026-11-24
 
 A major version, as this file's rule requires, because published numbers change. Two parts: corrections to how
 the FCC's reports and notices were read, which change published numbers, and engineering hardening, which changes
@@ -656,8 +725,8 @@ and one county name.
   report's own county list ("MATAGORDA"). A build check requires every county name in the panel to match its
   report's list, a checked spelling variant (`code/manifest/county_spelling_variants.csv`: three misspellings in
   the FCC's lists) or, for a county in the table but not the list, its Census name.
-- Counts: storms {N_STORMS_210} to {N_STORMS}, reports in use 167 to {N_REPORTS}, excluded reports 7 to 5.
-- Numbers that change (2.1.0, then {VERSION}): the median peak share 10.3% to 9.8%; Harvey's site-days lost 1,474 to
+- Counts: storms {N_STORMS_210} to 22, reports in use 167 to 169, excluded reports 7 to 5.
+- Numbers that change (2.1.0, then 3.0.0): the median peak share 10.3% to 9.8%; Harvey's site-days lost 1,474 to
   1,424 and its share restored by its last report 74.8% to 74.0%; the median site-days lost 2,124 to 2,099; sites
   still out in the FCC's last report 1,883 in 21 storms to 1,887 in 22 (Harvey 70 to 73); the power vs. cell order
   (cell first 158 to 159, undetermined 148 to 147); chapter 7's and chapter 8's model estimates move slightly
@@ -950,7 +1019,30 @@ RUN_ORDER = [
     ("10_analysis.py", "1 2", "chapters 1 and 2 (run second so results.json keeps the published key order)"),
     ("12_v2_analysis.py", "v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card", "chapters 10-14 to results.json"),
     ("12b_analysis_ready.py", "", "the analysis-ready panel (CSV and Parquet): the panel with every covariate"),
+    ("15_external_validation.py", "", "external check against the FCC's 2017 season report (Harvey and Irma figures)"),
 ]
+
+
+def external_validation_section() -> list:
+    ext = importlib.import_module("15_external_validation")
+    t = pd.read_csv(ext.OUT_CSV, dtype=str, keep_default_na=False)
+    ev = ext.summary(t)
+    L = ["## External validation", "",
+         f"The FCC's own summary of the season, *2017 Atlantic Hurricane Season Impact on Communications* "
+         f"(DOC-353805A1, August 2018), gives {ev['n']} county or state figures for Harvey and Irma. Each is "
+         f"transcribed with its page (`code/manifest/external_fcc_2017_report.csv`) and compared with the matching "
+         f"report by `code/src/15_external_validation.py`: {ev['match']} match, {ev['match after truncation']} match "
+         f"once the FCC's dropped decimals are allowed for, {ev['consistent']} is consistent with a figure given in "
+         f"words, {ev['differs']} differ and {ev['no panel field']} cannot be compared (switching centers, PSAPs, "
+         "broadcast stations, providers' filings). In each difference the season report departs from what the DIRS "
+         "report prints or from the total its rows reconcile to, so none points to an error in the panel, and no data "
+         "were changed because of the check. Every figure: `docs/external_validation.md` and "
+         "`data/analysis/validation/external_validation_fcc_2017.csv`. The differences:", "",
+         "| # | FCC figure | Report | FCC | Ours | Explanation |", "|---|---|---|---|---|---|"]
+    for r in t[t.status == "differs"].itertuples():
+        L.append(f"| {r.id} | {r.where}: {r.fcc_text} | {r.report_date or 'all'} | {r.fcc_value} | {r.ours} | "
+                 f"{r.explanation} |")
+    return L + [""]
 
 
 def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
@@ -1006,11 +1098,16 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "data/input/      every input, with INPUTS.csv (source, URL, retrieval time, SHA-256)",
          "data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/,",
          "                 panel_analysis_ready.csv and .parquet (the panel with every covariate the analysis uses)",
-         "code/src/        numbered pipeline steps, load.py (load_panel()); code/manifest/ hand-made tables;",
-         "                 code/tests/",
-         ".github/         CI: the tests and a full rebuild on Linux and Windows on every push",
+         "code/src/        numbered pipeline steps, load.py (load_panel(), clean_rows()); code/manifest/",
+         "                 hand-made tables; code/tests/",
+         "examples/        quickstart.ipynb: load the panel and rebuild two headline figures",
+         ".github/         CI (lint, tests, the notebook and a full rebuild on Linux and Windows, on every push",
+         "                 and monthly), Dependabot, the 'Report a data error' issue form",
          "docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes,",
-         "                 update_procedure.md (how a new season and a new version are added and released)",
+         "                 update_procedure.md (how a new season and a new version are added and released),",
+         "                 external_validation.md (the check against the FCC's 2017 season report),",
+         "                 restructure_plan.md (the layout planned for 4.0.0)",
+         "ERRATA.md        every correction, from the decision log; CONTRIBUTING.md: how to report an error",
          "run_all.py       one command: rebuild the panel and results.json into build/",
          "```", "",
          "## Analysis-ready panel", "",
@@ -1020,7 +1117,18 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "day 0, SVI 2022, ACS 2022, and the storm's BDC release with its provider counts and chapter 13 group. "
          "Variables: `CODEBOOK.md`. To load it with its types:", "",
          "```python", "import sys", "sys.path.insert(0, \"code/src\")", "from load import load_panel",
-         "p = load_panel()   # the Parquet if present, else the CSV, with the same types", "```", "",
+         "from load import clean_rows",
+         "p = load_panel()   # the Parquet if present, else the CSV, with the same types",
+         "q = clean_rows(p, \"standard\")   # or \"strict\"", "```", "",
+         "`report_date` and `dirs_activation_date` load as dates (since 3.1.0). `days_since_day0` is the days from the "
+         "storm's day 0 to the report's as-of time; `days_since_landfall` is the same column under its old name, kept "
+         "as a deprecated alias until 4.0.0. `clean_rows` drops rows at one of two levels and never changes a value:", "",
+         "| Level | Drops | Why |", "|---|---|---|",
+         *[f"| `{k}` | {v['drops']} | {v['why']} |" for k, v in load.CLEAN_LEVELS.items()], "",
+         "`examples/quickstart.ipynb` loads the panel, rebuilds the recovery curves (with the median time to 50% "
+         "restored) and the pooled cause shares with plain pandas, and checks both against `results.json`; CI runs it "
+         "(`python -m pytest --nbmake examples/quickstart.ipynb`).", "",
+         *external_validation_section(),
          "## Analysis plan", "",
          f"The analysis plan was committed on November 22, 2026, in the project's private version-controlled "
          f"repository (commit {plan['commit']}, {plan['committed']}), before any recovery outcome was computed. The "
@@ -1060,6 +1168,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "python -m pytest code/tests        # unit tests; the build checks skip until run_all.py has run",
           "python run_all.py                   # rebuild into build/",
           "python -m pytest code/tests        # now including the reproduction test (build/ vs data/analysis/)",
+          "python -m pytest --nbmake examples/quickstart.ipynb   # the quickstart notebook",
+          "python -m ruff check code examples run_all.py        # lint (ruff.toml)",
           "```", "",
           "`run_all.py` runs these steps in this order (all in `code/src/`):", "",
           "| # | Script | Arguments | Does |", "|---|---|---|---|"]
@@ -1087,6 +1197,9 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
             [f"- Version {VERSION} (this one) gets its own DOI when it is released; until then, cite the concept DOI."]),
           "",
           "`CITATION.cff` lists every DOI, and GitHub's \"Cite this repository\" button reads it.", "",
+          "## Corrections and contributing", "",
+          "Every correction made so far is in `ERRATA.md` (generated from the decision log). To report a data error, "
+          "use the issue form described in `CONTRIBUTING.md`; a change to a published number is a new major version.", "",
           "## Disclosure", "",
           "The author works in the telecommunications industry. This analysis was done independently, on personal "
           "time, using only publicly available government data. It uses no employer data or confidential "
@@ -1145,7 +1258,8 @@ NOT_BUILT = "needs build/ (not committed): run python run_all.py first"
 built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason=NOT_BUILT)
 CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv")] + [
     (f"output/{n}", f"validation/{n}") for n in ("validation_dirs.csv", "validation_summary.csv",
-                                                 "excluded_reports.csv", "area_status_counts.csv")]
+                                                 "excluded_reports.csv", "area_status_counts.csv",
+                                                 "external_validation_fcc_2017.csv")]
 
 
 @built
@@ -1218,22 +1332,36 @@ def test_datapackage_validates_with_no_errors():
     assert report.valid and not errors, errors[:20]
 '''
 
-CI_WORKFLOW = """name: CI
+# GitHub Actions pinned to commit SHAs (v3.1.0); Dependabot proposes updates weekly
+ACTIONS = {"checkout": ("actions/checkout", "11d5960a326750d5838078e36cf38b85af677262", "v4.4.0"),
+           "setup-python": ("actions/setup-python", "a26af69be951a213d495a4c3e4e4022e16d87065", "v5.6.0"),
+           "upload-artifact": ("actions/upload-artifact", "ea165f8d65b6e75b540449e92b4886f43607fa02", "v4.6.2")}
 
-# On every push: the tests, a full rebuild from data/input, then the reproduction tests (build/ vs data/analysis/),
-# on Linux and Windows. Nothing is downloaded except the Python packages.
+
+def uses(name: str) -> str:
+    repo, sha, tag = ACTIONS[name]
+    return f"{repo}@{sha}  # {tag}"
+
+
+CI_WORKFLOW = f"""name: CI
+
+# On every push, and on the 1st of each month: lint, the tests, the quickstart notebook, a full rebuild from
+# data/input, then the reproduction tests (build/ vs data/analysis/), on Linux and Windows. Nothing is downloaded
+# except the Python packages. Every action is pinned to a commit SHA (Dependabot proposes updates).
 on:
   push:
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: "17 6 1 * *"
 
 permissions:
   contents: read
 
 jobs:
   reproduce:
-    name: ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: ${{{{ matrix.os }}}}
+    runs-on: ${{{{ matrix.os }}}}
     timeout-minutes: 90
     strategy:
       fail-fast: false
@@ -1242,17 +1370,22 @@ jobs:
     env:
       PYTHONHASHSEED: "0"
       PYTHONIOENCODING: utf-8
+      MPLBACKEND: Agg
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: {uses("checkout")}
+      - uses: {uses("setup-python")}
         with:
           python-version: "3.13"
           cache: pip
           cache-dependency-path: requirements.lock
       - name: Install the locked environment
         run: python -m pip install --require-hashes -r requirements.lock
+      - name: Lint (ruff.toml)
+        run: python -m ruff check code examples run_all.py
       - name: Tests (build checks skip before the rebuild)
         run: python -m pytest code/tests -q -rs
+      - name: Quickstart notebook (examples/quickstart.ipynb)
+        run: python -m pytest --nbmake examples/quickstart.ipynb -q
       - name: Validate datapackage.json
         run: frictionless validate datapackage.json
       - name: Rebuild everything from data/input
@@ -1269,12 +1402,12 @@ jobs:
           for case in (ET.parse(p).getroot().iter("testcase") if p.exists() else []):
               for bad in list(case.findall("failure")) + list(case.findall("error")):
                   msg = (bad.get("message") or bad.text or "")[:1800].replace("%", "%25").replace("\\r", "").replace("\\n", "%0A")
-                  print(f"::error title={case.get('name')}::{msg}")
+                  print(f"::error title={{case.get('name')}}::{{msg}}")
       - name: Keep the rebuilt results for comparison
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: {uses("upload-artifact")}
         with:
-          name: build-${{ matrix.os }}
+          name: build-${{{{ matrix.os }}}}
           path: |
             build/output/results.json
             build/processed/dirs_county_day.csv
@@ -1283,6 +1416,124 @@ jobs:
           if-no-files-found: warn
 """
 
+DEPENDABOT = """# Weekly update proposals for the pinned GitHub Actions and the Python packages (v3.1.0).
+# A package update changes requirements.txt; regenerate requirements.lock (see README) before merging.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+"""
+
+
+ISSUE_TEMPLATE = """name: Report a data error
+description: A number in the panel, the storm table or results.json that does not match the FCC report it comes from.
+title: "Data error: <storm>, <report date>, <county>"
+labels: ["data error"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Thank you. Each row of the panel comes from one FCC DIRS Communications Status Report; the reports are in
+        data/input/dirs/ and listed in code/manifest/dirs_reports.csv. Known FCC misprints are in
+        code/manifest/known_fcc_inconsistencies.csv, and corrections made so far are in ERRATA.md.
+  - type: input
+    id: storm
+    attributes:
+      label: Storm
+      description: Name and year, or the storm_key (NHC ID and DIRS activation date).
+      placeholder: Harvey 2017 (AL092017_2017-08-25)
+    validations:
+      required: true
+  - type: input
+    id: report
+    attributes:
+      label: Report (DOC id)
+      description: The doc_id column, or the report's date.
+      placeholder: DOC-346499A1
+    validations:
+      required: true
+  - type: input
+    id: county
+    attributes:
+      label: County
+      description: County and state, or the 5-digit FIPS code. Leave blank if the error is not about one county.
+      placeholder: Matagorda, Texas (48321)
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong
+      description: The file and column, the value it has, and the value you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: >-
+        Where the right value is printed: the report's page and table row, a quote, or a screenshot. A public source
+        only, please.
+    validations:
+      required: true
+"""
+
+
+def contributing_md(T: Path) -> None:
+    write(T / "CONTRIBUTING.md", f"""# Contributing
+
+Thank you for checking this work. Corrections are welcome, and every one is credited in the decision log.
+
+## Report a data error
+
+Open an issue with the **Report a data error** form ({GITHUB}/issues/new?template=data_error.yml): the storm, the
+report's DOC id, the county, what is wrong and the evidence (the report's page and row). Each panel row comes from
+one FCC DIRS report in `data/input/dirs/`; checked FCC misprints are in `code/manifest/known_fcc_inconsistencies.csv`
+and the corrections made so far in `ERRATA.md`.
+
+## How a correction is made
+
+1. The error is checked against the report's text and PDF.
+2. The fix goes into the code or a hand-made table in `code/manifest/` (never into a published file by hand), with
+   a test from the report's own text.
+3. It is logged in `docs/decisions.md` as a CORRECTION (date, what, why). `ERRATA.md`, `DEVIATIONS.md` and the
+   page's Corrections list are generated from that log.
+4. The whole pipeline is rerun and the reproduction tests compared. A change to any published number is a new major
+   version (`CHANGELOG.md` states the rule), archived on Zenodo with its own DOI.
+
+## Code changes
+
+This repository is generated by `code/src/14_data_repo.py` from the author's working project, so pull requests are
+applied there and the repository regenerated; they are still the best way to propose a change. Before opening one:
+
+```
+python -m pip install --require-hashes -r requirements.lock
+python -m ruff check code examples run_all.py
+python -m pytest code/tests -q
+python run_all.py && python -m pytest code/tests -q   # the reproduction tests must still pass
+python -m pytest --nbmake examples/quickstart.ipynb
+```
+
+Ground rules: public data only; never name, infer or estimate an individual provider; associations, not causes.
+""")
+
+
+def errata_md(T: Path) -> None:
+    step11 = importlib.import_module("11_build_page")
+    text = (ROOT / "docs" / "decisions.md").read_text(encoding="utf-8")
+    rows = step11.corrections(text)
+    L = ["# Errata", "",
+         "Generated by `code/src/14_data_repo.py` from the CORRECTION entries of `docs/decisions.md`, in the log's "
+         "order and wording. Each correction was made after results or an independent check were seen; the version "
+         "that carries it is in `CHANGELOG.md`. To report an error: `CONTRIBUTING.md`.", "",
+         f"{len(rows)} corrections.", "", "| Date | Correction | Reason |", "|---|---|---|"]
+    L += [f"| {d} | {w} | {y} |" for d, w, y in rows]
+    write(T / "ERRATA.md", "\n".join(L) + "\n")
+
 
 def scripts(T: Path) -> None:
     write(T / "run_all.py", RUN_ALL.replace("STEPS_LITERAL", "[\n" + "".join(
@@ -1290,6 +1541,8 @@ def scripts(T: Path) -> None:
     write(T / "code" / "tests" / "test_reproduction.py", TEST_REPRO)
     write(T / "code" / "tests" / "test_datapackage.py", TEST_DATAPACKAGE)
     write(T / ".github" / "workflows" / "ci.yml", CI_WORKFLOW)
+    write(T / ".github" / "dependabot.yml", DEPENDABOT)
+    write(T / ".github" / "ISSUE_TEMPLATE" / "data_error.yml", ISSUE_TEMPLATE)
     write(T / "requirements.txt", "\n".join(PUBLIC_REQUIREMENTS) + "\n")
     lock = LOCKFILE.read_text(encoding="utf-8")
     norm = lambda x: x.lower().replace("_", "-").replace(".", "-")  # noqa: E731
@@ -1395,6 +1648,8 @@ def main():
     copy_docs(T)
     plan = plan_as_committed(T)
     deviations_md(T)
+    errata_md(T)
+    contributing_md(T)
     pkg = datapackage(T, plan)
     codebook_md(T, pkg)
     citation_cff(T)

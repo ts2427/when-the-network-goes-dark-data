@@ -2,7 +2,7 @@
   "profile": "data-package",
   "name": "when-the-network-goes-dark-data",
   "title": "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "created": "2026-11-24T12:00:00-06:00",
   "homepage": "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/",
   "description": "County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 22 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the inputs and code that rebuild it.",
@@ -760,7 +760,14 @@
           {
             "name": "days_since_landfall",
             "type": "number",
-            "description": "Days from day 0 to the report's as-of time.",
+            "description": "Deprecated alias of days_since_day0 (same values), kept until 4.0.0.",
+            "unit": "days",
+            "limitations": "Use days_since_day0: day 0 is not always a landfall (see landfall_source)."
+          },
+          {
+            "name": "days_since_day0",
+            "type": "number",
+            "description": "Days from day 0 to the report's as-of time (since 3.1.0).",
             "unit": "days"
           },
           {
@@ -903,8 +910,8 @@
           ""
         ]
       },
-      "hash": "sha256:59dd06ea74bc549921ff800799ee788b8871394111e3b375ab4eda7582e52258",
-      "bytes": 6394597
+      "hash": "sha256:674cf4457a391b3523756529de8ba41ba6e4bcc4530eac748e0b02924256f0c2",
+      "bytes": 6496749
     },
     {
       "name": "panel_analysis_ready_parquet",
@@ -913,7 +920,7 @@
       "format": "parquet",
       "mediatype": "application/vnd.apache.parquet",
       "title": "Analysis-ready panel (Parquet)",
-      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 042ea83e34970618063b08b2f04db4e398b09f4d0dd35c06ff75b78f54a7ee50; 666879 bytes.",
+      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 a60d61b6f9a7a0c5306ea5010e7b733afd428c84c439f3483d93dca35bc26195; 668614 bytes.",
       "schema": {
         "fields": [
           {
@@ -1302,7 +1309,14 @@
           {
             "name": "days_since_landfall",
             "type": "number",
-            "description": "Days from day 0 to the report's as-of time.",
+            "description": "Deprecated alias of days_since_day0 (same values), kept until 4.0.0.",
+            "unit": "days",
+            "limitations": "Use days_since_day0: day 0 is not always a landfall (see landfall_source)."
+          },
+          {
+            "name": "days_since_day0",
+            "type": "number",
+            "description": "Days from day 0 to the report's as-of time (since 3.1.0).",
             "unit": "days"
           },
           {

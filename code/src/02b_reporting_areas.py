@@ -23,7 +23,7 @@ import sys
 import pandas as pd
 
 from config import RAW, ROOT
-from notices import Op, read_notice
+from notices import read_notice
 
 MANIFEST_DIR = ROOT / "manifest"
 DOCUMENT_LIST = MANIFEST_DIR / "fcc_storm_documents.csv"
@@ -224,8 +224,9 @@ def main():
     storms["area_changes"] = storms.storm_page.map(changes).fillna("")
     storms.loc[storms.storm_name.isin([s["storm_name"] for s in SECOND_STORMS.values()]), "area_changes"] = ""
 
-    fmt = lambda df: df.assign(**{c: pd.to_datetime(df[c]).dt.date.astype("string") for c in df.columns
-                                  if c.endswith(("_on", "_began", "_ended"))})
+    def fmt(df):
+        return df.assign(**{c: pd.to_datetime(df[c]).dt.date.astype("string") for c in df.columns
+                            if c.endswith(("_on", "_began", "_ended"))})
     cols = ["storm_page", "state", "county", "spellings", "added_on", "added_by", "removed_on", "removed_by"]
     fmt(pd.concat(areas))[cols].to_csv(MANIFEST_DIR / "reporting_areas.csv", index=False, lineterminator="\n")
     fmt(pd.concat(starts))[["storm_page", "state", "reporting_began", "began_notice", "reporting_ended",

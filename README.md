@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24477809.svg)](https://doi.org/10.5281/zenodo.24477809) [![CI](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml/badge.svg)](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml)
 
-Version 3.0.0 (2026-11-24). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
+Version 3.1.0 (2026-11-24). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
 
 The data and code behind the page *When the Network Goes Dark* (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 22 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in `data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.
 
@@ -22,11 +22,16 @@ Associations, not causes. A site out is a site out: the FCC's counts describe th
 data/input/      every input, with INPUTS.csv (source, URL, retrieval time, SHA-256)
 data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/,
                  panel_analysis_ready.csv and .parquet (the panel with every covariate the analysis uses)
-code/src/        numbered pipeline steps, load.py (load_panel()); code/manifest/ hand-made tables;
-                 code/tests/
-.github/         CI: the tests and a full rebuild on Linux and Windows on every push
+code/src/        numbered pipeline steps, load.py (load_panel(), clean_rows()); code/manifest/
+                 hand-made tables; code/tests/
+examples/        quickstart.ipynb: load the panel and rebuild two headline figures
+.github/         CI (lint, tests, the notebook and a full rebuild on Linux and Windows, on every push
+                 and monthly), Dependabot, the 'Report a data error' issue form
 docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes,
-                 update_procedure.md (how a new season and a new version are added and released)
+                 update_procedure.md (how a new season and a new version are added and released),
+                 external_validation.md (the check against the FCC's 2017 season report),
+                 restructure_plan.md (the layout planned for 4.0.0)
+ERRATA.md        every correction, from the decision log; CONTRIBUTING.md: how to report an error
 run_all.py       one command: rebuild the panel and results.json into build/
 ```
 
@@ -38,8 +43,36 @@ run_all.py       one command: rebuild the panel and results.json into build/
 import sys
 sys.path.insert(0, "code/src")
 from load import load_panel
+from load import clean_rows
 p = load_panel()   # the Parquet if present, else the CSV, with the same types
+q = clean_rows(p, "standard")   # or "strict"
 ```
+
+`report_date` and `dirs_activation_date` load as dates (since 3.1.0). `days_since_day0` is the days from the storm's day 0 to the report's as-of time; `days_since_landfall` is the same column under its old name, kept as a deprecated alias until 4.0.0. `clean_rows` drops rows at one of two levels and never changes a value:
+
+| Level | Drops | Why |
+|---|---|---|
+| `standard` | rows with a time_flag: pre_onset_likely_marco, Laura's Aug 25, 2020 report (the FCC's combined Marco and Laura report, before Laura's day 0) | The rows behind every time-based result (steps 10 and 12 filter them the same way, with timed()): a report from before the storm's day 0 cannot be placed on its clock. Flagged reports are kept, as in the main analysis, because most flags are benign (see validation/validation_dirs.csv). Chapters 5 to 7 (causes, power, exposure) use every row. |
+| `strict` | everything standard drops, and every report whose report_status is flagged (keeping ok and known_fcc_inconsistency) | The sensitivity display 'without flagged reports': only reports that reconcile with their printed totals, or whose one inconsistency is a checked FCC misprint (manifest/known_fcc_inconsistencies.csv). It drops benign flags too (spelling variants, a footnote, causes over sites out), so it is cautious rather than a list of errors; serious flags alone are in validation/validation_dirs.csv. |
+
+`examples/quickstart.ipynb` loads the panel, rebuilds the recovery curves (with the median time to 50% restored) and the pooled cause shares with plain pandas, and checks both against `results.json`; CI runs it (`python -m pytest --nbmake examples/quickstart.ipynb`).
+
+## External validation
+
+The FCC's own summary of the season, *2017 Atlantic Hurricane Season Impact on Communications* (DOC-353805A1, August 2018), gives 80 county or state figures for Harvey and Irma. Each is transcribed with its page (`code/manifest/external_fcc_2017_report.csv`) and compared with the matching report by `code/src/15_external_validation.py`: 55 match, 4 match once the FCC's dropped decimals are allowed for, 1 is consistent with a figure given in words, 10 differ and 10 cannot be compared (switching centers, PSAPs, broadcast stations, providers' filings). In each difference the season report departs from what the DIRS report prints or from the total its rows reconcile to, so none points to an error in the panel, and no data were changed because of the check. Every figure: `docs/external_validation.md` and `data/analysis/validation/external_validation_fcc_2017.csv`. The differences:
+
+| # | FCC figure | Report | FCC | Ours | Explanation |
+|---|---|---|---|---|---|
+| H04 | p. 6 para. 13: By September 5, the eleventh and final day of DIRS reporting, only 1.6 percent of cell sites were out of service | 2017-09-05 | 1.6 | 1.74 | 1.6% is the Sep 4 report's printed figure. The Sep 5 report prints 1.73% (73 of 4,200 sites), and the FCC report itself gives 1.7% for Sep 5 on p. 7 (para. 15) and in its chart (H22). |
+| H20 | p. 8 chart: Percent of Cell Sites Out Per Day: 9/2 | 2017-09-02 | 3.6 | 2.01 | Not explained. The Sep 2 report prints 2.0% (193 of 9,611 sites), its rows give the same, and no state or combination of states in it gives 3.6%. The chart plots the point at 3.6% (its height matches the label), so this is not only a label error. |
+| H25 | p. 8 para. 16: about 150,000 cable subscribers lacked service at some point during the Hurricane Harvey DIRS reporting period (August 26-September 5, 2017) | all | 150000 | 283593 | The reports print one figure for cable and wireline subscribers out over the whole area. It is 149,909 in the first report (Aug 26) and peaks at 283,593 on Aug 29, so the FCC report's 'about 150,000' matches the first report, not the most at any point. This figure is not used in any result. |
+| I01 | p. 5 para. 10: during the initial impact of Hurricane Irma in USVI, 55.2 percent of cell sites were reported out of service (footnote 11: the Sep 7 report) | 2017-09-07 | 55.2 | 48.96 | 55.2% is the Sep 7 report's total for Puerto Rico and the USVI together (397 of 719 sites). The USVI alone is 49.0% (47 of 96). The three island figures in the same sentence (I02-I04) match the report. |
+| I05 | p. 8 para. 17: On September 7, 2017, the Commission activated DIRS for all 78 municipios in Puerto Rico and the three counties of the USVI | 2017-09-07 | 81 | 44 | The activation covered 81 areas, but the Sep 7 report lists 41 municipios and the 3 USVI counties. Every later Irma report lists all 78 municipios and 3 USVI counties (81). |
+| I20 | p. 14 chart: Puerto Rico 9/9 | 2017-09-09 | 19.3 | 29.32 | Not explained. Puerto Rico's 78 rows in the Sep 9 report give 29.3% (511 of 1,743 sites; the report prints no Puerto Rico total that day), and no state or combination of states in the report gives 19.3%. Our rows agree with the report's printed total for Puerto Rico and the USVI together, 31.1% (576 of 1,850). The chart plots the point at 19.3%, below the 25.0% of Sep 10. |
+| I32 | p. 14 chart: USVI 9/14 | 2017-09-14 | 54.7 | 53.77 | Probably the Sep 13 value repeated: the Sep 14 report prints 53.8% (57 of 106 sites), and 54.7% is the Sep 13 figure (58 of 106). The FCC report's own text gives 'fifty-four percent' for Sep 14 (I09), which matches the report. |
+| I37 | p. 14 para. 20: in Florida at the height of the storm 27.1 percent of the cell sites were out of service | 2017-09-11 | 27.1 | 27.40 | Not explained. The Sep 11 report prints 27.4% for Florida (3,973 of 14,502 sites), its rows give the same, and no combination of states in the report gives 27.1%. The FCC report's own 'twenty-seven percent' for Sep 11 (I08) is consistent with either. |
+| I39 | p. 14 chart: Percent of Cell Sites Out Per Day in Florida: 9/11 | 2017-09-11 | 27.1 | 27.40 | Not explained, as I37. |
+| I45 | p. 14 chart: Florida 9/17 | 2017-09-17 | 4.3 | 3.96 | Possibly Florida and the USVI together: the Sep 17 report prints 4.0% for Florida (584 of 14,730 sites), while Florida and the USVI together give 4.29% (637 of 14,836). That reading is not confirmed: the chart's other Florida points are Florida alone. |
 
 ## Analysis plan
 
@@ -51,7 +84,7 @@ The analysis plan was committed on November 22, 2026, in the project's private v
 |---|---|---|---|---|---|
 | FCC DIRS reports (PDF and text) | `data/input/dirs/` | FCC | Public domain (U.S. government) | yes | 103.7 MB |
 | FCC DIRS notices | `data/input/notices/` | FCC | Public domain | yes | 0.4 MB |
-| FCC orders cited for dates | `data/input/rules/` | FCC | Public domain | yes | 0.4 MB |
+| FCC orders cited for dates | `data/input/rules/` | FCC | Public domain | yes | 2.8 MB |
 | FCC storm-page document lists | `data/input/storm_pages/` | FCC (compiled list) | Public domain | yes | 0.1 MB |
 | EAGLE-I extract, MCC, coverage | `data/input/eaglei/` | ORNL/DOE | CC BY 4.0 | yes (extract modified) | 12.9 MB |
 | EAGLE-I year files 2017-2024 | not included (8.9 GB) | ORNL/DOE via figshare | CC BY 4.0 | no: download with code/src/06a_download_eaglei.py | 8.9 GB |
@@ -67,7 +100,7 @@ Exact attribution for each source: `SOURCES.md`. Variables: `CODEBOOK.md` and `d
 
 ## Computational requirements
 
-- Python 3.13 (tested with 3.13.2 on Windows 11). Reproduced on Windows and Linux: CI rebuilds everything and runs the reproduction tests on windows-latest and ubuntu-latest with Python 3.13 on every push (badge above).
+- Python 3.13 (tested with 3.13.2) on Windows 11; the code uses no platform-specific calls. CI runs the tests and a full rebuild on windows-latest and ubuntu-latest (badge above).
 - Packages: `requirements.txt` (exact versions of the packages used) and `requirements.lock` (every package, including dependencies, pinned with SHA-256 hashes for Windows, Linux and macOS; generated with `uv pip compile requirements.txt --universal --generate-hashes --python-version 3.13 -o requirements.lock`). For an exact environment: `python -m pip install --require-hashes -r requirements.lock`.
 - Memory: about 4 GB. Disk: about 200 MB for the repository and `build/`.
 - Run time: 12.4 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-23 (most of it is parsing the reports in step 3 and the bootstrap in step 10).
@@ -83,6 +116,8 @@ python -m pip install -r requirements.txt   # or: --require-hashes -r requiremen
 python -m pytest code/tests        # unit tests; the build checks skip until run_all.py has run
 python run_all.py                   # rebuild into build/
 python -m pytest code/tests        # now including the reproduction test (build/ vs data/analysis/)
+python -m pytest --nbmake examples/quickstart.ipynb   # the quickstart notebook
+python -m ruff check code examples run_all.py        # lint (ruff.toml)
 ```
 
 `run_all.py` runs these steps in this order (all in `code/src/`):
@@ -101,6 +136,7 @@ python -m pytest code/tests        # now including the reproduction test (build/
 | 10 | `10_analysis.py` | 1 2 | chapters 1 and 2 (run second so results.json keeps the published key order) |
 | 11 | `12_v2_analysis.py` | v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card | chapters 10-14 to results.json |
 | 12 | `12b_analysis_ready.py` |  | the analysis-ready panel (CSV and Parquet): the panel with every covariate |
+| 13 | `15_external_validation.py` |  | external check against the FCC's 2017 season report (Harvey and Irma figures) |
 
 `code/tests/test_reproduction.py` then compares `build/` with `data/analysis/`: `dirs_county_day.csv`, `storms.csv` and the validation tables byte for byte, `results.json` with numbers within a relative 1e-8 (absolute 1e-12 near zero) and everything else exactly, and the analysis-ready panel value by value. `code/tests/test_datapackage.py` checks `datapackage.json` with frictionless (`frictionless validate datapackage.json`: 0 errors).
 
@@ -137,8 +173,13 @@ The repository is archived on Zenodo. Cite the concept DOI for the data and code
 - Version 2.0.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 2.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477811
 - Version 2.1.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 2.1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24480432
 - Version 3.0.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24514963
+- Version 3.1.0 (this one) gets its own DOI when it is released; until then, cite the concept DOI.
 
 `CITATION.cff` lists every DOI, and GitHub's "Cite this repository" button reads it.
+
+## Corrections and contributing
+
+Every correction made so far is in `ERRATA.md` (generated from the decision log). To report a data error, use the issue form described in `CONTRIBUTING.md`; a change to a published number is a new major version.
 
 ## Disclosure
 

@@ -347,8 +347,6 @@ def pct(x: float) -> str:
 def v2_3_page_text(h: dict, periods: dict) -> dict:
     o, lag = h["orders"], h["lag_days_where_both"]
     determined = h["n"] - o["undetermined"]["count"]
-    more = "cell sites out" if o["cell_first"]["count"] > o["power_first"]["count"] else "customers without power"
-    other = "customers without power" if more == "cell sites out" else "cell sites out"
     u = o["undetermined"]
     return {
         "finding": (f"Where the order could be determined ({determined} of {h['n']} counties, as defined), cell outages "

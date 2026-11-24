@@ -124,7 +124,7 @@ def test_lookup_data_from_the_panel_leaves_flagged_reports_off_the_timeline():
 
 
 def test_map_topology_round_trip_matches_the_simplified_shapes():
-    import shapely
+    import shapely  # noqa: F401  (shapely 2 is required)
     from shapely.geometry import Polygon
     ring = [(-90.0, 30.0), (-89.5, 30.0), (-89.5, 30.4), (-90.0, 30.4), (-90.0, 30.0)]
     x0, y0, kx, ky = -91.0, 29.0, 0.001, 0.001
@@ -151,7 +151,7 @@ def test_map_data_leaves_flagged_reports_off_the_slider_and_keeps_causes_blank_w
 
 def test_map_topology_rings_wind_clockwise_for_d3():
     import json
-    import shapely
+    import shapely  # noqa: F401  (shapely 2 is required)
     from shapely.geometry import LinearRing
     topo = json.loads(step11.MAP_TOPO.read_text(encoding="utf-8")) if step11.MAP_TOPO.exists() else step11.map_topology()
     tr = topo["transform"]

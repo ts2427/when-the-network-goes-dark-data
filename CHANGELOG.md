@@ -4,11 +4,54 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
-## [Unreleased]
+## [3.1.0] - 2026-11-24
+
+Usability and maintenance. No published number changes: `dirs_county_day.csv`, `storms.csv`, the validation tables
+and `results.json` are as in 3.0.0 (the reproduction test compares them), and the analysis-ready panel differs only by
+its new column.
 
 ### Added
-- The version 3.0.0 DOI (10.5281/zenodo.24514963) in `CITATION.cff` and the README, added after the
-  release. Documentation only.
+- External validation against the FCC's own summary, the 2017 Atlantic Hurricane Season Impact on Communications
+  report (DOC-353805A1, August 2018; now in `data/input/rules/`). Every county or state figure it gives for Harvey and
+  Irma (80) is transcribed with its page in `code/manifest/external_fcc_2017_report.csv` and compared with the
+  matching report by the new step `code/src/15_external_validation.py`: 55 match, 4
+  match once the FCC's dropped decimals are allowed for, 1 is consistent with a figure given in words,
+  10 differ and 10 cannot be compared (switching centers, PSAPs, broadcast stations,
+  providers' filings). Every difference is explained or marked as not explained, and none points to an error in the
+  panel. Table: `data/analysis/validation/external_validation_fcc_2017.csv` and `docs/external_validation.md`; summary
+  in the README and the page's methods. No data were changed because of it.
+- `days_since_day0` in the analysis-ready panel: the documented name for `days_since_landfall` (same values), since
+  day 0 is not always a landfall. `days_since_landfall` stays as a deprecated alias until 4.0.0.
+- `clean_rows(panel, level="standard" | "strict")` in `code/src/load.py`, documented in `CODEBOOK.md` (Cleaning
+  levels): which rows each level drops and why.
+- `examples/quickstart.ipynb`: loads the panel and rebuilds two headline figures, the recovery curves with the
+  median time to 50% restored (chapter 4) and the pooled cause shares (chapter 5), checking each against
+  `results.json`. CI runs it with nbmake.
+- `CONTRIBUTING.md`; a "Report a data error" issue form (`.github/ISSUE_TEMPLATE/data_error.yml`: storm, report DOC,
+  county, what is wrong, evidence); `ERRATA.md`, generated from the CORRECTION entries of `docs/decisions.md`.
+- CI: a monthly scheduled run (the 1st of each month), a ruff lint step (`ruff.toml`: pyflakes and the pycodestyle
+  error and warning rules) and the notebook check. Dependabot (`.github/dependabot.yml`) proposes updates to the
+  Actions and the Python packages weekly.
+- `docs/restructure_plan.md`: the package layout planned for 4.0.0. No file is split or moved in this release.
+
+### Changed
+- `load_panel()` parses `report_date` and `dirs_activation_date` as dates (pandas datetime64, no time zone), from
+  the CSV and the Parquet alike; they were text. Comparisons with "YYYY-MM-DD" strings still work; string methods on
+  those two columns no longer do.
+- Every GitHub Action is pinned to a commit SHA (checkout v4.4.0, setup-python v5.6.0, upload-artifact v4.6.2).
+- `requirements.txt` adds matplotlib (already a dependency), nbmake, ipykernel and ruff; `requirements.lock` is
+  regenerated, and no version already pinned changes.
+- Lint fixes, with no change in behavior: unused imports and variables removed, a constant moved below the imports,
+  a lambda given a name, one ambiguous variable renamed, f-strings without placeholders made plain strings.
+- The version 3.0.0 DOI (10.5281/zenodo.24514963) in `CITATION.cff` and the README (added after its
+  release).
+
+### Note on the 3.0.0 archive
+- The 3.0.0 archive on Zenodo (10.5281/zenodo.24514963) holds a decision log (`docs/decisions.md`) that
+  predates two wording fixes made on main after the release: the display-rounding correction entry now names only
+  Nicholas's site-days lost (114 to 115), and the word "correction" in a notes entry is in lower case, so that entry is
+  no longer listed among the page's corrections. Main also adds a log entry for the 3.0.0 release itself. No number
+  differs. This release's archive carries the fixed log.
 
 ## [3.0.0] - 2026-11-24
 

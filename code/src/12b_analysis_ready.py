@@ -5,7 +5,8 @@ uses, as built by steps 6 to 9 and 12:
   EAGLE-I       customers out matched to the report's as-of time (and 6, 12 and 24 hours earlier), match quality,
                 modeled customers, percent out, coverage and MCC flags (step 6)
   exposure      distance to track, wind at closest approach, 34/50/64-kt radii, the chapter 7 wind zone (step 7)
-  day 0         day 0 (UTC), the rule that set it, days since day 0 (step 9)
+  day 0         day 0 (UTC), the rule that set it, days since day 0 (step 9; days_since_day0, with
+                days_since_landfall kept as a deprecated alias until 4.0.0)
   SVI, ACS      CDC/ATSDR SVI 2022 percentile ranks; ACS 2022 5-year households, population, 65+, broadband (step 8)
   BDC           the storm's Broadband Data Collection release and role, the six provider counts, and the chapter 13
                 group on the main measure, using the cut points in results.json v2_5_groups (steps 6f and 12)
@@ -33,7 +34,7 @@ EAGLEI = ["eaglei_time", "eaglei_match", "eaglei_gap_min", "eaglei_customers_out
           "eaglei_mcc_flag", "eaglei_coverage_flag", "eaglei_state_min_covered", "eaglei_state_max_covered"]
 EXPOSURE = ["min_dist_km", "wind_kt_at_closest", "in_34kt", "in_50kt", "in_64kt", "wind_zone", "first_34kt_utc",
             "nearest_landfall_utc", "nearest_landfall_km", "track_source"]
-DAY0 = ["landfall_utc", "landfall_source", "days_since_landfall"]
+DAY0 = ["landfall_utc", "landfall_source", "days_since_landfall", "days_since_day0"]  # days_since_day0: 3.1.0
 SVI_ACS = ["svi_overall", "svi_socioeconomic", "svi_household", "svi_minority_language", "svi_housing_transport",
            "acs_households", "acs_population", "acs_pct_65plus", "acs_pct_broadband"]
 BDC = ["bdc_release", "bdc_role", *[f"bdc_{m}" for m in step12.MEASURES], "bdc_mobile_half_group"]
@@ -59,7 +60,8 @@ def bdc_columns(panel: pd.DataFrame, results: dict) -> pd.DataFrame:
 def analysis_ready(panel: pd.DataFrame, results: dict) -> pd.DataFrame:
     p = panel.assign(wind_zone=[step10.wind_zone(a, b, c) for a, b, c in zip(panel.in_34kt, panel.in_50kt,
                                                                              panel.in_64kt)],
-                     time_flag=panel.time_flag.fillna(""))
+                     time_flag=panel.time_flag.fillna(""),
+                     days_since_day0=panel.days_since_landfall)  # documented name since 3.1.0; the old one is an alias
     p = p.rename(columns={"n_reports": "n_reports_county"})
     p = p.merge(bdc_columns(panel, results), on=["storm_key", "fips"], how="left", validate="many_to_one")
     p = p[COLUMNS].sort_values(["storm_key", "report_date", "state", "county"])

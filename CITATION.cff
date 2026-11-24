@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use these data or code, please cite them as below. Use the concept DOI for the work in general and the version DOI for specific numbers."
 type: dataset
 title: "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)"
-version: 3.0.0
+version: 3.1.0
 date-released: 2026-11-24
 doi: "10.5281/zenodo.24477809"
 identifiers:

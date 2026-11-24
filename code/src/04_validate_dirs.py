@@ -57,10 +57,11 @@ from collections import Counter
 import pandas as pd
 
 from carried import CAUSES, require_carried
-AREA_STATUSES = ("inside", "inside_spelling_variant", "outside_notice_area", "table_not_in_list")
 from config import INTERIM, OUTPUT, ROOT
 from dirs_parser import CODE_TO_STATE
 from tables import write_csv
+
+AREA_STATUSES = ("inside", "inside_spelling_variant", "outside_notice_area", "table_not_in_list")
 
 OVER_EXCEPTIONS = ROOT / "manifest" / "cause_exceptions.csv"
 LIST_EXCEPTIONS = ROOT / "manifest" / "county_list_exceptions.csv"

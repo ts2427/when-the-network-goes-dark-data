@@ -123,7 +123,8 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `track_source` | string |  | HURDAT2 or GIS best track (Isaias 2026). |  |
 | `landfall_utc` | datetime | UTC | Day 0: the first time the storm's 34-knot wind radii reach a study-state county. | Same for every county of a storm; see storms.csv. |
 | `landfall_source` | string |  | Which rule set day 0. |  |
-| `days_since_landfall` | number | days | Days from day 0 to the report's as-of time. |  |
+| `days_since_landfall` | number | days | Deprecated alias of days_since_day0 (same values), kept until 4.0.0. | Use days_since_day0: day 0 is not always a landfall (see landfall_source). |
+| `days_since_day0` | number | days | Days from day 0 to the report's as-of time (since 3.1.0). |  |
 | `svi_overall` | number | percentile (0-1) | CDC/ATSDR SVI 2022 overall national percentile rank (RPL_THEMES). | Chapter 8's quartiles are of the at-risk storm-counties, not of this column's national cut points. |
 | `svi_socioeconomic` | number | percentile (0-1) | SVI 2022 theme 1, socioeconomic status (RPL_THEME1). |  |
 | `svi_household` | number | percentile (0-1) | SVI 2022 theme 2, household characteristics (RPL_THEME2). |  |
@@ -149,7 +150,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
 ## `data/analysis/panel_analysis_ready.parquet`
 
-The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 042ea83e34970618063b08b2f04db4e398b09f4d0dd35c06ff75b78f54a7ee50; 666879 bytes.
+The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 a60d61b6f9a7a0c5306ea5010e7b733afd428c84c439f3483d93dca35bc26195; 668614 bytes.
 
 Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
@@ -209,7 +210,8 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `track_source` | string |  | HURDAT2 or GIS best track (Isaias 2026). |  |
 | `landfall_utc` | datetime | UTC | Day 0: the first time the storm's 34-knot wind radii reach a study-state county. | Same for every county of a storm; see storms.csv. |
 | `landfall_source` | string |  | Which rule set day 0. |  |
-| `days_since_landfall` | number | days | Days from day 0 to the report's as-of time. |  |
+| `days_since_landfall` | number | days | Deprecated alias of days_since_day0 (same values), kept until 4.0.0. | Use days_since_day0: day 0 is not always a landfall (see landfall_source). |
+| `days_since_day0` | number | days | Days from day 0 to the report's as-of time (since 3.1.0). |  |
 | `svi_overall` | number | percentile (0-1) | CDC/ATSDR SVI 2022 overall national percentile rank (RPL_THEMES). | Chapter 8's quartiles are of the at-risk storm-counties, not of this column's national cut points. |
 | `svi_socioeconomic` | number | percentile (0-1) | SVI 2022 theme 1, socioeconomic status (RPL_THEME1). |  |
 | `svi_household` | number | percentile (0-1) | SVI 2022 theme 2, household characteristics (RPL_THEME2). |  |
@@ -249,6 +251,15 @@ Primary key: `release`, `fips`. Missing value code: empty cell.
 | `fixed_any` | integer | providers | Fixed providers with any residential service. | Includes near-universal (likely satellite or national fixed-wireless) providers. |
 | `fixed_half` | integer | providers | Fixed providers serving at least half of residential locations. |  |
 | `fixed_half_excl_near_universal` | integer | providers | As fixed_half, near-universal providers excluded. |  |
+
+## Cleaning levels (`clean_rows`)
+
+`clean_rows(panel, level)` in `code/src/load.py` (since 3.1.0) drops rows of the analysis-ready panel at one of two levels; it never changes a value. The main analysis uses every row except as noted; the flags behind each report's status are in `data/analysis/validation/validation_dirs.csv`.
+
+| Level | Drops | Why |
+|---|---|---|
+| `standard` | rows with a time_flag: pre_onset_likely_marco, Laura's Aug 25, 2020 report (the FCC's combined Marco and Laura report, before Laura's day 0) | The rows behind every time-based result (steps 10 and 12 filter them the same way, with timed()): a report from before the storm's day 0 cannot be placed on its clock. Flagged reports are kept, as in the main analysis, because most flags are benign (see validation/validation_dirs.csv). Chapters 5 to 7 (causes, power, exposure) use every row. |
+| `strict` | everything standard drops, and every report whose report_status is flagged (keeping ok and known_fcc_inconsistency) | The sensitivity display 'without flagged reports': only reports that reconcile with their printed totals, or whose one inconsistency is a checked FCC misprint (manifest/known_fcc_inconsistencies.csv). It drops benign flags too (spelling variants, a footnote, causes over sites out), so it is cautious rather than a list of errors; serious flags alone are in validation/validation_dirs.csv. |
 
 ## `data/analysis/results.json`
 

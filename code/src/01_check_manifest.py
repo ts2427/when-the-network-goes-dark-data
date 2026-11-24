@@ -5,7 +5,6 @@ status is "ok" once confirmed, or "out_of_scope" (kept and logged, but not parse
 Build it by hand from the FCC storm pages (https://www.fcc.gov/past-response-efforts),
 because the FCC site may block automated browsing. Direct docs.fcc.gov file URLs usually download fine.
 """
-import re
 import sys
 
 import pandas as pd

@@ -1,0 +1,49 @@
+name: Report a data error
+description: A number in the panel, the storm table or results.json that does not match the FCC report it comes from.
+title: "Data error: <storm>, <report date>, <county>"
+labels: ["data error"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Thank you. Each row of the panel comes from one FCC DIRS Communications Status Report; the reports are in
+        data/input/dirs/ and listed in code/manifest/dirs_reports.csv. Known FCC misprints are in
+        code/manifest/known_fcc_inconsistencies.csv, and corrections made so far are in ERRATA.md.
+  - type: input
+    id: storm
+    attributes:
+      label: Storm
+      description: Name and year, or the storm_key (NHC ID and DIRS activation date).
+      placeholder: Harvey 2017 (AL092017_2017-08-25)
+    validations:
+      required: true
+  - type: input
+    id: report
+    attributes:
+      label: Report (DOC id)
+      description: The doc_id column, or the report's date.
+      placeholder: DOC-346499A1
+    validations:
+      required: true
+  - type: input
+    id: county
+    attributes:
+      label: County
+      description: County and state, or the 5-digit FIPS code. Leave blank if the error is not about one county.
+      placeholder: Matagorda, Texas (48321)
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong
+      description: The file and column, the value it has, and the value you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: >-
+        Where the right value is printed: the report's page and table row, a quote, or a screenshot. A public source
+        only, please.
+    validations:
+      required: true
