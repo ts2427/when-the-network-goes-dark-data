@@ -47,19 +47,17 @@ WORK_URL = f"/analysis/{SLUG}/"
 # archiving tag v2.0.0 = commit f587207; v2.1.0 is record 24480432, tag v2.1.0 = commit 0311a8b (2026-11-23);
 # v3.0.0 is record 24514963, tag v3.0.0 = commit 7d54a2b (2026-11-24); concept record 24477809 resolves to the latest.
 DATA_REPO = "https://github.com/ts2427/when-the-network-goes-dark-data"
-DATA_VERSION = "3.1.1"
-# 3.2.0 adds context tables and two external checks (no published number changes); the page links to them at this
-# version. At its release DATA_VERSION becomes 3.2.0 too (with its DOI), and the two are the same again.
-CONTEXT_VERSION = "3.2.0"
+DATA_VERSION = "3.2.0"
+CONTEXT_VERSION = DATA_VERSION  # the context tables and added checks are in this version (since 3.2.0)
 REPO_URL = f"{DATA_REPO}/tree/v{DATA_VERSION}"  # the files that produced the numbers on this page
 CONCEPT_DOI = "10.5281/zenodo.24477809"  # every version; resolves to the latest
 # Every archived version and its DOI, each read from its Zenodo record. Add a version only after its release.
 VERSION_DOIS = {"2.0.0": "10.5281/zenodo.24477811", "2.1.0": "10.5281/zenodo.24480432",
                 "3.0.0": "10.5281/zenodo.24514963", "3.1.0": "10.5281/zenodo.24534469",
-                "3.1.1": "10.5281/zenodo.24537335"}
+                "3.1.1": "10.5281/zenodo.24537335", "3.2.0": "10.5281/zenodo.24542647"}
 VERSION_DOI = VERSION_DOIS[DATA_VERSION]  # the version whose files produced the numbers on this page
-ZENODO_FILE = {"url": "https://zenodo.org/api/records/24537335/files/ts2427/when-the-network-goes-dark-data-v3.1.1.zip/content",
-               "bytes": 124274217, "md5": "35d6177f5f4e80b24eb0ea16e754e8de"}
+ZENODO_FILE = {"url": "https://zenodo.org/api/records/24542647/files/ts2427/when-the-network-goes-dark-data-v3.2.0.zip/content",
+               "bytes": 128607855, "md5": "db9b3c08faba5f0c7b13b28593776964"}
 DATASET_TITLE = ("When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)")
 TOLERANCE = 0.051  # figure values are rounded to one decimal
 # Methods note, v2.2.0 (docs/decisions.md, 2026-11-24): wording only; no interval changes.
