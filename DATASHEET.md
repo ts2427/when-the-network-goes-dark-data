@@ -14,7 +14,8 @@ Version 3.1.1. Following the sections of Gebru et al. (2021), "Datasheets for Da
 - **Fields.** Cell sites served and out, sites out by cause (damage, transport, power) where the FCC printed them, sites on backup power where printed, and the report's validation status. The analysis-ready panel (`panel_analysis_ready.csv` and `.parquet`) has the same 10,051 rows and 78 columns, adding power outages, exposure, day 0, SVI, ACS and broadband provider counts. Every variable: `CODEBOOK.md`.
 - **Is it a sample?** No: it covers every Atlantic storm with a DIRS activation in the ten study states, 2017-2026, and every one of their reports. Of 178 reports in scope, 5 are excluded because they fail validation (Laura 2020-08-28; Laura 2020-08-29; Laura 2020-08-30; Helene 2024-10-03; Helene 2024-10-04) and 4 have county rows only outside the study states, leaving 169.
 - **Missing values.** Empty cells. Cause columns are missing where the FCC did not print them (below); backup power likewise; power outages are missing where EAGLE-I has no record or no release (below).
-- **People.** None. The data are county aggregates of cell sites; there are no individuals and no personal data. The FCC's tables combine all providers, so no provider is named or identifiable, and the broadband provider counts carry no provider name or ID.
+- **People.** None. The data are county aggregates of cell sites; there are no individuals and no personal data.
+- **Providers.** The published files name no providers. Provider counts in chapter 9 come from the FCC's Broadband Data Collection; raw BDC data is not redistributed.
 - **Confidential data.** None: every input is public (`SOURCES.md`).
 
 ## Collection process
@@ -22,7 +23,8 @@ Version 3.1.1. Following the sections of Gebru et al. (2021), "Datasheets for Da
 - **DIRS reports.** The FCC's Communications Status Reports (text file and PDF) for each storm, listed by hand from the FCC's storm pages (linked from its Past Response Efforts page) and downloaded from docs.fcc.gov on 2026-11-22, one request at a time, each saved unmodified with its URL, retrieval time and SHA-256 (`data/input/INPUTS.csv`). The FCC's DIRS notices give each storm's reporting area.
 - **Other sources.** ORNL/DOE EAGLE-I power outages (figshare version 4), NOAA NHC HURDAT2 and best track, CDC/ATSDR SVI 2022, Census ACS 2022 and county files, OpenFEMA declarations and FCC Broadband Data Collection provider counts; each with its terms and access date in `SOURCES.md`.
 - **Who collected it.** The author, with code written with the help of an AI coding assistant (`AI_ASSISTANCE.md`); every decision is logged with its date and reason in `docs/decisions.md`.
-- **Timeframe.** Reports from 2017-08-26 to 2026-10-12; the analysis plan was committed on November 22, 2026, before any recovery outcome was computed (`docs/`).
+- **Timeframe.** Reports from 2017-08-26 to 2026-10-12.
+- **Analysis plan.** The analysis plan was committed on November 22, 2026, in the project's private version-controlled repository (commit 9fc17a4), before any recovery outcome was computed. The plan file as committed is published in the data repository with its SHA-256, so it can be checked against later changes. It is not blind to some figures, which the plan lists. Every deviation from it is in `DEVIATIONS.md`.
 
 ## Preprocessing and cleaning
 

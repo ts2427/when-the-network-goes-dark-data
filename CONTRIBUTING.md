@@ -31,6 +31,14 @@ file against Zenodo's legacy deposit schema (`code/tests/schemas/`) and checks t
 Change the metadata in the project, never in `.zenodo.json` by hand. GitHub's "Cite this repository" still reads
 `CITATION.cff`.
 
+## Sites that refuse automated requests
+
+When a website refuses an automated request (HTTP 403 or 429, or a bot check), do not change the User-Agent, add
+browser-like headers, retry, or use any other workaround. Record the refusal (the URL, the status and the date) where
+the work is logged, mark the item as not verified, and ask the maintainer, who can check the page in a browser. For
+example, the FCC's Past Response Efforts page refuses automated requests, so its entry in
+`code/manifest/related_identifiers.csv` records a check made by hand in a browser.
+
 ## Updating packages
 
 Dependabot proposes updates to the GitHub Actions only. It does not propose Python package updates: CI installs from

@@ -659,8 +659,10 @@ def datasheet_md(T: Path) -> None:
     cov = ready.eaglei_coverage_flag.value_counts()
     cov_unknown_years = sorted(ready[ready.eaglei_coverage_flag == "coverage_unknown"].report_date.dt.year.unique())
     no_release = sorted(ready[ready.eaglei_coverage_flag == "no_eaglei_release"].storm.unique())
-    dl = pd.read_csv(DOWNLOADS_LOG, dtype=str, keep_default_na=False)
-    dirs_when = dl[dl.path.str.startswith("data/raw/dirs/") & (dl.status == "downloaded")]["when"].str[:10]
+    inputs = pd.read_csv(T / "data" / "input" / "INPUTS.csv", dtype=str, keep_default_na=False)
+    dirs_when = inputs[inputs.path.str.startswith("data/input/dirs/")].retrieved_utc.str[:10]
+    if (dirs_when == "").any():
+        raise SystemExit("INPUTS.csv: a DIRS report has no retrieval time")
     strict = load.clean_rows(ready, "strict")
     concept, _ = dois()
     years = f"{v('first_report')[:4]}-{v('last_report')[:4]}"
@@ -696,8 +698,10 @@ def datasheet_md(T: Path) -> None:
         "- **Missing values.** Empty cells. Cause columns are missing where the FCC did not print them (below); backup "
         "power likewise; power outages are missing where EAGLE-I has no record or no release (below).",
         "- **People.** None. The data are county aggregates of cell sites; there are no individuals and no personal "
-        "data. The FCC's tables combine all providers, so no provider is named or identifiable, and the broadband "
-        "provider counts carry no provider name or ID.",
+        "data.",
+        # wording: Tim's instruction, 2026-11-25
+        "- **Providers.** The published files name no providers. Provider counts in chapter 9 come from the FCC's "
+        "Broadband Data Collection; raw BDC data is not redistributed.",
         "- **Confidential data.** None: every input is public (`SOURCES.md`).", "",
         "## Collection process", "",
         f"- **DIRS reports.** The FCC's Communications Status Reports (text file and PDF) for each storm, listed by hand "
@@ -709,8 +713,10 @@ def datasheet_md(T: Path) -> None:
         "provider counts; each with its terms and access date in `SOURCES.md`.",
         "- **Who collected it.** The author, with code written with the help of an AI coding assistant "
         "(`AI_ASSISTANCE.md`); every decision is logged with its date and reason in `docs/decisions.md`.",
-        f"- **Timeframe.** Reports from {v('first_report')} to {v('last_report')}; the analysis plan was committed on "
-        "November 22, 2026, before any recovery outcome was computed (`docs/`).", "",
+        f"- **Timeframe.** Reports from {v('first_report')} to {v('last_report')}.",
+        # the page's own wording about the committed plan (no stronger claim), Tim's instruction, 2026-11-25
+        f"- **Analysis plan.** {step11.PLAN_SENTENCE} It is not blind to some figures, which the plan lists. Every "
+        "deviation from it is in `DEVIATIONS.md`.", "",
         "## Preprocessing and cleaning", "",
         "- Each report is parsed from its text file or, when that is incomplete, its PDF; every county row is checked "
         "against a second reading of the PDF; county rows must sum to the report's printed state and overall totals, "
@@ -1814,6 +1820,14 @@ is checked before it is added, and the table records how and when. `code/tests/t
 file against Zenodo's legacy deposit schema (`code/tests/schemas/`) and checks that it agrees with `CITATION.cff`.
 Change the metadata in the project, never in `.zenodo.json` by hand. GitHub's "Cite this repository" still reads
 `CITATION.cff`.
+
+## Sites that refuse automated requests
+
+When a website refuses an automated request (HTTP 403 or 429, or a bot check), do not change the User-Agent, add
+browser-like headers, retry, or use any other workaround. Record the refusal (the URL, the status and the date) where
+the work is logged, mark the item as not verified, and ask the maintainer, who can check the page in a browser. For
+example, the FCC's Past Response Efforts page refuses automated requests, so its entry in
+`code/manifest/related_identifiers.csv` records a check made by hand in a browser.
 
 ## Updating packages
 
