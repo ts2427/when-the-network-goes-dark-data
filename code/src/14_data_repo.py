@@ -559,7 +559,11 @@ def codebook_md(T: Path, pkg: dict) -> None:
           "stored with its interval (`ci_low`, `ci_high`), `n`, `unit` and `method` where it has them. Floats are "
           "written to 10 significant digits (since 2.2.0). The README maps each page section and figure to its key "
           "and script.", "",
-          f"Intervals: {BOOTSTRAP_NOTE}", ""]
+          f"Intervals: {BOOTSTRAP_NOTE}", "",
+          "### Page chapters and results.json keys", "",
+          "The page numbers its chapters 1 to 12 (since November 25, 2026); the keys of `results.json` keep their "
+          "original numbering and did not change. Dated entries in `docs/decisions.md` use the chapter numbers the "
+          "page had when they were written (the last column).", "", *chapter_table(), ""]
     write(T / "CODEBOOK.md", "\n".join(L))
 
 
@@ -621,6 +625,17 @@ def changelog(T: Path) -> None:
 ### Added
 - The version {VERSION} DOI ({version_dois()[VERSION]}) in `CITATION.cff` and the README, added after the release.
   Documentation only.
+- The page was restructured (November 25, 2026) and numbers its chapters 1 to 12; a table in the README and
+  `CODEBOOK.md` maps each page chapter to its `results.json` key (the keys are unchanged) and to its earlier number.
+
+### Changed (documentation and configuration only; no data change)
+- `ERRATA.md` is for readers: one row per change to a published number, by version (what changed, before and after,
+  why), from the CORRECTION entries that changed published data (`code/manifest/errata.csv`, checked word for word
+  against `docs/decisions.md`). Process corrections stay in `docs/decisions.md` only.
+- Dependabot proposes updates to the GitHub Actions only: CI installs from `requirements.lock`, so pip update pull
+  requests would pass without testing the new versions (`CONTRIBUTING.md`, Updating packages).
+- README: the page's wording on what the FCC's counts measure replaces "A site out is a site out", and a note says
+  how much `clean_rows(level="strict")` keeps.
 
 """ if VERSION in version_dois() else "")
     write(T / "CHANGELOG.md", f"""# Changelog
@@ -980,33 +995,66 @@ redistributed here.
 
 
 # ---------------------------------------------------------------------------------------------- README --
-PAGE_MAP = [  # page section, figures (figure id: published CSV), results.json key, script
-    ("Opening, How to read it", "", "chapter_3, chapter_4, v2_1_public_record_misses", "10_analysis.py, 12_v2_analysis.py"),
+PAGE_MAP = [  # page section (page order since the 2026-11-25 restructure), figures, results.json key, script
+    ("Opening: Why this page exists, How to read it", "",
+     "chapter_1, chapter_4, v2_1_public_record_misses, v2_2_backup_power, v2_3_power_cell_timing, "
+     "v2_5_network_redundancy", "10_analysis.py, 12_v2_analysis.py"),
     ("Map: where cell sites were out", "storm map (hurricane-map.json)", "panel (dirs_county_day.csv)",
      "09_build_panel.py; map data written by 11_build_page.py"),
-    ("1. The question and the data", "fig-coverage: hurricane-coverage-heatmap.csv", "chapter_1", "10_analysis.py"),
-    ("2. Anatomy of a storm: Isaias", "fig-isaias-map: hurricane-isaias-map.csv; fig-isaias: hurricane-isaias-counties.csv",
+    ("The data", "", "chapter_1", "10_analysis.py"),
+    ("1. Anatomy of a storm: Isaias", "fig-isaias-map: hurricane-isaias-map.csv; fig-isaias: hurricane-isaias-counties.csv",
      "chapter_2", "10_analysis.py (track: 07_nhc.py)"),
-    ("3. How much goes dark", "fig-peaks: hurricane-peaks.csv", "chapter_3", "10_analysis.py"),
-    ("4. How fast it comes back", "fig-curves: hurricane-recovery-curves.csv; fig-restored: hurricane-restored.csv",
+    ("2. How much goes dark", "fig-peaks: hurricane-peaks.csv", "chapter_3", "10_analysis.py"),
+    ("3. How fast it comes back", "fig-curves: hurricane-recovery-curves.csv; fig-restored: hurricane-restored.csv",
      "chapter_4", "10_analysis.py"),
-    ("5. Why sites go dark", "fig-causes: hurricane-causes.csv", "chapter_5", "10_analysis.py"),
-    ("6. The power coupling", "fig-power-overlay: hurricane-power-overlay.csv; fig-power: hurricane-power-lags.csv",
-     "chapter_6", "10_analysis.py (EAGLE-I match: 06_eaglei.py)"),
+    ("4. Why sites go dark", "fig-causes: hurricane-causes.csv", "chapter_5", "10_analysis.py"),
+    ("5. The power coupling (with Which comes back first: power or cell service?)",
+     "fig-power-overlay: hurricane-power-overlay.csv; fig-power: hurricane-power-lags.csv",
+     "chapter_6, v2_3_power_cell_timing", "10_analysis.py (EAGLE-I match: 06_eaglei.py); 12_v2_analysis.py v2_3"),
+    ("6. Running on backup power", "", "v2_2_backup_power", "12_v2_analysis.py v2_2"),
     ("7. Exposure", "fig-zone: hurricane-wind-zone.csv; fig-distance: hurricane-distance.csv; "
      "fig-calibration (methods): hurricane-calibration.csv", "chapter_7", "10_analysis.py (exposure: 07_nhc.py)"),
-    ("8. Who waits longest", "fig-svi: hurricane-svi-wait.csv", "chapter_8", "10_analysis.py (SVI: 08_fema_svi_bdc.py)"),
-    ("9. Did the rules help?", "", "chapter_9", "10_analysis.py"),
-    ("10. What the public record misses", "", "v2_1_public_record_misses", "12_v2_analysis.py v2_1"),
-    ("11. Sites on backup power", "", "v2_2_backup_power", "12_v2_analysis.py v2_2"),
-    ("12. Which comes back first: power or cell service?", "", "v2_3_power_cell_timing", "12_v2_analysis.py v2_3"),
-    ("13. Do counties with more mobile providers recover differently?", "",
-     "v2_5_groups, v2_5_network_redundancy", "12_v2_analysis.py v2_5_groups v2_5 (counts: 06e, 06f)"),
-    ("14. How complete are the FCC's public reports?", "", "v2_1_1_report_card",
-     "12_v2_analysis.py report_card (from the validation outputs)"),
+    ("8. Social vulnerability", "fig-svi: hurricane-svi-wait.csv", "chapter_8", "10_analysis.py (SVI: 08_fema_svi_bdc.py)"),
+    ("9. Mobile providers", "", "v2_5_groups, v2_5_network_redundancy",
+     "12_v2_analysis.py v2_5_groups v2_5 (counts: 06e, 06f)"),
+    ("10. Where the reports stop", "fig-coverage: hurricane-coverage-heatmap.csv", "chapter_1 (heatmap), "
+     "v2_1_public_record_misses", "10_analysis.py; 12_v2_analysis.py v2_1"),
+    ("11. How complete the reports are", "", "v2_1_1_report_card; validation/external_validation_fcc_2017.csv",
+     "12_v2_analysis.py report_card (from the validation outputs); 15_external_validation.py"),
+    ("12. Did the rules help?", "", "chapter_9", "10_analysis.py"),
+    ("What it adds up to", "", "chapter_4 to chapter_9, v2_1_public_record_misses, v2_2_backup_power, "
+     "v2_3_power_cell_timing, v2_5_network_redundancy, v2_1_1_report_card; validation/external_validation_fcc_2017.csv",
+     "11_build_page.py (each number taken from its chapter; tested)"),
     ("Look up a county", "county lookup (hurricane-county-lookup.json)", "panel", "11_build_page.py"),
-    ("Methods, data and licenses", "validation tables", "chapter_1, validation/*.csv", "04_validate_dirs.py, 10_analysis.py"),
+    ("Methods (with the Audit trail)", "validation tables", "chapter_1, validation/*.csv",
+     "04_validate_dirs.py, 10_analysis.py, 15_external_validation.py"),
 ]
+# results.json key of each page chapter block (11_build_page.PARTS gives the block, its page number and its title)
+BLOCK_KEYS = {1: "chapter_1", 2: "chapter_2", 3: "chapter_3", 4: "chapter_4", 5: "chapter_5", 6: "chapter_6",
+              7: "chapter_7", 8: "chapter_8", 9: "chapter_9", 10: "v2_1_public_record_misses", 11: "v2_2_backup_power",
+              12: "v2_3_power_cell_timing", 13: "v2_5_network_redundancy", 14: "v2_1_1_report_card"}
+
+
+def chapter_table() -> list:
+    """Page chapters (numbered 1 to 12 since the 2026-11-25 restructure) and their results.json keys, which did not
+    change, with each chapter's number on the page before. Generated from the page builder's chapter list."""
+    step11 = importlib.import_module("11_build_page")
+    rows = [("The data (unnumbered)", "chapter_1", "1. The question and the data (its heatmap is now in 10)")]
+    for _, chapters in step11.PARTS:
+        for num, title, block, _, exploratory in chapters:
+            keys = BLOCK_KEYS[block] + (", v2_5_groups" if block == 13 else "")
+            before = f"{block}"
+            if block == 6:
+                keys += ", v2_3_power_cell_timing"
+                before = "6 (and 12, now a subsection)"
+            if block == 10:
+                keys = "v2_1_public_record_misses, chapter_1"
+                before = "10 (its heatmap was in 1)"
+            rows.append((f"{num}. {title}" + (" (Exploratory)" if exploratory else ""), keys, before))
+    return (["| Page chapter | results.json key (unchanged) | Chapter number on the page before |", "|---|---|---|"]
+            + [f"| {a} | `{b.replace(', ', '`, `')}` | {c} |" for a, b, c in rows])
+
+
 RUN_ORDER = [
     ("02b_reporting_areas.py", "", "each storm's reporting area from the FCC notices (rewrites code/manifest tables; "
                                    "the test checks they are unchanged)"),
@@ -1045,6 +1093,17 @@ def external_validation_section() -> list:
         L.append(f"| {r.id} | {r.where}: {r.fcc_text} | {r.report_date or 'all'} | {r.fcc_value} | {r.ours} | "
                  f"{r.explanation} |")
     return L + [""]
+
+
+def strict_note() -> str:
+    """How much of the panel each cleaning level keeps, from the analysis-ready panel."""
+    p = load.load_panel(PROCESSED / f"{load.NAME}.parquet")
+    n = p.storm_key.nunique()
+    std, strict = load.clean_rows(p, "standard"), load.clean_rows(p, "strict")
+    return (f"`clean_rows(level=\"strict\")` keeps {strict.storm_key.nunique()} of {n} storms ({strict.doc_id.nunique()} of "
+            f"{p.doc_id.nunique()} reports, {len(strict):,} of {len(p):,} rows), because most reports carry at least one "
+            f"flag, most of them benign; `standard` keeps {std.storm_key.nunique()} of {n} ({len(std):,} rows). Use strict "
+            "as a sensitivity check rather than as the main sample.")
 
 
 def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
@@ -1088,8 +1147,9 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability "
          "(CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in "
          "`data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.", "",
-         "Associations, not causes. A site out is a site out: the FCC's counts describe the network, not how many "
-         "people lost service.", "",
+         # the page's wording ("What the FCC's numbers measure"), since 3.1.0's documentation update
+         f"Associations, not causes. Each FCC report carries this caveat: \"{importlib.import_module('11_build_page').FCC_CAVEAT}\" "
+         "So the counts here describe the network, not how many people lost service.", "",
          "## Which licence covers what", "",
          "| Part | Licence |", "|---|---|",
          "| `data/analysis/`, derived files in `data/input/` (marked in `INPUTS.csv`), `datapackage.json`, "
@@ -1127,6 +1187,7 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "as a deprecated alias until 4.0.0. `clean_rows` drops rows at one of two levels and never changes a value:", "",
          "| Level | Drops | Why |", "|---|---|---|",
          *[f"| `{k}` | {v['drops']} | {v['why']} |" for k, v in load.CLEAN_LEVELS.items()], "",
+         strict_note(), "",
          "`examples/quickstart.ipynb` loads the panel, rebuilds the recovery curves (with the median time to 50% "
          "restored) and the pooled cause shares with plain pandas, and checks both against `results.json`; CI runs it "
          "(`python -m pytest --nbmake examples/quickstart.ipynb`).", "",
@@ -1188,6 +1249,10 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "which needs the website and is not run here.", "",
           "| Page section | Figures | results.json key | Script |", "|---|---|---|---|"]
     L += [f"| {a} | {b} | {c} | {d} |" for a, b, c, d in PAGE_MAP]
+    L += ["", "### Page chapters and results.json keys", "",
+          "The page numbers its chapters 1 to 12 (since November 25, 2026). The keys of `results.json` keep their "
+          "original numbering and did not change; dated entries in `docs/decisions.md` use the chapter numbers the "
+          "page had when they were written (the last column).", "", *chapter_table()]
     L += ["", "## How to cite", "",
           "The repository is archived on Zenodo. Cite the concept DOI for the data and code in general, and the "
           "version DOI when you use specific numbers:", "",
@@ -1418,15 +1483,12 @@ jobs:
           if-no-files-found: warn
 """
 
-DEPENDABOT = """# Weekly update proposals for the pinned GitHub Actions and the Python packages (v3.1.0).
-# A package update changes requirements.txt; regenerate requirements.lock (see README) before merging.
+DEPENDABOT = """# Weekly update proposals for the pinned GitHub Actions only. Python packages are not included: CI installs
+# from requirements.lock, so a pull request that changed only requirements.txt would pass without testing the new
+# versions (see CONTRIBUTING.md, Updating packages).
 version: 2
 updates:
   - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: weekly
-  - package-ecosystem: pip
     directory: /
     schedule:
       interval: weekly
@@ -1507,6 +1569,13 @@ and the corrections made so far in `ERRATA.md`.
 4. The whole pipeline is rerun and the reproduction tests compared. A change to any published number is a new major
    version (`CHANGELOG.md` states the rule), archived on Zenodo with its own DOI.
 
+## Updating packages
+
+Dependabot proposes updates to the GitHub Actions only. It does not propose Python package updates: CI installs from
+`requirements.lock`, so a pull request that changed only `requirements.txt` would pass without the new versions
+being tested. To update a package, change `requirements.txt`, regenerate the lockfile (the command is in the README),
+and let CI run the tests and the full rebuild against it.
+
 ## Code changes
 
 This repository is generated by `code/src/14_data_repo.py` from the author's working project, so pull requests are
@@ -1524,17 +1593,56 @@ Ground rules: public data only; never name, infer or estimate an individual prov
 """)
 
 
-def errata_md(T: Path) -> None:
+ERRATA = ROOT / "manifest" / "errata.csv"  # every CORRECTION entry classified; published changes with before/after
+
+
+def errata_rows(decisions: str) -> pd.DataFrame:
+    """manifest/errata.csv, checked against docs/decisions.md: every CORRECTION entry is classified exactly once as
+    published (it changed a number in a published release) or process (it did not), and each published row's quote is
+    in its entry, with every number of its before and after values in the quote."""
+    import re
     step11 = importlib.import_module("11_build_page")
-    text = (ROOT / "docs" / "decisions.md").read_text(encoding="utf-8")
-    rows = step11.corrections(text)
+    entries = [w for _, w, _ in step11.corrections(decisions)]
+    t = pd.read_csv(ERRATA, dtype=str, keep_default_na=False)
+    num = re.compile(r"\d[\d,]*(?:\.\d+)?")
+    for label in t.correction.unique():
+        hits = [w for w in entries if w.startswith(label)]
+        if len(hits) != 1:
+            raise SystemExit(f"errata.csv: '{label}' matches {len(hits)} CORRECTION entries, not 1")
+    for w in entries:
+        kinds = set(t[[w.startswith(c) for c in t.correction]].kind)
+        if len(kinds) != 1:
+            raise SystemExit(f"errata.csv: CORRECTION entry not classified (or both ways): {w[:80]}")
+    pub = t[t.kind == "published"]
+    for r in pub.itertuples():
+        entry = next(w for w in entries if w.startswith(r.correction))
+        if r.quote not in entry:
+            raise SystemExit(f"errata.csv: quote not in its entry: {r.quote[:80]}")
+        for v in (r.before, r.after):
+            missing = ({x.rstrip(",.") for x in num.findall(v)} - {x.rstrip(",.") for x in num.findall(r.quote)})
+            if missing or not v:
+                raise SystemExit(f"errata.csv: value '{v}' not in its quote ({r.quote[:60]})")
+    return t
+
+
+def errata_md(T: Path) -> None:
+    t = errata_rows((ROOT / "docs" / "decisions.md").read_text(encoding="utf-8"))
+    pub = t[t.kind == "published"]
+    n_process = int((t.kind == "process").sum())
     L = ["# Errata", "",
-         "Generated by `code/src/14_data_repo.py` from the CORRECTION entries of `docs/decisions.md`, in the log's "
-         "order and wording. Each correction was made after results or an independent check were seen; the version "
-         "that carries it is in `CHANGELOG.md`. To report an error: `CONTRIBUTING.md`.", "",
-         f"{len(rows)} corrections.", "", "| Date | Correction | Reason |", "|---|---|---|"]
-    L += [f"| {d} | {w} | {y} |" for d, w, y in rows]
-    write(T / "ERRATA.md", "\n".join(L) + "\n")
+         "Every change to a number in a published release, by the version that made it: what changed, before and "
+         "after, and why. Generated by `code/src/14_data_repo.py` from the CORRECTION entries of `docs/decisions.md` "
+         "that changed published data (`code/manifest/errata.csv` transcribes each before and after value, and the "
+         "build checks that it appears in the entry, word for word).", "",
+         f"Process corrections are not listed here: the {n_process} CORRECTION entries that changed how the analysis "
+         "was done before its numbers were published, or only the wording of a draft, are in `docs/decisions.md` "
+         "only. Chapter keys (`chapter_3` and so on) are those of `results.json`; the page numbers its chapters "
+         "differently (README, Page chapters and results.json keys). To report an error: `CONTRIBUTING.md`.", ""]
+    for version, g in pub.groupby("version", sort=False):
+        L += [f"## {version}", "", "| What changed | Before | After | Why |", "|---|---|---|---|"]
+        L += [f"| {r.what} | {r.before} | {r.after} | {r.why} |" for r in g.itertuples()]
+        L.append("")
+    write(T / "ERRATA.md", "\n".join(L))
 
 
 def scripts(T: Path) -> None:

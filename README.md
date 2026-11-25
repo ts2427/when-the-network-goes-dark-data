@@ -6,7 +6,7 @@ Version 3.1.0 (2026-11-24). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LIC
 
 The data and code behind the page *When the Network Goes Dark* (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 22 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in `data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.
 
-Associations, not causes. A site out is a site out: the FCC's counts describe the network, not how many people lost service.
+Associations, not causes. Each FCC report carries this caveat: "The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area." So the counts here describe the network, not how many people lost service.
 
 ## Which licence covers what
 
@@ -54,6 +54,8 @@ q = clean_rows(p, "standard")   # or "strict"
 |---|---|---|
 | `standard` | rows with a time_flag: pre_onset_likely_marco, Laura's Aug 25, 2020 report (the FCC's combined Marco and Laura report, before Laura's day 0) | The rows behind every time-based result (steps 10 and 12 filter them the same way, with timed()): a report from before the storm's day 0 cannot be placed on its clock. Flagged reports are kept, as in the main analysis, because most flags are benign (see validation/validation_dirs.csv). Chapters 5 to 7 (causes, power, exposure) use every row. |
 | `strict` | everything standard drops, and every report whose report_status is flagged (keeping ok and known_fcc_inconsistency) | The sensitivity display 'without flagged reports': only reports that reconcile with their printed totals, or whose one inconsistency is a checked FCC misprint (manifest/known_fcc_inconsistencies.csv). It drops benign flags too (spelling variants, a footnote, causes over sites out), so it is cautious rather than a list of errors; serious flags alone are in validation/validation_dirs.csv. |
+
+`clean_rows(level="strict")` keeps 10 of 22 storms (46 of 169 reports, 2,370 of 10,051 rows), because most reports carry at least one flag, most of them benign; `standard` keeps 22 of 22 (9,891 rows). Use strict as a sensitivity check rather than as the main sample.
 
 `examples/quickstart.ipynb` loads the panel, rebuilds the recovery curves (with the median time to 50% restored) and the pooled cause shares with plain pandas, and checks both against `results.json`; CI runs it (`python -m pytest --nbmake examples/quickstart.ipynb`).
 
@@ -146,24 +148,44 @@ Each section of the page, its figures (the figure CSVs are published with the pa
 
 | Page section | Figures | results.json key | Script |
 |---|---|---|---|
-| Opening, How to read it |  | chapter_3, chapter_4, v2_1_public_record_misses | 10_analysis.py, 12_v2_analysis.py |
+| Opening: Why this page exists, How to read it |  | chapter_1, chapter_4, v2_1_public_record_misses, v2_2_backup_power, v2_3_power_cell_timing, v2_5_network_redundancy | 10_analysis.py, 12_v2_analysis.py |
 | Map: where cell sites were out | storm map (hurricane-map.json) | panel (dirs_county_day.csv) | 09_build_panel.py; map data written by 11_build_page.py |
-| 1. The question and the data | fig-coverage: hurricane-coverage-heatmap.csv | chapter_1 | 10_analysis.py |
-| 2. Anatomy of a storm: Isaias | fig-isaias-map: hurricane-isaias-map.csv; fig-isaias: hurricane-isaias-counties.csv | chapter_2 | 10_analysis.py (track: 07_nhc.py) |
-| 3. How much goes dark | fig-peaks: hurricane-peaks.csv | chapter_3 | 10_analysis.py |
-| 4. How fast it comes back | fig-curves: hurricane-recovery-curves.csv; fig-restored: hurricane-restored.csv | chapter_4 | 10_analysis.py |
-| 5. Why sites go dark | fig-causes: hurricane-causes.csv | chapter_5 | 10_analysis.py |
-| 6. The power coupling | fig-power-overlay: hurricane-power-overlay.csv; fig-power: hurricane-power-lags.csv | chapter_6 | 10_analysis.py (EAGLE-I match: 06_eaglei.py) |
+| The data |  | chapter_1 | 10_analysis.py |
+| 1. Anatomy of a storm: Isaias | fig-isaias-map: hurricane-isaias-map.csv; fig-isaias: hurricane-isaias-counties.csv | chapter_2 | 10_analysis.py (track: 07_nhc.py) |
+| 2. How much goes dark | fig-peaks: hurricane-peaks.csv | chapter_3 | 10_analysis.py |
+| 3. How fast it comes back | fig-curves: hurricane-recovery-curves.csv; fig-restored: hurricane-restored.csv | chapter_4 | 10_analysis.py |
+| 4. Why sites go dark | fig-causes: hurricane-causes.csv | chapter_5 | 10_analysis.py |
+| 5. The power coupling (with Which comes back first: power or cell service?) | fig-power-overlay: hurricane-power-overlay.csv; fig-power: hurricane-power-lags.csv | chapter_6, v2_3_power_cell_timing | 10_analysis.py (EAGLE-I match: 06_eaglei.py); 12_v2_analysis.py v2_3 |
+| 6. Running on backup power |  | v2_2_backup_power | 12_v2_analysis.py v2_2 |
 | 7. Exposure | fig-zone: hurricane-wind-zone.csv; fig-distance: hurricane-distance.csv; fig-calibration (methods): hurricane-calibration.csv | chapter_7 | 10_analysis.py (exposure: 07_nhc.py) |
-| 8. Who waits longest | fig-svi: hurricane-svi-wait.csv | chapter_8 | 10_analysis.py (SVI: 08_fema_svi_bdc.py) |
-| 9. Did the rules help? |  | chapter_9 | 10_analysis.py |
-| 10. What the public record misses |  | v2_1_public_record_misses | 12_v2_analysis.py v2_1 |
-| 11. Sites on backup power |  | v2_2_backup_power | 12_v2_analysis.py v2_2 |
-| 12. Which comes back first: power or cell service? |  | v2_3_power_cell_timing | 12_v2_analysis.py v2_3 |
-| 13. Do counties with more mobile providers recover differently? |  | v2_5_groups, v2_5_network_redundancy | 12_v2_analysis.py v2_5_groups v2_5 (counts: 06e, 06f) |
-| 14. How complete are the FCC's public reports? |  | v2_1_1_report_card | 12_v2_analysis.py report_card (from the validation outputs) |
+| 8. Social vulnerability | fig-svi: hurricane-svi-wait.csv | chapter_8 | 10_analysis.py (SVI: 08_fema_svi_bdc.py) |
+| 9. Mobile providers |  | v2_5_groups, v2_5_network_redundancy | 12_v2_analysis.py v2_5_groups v2_5 (counts: 06e, 06f) |
+| 10. Where the reports stop | fig-coverage: hurricane-coverage-heatmap.csv | chapter_1 (heatmap), v2_1_public_record_misses | 10_analysis.py; 12_v2_analysis.py v2_1 |
+| 11. How complete the reports are |  | v2_1_1_report_card; validation/external_validation_fcc_2017.csv | 12_v2_analysis.py report_card (from the validation outputs); 15_external_validation.py |
+| 12. Did the rules help? |  | chapter_9 | 10_analysis.py |
+| What it adds up to |  | chapter_4 to chapter_9, v2_1_public_record_misses, v2_2_backup_power, v2_3_power_cell_timing, v2_5_network_redundancy, v2_1_1_report_card; validation/external_validation_fcc_2017.csv | 11_build_page.py (each number taken from its chapter; tested) |
 | Look up a county | county lookup (hurricane-county-lookup.json) | panel | 11_build_page.py |
-| Methods, data and licenses | validation tables | chapter_1, validation/*.csv | 04_validate_dirs.py, 10_analysis.py |
+| Methods (with the Audit trail) | validation tables | chapter_1, validation/*.csv | 04_validate_dirs.py, 10_analysis.py, 15_external_validation.py |
+
+### Page chapters and results.json keys
+
+The page numbers its chapters 1 to 12 (since November 25, 2026). The keys of `results.json` keep their original numbering and did not change; dated entries in `docs/decisions.md` use the chapter numbers the page had when they were written (the last column).
+
+| Page chapter | results.json key (unchanged) | Chapter number on the page before |
+|---|---|---|
+| The data (unnumbered) | `chapter_1` | 1. The question and the data (its heatmap is now in 10) |
+| 1. Anatomy of a storm: Isaias, October 2026 | `chapter_2` | 2 |
+| 2. How much goes dark | `chapter_3` | 3 |
+| 3. How fast it comes back | `chapter_4` | 4 |
+| 4. Why sites go dark | `chapter_5` | 5 |
+| 5. The power coupling | `chapter_6`, `v2_3_power_cell_timing` | 6 (and 12, now a subsection) |
+| 6. Running on backup power (Exploratory) | `v2_2_backup_power` | 11 |
+| 7. Exposure | `chapter_7` | 7 |
+| 8. Social vulnerability | `chapter_8` | 8 |
+| 9. Mobile providers (Exploratory) | `v2_5_network_redundancy`, `v2_5_groups` | 13 |
+| 10. Where the reports stop (Exploratory) | `v2_1_public_record_misses`, `chapter_1` | 10 (its heatmap was in 1) |
+| 11. How complete the reports are (Exploratory) | `v2_1_1_report_card` | 14 |
+| 12. Did the rules help? | `chapter_9` | 9 |
 
 ## How to cite
 

@@ -266,3 +266,23 @@ Primary key: `release`, `fips`. Missing value code: empty cell.
 Nested JSON, one key per chapter (`chapter_1` to `chapter_9`, then `v2_1_public_record_misses`, `v2_2_backup_power`, `v2_3_power_cell_timing`, `v2_5_groups`, `v2_5_network_redundancy`, `v2_1_1_report_card`). Each number is stored with its interval (`ci_low`, `ci_high`), `n`, `unit` and `method` where it has them. Floats are written to 10 significant digits (since 2.2.0). The README maps each page section and figure to its key and script.
 
 Intervals: The county bootstrap (chapters 3 to 6 within each storm; chapters 8 and 13 across storm-counties) resamples counties as if they were independent. Counties hit by the same storm share its wind, flooding, power grid and networks, so their outcomes are correlated, and these intervals may be somewhat narrow. The storm bootstrap (medians and pooled shares across storms, chapter 7's zone shares, chapter 12) resamples whole storms, and the models in chapters 7, 8 and 13 use storm- or county-clustered intervals. This is a note on the method, not a change to any result.
+
+### Page chapters and results.json keys
+
+The page numbers its chapters 1 to 12 (since November 25, 2026); the keys of `results.json` keep their original numbering and did not change. Dated entries in `docs/decisions.md` use the chapter numbers the page had when they were written (the last column).
+
+| Page chapter | results.json key (unchanged) | Chapter number on the page before |
+|---|---|---|
+| The data (unnumbered) | `chapter_1` | 1. The question and the data (its heatmap is now in 10) |
+| 1. Anatomy of a storm: Isaias, October 2026 | `chapter_2` | 2 |
+| 2. How much goes dark | `chapter_3` | 3 |
+| 3. How fast it comes back | `chapter_4` | 4 |
+| 4. Why sites go dark | `chapter_5` | 5 |
+| 5. The power coupling | `chapter_6`, `v2_3_power_cell_timing` | 6 (and 12, now a subsection) |
+| 6. Running on backup power (Exploratory) | `v2_2_backup_power` | 11 |
+| 7. Exposure | `chapter_7` | 7 |
+| 8. Social vulnerability | `chapter_8` | 8 |
+| 9. Mobile providers (Exploratory) | `v2_5_network_redundancy`, `v2_5_groups` | 13 |
+| 10. Where the reports stop (Exploratory) | `v2_1_public_record_misses`, `chapter_1` | 10 (its heatmap was in 1) |
+| 11. How complete the reports are (Exploratory) | `v2_1_1_report_card` | 14 |
+| 12. Did the rules help? | `chapter_9` | 9 |

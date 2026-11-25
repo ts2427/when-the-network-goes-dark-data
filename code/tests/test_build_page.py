@@ -16,6 +16,15 @@ needs_results = pytest.mark.skipif(not RESULTS.exists() or "chapter_9" not in RE
                                    reason="needs results.json from a build (not committed): run python run_all.py first")
 
 
+def chapters_text(r: dict) -> str:
+    """Chapters 1 to 9 as written (the page places them since the 2026-11-25 restructure)."""
+    return "\n".join("\n".join(v) for v in step11.chapter_blocks(r).values())
+
+
+def v2_text(r: dict) -> str:
+    return "\n".join("\n".join(v) for v in step11.v2_blocks(r).values())
+
+
 def test_figure_verification_catches_a_changed_value(tmp_path):
     rows = {"x.csv": [{"storm": "Helene", "peak_pct_out": 12.1}]}
     step11.write_figure_csvs(rows, tmp_path)
@@ -38,7 +47,7 @@ def test_seen_before_registration_is_taken_from_the_plan():
 @needs_results
 def test_page_wording_and_required_items():
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
-    body = step11.build_page(r)
+    body = chapters_text(r)
     low = body.lower()
     for bad in ("because of vulnerab", "neglect", "prioritiz", "caused by", "coincided with faster",
                 "battery", "generator depletion"):
@@ -50,7 +59,7 @@ def test_page_wording_and_required_items():
 @needs_results
 def test_every_figure_marker_has_a_figure():
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
-    body = step11.build_page(r) + step11.methods_section(
+    body = chapters_text(r) + step11.methods_section(
         r, (DOCS / "decisions.md").read_text(encoding="utf-8"),
         (DOCS / "analysis_plan.md").read_text(encoding="utf-8"),
         pd.read_csv(OUTPUT / "validation_dirs.csv"),
@@ -164,14 +173,14 @@ def test_v2_sections_wording_and_generated_numbers():
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
     if "v2_5_network_redundancy" not in r:
         return
-    text = step11.v2_sections(r) + "\n".join(step11.v2_opening(r))
+    text = v2_text(r) + "\n".join(step11.opening_section(r))
     low = text.lower()
     for bad in ("because of vulnerab", "neglect", "prioritiz", "caused by", "leads to", "drives", "predicted fail",
                 "about to fail", "never restored", "abandon", "claude"):
         assert bad not in low, bad
     a = r["v2_1_public_record_misses"]["headlines"]
     assert f"{a['n_storms']} storms" in text and f"{a['sites_out_at_last_reports_headline']['value']:,.0f}" in text
-    assert "Exploratory: added after version 1" in text
+    assert text.count("*Exploratory.*") == 4  # the opening marks its exploratory findings (2026-11-25)
 
 
 
@@ -197,7 +206,7 @@ def test_fcc_caveat_is_quoted_verbatim_from_the_reports():
 @needs_results
 def test_no_priority_or_preregistration_wording_on_the_page():
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
-    text = step11.build_page(r).lower() + step11.v2_sections(r).lower()
+    text = chapters_text(r).lower() + v2_text(r).lower()
     for bad in ("pre-registered", "preregistered", "pre-registration", "for the first time", "the first to",
                 "first-ever", "first study of", "first analysis"):
         assert bad not in text, bad

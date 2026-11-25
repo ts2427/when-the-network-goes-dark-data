@@ -1,12 +1,9 @@
-# Weekly update proposals for the pinned GitHub Actions and the Python packages (v3.1.0).
-# A package update changes requirements.txt; regenerate requirements.lock (see README) before merging.
+# Weekly update proposals for the pinned GitHub Actions only. Python packages are not included: CI installs
+# from requirements.lock, so a pull request that changed only requirements.txt would pass without testing the new
+# versions (see CONTRIBUTING.md, Updating packages).
 version: 2
 updates:
   - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: weekly
-  - package-ecosystem: pip
     directory: /
     schedule:
       interval: weekly

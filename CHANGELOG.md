@@ -9,6 +9,17 @@ any output.
 ### Added
 - The version 3.1.0 DOI (10.5281/zenodo.24534469) in `CITATION.cff` and the README, added after the release.
   Documentation only.
+- The page was restructured (November 25, 2026) and numbers its chapters 1 to 12; a table in the README and
+  `CODEBOOK.md` maps each page chapter to its `results.json` key (the keys are unchanged) and to its earlier number.
+
+### Changed (documentation and configuration only; no data change)
+- `ERRATA.md` is for readers: one row per change to a published number, by version (what changed, before and after,
+  why), from the CORRECTION entries that changed published data (`code/manifest/errata.csv`, checked word for word
+  against `docs/decisions.md`). Process corrections stay in `docs/decisions.md` only.
+- Dependabot proposes updates to the GitHub Actions only: CI installs from `requirements.lock`, so pip update pull
+  requests would pass without testing the new versions (`CONTRIBUTING.md`, Updating packages).
+- README: the page's wording on what the FCC's counts measure replaces "A site out is a site out", and a note says
+  how much `clean_rows(level="strict")` keeps.
 
 ## [3.1.0] - 2026-11-24
 
