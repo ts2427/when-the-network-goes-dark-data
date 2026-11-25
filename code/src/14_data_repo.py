@@ -717,8 +717,8 @@ def datasheet_md(T: Path) -> None:
         "or the report is flagged or excluded with its reason. Counties are matched to FIPS codes with a checked "
         "exception list.",
         "- Validation of the reports in scope: " + ", ".join(f"{n0(n)} {step11._status_label(k, n)}" for k, n in status.items())
-        + " (`data/analysis/validation/`). The known FCC inconsistencies are checked misprints, kept as printed with "
-        "the rows' sum used.",
+        + " (`data/analysis/validation/`). The known FCC inconsistencies are printed figures that disagree with the report's own rows or totals, each checked against the PDF and kept as printed, with "
+        "the figure computed from the rows used.",
         f"- External check: the FCC's own 2017 season report gives {ev['n']} county or state figures for Harvey and "
         f"Irma; {agree} of the {compared} comparable figures agree, and in the other {ev['differs']} the season report "
         "differs from the daily reports themselves (`docs/external_validation.md`).",

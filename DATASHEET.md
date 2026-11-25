@@ -27,7 +27,7 @@ Version 3.1.1. Following the sections of Gebru et al. (2021), "Datasheets for Da
 ## Preprocessing and cleaning
 
 - Each report is parsed from its text file or, when that is incomplete, its PDF; every county row is checked against a second reading of the PDF; county rows must sum to the report's printed state and overall totals, or the report is flagged or excluded with its reason. Counties are matched to FIPS codes with a checked exception list.
-- Validation of the reports in scope: 126 flagged, 44 ok, 5 excluded, 3 known FCC inconsistencies (`data/analysis/validation/`). The known FCC inconsistencies are checked misprints, kept as printed with the rows' sum used.
+- Validation of the reports in scope: 126 flagged, 44 ok, 5 excluded, 3 known FCC inconsistencies (`data/analysis/validation/`). The known FCC inconsistencies are printed figures that disagree with the report's own rows or totals, each checked against the PDF and kept as printed, with the figure computed from the rows used.
 - External check: the FCC's own 2017 season report gives 80 county or state figures for Harvey and Irma; 60 of the 70 comparable figures agree, and in the other 10 the season report differs from the daily reports themselves (`docs/external_validation.md`).
 - Nothing is imputed. Raw inputs are kept unmodified in `data/input/`; `run_all.py` rebuilds every derived file from them, and a test checks the rebuild against the published files.
 - Every change to a published number is listed, with before, after and why, in `ERRATA.md`.
