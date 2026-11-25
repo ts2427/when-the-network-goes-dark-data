@@ -36,6 +36,12 @@ Documentation and metadata only. No file under `data/` changes, and no number.
 - README: the page's wording on what the FCC's counts measure replaces "A site out is a site out", and a note says
   how much `clean_rows(level="strict")` keeps.
 
+### Note on Zenodo record 24536066
+- A release published too early, under the tag "3.1.1" on an earlier documentation commit (a024407), was archived
+  by Zenodo as record 24536066 (10.5281/zenodo.24536066). It holds that commit's snapshot: its data are identical to
+  3.1.0, and it has neither `.zenodo.json` nor `DATASHEET.md`. Version 3.1.1 is the release under the tag `v3.1.1`.
+  The decision log records this as a correction to the release process; no data changed.
+
 ## [3.1.0] - 2026-11-25
 
 Usability and maintenance. No published number changes: `dirs_county_day.csv`, `storms.csv`, the validation tables
