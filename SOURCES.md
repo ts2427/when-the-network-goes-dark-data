@@ -55,6 +55,28 @@ from the Agency's website(s).
 Dataset: Disaster Declarations Summaries v2, https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries, accessed
 2026-11-23T01:14:00+00:00 to 2026-11-23T01:14:43+00:00 (UTC). Used as context only (`fema_declared`); no result uses it.
 
+Datasets (v3.2.0): Registration Intake and Individuals Household Program (RI-IHP) v2,
+https://www.fema.gov/api/open/v2/RegistrationIntakeIndividualsHouseholdPrograms, and Housing Assistance Program Data -
+Renters v2, https://www.fema.gov/api/open/v2/HousingAssistanceRenters, one query per disaster number, accessed
+2026-11-25T17:16:40+00:00 to 2026-11-25T17:20:19+00:00 (UTC). Context only (`data/analysis/context/`); no result uses them.
+
+## NOAA NCEI Storm Events (v3.2.0)
+
+NOAA National Centers for Environmental Information, Storm Events Database, bulk details files
+`StormEvents_details-ftp_v1.0_d2017_c20261119.csv.gz` to `..._d2026_c20261119.csv.gz`,
+https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/, retrieved 2026-11-25 (SHA-256 of each in
+`code/manifest/downloads.csv`). No licence or use statement was found on the pages read, so the files are not
+redistributed; only the derived county table is published. The 2026 file holds events through August 2026.
+Zones are mapped to counties with the NWS zone-county correlation file `bp16ap26.dbx`
+(https://www.weather.gov/gis/ZoneCounty, `data/input/nws/`, retrieved 2026-11-25 (UTC; first file 17:15 UTC); U.S. government work).
+
+## FCC report on Hurricane Michael (v3.2.0)
+
+FCC Public Safety and Homeland Security Bureau (2019). *October 2018 Hurricane Michael's Impact on Communications:
+Preparation, Effect, and Recovery*. Report and Recommendations, PS Docket No. 18-339, DOC-357387A1,
+https://docs.fcc.gov/public/attachments/DOC-357387A1.pdf (`data/input/rules/DOC-357387A1.pdf`). Used for the
+external check in `docs/external_validation.md` only. U.S. government work.
+
 ## NOAA National Hurricane Center
 
 Landsea, C. W., & Franklin, J. L. (2013). Atlantic hurricane database uncertainty and presentation of a new database

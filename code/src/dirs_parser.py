@@ -70,6 +70,7 @@ TOTAL_WORDS = re.compile(r"\b(total|totals|all counties|overall)\b", re.IGNORECA
 CABLE_RE = re.compile(r"(?P<n>\d[\d,]+)\s+(?:\([^)]*\)\s+)?(?:(?:cable|wireline)[a-z/\s]*?\s+)?"
                       r"subscribers?[^.\n]*out\s+of\s+service"
                       r"|subscribers?[^.\n]*out of service[^.\n\d]*(?P<n2>[\d,]{2,})", re.IGNORECASE)
+CABLE_SECTION_RE = re.compile(r"Cable\s+Systems\s+and\s+Wireline\s+\(Combined\)", re.IGNORECASE)
 PCT_SITES_RE = re.compile(r"(?P<pct>\d+(?:\.\d+)?)\s*%\s*(?:\([^)]*\)\s*)?(?:of\s+)?(?:the\s+)?cell\s+sites", re.IGNORECASE)
 
 # The report's own county list: "Florida: Bay, Calhoun, ..., and Washington." ahead of the 911 section.
@@ -218,7 +219,10 @@ def parse_text(text: str) -> ParsedReport:
         if not THRESHOLD_RE.search(text[max(0, m.start() - 20):m.start()]):
             rep.pct_sites_out = float(m.group("pct"))
             break
-    m = CABLE_RE.search(text)
+    # the section first (v3.2.0 correction): Michael's Oct 21-24 reports print an earlier figure in a summary
+    # paragraph ("fell from 103,811 to 56,334 over the last three days") before the section's own figure
+    sec = CABLE_SECTION_RE.search(text)
+    m = (CABLE_RE.search(text, sec.end()) if sec else None) or CABLE_RE.search(text)
     if m:
         rep.cable_wireline_subs_out = int((m.group("n") or m.group("n2")).replace(",", ""))
     m = TWO_DAY_RE.search(text)

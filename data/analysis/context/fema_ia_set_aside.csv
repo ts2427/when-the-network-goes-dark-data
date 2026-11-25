@@ -1,0 +1,72 @@
+dataset,disasterNumber,state,county,set_aside,valid_registrations
+RegistrationIntakeIndividualsHouseholdPrograms,4332,LA,Evangeline (Parish),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4332,MO,Dade (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,FL,Statewide,statewide,7
+RegistrationIntakeIndividualsHouseholdPrograms,4337,GA,Bulloch (County),outside the disaster's states,2
+RegistrationIntakeIndividualsHouseholdPrograms,4337,GA,Chatham (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,GA,Dougherty (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,MI,Berrien (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,MS,Lowndes (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,NY,Ontario (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,PR,Anasco (Municipio),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,PR,Fajardo (Municipio),outside the disaster's states,2
+RegistrationIntakeIndividualsHouseholdPrograms,4337,PR,Guayama (Municipio),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,PR,Humacao (Municipio),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,PR,Juana Diaz (Municipio),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,PR,Las Piedras (Municipio),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,PR,San Juan (Municipio),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,SC,Cherokee (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4337,TX,Blanco (County),outside the disaster's states,2
+RegistrationIntakeIndividualsHouseholdPrograms,4337,TX,Burnet (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4338,FL,Volusia (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4338,GA,Statewide,statewide,1
+RegistrationIntakeIndividualsHouseholdPrograms,4338,MO,Clinton (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4393,FL,Duval (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4393,SC,Greenwood (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4393,SC,Horry (County),outside the disaster's states,2
+RegistrationIntakeIndividualsHouseholdPrograms,4399,GA,Bacon (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4563,FL,Baker (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4611,AL,Elmore (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4611,MS,Lafayette (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4611,MS,Oktibbeha (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4611,TX,Burleson (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4673,FL,Tampa Reservation,tribal area,1
+RegistrationIntakeIndividualsHouseholdPrograms,4673,OH,Highland (County),outside the disaster's states,2
+RegistrationIntakeIndividualsHouseholdPrograms,4673,WV,Gilmer (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4734,GA,Crawford (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4827,NC,Eastern Band of Cherokee Indians,tribal area,5495
+RegistrationIntakeIndividualsHouseholdPrograms,4827,SC,Fairfield (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4827,SC,Union (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4827,SC,Williamsburg (County),outside the disaster's states,2
+RegistrationIntakeIndividualsHouseholdPrograms,4828,PA,Pike (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4829,GA,Atkinson (County),outside the disaster's states,2
+RegistrationIntakeIndividualsHouseholdPrograms,4829,GA,Columbia (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4829,NC,Halifax (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4829,SC,Catawba Indian Nation,tribal area,788
+RegistrationIntakeIndividualsHouseholdPrograms,4830,SC,Oconee (County),outside the disaster's states,1
+RegistrationIntakeIndividualsHouseholdPrograms,4834,FL,Miccosukee Tribe of Indians of Florida,tribal area,4149
+RegistrationIntakeIndividualsHouseholdPrograms,4834,NC,Jones (County),outside the disaster's states,1
+HousingAssistanceRenters,4332,LA,Evangeline (Parish),outside the disaster's states,1
+HousingAssistanceRenters,4337,FL,Statewide,statewide,7
+HousingAssistanceRenters,4337,GA,Bulloch (County),outside the disaster's states,1
+HousingAssistanceRenters,4337,GA,Chatham (County),outside the disaster's states,1
+HousingAssistanceRenters,4337,GA,Dougherty (County),outside the disaster's states,1
+HousingAssistanceRenters,4337,PR,Anasco (Municipio),outside the disaster's states,1
+HousingAssistanceRenters,4337,PR,Fajardo (Municipio),outside the disaster's states,1
+HousingAssistanceRenters,4337,PR,San Juan (Municipio),outside the disaster's states,1
+HousingAssistanceRenters,4393,SC,Greenwood (County),outside the disaster's states,1
+HousingAssistanceRenters,4393,SC,Horry (County),outside the disaster's states,1
+HousingAssistanceRenters,4399,GA,Bacon (County),outside the disaster's states,1
+HousingAssistanceRenters,4611,MS,Lafayette (County),outside the disaster's states,1
+HousingAssistanceRenters,4611,MS,Oktibbeha (County),outside the disaster's states,1
+HousingAssistanceRenters,4673,OH,Highland (County),outside the disaster's states,1
+HousingAssistanceRenters,4734,GA,Crawford (County),outside the disaster's states,1
+HousingAssistanceRenters,4827,NC,Eastern Band of Cherokee Indians,tribal area,1131
+HousingAssistanceRenters,4827,SC,Fairfield (County),outside the disaster's states,1
+HousingAssistanceRenters,4827,SC,Union (County),outside the disaster's states,1
+HousingAssistanceRenters,4827,SC,Williamsburg (County),outside the disaster's states,1
+HousingAssistanceRenters,4829,GA,Atkinson (County),outside the disaster's states,2
+HousingAssistanceRenters,4829,SC,Catawba Indian Nation,tribal area,451
+HousingAssistanceRenters,4830,SC,Oconee (County),outside the disaster's states,1
+HousingAssistanceRenters,4834,FL,Miccosukee Tribe of Indians of Florida,tribal area,3038
+HousingAssistanceRenters,4834,NC,Jones (County),outside the disaster's states,1

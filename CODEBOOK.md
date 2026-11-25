@@ -14,7 +14,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `nhc_id` | string |  | National Hurricane Center storm ID (basin, number, year). |  |
 | `storm` | string |  | Storm name. | Not unique across years. |
 | `dirs_activation_date` | date |  | Date the FCC activated DIRS for the storm. |  |
-| `rule_period` | string |  | FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present). | Descriptive grouping only; periods differ in storms, hazards and filers. |
+| `rule_period` | string |  | FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present). | Descriptive grouping only; periods differ in storms, hazards and filers. |
 | `doc_id` | string |  | FCC EDOCS document number of the report. |  |
 | `report_date` | date |  | Date of the report. |  |
 | `as_of_utc` | datetime | UTC | The report's stated as-of time, in UTC. | Where the report prints none, set to 12:00 Eastern on the report date (as_of_imputed). |
@@ -49,7 +49,7 @@ Primary key: `storm_key`. Missing value code: empty cell.
 | `dirs_activation_date` | date |  | Date the FCC activated DIRS. |  |
 | `storm_key` | string |  | NHC ID and DIRS activation date. |  |
 | `storm` | string |  | Storm name. | Not unique across years. |
-| `rule_period` | string |  | FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present). | Blank for storms not in the panel. |
+| `rule_period` | string |  | FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present). | Blank for storms not in the panel. |
 | `landfall_utc` | datetime | UTC | Day 0: the first time the storm's 34-kt wind radii reach a study-state county (fallback: first study-state landfall at tropical-storm strength or above). | Defined from NHC best-track radii; see docs/decisions.md (2026-11-23). |
 | `landfall_source` | string |  | Which rule set day 0. |  |
 | `previous_landfall_utc` | datetime | UTC | Day 0 under the original rule (kept for chapter 8's comparison). | Superseded; not used for the main results. |
@@ -73,7 +73,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `nhc_id` | string |  | National Hurricane Center storm ID (basin, number, year). |  |
 | `storm` | string |  | Storm name. | Not unique across years. |
 | `dirs_activation_date` | date |  | Date the FCC activated DIRS for the storm. |  |
-| `rule_period` | string |  | FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present). | Descriptive grouping only; periods differ in storms, hazards and filers. |
+| `rule_period` | string |  | FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present). | Descriptive grouping only; periods differ in storms, hazards and filers. |
 | `doc_id` | string |  | FCC EDOCS document number of the report. |  |
 | `report_date` | date |  | Date of the report. |  |
 | `as_of_utc` | datetime | UTC | The report's stated as-of time, in UTC. | Where the report prints none, set to 12:00 Eastern on the report date (as_of_imputed). |
@@ -160,7 +160,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `nhc_id` | string |  | National Hurricane Center storm ID (basin, number, year). |  |
 | `storm` | string |  | Storm name. | Not unique across years. |
 | `dirs_activation_date` | date |  | Date the FCC activated DIRS for the storm. |  |
-| `rule_period` | string |  | FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present). | Descriptive grouping only; periods differ in storms, hazards and filers. |
+| `rule_period` | string |  | FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present). | Descriptive grouping only; periods differ in storms, hazards and filers. |
 | `doc_id` | string |  | FCC EDOCS document number of the report. |  |
 | `report_date` | date |  | Date of the report. |  |
 | `as_of_utc` | datetime | UTC | The report's stated as-of time, in UTC. | Where the report prints none, set to 12:00 Eastern on the report date (as_of_imputed). |
@@ -252,6 +252,103 @@ Primary key: `release`, `fips`. Missing value code: empty cell.
 | `fixed_half` | integer | providers | Fixed providers serving at least half of residential locations. |  |
 | `fixed_half_excl_near_universal` | integer | providers | As fixed_half, near-universal providers excluded. |  |
 
+## `data/analysis/context/dirs_cable_wireline.csv`
+
+One row per report and area, from the reports' Cable Systems and Wireline section, with the previous-day check. Built by code/src/17_cable_wireline.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.
+
+Primary key: `storm_key`, `doc_id`, `area`, `form`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `storm_key` | string |  | NHC ID and DIRS activation date (the manifest row's storm). |  |
+| `nhc_id` | string |  | National Hurricane Center storm ID. |  |
+| `storm` | string |  | Storm name. |  |
+| `doc_id` | string |  | FCC EDOCS document ID of the report. |  |
+| `report_date` | date |  | Report date. |  |
+| `area` | string |  | What the figure covers: 'disaster area' (the whole reporting area, or a sentence naming several states), a state's postal code (a state row, or a sentence naming one state), or 'none printed'. | The FCC's area changes during a storm; compare figures only within one area. |
+| `subscribers_out` | integer | subscribers | Cable and wireline subscribers out of service, as printed. | Blank where the report prints 'None' or no figure. Subscribers, not people or premises; not allocated to counties. No total is added up from state rows. |
+| `printed` | string |  | The figure as printed in the report. |  |
+| `form` | string |  | How it is printed: sentence, code table, name list or colon list ('and sentence' when the same figure is printed twice). |  |
+| `source` | string |  | Which file the figure was read from: txt or pdf. |  |
+| `previous_day_printed` | integer | subscribers | The previous-day figure the report prints ('up/down from N yesterday'). | Only where printed. |
+| `previous_report_value` | integer | subscribers | The previous report's figure for the same storm and area. |  |
+| `previous_day_check` | string |  | match, mismatch or 'no previous figure for this area' (blank where no previous-day figure is printed). | A mismatch is flagged, never corrected. |
+| `from_excluded_report` | boolean |  | The report is excluded from the cell-site panel (its cable figure is kept). |  |
+
+## `data/analysis/context/fema_ia_county_storm.csv`
+
+One row per storm and panel county, from OpenFEMA RI-IHP v2 and Housing Assistance Renters v2. This product uses the Federal Emergency Management Agency's OpenFEMA API, but is not endorsed by FEMA. Built by code/src/16_fema_ia.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.
+
+Primary key: `storm_key`, `fips`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `storm_key` | string |  | NHC ID and DIRS activation date. |  |
+| `storm` | string |  | Storm name. |  |
+| `fips` | string |  | County FIPS code. |  |
+| `ia_declared` | boolean |  | Individual Assistance or IHP declared for the county under the storm's declarations (iaProgramDeclared or ihProgramDeclared). |  |
+| `fema_disasters_ia` | string |  | The major-disaster numbers summed over ('; '-separated). |  |
+| `ihp_valid_registrations` | integer | registrations | RI-IHP v2 totalValidRegistrations. | Blank where no IA was declared; 0 where declared with no record. Applicants' damaged-dwelling counties as OpenFEMA gives them; tribal-area and statewide rows are not in any county (context/fema_ia_set_aside.csv). |
+| `ihp_referrals` | integer | registrations | RI-IHP v2 ihpReferrals. | As above. |
+| `ihp_eligible` | integer | registrations | RI-IHP v2 ihpEligible. | As above. |
+| `renters_valid_registrations` | integer | registrations | Housing Assistance Renters v2 validRegistrations. | As above. |
+| `renters_inspected` | integer | registrations | Housing Assistance Renters v2 totalInspected. | As above. |
+| `renters_approved` | integer | registrations | Housing Assistance Renters v2 approvedForFemaAssistance. | As above. |
+| `ihp_amount_usd` | number | US dollars (nominal) | RI-IHP v2 ihpAmount. | As above. Not adjusted for inflation. |
+
+## `data/analysis/context/fema_ia_set_aside.csv`
+
+Counted here instead of the county table. Built by code/src/16_fema_ia.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.
+
+Primary key: `dataset`, `disasterNumber`, `state`, `county`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `dataset` | string |  | OpenFEMA dataset. |  |
+| `disasterNumber` | integer |  | FEMA disaster number. |  |
+| `state` | string |  | State as OpenFEMA gives it. |  |
+| `county` | string |  | County or area name as OpenFEMA gives it. |  |
+| `set_aside` | string |  | Why the rows are not in the county table: outside the disaster's states, statewide, or tribal area (spans counties; no single county is assigned). |  |
+| `valid_registrations` | integer | registrations | Valid registrations in those rows. |  |
+
+## `data/analysis/context/hazard_ncei_county_storm.csv`
+
+One row per storm and panel county: surge, flood and wind flags and damage from NOAA NCEI Storm Events (details files c20261119; zones mapped with NWS bp16ap26.dbx). The NCEI files are not redistributed. Built by code/src/18_hazard_ncei.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.
+
+Primary key: `storm_key`, `fips`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `storm_key` | string |  | NHC ID and DIRS activation date. |  |
+| `storm` | string |  | Storm name. |  |
+| `fips` | string |  | County FIPS code. |  |
+| `surge_flag` | boolean |  | Any NCEI Storm Surge/Tide event in the county in the storm's window. |  |
+| `flood_flag` | boolean |  | Any Flood or Flash Flood event. |  |
+| `wind_flag` | boolean |  | Any Hurricane (Typhoon), Tropical Storm or High Wind event. |  |
+| `damage_property_usd` | integer | US dollars (nominal) | Property damage of the county (C) events. | County events only; zone events' damage is in the zone columns. |
+| `damage_crops_usd` | integer | US dollars (nominal) | Crop damage of the county (C) events. | County events only. |
+| `zone_damage_property_usd_unallocated` | integer | US dollars (nominal) | Property damage of the zone (Z) events that cover the county: each event's whole figure, not divided among the zone's counties. | NEVER sum across counties: the same dollars appear in every county of the zone (see zone_n_counties). |
+| `zone_damage_crops_usd_unallocated` | integer | US dollars (nominal) | Crop damage of the zone events that cover the county, undivided. | NEVER sum across counties. |
+| `zone_n_counties` | integer | counties | Counties covered by those zone events (from bp16ap26.dbx). | 1 means the zone figures belong to this county alone; more means they are shared. |
+| `n_events` | integer | events | NCEI events used. |  |
+| `ncei_episode_ids` | string |  | NCEI episode IDs used ('; '-separated). |  |
+
+## `data/analysis/context/hazard_ncei_storm_summary.csv`
+
+Window, events used and zone events not mapped. Built by code/src/18_hazard_ncei.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.
+
+Primary key: `storm_key`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `storm_key` | string |  | NHC ID and DIRS activation date. |  |
+| `storm` | string |  | Storm name. |  |
+| `window_start` | date |  | DIRS activation date minus 2 days. |  |
+| `window_end` | date |  | Last report plus 2 days. |  |
+| `events_used` | integer | events | NCEI events matched to the storm's panel counties. |  |
+| `zone_events_unmapped` | integer | events | Zone events in the storm's states whose zone is not in bp16ap26.dbx. |  |
+| `zone_events_name_differs` | integer | events | Zone events set aside because their NCEI zone name names none of the counties bp16ap26.dbx gives the zone (renumbered zones, place-named zones, misspellings). |  |
+
 ## Cleaning levels (`clean_rows`)
 
 `clean_rows(panel, level)` in `code/src/load.py` (since 3.1.0) drops rows of the analysis-ready panel at one of two levels; it never changes a value. The main analysis uses every row except as noted; the flags behind each report's status are in `data/analysis/validation/validation_dirs.csv`.
@@ -260,6 +357,50 @@ Primary key: `release`, `fips`. Missing value code: empty cell.
 |---|---|---|
 | `standard` | rows with a time_flag: pre_onset_likely_marco, Laura's Aug 25, 2020 report (the FCC's combined Marco and Laura report, before Laura's day 0) | The rows behind every time-based result (steps 10 and 12 filter them the same way, with timed()): a report from before the storm's day 0 cannot be placed on its clock. Flagged reports are kept, as in the main analysis, because most flags are benign (see validation/validation_dirs.csv). Chapters 5 to 7 (causes, power, exposure) use every row. |
 | `strict` | everything standard drops, and every report whose report_status is flagged (keeping ok and known_fcc_inconsistency) | The sensitivity display 'without flagged reports': only reports that reconcile with their printed totals, or whose one inconsistency is a checked FCC misprint (manifest/known_fcc_inconsistencies.csv). It drops benign flags too (spelling variants, a footnote, causes over sites out), so it is cautious rather than a list of errors; serious flags alone are in validation/validation_dirs.csv. |
+
+## County-level cause columns, by storm
+
+Which reports print sites out by cause (damage, transport, power) on each county row, as parsed into `dirs_county_day.csv`. Reports without them print state totals only, or no causes at all. (Olukola et al. 2026 describe causes as state-level; in these reports, from 2019 on, they are printed per county.)
+
+| Storm | DIRS activation | Reports | Reports with county causes | County rows | Rows with causes | Reports with backup power |
+|---|---|---|---|---|---|---|
+| Harvey | 2017-08-25 | 11 | 0 | 497 | 0 | 0 |
+| Irma | 2017-09-06 | 8 | 0 | 603 | 0 | 0 |
+| Nate | 2017-10-08 | 1 | 0 | 8 | 0 | 0 |
+| Florence | 2018-09-12 | 11 | 0 | 849 | 0 | 0 |
+| Michael | 2018-10-09 | 16 | 0 | 1,039 | 0 | 0 |
+| Barry | 2019-07-12 | 2 | 2 | 146 | 146 | 0 |
+| Dorian | 2019-08-27 | 5 | 5 | 363 | 363 | 0 |
+| Laura | 2020-08-24 | 12 | 12 | 881 | 881 | 2 |
+| Sally | 2020-09-14 | 7 | 7 | 136 | 136 | 0 |
+| Delta | 2020-10-08 | 5 | 5 | 216 | 216 | 1 |
+| Zeta | 2020-10-28 | 4 | 4 | 387 | 387 | 0 |
+| Ida | 2021-08-29 | 22 | 22 | 953 | 953 | 0 |
+| Nicholas | 2021-09-14 | 2 | 2 | 28 | 28 | 0 |
+| Ian | 2022-09-27 | 13 | 13 | 517 | 517 | 13 |
+| Nicole | 2022-11-09 | 2 | 2 | 68 | 68 | 2 |
+| Idalia | 2023-08-29 | 6 | 6 | 160 | 160 | 6 |
+| Beryl | 2024-07-08 | 6 | 6 | 33 | 33 | 6 |
+| Debby | 2024-08-04 | 5 | 5 | 339 | 339 | 5 |
+| Francine | 2024-09-11 | 3 | 3 | 105 | 105 | 3 |
+| Helene | 2024-09-25 | 22 | 22 | 2,332 | 2,332 | 22 |
+| Milton | 2024-10-07 | 5 | 5 | 260 | 260 | 5 |
+| Isaias | 2026-10-08 | 3 | 3 | 131 | 131 | 3 |
+
+## Reporting-regime boundaries
+
+The rule periods in `rule_period` (by DIRS activation date) and which storms fall in each:
+
+| Period | From | To | Storms |
+|---|---|---|---|
+| Voluntary DIRS, voluntary Framework | 2016-01-01 | 2024-04-30 | Barry, Delta, Dorian, Florence, Harvey, Ian, Ida, Idalia, Irma, Laura, Michael, Nate, Nicholas, Nicole, Sally, Zeta |
+| MDRI in force, DIRS voluntary | 2024-05-01 | 2025-02-19 | Beryl, Debby, Francine, Helene, Milton |
+| MDRI + mandatory DIRS | 2025-02-20 | 2026-06-29 | none in scope |
+| After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely | 2026-06-30 | open | Isaias |
+
+- **Mandatory DIRS (FCC 24-5).** The Federal Register notice 2025-00495 (90 FR 6839) was published on January 21, 2025 and reads: "Effective February 20, 2025. Compliance with 47 CFR 4.18 ... is required as of February 20, 2025." No storm in scope has a DIRS activation in that period.
+- **FCC 26-34.** 47 CFR 4.18 is the mandatory DIRS reporting rule itself. The Federal Register publication 2026-13155 (91 FR 39516, June 30, 2026) reads: "Effective June 30, 2026, except for amendatory instruction 3 (47 CFR 4.18), which is delayed indefinitely." In force from June 30, 2026 (amendatory instruction 2): daily reports from facilities-based providers even when nothing changed, no DIRS final report, and no reporting by providers without their own facilities (FCC 26-34, paras. 26 and 41). Delayed (instruction 3): the restated list of what each provider type reports and new paragraph (c), public safety voice and broadband networks, after Paperwork Reduction Act review and a Public Notice, not before November 30, 2026 (para. 52). The streamlined filing itself (a dynamic form, fewer fields, finer location) waits for changes to DIRS announced by a further Public Notice (para. 41); none was found in the Federal Register through 2026-11-25 (the FCC's own site refuses automated requests and was not checked). So the stored label "Streamlined DIRS (FCC 26-34)" overstates what was in force when Isaias 2026, the only storm after the date, was reported (October 2026); it is shown here as "After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely", and `results.json` keeps the stored label until the next major version.
+- **Layout.** Every storm from Barry (2019) on, including Isaias, prints cause columns on county rows; backup-power columns appear from Ian (2022) on (and in a few earlier reports, table above). Isaias's reports carry the same county-row columns as 2024's (cause and backup power, table above).
 
 ## `data/analysis/results.json`
 

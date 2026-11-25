@@ -32,11 +32,11 @@ import load
 from config import (BDC_COUNTS, BDC_COUNTS_META, DOWNLOADS_LOG, EAGLEI_EXTRACT, EAGLEI_RAW_DIR, OUTPUT, PROCESSED,
                     RAW, REGIMES, ROOT)
 
-VERSION = "3.1.1"
+VERSION = "3.2.0"
 RELEASE_DATE = "2026-11-25"
 CREATED = f"{RELEASE_DATE}T12:00:00-06:00"  # datapackage.json created: ISO 8601 date-time (v2.2.0)
 # Set to True only after CI has passed on both ubuntu-latest and windows-latest (README then says so).
-CI_PASSED_ON_BOTH = True  # CI passed on ubuntu-latest and windows-latest, commit cc504d5 (2026-11-25)
+CI_PASSED_ON_BOTH = False  # 3.2.0: not yet run on CI
 GITHUB = "https://github.com/ts2427/when-the-network-goes-dark-data"
 BOOTSTRAP_NOTE = importlib.import_module("11_build_page").BOOTSTRAP_METHODS
 PUBLIC_REQUIREMENTS = [
@@ -54,6 +54,9 @@ AUTHOR = {"family": "Spivey", "given": "Timothy D.", "orcid": "0009-0009-8990-43
 PAGE_URL = "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/"
 PLAN_COMMIT = "9fc17a4"
 PLAN_FILE = "docs/analysis_plan.md"
+# addendum 4.x-1 (v3.2.0): committed on its own before its sources were downloaded or anything was computed
+ADDENDUM_COMMIT = "d7bdc66"
+ADDENDUM_FILE = "docs/analysis_plan_addendum_4x.md"
 STUDY_FIPS = {"48", "22", "28", "01", "12", "13", "45", "37", "47", "51"}
 
 # data/input subfolder -> (source label, files): every published input, by name
@@ -64,10 +67,14 @@ INPUT_DIRS = {
     "acs": "U.S. Census Bureau, ACS 5-year 2022 (Census Data API)",
     "svi": "CDC/ATSDR Social Vulnerability Index 2022",
     "fema": "OpenFEMA Disaster Declarations Summaries v2",
+    "fema_ia": "OpenFEMA Individual Assistance: RI-IHP v2 and Housing Assistance Program Data - Renters v2 (v3.2.0)",
+    "nws": "NWS zone-county correlation file bp16ap26.dbx (v3.2.0)",
 }
 NHC_FILES = ["hurdat2-1851-2025-092326.txt", "al092026_best_track.zip"]
 RULE_FILES = ["FCC-22-50A1_Rcd.pdf", "FCC-26-34A1.txt"]
 EXTERNAL_FILES = ["DOC-353805A1.pdf"]  # the FCC's 2017 season report, for the external check (step 15, v3.1.0)
+MICHAEL_FILES = ["DOC-357387A1.pdf"]  # the FCC's Hurricane Michael report, for the external check (step 15b, v3.2.0)
+FCC_21_99_FILES = ["FCC-21-99A1.pdf"]  # FCC 21-99, whose footnote 60 gives Ida's causes (step 15b, v3.2.0)
 EAGLEI_FILES = ["MCC.csv", "coverage_history.csv"]  # unmodified EAGLE-I files; the year files are never copied
 BDC_LISTINGS = ["storm_releases.json", "provider_summary_files.csv"]
 STORM_PAGE_FILES = ["fcc_storm_documents.csv", "fcc_storm_documents_supplement.csv", "README_fcc_storm_documents.md"]
@@ -77,7 +84,12 @@ NEVER = (".env", ".venv", "__pycache__", "bdc_provider_county", "eaglei_outages_
 MAX_BYTES = 50 * 1024 * 1024
 
 # --------------------------------------------------------------------------------------------------- codebook --
-PERIODS = "; ".join(f"P{i}: {name} ({start} to {end if end < '2099' else 'present'})"
+# Display wording for a stored rule-period label that overstates what was in force (decision log, 2026-11-25): FCC
+# 26-34's DIRS streamlining (47 CFR 4.18, amendatory instruction 3, and the new forms) was not in force when Isaias was
+# reported. The stored label (config.REGIMES, results.json) changes only in the next major version.
+PERIOD_DISPLAY = {"Streamlined DIRS (FCC 26-34)":
+                  "After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely"}
+PERIODS = "; ".join(f"P{i}: {PERIOD_DISPLAY.get(name, name)} ({start} to {end if end < '2099' else 'present'})"
                     for i, (name, start, end) in enumerate(REGIMES))
 SITE_LIMIT = ("Cell sites as reported by providers to the FCC; a site out is not a count of people without service "
               "(the FCC's caveat).")
@@ -304,6 +316,13 @@ def copy_inputs(T: Path) -> pd.DataFrame:
     for name in EXTERNAL_FILES:
         add(RAW / "rules" / name, f"rules/{name}", "FCC PSHSB report (external check, step 15)",
             f"data/raw/rules/{name}")
+    for name in MICHAEL_FILES:
+        add(RAW / "rules" / name, f"rules/{name}", "FCC PSHSB report on Hurricane Michael (external check, step 15b)",
+            f"data/raw/rules/{name}", "DOC number given by the author (fcc.gov refused an automated look-up); "
+            "downloaded from docs.fcc.gov.")
+    for name in FCC_21_99_FILES:
+        add(RAW / "rules" / name, f"rules/{name}", "FCC 21-99, notice of proposed rulemaking (external check, step 15b)",
+            f"data/raw/rules/{name}")
     for name in STORM_PAGE_FILES:
         add(RAW / "storm_pages" / name, f"storm_pages/{name}", "FCC storm pages (document lists)",
             f"data/raw/storm_pages/{name}", "Compiled by reading the FCC storm pages (www.fcc.gov/<storm>) on "
@@ -328,6 +347,15 @@ def copy_inputs(T: Path) -> pd.DataFrame:
 
 
 # ------------------------------------------------------------------------------------------------ analysis --
+CONTEXT_FILES = [  # (built file, published name), v3.2.0 (addendum 4.x-1)
+    (PROCESSED / "dirs_cable_wireline.csv", "dirs_cable_wireline.csv"),
+    (PROCESSED / "fema_ia_county_storm.csv", "fema_ia_county_storm.csv"),
+    (OUTPUT / "fema_ia_set_aside.csv", "fema_ia_set_aside.csv"),
+    (PROCESSED / "hazard_ncei_county_storm.csv", "hazard_ncei_county_storm.csv"),
+    (OUTPUT / "hazard_ncei_storm_summary.csv", "hazard_ncei_storm_summary.csv"),
+]
+
+
 def copy_analysis(T: Path) -> None:
     a = T / "data" / "analysis"
     copy(PROCESSED / "dirs_county_day.csv", a / "dirs_county_day.csv")
@@ -336,8 +364,11 @@ def copy_analysis(T: Path) -> None:
         copy(PROCESSED / f"panel_analysis_ready.{ext}", a / f"panel_analysis_ready.{ext}")
     copy(OUTPUT / "results.json", a / "results.json")
     for f in ("validation_dirs.csv", "validation_summary.csv", "excluded_reports.csv", "area_status_counts.csv",
-              "external_validation_fcc_2017.csv"):
+              "external_validation_fcc_2017.csv", "external_validation_fcc_michael.csv",
+              "external_validation_olukola.csv", "external_validation_fcc_21_99.csv"):
         copy(OUTPUT / f, a / "validation" / f)
+    for src, name in CONTEXT_FILES:  # v3.2.0: context tables that no published result reads
+        copy(src, a / "context" / name)
 
 
 # -------------------------------------------------------------------------------------------------- code --
@@ -363,6 +394,8 @@ DOWNLOADS_LOG = ROOT / "manifest" / "downloads.csv"  # every download; a rerun a
 # MCC.csv and coverage_history.csv only (the year files are not redistributed); EAGLEI_RAW_DIR overrides it
 EAGLEI_RAW_DIR = Path(os.environ.get("EAGLEI_RAW_DIR", str(RAW / "eaglei")))
 EAGLEI_EXTRACT = RAW / "eaglei" / "eaglei_extract.parquet"
+# NOAA NCEI Storm Events details files (step 18, v3.2.0): not redistributed; download them and set NCEI_RAW_DIR
+NCEI_RAW_DIR = Path(os.environ.get("NCEI_RAW_DIR", str(RAW / "ncei")))
 BDC_COUNTS = RAW / "bdc" / "bdc_county_provider_counts.csv"
 BDC_COUNTS_META = RAW / "bdc" / "bdc_county_provider_counts_meta.json"
 for _d in (INTERIM, PROCESSED, OUTPUT):
@@ -413,9 +446,25 @@ def plan_as_committed(T: Path) -> dict:
     return info
 
 
+def addendum_as_committed(T: Path) -> dict:
+    """Addendum 4.x-1 as committed (v3.2.0), with its SHA-256, as for the original plan."""
+    blob = subprocess.run(["git", "-C", str(ROOT), "show", f"{ADDENDUM_COMMIT}:{ADDENDUM_FILE}"],
+                          capture_output=True, check=True).stdout
+    when = subprocess.run(["git", "-C", str(ROOT), "log", "-1", "--format=%ad", "--date=iso-strict", ADDENDUM_COMMIT],
+                          capture_output=True, text=True, check=True).stdout.strip()
+    dest = T / "docs" / f"analysis_plan_addendum_4x_as_committed_{ADDENDUM_COMMIT}.md"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_bytes(blob)
+    info = {"file": dest.name, "commit": ADDENDUM_COMMIT, "committed": when,
+            "sha256": hashlib.sha256(blob).hexdigest(), "bytes": len(blob)}
+    write(T / "docs" / "analysis_plan_addendum_4x_as_committed.sha256", f"{info['sha256']}  {dest.name}\n")
+    return info
+
+
 def copy_docs(T: Path) -> None:
     for name in ("analysis_plan.md", "analysis_plan_addendum_v2.md", "decisions.md", "data_sources.md",
-                 "literature.md", "update_procedure.md", "external_validation.md", "restructure_plan.md"):
+                 "literature.md", "update_procedure.md", "external_validation.md", "restructure_plan.md",
+                 "analysis_plan_addendum_4x.md", "scoping_4x.md"):
         copy(ROOT / "docs" / name, T / "docs" / name)
     copy(ROOT / "examples" / "quickstart.ipynb", T / "examples" / "quickstart.ipynb")
     copy(ROOT / "ruff.toml", T / "ruff.toml")
@@ -451,6 +500,125 @@ def schema(fields, primary_key, missing=("",)) -> dict:
             f["format"] = "any"
         out.append(f)
     return {"fields": out, "primaryKey": primary_key, "missingValues": list(missing)}
+
+
+CONTEXT_NOTE = ("Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, "
+                "and no association with cell outages has been computed.")
+CABLE_FIELDS = [
+    ("storm_key", "string", "NHC ID and DIRS activation date (the manifest row's storm).", "", ""),
+    ("nhc_id", "string", "National Hurricane Center storm ID.", "", ""),
+    ("storm", "string", "Storm name.", "", ""),
+    ("doc_id", "string", "FCC EDOCS document ID of the report.", "", ""),
+    ("report_date", "date", "Report date.", "", ""),
+    ("area", "string", "What the figure covers: 'disaster area' (the whole reporting area, or a sentence naming "
+     "several states), a state's postal code (a state row, or a sentence naming one state), or 'none printed'.", "",
+     "The FCC's area changes during a storm; compare figures only within one area."),
+    ("subscribers_out", "integer", "Cable and wireline subscribers out of service, as printed.", "subscribers",
+     "Blank where the report prints 'None' or no figure. Subscribers, not people or premises; not allocated to "
+     "counties. No total is added up from state rows."),
+    ("printed", "string", "The figure as printed in the report.", "", ""),
+    ("form", "string", "How it is printed: sentence, code table, name list or colon list ('and sentence' when the "
+     "same figure is printed twice).", "", ""),
+    ("source", "string", "Which file the figure was read from: txt or pdf.", "", ""),
+    ("previous_day_printed", "integer", "The previous-day figure the report prints ('up/down from N yesterday').",
+     "subscribers", "Only where printed."),
+    ("previous_report_value", "integer", "The previous report's figure for the same storm and area.", "subscribers", ""),
+    ("previous_day_check", "string", "match, mismatch or 'no previous figure for this area' (blank where no "
+     "previous-day figure is printed).", "", "A mismatch is flagged, never corrected."),
+    ("from_excluded_report", "boolean", "The report is excluded from the cell-site panel (its cable figure is kept).",
+     "", ""),
+]
+FEMA_IA_FIELDS = [
+    ("storm_key", "string", "NHC ID and DIRS activation date.", "", ""),
+    ("storm", "string", "Storm name.", "", ""),
+    ("fips", "string", "County FIPS code.", "", ""),
+    ("ia_declared", "boolean", "Individual Assistance or IHP declared for the county under the storm's declarations "
+     "(iaProgramDeclared or ihProgramDeclared).", "", ""),
+    ("fema_disasters_ia", "string", "The major-disaster numbers summed over ('; '-separated).", "", ""),
+    ("ihp_valid_registrations", "integer", "RI-IHP v2 totalValidRegistrations.", "registrations",
+     "Blank where no IA was declared; 0 where declared with no record. Applicants' damaged-dwelling counties as "
+     "OpenFEMA gives them; tribal-area and statewide rows are not in any county (context/fema_ia_set_aside.csv)."),
+    ("ihp_referrals", "integer", "RI-IHP v2 ihpReferrals.", "registrations", "As above."),
+    ("ihp_eligible", "integer", "RI-IHP v2 ihpEligible.", "registrations", "As above."),
+    ("renters_valid_registrations", "integer", "Housing Assistance Renters v2 validRegistrations.", "registrations",
+     "As above."),
+    ("renters_inspected", "integer", "Housing Assistance Renters v2 totalInspected.", "registrations", "As above."),
+    ("renters_approved", "integer", "Housing Assistance Renters v2 approvedForFemaAssistance.", "registrations",
+     "As above."),
+    ("ihp_amount_usd", "number", "RI-IHP v2 ihpAmount.", "US dollars (nominal)", "As above. Not adjusted for inflation."),
+]
+FEMA_ASIDE_FIELDS = [
+    ("dataset", "string", "OpenFEMA dataset.", "", ""),
+    ("disasterNumber", "integer", "FEMA disaster number.", "", ""),
+    ("state", "string", "State as OpenFEMA gives it.", "", ""),
+    ("county", "string", "County or area name as OpenFEMA gives it.", "", ""),
+    ("set_aside", "string", "Why the rows are not in the county table: outside the disaster's states, statewide, or "
+     "tribal area (spans counties; no single county is assigned).", "", ""),
+    ("valid_registrations", "integer", "Valid registrations in those rows.", "registrations", ""),
+]
+HAZARD_FIELDS = [
+    ("storm_key", "string", "NHC ID and DIRS activation date.", "", ""),
+    ("storm", "string", "Storm name.", "", ""),
+    ("fips", "string", "County FIPS code.", "", ""),
+    ("surge_flag", "boolean", "Any NCEI Storm Surge/Tide event in the county in the storm's window.", "", ""),
+    ("flood_flag", "boolean", "Any Flood or Flash Flood event.", "", ""),
+    ("wind_flag", "boolean", "Any Hurricane (Typhoon), Tropical Storm or High Wind event.", "", ""),
+    ("damage_property_usd", "integer", "Property damage of the county (C) events.", "US dollars (nominal)",
+     "County events only; zone events' damage is in the zone columns."),
+    ("damage_crops_usd", "integer", "Crop damage of the county (C) events.", "US dollars (nominal)",
+     "County events only."),
+    ("zone_damage_property_usd_unallocated", "integer", "Property damage of the zone (Z) events that cover the county: "
+     "each event's whole figure, not divided among the zone's counties.", "US dollars (nominal)",
+     "NEVER sum across counties: the same dollars appear in every county of the zone (see zone_n_counties)."),
+    ("zone_damage_crops_usd_unallocated", "integer", "Crop damage of the zone events that cover the county, "
+     "undivided.", "US dollars (nominal)", "NEVER sum across counties."),
+    ("zone_n_counties", "integer", "Counties covered by those zone events (from bp16ap26.dbx).", "counties",
+     "1 means the zone figures belong to this county alone; more means they are shared."),
+    ("n_events", "integer", "NCEI events used.", "events", ""),
+    ("ncei_episode_ids", "string", "NCEI episode IDs used ('; '-separated).", "", ""),
+]
+HAZARD_SUMMARY_FIELDS = [
+    ("storm_key", "string", "NHC ID and DIRS activation date.", "", ""),
+    ("storm", "string", "Storm name.", "", ""),
+    ("window_start", "date", "DIRS activation date minus 2 days.", "", ""),
+    ("window_end", "date", "Last report plus 2 days.", "", ""),
+    ("events_used", "integer", "NCEI events matched to the storm's panel counties.", "events", ""),
+    ("zone_events_unmapped", "integer", "Zone events in the storm's states whose zone is not in bp16ap26.dbx.",
+     "events", ""),
+    ("zone_events_name_differs", "integer", "Zone events set aside because their NCEI zone name names none of the "
+     "counties bp16ap26.dbx gives the zone (renumbered zones, place-named zones, misspellings).", "events", ""),
+]
+
+
+def hazard_set_aside() -> int:
+    return int(pd.read_csv(OUTPUT / "hazard_ncei_storm_summary.csv").zone_events_name_differs.sum())
+
+
+def context_resources() -> list:
+    def res(name, path, title, desc, fields, key):
+        return {"name": name, "path": f"data/analysis/context/{path}", "profile": "tabular-data-resource",
+                "format": "csv", "mediatype": "text/csv", "encoding": "utf-8", "title": title,
+                "description": f"{desc} {CONTEXT_NOTE}", "schema": schema(fields, key)}
+    return [
+        res("dirs_cable_wireline", "dirs_cable_wireline.csv", "Cable and wireline subscribers out, per DIRS report",
+            "One row per report and area, from the reports' Cable Systems and Wireline section, with the "
+            "previous-day check. Built by code/src/17_cable_wireline.py.", CABLE_FIELDS,
+            ["storm_key", "doc_id", "area", "form"]),
+        res("fema_ia_county_storm", "fema_ia_county_storm.csv", "FEMA Individual Assistance by storm and county",
+            "One row per storm and panel county, from OpenFEMA RI-IHP v2 and Housing Assistance Renters v2. "
+            "This product uses the Federal Emergency Management Agency's OpenFEMA API, but is not endorsed by FEMA. "
+            "Built by code/src/16_fema_ia.py.", FEMA_IA_FIELDS, ["storm_key", "fips"]),
+        res("fema_ia_set_aside", "fema_ia_set_aside.csv", "OpenFEMA rows not placed in a county",
+            "Counted here instead of the county table. Built by code/src/16_fema_ia.py.", FEMA_ASIDE_FIELDS,
+            ["dataset", "disasterNumber", "state", "county"]),
+        res("hazard_ncei_county_storm", "hazard_ncei_county_storm.csv", "NCEI Storm Events hazard by storm and county",
+            "One row per storm and panel county: surge, flood and wind flags and damage from NOAA NCEI Storm Events "
+            "(details files c20261119; zones mapped with NWS bp16ap26.dbx). The NCEI files are not redistributed. "
+            "Built by code/src/18_hazard_ncei.py.", HAZARD_FIELDS, ["storm_key", "fips"]),
+        res("hazard_ncei_storm_summary", "hazard_ncei_storm_summary.csv", "NCEI matching summary by storm",
+            "Window, events used and zone events not mapped. Built by code/src/18_hazard_ncei.py.",
+            HAZARD_SUMMARY_FIELDS, ["storm_key"]),
+    ]
 
 
 def datapackage(T: Path, plan: dict) -> dict:
@@ -510,6 +678,7 @@ def datapackage(T: Path, plan: dict) -> dict:
              "title": "Broadband provider counts by county and BDC release (counts only)",
              "description": "Derived from FCC Broadband Data Collection public data; no provider is named or identified.",
              "schema": schema(BDC_FIELDS, ["release", "fips"])},
+            *context_resources(),
             {"name": "results", "path": "data/analysis/results.json", "format": "json", "mediatype": "application/json",
              "title": "Every number on the page",
              "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py "
@@ -524,6 +693,12 @@ def datapackage(T: Path, plan: dict) -> dict:
              "mediatype": "text/markdown", "title": "Analysis plan as committed",
              "description": f"Committed {plan['committed']} (commit {plan['commit']}); SHA-256 {plan['sha256']}.",
              "hash": f"sha256:{plan['sha256']}"},
+            {"name": "analysis_plan_addendum_4x_as_committed", "path": f"docs/{plan['addendum_4x']['file']}",
+             "format": "md", "mediatype": "text/markdown", "title": "Analysis plan addendum 4.x-1 as committed (v3.2.0)",
+             "description": f"Committed {plan['addendum_4x']['committed']} (commit {plan['addendum_4x']['commit']}), "
+                            "before any NCEI or OpenFEMA file was downloaded and before any of its quantities was "
+                            f"computed; SHA-256 {plan['addendum_4x']['sha256']}.",
+             "hash": f"sha256:{plan['addendum_4x']['sha256']}"},
         ],
     }
     for r in pkg["resources"]:
@@ -535,6 +710,56 @@ def datapackage(T: Path, plan: dict) -> dict:
         r["bytes"] = (T / r["path"]).stat().st_size
     write(T / "datapackage.json", json.dumps(pkg, indent=2, ensure_ascii=False) + "\n")
     return pkg
+
+
+def codebook_report_notes() -> list:
+    """(a) Which reports carry county-level cause columns; (b) the reporting-regime boundaries (v3.2.0)."""
+    from config import REGIMES
+    p = pd.read_parquet(PROCESSED / "panel.parquet",
+                        columns=["storm", "storm_key", "dirs_activation_date", "doc_id", "out_damage", "out_transport",
+                                 "out_power", "on_backup_power", "rule_period_label"])
+    p["cause"] = p[["out_damage", "out_transport", "out_power"]].notna().all(axis=1)
+    rows = []
+    for key, g in p.groupby("storm_key", sort=False):
+        rows.append((g.dirs_activation_date.iloc[0], g.storm.iloc[0], g.doc_id.nunique(),
+                     g[g.cause].doc_id.nunique(), len(g), int(g.cause.sum()),
+                     g[g.on_backup_power.notna()].doc_id.nunique()))
+    rows.sort(key=lambda r: str(r[0]))
+    L = ["## County-level cause columns, by storm", "",
+         "Which reports print sites out by cause (damage, transport, power) on each county row, as parsed into "
+         "`dirs_county_day.csv`. Reports without them print state totals only, or no causes at all. (Olukola et al. "
+         "2026 describe causes as state-level; in these reports, from 2019 on, they are printed per county.)", "",
+         "| Storm | DIRS activation | Reports | Reports with county causes | County rows | Rows with causes | "
+         "Reports with backup power |", "|---|---|---|---|---|---|---|"]
+    L += [f"| {st} | {str(d)[:10]} | {n} | {nc} | {r:,} | {rc:,} | {b} |" for d, st, n, nc, r, rc, b in rows]
+    first = p.drop_duplicates("storm_key")
+    L += ["", "## Reporting-regime boundaries", "",
+          "The rule periods in `rule_period` (by DIRS activation date) and which storms fall in each:", "",
+          "| Period | From | To | Storms |", "|---|---|---|---|"]
+    for label, a, b in REGIMES:
+        names = sorted(first[first.rule_period_label == label].storm)
+        L.append(f"| {PERIOD_DISPLAY.get(label, label)} | {a} | {b if b < '2099' else 'open'} | "
+                 f"{', '.join(names) or 'none in scope'} |")
+    L += ["", "- **Mandatory DIRS (FCC 24-5).** The Federal Register notice 2025-00495 (90 FR 6839) was published on "
+          "January 21, 2025 and reads: \"Effective February 20, 2025. Compliance with 47 CFR 4.18 ... is required as of "
+          "February 20, 2025.\" No storm in scope has a DIRS activation in that period.",
+          "- **FCC 26-34.** 47 CFR 4.18 is the mandatory DIRS reporting rule itself. The Federal Register publication "
+          "2026-13155 (91 FR 39516, June 30, 2026) reads: \"Effective June 30, 2026, except for amendatory instruction 3 "
+          "(47 CFR 4.18), which is delayed indefinitely.\" In force from June 30, 2026 (amendatory instruction 2): "
+          "daily reports from facilities-based providers even when nothing changed, no DIRS final report, and no "
+          "reporting by providers without their own facilities (FCC 26-34, paras. 26 and 41). Delayed (instruction 3): "
+          "the restated list of what each provider type reports and new paragraph (c), public safety voice and "
+          "broadband networks, after Paperwork Reduction Act review and a Public Notice, not before November 30, 2026 "
+          "(para. 52). The streamlined filing itself (a dynamic form, fewer fields, finer location) waits for changes "
+          "to DIRS announced by a further Public Notice (para. 41); none was found in the Federal Register through "
+          "2026-11-25 (the FCC's own site refuses automated requests and was not checked). So the stored label "
+          "\"Streamlined DIRS (FCC 26-34)\" overstates what was in force when Isaias 2026, the only storm after the "
+          "date, was reported (October 2026); it is shown here as \"" + PERIOD_DISPLAY["Streamlined DIRS (FCC 26-34)"]
+          + "\", and `results.json` keeps the stored label until the next major version.",
+          "- **Layout.** Every storm from Barry (2019) on, including Isaias, prints cause columns on county rows; "
+          "backup-power columns appear from Ian (2022) on (and in a few earlier reports, table above). Isaias's "
+          "reports carry the same county-row columns as 2024's (cause and backup power, table above).", ""]
+    return L
 
 
 def codebook_md(T: Path, pkg: dict) -> None:
@@ -558,6 +783,7 @@ def codebook_md(T: Path, pkg: dict) -> None:
           "| Level | Drops | Why |", "|---|---|---|"]
     L += [f"| `{k}` | {v['drops']} | {v['why']} |" for k, v in load.CLEAN_LEVELS.items()]
     L += [""]
+    L += codebook_report_notes()
     L += ["## `data/analysis/results.json`", "",
           "Nested JSON, one key per chapter (`chapter_1` to `chapter_9`, then `v2_1_public_record_misses`, "
           "`v2_2_backup_power`, `v2_3_power_cell_timing`, `v2_5_groups`, `v2_5_network_redundancy`, `v2_1_1_report_card`). Each number is "
@@ -586,6 +812,7 @@ def version_dois() -> dict:
 
 KEYWORDS = ["FCC DIRS", "cell site outages", "hurricanes", "telecommunications resilience", "power outages", "EAGLE-I",
             "disaster recovery", "public records"]  # Tim's list, 2026-11-25 (CITATION.cff, then .zenodo.json from it)
+SUBJECTS = ROOT / "manifest" / "subjects.csv"
 RELATED = ROOT / "manifest" / "related_identifiers.csv"  # each verified before it was added (the verified column)
 ZENODO_USE_NOTE = ("The counts are descriptive associations, not causal estimates, and cell sites out do not measure "
                    "people without service; see DATASHEET.md for supported uses and limitations.")  # Tim, 2026-11-25
@@ -626,7 +853,17 @@ def zenodo_metadata(cff_text: str) -> dict:
         "publication_date": str(cff["date-released"]),
         "related_identifiers": [{"identifier": x.identifier, "relation": x.relation, "scheme": x.scheme,
                                  "resource_type": x.resource_type} for x in rel.itertuples()],
+        "subjects": subjects(),
     }
+
+
+def subjects() -> list[dict]:
+    """Subjects from a registered vocabulary (v3.2.0, the F-UJI fix): Library of Congress Subject Headings, each URI
+    checked on id.loc.gov (manifest/subjects.csv, with its verification note)."""
+    s = pd.read_csv(SUBJECTS, dtype=str, keep_default_na=False)
+    if (s.verified == "").any() or not s.identifier.str.startswith("http://id.loc.gov/authorities/subjects/sh").all():
+        raise SystemExit("subjects.csv: every subject needs an id.loc.gov URI and its verification note")
+    return [{"term": x.term, "identifier": x.identifier, "scheme": x.scheme} for x in s.itertuples()]
 
 
 def zenodo_json(T: Path) -> None:
@@ -648,6 +885,7 @@ def datasheet_md(T: Path) -> None:
     excluded = pd.read_csv(OUTPUT / "excluded_reports.csv", dtype=str, keep_default_na=False)
     evt = pd.read_csv(ext.OUT_CSV, dtype=str, keep_default_na=False)
     ev = ext.summary(evt)
+    ms = michael_summary()
     compared = ev["n"] - ev["no panel field"]
     agree = ev["match"] + ev["match after truncation"] + ev["consistent"]
     t90 = r["chapter_4"]["headlines"]["n_storms_reaching_90pct_restored"]
@@ -681,7 +919,9 @@ def datasheet_md(T: Path) -> None:
         "The FCC publishes the reports one PDF at a time, storm by storm, in layouts that change between years.",
         f"- **Created by** {AUTHOR['given']} {AUTHOR['family']} (ORCID {AUTHOR['orcid']}), Threshold Data Sciences, for "
         f"the page *When the Network Goes Dark* ({PAGE_URL}).",
-        f"- **Funding and independence.** {step11.DISCLOSURE}", "",
+        f"- **Funding and independence.** {step11.DISCLOSURE}",
+        f"- **Novelty.** {step11.NOVELTY}",
+        "- **Related work.** " + " ".join(f"{c} {d}" for c, d in step11.RELATED_WORK_ITEMS), "",
         "## Composition", "",
         f"- **Instances.** One row per county per FCC DIRS report: {n0(v('n_county_days'))} county-report rows "
         f"(`data/analysis/dirs_county_day.csv`) from {v('n_reports_used')} reports for {v('n_storms')} storms, "
@@ -730,6 +970,15 @@ def datasheet_md(T: Path) -> None:
         f"- External check: the FCC's own 2017 season report gives {ev['n']} county or state figures for Harvey and "
         f"Irma; {agree} of the {compared} comparable figures agree, and in the other {ev['differs']} the season report "
         "differs from the daily reports themselves (`docs/external_validation.md`).",
+        f"- External checks added in 3.2.0 (exploratory): the FCC's report on Hurricane Michael (May 2019) gives "
+        f"{ms['n']} figures in its text; {ms['ok']} of the {ms['scored']} that can be tested match or are consistent, "
+        f"{ms['differs']} differ{'s' if ms['differs'] == 1 else ''} ({ms['differs_ids']}; explained in "
+        f"`docs/external_validation.md`), and {ms['shown']} statements with no number are shown beside our series. "
+        f"Olukola et al. (2026) extracted Helene from the same reports independently: the {ms['olukola_matches']} "
+        "match exactly. " + step11.extra_checks_sentence(),
+        "- Context tables added in 3.2.0 (`data/analysis/context/`): cable and wireline subscribers out per report, "
+        "FEMA Individual Assistance and NCEI Storm Events hazard by storm and county. Descriptive only, under "
+        "addendum 4.x-1; the NCEI files themselves are not redistributed.",
         "- Nothing is imputed. Raw inputs are kept unmodified in `data/input/`; `run_all.py` rebuilds every derived "
         "file from them, and a test checks the rebuild against the published files.",
         "- Every change to a published number is listed, with before, after and why, in `ERRATA.md`.", "",
@@ -744,10 +993,17 @@ def datasheet_md(T: Path) -> None:
         "- **Not carrier or provider performance.** The counts combine all providers that report; no provider can be "
         "seen or compared.",
         "- **Not causal estimates.** Every result is an association: what happened together, not what caused what.",
+        "- **Not a hazard or impact measure for the cell-site results.** The 3.2.0 context tables (cable and wireline, "
+        "FEMA Individual Assistance, NCEI hazard) are descriptive; no association with cell outages has been computed, "
+        "and any such use needs its own committed plan.",
         f"- **Not proof that {step11.RULES_NEW} did or didn't work.** "
         + step11.rules_wording(r["chapter_9"]["page_text"]["headline"]),
         "",
         "**Known limitations:**", "",
+        f"- **Zone-to-county mapping (context hazard table).** The NWS zone-to-county file of 16 April 2026 "
+        "(bp16ap26.dbx) is used for every storm, because the files in force for earlier storms are no longer "
+        f"published. A check on zone names guards against renumbered zones ({hazard_set_aside()} zone events set "
+        "aside), but some zone-to-county mapping error may remain.",
         f"- **Reporting ends before recovery is complete.** Only {t90['value']} of {t90['n']} storms with a report "
         f"after their peak reached 90% restored before their reports ended, and in "
         f"{'all ' + str(last['n_storms']) if last['n_storms_with_sites_out_at_last_report'] == last['n_storms'] else str(last['n_storms_with_sites_out_at_last_report']) + ' of ' + str(last['n_storms'])}"
@@ -856,6 +1112,50 @@ variable's meaning, a minor version adds data or variables, a patch fixes docume
 any output.
 
 {unreleased}## [{VERSION}] - {RELEASE_DATE}
+
+Adds context tables, external checks and documentation. No published value changes: every file published in
+3.1.1 under `data/analysis/` and `data/input/` is byte for byte the same, `results.json` included (the reproduction
+test compares them). The new tables are exploratory, under analysis plan addendum 4.x-1
+(`docs/{ADDENDUM_FILE.split('/')[-1]}`, committed on its own as
+`docs/analysis_plan_addendum_4x_as_committed_{ADDENDUM_COMMIT}.md` with its SHA-256 before any of its sources was
+downloaded or any value computed); the page describes them and draws no new finding from them.
+
+### Fixed
+- Step 3 read the cable and wireline figure of Hurricane Michael's reports of October 21 to 24, 2018 from a summary
+  paragraph ("fell from 103,811 to 56,334 over the last three days"); it now reads the report's Cable Systems and
+  Wireline section first, giving 56,334, 55,006, 50,387 and 45,506, with a test for this pattern. The figure is in no
+  published file (the panel files have no cable and wireline column), so no published value changes; the new
+  `context/dirs_cable_wireline.csv` has the section figures.
+
+### Added
+- `data/analysis/context/dirs_cable_wireline.csv` (step 17): cable and wireline subscribers out per report and area,
+  read from the reports' Cable Systems and Wireline section in all four printed forms, including the state rows of
+  Michael, Florence, Barry, Dorian, Zeta, Ida and Ian, with a check of each printed previous-day figure against the
+  previous report.
+- `data/analysis/context/fema_ia_county_storm.csv` and `fema_ia_set_aside.csv` (step 16): FEMA Individual Assistance
+  by storm and county from OpenFEMA RI-IHP v2 and Housing Assistance Renters v2 (inputs in `data/input/fema_ia/`).
+- `data/analysis/context/hazard_ncei_county_storm.csv` and `hazard_ncei_storm_summary.csv` (step 18): NCEI Storm Events
+  surge, flood and wind flags by storm and county; damage from county events, and damage from zone events in separate
+  `zone_..._unallocated` columns with `zone_n_counties` (never to be summed across counties; a rule changed after a
+  value was seen, logged as a deviation). Zones mapped with NWS `bp16ap26.dbx` (`data/input/nws/`). The NCEI files are
+  not redistributed; the reproduction test compares these tables only when they are supplied.
+- External checks (step 15b; `docs/external_validation.md`, `data/analysis/validation/`): the FCC's report on
+  Hurricane Michael (DOC-357387A1), {michael_summary()['n']} figures; Olukola et al. (2026), Helene and Irma: the Helene
+  peak (4,562 sites out) and sites in the reporting area (37,717) and Irma's peak (4,370) match an independent
+  extraction exactly; FCC 21-99's Ida figures (699 sites out for power, 354 for damage and transport, from
+  DOC-375367A1), which match the report's Louisiana totals and our county rows.
+- `CODEBOOK.md`: which reports carry county-level cause columns, by storm, and the reporting-regime boundaries.
+- Related work and a statement of what is new, in the README and `DATASHEET.md`; the datasheet's limitations add the
+  zone-to-county mapping.
+- `.zenodo.json`: subjects from the Library of Congress Subject Headings, each URI checked on id.loc.gov
+  (`code/manifest/subjects.csv`), and two related identifiers (Du 2024; StEER PRJ-3709).
+- `docs/scoping_4x.md`: the sources considered, with what was and was not verified.
+
+### Not changed
+- The high-water-mark columns planned in the scoping are left out: both USGS sources (STN and the ScienceBase
+  catalog) refused automated requests (HTTP 403). To be revisited in 4.x.
+
+## [3.1.1] - 2026-11-25
 
 Documentation and metadata only. No file under `data/` changes, and no number.
 
@@ -1215,6 +1515,28 @@ from the Agency's website(s).
 Dataset: Disaster Declarations Summaries v2, https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries, accessed
 {span('data/input/fema/')} (UTC). Used as context only (`fema_declared`); no result uses it.
 
+Datasets (v3.2.0): Registration Intake and Individuals Household Program (RI-IHP) v2,
+https://www.fema.gov/api/open/v2/RegistrationIntakeIndividualsHouseholdPrograms, and Housing Assistance Program Data -
+Renters v2, https://www.fema.gov/api/open/v2/HousingAssistanceRenters, one query per disaster number, accessed
+{span('data/input/fema_ia/')} (UTC). Context only (`data/analysis/context/`); no result uses them.
+
+## NOAA NCEI Storm Events (v3.2.0)
+
+NOAA National Centers for Environmental Information, Storm Events Database, bulk details files
+`StormEvents_details-ftp_v1.0_d2017_c20261119.csv.gz` to `..._d2026_c20261119.csv.gz`,
+https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/, retrieved 2026-11-25 (SHA-256 of each in
+`code/manifest/downloads.csv`). No licence or use statement was found on the pages read, so the files are not
+redistributed; only the derived county table is published. The 2026 file holds events through August 2026.
+Zones are mapped to counties with the NWS zone-county correlation file `bp16ap26.dbx`
+(https://www.weather.gov/gis/ZoneCounty, `data/input/nws/`, retrieved {when('data/input/nws/')}; U.S. government work).
+
+## FCC report on Hurricane Michael (v3.2.0)
+
+FCC Public Safety and Homeland Security Bureau (2019). *October 2018 Hurricane Michael's Impact on Communications:
+Preparation, Effect, and Recovery*. Report and Recommendations, PS Docket No. 18-339, DOC-357387A1,
+https://docs.fcc.gov/public/attachments/DOC-357387A1.pdf (`data/input/rules/DOC-357387A1.pdf`). Used for the
+external check in `docs/external_validation.md` only. U.S. government work.
+
 ## NOAA National Hurricane Center
 
 Landsea, C. W., & Franklin, J. L. (2013). Atlantic hurricane database uncertainty and presentation of a new database
@@ -1319,13 +1641,71 @@ RUN_ORDER = [
     ("12_v2_analysis.py", "v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card", "chapters 10-14 to results.json"),
     ("12b_analysis_ready.py", "", "the analysis-ready panel (CSV and Parquet): the panel with every covariate"),
     ("15_external_validation.py", "", "external check against the FCC's 2017 season report (Harvey and Irma figures)"),
+    ("16_fema_ia.py", "", "v3.2.0: FEMA Individual Assistance by storm and county (from the stored OpenFEMA responses)"),
+    ("17_cable_wireline.py", "", "v3.2.0: cable and wireline subscribers out, per report and area"),
+    ("18_hazard_ncei.py", "", "v3.2.0: NCEI hazard flags and damage by storm and county (skipped unless the NCEI "
+                              "files are supplied: they are not redistributed)"),
+    ("15b_external_michael_olukola.py", "", "v3.2.0: external checks against the FCC's Michael report and "
+                                            "Olukola et al. (2026)"),
 ]
+
+
+def step11_mod():
+    return importlib.import_module("11_build_page")
+
+
+def michael_summary() -> dict:
+    m = pd.read_csv(OUTPUT / "external_validation_fcc_michael.csv", dtype=str, keep_default_na=False)
+    o = pd.read_csv(OUTPUT / "external_validation_olukola.csv", dtype=str, keep_default_na=False)
+    scored = m[m.status != "shown, not scored"]
+    return {"n": len(m), "scored": len(scored), "ok": int(scored.status.isin(["match", "consistent"]).sum()),
+            "differs": int((scored.status == "differs").sum()), "shown": len(m) - len(scored),
+            "differs_ids": ", ".join(scored[scored.status == "differs"].id),
+            "olukola_matches": olukola_matches(o)}
+
+
+def olukola_matches(o: pd.DataFrame) -> str:
+    """'peak (4,562 sites out, 28 September 2024) and sites in the reporting area (37,717, 12.1% out)', from the
+    table; stops if either is not a match."""
+    x = o.set_index("id")
+    if not (x.loc["O1", "status"] == "match" and x.loc["O2", "status"] == "match"):
+        raise SystemExit("Olukola O1 or O2 no longer matches: rewrite the README and datasheet wording")
+    served, pct = x.loc["O2", "theirs"].split()
+    return (f"peak ({int(x.loc['O1', 'theirs']):,} sites out, 28 September 2024) and sites in the reporting area "
+            f"({int(served):,}, {pct.strip('()')} out)")
+
+
+def context_section() -> list:
+    c = pd.read_csv(PROCESSED / "dirs_cable_wireline.csv", dtype=str, keep_default_na=False)
+    f = pd.read_csv(PROCESSED / "fema_ia_county_storm.csv", dtype=str, keep_default_na=False)
+    h = pd.read_csv(PROCESSED / "hazard_ncei_county_storm.csv", dtype=str, keep_default_na=False)
+    checks = c.previous_day_check.value_counts()
+    return ["## Context tables (3.2.0)", "",
+            "Exploratory, under addendum 4.x-1: descriptive tables added in 3.2.0. No published result reads them, "
+            "and no association with cell outages has been computed. Variables: `CODEBOOK.md`.", "",
+            f"- `data/analysis/context/dirs_cable_wireline.csv`: cable and wireline subscribers out, {len(c):,} rows "
+            f"from {c.doc_id.nunique()} reports, by area as printed (the whole disaster area, or state rows). Where a "
+            f"report prints the previous day's figure it is checked against the previous report: "
+            f"{checks.get('match', 0)} match, {checks.get('mismatch', 0)} do not (flagged, not corrected).",
+            f"- `data/analysis/context/fema_ia_county_storm.csv`: FEMA Individual Assistance by storm and county "
+            f"({len(f):,} storm-counties, {int((f.ia_declared == 'True').sum())} with IA declared), from OpenFEMA "
+            "RI-IHP v2 and Housing Assistance Renters v2; rows that name no single county (tribal areas, statewide, "
+            "other states) are counted in `fema_ia_set_aside.csv`.",
+            f"- `data/analysis/context/hazard_ncei_county_storm.csv`: surge, flood and wind flags and damage by storm "
+            f"and county ({len(h):,} storm-counties), from NOAA NCEI Storm Events. Damage from county events is in "
+            "`damage_property_usd` and `damage_crops_usd`; damage from zone events is in the `zone_..._unallocated` "
+            "columns, undivided, with `zone_n_counties`, and must never be summed across counties. "
+            "`hazard_ncei_storm_summary.csv` "
+            "gives each storm's window and the zone events not mapped. The NCEI files are not redistributed (no "
+            "licence or use statement was found), so the reproduction test compares this table only when they are "
+            "supplied (`NCEI_RAW_DIR`). No high-water marks: both USGS sources refused automated requests.", ""]
 
 
 def external_validation_section() -> list:
     ext = importlib.import_module("15_external_validation")
     t = pd.read_csv(ext.OUT_CSV, dtype=str, keep_default_na=False)
     ev = ext.summary(t)
+    ms = michael_summary()
     L = ["## External validation", "",
          f"The FCC's own summary of the season, *2017 Atlantic Hurricane Season Impact on Communications* "
          f"(DOC-353805A1, August 2018), gives {ev['n']} county or state figures for Harvey and Irma. Each is "
@@ -1341,6 +1721,16 @@ def external_validation_section() -> list:
     for r in t[t.status == "differs"].itertuples():
         L.append(f"| {r.id} | {r.where}: {r.fcc_text} | {r.report_date or 'all'} | {r.fcc_value} | {r.ours} | "
                  f"{r.explanation} |")
+    L += ["", f"Since 3.2.0, three more checks (`code/src/15b_external_michael_olukola.py`, exploratory). The FCC's report "
+          f"on Hurricane Michael (DOC-357387A1, May 2019) gives {ms['n']} figures in its text: {ms['scored']} can be "
+          f"tested, of which {ms['ok']} match or are consistent and {ms['differs']} differ{'s' if ms['differs'] == 1 else ''} "
+          f"({ms['differs_ids']}, explained in `docs/external_validation.md`); {ms['shown']} are statements with no "
+          "number to test and are shown beside our series. Olukola et al. (2026): the Helene "
+          f"{ms['olukola_matches']} match an independent extraction exactly; the cause split is the comparison "
+          "already on the page, and the county-day counts are defined differently. "
+          + step11_mod().extra_checks_sentence() + " Tables: "
+          "`data/analysis/validation/external_validation_fcc_michael.csv`, `external_validation_olukola.csv` and "
+          "`external_validation_fcc_21_99.csv`."]
     return L + [""]
 
 
@@ -1385,6 +1775,12 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          size("data/input/fema/")),
         ("NHC HURDAT2 and Isaias best track", "data/input/nhc/", "NOAA/NHC", "Public domain", "yes",
          size("data/input/nhc/")),
+        ("OpenFEMA Individual Assistance (3.2.0)", "data/input/fema_ia/", "FEMA",
+         "OpenFEMA terms; disclaimer in SOURCES.md", "yes", size("data/input/fema_ia/")),
+        ("NWS zone-county file (3.2.0)", "data/input/nws/", "NOAA/NWS", "Public domain", "yes",
+         size("data/input/nws/")),
+        ("NCEI Storm Events details 2017-2026 (3.2.0)", "not included (135 MB)", "NOAA/NCEI",
+         "no licence or use statement found", "no: download the c20261119 files and set NCEI_RAW_DIR", "135 MB"),
     ]
     concept, version = dois()
     L = [f"# {TITLE}", "",
@@ -1405,7 +1801,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "## Contents", "", "```",
          "data/input/      every input, with INPUTS.csv (source, URL, retrieval time, SHA-256)",
          "data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/,",
-         "                 panel_analysis_ready.csv and .parquet (the panel with every covariate the analysis uses)",
+         "                 panel_analysis_ready.csv and .parquet (the panel with every covariate the analysis uses),",
+         "                 context/ (3.2.0: cable and wireline, FEMA Individual Assistance, NCEI hazard)",
          "code/src/        numbered pipeline steps, load.py (load_panel(), clean_rows()); code/manifest/",
          "                 hand-made tables; code/tests/",
          "examples/        quickstart.ipynb: load the panel and rebuild two headline figures",
@@ -1414,7 +1811,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes,",
          "                 update_procedure.md (how a new season and a new version are added and released),",
          "                 external_validation.md (the check against the FCC's 2017 season report),",
-         "                 restructure_plan.md (the layout planned for 4.0.0)",
+         "                 restructure_plan.md (the layout planned for 4.0.0), addendum 4.x-1 (as committed,",
+         "                 with SHA-256) and scoping_4x.md (the sources considered for 3.2.0 and 4.0.0)",
          "ERRATA.md        every change to a published number; CONTRIBUTING.md: how to report an error",
          "DATASHEET.md     the datasheet: motivation, composition, collection, uses not supported, known",
          "                 limitations, distribution and maintenance",
@@ -1441,12 +1839,19 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "restored) and the pooled cause shares with plain pandas, and checks both against `results.json`; CI runs it "
          "(`python -m pytest --nbmake examples/quickstart.ipynb`).", "",
          *external_validation_section(),
+         *context_section(),
+         "## Related work", "",
+         f"{step11_mod().NOVELTY}", "",
+         *[f"- {c} {d}" for c, d in step11_mod().RELATED_WORK_ITEMS], "",
          "## Analysis plan", "",
          f"The analysis plan was committed on November 22, 2026, in the project's private version-controlled "
          f"repository (commit {plan['commit']}, {plan['committed']}), before any recovery outcome was computed. The "
          f"plan file as committed is `docs/{plan['file']}`, SHA-256 `{plan['sha256']}` (git blob "
          f"`{plan['git_blob']}`), so it can be checked against later changes. It is not blind to some figures, which "
          "the plan lists. Deviations are in `DEVIATIONS.md`.", "",
+         f"The 3.2.0 context tables follow addendum 4.x-1, committed on its own ({plan['addendum_4x']['committed']}, "
+         f"commit {plan['addendum_4x']['commit']}) before any of their sources was downloaded or any of their values "
+         f"computed: `docs/{plan['addendum_4x']['file']}`, SHA-256 `{plan['addendum_4x']['sha256']}`.", "",
          "## Data availability and provenance", "",
          "| Data | Location | Provider | Terms | Included | Size |", "|---|---|---|---|---|---|"]
     L += [f"| {a} | `{b}` | {c} | {d} | {e} | {f} |" if b.startswith("data/") else f"| {a} | {b} | {c} | {d} | {e} | {f} |"
@@ -1463,8 +1868,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "`uv pip compile requirements.txt --universal --generate-hashes --python-version 3.13 -o requirements.lock`). "
           "For an exact environment: `python -m pip install --require-hashes -r requirements.lock`.",
           "- Memory: about 4 GB. Disk: about 200 MB for the repository and `build/`.",
-          "- Run time: 12.4 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-23 "
-          "(most of it is parsing the reports in step 3 and the bootstrap in step 10).",
+          "- Run time: 18.8 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-25 "
+          "(most of it is parsing the reports in steps 3 and 17 and the bootstrap in step 10).",
           "- No network access is needed: every step reads `data/input/`. Steps 02, 06a, 06c, 06d and 06e (downloads "
           "and raw BDC reading) are included for transparency but are not run; they need the original sources and, "
           "for BDC, an FCC account.",
@@ -1575,7 +1980,16 @@ built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), rea
 CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv")] + [
     (f"output/{n}", f"validation/{n}") for n in ("validation_dirs.csv", "validation_summary.csv",
                                                  "excluded_reports.csv", "area_status_counts.csv",
-                                                 "external_validation_fcc_2017.csv")]
+                                                 "external_validation_fcc_2017.csv",
+                                                 "external_validation_fcc_michael.csv",
+                                                 "external_validation_olukola.csv",
+                                                 "external_validation_fcc_21_99.csv")] + [
+    ("processed/dirs_cable_wireline.csv", "context/dirs_cable_wireline.csv"),
+    ("processed/fema_ia_county_storm.csv", "context/fema_ia_county_storm.csv"),
+    ("output/fema_ia_set_aside.csv", "context/fema_ia_set_aside.csv")]
+# the hazard table needs the NCEI files, which are not redistributed: compared only when step 18 was run with them
+NCEI_PAIRS = [("processed/hazard_ncei_county_storm.csv", "context/hazard_ncei_county_storm.csv"),
+              ("output/hazard_ncei_storm_summary.csv", "context/hazard_ncei_storm_summary.csv")]
 
 
 @built
@@ -1587,6 +2001,13 @@ def test_csv_matches_published_byte_for_byte(built_path, published):
         diff = [(i + 1, a, b) for i, (a, b) in enumerate(zip(g, w)) if a != b]
         pytest.fail(f"{built_path}: {len(g)} vs {len(w)} lines, {len(diff)} differ; first: "
                     + " | ".join(f"line {n}: built {a!r} published {b!r}" for n, a, b in diff[:3]))
+
+
+@pytest.mark.parametrize("built_path, published", NCEI_PAIRS)
+def test_ncei_tables_match_published_when_built(built_path, published):
+    if not (BUILD / built_path).exists():
+        pytest.skip("needs the NCEI Storm Events files (not redistributed): set NCEI_RAW_DIR and run step 18")
+    assert (BUILD / built_path).read_bytes() == (PUBLISHED / published).read_bytes(), built_path
 
 
 @built
@@ -1621,6 +2042,12 @@ def test_manifest_tables_unchanged():
     for line in (REPO / "code" / "manifest.sha256").read_text(encoding="utf-8").splitlines():
         digest, name = line.split(maxsplit=1)
         assert hashlib.sha256((REPO / "code" / "manifest" / name).read_bytes()).hexdigest() == digest, name
+
+
+def test_addendum_4x_as_committed_matches_its_hash():
+    import hashlib
+    line = (REPO / "docs" / "analysis_plan_addendum_4x_as_committed.sha256").read_text(encoding="utf-8").split()
+    assert hashlib.sha256((REPO / "docs" / line[1]).read_bytes()).hexdigest() == line[0]
 
 
 def test_plan_as_committed_matches_its_hash():
@@ -2026,6 +2453,7 @@ def main():
     copy_code(T)
     copy_docs(T)
     plan = plan_as_committed(T)
+    plan["addendum_4x"] = addendum_as_committed(T)
     deviations_md(T)
     errata_md(T)
     contributing_md(T)

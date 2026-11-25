@@ -2,7 +2,7 @@
   "profile": "data-package",
   "name": "when-the-network-goes-dark-data",
   "title": "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "created": "2026-11-25T12:00:00-06:00",
   "homepage": "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/",
   "description": "County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 22 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the inputs and code that rebuild it.",
@@ -74,7 +74,7 @@
           {
             "name": "rule_period",
             "type": "string",
-            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present).",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present).",
             "limitations": "Descriptive grouping only; periods differ in storms, hazards and filers."
           },
           {
@@ -279,7 +279,7 @@
           {
             "name": "rule_period",
             "type": "string",
-            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present).",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present).",
             "limitations": "Blank for storms not in the panel."
           },
           {
@@ -399,7 +399,7 @@
           {
             "name": "rule_period",
             "type": "string",
-            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present).",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present).",
             "limitations": "Descriptive grouping only; periods differ in storms, hazards and filers."
           },
           {
@@ -948,7 +948,7 @@
           {
             "name": "rule_period",
             "type": "string",
-            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Streamlined DIRS (FCC 26-34) (2026-06-30 to present).",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present).",
             "limitations": "Descriptive grouping only; periods differ in storms, hazards and filers."
           },
           {
@@ -1539,6 +1539,458 @@
       "bytes": 127534
     },
     {
+      "name": "dirs_cable_wireline",
+      "path": "data/analysis/context/dirs_cable_wireline.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "Cable and wireline subscribers out, per DIRS report",
+      "description": "One row per report and area, from the reports' Cable Systems and Wireline section, with the previous-day check. Built by code/src/17_cable_wireline.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.",
+      "schema": {
+        "fields": [
+          {
+            "name": "storm_key",
+            "type": "string",
+            "description": "NHC ID and DIRS activation date (the manifest row's storm)."
+          },
+          {
+            "name": "nhc_id",
+            "type": "string",
+            "description": "National Hurricane Center storm ID."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm name."
+          },
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "FCC EDOCS document ID of the report."
+          },
+          {
+            "name": "report_date",
+            "type": "date",
+            "description": "Report date."
+          },
+          {
+            "name": "area",
+            "type": "string",
+            "description": "What the figure covers: 'disaster area' (the whole reporting area, or a sentence naming several states), a state's postal code (a state row, or a sentence naming one state), or 'none printed'.",
+            "limitations": "The FCC's area changes during a storm; compare figures only within one area."
+          },
+          {
+            "name": "subscribers_out",
+            "type": "integer",
+            "description": "Cable and wireline subscribers out of service, as printed.",
+            "unit": "subscribers",
+            "limitations": "Blank where the report prints 'None' or no figure. Subscribers, not people or premises; not allocated to counties. No total is added up from state rows."
+          },
+          {
+            "name": "printed",
+            "type": "string",
+            "description": "The figure as printed in the report."
+          },
+          {
+            "name": "form",
+            "type": "string",
+            "description": "How it is printed: sentence, code table, name list or colon list ('and sentence' when the same figure is printed twice)."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "Which file the figure was read from: txt or pdf."
+          },
+          {
+            "name": "previous_day_printed",
+            "type": "integer",
+            "description": "The previous-day figure the report prints ('up/down from N yesterday').",
+            "unit": "subscribers",
+            "limitations": "Only where printed."
+          },
+          {
+            "name": "previous_report_value",
+            "type": "integer",
+            "description": "The previous report's figure for the same storm and area.",
+            "unit": "subscribers"
+          },
+          {
+            "name": "previous_day_check",
+            "type": "string",
+            "description": "match, mismatch or 'no previous figure for this area' (blank where no previous-day figure is printed).",
+            "limitations": "A mismatch is flagged, never corrected."
+          },
+          {
+            "name": "from_excluded_report",
+            "type": "boolean",
+            "description": "The report is excluded from the cell-site panel (its cable figure is kept).",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          }
+        ],
+        "primaryKey": [
+          "storm_key",
+          "doc_id",
+          "area",
+          "form"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:34a65daeaf3dccca5af83025f53c1de4f791fad77137b3b7b8ada689c5c3534c",
+      "bytes": 25444
+    },
+    {
+      "name": "fema_ia_county_storm",
+      "path": "data/analysis/context/fema_ia_county_storm.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "FEMA Individual Assistance by storm and county",
+      "description": "One row per storm and panel county, from OpenFEMA RI-IHP v2 and Housing Assistance Renters v2. This product uses the Federal Emergency Management Agency's OpenFEMA API, but is not endorsed by FEMA. Built by code/src/16_fema_ia.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.",
+      "schema": {
+        "fields": [
+          {
+            "name": "storm_key",
+            "type": "string",
+            "description": "NHC ID and DIRS activation date."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm name."
+          },
+          {
+            "name": "fips",
+            "type": "string",
+            "description": "County FIPS code.",
+            "constraints": {
+              "pattern": "^[0-9]{5}$",
+              "required": true
+            }
+          },
+          {
+            "name": "ia_declared",
+            "type": "boolean",
+            "description": "Individual Assistance or IHP declared for the county under the storm's declarations (iaProgramDeclared or ihProgramDeclared).",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "fema_disasters_ia",
+            "type": "string",
+            "description": "The major-disaster numbers summed over ('; '-separated)."
+          },
+          {
+            "name": "ihp_valid_registrations",
+            "type": "integer",
+            "description": "RI-IHP v2 totalValidRegistrations.",
+            "unit": "registrations",
+            "limitations": "Blank where no IA was declared; 0 where declared with no record. Applicants' damaged-dwelling counties as OpenFEMA gives them; tribal-area and statewide rows are not in any county (context/fema_ia_set_aside.csv)."
+          },
+          {
+            "name": "ihp_referrals",
+            "type": "integer",
+            "description": "RI-IHP v2 ihpReferrals.",
+            "unit": "registrations",
+            "limitations": "As above."
+          },
+          {
+            "name": "ihp_eligible",
+            "type": "integer",
+            "description": "RI-IHP v2 ihpEligible.",
+            "unit": "registrations",
+            "limitations": "As above."
+          },
+          {
+            "name": "renters_valid_registrations",
+            "type": "integer",
+            "description": "Housing Assistance Renters v2 validRegistrations.",
+            "unit": "registrations",
+            "limitations": "As above."
+          },
+          {
+            "name": "renters_inspected",
+            "type": "integer",
+            "description": "Housing Assistance Renters v2 totalInspected.",
+            "unit": "registrations",
+            "limitations": "As above."
+          },
+          {
+            "name": "renters_approved",
+            "type": "integer",
+            "description": "Housing Assistance Renters v2 approvedForFemaAssistance.",
+            "unit": "registrations",
+            "limitations": "As above."
+          },
+          {
+            "name": "ihp_amount_usd",
+            "type": "number",
+            "description": "RI-IHP v2 ihpAmount.",
+            "unit": "US dollars (nominal)",
+            "limitations": "As above. Not adjusted for inflation."
+          }
+        ],
+        "primaryKey": [
+          "storm_key",
+          "fips"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:fb11922cdd4f396c66d3aba182c287a27578a7734e800f9fe6ba52d3c2a7ce89",
+      "bytes": 119638
+    },
+    {
+      "name": "fema_ia_set_aside",
+      "path": "data/analysis/context/fema_ia_set_aside.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "OpenFEMA rows not placed in a county",
+      "description": "Counted here instead of the county table. Built by code/src/16_fema_ia.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.",
+      "schema": {
+        "fields": [
+          {
+            "name": "dataset",
+            "type": "string",
+            "description": "OpenFEMA dataset."
+          },
+          {
+            "name": "disasterNumber",
+            "type": "integer",
+            "description": "FEMA disaster number."
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "description": "State as OpenFEMA gives it."
+          },
+          {
+            "name": "county",
+            "type": "string",
+            "description": "County or area name as OpenFEMA gives it."
+          },
+          {
+            "name": "set_aside",
+            "type": "string",
+            "description": "Why the rows are not in the county table: outside the disaster's states, statewide, or tribal area (spans counties; no single county is assigned)."
+          },
+          {
+            "name": "valid_registrations",
+            "type": "integer",
+            "description": "Valid registrations in those rows.",
+            "unit": "registrations"
+          }
+        ],
+        "primaryKey": [
+          "dataset",
+          "disasterNumber",
+          "state",
+          "county"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:0d8eef751f95fa511de0775c4c31f5404be9cd41fc24038f97a402ea1ab4b650",
+      "bytes": 6868
+    },
+    {
+      "name": "hazard_ncei_county_storm",
+      "path": "data/analysis/context/hazard_ncei_county_storm.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "NCEI Storm Events hazard by storm and county",
+      "description": "One row per storm and panel county: surge, flood and wind flags and damage from NOAA NCEI Storm Events (details files c20261119; zones mapped with NWS bp16ap26.dbx). The NCEI files are not redistributed. Built by code/src/18_hazard_ncei.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.",
+      "schema": {
+        "fields": [
+          {
+            "name": "storm_key",
+            "type": "string",
+            "description": "NHC ID and DIRS activation date."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm name."
+          },
+          {
+            "name": "fips",
+            "type": "string",
+            "description": "County FIPS code.",
+            "constraints": {
+              "pattern": "^[0-9]{5}$",
+              "required": true
+            }
+          },
+          {
+            "name": "surge_flag",
+            "type": "boolean",
+            "description": "Any NCEI Storm Surge/Tide event in the county in the storm's window.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "flood_flag",
+            "type": "boolean",
+            "description": "Any Flood or Flash Flood event.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "wind_flag",
+            "type": "boolean",
+            "description": "Any Hurricane (Typhoon), Tropical Storm or High Wind event.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "damage_property_usd",
+            "type": "integer",
+            "description": "Property damage of the county (C) events.",
+            "unit": "US dollars (nominal)",
+            "limitations": "County events only; zone events' damage is in the zone columns."
+          },
+          {
+            "name": "damage_crops_usd",
+            "type": "integer",
+            "description": "Crop damage of the county (C) events.",
+            "unit": "US dollars (nominal)",
+            "limitations": "County events only."
+          },
+          {
+            "name": "zone_damage_property_usd_unallocated",
+            "type": "integer",
+            "description": "Property damage of the zone (Z) events that cover the county: each event's whole figure, not divided among the zone's counties.",
+            "unit": "US dollars (nominal)",
+            "limitations": "NEVER sum across counties: the same dollars appear in every county of the zone (see zone_n_counties)."
+          },
+          {
+            "name": "zone_damage_crops_usd_unallocated",
+            "type": "integer",
+            "description": "Crop damage of the zone events that cover the county, undivided.",
+            "unit": "US dollars (nominal)",
+            "limitations": "NEVER sum across counties."
+          },
+          {
+            "name": "zone_n_counties",
+            "type": "integer",
+            "description": "Counties covered by those zone events (from bp16ap26.dbx).",
+            "unit": "counties",
+            "limitations": "1 means the zone figures belong to this county alone; more means they are shared."
+          },
+          {
+            "name": "n_events",
+            "type": "integer",
+            "description": "NCEI events used.",
+            "unit": "events"
+          },
+          {
+            "name": "ncei_episode_ids",
+            "type": "string",
+            "description": "NCEI episode IDs used ('; '-separated)."
+          }
+        ],
+        "primaryKey": [
+          "storm_key",
+          "fips"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:75c5e261cdd922bb059f949da81592ddbfc12c0b42da55cb4ecaceccdc0dde50",
+      "bytes": 148557
+    },
+    {
+      "name": "hazard_ncei_storm_summary",
+      "path": "data/analysis/context/hazard_ncei_storm_summary.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "NCEI matching summary by storm",
+      "description": "Window, events used and zone events not mapped. Built by code/src/18_hazard_ncei.py. Exploratory (addendum 4.x-1, v3.2.0): a descriptive context table; no published result reads it, and no association with cell outages has been computed.",
+      "schema": {
+        "fields": [
+          {
+            "name": "storm_key",
+            "type": "string",
+            "description": "NHC ID and DIRS activation date."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm name."
+          },
+          {
+            "name": "window_start",
+            "type": "date",
+            "description": "DIRS activation date minus 2 days."
+          },
+          {
+            "name": "window_end",
+            "type": "date",
+            "description": "Last report plus 2 days."
+          },
+          {
+            "name": "events_used",
+            "type": "integer",
+            "description": "NCEI events matched to the storm's panel counties.",
+            "unit": "events"
+          },
+          {
+            "name": "zone_events_unmapped",
+            "type": "integer",
+            "description": "Zone events in the storm's states whose zone is not in bp16ap26.dbx.",
+            "unit": "events"
+          },
+          {
+            "name": "zone_events_name_differs",
+            "type": "integer",
+            "description": "Zone events set aside because their NCEI zone name names none of the counties bp16ap26.dbx gives the zone (renumbered zones, place-named zones, misspellings).",
+            "unit": "events"
+          }
+        ],
+        "primaryKey": [
+          "storm_key"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:9b9e1e512ae330dc8fcd2649f62ffd22015055d1f2f395a495fd09d4b9eb3956",
+      "bytes": 1340
+    },
+    {
       "name": "results",
       "path": "data/analysis/results.json",
       "format": "json",
@@ -1555,8 +2007,8 @@
       "mediatype": "text/markdown",
       "title": "Datasheet for the dataset",
       "description": "Motivation, composition, collection, preprocessing, uses (and uses not supported), known limitations, distribution and maintenance, following Gebru et al.'s Datasheets for Datasets; every number generated from results.json or the data.",
-      "hash": "sha256:daee31abbf834b4b5d0d7d2800834c53011ba504a676e762dfba024dea09a52a",
-      "bytes": 10409
+      "hash": "sha256:9c3865aacedb57c4be46aa222a79f5834ba081d53716ce80f2ed7f1d3367c522",
+      "bytes": 16165
     },
     {
       "name": "analysis_plan_as_committed",
@@ -1567,6 +2019,16 @@
       "description": "Committed 2026-11-22T16:16:48-06:00 (commit 9fc17a4); SHA-256 d4aa966e3874d69bc256bbe1c8d1153da9fb35429551d2bae25403e61db1dd8e.",
       "hash": "sha256:d4aa966e3874d69bc256bbe1c8d1153da9fb35429551d2bae25403e61db1dd8e",
       "bytes": 10877
+    },
+    {
+      "name": "analysis_plan_addendum_4x_as_committed",
+      "path": "docs/analysis_plan_addendum_4x_as_committed_d7bdc66.md",
+      "format": "md",
+      "mediatype": "text/markdown",
+      "title": "Analysis plan addendum 4.x-1 as committed (v3.2.0)",
+      "description": "Committed 2026-11-25T11:13:28-06:00 (commit d7bdc66), before any NCEI or OpenFEMA file was downloaded and before any of its quantities was computed; SHA-256 fdb273bd2d723354143ff42322cfe2595b6f2c107c7f4d7d503c9c64a9b1123f.",
+      "hash": "sha256:fdb273bd2d723354143ff42322cfe2595b6f2c107c7f4d7d503c9c64a9b1123f",
+      "bytes": 4721
     }
   ]
 }

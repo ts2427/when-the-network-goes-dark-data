@@ -24,6 +24,10 @@ STEPS = [
     ('12_v2_analysis.py', ['v2_1', 'v2_2', 'v2_3', 'v2_5_groups', 'v2_5', 'report_card']),
     ('12b_analysis_ready.py', []),
     ('15_external_validation.py', []),
+    ('16_fema_ia.py', []),
+    ('17_cable_wireline.py', []),
+    ('18_hazard_ncei.py', []),
+    ('15b_external_michael_olukola.py', []),
 ]
 
 

@@ -20,6 +20,8 @@ DOWNLOADS_LOG = ROOT / "manifest" / "downloads.csv"  # every download; a rerun a
 # MCC.csv and coverage_history.csv only (the year files are not redistributed); EAGLEI_RAW_DIR overrides it
 EAGLEI_RAW_DIR = Path(os.environ.get("EAGLEI_RAW_DIR", str(RAW / "eaglei")))
 EAGLEI_EXTRACT = RAW / "eaglei" / "eaglei_extract.parquet"
+# NOAA NCEI Storm Events details files (step 18, v3.2.0): not redistributed; download them and set NCEI_RAW_DIR
+NCEI_RAW_DIR = Path(os.environ.get("NCEI_RAW_DIR", str(RAW / "ncei")))
 BDC_COUNTS = RAW / "bdc" / "bdc_county_provider_counts.csv"
 BDC_COUNTS_META = RAW / "bdc" / "bdc_county_provider_counts_meta.json"
 for _d in (INTERIM, PROCESSED, OUTPUT):

@@ -20,7 +20,16 @@ built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), rea
 CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv")] + [
     (f"output/{n}", f"validation/{n}") for n in ("validation_dirs.csv", "validation_summary.csv",
                                                  "excluded_reports.csv", "area_status_counts.csv",
-                                                 "external_validation_fcc_2017.csv")]
+                                                 "external_validation_fcc_2017.csv",
+                                                 "external_validation_fcc_michael.csv",
+                                                 "external_validation_olukola.csv",
+                                                 "external_validation_fcc_21_99.csv")] + [
+    ("processed/dirs_cable_wireline.csv", "context/dirs_cable_wireline.csv"),
+    ("processed/fema_ia_county_storm.csv", "context/fema_ia_county_storm.csv"),
+    ("output/fema_ia_set_aside.csv", "context/fema_ia_set_aside.csv")]
+# the hazard table needs the NCEI files, which are not redistributed: compared only when step 18 was run with them
+NCEI_PAIRS = [("processed/hazard_ncei_county_storm.csv", "context/hazard_ncei_county_storm.csv"),
+              ("output/hazard_ncei_storm_summary.csv", "context/hazard_ncei_storm_summary.csv")]
 
 
 @built
@@ -32,6 +41,13 @@ def test_csv_matches_published_byte_for_byte(built_path, published):
         diff = [(i + 1, a, b) for i, (a, b) in enumerate(zip(g, w)) if a != b]
         pytest.fail(f"{built_path}: {len(g)} vs {len(w)} lines, {len(diff)} differ; first: "
                     + " | ".join(f"line {n}: built {a!r} published {b!r}" for n, a, b in diff[:3]))
+
+
+@pytest.mark.parametrize("built_path, published", NCEI_PAIRS)
+def test_ncei_tables_match_published_when_built(built_path, published):
+    if not (BUILD / built_path).exists():
+        pytest.skip("needs the NCEI Storm Events files (not redistributed): set NCEI_RAW_DIR and run step 18")
+    assert (BUILD / built_path).read_bytes() == (PUBLISHED / published).read_bytes(), built_path
 
 
 @built
@@ -66,6 +82,12 @@ def test_manifest_tables_unchanged():
     for line in (REPO / "code" / "manifest.sha256").read_text(encoding="utf-8").splitlines():
         digest, name = line.split(maxsplit=1)
         assert hashlib.sha256((REPO / "code" / "manifest" / name).read_bytes()).hexdigest() == digest, name
+
+
+def test_addendum_4x_as_committed_matches_its_hash():
+    import hashlib
+    line = (REPO / "docs" / "analysis_plan_addendum_4x_as_committed.sha256").read_text(encoding="utf-8").split()
+    assert hashlib.sha256((REPO / "docs" / line[1]).read_bytes()).hexdigest() == line[0]
 
 
 def test_plan_as_committed_matches_its_hash():

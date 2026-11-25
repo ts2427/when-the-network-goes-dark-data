@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24477809.svg)](https://doi.org/10.5281/zenodo.24477809) [![CI](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml/badge.svg)](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml)
 
-Version 3.1.1 (2026-11-25). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
+Version 3.2.0 (2026-11-25). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
 
 The data and code behind the page *When the Network Goes Dark* (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 22 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in `data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.
 
@@ -23,7 +23,8 @@ Associations, not causes. Each FCC report carries this caveat: "The number of ce
 ```
 data/input/      every input, with INPUTS.csv (source, URL, retrieval time, SHA-256)
 data/analysis/   dirs_county_day.csv (the panel), storms.csv, results.json, validation/,
-                 panel_analysis_ready.csv and .parquet (the panel with every covariate the analysis uses)
+                 panel_analysis_ready.csv and .parquet (the panel with every covariate the analysis uses),
+                 context/ (3.2.0: cable and wireline, FEMA Individual Assistance, NCEI hazard)
 code/src/        numbered pipeline steps, load.py (load_panel(), clean_rows()); code/manifest/
                  hand-made tables; code/tests/
 examples/        quickstart.ipynb: load the panel and rebuild two headline figures
@@ -32,7 +33,8 @@ examples/        quickstart.ipynb: load the panel and rebuild two headline figur
 docs/            analysis plan (as committed, with SHA-256), addendum, decision log, sources notes,
                  update_procedure.md (how a new season and a new version are added and released),
                  external_validation.md (the check against the FCC's 2017 season report),
-                 restructure_plan.md (the layout planned for 4.0.0)
+                 restructure_plan.md (the layout planned for 4.0.0), addendum 4.x-1 (as committed,
+                 with SHA-256) and scoping_4x.md (the sources considered for 3.2.0 and 4.0.0)
 ERRATA.md        every change to a published number; CONTRIBUTING.md: how to report an error
 DATASHEET.md     the datasheet: motivation, composition, collection, uses not supported, known
                  limitations, distribution and maintenance
@@ -81,9 +83,37 @@ The FCC's own summary of the season, *2017 Atlantic Hurricane Season Impact on C
 | I39 | p. 14 chart: Percent of Cell Sites Out Per Day in Florida: 9/11 | 2017-09-11 | 27.1 | 27.40 | Not explained, as I37. |
 | I45 | p. 14 chart: Florida 9/17 | 2017-09-17 | 4.3 | 3.96 | Possibly Florida and the USVI together: the Sep 17 report prints 4.0% for Florida (584 of 14,730 sites), while Florida and the USVI together give 4.29% (637 of 14,836). That reading is not confirmed: the chart's other Florida points are Florida alone. |
 
+Since 3.2.0, three more checks (`code/src/15b_external_michael_olukola.py`, exploratory). The FCC's report on Hurricane Michael (DOC-357387A1, May 2019) gives 12 figures in its text: 8 can be tested, of which 7 match or are consistent and 1 differs (M5a, explained in `docs/external_validation.md`); 4 are statements with no number to test and are shown beside our series. Olukola et al. (2026): the Helene peak (4,562 sites out, 28 September 2024) and sites in the reporting area (37,717, 12.1% out) match an independent extraction exactly; the cause split is the comparison already on the page, and the county-day counts are defined differently. Their Irma peak (4,370 sites out, 11 September 2017) matches our report's rows, counting Puerto Rico and the U.S. Virgin Islands, which are outside the panel. FCC 21-99 cites Ida's report of August 31, 2021 for 699 sites out for power against 354 for damage and transport: those are the report's Louisiana totals, and our county rows sum to the same. Tables: `data/analysis/validation/external_validation_fcc_michael.csv`, `external_validation_olukola.csv` and `external_validation_fcc_21_99.csv`.
+
+## Context tables (3.2.0)
+
+Exploratory, under addendum 4.x-1: descriptive tables added in 3.2.0. No published result reads them, and no association with cell outages has been computed. Variables: `CODEBOOK.md`.
+
+- `data/analysis/context/dirs_cable_wireline.csv`: cable and wireline subscribers out, 233 rows from 178 reports, by area as printed (the whole disaster area, or state rows). Where a report prints the previous day's figure it is checked against the previous report: 45 match, 1 do not (flagged, not corrected).
+- `data/analysis/context/fema_ia_county_storm.csv`: FEMA Individual Assistance by storm and county (2,158 storm-counties, 537 with IA declared), from OpenFEMA RI-IHP v2 and Housing Assistance Renters v2; rows that name no single county (tribal areas, statewide, other states) are counted in `fema_ia_set_aside.csv`.
+- `data/analysis/context/hazard_ncei_county_storm.csv`: surge, flood and wind flags and damage by storm and county (2,158 storm-counties), from NOAA NCEI Storm Events. Damage from county events is in `damage_property_usd` and `damage_crops_usd`; damage from zone events is in the `zone_..._unallocated` columns, undivided, with `zone_n_counties`, and must never be summed across counties. `hazard_ncei_storm_summary.csv` gives each storm's window and the zone events not mapped. The NCEI files are not redistributed (no licence or use statement was found), so the reproduction test compares this table only when they are supplied (`NCEI_RAW_DIR`). No high-water marks: both USGS sources refused automated requests.
+
+## Related work
+
+To our knowledge, this is the first openly licensed, versioned, DOI-archived county-by-report panel of FCC DIRS cell-site outages spanning multiple hurricanes and states, validated against the reports' printed totals. The other DIRS-derived compilations we found cover a single storm (Helene) or a single state (Florida); for a ten-hurricane county-level study (Du, 2024) we found no public data release.
+
+- Olukola, O., Addeh, O. D., Konan, E. A., & Rahimi, N. (2026). The towers were standing: A cause decomposition of cellular outages during Hurricane Helene. arXiv:2609.10944. Helene only, from the same FCC reports; the preprint gives no link to its dataset, which is not yet deposited. This page uses it as a check (chapter 4 and the methods).
+- Du (2024). Data-driven telecommunication outage prediction during hurricane events. ASCE-ASME Journal of Risk and Uncertainty in Engineering Systems, Part A. doi:10.1061/AJRUA6.RUENG-1285. A model that predicts outages; this work is a checked record of the outages the FCC reported, not a prediction.
+- Anonymous. grid-to-lifeline-site: interactive companion site, cross-infrastructure dependency and resilience across nine Florida hurricanes. GitHub repository ac5907846/grid-to-lifeline-site, accessed November 25, 2026. Florida only, the companion to a manuscript under review, with no licence stated; this work covers ten states under CC BY 4.0.
+- Reed & Wang (2018). Power and telecom modeling for Harvey and Irma. Forensic Engineering 2018. doi:10.1061/9780784482018.097. Models power and telecommunications for two 2017 storms; this work records what the reports show for every storm in scope.
+- Feeny, N., White, A., & Guikema, S. (2026). A quantitative spatial approach to estimate cellular network coverage during natural hazards using publicly available data. Journal of Infrastructure Preservation and Resilience, 7, 14. doi:10.1186/s43065-026-00176-0. Simulates where cell coverage is likely to be lost (Ann Arbor, Michigan, under high winds); this work uses observed outages.
+- StEER (2022). Hurricane Ian Preliminary Virtual Reconnaissance Report (PRJ-3709). DesignSafe-CI. doi:10.17603/ds2-kc9k-s242. One storm, from virtual (not field) reconnaissance across power, telecommunications and transportation; this work is cell sites only, across storms.
+- claffy, k., & Clark, D. (2022). Challenges in measuring the Internet for the public interest. Journal of Information Policy, 12, 195-233. doi:10.5325/jinfopoli.12.2022.0003. Describes the access limits on NORS/DIRS data that make an open panel useful.
+- U.S. Government Accountability Office (2017). Telecommunications: FCC should improve monitoring of industry efforts to strengthen wireless network resiliency (GAO-18-198); and (2021). Telecommunications: FCC assisted in Hurricane Maria network restoration, but a clarified disaster response role and enhanced communication are needed (GAO-21-297). Audits of the FCC's role and of industry efforts; not outage datasets.
+- Peskin, A. H. (2025). Cellular network outage reporting and restoration during disasters (CRS Report R48776); Gallagher, J. C., & Peskin, A. H. (2024). Restoration of cell phone services: Hurricane Helene (CRS In Focus IF12779). Congressional Research Service. Reports to Congress on outage reporting and on Helene's restoration; not datasets.
+- Federal Communications Commission. FCC 21-99 (Resilient Networks, notice of proposed rulemaking, 2021); FCC 24-5 (mandatory DIRS, in force February 20, 2025, Federal Register 2025-00495); FCC 26-34 (Federal Register 2026-13155, 91 FR 39516, June 30, 2026). The rules behind the reports; chapter 12 describes the periods they define.
+- Federal Communications Commission, Public Safety and Homeland Security Bureau (2018). 2017 Atlantic Hurricane Season Impact on Communications: Report and Recommendations (DOC-353805A1); and (2019). October 2018 Hurricane Michael's Impact on Communications (DOC-357387A1). The FCC's own summaries of three storms, used here as external checks.
+
 ## Analysis plan
 
 The analysis plan was committed on November 22, 2026, in the project's private version-controlled repository (commit 9fc17a4, 2026-11-22T16:16:48-06:00), before any recovery outcome was computed. The plan file as committed is `docs/analysis_plan_as_committed_9fc17a4.md`, SHA-256 `d4aa966e3874d69bc256bbe1c8d1153da9fb35429551d2bae25403e61db1dd8e` (git blob `28c91c70c8be9194848957569fab1e7f5515d345`), so it can be checked against later changes. It is not blind to some figures, which the plan lists. Deviations are in `DEVIATIONS.md`.
+
+The 3.2.0 context tables follow addendum 4.x-1, committed on its own (2026-11-25T11:13:28-06:00, commit d7bdc66) before any of their sources was downloaded or any of their values computed: `docs/analysis_plan_addendum_4x_as_committed_d7bdc66.md`, SHA-256 `fdb273bd2d723354143ff42322cfe2595b6f2c107c7f4d7d503c9c64a9b1123f`.
 
 ## Data availability and provenance
 
@@ -91,7 +121,7 @@ The analysis plan was committed on November 22, 2026, in the project's private v
 |---|---|---|---|---|---|
 | FCC DIRS reports (PDF and text) | `data/input/dirs/` | FCC | Public domain (U.S. government) | yes | 103.7 MB |
 | FCC DIRS notices | `data/input/notices/` | FCC | Public domain | yes | 0.4 MB |
-| FCC orders cited for dates | `data/input/rules/` | FCC | Public domain | yes | 2.8 MB |
+| FCC orders cited for dates | `data/input/rules/` | FCC | Public domain | yes | 3.6 MB |
 | FCC storm-page document lists | `data/input/storm_pages/` | FCC (compiled list) | Public domain | yes | 0.1 MB |
 | EAGLE-I extract, MCC, coverage | `data/input/eaglei/` | ORNL/DOE | CC BY 4.0 | yes (extract modified) | 12.9 MB |
 | EAGLE-I year files 2017-2024 | not included (8.9 GB) | ORNL/DOE via figshare | CC BY 4.0 | no: download with code/src/06a_download_eaglei.py | 8.9 GB |
@@ -102,15 +132,18 @@ The analysis plan was committed on November 22, 2026, in the project's private v
 | SVI 2022 | `data/input/svi/` | CDC/ATSDR | Public domain; credit line in SOURCES.md | yes | 2.3 MB |
 | OpenFEMA declarations | `data/input/fema/` | FEMA | Public domain; disclaimer in SOURCES.md | yes | 6.1 MB |
 | NHC HURDAT2 and Isaias best track | `data/input/nhc/` | NOAA/NHC | Public domain | yes | 7.2 MB |
+| OpenFEMA Individual Assistance (3.2.0) | `data/input/fema_ia/` | FEMA | OpenFEMA terms; disclaimer in SOURCES.md | yes | 30.7 MB |
+| NWS zone-county file (3.2.0) | `data/input/nws/` | NOAA/NWS | Public domain | yes | 0.4 MB |
+| NCEI Storm Events details 2017-2026 (3.2.0) | not included (135 MB) | NOAA/NCEI | no licence or use statement found | no: download the c20261119 files and set NCEI_RAW_DIR | 135 MB |
 
 Exact attribution for each source: `SOURCES.md`. Variables: `CODEBOOK.md` and `datapackage.json`.
 
 ## Computational requirements
 
-- Python 3.13 (tested with 3.13.2 on Windows 11). Reproduced on Windows and Linux: CI rebuilds everything and runs the reproduction tests on windows-latest and ubuntu-latest with Python 3.13 on every push (badge above).
+- Python 3.13 (tested with 3.13.2) on Windows 11; the code uses no platform-specific calls. CI runs the tests and a full rebuild on windows-latest and ubuntu-latest (badge above).
 - Packages: `requirements.txt` (exact versions of the packages used) and `requirements.lock` (every package, including dependencies, pinned with SHA-256 hashes for Windows, Linux and macOS; generated with `uv pip compile requirements.txt --universal --generate-hashes --python-version 3.13 -o requirements.lock`). For an exact environment: `python -m pip install --require-hashes -r requirements.lock`.
 - Memory: about 4 GB. Disk: about 200 MB for the repository and `build/`.
-- Run time: 12.4 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-23 (most of it is parsing the reports in step 3 and the bootstrap in step 10).
+- Run time: 18.8 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-25 (most of it is parsing the reports in steps 3 and 17 and the bootstrap in step 10).
 - No network access is needed: every step reads `data/input/`. Steps 02, 06a, 06c, 06d and 06e (downloads and raw BDC reading) are included for transparency but are not run; they need the original sources and, for BDC, an FCC account.
 - Random numbers: fixed seed 20261122 (bootstrap, 2,000 draws).
 - Intervals: The county bootstrap (chapters 3 to 6 within each storm; chapters 8 and 13 across storm-counties) resamples counties as if they were independent. Counties hit by the same storm share its wind, flooding, power grid and networks, so their outcomes are correlated, and these intervals may be somewhat narrow. The storm bootstrap (medians and pooled shares across storms, chapter 7's zone shares, chapter 12) resamples whole storms, and the models in chapters 7, 8 and 13 use storm- or county-clustered intervals. This is a note on the method, not a change to any result.
@@ -144,6 +177,10 @@ python -m ruff check code examples run_all.py        # lint (ruff.toml)
 | 11 | `12_v2_analysis.py` | v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card | chapters 10-14 to results.json |
 | 12 | `12b_analysis_ready.py` |  | the analysis-ready panel (CSV and Parquet): the panel with every covariate |
 | 13 | `15_external_validation.py` |  | external check against the FCC's 2017 season report (Harvey and Irma figures) |
+| 14 | `16_fema_ia.py` |  | v3.2.0: FEMA Individual Assistance by storm and county (from the stored OpenFEMA responses) |
+| 15 | `17_cable_wireline.py` |  | v3.2.0: cable and wireline subscribers out, per report and area |
+| 16 | `18_hazard_ncei.py` |  | v3.2.0: NCEI hazard flags and damage by storm and county (skipped unless the NCEI files are supplied: they are not redistributed) |
+| 17 | `15b_external_michael_olukola.py` |  | v3.2.0: external checks against the FCC's Michael report and Olukola et al. (2026) |
 
 `code/tests/test_reproduction.py` then compares `build/` with `data/analysis/`: `dirs_county_day.csv`, `storms.csv` and the validation tables byte for byte, `results.json` with numbers within a relative 1e-8 (absolute 1e-12 near zero) and everything else exactly, and the analysis-ready panel value by value. `code/tests/test_datapackage.py` checks `datapackage.json` with frictionless (`frictionless validate datapackage.json`: 0 errors).
 
@@ -202,6 +239,7 @@ The repository is archived on Zenodo. Cite the concept DOI for the data and code
 - Version 3.0.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24514963
 - Version 3.1.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24534469
 - Version 3.1.1: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.1.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24537335
+- Version 3.2.0 (this one) gets its own DOI when it is released; until then, cite the concept DOI.
 
 `CITATION.cff` lists every DOI, and GitHub's "Cite this repository" button reads it.
 

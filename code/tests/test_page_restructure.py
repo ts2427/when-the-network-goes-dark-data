@@ -32,7 +32,9 @@ CHANGED = ("## ", "### What version 2 adds", "*Exploratory:", "Exploratory: adde
            "Everything here is descriptive", "method: ", "  - name: ", "    url: ", "    caption: \"Each row is a storm",
            "**What it means.** With wind zone in the model", "**Intervals.**", "**Mobile and fixed providers (chapter 13)",
            "- Olukola, O.", "- Federal Communications Commission.", "- National Hurricane Center.", "- CDC/ATSDR",
-           "**Claim.** The public reports can't yet show whether")  # the rules named 2024-2026 since 2026-11-25
+           "**Claim.** The public reports can't yet show whether",  # the rules named 2024-2026 since 2026-11-25
+           "- U.S. Government Accountability Office", "- Peskin, A. H.", "- Gallagher, J. C.",  # related work, 3.2.0
+           "- Federal Communications Commission, Public Safety")
 # Release metadata, not results: the data release moved from 3.0.0 to 3.1.0 (version, DOI, file, Updated date).
 RELEASE = ('updated: "', 'dataset: {"name": ', "**Reproduce it.**",
            "Each report's flags and reasons are in the snapshot's")  # its link is pinned to the release tag
@@ -57,7 +59,9 @@ def test_every_number_on_the_old_page_is_on_the_new_page():
     for ln in changed:
         assert numbers(ln) <= new_numbers, (ln[:120], numbers(ln) - new_numbers)
     kept = sum(1 for ln in old.splitlines() if NUMBER.search(ln) and ln.strip() and ln in new)
-    assert kept >= 400 and len(changed) <= 50  # almost every line is unchanged, word for word
+    # almost every line is unchanged, word for word (cap raised from 50 to 60 on 2026-11-25 for the 3.2.0 related
+    # work, whose rewritten lines each still pass the checks above)
+    assert kept >= 400 and len(changed) <= 60
 
 
 @built

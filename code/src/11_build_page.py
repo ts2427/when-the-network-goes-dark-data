@@ -48,6 +48,9 @@ WORK_URL = f"/analysis/{SLUG}/"
 # v3.0.0 is record 24514963, tag v3.0.0 = commit 7d54a2b (2026-11-24); concept record 24477809 resolves to the latest.
 DATA_REPO = "https://github.com/ts2427/when-the-network-goes-dark-data"
 DATA_VERSION = "3.1.1"
+# 3.2.0 adds context tables and two external checks (no published number changes); the page links to them at this
+# version. At its release DATA_VERSION becomes 3.2.0 too (with its DOI), and the two are the same again.
+CONTEXT_VERSION = "3.2.0"
 REPO_URL = f"{DATA_REPO}/tree/v{DATA_VERSION}"  # the files that produced the numbers on this page
 CONCEPT_DOI = "10.5281/zenodo.24477809"  # every version; resolves to the latest
 # Every archived version and its DOI, each read from its Zenodo record. Add a version only after its release.
@@ -664,21 +667,61 @@ FCC_CAVEAT = ("The number of cell site outages in a specific area does not neces
 DISCLOSURE = ("The author works in the telecommunications industry. This analysis was done independently, on personal time, "
               "using only publicly available government data. It uses no employer data or confidential information, and "
               "the views are the author's alone. The author has no financial interest in any FCC proceeding.")
-RELATED_WORK = [
-    "Olukola, O., Addeh, O. D., Konan, E. A., & Rahimi, N. (2026). The towers were standing: A cause decomposition of "
-    "cellular outages during Hurricane Helene. arXiv:2609.10944. A cause decomposition of Helene's cell-site outages from "
-    "the same FCC reports; this page uses it as a check on chapter 5.",
-    "U.S. Government Accountability Office (2017). Telecommunications: FCC should improve monitoring of industry efforts to "
-    "strengthen wireless network resiliency (GAO-18-198).",
-    "U.S. Government Accountability Office (2021). Telecommunications: FCC assisted in Hurricane Maria network restoration, "
-    "but a clarified disaster response role and enhanced communication are needed (GAO-21-297).",
-    "Federal Communications Commission, Public Safety and Homeland Security Bureau (2018). 2017 Atlantic Hurricane Season "
-    "Impact on Communications: Report and Recommendations (DOC-353805A1).",
-    "Peskin, A. H. (2025). Cellular network outage reporting and restoration during disasters (CRS Report R48776). "
-    "Congressional Research Service.",
-    "Gallagher, J. C., & Peskin, A. H. (2024). Restoration of cell phone services: Hurricane Helene (CRS In Focus "
-    "IF12779). Congressional Research Service.",
+# (citation, how it differs from this work): each citation VERIFIED in docs/literature.md; the sentences say only
+# what was read (2026-11-25 entries there). Shared with the README and the datasheet (step 14).
+RELATED_WORK_ITEMS = [
+    ("Olukola, O., Addeh, O. D., Konan, E. A., & Rahimi, N. (2026). The towers were standing: A cause decomposition of "
+     "cellular outages during Hurricane Helene. arXiv:2609.10944.",
+     "Helene only, from the same FCC reports; the preprint gives no link to its dataset, which is not yet deposited. "
+     "This page uses it as a check (chapter 4 and the methods)."),
+    ("Du (2024). Data-driven telecommunication outage prediction during hurricane events. ASCE-ASME Journal of Risk "
+     "and Uncertainty in Engineering Systems, Part A. doi:10.1061/AJRUA6.RUENG-1285.",
+     "A model that predicts outages; this work is a checked record of the outages the FCC reported, not a "
+     "prediction."),
+    ("Anonymous. grid-to-lifeline-site: interactive companion site, cross-infrastructure dependency and resilience "
+     "across nine Florida hurricanes. GitHub repository ac5907846/grid-to-lifeline-site, accessed November 25, 2026.",
+     "Florida only, the companion to a manuscript under review, with no licence stated; this work covers ten states "
+     "under CC BY 4.0."),
+    ("Reed & Wang (2018). Power and telecom modeling for Harvey and Irma. Forensic Engineering 2018. "
+     "doi:10.1061/9780784482018.097.",
+     "Models power and telecommunications for two 2017 storms; this work records what the reports show for every "
+     "storm in scope."),
+    ("Feeny, N., White, A., & Guikema, S. (2026). A quantitative spatial approach to estimate cellular network coverage "
+     "during natural hazards using publicly available data. Journal of Infrastructure Preservation and Resilience, 7, "
+     "14. doi:10.1186/s43065-026-00176-0.",
+     "Simulates where cell coverage is likely to be lost (Ann Arbor, Michigan, under high winds); this work uses "
+     "observed outages."),
+    ("StEER (2022). Hurricane Ian Preliminary Virtual Reconnaissance Report (PRJ-3709). DesignSafe-CI. "
+     "doi:10.17603/ds2-kc9k-s242.",
+     "One storm, from virtual (not field) reconnaissance across power, telecommunications and transportation; this "
+     "work is cell sites only, across storms."),
+    ("claffy, k., & Clark, D. (2022). Challenges in measuring the Internet for the public interest. Journal of "
+     "Information Policy, 12, 195-233. doi:10.5325/jinfopoli.12.2022.0003.",
+     "Describes the access limits on NORS/DIRS data that make an open panel useful."),
+    ("U.S. Government Accountability Office (2017). Telecommunications: FCC should improve monitoring of industry "
+     "efforts to strengthen wireless network resiliency (GAO-18-198); and (2021). Telecommunications: FCC assisted in "
+     "Hurricane Maria network restoration, but a clarified disaster response role and enhanced communication are "
+     "needed (GAO-21-297).",
+     "Audits of the FCC's role and of industry efforts; not outage datasets."),
+    ("Peskin, A. H. (2025). Cellular network outage reporting and restoration during disasters (CRS Report R48776); "
+     "Gallagher, J. C., & Peskin, A. H. (2024). Restoration of cell phone services: Hurricane Helene (CRS In Focus "
+     "IF12779). Congressional Research Service.",
+     "Reports to Congress on outage reporting and on Helene's restoration; not datasets."),
+    ("Federal Communications Commission. FCC 21-99 (Resilient Networks, notice of proposed rulemaking, 2021); FCC 24-5 "
+     "(mandatory DIRS, in force February 20, 2025, Federal Register 2025-00495); FCC 26-34 (Federal Register "
+     "2026-13155, 91 FR 39516, June 30, 2026).",
+     "The rules behind the reports; chapter 12 describes the periods they define."),
+    ("Federal Communications Commission, Public Safety and Homeland Security Bureau (2018). 2017 Atlantic Hurricane "
+     "Season Impact on Communications: Report and Recommendations (DOC-353805A1); and (2019). October 2018 Hurricane "
+     "Michael's Impact on Communications (DOC-357387A1).",
+     "The FCC's own summaries of three storms, used here as external checks."),
 ]
+RELATED_WORK = [f"{c} {d}" for c, d in RELATED_WORK_ITEMS]
+# README and datasheet only, not a page headline (Tim's wording, 2026-11-25)
+NOVELTY = ("To our knowledge, this is the first openly licensed, versioned, DOI-archived county-by-report panel of FCC "
+           "DIRS cell-site outages spanning multiple hurricanes and states, validated against the reports' printed "
+           "totals. The other DIRS-derived compilations we found cover a single storm (Helene) or a single state "
+           "(Florida); for a ten-hurricane county-level study (Du, 2024) we found no public data release.")
 AI_LINE = ("Code was written with the help of an AI coding assistant; every number on this page is generated by that "
            "code from public data and was checked independently against its sources.")
 
@@ -1578,7 +1621,44 @@ def external_check_details() -> str:
             f"(\"Ours\" is computed from the daily report's county rows); no data were changed because of the check. "
             f"Every figure, with its page: [`docs/external_validation.md`]({DATA_REPO}/blob/v{DATA_VERSION}/docs/"
             f"external_validation.md).\n\n"
-            + table(["#", "Season report figure", "Report", "Season report", "Ours", "Explanation"], rows) + "\n")
+            + table(["#", "Season report figure", "Report", "Season report", "Ours", "Explanation"], rows) + "\n\n"
+            + more_external_checks())
+
+
+def more_external_checks() -> str:
+    """The two checks added in 3.2.0 (step 15b; addendum 4.x-1, exploratory): counts from their tables."""
+    m = pd.read_csv(OUTPUT / "external_validation_fcc_michael.csv", dtype=str, keep_default_na=False)
+    o = pd.read_csv(OUTPUT / "external_validation_olukola.csv", dtype=str, keep_default_na=False)
+    scored = m[m.status != "shown, not scored"]
+    ok = int(scored.status.isin(["match", "consistent"]).sum())
+    differs = scored[scored.status == "differs"]
+    rows = [(x.id, f"{x.where}: {x.fcc_text}", x.report_date, x.fcc_value, x.ours_detail, x.explanation)
+            for x in differs.itertuples()]
+    peak, served = (o.set_index("id").loc[k] for k in ("O1", "O2"))
+    return (f"*Exploratory.* **External checks added later: Michael, Helene, Irma and Ida.** The FCC's report on "
+            f"Hurricane Michael (DOC-357387A1, May 2019) gives {len(m)} figures in its text. {len(scored)} can be "
+            f"tested against the daily reports: {ok} match or are consistent, and {len(differs)} "
+            f"differ{'s' if len(differs) == 1 else ''}. The other {len(m) - len(scored)} are statements with no number "
+            "to test (\"little change\", \"within 48 hours\"), shown beside our series. Olukola et al. (2026) "
+            f"extracted Helene from the same reports independently: their peak ({int(peak.theirs):,} sites out, "
+            f"28 September 2024) and the sites in the reporting area ({int(served.theirs.split()[0]):,}, "
+            f"{served.theirs.split()[1].strip('()')} out) match ours exactly. " + extra_checks_sentence() + " Every "
+            f"figure: [`docs/external_validation.md`]({DATA_REPO}/blob/v{CONTEXT_VERSION}/docs/external_validation.md)."
+            "\n\n" + (table(["#", "Michael report figure", "Report", "Michael report", "Ours", "Explanation"], rows)
+                       + "\n" if rows else ""))
+
+
+def extra_checks_sentence() -> str:
+    """Irma (Olukola et al.) and FCC 21-99 (Ida), from their tables (v3.2.0)."""
+    o = pd.read_csv(OUTPUT / "external_validation_olukola.csv", dtype=str, keep_default_na=False).set_index("id")
+    f = pd.read_csv(OUTPUT / "external_validation_fcc_21_99.csv", dtype=str, keep_default_na=False).set_index("id")
+    if not (o.loc["O5", "status"] == "match" and (f.status == "match").all()):
+        raise SystemExit("an Irma or FCC 21-99 check no longer matches: rewrite this sentence")
+    return (f"Their Irma peak ({int(o.loc['O5', 'theirs']):,} sites out, 11 September 2017) matches our report's rows, "
+            "counting Puerto Rico and the U.S. Virgin Islands, which are outside the panel. FCC 21-99 cites Ida's report "
+            f"of August 31, 2021 for {int(f.loc['F1', 'fcc_value']):,} sites out for power against "
+            f"{int(f.loc['F2', 'fcc_value']):,} for damage and transport: those are the report's Louisiana totals, and "
+            "our county rows sum to the same.")
 
 
 # ------------------------------------------------------------------ page order (2026-11-25 restructure) --
@@ -1601,7 +1681,6 @@ PAGE_CHAPTER_REFS = [
     ("models in chapters 7, 8 and 13", "models in chapters 7, 8 and 9"),
     ("single-report peak in chapter 3", "single-report peak in chapter 2"),
     ("**Mobile and fixed providers (chapter 13).**", "**Mobile and fixed providers (chapter 9).**"),
-    ("this page uses it as a check on chapter 5.", "this page uses it as a check on chapter 4."),
 ]
 PARTS = [  # (part heading, [(page number, title, block, old anchor id, exploratory)])
     ("Part I: What happens when the network goes dark", [
@@ -1833,6 +1912,7 @@ def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame
         f"provider counts only; no provider is named and the files are not redistributed. The map is drawn with D3 and topojson-client (ISC licence), served from this site. {AI_LINE} "
         f"{VIEWS_LINE}\n")
     add(reproduce_line())
+    add(context_tables_line())
     add(f"**Datasheet.** What the data can and cannot be used for, its known limitations and how it is maintained: "
         f"[`DATASHEET.md`]({DATA_REPO}/blob/v{DATA_VERSION}/DATASHEET.md) in the data repository.\n")
     add(f"**Disclosure.** {DISCLOSURE}\n")
@@ -1842,6 +1922,21 @@ def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame
     L.extend(trail)
     add("\n</details>\n")
     return "\n".join(L)
+
+
+def context_tables_line() -> str:
+    """Methods (3.2.0): what the context tables are, with no finding drawn from them (addendum 4.x-1)."""
+    c = pd.read_csv(PROCESSED / "dirs_cable_wireline.csv", dtype=str, keep_default_na=False)
+    f = pd.read_csv(PROCESSED / "fema_ia_county_storm.csv", dtype=str, keep_default_na=False)
+    return (f"*Exploratory.* **Context tables.** The data repository (from version {CONTEXT_VERSION}) adds three "
+            "descriptive tables under a written addendum committed before their sources were downloaded: cable and "
+            f"wireline subscribers out as each report prints them ({c.doc_id.nunique()} reports, by area or state, "
+            "with each printed previous-day figure checked against the previous report); FEMA Individual Assistance "
+            f"by storm and county ({int((f.ia_declared == 'True').sum())} storm-counties with assistance declared; "
+            f"OpenFEMA, used under its terms: {OPENFEMA_DISCLAIMER}); and NOAA NCEI Storm Events surge, flood and wind "
+            "flags and damage by storm and county (the NCEI files themselves are not redistributed). No result on "
+            "this page uses them, and none has been set against the cell-site outages. "
+            f"[`data/analysis/context/`]({DATA_REPO}/tree/v{CONTEXT_VERSION}/data/analysis/context).\n")
 
 
 def tail_sections() -> str:
@@ -1897,7 +1992,17 @@ def sources_list() -> list:
         f"U.S. Census Bureau. ACS 5-year 2022 and 2020 county Gazetteer, {link('https://api.census.gov')}; 2022 "
         f"cartographic boundary file, counties 1:500,000 (Isaias map), {link(boundary_download()['url'])}.",
         "FEMA. OpenFEMA Disaster Declarations Summaries v2, "
-        f"{link('https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries')}.",
+        f"{link('https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries')}; Registration Intake and "
+        "Individuals Household Program v2, "
+        f"{link('https://www.fema.gov/api/open/v2/RegistrationIntakeIndividualsHouseholdPrograms')}, and Housing "
+        "Assistance Program Data - Renters v2, "
+        f"{link('https://www.fema.gov/api/open/v2/HousingAssistanceRenters')} (context tables).",
+        "NOAA National Centers for Environmental Information. Storm Events Database, bulk details files 2017–2026 "
+        f"(context tables), {link('https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/')}; NWS "
+        f"zone-county correlation file, {link('https://www.weather.gov/gis/ZoneCounty')}.",
+        "Federal Communications Commission, Public Safety and Homeland Security Bureau (2019). October 2018 Hurricane "
+        "Michael's Impact on Communications: Preparation, Effect, and Recovery. PS Docket No. 18-339 (external "
+        f"check), {link('https://docs.fcc.gov/public/attachments/DOC-357387A1.pdf')}.",
     ]
 
 
@@ -1922,15 +2027,27 @@ def last_report_clause(r: dict) -> str:
             f"{h['sites_out_at_last_reports_headline']['value']:,.0f} in total")
 
 
+def work_what(r: dict) -> str:
+    """The Work card's "what it is" line (wording: Tim, 2026-11-25), numbers from results.json."""
+    h1 = r["chapter_1"]["headlines"]
+    return (f"Full study and open dataset: {h1['n_storms']['value']} storms and {h1['n_reports_used']['value']} FCC "
+            f"reports, checked line by line, released with a DOI.")
+
+
 def update_work_entry(r: dict, path: Path = WORK_YAML) -> None:
-    """Regenerate this page's summary line in the site's Work list (numbers from results.json, never typed)."""
+    """Regenerate this page's summary and "what it is" lines in the site's Work list (numbers from results.json,
+    never typed)."""
     lines = path.read_text(encoding="utf-8").split("\n")
     at = [i for i, ln in enumerate(lines) if ln.strip() == f'url: "{WORK_URL}"']
     if len(at) != 1:
         raise SystemExit(f"work.yaml: expected one entry with url {WORK_URL}, found {len(at)}")
-    j = next(i for i in range(at[0], min(at[0] + 6, len(lines))) if lines[i].lstrip().startswith("summary:"))
-    indent = lines[j][:len(lines[j]) - len(lines[j].lstrip())]
-    lines[j] = f"{indent}summary: {json.dumps(work_summary(r), ensure_ascii=False)}"
+    for key, value in (("summary", work_summary(r)), ("what", work_what(r))):
+        j = next((i for i in range(at[0], min(at[0] + 8, len(lines))) if lines[i].lstrip().startswith(f"{key}:")),
+                 None)
+        if j is None:
+            raise SystemExit(f"work.yaml: the {WORK_URL} entry has no {key} line")
+        indent = lines[j][:len(lines[j]) - len(lines[j].lstrip())]
+        lines[j] = f"{indent}{key}: {json.dumps(value, ensure_ascii=False)}"
     path.write_text("\n".join(lines), encoding="utf-8", newline="\n")
 
 

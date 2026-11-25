@@ -4,11 +4,49 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
-## [Unreleased]
+## [3.2.0] - 2026-11-25
+
+Adds context tables, external checks and documentation. No published value changes: every file published in
+3.1.1 under `data/analysis/` and `data/input/` is byte for byte the same, `results.json` included (the reproduction
+test compares them). The new tables are exploratory, under analysis plan addendum 4.x-1
+(`docs/analysis_plan_addendum_4x.md`, committed on its own as
+`docs/analysis_plan_addendum_4x_as_committed_d7bdc66.md` with its SHA-256 before any of its sources was
+downloaded or any value computed); the page describes them and draws no new finding from them.
+
+### Fixed
+- Step 3 read the cable and wireline figure of Hurricane Michael's reports of October 21 to 24, 2018 from a summary
+  paragraph ("fell from 103,811 to 56,334 over the last three days"); it now reads the report's Cable Systems and
+  Wireline section first, giving 56,334, 55,006, 50,387 and 45,506, with a test for this pattern. The figure is in no
+  published file (the panel files have no cable and wireline column), so no published value changes; the new
+  `context/dirs_cable_wireline.csv` has the section figures.
 
 ### Added
-- The version 3.1.1 DOI (10.5281/zenodo.24537335) in `CITATION.cff` and the README, added after the release.
-  Documentation only.
+- `data/analysis/context/dirs_cable_wireline.csv` (step 17): cable and wireline subscribers out per report and area,
+  read from the reports' Cable Systems and Wireline section in all four printed forms, including the state rows of
+  Michael, Florence, Barry, Dorian, Zeta, Ida and Ian, with a check of each printed previous-day figure against the
+  previous report.
+- `data/analysis/context/fema_ia_county_storm.csv` and `fema_ia_set_aside.csv` (step 16): FEMA Individual Assistance
+  by storm and county from OpenFEMA RI-IHP v2 and Housing Assistance Renters v2 (inputs in `data/input/fema_ia/`).
+- `data/analysis/context/hazard_ncei_county_storm.csv` and `hazard_ncei_storm_summary.csv` (step 18): NCEI Storm Events
+  surge, flood and wind flags by storm and county; damage from county events, and damage from zone events in separate
+  `zone_..._unallocated` columns with `zone_n_counties` (never to be summed across counties; a rule changed after a
+  value was seen, logged as a deviation). Zones mapped with NWS `bp16ap26.dbx` (`data/input/nws/`). The NCEI files are
+  not redistributed; the reproduction test compares these tables only when they are supplied.
+- External checks (step 15b; `docs/external_validation.md`, `data/analysis/validation/`): the FCC's report on
+  Hurricane Michael (DOC-357387A1), 12 figures; Olukola et al. (2026), Helene and Irma: the Helene
+  peak (4,562 sites out) and sites in the reporting area (37,717) and Irma's peak (4,370) match an independent
+  extraction exactly; FCC 21-99's Ida figures (699 sites out for power, 354 for damage and transport, from
+  DOC-375367A1), which match the report's Louisiana totals and our county rows.
+- `CODEBOOK.md`: which reports carry county-level cause columns, by storm, and the reporting-regime boundaries.
+- Related work and a statement of what is new, in the README and `DATASHEET.md`; the datasheet's limitations add the
+  zone-to-county mapping.
+- `.zenodo.json`: subjects from the Library of Congress Subject Headings, each URI checked on id.loc.gov
+  (`code/manifest/subjects.csv`), and two related identifiers (Du 2024; StEER PRJ-3709).
+- `docs/scoping_4x.md`: the sources considered, with what was and was not verified.
+
+### Not changed
+- The high-water-mark columns planned in the scoping are left out: both USGS sources (STN and the ScienceBase
+  catalog) refused automated requests (HTTP 403). To be revisited in 4.x.
 
 ## [3.1.1] - 2026-11-25
 

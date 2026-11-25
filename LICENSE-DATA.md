@@ -5,7 +5,7 @@ The author's data in this repository (everything in `data/analysis/`, the derive
 Creative Commons Attribution 4.0 International license (CC BY 4.0):
 https://creativecommons.org/licenses/by/4.0/ (legal code: https://creativecommons.org/licenses/by/4.0/legalcode).
 
-Attribute: Timothy D. Spivey, "When the Network Goes Dark" data, version 3.1.1 (2026). See `CITATION.cff`.
+Attribute: Timothy D. Spivey, "When the Network Goes Dark" data, version 3.2.0 (2026). See `CITATION.cff`.
 
 The third-party inputs in `data/input/` keep their own terms, listed with the exact attribution for each in
 `SOURCES.md`. U.S. federal government works (FCC, Census, NOAA/NHC, CDC/ATSDR, FEMA) are in the public domain in the
