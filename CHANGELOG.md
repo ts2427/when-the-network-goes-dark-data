@@ -4,6 +4,12 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
+## [Unreleased]
+
+### Added
+- The version 3.1.0 DOI (10.5281/zenodo.24534469) in `CITATION.cff` and the README, added after the release.
+  Documentation only.
+
 ## [3.1.0] - 2026-11-24
 
 Usability and maintenance. No published number changes: `dirs_county_day.csv`, `storms.csv`, the validation tables
