@@ -852,6 +852,18 @@ def opening_section(r: dict) -> list:
     ]
 
 
+# Chapter 12 (results.json chapter_9) covers the 2024, 2025 and 2026 rule changes (config.REGIMES), so the rules are
+# named for all three (Tim's instruction, 2026-11-25). results.json keeps its stored sentence until the next data
+# release (3.1.1 changes no file under data/); the page, the takeaways and DATASHEET.md render the new wording.
+RULES_OLD, RULES_NEW = "the FCC's 2024–2025 rules", "the FCC's 2024–2026 rule changes"
+
+
+def rules_wording(text: str) -> str:
+    if RULES_OLD not in text and RULES_NEW not in text:
+        raise ValueError(f"chapter 12's sentence no longer names the rules as expected: {text[:80]}")
+    return text.replace(RULES_OLD, RULES_NEW)
+
+
 def chapter_blocks(r: dict) -> dict:
     """Chapters 1 to 9 as they were written, one list of lines per chapter (keyed by its results.json chapter
     number), without headings: page_body() places and numbers them. Chapter 1's coverage heatmap and its table are
@@ -1074,7 +1086,7 @@ def chapter_blocks(r: dict) -> dict:
     # 9
     L = S[9] = []
     add = L.append
-    add(f"**Claim.** {c9['page_text']['headline']}\n")
+    add(f"**Claim.** {rules_wording(c9['page_text']['headline'])}\n")
     add("**Exhibit.**\n")
     st9 = [(s["storm"], s["rule_period"], f1(s["peak_pct_out"]), days(s["t50"], s["t50_censored"], s["censored_at"]),
             days(s["t90"], s["t90_censored"], s["censored_at"]), days(s["t90_best"], s["t90_best_censored"], s["censored_at"]),
@@ -1632,7 +1644,7 @@ def takeaways(r: dict) -> list:
     bk = r["v2_2_backup_power"]["headlines"]
     n_bk = len(bk["storms_collected"])
     _, ev, agree, compared = external_counts()
-    rules = r["chapter_9"]["page_text"]["headline"].split(":")[0]
+    rules = rules_wording(r["chapter_9"]["page_text"]["headline"]).split(":")[0]
     rules = rules.replace("The public reports can't yet show", "The reports can't yet show").replace("the FCC's ", "the ")
     bound = re.search(r"more than (\d+)% slower", r["chapter_8"]["page_text"]["headline"]).group(1)
     lr = r["v2_1_public_record_misses"]["headlines"]

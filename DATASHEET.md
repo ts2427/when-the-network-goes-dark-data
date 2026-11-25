@@ -43,7 +43,7 @@ Version 3.1.1. Following the sections of Gebru et al. (2021), "Datasheets for Da
 - **Not a measure of service availability or of people without service.** Each FCC report says: "The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area."
 - **Not carrier or provider performance.** The counts combine all providers that report; no provider can be seen or compared.
 - **Not causal estimates.** Every result is an association: what happened together, not what caused what.
-- **Not proof that the 2024-2025 rules did or didn't work.** The public reports can't yet show whether the FCC's 2024–2025 rules coincided with any change in recovery: one rule period has no storm, another has only Isaias, and the sites-served counts shift within storms by as much as 31%.
+- **Not proof that the FCC's 2024–2026 rule changes did or didn't work.** The public reports can't yet show whether the FCC's 2024–2026 rule changes coincided with any change in recovery: one rule period has no storm, another has only Isaias, and the sites-served counts shift within storms by as much as 31%.
 
 **Known limitations:**
 
@@ -63,7 +63,7 @@ Version 3.1.1. Following the sections of Gebru et al. (2021), "Datasheets for Da
 ## Maintenance
 
 - **Maintainer.** Timothy D. Spivey (ORCID 0009-0009-8990-4308).
-- **Updates.** Once a year, after each hurricane season, when EAGLE-I's release covering that season is out (usually February to April); each season's analysis plan is committed before its reports are read (`docs/update_procedure.md`). Each report is archived as soon as the FCC publishes it.
+- **Updates.** Once a year, after each hurricane season, when EAGLE-I's release covering that season is out (usually February to April); each season's analysis plan is committed before its reports are read (`docs/update_procedure.md`). Reports are collected and archived at each update.
 - **Reporting an error.** The "Report a data error" issue form (storm, report DOC, county, what is wrong, evidence); see `CONTRIBUTING.md`.
 - **Corrections.** Made in the code or a checked table, never by hand in a published file; logged in `docs/decisions.md`; a change to a published number is a new major version, archived with its own DOI and listed in `ERRATA.md` with before, after and why.
 - **If maintenance stops.** Every released version stays archived on Zenodo and citable: the concept DOI (10.5281/zenodo.24477809) resolves to the latest version, and each version DOI to its own files.

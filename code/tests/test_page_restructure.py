@@ -31,7 +31,8 @@ CHANGED = ("## ", "### What version 2 adds", "*Exploratory:", "Exploratory: adde
            "- The FCC printed sites operating", "- Where the order could be determined", "- In storms from 2022 on",
            "Everything here is descriptive", "method: ", "  - name: ", "    url: ", "    caption: \"Each row is a storm",
            "**What it means.** With wind zone in the model", "**Intervals.**", "**Mobile and fixed providers (chapter 13)",
-           "- Olukola, O.", "- Federal Communications Commission.", "- National Hurricane Center.", "- CDC/ATSDR")
+           "- Olukola, O.", "- Federal Communications Commission.", "- National Hurricane Center.", "- CDC/ATSDR",
+           "**Claim.** The public reports can't yet show whether")  # the rules named 2024-2026 since 2026-11-25
 # Release metadata, not results: the data release moved from 3.0.0 to 3.1.0 (version, DOI, file, Updated date).
 RELEASE = ('updated: "', 'dataset: {"name": ', "**Reproduce it.**",
            "Each report's flags and reasons are in the snapshot's")  # its link is pinned to the release tag

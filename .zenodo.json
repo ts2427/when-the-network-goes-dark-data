@@ -7,7 +7,7 @@
       "orcid": "0009-0009-8990-4308"
     }
   ],
-  "description": "The data and code behind the page When the Network Goes Dark (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 22 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in data/analysis/results.json, and run_all.py rebuilds it and the panel from data/input/.",
+  "description": "The data and code behind the page When the Network Goes Dark (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 22 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in data/analysis/results.json, and run_all.py rebuilds it and the panel from data/input/. The counts are descriptive associations, not causal estimates, and cell sites out do not measure people without service; see DATASHEET.md for supported uses and limitations.",
   "keywords": [
     "FCC DIRS",
     "cell site outages",

@@ -587,6 +587,8 @@ def version_dois() -> dict:
 KEYWORDS = ["FCC DIRS", "cell site outages", "hurricanes", "telecommunications resilience", "power outages", "EAGLE-I",
             "disaster recovery", "public records"]  # Tim's list, 2026-11-25 (CITATION.cff, then .zenodo.json from it)
 RELATED = ROOT / "manifest" / "related_identifiers.csv"  # each verified before it was added (the verified column)
+ZENODO_USE_NOTE = ("The counts are descriptive associations, not causal estimates, and cell sites out do not measure "
+                   "people without service; see DATASHEET.md for supported uses and limitations.")  # Tim, 2026-11-25
 
 
 def summary_text(markdown: bool = False) -> str:
@@ -616,7 +618,7 @@ def zenodo_metadata(cff_text: str) -> dict:
         "title": cff["title"],
         "creators": [{"name": f"{a['family-names']}, {a['given-names']}",
                       "orcid": a["orcid"].removeprefix("https://orcid.org/")} for a in cff["authors"]],
-        "description": summary_text(),
+        "description": summary_text() + " " + ZENODO_USE_NOTE,
         "keywords": list(cff["keywords"]),
         "license": lic,
         "access_right": "open",
@@ -742,7 +744,8 @@ def datasheet_md(T: Path) -> None:
         "- **Not carrier or provider performance.** The counts combine all providers that report; no provider can be "
         "seen or compared.",
         "- **Not causal estimates.** Every result is an association: what happened together, not what caused what.",
-        "- **Not proof that the 2024-2025 rules did or didn't work.** " + r["chapter_9"]["page_text"]["headline"],
+        f"- **Not proof that {step11.RULES_NEW} did or didn't work.** "
+        + step11.rules_wording(r["chapter_9"]["page_text"]["headline"]),
         "",
         "**Known limitations:**", "",
         f"- **Reporting ends before recovery is complete.** Only {t90['value']} of {t90['n']} storms with a report "
@@ -776,7 +779,7 @@ def datasheet_md(T: Path) -> None:
         f"- **Maintainer.** {AUTHOR['given']} {AUTHOR['family']} (ORCID {AUTHOR['orcid']}).",
         "- **Updates.** Once a year, after each hurricane season, when EAGLE-I's release covering that season is out "
         "(usually February to April); each season's analysis plan is committed before its reports are read "
-        "(`docs/update_procedure.md`). Each report is archived as soon as the FCC publishes it.",
+        "(`docs/update_procedure.md`). Reports are collected and archived at each update.",
         "- **Reporting an error.** The \"Report a data error\" issue form (storm, report DOC, county, what is wrong, "
         "evidence); see `CONTRIBUTING.md`.",
         "- **Corrections.** Made in the code or a checked table, never by hand in a published file; logged in "

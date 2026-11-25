@@ -52,7 +52,7 @@ def test_page_wording_and_required_items():
     for bad in ("because of vulnerab", "neglect", "prioritiz", "caused by", "coincided with faster",
                 "battery", "generator depletion"):
         assert bad not in low, bad
-    assert "can't yet show whether the fcc's 2024–2025 rules" in low
+    assert "can't yet show whether the fcc's 2024–2026 rule changes" in low  # the page's wording since 2026-11-25
     assert "6 to 11 of 20" in body and "Nicole: no report after its peak, so no recovery could be observed." in body  # Nicole left out (2026-11-23)
 
 
