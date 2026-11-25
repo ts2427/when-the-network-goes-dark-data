@@ -38,7 +38,9 @@ its new column.
 - `load_panel()` parses `report_date` and `dirs_activation_date` as dates (pandas datetime64, no time zone), from
   the CSV and the Parquet alike; they were text. Comparisons with "YYYY-MM-DD" strings still work; string methods on
   those two columns no longer do.
-- Every GitHub Action is pinned to a commit SHA (checkout v4.4.0, setup-python v5.6.0, upload-artifact v4.6.2).
+- Every GitHub Action is pinned to a commit SHA, at its current release: checkout v7.0.1, setup-python v7.1.0 and
+  upload-artifact v7.0.2 (from v4, v5 and v4; they run on Node.js 24, which GitHub-hosted runners support). None of
+  their breaking changes touches this workflow, and CI confirms the build artifacts still upload.
 - `requirements.txt` adds matplotlib (already a dependency), nbmake, ipykernel and ruff; `requirements.lock` is
   regenerated, and no version already pinned changes.
 - Lint fixes, with no change in behavior: unused imports and variables removed, a constant moved below the imports,

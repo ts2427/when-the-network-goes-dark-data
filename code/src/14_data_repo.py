@@ -663,7 +663,9 @@ its new column.
 - `load_panel()` parses `report_date` and `dirs_activation_date` as dates (pandas datetime64, no time zone), from
   the CSV and the Parquet alike; they were text. Comparisons with "YYYY-MM-DD" strings still work; string methods on
   those two columns no longer do.
-- Every GitHub Action is pinned to a commit SHA (checkout v4.4.0, setup-python v5.6.0, upload-artifact v4.6.2).
+- Every GitHub Action is pinned to a commit SHA, at its current release: checkout v7.0.1, setup-python v7.1.0 and
+  upload-artifact v7.0.2 (from v4, v5 and v4; they run on Node.js 24, which GitHub-hosted runners support). None of
+  their breaking changes touches this workflow, and CI confirms the build artifacts still upload.
 - `requirements.txt` adds matplotlib (already a dependency), nbmake, ipykernel and ruff; `requirements.lock` is
   regenerated, and no version already pinned changes.
 - Lint fixes, with no change in behavior: unused imports and variables removed, a constant moved below the imports,
@@ -1333,9 +1335,9 @@ def test_datapackage_validates_with_no_errors():
 '''
 
 # GitHub Actions pinned to commit SHAs (v3.1.0); Dependabot proposes updates weekly
-ACTIONS = {"checkout": ("actions/checkout", "11d5960a326750d5838078e36cf38b85af677262", "v4.4.0"),
-           "setup-python": ("actions/setup-python", "a26af69be951a213d495a4c3e4e4022e16d87065", "v5.6.0"),
-           "upload-artifact": ("actions/upload-artifact", "ea165f8d65b6e75b540449e92b4886f43607fa02", "v4.6.2")}
+ACTIONS = {"checkout": ("actions/checkout", "3d3c42e5aac5ba805825da76410c181273ba90b1", "v7.0.1"),
+           "setup-python": ("actions/setup-python", "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0", "v7.1.0"),
+           "upload-artifact": ("actions/upload-artifact", "cf430e030ddbb5b0abf93d22962f4752f3646cd9", "v7.0.2")}
 
 
 def uses(name: str) -> str:

@@ -1532,20 +1532,14 @@ def external_check_paragraph() -> str:
     t = pd.read_csv(ext.OUT_CSV, dtype=str, keep_default_na=False)
     ev = ext.summary(t)
     compared = ev["n"] - ev["no panel field"]
-    unexplained = int(t.explanation.str.startswith("Not explained").sum())
-    rows = [(x.id, f"{x.where}: {x.fcc_text}", x.report_date or "all", x.fcc_value, x.ours, x.explanation)
-            for x in t[t.status == "differs"].itertuples()]
-    return (f"**External check.** The FCC's own summary of the 2017 season (DOC-353805A1, August 2018) gives "
-            f"{ev['n']} county or state figures for Harvey and Irma; {compared} can be set against the reports. Of "
-            f"those, {ev['match'] + ev['match after truncation'] + ev['consistent']} agree (including "
-            f"{ev['match after truncation']} where the FCC dropped decimals instead of rounding) and {ev['differs']} "
-            f"differ: {ev['differs'] - unexplained} are explained or have a likely explanation, for example a "
-            f"combined Puerto Rico and Virgin Islands figure given for the islands alone, and {unexplained} match no "
-            f"figure in their report. In each, the summary departs from what the DIRS report prints or from the total "
-            f"its rows reconcile to, so none points to an error in the panel, and no data were changed because of it. Every figure is in the snapshot's "
-            f"[`docs/external_validation.md`]({DATA_REPO}/blob/v{DATA_VERSION}/docs/external_validation.md). The "
-            f"differences:\n\n"
-            + table(["#", "FCC figure", "Report", "FCC", "Ours", "Explanation"], rows) + "\n")
+    agree = ev["match"] + ev["match after truncation"] + ev["consistent"]
+    if agree + ev["differs"] != compared:
+        raise ValueError("external check: statuses do not add up")
+    # wording: Tim's instruction, 2026-11-25 (counts from the table; the differences are not called FCC errors)
+    return (f"**External check.** Checked against the FCC's own 2017 Atlantic Hurricane Season Impact on "
+            f"Communications report: {agree} of {compared} comparable figures agree. In the other {ev['differs']}, "
+            f"the season report differs from the FCC's daily reports themselves (details in the data repository: "
+            f"[`docs/external_validation.md`]({DATA_REPO}/blob/v{DATA_VERSION}/docs/external_validation.md)).\n")
 
 
 def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame, excluded: pd.DataFrame) -> str:
