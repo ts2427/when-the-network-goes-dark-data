@@ -2,9 +2,11 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24477809.svg)](https://doi.org/10.5281/zenodo.24477809) [![CI](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml/badge.svg)](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml)
 
-Version 3.1.0 (2026-11-24). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
+Version 3.1.1 (2026-11-25). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
 
 The data and code behind the page *When the Network Goes Dark* (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 22 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in `data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.
+
+What the data can and cannot be used for, and their known limitations: `DATASHEET.md`.
 
 Associations, not causes. Each FCC report carries this caveat: "The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area." So the counts here describe the network, not how many people lost service.
 
@@ -31,7 +33,10 @@ docs/            analysis plan (as committed, with SHA-256), addendum, decision 
                  update_procedure.md (how a new season and a new version are added and released),
                  external_validation.md (the check against the FCC's 2017 season report),
                  restructure_plan.md (the layout planned for 4.0.0)
-ERRATA.md        every correction, from the decision log; CONTRIBUTING.md: how to report an error
+ERRATA.md        every change to a published number; CONTRIBUTING.md: how to report an error
+DATASHEET.md     the datasheet: motivation, composition, collection, uses not supported, known
+                 limitations, distribution and maintenance
+.zenodo.json     the Zenodo archive's metadata (built from CITATION.cff)
 run_all.py       one command: rebuild the panel and results.json into build/
 ```
 
@@ -102,7 +107,7 @@ Exact attribution for each source: `SOURCES.md`. Variables: `CODEBOOK.md` and `d
 
 ## Computational requirements
 
-- Python 3.13 (tested with 3.13.2 on Windows 11). Reproduced on Windows and Linux: CI rebuilds everything and runs the reproduction tests on windows-latest and ubuntu-latest with Python 3.13 on every push (badge above).
+- Python 3.13 (tested with 3.13.2) on Windows 11; the code uses no platform-specific calls. CI runs the tests and a full rebuild on windows-latest and ubuntu-latest (badge above).
 - Packages: `requirements.txt` (exact versions of the packages used) and `requirements.lock` (every package, including dependencies, pinned with SHA-256 hashes for Windows, Linux and macOS; generated with `uv pip compile requirements.txt --universal --generate-hashes --python-version 3.13 -o requirements.lock`). For an exact environment: `python -m pip install --require-hashes -r requirements.lock`.
 - Memory: about 4 GB. Disk: about 200 MB for the repository and `build/`.
 - Run time: 12.4 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-23 (most of it is parsing the reports in step 3 and the bootstrap in step 10).
@@ -196,6 +201,7 @@ The repository is archived on Zenodo. Cite the concept DOI for the data and code
 - Version 2.1.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 2.1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24480432
 - Version 3.0.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24514963
 - Version 3.1.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24534469
+- Version 3.1.1 (this one) gets its own DOI when it is released; until then, cite the concept DOI.
 
 `CITATION.cff` lists every DOI, and GitHub's "Cite this repository" button reads it.
 

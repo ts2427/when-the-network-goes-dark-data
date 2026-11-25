@@ -19,6 +19,18 @@ and the corrections made so far in `ERRATA.md`.
 4. The whole pipeline is rerun and the reproduction tests compared. A change to any published number is a new major
    version (`CHANGELOG.md` states the rule), archived on Zenodo with its own DOI.
 
+## Zenodo metadata
+
+Each GitHub release is archived on Zenodo with the metadata in `.zenodo.json`: the type (dataset), title, creator
+and ORCID, licence, description, keywords, version, date and related identifiers. When a repository has both a
+`.zenodo.json` and a `CITATION.cff`, Zenodo uses only `.zenodo.json` (Zenodo's GitHub integration documentation), so
+the build writes `.zenodo.json` from `CITATION.cff` (title, creator, licence, keywords, version and date) and the
+README's summary, adding the related identifiers from `code/manifest/related_identifiers.csv`. Each identifier there
+is checked before it is added, and the table records how and when. `code/tests/test_zenodo_json.py` validates the
+file against Zenodo's legacy deposit schema (`code/tests/schemas/`) and checks that it agrees with `CITATION.cff`.
+Change the metadata in the project, never in `.zenodo.json` by hand. GitHub's "Cite this repository" still reads
+`CITATION.cff`.
+
 ## Updating packages
 
 Dependabot proposes updates to the GitHub Actions only. It does not propose Python package updates: CI installs from

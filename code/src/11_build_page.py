@@ -1820,6 +1820,8 @@ def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame
         f"provider counts only; no provider is named and the files are not redistributed. The map is drawn with D3 and topojson-client (ISC licence), served from this site. {AI_LINE} "
         f"{VIEWS_LINE}\n")
     add(reproduce_line())
+    add(f"**Datasheet.** What the data can and cannot be used for, its known limitations and how it is maintained: "
+        f"[`DATASHEET.md`]({DATA_REPO}/blob/v{DATA_VERSION}/DATASHEET.md) in the data repository.\n")
     add(f"**Disclosure.** {DISCLOSURE}\n")
     add("### Audit trail {#audit-trail}\n")
     add(AUDIT_TRAIL_LEAD + "\n")

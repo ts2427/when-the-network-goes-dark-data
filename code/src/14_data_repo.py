@@ -32,11 +32,11 @@ import load
 from config import (BDC_COUNTS, BDC_COUNTS_META, DOWNLOADS_LOG, EAGLEI_EXTRACT, EAGLEI_RAW_DIR, OUTPUT, PROCESSED,
                     RAW, REGIMES, ROOT)
 
-VERSION = "3.1.0"
-RELEASE_DATE = "2026-11-24"
+VERSION = "3.1.1"
+RELEASE_DATE = "2026-11-25"
 CREATED = f"{RELEASE_DATE}T12:00:00-06:00"  # datapackage.json created: ISO 8601 date-time (v2.2.0)
 # Set to True only after CI has passed on both ubuntu-latest and windows-latest (README then says so).
-CI_PASSED_ON_BOTH = True  # CI passed on ubuntu-latest and windows-latest, commit c4c0573 (2026-11-25)
+CI_PASSED_ON_BOTH = False  # 3.1.1: set to True once CI passes on both
 GITHUB = "https://github.com/ts2427/when-the-network-goes-dark-data"
 BOOTSTRAP_NOTE = importlib.import_module("11_build_page").BOOTSTRAP_METHODS
 PUBLIC_REQUIREMENTS = [
@@ -515,6 +515,11 @@ def datapackage(T: Path, plan: dict) -> dict:
              "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py "
                             "(chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant "
                             "digits."},
+            {"name": "datasheet", "path": "DATASHEET.md", "format": "md", "mediatype": "text/markdown",
+             "title": "Datasheet for the dataset",
+             "description": "Motivation, composition, collection, preprocessing, uses (and uses not supported), known "
+                            "limitations, distribution and maintenance, following Gebru et al.'s Datasheets for "
+                            "Datasets; every number generated from results.json or the data."},
             {"name": "analysis_plan_as_committed", "path": f"docs/{plan['file']}", "format": "md",
              "mediatype": "text/markdown", "title": "Analysis plan as committed",
              "description": f"Committed {plan['committed']} (commit {plan['commit']}); SHA-256 {plan['sha256']}.",
@@ -579,6 +584,219 @@ def version_dois() -> dict:
     return dict(importlib.import_module("11_build_page").VERSION_DOIS)
 
 
+KEYWORDS = ["FCC DIRS", "cell site outages", "hurricanes", "telecommunications resilience", "power outages", "EAGLE-I",
+            "disaster recovery", "public records"]  # Tim's list, 2026-11-25 (CITATION.cff, then .zenodo.json from it)
+RELATED = ROOT / "manifest" / "related_identifiers.csv"  # each verified before it was added (the verified column)
+
+
+def summary_text(markdown: bool = False) -> str:
+    """The README's summary paragraph (also the Zenodo description)."""
+    title = "*When the Network Goes Dark*" if markdown else "When the Network Goes Dark"
+    code = (lambda x: f"`{x}`") if markdown else (lambda x: x)
+    return (f"The data and code behind the page {title} ({PAGE_URL}): a county-by-report panel of "
+            f"FCC DIRS cell-site outages for {N_STORMS} storms in ten Gulf and Southeast states, 2017-2026, each report "
+            "checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social "
+            "vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in "
+            f"{code('data/analysis/results.json')}, and {code('run_all.py')} rebuilds it and the panel from "
+            f"{code('data/input/')}.")
+
+
+def zenodo_metadata(cff_text: str) -> dict:
+    """.zenodo.json (v3.1.1), built from CITATION.cff and manifest/related_identifiers.csv. Zenodo uses .zenodo.json
+    instead of CITATION.cff when a release is archived (help.zenodo.org, GitHub integration), so the deposit's type
+    is set here: upload_type dataset."""
+    import yaml
+    cff = yaml.safe_load(cff_text)
+    rel = pd.read_csv(RELATED, dtype=str, keep_default_na=False)
+    if (rel.verified == "").any():
+        raise SystemExit("related_identifiers.csv: every identifier needs its verification note")
+    lic = {"CC-BY-4.0": "CC-BY-4.0"}[cff["license"]]
+    return {
+        "upload_type": "dataset",
+        "title": cff["title"],
+        "creators": [{"name": f"{a['family-names']}, {a['given-names']}",
+                      "orcid": a["orcid"].removeprefix("https://orcid.org/")} for a in cff["authors"]],
+        "description": summary_text(),
+        "keywords": list(cff["keywords"]),
+        "license": lic,
+        "access_right": "open",
+        "version": str(cff["version"]),
+        "publication_date": str(cff["date-released"]),
+        "related_identifiers": [{"identifier": x.identifier, "relation": x.relation, "scheme": x.scheme,
+                                 "resource_type": x.resource_type} for x in rel.itertuples()],
+    }
+
+
+def zenodo_json(T: Path) -> None:
+    meta = zenodo_metadata((T / "CITATION.cff").read_text(encoding="utf-8"))
+    write(T / ".zenodo.json", json.dumps(meta, indent=2, ensure_ascii=False) + "\n")
+
+
+def datasheet_md(T: Path) -> None:
+    """DATASHEET.md (v3.1.1), following Gebru et al. (2021), Datasheets for Datasets: assembled from the README,
+    CODEBOOK, SOURCES, the decision log and ERRATA, with every number from results.json or the data."""
+    step11 = importlib.import_module("11_build_page")
+    ext = importlib.import_module("15_external_validation")
+    r = json.loads((OUTPUT / "results.json").read_text(encoding="utf-8"))
+    h1 = r["chapter_1"]["headlines"]
+    v = lambda k: h1[k]["value"] if isinstance(h1[k], dict) else h1[k]  # noqa: E731
+    storms = pd.read_csv(PROCESSED / "storms.csv", dtype=str)
+    ready = load.load_panel(PROCESSED / f"{load.NAME}.parquet")
+    status = r["chapter_1"]["validation"]["status_counts"]
+    excluded = pd.read_csv(OUTPUT / "excluded_reports.csv", dtype=str, keep_default_na=False)
+    evt = pd.read_csv(ext.OUT_CSV, dtype=str, keep_default_na=False)
+    ev = ext.summary(evt)
+    compared = ev["n"] - ev["no panel field"]
+    agree = ev["match"] + ev["match after truncation"] + ev["consistent"]
+    t90 = r["chapter_4"]["headlines"]["n_storms_reaching_90pct_restored"]
+    last = r["v2_1_public_record_misses"]["headlines"]
+    sc = ready.drop_duplicates(["storm_key", "fips"]).censoring.value_counts()
+    within = r["chapter_9"]["red_flags"]["4_denominators_jump_or_move_over_10pct"]["within_storm"]
+    shift = max(abs(x - 1) for x in within.values() if x is not None)
+    nc = r["chapter_5"]["headlines"]["not_collected"]
+    nc_years = sorted({storms.set_index("storm_key").dirs_activation_date[x["storm_key"]][:4] for x in nc})
+    first_cause_year = min(storms.dirs_activation_date[~storms.storm_key.isin([x["storm_key"] for x in nc])].str[:4])
+    cov = ready.eaglei_coverage_flag.value_counts()
+    cov_unknown_years = sorted(ready[ready.eaglei_coverage_flag == "coverage_unknown"].report_date.dt.year.unique())
+    no_release = sorted(ready[ready.eaglei_coverage_flag == "no_eaglei_release"].storm.unique())
+    dl = pd.read_csv(DOWNLOADS_LOG, dtype=str, keep_default_na=False)
+    dirs_when = dl[dl.path.str.startswith("data/raw/dirs/") & (dl.status == "downloaded")]["when"].str[:10]
+    strict = load.clean_rows(ready, "strict")
+    concept, _ = dois()
+    years = f"{v('first_report')[:4]}-{v('last_report')[:4]}"
+    L = [
+        "# Datasheet: When the Network Goes Dark (data and code)", "",
+        f"Version {VERSION}. Following the sections of Gebru et al. (2021), \"Datasheets for Datasets\" "
+        "(Communications of the ACM 64(12)). Generated by `code/src/14_data_repo.py` from the README, `CODEBOOK.md`, "
+        "`SOURCES.md`, `docs/decisions.md` and `ERRATA.md`; every number comes from `data/analysis/results.json` or the "
+        "data, so it changes when they do.", "",
+        "## Motivation", "",
+        "- **Purpose.** To put the FCC's daily Disaster Information Reporting System (DIRS) cell-site reports for Gulf "
+        "and Southeast hurricanes side by side, checked line by line, so that how much of the network goes dark, how "
+        "fast it comes back, what is reported to take it down and who waits longest can be described across storms. "
+        "The FCC publishes the reports one PDF at a time, storm by storm, in layouts that change between years.",
+        f"- **Created by** {AUTHOR['given']} {AUTHOR['family']} (ORCID {AUTHOR['orcid']}), Threshold Data Sciences, for "
+        f"the page *When the Network Goes Dark* ({PAGE_URL}).",
+        f"- **Funding and independence.** {step11.DISCLOSURE}", "",
+        "## Composition", "",
+        f"- **Instances.** One row per county per FCC DIRS report: {n0(v('n_county_days'))} county-report rows "
+        f"(`data/analysis/dirs_county_day.csv`) from {v('n_reports_used')} reports for {v('n_storms')} storms, "
+        f"{n0(v('n_counties'))} counties in ten states, reports dated {v('first_report')} to {v('last_report')}. "
+        f"`storms.csv` has one row per storm in scope ({len(storms)}, including any with no usable report).",
+        f"- **Fields.** Cell sites served and out, sites out by cause (damage, transport, power) where the FCC printed "
+        f"them, sites on backup power where printed, and the report's validation status. The analysis-ready panel "
+        f"(`panel_analysis_ready.csv` and `.parquet`) has the same {n0(len(ready))} rows and {ready.shape[1]} columns, "
+        "adding power outages, exposure, day 0, SVI, ACS and broadband provider counts. Every variable: `CODEBOOK.md`.",
+        "- **Is it a sample?** No: it covers every Atlantic storm with a DIRS activation in the ten study states, "
+        f"{years}, and every one of their reports. Of {v('n_reports_in_scope')} reports in scope, "
+        f"{v('n_reports_excluded')} are excluded because they fail validation "
+        f"({'; '.join(f'{e.storm_name} {e.report_date}' for e in excluded.itertuples())}) and "
+        f"{v('n_reports_in_scope') - v('n_reports_excluded') - v('n_reports_used')} have county rows only outside the "
+        f"study states, leaving {v('n_reports_used')}.",
+        "- **Missing values.** Empty cells. Cause columns are missing where the FCC did not print them (below); backup "
+        "power likewise; power outages are missing where EAGLE-I has no record or no release (below).",
+        "- **People.** None. The data are county aggregates of cell sites; there are no individuals and no personal "
+        "data. The FCC's tables combine all providers, so no provider is named or identifiable, and the broadband "
+        "provider counts carry no provider name or ID.",
+        "- **Confidential data.** None: every input is public (`SOURCES.md`).", "",
+        "## Collection process", "",
+        f"- **DIRS reports.** The FCC's Communications Status Reports (text file and PDF) for each storm, listed by hand "
+        f"from the FCC's storm pages (linked from its Past Response Efforts page) and downloaded from docs.fcc.gov "
+        f"{span(dirs_when)}, one request at a time, each saved unmodified with its URL, "
+        "retrieval time and SHA-256 (`data/input/INPUTS.csv`). The FCC's DIRS notices give each storm's reporting area.",
+        "- **Other sources.** ORNL/DOE EAGLE-I power outages (figshare version 4), NOAA NHC HURDAT2 and best track, "
+        "CDC/ATSDR SVI 2022, Census ACS 2022 and county files, OpenFEMA declarations and FCC Broadband Data Collection "
+        "provider counts; each with its terms and access date in `SOURCES.md`.",
+        "- **Who collected it.** The author, with code written with the help of an AI coding assistant "
+        "(`AI_ASSISTANCE.md`); every decision is logged with its date and reason in `docs/decisions.md`.",
+        f"- **Timeframe.** Reports from {v('first_report')} to {v('last_report')}; the analysis plan was committed on "
+        "November 22, 2026, before any recovery outcome was computed (`docs/`).", "",
+        "## Preprocessing and cleaning", "",
+        "- Each report is parsed from its text file or, when that is incomplete, its PDF; every county row is checked "
+        "against a second reading of the PDF; county rows must sum to the report's printed state and overall totals, "
+        "or the report is flagged or excluded with its reason. Counties are matched to FIPS codes with a checked "
+        "exception list.",
+        "- Validation of the reports in scope: " + ", ".join(f"{n0(n)} {step11._status_label(k, n)}" for k, n in status.items())
+        + " (`data/analysis/validation/`). The known FCC inconsistencies are checked misprints, kept as printed with "
+        "the rows' sum used.",
+        f"- External check: the FCC's own 2017 season report gives {ev['n']} county or state figures for Harvey and "
+        f"Irma; {agree} of the {compared} comparable figures agree, and in the other {ev['differs']} the season report "
+        "differs from the daily reports themselves (`docs/external_validation.md`).",
+        "- Nothing is imputed. Raw inputs are kept unmodified in `data/input/`; `run_all.py` rebuilds every derived "
+        "file from them, and a test checks the rebuild against the published files.",
+        "- Every change to a published number is listed, with before, after and why, in `ERRATA.md`.", "",
+        "## Uses", "",
+        "- **Intended.** Describing how much of the cell network the FCC's reports show out in hurricanes, how fast it "
+        "is reported back, what causes the reports give, and how that co-moves with power outages, exposure and "
+        "social vulnerability; reproducing or extending the page; studying the FCC's public record itself.",
+        "",
+        "**Uses not supported:**", "",
+        f"- **Not a measure of service availability or of people without service.** Each FCC report says: "
+        f"\"{step11.FCC_CAVEAT}\"",
+        "- **Not carrier or provider performance.** The counts combine all providers that report; no provider can be "
+        "seen or compared.",
+        "- **Not causal estimates.** Every result is an association: what happened together, not what caused what.",
+        "- **Not proof that the 2024-2025 rules did or didn't work.** " + r["chapter_9"]["page_text"]["headline"],
+        "",
+        "**Known limitations:**", "",
+        f"- **Reporting ends before recovery is complete.** Only {t90['value']} of {t90['n']} storms with a report "
+        f"after their peak reached 90% restored before their reports ended, and in "
+        f"{'all ' + str(last['n_storms']) if last['n_storms_with_sites_out_at_last_report'] == last['n_storms'] else str(last['n_storms_with_sites_out_at_last_report']) + ' of ' + str(last['n_storms'])}"
+        f" storms the FCC's last report still "
+        f"showed sites out ({n0(last['sites_out_at_last_reports_headline']['value'])} in total).",
+        f"- **Censoring.** A county that leaves the reports while still out is censored, not recovered: "
+        f"{n0(sc.get('left_reports_while_out', 0))} of {n0(sc.sum())} storm-counties left the reports while out and "
+        f"{n0(sc.get('out_at_last_report', 0))} were still out at their storm's last report.",
+        f"- **Changing denominators.** The FCC's reporting area, and so the sites served, changes during a storm; over "
+        f"the counties every report of a storm lists, sites served move by up to {100 * shift:.0f}% within a storm. "
+        "Report counts and percents together.",
+        f"- **Cause columns missing before {first_cause_year}.** {_and_list([x['storm'] for x in nc])} "
+        f"({', '.join(nc_years)}) print no cause columns; they are left out of every cause share, not counted as zero.",
+        f"- **EAGLE-I coverage gaps.** EAGLE-I counts electricity meters, and its coverage varies: of the county-reports, "
+        f"{n0(cov.get('ok', 0))} have coverage marked ok, {n0(cov.get('low_coverage', 0))} low coverage (the state's "
+        f"covered share below 0.75), {n0(cov.get('coverage_unknown', 0))} no published coverage (reports in "
+        f"{', '.join(str(y) for y in cov_unknown_years)}), and {n0(cov.get('no_eaglei_release', 0))} no EAGLE-I release "
+        f"yet ({_and_list(no_release)}).",
+        f"- **The county bootstrap.** {BOOTSTRAP_NOTE} (Chapter numbers here are those of the `results.json` keys; "
+        "the README maps them to the page's chapters.)",
+        f"- **Flags.** Most reports carry at least one flag, most of them benign; `clean_rows(level=\"strict\")` keeps "
+        f"{strict.storm_key.nunique()} of {ready.storm_key.nunique()} storms. Use it as a sensitivity check.", "",
+        "## Distribution", "",
+        f"- On GitHub ({GITHUB}) and archived on Zenodo; cite the concept DOI ({concept}) for the work and a version DOI "
+        "for specific numbers (`CITATION.cff`, README).",
+        "- Data: CC BY 4.0 (`LICENSE-DATA.md`); code: MIT (`LICENSE`); third-party inputs keep their own terms "
+        "(`SOURCES.md`). The EAGLE-I year files and raw BDC files are not redistributed (README, Data availability).", "",
+        "## Maintenance", "",
+        f"- **Maintainer.** {AUTHOR['given']} {AUTHOR['family']} (ORCID {AUTHOR['orcid']}).",
+        "- **Updates.** Once a year, after each hurricane season, when EAGLE-I's release covering that season is out "
+        "(usually February to April); each season's analysis plan is committed before its reports are read "
+        "(`docs/update_procedure.md`). Each report is archived as soon as the FCC publishes it.",
+        "- **Reporting an error.** The \"Report a data error\" issue form (storm, report DOC, county, what is wrong, "
+        "evidence); see `CONTRIBUTING.md`.",
+        "- **Corrections.** Made in the code or a checked table, never by hand in a published file; logged in "
+        "`docs/decisions.md`; a change to a published number is a new major version, archived with its own DOI and "
+        "listed in `ERRATA.md` with before, after and why.",
+        f"- **If maintenance stops.** Every released version stays archived on Zenodo and citable: the concept DOI "
+        f"({concept}) resolves to the latest version, and each version DOI to its own files.",
+        "- **Contributions.** Welcome through issues and pull requests (`CONTRIBUTING.md`); they are applied to the "
+        "working project and the repository is regenerated.", ""]
+    write(T / "DATASHEET.md", "\n".join(L))
+
+
+def span(dates: pd.Series) -> str:
+    lo, hi = dates.min(), dates.max()
+    return f"on {lo}" if lo == hi else f"between {lo} and {hi}"
+
+
+def _and_list(items: list) -> str:
+    items = list(items)
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
+
+
+def n0(x) -> str:
+    return f"{x:,.0f}"
+
+
 def citation_cff(T: Path) -> None:
     concept, _ = dois()
     ids = "".join(f'''  - type: doi
@@ -604,12 +822,7 @@ authors:
 url: "{PAGE_URL}"
 repository-code: "https://github.com/ts2427/{REPO_NAME}"
 keywords:
-  - hurricanes
-  - cell sites
-  - telecommunications outages
-  - FCC DIRS
-  - disaster resilience
-abstract: >-
+{"".join(f"  - {k}" + chr(10) for k in KEYWORDS)}abstract: >-
   A county-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for {N_STORMS} Atlantic
   storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the public
   inputs and the code that rebuild the panel and every number on the page "When the Network Goes Dark".
@@ -625,17 +838,6 @@ def changelog(T: Path) -> None:
 ### Added
 - The version {VERSION} DOI ({version_dois()[VERSION]}) in `CITATION.cff` and the README, added after the release.
   Documentation only.
-- The page was restructured (November 25, 2026) and numbers its chapters 1 to 12; a table in the README and
-  `CODEBOOK.md` maps each page chapter to its `results.json` key (the keys are unchanged) and to its earlier number.
-
-### Changed (documentation and configuration only; no data change)
-- `ERRATA.md` is for readers: one row per change to a published number, by version (what changed, before and after,
-  why), from the CORRECTION entries that changed published data (`code/manifest/errata.csv`, checked word for word
-  against `docs/decisions.md`). Process corrections stay in `docs/decisions.md` only.
-- Dependabot proposes updates to the GitHub Actions only: CI installs from `requirements.lock`, so pip update pull
-  requests would pass without testing the new versions (`CONTRIBUTING.md`, Updating packages).
-- README: the page's wording on what the FCC's counts measure replaces "A site out is a site out", and a note says
-  how much `clean_rows(level="strict")` keeps.
 
 """ if VERSION in version_dois() else "")
     write(T / "CHANGELOG.md", f"""# Changelog
@@ -645,6 +847,38 @@ variable's meaning, a minor version adds data or variables, a patch fixes docume
 any output.
 
 {unreleased}## [{VERSION}] - {RELEASE_DATE}
+
+Documentation and metadata only. No file under `data/` changes, and no number.
+
+### Added
+- `.zenodo.json`: the Zenodo archive's metadata, written by the build from `CITATION.cff` (title, creator with ORCID,
+  licence CC-BY-4.0, keywords, version, date) and the README's summary, with upload type dataset and the related
+  identifiers in `code/manifest/related_identifiers.csv`, each checked before it was added (the table says how and
+  when): the page (isDocumentedBy); Olukola et al. 2026, Brelsford et al. 2024, EAGLE-I on figshare (version 4, the
+  files used), FCC 22-50, DA 25-74, FCC 26-34 and the FCC's 2017 season report (references); the FCC's Past Response
+  Efforts page (isDerivedFrom). Zenodo uses `.zenodo.json` instead of `CITATION.cff` when it archives a release.
+  `code/tests/test_zenodo_json.py` validates it against Zenodo's legacy deposit schema (saved in `code/tests/schemas/`
+  with its source and SHA-256) and checks it against `CITATION.cff`; `CONTRIBUTING.md` explains it.
+- `DATASHEET.md`, following Gebru et al.'s "Datasheets for Datasets": motivation, composition, collection,
+  preprocessing, uses (with uses not supported and known limitations), distribution and maintenance, every number
+  generated from `results.json` or the data. Linked from the README and the page's methods, and listed in
+  `datapackage.json`.
+- The version 3.1.0 DOI (10.5281/zenodo.24534469) in `CITATION.cff` and the README, added after its release.
+- The page was restructured (November 25, 2026) and numbers its chapters 1 to 12; a table in the README and
+  `CODEBOOK.md` maps each page chapter to its `results.json` key (the keys are unchanged) and to its earlier number.
+
+### Changed
+- Keywords (`CITATION.cff`, `.zenodo.json`): FCC DIRS, cell site outages, hurricanes, telecommunications resilience,
+  power outages, EAGLE-I, disaster recovery, public records.
+- `ERRATA.md` is for readers: one row per change to a published number, by version (what changed, before and after,
+  why), from the CORRECTION entries that changed published data (`code/manifest/errata.csv`, checked word for word
+  against `docs/decisions.md`). Process corrections stay in `docs/decisions.md` only.
+- Dependabot proposes updates to the GitHub Actions only: CI installs from `requirements.lock`, so pip update pull
+  requests would pass without testing the new versions (`CONTRIBUTING.md`, Updating packages).
+- README: the page's wording on what the FCC's counts measure replaces "A site out is a site out", and a note says
+  how much `clean_rows(level="strict")` keeps.
+
+## [3.1.0] - 2026-11-25
 
 Usability and maintenance. No published number changes: `dirs_county_day.csv`, `storms.csv`, the validation tables
 and `results.json` are as in 3.0.0 (the reproduction test compares them), and the analysis-ready panel differs only by
@@ -1142,11 +1376,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          f"[![DOI](https://zenodo.org/badge/DOI/{concept}.svg)](https://doi.org/{concept}) "
          f"[![CI]({GITHUB}/actions/workflows/ci.yml/badge.svg)]({GITHUB}/actions/workflows/ci.yml)", "",
          f"Version {VERSION} ({RELEASE_DATE}). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).", "",
-         f"The data and code behind the page *When the Network Goes Dark* ({PAGE_URL}): a county-by-report panel of "
-         f"FCC DIRS cell-site outages for {N_STORMS} storms in ten Gulf and Southeast states, 2017-2026, each report checked "
-         "against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability "
-         "(CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in "
-         "`data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.", "",
+         summary_text(markdown=True), "",
+         "What the data can and cannot be used for, and their known limitations: `DATASHEET.md`.", "",
          # the page's wording ("What the FCC's numbers measure"), since 3.1.0's documentation update
          f"Associations, not causes. Each FCC report carries this caveat: \"{importlib.import_module('11_build_page').FCC_CAVEAT}\" "
          "So the counts here describe the network, not how many people lost service.", "",
@@ -1169,7 +1400,10 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          "                 update_procedure.md (how a new season and a new version are added and released),",
          "                 external_validation.md (the check against the FCC's 2017 season report),",
          "                 restructure_plan.md (the layout planned for 4.0.0)",
-         "ERRATA.md        every correction, from the decision log; CONTRIBUTING.md: how to report an error",
+         "ERRATA.md        every change to a published number; CONTRIBUTING.md: how to report an error",
+         "DATASHEET.md     the datasheet: motivation, composition, collection, uses not supported, known",
+         "                 limitations, distribution and maintenance",
+         ".zenodo.json     the Zenodo archive's metadata (built from CITATION.cff)",
          "run_all.py       one command: rebuild the panel and results.json into build/",
          "```", "",
          "## Analysis-ready panel", "",
@@ -1569,6 +1803,18 @@ and the corrections made so far in `ERRATA.md`.
 4. The whole pipeline is rerun and the reproduction tests compared. A change to any published number is a new major
    version (`CHANGELOG.md` states the rule), archived on Zenodo with its own DOI.
 
+## Zenodo metadata
+
+Each GitHub release is archived on Zenodo with the metadata in `.zenodo.json`: the type (dataset), title, creator
+and ORCID, licence, description, keywords, version, date and related identifiers. When a repository has both a
+`.zenodo.json` and a `CITATION.cff`, Zenodo uses only `.zenodo.json` (Zenodo's GitHub integration documentation), so
+the build writes `.zenodo.json` from `CITATION.cff` (title, creator, licence, keywords, version and date) and the
+README's summary, adding the related identifiers from `code/manifest/related_identifiers.csv`. Each identifier there
+is checked before it is added, and the table records how and when. `code/tests/test_zenodo_json.py` validates the
+file against Zenodo's legacy deposit schema (`code/tests/schemas/`) and checks that it agrees with `CITATION.cff`.
+Change the metadata in the project, never in `.zenodo.json` by hand. GitHub's "Cite this repository" still reads
+`CITATION.cff`.
+
 ## Updating packages
 
 Dependabot proposes updates to the GitHub Actions only. It does not propose Python package updates: CI installs from
@@ -1760,6 +2006,7 @@ def main():
     deviations_md(T)
     errata_md(T)
     contributing_md(T)
+    datasheet_md(T)
     pkg = datapackage(T, plan)
     codebook_md(T, pkg)
     citation_cff(T)
@@ -1768,6 +2015,7 @@ def main():
     ai_statement(T)
     sources_md(T, idx)
     readme(T, idx, plan)
+    zenodo_json(T)  # after CITATION.cff: built from it, so the two cannot disagree
     scripts(T)
     validate_datapackage(T)
     report = scan(T)

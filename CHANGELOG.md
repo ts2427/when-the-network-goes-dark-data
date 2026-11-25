@@ -4,15 +4,30 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
-## [Unreleased]
+## [3.1.1] - 2026-11-25
+
+Documentation and metadata only. No file under `data/` changes, and no number.
 
 ### Added
-- The version 3.1.0 DOI (10.5281/zenodo.24534469) in `CITATION.cff` and the README, added after the release.
-  Documentation only.
+- `.zenodo.json`: the Zenodo archive's metadata, written by the build from `CITATION.cff` (title, creator with ORCID,
+  licence CC-BY-4.0, keywords, version, date) and the README's summary, with upload type dataset and the related
+  identifiers in `code/manifest/related_identifiers.csv`, each checked before it was added (the table says how and
+  when): the page (isDocumentedBy); Olukola et al. 2026, Brelsford et al. 2024, EAGLE-I on figshare (version 4, the
+  files used), FCC 22-50, DA 25-74, FCC 26-34 and the FCC's 2017 season report (references); the FCC's Past Response
+  Efforts page (isDerivedFrom). Zenodo uses `.zenodo.json` instead of `CITATION.cff` when it archives a release.
+  `code/tests/test_zenodo_json.py` validates it against Zenodo's legacy deposit schema (saved in `code/tests/schemas/`
+  with its source and SHA-256) and checks it against `CITATION.cff`; `CONTRIBUTING.md` explains it.
+- `DATASHEET.md`, following Gebru et al.'s "Datasheets for Datasets": motivation, composition, collection,
+  preprocessing, uses (with uses not supported and known limitations), distribution and maintenance, every number
+  generated from `results.json` or the data. Linked from the README and the page's methods, and listed in
+  `datapackage.json`.
+- The version 3.1.0 DOI (10.5281/zenodo.24534469) in `CITATION.cff` and the README, added after its release.
 - The page was restructured (November 25, 2026) and numbers its chapters 1 to 12; a table in the README and
   `CODEBOOK.md` maps each page chapter to its `results.json` key (the keys are unchanged) and to its earlier number.
 
-### Changed (documentation and configuration only; no data change)
+### Changed
+- Keywords (`CITATION.cff`, `.zenodo.json`): FCC DIRS, cell site outages, hurricanes, telecommunications resilience,
+  power outages, EAGLE-I, disaster recovery, public records.
 - `ERRATA.md` is for readers: one row per change to a published number, by version (what changed, before and after,
   why), from the CORRECTION entries that changed published data (`code/manifest/errata.csv`, checked word for word
   against `docs/decisions.md`). Process corrections stay in `docs/decisions.md` only.
@@ -21,7 +36,7 @@ any output.
 - README: the page's wording on what the FCC's counts measure replaces "A site out is a site out", and a note says
   how much `clean_rows(level="strict")` keeps.
 
-## [3.1.0] - 2026-11-24
+## [3.1.0] - 2026-11-25
 
 Usability and maintenance. No published number changes: `dirs_county_day.csv`, `storms.csv`, the validation tables
 and `results.json` are as in 3.0.0 (the reproduction test compares them), and the analysis-ready panel differs only by

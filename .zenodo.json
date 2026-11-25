@@ -1,0 +1,81 @@
+{
+  "upload_type": "dataset",
+  "title": "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)",
+  "creators": [
+    {
+      "name": "Spivey, Timothy D.",
+      "orcid": "0009-0009-8990-4308"
+    }
+  ],
+  "description": "The data and code behind the page When the Network Goes Dark (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 22 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in data/analysis/results.json, and run_all.py rebuilds it and the panel from data/input/.",
+  "keywords": [
+    "FCC DIRS",
+    "cell site outages",
+    "hurricanes",
+    "telecommunications resilience",
+    "power outages",
+    "EAGLE-I",
+    "disaster recovery",
+    "public records"
+  ],
+  "license": "CC-BY-4.0",
+  "access_right": "open",
+  "version": "3.1.1",
+  "publication_date": "2026-11-25",
+  "related_identifiers": [
+    {
+      "identifier": "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/",
+      "relation": "isDocumentedBy",
+      "scheme": "url",
+      "resource_type": "publication-other"
+    },
+    {
+      "identifier": "arXiv:2609.10944",
+      "relation": "references",
+      "scheme": "arxiv",
+      "resource_type": "publication-preprint"
+    },
+    {
+      "identifier": "10.1038/s41597-024-03095-5",
+      "relation": "references",
+      "scheme": "doi",
+      "resource_type": "publication-article"
+    },
+    {
+      "identifier": "10.6084/m9.figshare.24237376.v4",
+      "relation": "references",
+      "scheme": "doi",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "https://docs.fcc.gov/public/attachments/FCC-22-50A1.pdf",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "publication-other"
+    },
+    {
+      "identifier": "https://docs.fcc.gov/public/attachments/DA-25-74A1.pdf",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "publication-other"
+    },
+    {
+      "identifier": "https://docs.fcc.gov/public/attachments/FCC-26-34A1.pdf",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "publication-other"
+    },
+    {
+      "identifier": "https://docs.fcc.gov/public/attachments/DOC-353805A1.pdf",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "publication-report"
+    },
+    {
+      "identifier": "https://www.fcc.gov/past-response-efforts",
+      "relation": "isDerivedFrom",
+      "scheme": "url",
+      "resource_type": "other"
+    }
+  ]
+}

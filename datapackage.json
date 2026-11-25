@@ -2,8 +2,8 @@
   "profile": "data-package",
   "name": "when-the-network-goes-dark-data",
   "title": "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)",
-  "version": "3.1.0",
-  "created": "2026-11-24T12:00:00-06:00",
+  "version": "3.1.1",
+  "created": "2026-11-25T12:00:00-06:00",
   "homepage": "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/",
   "description": "County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 22 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the inputs and code that rebuild it.",
   "keywords": [
@@ -1547,6 +1547,16 @@
       "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant digits.",
       "hash": "sha256:5e488ec9b9f64dd941560eb2782cd1695fd3bc24f9caa46a9a3a935759f84aff",
       "bytes": 997899
+    },
+    {
+      "name": "datasheet",
+      "path": "DATASHEET.md",
+      "format": "md",
+      "mediatype": "text/markdown",
+      "title": "Datasheet for the dataset",
+      "description": "Motivation, composition, collection, preprocessing, uses (and uses not supported), known limitations, distribution and maintenance, following Gebru et al.'s Datasheets for Datasets; every number generated from results.json or the data.",
+      "hash": "sha256:1861ef74cbcef2cfe548465dd305534ebcd2c391714c6a46fd4a6a8509a0d6fb",
+      "bytes": 9957
     },
     {
       "name": "analysis_plan_as_committed",
