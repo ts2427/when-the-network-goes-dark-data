@@ -27,6 +27,9 @@ identifiers:
   - type: doi
     value: "10.5281/zenodo.24542647"
     description: "Version 3.2.0"
+  - type: doi
+    value: "10.5281/zenodo.24595378"
+    description: "Version 3.2.1"
 license: CC-BY-4.0
 authors:
   - family-names: "Spivey"

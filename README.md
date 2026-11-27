@@ -241,7 +241,7 @@ The repository is archived on Zenodo. Cite the concept DOI for the data and code
 - Version 3.1.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24534469
 - Version 3.1.1: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.1.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24537335
 - Version 3.2.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.2.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24542647
-- Version 3.2.1 (this one) gets its own DOI when it is released; until then, cite the concept DOI.
+- Version 3.2.1: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.2.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24595378
 
 `CITATION.cff` lists every DOI, and GitHub's "Cite this repository" button reads it.
 
