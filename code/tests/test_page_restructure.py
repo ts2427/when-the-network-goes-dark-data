@@ -73,8 +73,13 @@ def uncollapse(md: str) -> str:
     return md.replace("\n\n</details>", "")
 
 
+# the release's VERSION, read from step 14's source: importing step 14 reads the built panel, which a fresh clone lacks
+RELEASE_MAJOR = int(re.search(r'^VERSION = "(\d+)\.', (Path(__file__).resolve().parents[1] / "src" / "14_data_repo.py")
+                              .read_text(encoding="utf-8"), re.M).group(1))
+
+
 @built
-@pytest.mark.skipif(int(importlib.import_module("14_data_repo").VERSION.split(".")[0]) > 3,
+@pytest.mark.skipif(RELEASE_MAJOR > 3,
                     reason="checks the 3.x restructure, which changed no number; 4.0.0 changes published values "
                            "(ERRATA.md, docs/changes_4_0_0_results.csv)")
 def test_every_number_on_the_old_page_is_on_the_new_page():
