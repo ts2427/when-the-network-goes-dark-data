@@ -9,12 +9,26 @@ The inclusion rule (INCLUSION_RULE) is shared with the README and the DATASHEET 
 """
 import pandas as pd
 
-from config import DOCS, INTERIM, MANIFEST, PROCESSED, ROOT, STUDY_STATES
+from config import DOCS, INTERIM, MANIFEST, PROCESSED, RAW, ROOT, STUDY_STATES
 
 OTHER = ROOT / "manifest" / "dirs_activations_other.csv"
 OUT = DOCS / "dirs_activations.csv"
 COLUMNS = ["event", "year", "event_type", "nhc_id", "dirs_activation_date", "first_report", "last_report", "geography",
-           "n_reports", "table_columns", "decision", "reason", "source"]
+           "n_reports", "table_columns", "decision", "reason", "page_url", "on_fcc_listing", "source"]
+LISTING = RAW / "fcc_past_response_efforts_2026-11-27.txt"  # Tim's browser reading of the FCC listing, 2026-11-27
+ISAIAS_2026_NOTE = ("Not on the FCC's Past Response Efforts listing as of 2026-11-27 (the listing's Isaias page, "
+                    "/isaias-2020, is the 2020 storm); confirmed from its own notice (DA-26-1091A1) and reports "
+                    "(DOC-425790A1, DOC-425794A1, DOC-425795A1)")
+
+
+def listing_urls() -> dict:
+    """{page slug, lower case: URL} from the listing."""
+    out = {}
+    for line in LISTING.read_text(encoding="utf-8").splitlines():
+        if " | https://" in line:
+            url = line.split(" | ")[1].strip()
+            out[url.rstrip("/").split("/")[-1].lower()] = url
+    return out
 INCLUSION_RULE = (
     "A DIRS activation is included when it is for an Atlantic named storm, hurricane or tropical storm (a storm that "
     "never reaches hurricane strength is included too; every storm in this release did, at some point in its track, "
@@ -47,6 +61,8 @@ def panel_rows() -> pd.DataFrame:
     m = pd.read_csv(MANIFEST, dtype=str, keep_default_na=False)
     rows = pd.read_parquet(INTERIM / "dirs_county_rows.parquet")
     storms = pd.read_csv(PROCESSED / "storms.csv", dtype=str, keep_default_na=False)
+    pages = pd.read_csv(ROOT / "manifest" / "storms.csv", dtype=str, keep_default_na=False).set_index("storm_name")
+    urls = listing_urls()
     out = []
     for s in storms.itertuples():
         mm = m[(m.nhc_id == s.nhc_id) & (m.dirs_activation_date == s.dirs_activation_date)]
@@ -70,12 +86,17 @@ def panel_rows() -> pd.DataFrame:
             "n_reports": n_text,
             "table_columns": table_columns(r), "decision": "include",
             "reason": "Atlantic storm, 2017-2026, county rows in the study states",
-            "source": "manifest/dirs_reports.csv and the parsed reports (steps 3-4)"})
+            "page_url": urls.get(pages.storm_page.get(s.storm, "").lower(), ""),
+            "on_fcc_listing": str(pages.storm_page.get(s.storm, "").lower() in urls),  # Isaias 2026's page is not
+            "source": "manifest/dirs_reports.csv and the parsed reports (steps 3-4)"
+                      + ("; " + ISAIAS_2026_NOTE if s.storm == "Isaias" and s.dirs_activation_date[:4] == "2026" else "")})
     return pd.DataFrame(out)
 
 
 def main():
     other = pd.read_csv(OTHER, dtype=str, keep_default_na=False).assign(nhc_id="")
+    if "Isaias" in set(other.event):
+        raise SystemExit("dirs_activations_other.csv: Isaias belongs to the panel rows")
     inv = pd.concat([panel_rows(), other], ignore_index=True)[COLUMNS]
     inv = inv.sort_values(["year", "dirs_activation_date", "event"], kind="stable")
     DOCS.mkdir(exist_ok=True)

@@ -66,6 +66,8 @@ Process corrections are not listed here: the 15 CORRECTION entries that changed 
 | Cell first, power first, same report (v2_3_power_cell_timing) | 159, 66, 127 of 352 determined (499 counties) | 168, 72, 124 of 364 determined (509 counties) | The restored reports' counties |
 | Median share of peak still out at the last report (v2_1_public_record_misses) | 9.0% | 8.9% | Laura's larger peak |
 | Recovery to half restored, range across storms (chapter_4) | 1 to 7 days | 1 to 4 days | Laura's restored reports |
-| eaglei_pct_out above 100% (analysis-ready panel) | 415 rows | 0 rows (blank where the MCC flag is not ok) | MCC below EAGLE-I's own outages; no result used it |
+| eaglei_pct_out (analysis-ready panel): 415 values above 100% set to blank where the MCC flag isn't ok | 415 values above 100% | blank | The MCC (EAGLE-I's modeled customers) is below EAGLE-I's own recorded outages there; no result used it |
 | Harrison County, Texas, in DOC-375778A1 and DOC-375808A1 (2 rows) | Ida | Nicholas | Only Nicholas's notice covered Texas |
 | as_of_imputed, Laura 2020-09-01 (38 rows) | True | False | Its printed time is read |
+| SVI hazard ratio without any flagged report, most vulnerable quartile (chapter_8, plan item 5) | 0.44 (0.24 to 0.80); 5 storms, 145 storm-counties | 0.65 (0.38 to 1.12); 5 storms, 206 storm-counties | The restored reports add storm-counties to the sample with no flagged report; its interval now includes 1 |
+| Share below 5% by day 3, other quartiles (chapter_8) | 23% to 25% | 22% to 25% | As above |

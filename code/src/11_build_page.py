@@ -751,8 +751,7 @@ COMPETING_INTERESTS = ("The author works for a cable operator. This is independe
                        "data, time or resources were used, and the employer has no role in it.")
 FUNDING = "None."
 CONTACT_EMAIL = "timothy@thresholddatasciences.com"
-DISCLOSURE = (f"Competing interests: {COMPETING_INTERESTS} Funding: none. The views are the author's alone, and the "
-              "author has no financial interest in any FCC proceeding.")
+DISCLOSURE = f"Competing interests: {COMPETING_INTERESTS} Funding: none. The views are the author's alone."
 # (citation, how it differs from this work): each citation VERIFIED in docs/literature.md; the sentences say only
 # what was read (2026-11-25 entries there). Shared with the README and the datasheet (step 14).
 RELATED_WORK_ITEMS = [  # APA 7 (3.2.1), each checked against its DOI or official page (docs/literature.md)

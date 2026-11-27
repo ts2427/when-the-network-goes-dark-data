@@ -274,4 +274,4 @@ major: an existing published value, or the meaning of a variable, changes; minor
 
 ## Disclosure
 
-Competing interests: The author works for a cable operator. This is independent work on public data only; no employer data, time or resources were used, and the employer has no role in it. Funding: none. The views are the author's alone, and the author has no financial interest in any FCC proceeding. Contact: timothy@thresholddatasciences.com. AI assistance: `AI_ASSISTANCE.md`.
+Competing interests: The author works for a cable operator. This is independent work on public data only; no employer data, time or resources were used, and the employer has no role in it. Funding: none. The views are the author's alone. Contact: timothy@thresholddatasciences.com. AI assistance: `AI_ASSISTANCE.md`.

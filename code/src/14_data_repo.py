@@ -477,6 +477,7 @@ def copy_docs(T: Path) -> None:
     for name in ("analysis_plan.md", "analysis_plan_addendum_v2.md", "decisions.md", "data_sources.md",
                  "literature.md", "update_procedure.md", "external_validation.md", "restructure_plan.md",
                  "analysis_plan_addendum_4x.md", "scoping_4x.md", "roadmap_modules.md", "dirs_activations.csv", "changes_4_0_0_results.csv",
+                 "external_review_2026-11-27.zip",
                  "scoping_earlier_years.md"):
         copy(ROOT / "docs" / name, T / "docs" / name)
     copy(ROOT / "examples" / "quickstart.ipynb", T / "examples" / "quickstart.ipynb")
@@ -1167,8 +1168,9 @@ def datasheet_md(T: Path) -> None:
         "- Independent re-extraction (2026-11-27): a reviewer checked the published v3.2.1 panel with an extractor, "
         "scripts and sample of their own (pdftotext text, a seeded stratified sample), reporting 0 mismatches over "
         "its 10,051 rows. It is an independent code path and reviewer, AI-assisted, and not a human-keyed sample; a "
-        "human-keyed sample is planned before the data paper. Its rerun against this version is pending "
-        "(`docs/external_validation.md`).",
+        "human-keyed sample is planned before the data paper. Rerun against this version (all 11,296 rows, with the "
+        "restored ones): no field mismatch; the three rows its rebuild step cannot find were read and match "
+        "(`docs/external_validation.md`; scripts in `docs/external_review_2026-11-27.zip`).",
         "- Context tables added in 3.2.0 (`data/analysis/context/`): cable and wireline subscribers out per report, "
         "FEMA Individual Assistance and NCEI Storm Events hazard by storm and county. Descriptive only, under "
         "addendum 4.x-1; the NCEI files themselves are not redistributed.",
@@ -2198,7 +2200,7 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "## Versions", "", f"{POLICY_TEXT} (`CHANGELOG.md`).", "",
           "## Disclosure", "",
           f"Competing interests: {importlib.import_module('11_build_page').COMPETING_INTERESTS} Funding: none. The "
-          "views are the author's alone, and the author has no financial interest in any FCC proceeding. Contact: "
+          "views are the author's alone. Contact: "
           f"{importlib.import_module('11_build_page').CONTACT_EMAIL}. AI assistance: `AI_ASSISTANCE.md`.", ""]
     write(T / "README.md", "\n".join(L))
 

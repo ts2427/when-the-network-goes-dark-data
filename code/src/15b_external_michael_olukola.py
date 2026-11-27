@@ -271,7 +271,8 @@ def markdown(m: pd.DataFrame, o: pd.DataFrame, f: pd.DataFrame) -> str:
 
 
 REVIEW = ROOT / "manifest" / "external_review_2026-11-27.csv"  # the review's own reported results (its README)
-REVIEW_ARCHIVE = "data/raw/external_review_2026-11-27.zip"  # in the private project; not yet published
+REVIEW_ARCHIVE = "docs/external_review_2026-11-27.zip"  # file paths made relative (tools/review_archive_relative.py)
+RERUN = ROOT / "manifest" / "external_review_rerun_4_0_0.csv"
 EENEWS_SOURCE = ("Frank, T. (2019, October 8). Hello? There's a hurricane and my phone won't work. *E&E News* "
                  "(Climatewire). https://www.eenews.net/articles/hello-theres-a-hurricane-and-my-phone-wont-work/")
 EENEWS_SHARE = 70  # the article's figure, as read 2026-11-27 (docs/literature.md); its text is not copied
@@ -286,8 +287,9 @@ def review_section() -> list:
         "**What it is.** On 2026-11-27 an independent reviewer checked the published v3.2.1 panel against the FCC's "
         "reports without using this project's parsing code: its own extractor (pdftotext -layout text of each PDF, "
         "table rows matched by regular expressions, names split across lines rebuilt from neighbouring lines), its "
-        "own scripts and its own sample. Its scripts, sample and results, with a README, are kept with the project "
-        "and are not yet in this repository. "
+        f"own scripts and its own sample. Its scripts, sample and results, with a README, are in `{REVIEW_ARCHIVE}`; "
+        "when it was published, the scripts' absolute file paths were made relative and nothing else was changed "
+        "(the README says so). "
         "It is an independent code path and an independent reviewer, and it was AI-assisted: an AI review agent "
         "wrote and ran the scripts. It is **not** a human-keyed sample. A human double-keyed sample is planned "
         "before the data paper.", "",
@@ -298,11 +300,16 @@ def review_section() -> list:
         "", "It also found that four excluded reports (Laura, 2020-08-28 to 08-30; Helene, 2024-10-04) were legible "
         "and excluded by this project's own checker, not by FCC errors, and that a one-cell FCC total misprint "
         "(Helene, 2024-10-03) was treated differently from Harvey's. Version 4.0.0 corrects both (`ERRATA.md`).", "",
-        "**Rerun against 4.0.0.** Not yet done. The review's scripts read poppler's pdftotext layout; the only "
-        "pdftotext on the build machine is Xpdf's, which lays text out differently, so its comparison would test the "
-        "extractor, not the data (run with Xpdf, the same scripts report thousands of mismatches even against the "
-        "v3.2.1 panel the review found clean). The rerun waits for poppler's pdftotext or a Linux machine "
-        "(`docs/decisions.md`, 2026-11-27)."]
+        "**Rerun against 4.0.0** (2026-11-27, the review's own whole-panel scripts unchanged except for paths, with "
+        "poppler's pdftotext 26.09.0 for Windows). Xpdf's pdftotext lays text out differently and is not a fair rerun: "
+        "with it, the same scripts report thousands of mismatches even against the v3.2.1 panel the review found "
+        "clean. With poppler they first reproduce the review's v3.2.1 result, then check the 4.0.0 panel, including "
+        "the 1,245 restored rows:", "",
+        "| Panel | Rows | Matched on a line | Matched by name rebuild | Field mismatches | Not found | Note |",
+        "|---|---|---|---|---|---|---|"]
+    r = pd.read_csv(RERUN, dtype=str, keep_default_na=False)
+    lines += [f"| {x.panel} | {int(x.rows):,} | {int(x.matched_on_a_line):,} | {int(x.matched_by_name_rebuild):,} | "
+              f"{x.field_mismatches} | {x.not_found} | {x.note} |" for x in r.itertuples()]
     return lines
 
 
