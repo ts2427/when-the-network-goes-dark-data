@@ -2,7 +2,7 @@
   "profile": "data-package",
   "name": "when-the-network-goes-dark-data",
   "title": "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)",
-  "version": "3.2.1",
+  "version": "4.0.0",
   "created": "2026-11-27T12:00:00-06:00",
   "homepage": "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/",
   "description": "County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 22 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the inputs and code that rebuild it.",
@@ -46,7 +46,7 @@
       "mediatype": "text/csv",
       "encoding": "utf-8",
       "title": "FCC DIRS cell-site outages by county and report",
-      "description": "One row per county per FCC DIRS report in use (169 reports, 22 storms).",
+      "description": "One row per county per FCC DIRS report in use (174 reports, 22 storms).",
       "schema": {
         "fields": [
           {
@@ -121,8 +121,14 @@
           {
             "name": "county",
             "type": "string",
-            "description": "County as printed by the FCC (upper case).",
-            "limitations": "Spellings vary between reports; use fips."
+            "description": "County as printed by the FCC; case and suffix vary by report format.",
+            "limitations": "Use fips or county_name_census."
+          },
+          {
+            "name": "county_name_census",
+            "type": "string",
+            "description": "The county's 2020 Census name for its FIPS code (NAMELSAD form, e.g. \"Baldwin County\", \"Orleans Parish\"), from data/input/census/national_county2020.txt.",
+            "limitations": "Added in 4.0.0. One name per FIPS across every report."
           },
           {
             "name": "fips",
@@ -241,8 +247,8 @@
           ""
         ]
       },
-      "hash": "sha256:ee5b93f582765c79d84a64dfc59aee1416ca45c8667556b69254e7c542539944",
-      "bytes": 1762625
+      "hash": "sha256:452b40792bf29c761f7b5e418d614a2a18ff474388f24c7e073652d8bd12d65e",
+      "bytes": 2158753
     },
     {
       "name": "storms",
@@ -316,7 +322,7 @@
             "type": "integer",
             "description": "Reports in the panel.",
             "unit": "reports",
-            "limitations": "Blank for storms not in the panel."
+            "limitations": "Blank for storms not in the panel. DOC-375778A1 and DOC-375808A1 are shared by Ida and Nicholas and counted for both, so the column sums to more than the reports used (README, Report counts)."
           },
           {
             "name": "n_counties",
@@ -360,8 +366,8 @@
           ""
         ]
       },
-      "hash": "sha256:9cc9a0204fe1fba14cdcaf58b23f874192e0dcf54ba709a8be0abffb8829c1a9",
-      "bytes": 5266
+      "hash": "sha256:5a4a146957caeabc8234166addb140c033a59f37a1ab5fd0daa7bcc8321b200b",
+      "bytes": 4736
     },
     {
       "name": "panel_analysis_ready",
@@ -446,8 +452,14 @@
           {
             "name": "county",
             "type": "string",
-            "description": "County as printed by the FCC (upper case).",
-            "limitations": "Spellings vary between reports; use fips."
+            "description": "County as printed by the FCC; case and suffix vary by report format.",
+            "limitations": "Use fips or county_name_census."
+          },
+          {
+            "name": "county_name_census",
+            "type": "string",
+            "description": "The county's 2020 Census name for its FIPS code (NAMELSAD form, e.g. \"Baldwin County\", \"Orleans Parish\"), from data/input/census/national_county2020.txt.",
+            "limitations": "Added in 4.0.0. One name per FIPS across every report."
           },
           {
             "name": "fips",
@@ -622,7 +634,11 @@
             "type": "number",
             "description": "eaglei_customers_out as a percent of eaglei_modeled_customers.",
             "unit": "percent",
-            "limitations": "Not used where eaglei_mcc_flag is not ok."
+            "limitations": "Not used where eaglei_mcc_flag is not ok.",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 100
+            }
           },
           {
             "name": "eaglei_max_out_in_window",
@@ -910,8 +926,8 @@
           ""
         ]
       },
-      "hash": "sha256:674cf4457a391b3523756529de8ba41ba6e4bcc4530eac748e0b02924256f0c2",
-      "bytes": 6496749
+      "hash": "sha256:027189402b0f7ea27006ca41ae4fbc9022a711506e242bf8265c63fc7290c6d3",
+      "bytes": 7452431
     },
     {
       "name": "panel_analysis_ready_parquet",
@@ -920,7 +936,7 @@
       "format": "parquet",
       "mediatype": "application/vnd.apache.parquet",
       "title": "Analysis-ready panel (Parquet)",
-      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 a60d61b6f9a7a0c5306ea5010e7b733afd428c84c439f3483d93dca35bc26195; 668614 bytes.",
+      "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. A missing float is NaN, which frictionless reads as the text nan, so nan is a missing value here (4.0.0). SHA-256 722d9b6700e690dd4c17b7d824d48431acab833e39fb8d62e835c1a212b66ac4; 742466 bytes.",
       "schema": {
         "fields": [
           {
@@ -995,8 +1011,14 @@
           {
             "name": "county",
             "type": "string",
-            "description": "County as printed by the FCC (upper case).",
-            "limitations": "Spellings vary between reports; use fips."
+            "description": "County as printed by the FCC; case and suffix vary by report format.",
+            "limitations": "Use fips or county_name_census."
+          },
+          {
+            "name": "county_name_census",
+            "type": "string",
+            "description": "The county's 2020 Census name for its FIPS code (NAMELSAD form, e.g. \"Baldwin County\", \"Orleans Parish\"), from data/input/census/national_county2020.txt.",
+            "limitations": "Added in 4.0.0. One name per FIPS across every report."
           },
           {
             "name": "fips",
@@ -1171,7 +1193,11 @@
             "type": "number",
             "description": "eaglei_customers_out as a percent of eaglei_modeled_customers.",
             "unit": "percent",
-            "limitations": "Not used where eaglei_mcc_flag is not ok."
+            "limitations": "Not used where eaglei_mcc_flag is not ok.",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 100
+            }
           },
           {
             "name": "eaglei_max_out_in_window",
@@ -1456,10 +1482,11 @@
           "fips"
         ],
         "missingValues": [
-          ""
+          "",
+          "nan"
         ]
       },
-      "hash": "sha256:a60d61b6f9a7a0c5306ea5010e7b733afd428c84c439f3483d93dca35bc26195"
+      "hash": "sha256:722d9b6700e690dd4c17b7d824d48431acab833e39fb8d62e835c1a212b66ac4"
     },
     {
       "name": "bdc_county_provider_counts",
@@ -1644,8 +1671,8 @@
           ""
         ]
       },
-      "hash": "sha256:34a65daeaf3dccca5af83025f53c1de4f791fad77137b3b7b8ada689c5c3534c",
-      "bytes": 25444
+      "hash": "sha256:1cf1597fb3dd98ae83fb1bae8698a31436dae10cb1562a04ff74f4d7d04f7a06",
+      "bytes": 25449
     },
     {
       "name": "fema_ia_county_storm",
@@ -1751,8 +1778,8 @@
           ""
         ]
       },
-      "hash": "sha256:fb11922cdd4f396c66d3aba182c287a27578a7734e800f9fe6ba52d3c2a7ce89",
-      "bytes": 119638
+      "hash": "sha256:2d99fa9c4a902e948fc87456ed2a07ccd62a99ed2646dcc2110c3eca485b60b4",
+      "bytes": 129625
     },
     {
       "name": "fema_ia_set_aside",
@@ -1928,8 +1955,8 @@
           ""
         ]
       },
-      "hash": "sha256:75c5e261cdd922bb059f949da81592ddbfc12c0b42da55cb4ecaceccdc0dde50",
-      "bytes": 148557
+      "hash": "sha256:5c8acfffa45c6417a7815a36d0b8aa6a9a3ac3d905cf4bb62e76f143e7afcc62",
+      "bytes": 162473
     },
     {
       "name": "hazard_ncei_storm_summary",
@@ -1988,8 +2015,628 @@
           ""
         ]
       },
-      "hash": "sha256:9b9e1e512ae330dc8fcd2649f62ffd22015055d1f2f395a495fd09d4b9eb3956",
+      "hash": "sha256:1c01ff074089a6ea04e9a09a05a3e41d00cb14530bfa443ba78d7ce2111e512d",
       "bytes": 1340
+    },
+    {
+      "name": "validation_dirs",
+      "path": "data/analysis/validation/validation_dirs.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "Validation of every report in scope",
+      "description": "One row per report: its status, what confirmed its rows and every failure and flag. Written by code/src/04_validate_dirs.py.",
+      "schema": {
+        "fields": [
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "FCC EDOCS document ID of the report."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm of the report, as in the manifest (Ida for the reports Ida and Nicholas share).",
+            "limitations": "Added in 4.0.0."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "ok, flagged, known_fcc_inconsistency, excluded or fail (fail stops the build)."
+          },
+          {
+            "name": "n_rows",
+            "type": "integer",
+            "description": "County rows parsed.",
+            "unit": "rows"
+          },
+          {
+            "name": "second_reading",
+            "type": "string",
+            "description": "What confirmed every row: pdf_plain_text (the PDF's plain text, independent of the parse, which used the .txt or the PDF's table cells), or, where the parse itself used plain PDF text, txt, pdfium (PDFium's text) or pdf_cells (both pdfplumber readings), joined by \"and\".",
+            "limitations": "Added in 4.0.0."
+          },
+          {
+            "name": "fcc_multiple_causes_note",
+            "type": "boolean",
+            "description": "The report prints the FCC's note that a site can be out for more than one cause.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          },
+          {
+            "name": "computed_pct_out",
+            "type": "number",
+            "description": "Sites out over sites served, from the county rows.",
+            "unit": "percent"
+          },
+          {
+            "name": "stated_pct_out",
+            "type": "number",
+            "description": "The report's printed headline share of sites out.",
+            "unit": "percent",
+            "limitations": "Blank where none is printed."
+          },
+          {
+            "name": "pct_out_used",
+            "type": "number",
+            "description": "The share used: always computed from the rows.",
+            "unit": "percent"
+          },
+          {
+            "name": "sites_unattributed",
+            "type": "integer",
+            "description": "Sum over rows of sites out with no cause given.",
+            "unit": "cell sites",
+            "limitations": "Blank where the report prints no causes."
+          },
+          {
+            "name": "sites_overattributed",
+            "type": "integer",
+            "description": "Sum over rows of causes in excess of sites out.",
+            "unit": "cell sites",
+            "limitations": "Blank where the report prints no causes."
+          },
+          {
+            "name": "failures",
+            "type": "string",
+            "description": "Why the report fails, if it does; ';'-separated."
+          },
+          {
+            "name": "flag_reasons",
+            "type": "string",
+            "description": "Known FCC inconsistencies and flags; ';'-separated."
+          }
+        ],
+        "primaryKey": [
+          "doc_id"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:0f5cc28f95fe7d524fc761ac0ae019662aa340fe562f30d9679c3f74b415546f",
+      "bytes": 38865
+    },
+    {
+      "name": "validation_summary",
+      "path": "data/analysis/validation/validation_summary.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "Cause attribution by report (the table the page cites)",
+      "description": "One row per report: county rows and how their causes compare with sites out. n/a where the report prints no causes. Column names without spaces since 4.0.0.",
+      "schema": {
+        "fields": [
+          {
+            "name": "report",
+            "type": "string",
+            "description": "Storm, date and DOC ID."
+          },
+          {
+            "name": "rows",
+            "type": "integer",
+            "description": "County rows.",
+            "unit": "rows"
+          },
+          {
+            "name": "rows_causes_exact",
+            "type": "integer",
+            "description": "Rows whose causes sum to sites out.",
+            "unit": "rows",
+            "limitations": "n/a: no causes printed."
+          },
+          {
+            "name": "rows_causes_short_by_1",
+            "type": "integer",
+            "description": "Rows whose causes fall short of sites out by 1.",
+            "unit": "rows"
+          },
+          {
+            "name": "rows_causes_short_by_more",
+            "type": "integer",
+            "description": "Rows whose causes fall short by more than 1.",
+            "unit": "rows"
+          },
+          {
+            "name": "rows_causes_exceed_out",
+            "type": "integer",
+            "description": "Rows whose causes exceed sites out.",
+            "unit": "rows"
+          },
+          {
+            "name": "sites_with_no_cause",
+            "type": "string",
+            "description": "Sites out with no cause, \"N of M\" sites out."
+          }
+        ],
+        "primaryKey": [
+          "report"
+        ],
+        "missingValues": [
+          "",
+          "n/a"
+        ]
+      },
+      "hash": "sha256:a23381d36cb575812f0651e0af841c967b035ef548202f23183afb8609216d44",
+      "bytes": 10620
+    },
+    {
+      "name": "excluded_reports",
+      "path": "data/analysis/validation/excluded_reports.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "Excluded reports",
+      "description": "manifest/excluded_reports.csv with each report's status and failures (empty in 4.0.0: every report in scope passes).",
+      "schema": {
+        "fields": [
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "FCC EDOCS document ID."
+          },
+          {
+            "name": "storm_name",
+            "type": "string",
+            "description": "Storm."
+          },
+          {
+            "name": "report_date",
+            "type": "date",
+            "description": "Report date."
+          },
+          {
+            "name": "reason",
+            "type": "string",
+            "description": "Why it is excluded."
+          },
+          {
+            "name": "decided_on",
+            "type": "date",
+            "description": "When the exclusion was decided."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "Its validation status."
+          },
+          {
+            "name": "failures",
+            "type": "string",
+            "description": "Its failures."
+          }
+        ],
+        "primaryKey": [
+          "doc_id"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:ff08a934b02cc128e01dc06b3a45c3185422a29ebc43059ef56c663f0074bd7b",
+      "bytes": 64
+    },
+    {
+      "name": "area_status_counts",
+      "path": "data/analysis/validation/area_status_counts.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "County rows by area status, per report",
+      "description": "Counts of each report's rows inside the storm's notice area, inside under a spelling variant, outside it, or in the table but not the report's list.",
+      "schema": {
+        "fields": [
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "FCC EDOCS document ID."
+          },
+          {
+            "name": "inside",
+            "type": "integer",
+            "description": "Rows inside the notice area.",
+            "unit": "rows"
+          },
+          {
+            "name": "inside_spelling_variant",
+            "type": "integer",
+            "description": "Rows inside under a checked spelling variant.",
+            "unit": "rows"
+          },
+          {
+            "name": "outside_notice_area",
+            "type": "integer",
+            "description": "Rows outside the notice area (kept, flagged).",
+            "unit": "rows"
+          },
+          {
+            "name": "table_not_in_list",
+            "type": "integer",
+            "description": "Rows in the table but not the report's county list.",
+            "unit": "rows"
+          },
+          {
+            "name": "confirmed_by_second_reading",
+            "type": "boolean",
+            "description": "Every row confirmed by the second reading.",
+            "trueValues": [
+              "True"
+            ],
+            "falseValues": [
+              "False"
+            ]
+          }
+        ],
+        "primaryKey": [
+          "doc_id"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:26e6676cde4cba86fd5f1b2c052dd35ea2110a8f7c60ac8349f2f455b4585fc5",
+      "bytes": 4929
+    },
+    {
+      "name": "external_validation_fcc_2017",
+      "path": "data/analysis/validation/external_validation_fcc_2017.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "External check: the FCC's 2017 season report",
+      "description": "One row per figure the source gives in its text; see docs/external_validation.md. Values are text, since some figures are ranges or words.",
+      "schema": {
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": "Figure ID."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm."
+          },
+          {
+            "name": "where",
+            "type": "string",
+            "description": "Page and paragraph in the source."
+          },
+          {
+            "name": "fcc_text",
+            "type": "string",
+            "description": "The source's figure, as printed."
+          },
+          {
+            "name": "report_date",
+            "type": "date",
+            "description": "Matching DIRS report date."
+          },
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "Matching DIRS report."
+          },
+          {
+            "name": "area",
+            "type": "string",
+            "description": "State or area (';'-separated)."
+          },
+          {
+            "name": "county",
+            "type": "string",
+            "description": "County, where the figure is for one."
+          },
+          {
+            "name": "measure",
+            "type": "string",
+            "description": "How the figure is tested."
+          },
+          {
+            "name": "fcc_value",
+            "type": "string",
+            "description": "The source's value (text: some are ranges or words)."
+          },
+          {
+            "name": "ours",
+            "type": "string",
+            "description": "Our value."
+          },
+          {
+            "name": "ours_detail",
+            "type": "string",
+            "description": "Our counts behind the value."
+          },
+          {
+            "name": "printed_in_report",
+            "type": "string",
+            "description": "What the daily report prints."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "Where our value comes from."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "match, consistent, differs, or shown, not scored."
+          },
+          {
+            "name": "explanation",
+            "type": "string",
+            "description": "Why a figure differs, where it does."
+          }
+        ],
+        "primaryKey": [
+          "id"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:38317bfa4eeb841bc047e976669d212852ad9ae35ece79b4dcd06282cf32bb22",
+      "bytes": 20744
+    },
+    {
+      "name": "external_validation_fcc_michael",
+      "path": "data/analysis/validation/external_validation_fcc_michael.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "External check: the FCC's Hurricane Michael report",
+      "description": "One row per figure the source gives in its text; see docs/external_validation.md. Values are text, since some figures are ranges or words.",
+      "schema": {
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": "Figure ID."
+          },
+          {
+            "name": "where",
+            "type": "string",
+            "description": "Page and paragraph in the source."
+          },
+          {
+            "name": "fcc_text",
+            "type": "string",
+            "description": "The source's figure, as printed."
+          },
+          {
+            "name": "report_date",
+            "type": "date",
+            "description": "Matching DIRS report date."
+          },
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "Matching DIRS report."
+          },
+          {
+            "name": "area",
+            "type": "string",
+            "description": "State or area (';'-separated)."
+          },
+          {
+            "name": "county",
+            "type": "string",
+            "description": "County, where the figure is for one."
+          },
+          {
+            "name": "measure",
+            "type": "string",
+            "description": "How the figure is tested."
+          },
+          {
+            "name": "fcc_value",
+            "type": "string",
+            "description": "The source's value (text: some are ranges or words)."
+          },
+          {
+            "name": "ours",
+            "type": "string",
+            "description": "Our value."
+          },
+          {
+            "name": "ours_detail",
+            "type": "string",
+            "description": "Our counts behind the value."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "match, consistent, differs, or shown, not scored."
+          },
+          {
+            "name": "explanation",
+            "type": "string",
+            "description": "Why a figure differs, where it does."
+          }
+        ],
+        "primaryKey": [
+          "id"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:1bb17315b8fc06e845decbf600fa391102a4cd1f0d40bc86aec50a8cf3f5da7d",
+      "bytes": 4608
+    },
+    {
+      "name": "external_validation_olukola",
+      "path": "data/analysis/validation/external_validation_olukola.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "External check: Olukola et al. (2026), Helene",
+      "description": "One row per figure the source gives in its text; see docs/external_validation.md. Values are text, since some figures are ranges or words.",
+      "schema": {
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": "Figure ID."
+          },
+          {
+            "name": "storm",
+            "type": "string",
+            "description": "Storm."
+          },
+          {
+            "name": "figure",
+            "type": "string",
+            "description": "What is compared."
+          },
+          {
+            "name": "where",
+            "type": "string",
+            "description": "Page and paragraph in the source."
+          },
+          {
+            "name": "theirs",
+            "type": "string",
+            "description": "Their value."
+          },
+          {
+            "name": "ours",
+            "type": "string",
+            "description": "Our value."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "match, consistent, differs, or shown, not scored."
+          },
+          {
+            "name": "explanation",
+            "type": "string",
+            "description": "Why a figure differs, where it does."
+          }
+        ],
+        "primaryKey": [
+          "id"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:9d8f53a374373e2b6044a54821bb481940baf5fa4b329e41659d1307ebccfc51",
+      "bytes": 1661
+    },
+    {
+      "name": "external_validation_fcc_21_99",
+      "path": "data/analysis/validation/external_validation_fcc_21_99.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "title": "External check: FCC 21-99 on Ida",
+      "description": "One row per figure the source gives in its text; see docs/external_validation.md. Values are text, since some figures are ranges or words.",
+      "schema": {
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": "Figure ID."
+          },
+          {
+            "name": "where",
+            "type": "string",
+            "description": "Page and paragraph in the source."
+          },
+          {
+            "name": "fcc_text",
+            "type": "string",
+            "description": "The source's figure, as printed."
+          },
+          {
+            "name": "doc_id",
+            "type": "string",
+            "description": "Matching DIRS report."
+          },
+          {
+            "name": "report_date",
+            "type": "date",
+            "description": "Matching DIRS report date."
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "description": "State."
+          },
+          {
+            "name": "measure",
+            "type": "string",
+            "description": "How the figure is tested."
+          },
+          {
+            "name": "fcc_value",
+            "type": "string",
+            "description": "The source's value (text: some are ranges or words)."
+          },
+          {
+            "name": "ours",
+            "type": "string",
+            "description": "Our value."
+          },
+          {
+            "name": "ours_detail",
+            "type": "string",
+            "description": "Our counts behind the value."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "match, consistent, differs, or shown, not scored."
+          },
+          {
+            "name": "explanation",
+            "type": "string",
+            "description": "Why a figure differs, where it does."
+          }
+        ],
+        "primaryKey": [
+          "id"
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "hash": "sha256:92601d4fa8546dad40380fc262849cbcbfec034b91532dd56db0d107605dc250",
+      "bytes": 611
     },
     {
       "name": "results",
@@ -1998,8 +2645,8 @@
       "mediatype": "application/json",
       "title": "Every number on the page",
       "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant digits.",
-      "hash": "sha256:bbafb196c0abebc4e919598a5d637b158ddbe8f33c2f312d991bae98d7001918",
-      "bytes": 966461
+      "hash": "sha256:8935224bbea018b5c9f9074aa9e5fc039ced576c0d091835dad39f58d42f0a65",
+      "bytes": 978296
     },
     {
       "name": "datasheet",
@@ -2008,8 +2655,8 @@
       "mediatype": "text/markdown",
       "title": "Datasheet for the dataset",
       "description": "Motivation, composition, collection, preprocessing, uses (and uses not supported), known limitations, distribution and maintenance, following Gebru et al.'s Datasheets for Datasets; every number generated from results.json or the data.",
-      "hash": "sha256:8bfa9322baebe818bb333501686b176aab5e064731039d9f8201f4f4d18f90ba",
-      "bytes": 16991
+      "hash": "sha256:fb9c13ed66a16bfc99017d32f9df19ecea4a64ee4cd571c1d45988afa8dc0d28",
+      "bytes": 20269
     },
     {
       "name": "analysis_plan_as_committed",

@@ -1,14 +1,53 @@
 # Changelog
 
-This project follows [Semantic Versioning](https://semver.org/): a major version changes a published number or a
-variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
-any output.
+This project follows [Semantic Versioning](https://semver.org/) (since 4.0.0, stated exactly): major: an existing published value, or the meaning of a variable, changes; minor: rows, storms, files or variables are added and every existing published value is unchanged; patch: no value changes (bytes may change, for example a format or documentation fix, and the changelog says so).
 
-## [Unreleased]
+## [4.0.0] - 2026-11-27
+
+Corrections from an independent fine-tooth review of v3.2.1 and a search of the wider public FCC record. **Published
+numbers change**, so this is a major version: every changed value is in `ERRATA.md` (before, after and why). The
+FCC's reports were not re-keyed: an independent re-extraction of all 10,051 v3.2.1 rows found no transcription error;
+the changes come from reports wrongly excluded, a parser gap and documentation errors.
+
+### Fixed (published values change)
+- Four reports were excluded by this project's own checker, not by FCC errors, and are restored: Laura 2020-08-28,
+  08-29 and 08-30 (DOC-366519A1, DOC-366524A1, DOC-366526A1) and Helene 2024-10-04 (DOC-406197A1). The second reading
+  now confirms a row split across two or three lines of the PDF's plain text ("SAN ... AUGUSTINE"), and the parser
+  reads county names with a backquote (Prince George`s, Queen Anne`s, St. Mary`s). The recorded reason for
+  DOC-366524A1, that the FCC's Maryland rows do not add up, was wrong: its 24 rows sum to the printed 6,522; the
+  parser had skipped three of them.
+- Helene 2024-10-03 (DOC-406144A1), a one-cell FCC total misprint (Florida transport printed 1, its row 0), is a known
+  FCC inconsistency using the row sums, as Harvey 2017-09-04 and 09-05 are, instead of an exclusion. No report in
+  scope is excluded now.
+- Harrison County, Texas, in the reports Ida and Nicholas share (DOC-375778A1, DOC-375808A1) is keyed to Nicholas:
+  a row in a state only the second storm's notice covers takes the second storm's key.
+- `eaglei_pct_out` is blank wherever `eaglei_mcc_flag` is not ok (415 rows exceeded 100%, up to 296,546%), and the
+  schema constrains it to 0-100. No result used it.
+- Laura 2020-09-01 (DOC-366601A1): its printed time ("September1, 2020 at 12:00 p.m.") is read, so
+  `as_of_imputed` is False.
+
+### Fixed (no value changes)
+- State-code total lines ("GA - 13083 1293 9.88% ...", Helene 2024-09-28) are read; the note that this report
+  prints no Georgia total is removed (its Georgia rows reconcile to it).
+- The second reading is described as independent only where it is: where a report's parse used the PDF's plain text,
+  its rows are confirmed by the .txt or by PDFium's text instead (`second_reading` in `validation_dirs.csv`).
 
 ### Added
-- The version 3.2.1 DOI (10.5281/zenodo.24595378) in `CITATION.cff` and the README, added after the release.
-  Documentation only.
+- `county_name_census` (the 2020 Census county name for each FIPS) in the panel and the analysis-ready panel.
+- `docs/dirs_activations.csv` (an inventory of DIRS activations 2016-2026 known here), `docs/roadmap_modules.md`
+  (later extensions as separate modules), a report-count reconciliation (README, `CODEBOOK.md`, `DATASHEET.md`),
+  every validation table documented in `datapackage.json` and `CODEBOOK.md` (a `storm` column in
+  `validation_dirs.csv`; no spaces in `validation_summary.csv`'s headers), and the Parquet resource's byte count.
+- The independent re-extraction and an E&E News comparison for Michael, in `docs/external_validation.md`.
+- A version guard: `code/snapshots/` (the SHA-256 of every published file and a frozen `results.json`) and
+  `code/tests/test_version_guard.py`.
+- `run_all.py` empties `build/` first and stamps the run; the reproduction tests read `WTNGD_BUILD` and fail on a
+  stale or partial build. `01_check_manifest.py` fails on any report not confirmed, and runs first.
+
+### Changed (documentation)
+- The datasheet gives a contact, funding (none) and a competing-interests statement, which the README and the page
+  share; it names chapters by their `results.json` keys.
+- The versioning policy is stated exactly (top of this file).
 
 ## [3.2.1] - 2026-11-27
 

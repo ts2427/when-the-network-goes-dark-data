@@ -1,0 +1,5 @@
+check,what,n,result
+whole_panel,"Whole-panel comparison: every row of dirs_county_day.csv (v3.2.1), fields served, out, percent, damage, transport, power, backup and blanks",10051 rows,0 mismatches (95% upper bound 0.037% of rows)
+stratified_sample,"Stratified random sample (numpy seed 20261127; era by report format; 100 hard cases: wrapped names, later pages of multi-page tables, punctuation, combined-storm reports), checked against the FCC .txt (UTF-16, 2018-2020) or the PDF where the .txt is an FCC not-found page",164 rows; 1286 fields,"0 mismatches (95% upper bounds 2.2% of rows, 0.29% of fields)"
+fips,State-county pairs against Census national_county2020.txt,1183 pairs,0 mismatches
+coverage,Reports drawn with the same seed: rows missing or extra,6 reports,0 rows missing or extra

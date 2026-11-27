@@ -21,7 +21,7 @@ DATETIMES = ["as_of_utc", "eaglei_time", "first_34kt_utc", "nearest_landfall_utc
 BOOLEANS = ["as_of_imputed", "pct_printed", "fema_declared", "eaglei_release", "in_34kt", "in_50kt", "in_64kt"]
 DATES = ["report_date", "dirs_activation_date"]  # parsed as dates since 3.1.0
 STRINGS = ["storm_key", "nhc_id", "storm", "rule_period", "doc_id",
-           "report_status", "state", "county", "fips", "area_status", "time_flag", "eaglei_match", "eaglei_mcc_flag",
+           "report_status", "state", "county", "county_name_census", "fips", "area_status", "time_flag", "eaglei_match", "eaglei_mcc_flag",
            "eaglei_coverage_flag", "wind_zone", "track_source", "landfall_source", "bdc_release", "bdc_role",
            "bdc_mobile_half_group", "first_report_date", "last_report_date", "censoring"]
 COUNTS = ["sites_served", "sites_out", "out_damage", "out_transport", "out_power", "on_backup_power",

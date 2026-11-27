@@ -3,20 +3,35 @@
 CSVs must match byte for byte. results.json: numbers within a relative 1e-8 (or 1e-12 absolute, for values that are
 zero up to floating-point noise), everything else exactly (platforms' math libraries differ in the last bits). The
 analysis-ready panel: value by value at the same tolerance."""
+import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]
-BUILD = REPO / "build"
+BUILD = Path(os.environ.get("WTNGD_BUILD", str(REPO / "build")))  # the same folder run_all.py and config.py use
 PUBLISHED = REPO / "data" / "analysis"
 sys.path.insert(0, str(REPO / "code" / "src"))
 from compare import ATOL, RTOL, differences  # noqa: E402
 
 NOT_BUILT = "needs build/ (not committed): run python run_all.py first"
 built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason=NOT_BUILT)
+
+
+@built
+def test_build_is_from_a_complete_run_of_this_code():
+    """4.0.0: a stale or partial build/ can neither pass nor fail the comparisons below unnoticed."""
+    stamp_file = BUILD / "run_stamp.json"
+    assert stamp_file.exists(), "build/ has no run_stamp.json: rerun python run_all.py"
+    stamp = json.loads(stamp_file.read_text(encoding="utf-8"))
+    spec = importlib.util.spec_from_file_location("run_all", REPO / "run_all.py")
+    run_all = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(run_all)
+    assert stamp["complete"], "run_all.py did not finish: rerun it"
+    assert stamp["code_sha256"] == run_all.code_digest(), "code/src or code/manifest changed since the run: rerun"
 CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv")] + [
     (f"output/{n}", f"validation/{n}") for n in ("validation_dirs.csv", "validation_summary.csv",
                                                  "excluded_reports.csv", "area_status_counts.csv",

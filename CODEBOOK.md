@@ -4,7 +4,7 @@ Generated from `datapackage.json` by `code/src/14_data_repo.py`; edit the packag
 
 ## `data/analysis/dirs_county_day.csv`
 
-One row per county per FCC DIRS report in use (169 reports, 22 storms).
+One row per county per FCC DIRS report in use (174 reports, 22 storms).
 
 Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
@@ -21,7 +21,8 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `as_of_imputed` | boolean |  | True when as_of_utc was set to 12:00 Eastern because the report prints no time. |  |
 | `report_status` | string |  | Validation status of the report (step 4): ok, flagged (a check raised a note) or known_fcc_inconsistency (a stated total the FCC's own rows do not sum to, listed in code/manifest/known_fcc_inconsistencies.csv). | Excluded reports are not in the file. |
 | `state` | string |  | State, as printed. | Ten study states only. |
-| `county` | string |  | County as printed by the FCC (upper case). | Spellings vary between reports; use fips. |
+| `county` | string |  | County as printed by the FCC; case and suffix vary by report format. | Use fips or county_name_census. |
+| `county_name_census` | string |  | The county's 2020 Census name for its FIPS code (NAMELSAD form, e.g. "Baldwin County", "Orleans Parish"), from data/input/census/national_county2020.txt. | Added in 4.0.0. One name per FIPS across every report. |
 | `fips` | string |  | Five-digit county FIPS code (with leading zero). | Mapped from the printed name with code/manifest/fips_exceptions.csv. |
 | `sites_served` | integer | sites | Cell sites served in the county, as reported. | The denominator differs by storm and report; compare percentages with care. Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat). |
 | `sites_out` | integer | sites | Cell sites out of service in the county, as reported. | Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat). |
@@ -54,7 +55,7 @@ Primary key: `storm_key`. Missing value code: empty cell.
 | `landfall_source` | string |  | Which rule set day 0. |  |
 | `previous_landfall_utc` | datetime | UTC | Day 0 under the original rule (kept for chapter 8's comparison). | Superseded; not used for the main results. |
 | `interim_landfall_utc` | datetime | UTC | Day 0 under the first 2026-11-23 rule (kept for comparison). | Superseded; not used for the main results. |
-| `n_reports` | integer | reports | Reports in the panel. | Blank for storms not in the panel. |
+| `n_reports` | integer | reports | Reports in the panel. | Blank for storms not in the panel. DOC-375778A1 and DOC-375808A1 are shared by Ida and Nicholas and counted for both, so the column sums to more than the reports used (README, Report counts). |
 | `n_counties` | integer | counties | Counties in the panel. | Blank for storms not in the panel. |
 | `first_report` | date |  | First report date in the panel. |  |
 | `last_report` | date |  | Last report date in the panel. | The FCC's last public report, not the end of outages. |
@@ -80,7 +81,8 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `as_of_imputed` | boolean |  | True when as_of_utc was set to 12:00 Eastern because the report prints no time. |  |
 | `report_status` | string |  | Validation status of the report (step 4): ok, flagged (a check raised a note) or known_fcc_inconsistency (a stated total the FCC's own rows do not sum to, listed in code/manifest/known_fcc_inconsistencies.csv). | Excluded reports are not in the file. |
 | `state` | string |  | State, as printed. | Ten study states only. |
-| `county` | string |  | County as printed by the FCC (upper case). | Spellings vary between reports; use fips. |
+| `county` | string |  | County as printed by the FCC; case and suffix vary by report format. | Use fips or county_name_census. |
+| `county_name_census` | string |  | The county's 2020 Census name for its FIPS code (NAMELSAD form, e.g. "Baldwin County", "Orleans Parish"), from data/input/census/national_county2020.txt. | Added in 4.0.0. One name per FIPS across every report. |
 | `fips` | string |  | Five-digit county FIPS code (with leading zero). | Mapped from the printed name with code/manifest/fips_exceptions.csv. |
 | `sites_served` | integer | sites | Cell sites served in the county, as reported. | The denominator differs by storm and report; compare percentages with care. Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat). |
 | `sites_out` | integer | sites | Cell sites out of service in the county, as reported. | Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat). |
@@ -150,7 +152,7 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
 ## `data/analysis/panel_analysis_ready.parquet`
 
-The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. SHA-256 a60d61b6f9a7a0c5306ea5010e7b733afd428c84c439f3483d93dca35bc26195; 668614 bytes.
+The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable integers) and full float precision. A missing float is NaN, which frictionless reads as the text nan, so nan is a missing value here (4.0.0). SHA-256 722d9b6700e690dd4c17b7d824d48431acab833e39fb8d62e835c1a212b66ac4; 742466 bytes.
 
 Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 
@@ -167,7 +169,8 @@ Primary key: `storm_key`, `doc_id`, `fips`. Missing value code: empty cell.
 | `as_of_imputed` | boolean |  | True when as_of_utc was set to 12:00 Eastern because the report prints no time. |  |
 | `report_status` | string |  | Validation status of the report (step 4): ok, flagged (a check raised a note) or known_fcc_inconsistency (a stated total the FCC's own rows do not sum to, listed in code/manifest/known_fcc_inconsistencies.csv). | Excluded reports are not in the file. |
 | `state` | string |  | State, as printed. | Ten study states only. |
-| `county` | string |  | County as printed by the FCC (upper case). | Spellings vary between reports; use fips. |
+| `county` | string |  | County as printed by the FCC; case and suffix vary by report format. | Use fips or county_name_census. |
+| `county_name_census` | string |  | The county's 2020 Census name for its FIPS code (NAMELSAD form, e.g. "Baldwin County", "Orleans Parish"), from data/input/census/national_county2020.txt. | Added in 4.0.0. One name per FIPS across every report. |
 | `fips` | string |  | Five-digit county FIPS code (with leading zero). | Mapped from the printed name with code/manifest/fips_exceptions.csv. |
 | `sites_served` | integer | sites | Cell sites served in the county, as reported. | The denominator differs by storm and report; compare percentages with care. Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat). |
 | `sites_out` | integer | sites | Cell sites out of service in the county, as reported. | Cell sites as reported by providers to the FCC; a site out is not a count of people without service (the FCC's caveat). |
@@ -349,6 +352,160 @@ Primary key: `storm_key`. Missing value code: empty cell.
 | `zone_events_unmapped` | integer | events | Zone events in the storm's states whose zone is not in bp16ap26.dbx. |  |
 | `zone_events_name_differs` | integer | events | Zone events set aside because their NCEI zone name names none of the counties bp16ap26.dbx gives the zone (renumbered zones, place-named zones, misspellings). |  |
 
+## `data/analysis/validation/validation_dirs.csv`
+
+One row per report: its status, what confirmed its rows and every failure and flag. Written by code/src/04_validate_dirs.py.
+
+Primary key: `doc_id`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `doc_id` | string |  | FCC EDOCS document ID of the report. |  |
+| `storm` | string |  | Storm of the report, as in the manifest (Ida for the reports Ida and Nicholas share). | Added in 4.0.0. |
+| `status` | string |  | ok, flagged, known_fcc_inconsistency, excluded or fail (fail stops the build). |  |
+| `n_rows` | integer | rows | County rows parsed. |  |
+| `second_reading` | string |  | What confirmed every row: pdf_plain_text (the PDF's plain text, independent of the parse, which used the .txt or the PDF's table cells), or, where the parse itself used plain PDF text, txt, pdfium (PDFium's text) or pdf_cells (both pdfplumber readings), joined by "and". | Added in 4.0.0. |
+| `fcc_multiple_causes_note` | boolean |  | The report prints the FCC's note that a site can be out for more than one cause. |  |
+| `computed_pct_out` | number | percent | Sites out over sites served, from the county rows. |  |
+| `stated_pct_out` | number | percent | The report's printed headline share of sites out. | Blank where none is printed. |
+| `pct_out_used` | number | percent | The share used: always computed from the rows. |  |
+| `sites_unattributed` | integer | cell sites | Sum over rows of sites out with no cause given. | Blank where the report prints no causes. |
+| `sites_overattributed` | integer | cell sites | Sum over rows of causes in excess of sites out. | Blank where the report prints no causes. |
+| `failures` | string |  | Why the report fails, if it does; ';'-separated. |  |
+| `flag_reasons` | string |  | Known FCC inconsistencies and flags; ';'-separated. |  |
+
+## `data/analysis/validation/validation_summary.csv`
+
+One row per report: county rows and how their causes compare with sites out. n/a where the report prints no causes. Column names without spaces since 4.0.0.
+
+Primary key: `report`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `report` | string |  | Storm, date and DOC ID. |  |
+| `rows` | integer | rows | County rows. |  |
+| `rows_causes_exact` | integer | rows | Rows whose causes sum to sites out. | n/a: no causes printed. |
+| `rows_causes_short_by_1` | integer | rows | Rows whose causes fall short of sites out by 1. |  |
+| `rows_causes_short_by_more` | integer | rows | Rows whose causes fall short by more than 1. |  |
+| `rows_causes_exceed_out` | integer | rows | Rows whose causes exceed sites out. |  |
+| `sites_with_no_cause` | string |  | Sites out with no cause, "N of M" sites out. |  |
+
+## `data/analysis/validation/excluded_reports.csv`
+
+manifest/excluded_reports.csv with each report's status and failures (empty in 4.0.0: every report in scope passes).
+
+Primary key: `doc_id`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `doc_id` | string |  | FCC EDOCS document ID. |  |
+| `storm_name` | string |  | Storm. |  |
+| `report_date` | date |  | Report date. |  |
+| `reason` | string |  | Why it is excluded. |  |
+| `decided_on` | date |  | When the exclusion was decided. |  |
+| `status` | string |  | Its validation status. |  |
+| `failures` | string |  | Its failures. |  |
+
+## `data/analysis/validation/area_status_counts.csv`
+
+Counts of each report's rows inside the storm's notice area, inside under a spelling variant, outside it, or in the table but not the report's list.
+
+Primary key: `doc_id`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `doc_id` | string |  | FCC EDOCS document ID. |  |
+| `inside` | integer | rows | Rows inside the notice area. |  |
+| `inside_spelling_variant` | integer | rows | Rows inside under a checked spelling variant. |  |
+| `outside_notice_area` | integer | rows | Rows outside the notice area (kept, flagged). |  |
+| `table_not_in_list` | integer | rows | Rows in the table but not the report's county list. |  |
+| `confirmed_by_second_reading` | boolean |  | Every row confirmed by the second reading. |  |
+
+## `data/analysis/validation/external_validation_fcc_2017.csv`
+
+One row per figure the source gives in its text; see docs/external_validation.md. Values are text, since some figures are ranges or words.
+
+Primary key: `id`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `id` | string |  | Figure ID. |  |
+| `storm` | string |  | Storm. |  |
+| `where` | string |  | Page and paragraph in the source. |  |
+| `fcc_text` | string |  | The source's figure, as printed. |  |
+| `report_date` | date |  | Matching DIRS report date. |  |
+| `doc_id` | string |  | Matching DIRS report. |  |
+| `area` | string |  | State or area (';'-separated). |  |
+| `county` | string |  | County, where the figure is for one. |  |
+| `measure` | string |  | How the figure is tested. |  |
+| `fcc_value` | string |  | The source's value (text: some are ranges or words). |  |
+| `ours` | string |  | Our value. |  |
+| `ours_detail` | string |  | Our counts behind the value. |  |
+| `printed_in_report` | string |  | What the daily report prints. |  |
+| `source` | string |  | Where our value comes from. |  |
+| `status` | string |  | match, consistent, differs, or shown, not scored. |  |
+| `explanation` | string |  | Why a figure differs, where it does. |  |
+
+## `data/analysis/validation/external_validation_fcc_michael.csv`
+
+One row per figure the source gives in its text; see docs/external_validation.md. Values are text, since some figures are ranges or words.
+
+Primary key: `id`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `id` | string |  | Figure ID. |  |
+| `where` | string |  | Page and paragraph in the source. |  |
+| `fcc_text` | string |  | The source's figure, as printed. |  |
+| `report_date` | date |  | Matching DIRS report date. |  |
+| `doc_id` | string |  | Matching DIRS report. |  |
+| `area` | string |  | State or area (';'-separated). |  |
+| `county` | string |  | County, where the figure is for one. |  |
+| `measure` | string |  | How the figure is tested. |  |
+| `fcc_value` | string |  | The source's value (text: some are ranges or words). |  |
+| `ours` | string |  | Our value. |  |
+| `ours_detail` | string |  | Our counts behind the value. |  |
+| `status` | string |  | match, consistent, differs, or shown, not scored. |  |
+| `explanation` | string |  | Why a figure differs, where it does. |  |
+
+## `data/analysis/validation/external_validation_olukola.csv`
+
+One row per figure the source gives in its text; see docs/external_validation.md. Values are text, since some figures are ranges or words.
+
+Primary key: `id`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `id` | string |  | Figure ID. |  |
+| `storm` | string |  | Storm. |  |
+| `figure` | string |  | What is compared. |  |
+| `where` | string |  | Page and paragraph in the source. |  |
+| `theirs` | string |  | Their value. |  |
+| `ours` | string |  | Our value. |  |
+| `status` | string |  | match, consistent, differs, or shown, not scored. |  |
+| `explanation` | string |  | Why a figure differs, where it does. |  |
+
+## `data/analysis/validation/external_validation_fcc_21_99.csv`
+
+One row per figure the source gives in its text; see docs/external_validation.md. Values are text, since some figures are ranges or words.
+
+Primary key: `id`. Missing value code: empty cell.
+
+| Variable | Type | Unit | Description | Limitations |
+|---|---|---|---|---|
+| `id` | string |  | Figure ID. |  |
+| `where` | string |  | Page and paragraph in the source. |  |
+| `fcc_text` | string |  | The source's figure, as printed. |  |
+| `doc_id` | string |  | Matching DIRS report. |  |
+| `report_date` | date |  | Matching DIRS report date. |  |
+| `state` | string |  | State. |  |
+| `measure` | string |  | How the figure is tested. |  |
+| `fcc_value` | string |  | The source's value (text: some are ranges or words). |  |
+| `ours` | string |  | Our value. |  |
+| `ours_detail` | string |  | Our counts behind the value. |  |
+| `status` | string |  | match, consistent, differs, or shown, not scored. |  |
+| `explanation` | string |  | Why a figure differs, where it does. |  |
+
 ## Cleaning levels (`clean_rows`)
 
 `clean_rows(panel, level)` in `code/src/load.py` (since 3.1.0) drops rows of the analysis-ready panel at one of two levels; it never changes a value. The main analysis uses every row except as noted; the flags behind each report's status are in `data/analysis/validation/validation_dirs.csv`.
@@ -357,6 +514,21 @@ Primary key: `storm_key`. Missing value code: empty cell.
 |---|---|---|
 | `standard` | rows with a time_flag: pre_onset_likely_marco, Laura's Aug 25, 2020 report (the FCC's combined Marco and Laura report, before Laura's day 0) | The rows behind every time-based result (steps 10 and 12 filter them the same way, with timed()): a report from before the storm's day 0 cannot be placed on its clock. Flagged reports are kept, as in the main analysis, because most flags are benign (see validation/validation_dirs.csv). Chapters 5 to 7 (causes, power, exposure) use every row. |
 | `strict` | everything standard drops, and every report whose report_status is flagged (keeping ok and known_fcc_inconsistency) | The sensitivity display 'without flagged reports': only reports that reconcile with their printed totals, or whose one inconsistency is a checked FCC misprint (manifest/known_fcc_inconsistencies.csv). It drops benign flags too (spelling variants, a footnote, causes over sites out), so it is cautious rather than a list of errors; serious flags alone are in validation/validation_dirs.csv. |
+
+## Report counts
+
+From the manifest to the reports in `dirs_county_day.csv` (4.0.0):
+
+| Step | Reports | Which |
+|---|---|---|
+| In the manifest (`code/manifest/dirs_reports.csv`) | 181 | every FCC report listed from the FCC's storm pages (Nicholas's rows are in two of Ida's reports) |
+| Out of scope | 3 | Fiona 2022-09-24 (DOC-387555A1); Fiona 2022-09-26 (DOC-387584A1); Dorian 2019-08-29 (DOC-359363A1): outside the study area (Puerto Rico; Dorian's also the U.S. Virgin Islands); not parsed |
+| Validated (step 4) | 178 | parsed and checked |
+| Excluded | 0 | none |
+| Outside the study states | 4 | Irma 2017-09-07 (DOC-346607A1); Irma 2017-09-08 (DOC-346626A1); Irma 2017-09-09 (DOC-346632A1); Irma 2017-09-10 (DOC-346634A1): county rows only outside the ten study states |
+| Used (in `dirs_county_day.csv`) | 174 |  |
+
+In `storms.csv`, `n_reports` sums to 176, not 174: DOC-375778A1 and DOC-375808A1 are shared by Ida and Nicholas and counted for both.
 
 ## County-level cause columns, by storm
 
@@ -371,19 +543,19 @@ Which reports print sites out by cause (damage, transport, power) on each county
 | Michael | 2018-10-09 | 16 | 0 | 1,039 | 0 | 0 |
 | Barry | 2019-07-12 | 2 | 2 | 146 | 146 | 0 |
 | Dorian | 2019-08-27 | 5 | 5 | 363 | 363 | 0 |
-| Laura | 2020-08-24 | 12 | 12 | 881 | 881 | 2 |
+| Laura | 2020-08-24 | 15 | 15 | 1,874 | 1,874 | 2 |
 | Sally | 2020-09-14 | 7 | 7 | 136 | 136 | 0 |
 | Delta | 2020-10-08 | 5 | 5 | 216 | 216 | 1 |
 | Zeta | 2020-10-28 | 4 | 4 | 387 | 387 | 0 |
-| Ida | 2021-08-29 | 22 | 22 | 953 | 953 | 0 |
-| Nicholas | 2021-09-14 | 2 | 2 | 28 | 28 | 0 |
+| Ida | 2021-08-29 | 22 | 22 | 951 | 951 | 0 |
+| Nicholas | 2021-09-14 | 2 | 2 | 30 | 30 | 0 |
 | Ian | 2022-09-27 | 13 | 13 | 517 | 517 | 13 |
 | Nicole | 2022-11-09 | 2 | 2 | 68 | 68 | 2 |
 | Idalia | 2023-08-29 | 6 | 6 | 160 | 160 | 6 |
 | Beryl | 2024-07-08 | 6 | 6 | 33 | 33 | 6 |
 | Debby | 2024-08-04 | 5 | 5 | 339 | 339 | 5 |
 | Francine | 2024-09-11 | 3 | 3 | 105 | 105 | 3 |
-| Helene | 2024-09-25 | 22 | 22 | 2,332 | 2,332 | 22 |
+| Helene | 2024-09-25 | 24 | 24 | 2,584 | 2,584 | 24 |
 | Milton | 2024-10-07 | 5 | 5 | 260 | 260 | 5 |
 | Isaias | 2026-10-08 | 3 | 3 | 131 | 131 | 3 |
 

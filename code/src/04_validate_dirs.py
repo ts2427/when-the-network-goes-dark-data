@@ -65,6 +65,9 @@ AREA_STATUSES = ("inside", "inside_spelling_variant", "outside_notice_area", "ta
 
 OVER_EXCEPTIONS = ROOT / "manifest" / "cause_exceptions.csv"
 LIST_EXCEPTIONS = ROOT / "manifest" / "county_list_exceptions.csv"
+# 4.0.0: a listed county the table prints with no sites ("VA GALAX CITY 0 0 N/A 0 0 0", Laura Aug 29, 2020). It has no
+# data row (no sites, no percent); the entry, checked against the page, lets the county list match.
+NO_SITE_ROWS = ROOT / "manifest" / "no_site_rows.csv"
 EXCLUDED = ROOT / "manifest" / "excluded_reports.csv"
 # Known FCC inconsistencies, each checked against the PDF, one table with a kind column:
 #   headline     a stated % out that the report's own totals do not give (Helene Oct 1, 2024)
@@ -78,8 +81,10 @@ HEADLINE_EXCEPTIONS = ROOT / "manifest" / "known_fcc_inconsistencies.csv"
 PRINTED = ["sites_served", "sites_out", "pct_out", *CAUSES, "on_backup_power"]
 OVER_FIELDS = ["doc_id", "page", "state", "county", *PRINTED, "checked_on"]
 HEADLINE_FIELDS = ["doc_id", "page", "stated_pct", "total_served", "total_out", "checked_on"]
-SUMMARY_COLUMNS = ["Report", "Rows", "Exact", "Short by 1", "Short by more", "Causes exceed out",
-                   "Sites with no cause"]
+# 4.0.0: names without spaces (were "Report", "Rows", "Exact", "Short by 1", "Short by more", "Causes exceed out",
+# "Sites with no cause"); the meaning of each column is unchanged
+SUMMARY_COLUMNS = ["report", "rows", "rows_causes_exact", "rows_causes_short_by_1", "rows_causes_short_by_more",
+                   "rows_causes_exceed_out", "sites_with_no_cause"]
 PCT_TOLERANCE = 0.2  # points; the FCC rounds and sometimes truncates
 ROW_PCT_TOLERANCE = 0.1  # points; row percents are printed to one or two places, rounded or truncated
 NUMBER_RE = re.compile(r"\d[\d,]*(?:\.\d+)?%?")
@@ -237,30 +242,100 @@ def check_second_reading(g: pd.DataFrame, lines: pd.DataFrame) -> list[str]:
     return [f"not confirmed by second reading of the PDF: {', '.join(missing)}"] if missing else []
 
 
-def unconfirmed_rows(g: pd.DataFrame, lines: pd.DataFrame) -> list[str]:
-    split = [line.split() for line in lines["line"]]
-    missing = []
+def _number(tok: str) -> float:
+    return float(tok.replace(",", "").replace("%", ""))
+
+
+def wanted_numbers(row) -> list[float]:
+    skip = {"pct_out"} if row.get("pct_printed", True) is False else set()
+    want = [float(row[col]) for col in PRINTED if col not in skip and pd.notna(row[col])]
+    if pd.notna(row.get("prev_sites_out")):  # two-day layout: served, previous out and %, today's out and %
+        want = [float(row["sites_served"]), float(row["prev_sites_out"]), float(row["prev_pct_out"]), *want[1:]]
+    return want
+
+
+def on_one_line(row, want, split) -> bool:
+    for tokens in split:
+        head, tail = tokens[:-len(want)], tokens[-len(want):]
+        if not head or not all(NUMBER_RE.fullmatch(tok) for tok in tail):
+            continue
+        if [_number(tok) for tok in tail] != want:
+            continue
+        if head[0] in CODE_TO_STATE and name_key(CODE_TO_STATE[head[0]]) != name_key(row["state"]):
+            continue
+        words = {name_key(w) for w in re.split(r"[\s-]+", row["county"]) if w}
+        # pdfplumber can split a wrapped name: "PEARL 72 0 0% ..." then "MS RIVER" (Isaias 2026)
+        if last_word(head[-1]) == last_word(row["county"]) or name_key(head[-1]) in words:
+            return True
+    return False
+
+
+def across_lines(row, want, split) -> bool:
+    """4.0.0: two or three consecutive lines holding exactly the row's numbers (in any order, no others), its county
+    name and at most its state's code. Plain PDF text splits a wrapped cell across lines in any order: "SAN 16.7%" /
+    "6 1 1 0 0" / "TX AUGUSTINE" (Laura Aug 28, 2020); "Washington" / "TN 132 12 9.1% 0 9 3 0" (Helene Oct 4, 2024)."""
+    target, county = sorted(want), name_key(row["county"])
+    for i in range(len(split)):
+        for size in (2, 3):
+            tokens = [tok for line in split[i:i + size] for tok in line]
+            numbers = [tok for tok in tokens if NUMBER_RE.fullmatch(tok)]
+            if len(numbers) != len(want) or sorted(_number(tok) for tok in numbers) != target:
+                continue
+            words = [tok for tok in tokens if not NUMBER_RE.fullmatch(tok)]
+            codes = [w for w in words if w in CODE_TO_STATE]
+            if any(name_key(CODE_TO_STATE[c]) != name_key(row["state"]) for c in codes):
+                continue
+            if name_key(" ".join(w for w in words if w not in CODE_TO_STATE)) == county:
+                return True
+    return False
+
+
+def row_reading(row, split) -> str | None:
+    """"line" or "split" when the row is found in these lines, else None."""
+    want = wanted_numbers(row)
+    if on_one_line(row, want, split):
+        return "line"
+    return "split" if across_lines(row, want, split) else None
+
+
+def second_reading(g: pd.DataFrame, lines: pd.DataFrame, plain_is_parse: bool) -> tuple[list[str], str, list[str]]:
+    """(rows not confirmed, what confirmed the report, rows confirmed across split lines). Where the parse read a
+    table page as plain PDF text (plain_is_parse), the plain reading is not independent: a row must be in the .txt,
+    in PDFium's text, or in both pdfplumber readings of the PDF, cell by cell and plain (4.0.0)."""
+    if "reading" not in lines.columns:
+        lines = lines.assign(reading="pdf_plain")
+    split = {k: [line.split() for line in v["line"]] for k, v in lines.groupby("reading")}
+    missing, used, across = [], set(), []
     for row in g.to_dict("records"):
-        skip = {"pct_out"} if row.get("pct_printed", True) is False else set()
-        want = [float(row[col]) for col in PRINTED if col not in skip and pd.notna(row[col])]
-        if pd.notna(row.get("prev_sites_out")):  # two-day layout: served, previous out and %, today's out and %
-            want = [float(row["sites_served"]), float(row["prev_sites_out"]), float(row["prev_pct_out"]),
-                    *want[1:]]
-        for tokens in split:
-            head, tail = tokens[:-len(want)], tokens[-len(want):]
-            if not head or not all(NUMBER_RE.fullmatch(tok) for tok in tail):
-                continue
-            if [float(tok.replace(",", "").replace("%", "")) for tok in tail] != want:
-                continue
-            if head[0] in CODE_TO_STATE and name_key(CODE_TO_STATE[head[0]]) != name_key(row["state"]):
-                continue
-            words = {name_key(w) for w in re.split(r"[\s-]+", row["county"]) if w}
-            # pdfplumber can split a wrapped name: "PEARL 72 0 0% ..." then "MS RIVER" (Isaias 2026)
-            if last_word(head[-1]) == last_word(row["county"]) or name_key(head[-1]) in words:
-                break
+        name = f"{row['state']}/{row['county']}"
+        if not plain_is_parse:
+            how = row_reading(row, split.get("pdf_plain", []))
+            found = {"pdf_plain_text"} if how else set()
         else:
-            missing.append(f"{row['state']}/{row['county']}")
-    return missing
+            how = row_reading(row, split.get("txt", []))
+            found = {"txt"} if how else set()
+            if not how:
+                how = row_reading(row, split.get("pdfium", []))
+                found = {"pdfium"} if how else set()
+            if not how:
+                cells, plain = row_reading(row, split.get("pdf_cells", [])), row_reading(row, split.get("pdf_plain", []))
+                how = "split" if "split" in (cells, plain) and cells and plain else (cells if plain else None)
+                found = {"pdf_cells"} if how else set()
+        if not how:
+            missing.append(name)
+        elif how == "split":
+            across.append(name)
+        used |= found
+    return missing, " and ".join(sorted(used)), across
+
+
+def plain_lines(lines: pd.DataFrame) -> pd.DataFrame:
+    """The plain-text reading of the PDF (all lines, for tables written before 4.0.0 had a reading column)."""
+    return lines[lines.reading == "pdf_plain"] if "reading" in lines.columns else lines
+
+
+def unconfirmed_rows(g: pd.DataFrame, lines: pd.DataFrame) -> list[str]:
+    return second_reading(g, lines, plain_is_parse=False)[0]
 
 
 def matching_entry(entries: list[dict], row) -> int | None:
@@ -291,7 +366,8 @@ def match_spellings(parsed: dict, stated: dict, flags: list[str]) -> dict:
     return stated
 
 
-def check_names(g: pd.DataFrame, listed: pd.DataFrame, allowed: pd.DataFrame) -> tuple[list[str], list[str]]:
+def check_names(g: pd.DataFrame, listed: pd.DataFrame, allowed: pd.DataFrame,
+                no_sites: pd.DataFrame | None = None, lines: pd.DataFrame | None = None) -> tuple[list[str], list[str]]:
     if listed.empty:
         return ["no county list found in the report"], []
     parsed = {(name_key(r.state), name_key(r.county)): f"{r.state}/{r.county}" for r in g.itertuples()}
@@ -314,6 +390,16 @@ def check_names(g: pd.DataFrame, listed: pd.DataFrame, allowed: pd.DataFrame) ->
             fails.append(f"county-list exception matches no unlisted row: {entry['county']}")
     extra = [parsed[k] for k in sorted(parsed.keys() - stated.keys() - excused)]
     absent = [stated[k] for k in sorted(stated.keys() - parsed.keys())]
+    printed = set() if lines is None else {" ".join(line.split()) for line in lines["line"]}
+    for entry in ([] if no_sites is None else no_sites.to_dict("records")):
+        key = (name_key(entry["state"]), name_key(entry["county"]))
+        if incomplete(entry) or " ".join(str(entry["printed_line"]).split()) not in printed:
+            fails.append(f"no-site entry for {entry['county']} lacks page or checked_on, or its line is not printed")
+        elif key in stated and key not in parsed:
+            absent.remove(stated[key])
+            flags.append(f"listed, printed with no sites and no data row: {stated[key]} ({entry['printed_line']})")
+        else:
+            fails.append(f"no-site entry matches no listed county without a row: {entry['county']}")
     if extra:
         flags.append(f"in table, not in the report's county list: {', '.join(extra)}")
     if absent:
@@ -433,7 +519,7 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
             g[col] = pd.to_numeric(g[col]).astype(float)
             t[col] = pd.to_numeric(t[col]).astype(float)
 
-        fails, flags, unconfirmed, known_totals = [], [], set(), []
+        fails, flags, unconfirmed, known_totals, confirmed_by = [], [], set(), [], ""
         ov = pd.DataFrame(columns=["doc_id", "states", "sites_served", "sites_out"])
         total_entries = for_report(total_allowed if total_allowed is not None else pd.DataFrame(), doc, ["doc_id"])
         if g.empty:
@@ -449,7 +535,11 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
                 fails.append(str(err))
             ov = for_report(overall_totals if overall_totals is not None else pd.DataFrame(), doc,
                             ["doc_id", "states", "sites_served", "sites_out"])
-            unconfirmed_list = unconfirmed_rows(g, for_report(pdf_lines, doc, ["doc_id", "line"]))
+            plain_is_parse = report.get("source") == "pdf" and (report.get("pdf_plain_table_pages") or 0) > 0
+            doc_lines = pdf_lines[pdf_lines.doc_id == doc]
+            unconfirmed_list, confirmed_by, across = second_reading(g, doc_lines, plain_is_parse)
+            if across:
+                flags.append(f"confirmed across split lines: {', '.join(across)}")
             by_next = [u for u in unconfirmed_list if u in (next_confirmed or {}).get(doc, set())]
             if by_next:  # correction, 2026-11-24: the next report reprints these rows exactly
                 flags.append(f"rows confirmed by the next report's previous-day column: {', '.join(by_next)}")
@@ -478,7 +568,10 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
             fails += check_row_percent(g)
             if unconfirmed_list:
                 fails.append(f"not confirmed by second reading of the PDF: {', '.join(unconfirmed_list)}")
-            more_fails, more_flags = check_names(g, listed, for_report(unlisted_allowed, doc, OVER_FIELDS))
+            more_fails, more_flags = check_names(
+                g, listed, for_report(unlisted_allowed, doc, OVER_FIELDS),
+                for_report(pd.read_csv(NO_SITE_ROWS, dtype=str, keep_default_na=False), doc, ["doc_id"]),
+                plain_lines(doc_lines))
             fails += more_fails
             flags += more_flags
 
@@ -513,8 +606,9 @@ def validate(rows, totals, reports, lists, over_allowed, headline_allowed, unlis
                 status = "fail"
         has_causes = len(gap) > 0
         results.append({
-            "doc_id": doc, "status": status, "n_rows": len(g),
-            "fcc_multiple_causes_note": has_multiple_causes_note(for_report(pdf_lines, doc, ["doc_id", "line"])),
+            "doc_id": doc, "storm": report.get("storm_name", ""), "status": status, "n_rows": len(g),
+            "second_reading": confirmed_by,
+            "fcc_multiple_causes_note": has_multiple_causes_note(plain_lines(pdf_lines[pdf_lines.doc_id == doc])),
             "computed_pct_out": computed, "stated_pct_out": stated, "pct_out_used": computed,
             "sites_unattributed": gap.clip(lower=0).sum() if has_causes else None,
             "sites_overattributed": (-gap).clip(lower=0).sum() if has_causes else None,

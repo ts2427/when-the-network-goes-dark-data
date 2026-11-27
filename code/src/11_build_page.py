@@ -285,7 +285,34 @@ def excluded_days(r: dict) -> dict:
     return out
 
 
+def peak_headline_footnote(r: dict) -> tuple[str, str]:
+    """(marker, footnote) when the report holding the largest peak prints a headline share that disagrees with its
+    own table (4.0.0, Tim's item 18: Helene, Sep 28, 2024). Every figure is read here: the headline sentence from the
+    report's own text, the table's sum from the published panel."""
+    lc = r["chapter_3"]["headlines"]["largest_peak_sites_out"]
+    storm = next(s for s in r["chapter_3"]["storms"] if s["storm"] == lc["storm"])
+    doc = storm["peak_doc_id"]
+    v = pd.read_csv(OUTPUT / "validation_dirs.csv", dtype=str, keep_default_na=False).set_index("doc_id").loc[doc]
+    if not v.stated_pct_out or abs(float(v.stated_pct_out) - float(v.computed_pct_out)) <= 0.2:
+        return "", ""
+    raw = (RAW / "dirs" / f"{doc}.txt").read_bytes()
+    text = " ".join((raw.decode("utf-16") if b"\x00" in raw[:400] else raw.decode("utf-8", "replace")).split())
+    m = re.search(r"(\d+(?:\.\d+)?)% \(up from (\d+(?:\.\d+)?)% yesterday\) of the cell sites", text)
+    if not m or abs(float(m.group(1)) - float(v.stated_pct_out)) > 1e-9:
+        raise ValueError(f"{doc}: the headline sentence was not found as checked on 2026-11-27")
+    p = pd.read_csv(PROCESSED / "dirs_county_day.csv", usecols=["doc_id", "sites_served", "sites_out"])
+    t = p[p.doc_id == doc]
+    out, served = int(t.sites_out.sum()), int(t.sites_served.sum())
+    date = storm["peak_report_date"]
+    return "[^peak-headline]", (
+        f"[^peak-headline]: The FCC's own text in that report ({lc['storm']}, {date}, {doc}) says "
+        f"\"{m.group(1)}% (up from {m.group(2)}% yesterday)\" of cell sites were out, while its table gives "
+        f"{f1(100 * out / served)}% ({n0(out)} of {n0(served)}). The page uses the table, as for every report; the "
+        "report is flagged as a headline mismatch (methods).")
+
+
 def excluded_days_text(r: dict) -> str:
+    """The excluded reports' days, by storm; empty when none is excluded (4.0.0)."""
     parts = []
     for storm, xs in excluded_days(r).items():
         if xs:
@@ -293,7 +320,7 @@ def excluded_days_text(r: dict) -> str:
             span = f"day {d[0]}" if len(d) == 1 else (f"days {d[0]}–{d[-1]}" if d == list(range(d[0], d[-1] + 1))
                                                       else "days " + _and([str(v) for v in d]))
             parts.append(f"{storm} {span}")
-    return _and(parts)
+    return _and(parts) if parts else ""
 
 
 def _verb(measure: dict, one: str, many: str) -> str:
@@ -466,7 +493,8 @@ def figures_front_matter(verified: dict, r: dict) -> list:
             "Every storm's reports, day by day",
             "Each row is a storm, in date order; each cell is one FCC report, by calendar days since the storm's 34-knot "
             "winds first reached a study-state county (day 0; see the methods), shaded by the share of sites served that were out. Blank cells: no FCC report that day. "
-            f"Crossed cells: an FCC report that exists but is excluded ({excluded_days_text(r)}; listed in the methods). "
+            + (f"Crossed cells: an FCC report that exists but is excluded ({excluded_days_text(r)}; listed in the "
+               "methods). " if excluded_days_text(r) else "No report is excluded. ") +
             f"{outlined_cell_text(r)}"
             "Rule periods are marked at the right. Late dark cells can reflect a reporting area narrowed to a few "
             "hard-hit counties (Laura).",
@@ -562,8 +590,8 @@ SUPERSEDED_NOTES = [  # (condition on an entry, note appended on the page; {n_ex
     (lambda d, w: d < "2026-11-23" and "landfall" in w and not w.startswith(EXHIBIT_DECISIONS),
      "Superseded: day 0 is now the first time 34-knot winds reach a study-state county (2026-11-23 corrections)."),
     (lambda d, w: w.startswith("DEVIATION from the plan (Validation: 'every report in scope must pass step 4"),
-     "Superseded by the combined correction of 2026-11-24 below: {n_excluded} reports are now excluded, and Nate's "
-     "report is in use.")]
+     "Superseded by the combined correction of 2026-11-24 below, and by the 4.0.0 corrections of 2026-11-27: "
+     "{n_excluded} reports are now excluded, and Nate's report is in use.")]
 # Log entries the page shows beside the corrections because a correction refers to them ("the entry ... above")
 AUDIT_ALSO = ("Found while building the 3.2.0 cable and wireline table",  # "the entry of 2026-11-25 above"
               "3.0.0 engineering: each storm's bootstrap seed")  # "(engineering change, 2026-11-24 below"
@@ -571,6 +599,11 @@ AUDIT_ALSO = ("Found while building the 3.2.0 cable and wireline table",  # "the
 
 def superseded_note(date: str, what: str, n_excluded: int = 0) -> str:
     return next((f" *{n.format(n_excluded=n_excluded)}*" for c, n in SUPERSEDED_NOTES if c(date, what)), "")
+
+
+TOTAL_COLUMN_WORDS = {"sites_served": "sites served", "sites_out": "sites out", "out_damage": "sites out due to damage",
+                      "out_transport": "sites out due to transport", "out_power": "sites out due to power",
+                      "on_backup_power": "sites on backup power"}
 
 
 def audit_rows(decisions: str, kind: str) -> list:
@@ -713,9 +746,13 @@ FINAL_REPORT_SENTENCE = ("The FCC's order FCC 26-34 (adopted May 20, 2026; in ef
                          "of deactivation.")
 FCC_CAVEAT = ("The number of cell site outages in a specific area does not necessarily correspond to the availability of "
               "wireless service to consumers in that area.")
-DISCLOSURE = ("The author works in the telecommunications industry. This analysis was done independently, on personal time, "
-              "using only publicly available government data. It uses no employer data or confidential information, and "
-              "the views are the author's alone. The author has no financial interest in any FCC proceeding.")
+# Tim's wording, 2026-11-27 (4.0.0): the same statement on the page, in the README and in the DATASHEET
+COMPETING_INTERESTS = ("The author works for a cable operator. This is independent work on public data only; no employer "
+                       "data, time or resources were used, and the employer has no role in it.")
+FUNDING = "None."
+CONTACT_EMAIL = "timothy@thresholddatasciences.com"
+DISCLOSURE = (f"Competing interests: {COMPETING_INTERESTS} Funding: none. The views are the author's alone, and the "
+              "author has no financial interest in any FCC proceeding.")
 # (citation, how it differs from this work): each citation VERIFIED in docs/literature.md; the sentences say only
 # what was read (2026-11-25 entries there). Shared with the README and the datasheet (step 14).
 RELATED_WORK_ITEMS = [  # APA 7 (3.2.1), each checked against its DOI or official page (docs/literature.md)
@@ -1085,8 +1122,9 @@ def chapter_blocks(r: dict) -> dict:
     shared = c1["reports_shared_by_two_storms"]
     add(f"**Claim.** The FCC's Disaster Information Reporting System (DIRS) publishes, for each activated storm, a "
         f"daily county table of cell sites served and out. Of {h1['n_reports_in_scope']['value']} reports in scope, "
-        f"{h1['n_reports_excluded']['value']} are excluded (they fail validation; listed in the methods) and "
-        f"{len(none)} have county rows only outside the ten study states ({', '.join(sorted({x['storm'] for x in none}))}, "
+        + (f"{h1['n_reports_excluded']['value']} are excluded (they fail validation; listed in the methods) and "
+           if h1['n_reports_excluded']['value'] else "none is excluded (every one passes validation) and ")
+        + f"{len(none)} have county rows only outside the ten study states ({', '.join(sorted({x['storm'] for x in none}))}, "
         f"{none[0]['report_date']} to {none[-1]['report_date']}: Puerto Rico and the U.S. Virgin Islands), leaving "
         f"{h1['n_reports_used']['value']} reports for {h1['n_storms']['value']} storms: "
         f"{n0(h1['n_county_days']['value'])} county-report rows in {n0(h1['n_counties']['value'])} counties of ten Gulf "
@@ -1139,9 +1177,13 @@ def chapter_blocks(r: dict) -> dict:
     L = S[3] = []
     add = L.append
     lc, mp = h3["largest_peak_sites_out"], h3["median_peak_pct_out"]
+    note_mark, note = peak_headline_footnote(r)
     add(f"**Claim.** At their peaks, between {f1(mp['min'])}% and {f1(mp['max'])}% of the cell sites in storms' "
         f"reporting areas were out; the median across {mp['n']} storms is {f1(mp['value'])}% (95% interval {ci(mp)}). "
-        f"Helene had the most sites out, {n0(lc['value'])} (95% interval {n0(lc['ci_low'])} to {n0(lc['ci_high'])}).\n")
+        f"{lc['storm']} had the most sites out, {n0(lc['value'])} (95% interval {n0(lc['ci_low'])} to "
+        f"{n0(lc['ci_high'])}).{note_mark}\n")
+    if note:
+        add(note + "\n")
     add("**Exhibit.**\n\n[figure:fig-peaks]\n")
     prow = []
     for s in c3["storms"]:
@@ -2080,22 +2122,26 @@ def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame
         add(f"\nThe known FCC inconsistenc{'y' if len(known) == 1 else 'ies'}, each checked against the PDF:")
     for k in known:
         head = re.search(r"headline ([\d.]+)% vs ([\d.]+)%", k["detail"])
-        total = re.search(r"(\w[\w ]*?) sites_served: printed total ([\d,]+) vs ([\d,]+) from its rows", k["detail"])
+        total = re.search(r"(\w[\w ]*?) (sites_served|sites_out|out_damage|out_transport|out_power|on_backup_power): "
+                          r"printed total ([\d,]+) vs ([\d,]+) from its rows", k["detail"])
         if head:
             add(f"\n- {k['storm']}, {k['report_date']} ({k['doc_id']}): the headline states {head.group(1)}% of sites "
                 f"out against {head.group(2)}% computed from its own totals; the computed share is used.")
         elif total:
-            add(f"\n- {k['storm']}, {k['report_date']} ({k['doc_id']}): the printed {total.group(1)} total of sites "
-                f"served is {total.group(2)}, while its county rows, each confirmed in the PDF, add up to "
-                f"{total.group(3)}; the rows are used.")
+            add(f"\n- {k['storm']}, {k['report_date']} ({k['doc_id']}): the printed {total.group(1)} total of "
+                f"{TOTAL_COLUMN_WORDS[total.group(2)]} is {total.group(3)}, while its county rows, each confirmed in "
+                f"the PDF, add up to {total.group(4)}; the rows are used.")
         else:
             raise ValueError(f"known FCC inconsistency with no page wording: {k['detail']}")
     add("\n" + external_check_details())
     add(f"\nEach report's flags and reasons are in the snapshot's "
         f"[`data/analysis/validation/validation_dirs.csv`]({DATA_REPO}/blob/v{DATA_VERSION}/data/analysis/validation/"
         f"validation_dirs.csv). Excluded reports:\n")
-    add(table(["Report", "Storm", "Date", "Reason"],
-              [(e.doc_id, e.storm_name, e.report_date, e.reason) for e in excluded.itertuples()]))
+    if excluded.empty:  # 4.0.0: every report in scope passes
+        add("None: every report in scope passes validation.\n")
+    else:
+        add(table(["Report", "Storm", "Date", "Reason"],
+                  [(e.doc_id, e.storm_name, e.report_date, e.reason) for e in excluded.itertuples()]))
     trail = []
     add = trail.append  # the four dated logs, in full, in the collapsible Audit trail at the end of the methods
     add("\n**Deviations from the analysis plan**, each logged in `docs/decisions.md` before it was run:\n")

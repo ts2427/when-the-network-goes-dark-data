@@ -77,9 +77,12 @@ Power outages come from ORNL/DOE EAGLE-I, released yearly. The 2026 file is expe
 
 ## 6. Release steps
 
-1. **Version.** Semantic versioning (see `CHANGELOG.md`): a major version changes a published number or a variable's
-   meaning; a minor version adds data, variables or a chapter (a new season is a minor version, for example 2.2.0);
-   a patch fixes documentation or code without changing any output. Set `VERSION` and `RELEASE_DATE` in
+1. **Version.** Semantic versioning (see `CHANGELOG.md`; stated exactly since 4.0.0, Tim's policy of 2026-11-27):
+   major = an existing published value or the meaning of a variable changes; minor = rows, storms, files or
+   variables are added and every existing published value is unchanged; patch = no value changes (bytes may change,
+   and the changelog says so). A new season changes pooled results (medians, pooled shares), so it is a major version
+   unless it is published as a separate module (`docs/roadmap_modules.md`). `code/tests/test_version_guard.py` in
+   the data repository fails if a published file changes while the major number in `CITATION.cff` does not. Set `VERSION` and `RELEASE_DATE` in
    `src/14_data_repo.py` (it writes `CITATION.cff`, the README and `datapackage.json`) and `DATA_VERSION` in
    `src/11_build_page.py`.
 2. **CHANGELOG.** Move the "Unreleased" notes in `src/14_data_repo.py`'s changelog under the new version and date,

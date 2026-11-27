@@ -2,11 +2,28 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24477809.svg)](https://doi.org/10.5281/zenodo.24477809) [![CI](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml/badge.svg)](https://github.com/ts2427/when-the-network-goes-dark-data/actions/workflows/ci.yml)
 
-Version 3.2.1 (2026-11-27). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
+Version 4.0.0 (2026-11-27). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).
 
 The data and code behind the page *When the Network Goes Dark* (https://thresholddatasciences.com/analysis/when-the-network-goes-dark/): a county-by-report panel of FCC DIRS cell-site outages for 22 storms in ten Gulf and Southeast states, 2017-2026, each report checked against its printed totals, joined to power outages (EAGLE-I), storm tracks (NHC), social vulnerability (CDC/ATSDR SVI) and broadband provider counts (FCC BDC). Every number on the page is in `data/analysis/results.json`, and `run_all.py` rebuilds it and the panel from `data/input/`.
 
 What the data can and cannot be used for, and their known limitations: `DATASHEET.md`.
+
+## Scope
+
+A DIRS activation is included when it is for an Atlantic named storm, hurricane or tropical storm (a storm that never reaches hurricane strength is included too; every storm in this release did, at some point in its track, per HURDAT2), its activation date is in 2017-2026, and its public Communications Status Reports print county rows in at least one of the ten study states (Texas, Louisiana, Mississippi, Alabama, Florida, Georgia, South Carolina, North Carolina, Tennessee, Virginia). Within an included storm, a report whose rows all lie outside those states is kept in the manifest but not used, and rows outside them are dropped. The series starts in 2017 because the committed analysis plan (2026-11-22) fixed the scope at 2017-2026, the years whose report layouts the parser was built and checked on; the only 2016 activation, Matthew, has not been read and is planned as a separate module (docs/roadmap_modules.md). Other hazards (earthquakes, wildfires, winter storms, power shutoffs) and the territories are outside the rule. This dataset is the Gulf and Southeast hurricane subset of a larger public DIRS record: the FCC has also published status reports for activations in the territories and for other hazards (docs/dirs_activations.csv). Later extensions (Matthew 2016, the territories, other hazards) are planned as separate modules with their own versions, so the core numbers do not change when one is added (`docs/roadmap_modules.md`).
+
+### Report counts
+
+| Step | Reports | Which |
+|---|---|---|
+| In the manifest (`code/manifest/dirs_reports.csv`) | 181 | every FCC report listed from the FCC's storm pages (Nicholas's rows are in two of Ida's reports) |
+| Out of scope | 3 | Fiona 2022-09-24 (DOC-387555A1); Fiona 2022-09-26 (DOC-387584A1); Dorian 2019-08-29 (DOC-359363A1): outside the study area (Puerto Rico; Dorian's also the U.S. Virgin Islands); not parsed |
+| Validated (step 4) | 178 | parsed and checked |
+| Excluded | 0 | none |
+| Outside the study states | 4 | Irma 2017-09-07 (DOC-346607A1); Irma 2017-09-08 (DOC-346626A1); Irma 2017-09-09 (DOC-346632A1); Irma 2017-09-10 (DOC-346634A1): county rows only outside the ten study states |
+| Used (in `dirs_county_day.csv`) | 174 |  |
+
+In `storms.csv`, `n_reports` sums to 176, not 174: DOC-375778A1 and DOC-375808A1 are shared by Ida and Nicholas and counted for both.
 
 Associations, not causes. Each FCC report carries this caveat: "The number of cell site outages in a specific area does not necessarily correspond to the availability of wireless service to consumers in that area." So the counts here describe the network, not how many people lost service.
 
@@ -62,7 +79,7 @@ q = clean_rows(p, "standard")   # or "strict"
 | `standard` | rows with a time_flag: pre_onset_likely_marco, Laura's Aug 25, 2020 report (the FCC's combined Marco and Laura report, before Laura's day 0) | The rows behind every time-based result (steps 10 and 12 filter them the same way, with timed()): a report from before the storm's day 0 cannot be placed on its clock. Flagged reports are kept, as in the main analysis, because most flags are benign (see validation/validation_dirs.csv). Chapters 5 to 7 (causes, power, exposure) use every row. |
 | `strict` | everything standard drops, and every report whose report_status is flagged (keeping ok and known_fcc_inconsistency) | The sensitivity display 'without flagged reports': only reports that reconcile with their printed totals, or whose one inconsistency is a checked FCC misprint (manifest/known_fcc_inconsistencies.csv). It drops benign flags too (spelling variants, a footnote, causes over sites out), so it is cautious rather than a list of errors; serious flags alone are in validation/validation_dirs.csv. |
 
-`clean_rows(level="strict")` keeps 10 of 22 storms (46 of 169 reports, 2,370 of 10,051 rows), because most reports carry at least one flag, most of them benign; `standard` keeps 22 of 22 (9,891 rows). Use strict as a sensitivity check rather than as the main sample.
+`clean_rows(level="strict")` keeps 10 of 22 storms (47 of 174 reports, 2,518 of 11,296 rows), because most reports carry at least one flag, most of them benign; `standard` keeps 22 of 22 (11,136 rows). Use strict as a sensitivity check rather than as the main sample.
 
 `examples/quickstart.ipynb` loads the panel, rebuilds the recovery curves (with the median time to 50% restored) and the pooled cause shares with plain pandas, and checks both against `results.json`; CI runs it (`python -m pytest --nbmake examples/quickstart.ipynb`).
 
@@ -90,8 +107,8 @@ Since 3.2.0, three more checks (`code/src/15b_external_michael_olukola.py`, expl
 Exploratory, under addendum 4.x-1: descriptive tables added in 3.2.0. No published result reads them, and no association with cell outages has been computed. Variables: `CODEBOOK.md`.
 
 - `data/analysis/context/dirs_cable_wireline.csv`: cable and wireline subscribers out, 233 rows from 178 reports, by area as printed (the whole disaster area, or state rows). Where a report prints the previous day's figure it is checked against the previous report: 45 match, 1 do not (flagged, not corrected).
-- `data/analysis/context/fema_ia_county_storm.csv`: FEMA Individual Assistance by storm and county (2,158 storm-counties, 537 with IA declared), from OpenFEMA RI-IHP v2 and Housing Assistance Renters v2; rows that name no single county (tribal areas, statewide, other states) are counted in `fema_ia_set_aside.csv`.
-- `data/analysis/context/hazard_ncei_county_storm.csv`: surge, flood and wind flags and damage by storm and county (2,158 storm-counties), from NOAA NCEI Storm Events. Damage from county events is in `damage_property_usd` and `damage_crops_usd`; damage from zone events is in the `zone_..._unallocated` columns, undivided, with `zone_n_counties`, and must never be summed across counties. `hazard_ncei_storm_summary.csv` gives each storm's window and the zone events not mapped. The NCEI files are not redistributed (no licence or use statement was found), so the reproduction test compares this table only when they are supplied (`NCEI_RAW_DIR`). No high-water marks: both USGS sources refused automated requests.
+- `data/analysis/context/fema_ia_county_storm.csv`: FEMA Individual Assistance by storm and county (2,375 storm-counties, 537 with IA declared), from OpenFEMA RI-IHP v2 and Housing Assistance Renters v2; rows that name no single county (tribal areas, statewide, other states) are counted in `fema_ia_set_aside.csv`.
+- `data/analysis/context/hazard_ncei_county_storm.csv`: surge, flood and wind flags and damage by storm and county (2,375 storm-counties), from NOAA NCEI Storm Events. Damage from county events is in `damage_property_usd` and `damage_crops_usd`; damage from zone events is in the `zone_..._unallocated` columns, undivided, with `zone_n_counties`, and must never be summed across counties. `hazard_ncei_storm_summary.csv` gives each storm's window and the zone events not mapped. The NCEI files are not redistributed (no licence or use statement was found), so the reproduction test compares this table only when they are supplied (`NCEI_RAW_DIR`). No high-water marks: both USGS sources refused automated requests.
 
 ## Related work
 
@@ -141,7 +158,7 @@ Exact attribution for each source: `SOURCES.md`. Variables: `CODEBOOK.md` and `d
 
 ## Computational requirements
 
-- Python 3.13 (tested with 3.13.2 on Windows 11). Reproduced on Windows and Linux: CI rebuilds everything and runs the reproduction tests on windows-latest and ubuntu-latest with Python 3.13 on every push (badge above).
+- Python 3.13 (tested with 3.13.2) on Windows 11; the code uses no platform-specific calls. CI runs the tests and a full rebuild on windows-latest and ubuntu-latest (badge above).
 - Packages: `requirements.txt` (exact versions of the packages used) and `requirements.lock` (every package, including dependencies, pinned with SHA-256 hashes for Windows, Linux and macOS; generated with `uv pip compile requirements.txt --universal --generate-hashes --python-version 3.13 -o requirements.lock`). For an exact environment: `python -m pip install --require-hashes -r requirements.lock`.
 - Memory: about 4 GB. Disk: about 200 MB for the repository and `build/`.
 - Run time: 18.8 minutes for `run_all.py`, measured on the author's Windows 11 laptop on 2026-11-25 (most of it is parsing the reports in steps 3 and 17 and the bootstrap in step 10).
@@ -165,23 +182,24 @@ python -m ruff check code examples run_all.py        # lint (ruff.toml)
 
 | # | Script | Arguments | Does |
 |---|---|---|---|
-| 1 | `02b_reporting_areas.py` |  | each storm's reporting area from the FCC notices (rewrites code/manifest tables; the test checks they are unchanged) |
-| 2 | `03_parse_dirs.py` |  | parse every DIRS report (text first, PDF fallback) into county rows and totals |
-| 3 | `04_validate_dirs.py` |  | reconcile county rows with each report's printed totals; validation tables |
-| 4 | `05_fips.py` |  | county names to FIPS |
-| 5 | `06_eaglei.py` |  | match EAGLE-I (from the published extract) to each report's as-of time |
-| 6 | `07_nhc.py` |  | tracks, wind radii, distance to track, day 0 |
-| 7 | `08_fema_svi_bdc.py` |  | ACS, SVI and OpenFEMA declarations (from the stored files; no request is made) |
-| 8 | `09_build_panel.py` |  | the panel, the storm table and dirs_county_day.csv |
-| 9 | `10_analysis.py` | 3 4 5 6 7 8 9 | chapters 3-9 to results.json |
-| 10 | `10_analysis.py` | 1 2 | chapters 1 and 2 (run second so results.json keeps the published key order) |
-| 11 | `12_v2_analysis.py` | v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card | chapters 10-14 to results.json |
-| 12 | `12b_analysis_ready.py` |  | the analysis-ready panel (CSV and Parquet): the panel with every covariate |
-| 13 | `15_external_validation.py` |  | external check against the FCC's 2017 season report (Harvey and Irma figures) |
-| 14 | `16_fema_ia.py` |  | v3.2.0: FEMA Individual Assistance by storm and county (from the stored OpenFEMA responses) |
-| 15 | `17_cable_wireline.py` |  | v3.2.0: cable and wireline subscribers out, per report and area |
-| 16 | `18_hazard_ncei.py` |  | v3.2.0: NCEI hazard flags and damage by storm and county (skipped unless the NCEI files are supplied: they are not redistributed) |
-| 17 | `15b_external_michael_olukola.py` |  | v3.2.0: external checks against the FCC's Michael report and Olukola et al. (2026) |
+| 1 | `01_check_manifest.py` |  | 4.0.0: the report manifest; fails on any report whose status is not ok, excluded or out_of_scope |
+| 2 | `02b_reporting_areas.py` |  | each storm's reporting area from the FCC notices (rewrites code/manifest tables; the test checks they are unchanged) |
+| 3 | `03_parse_dirs.py` |  | parse every DIRS report (text first, PDF fallback) into county rows and totals |
+| 4 | `04_validate_dirs.py` |  | reconcile county rows with each report's printed totals; validation tables |
+| 5 | `05_fips.py` |  | county names to FIPS |
+| 6 | `06_eaglei.py` |  | match EAGLE-I (from the published extract) to each report's as-of time |
+| 7 | `07_nhc.py` |  | tracks, wind radii, distance to track, day 0 |
+| 8 | `08_fema_svi_bdc.py` |  | ACS, SVI and OpenFEMA declarations (from the stored files; no request is made) |
+| 9 | `09_build_panel.py` |  | the panel, the storm table and dirs_county_day.csv |
+| 10 | `10_analysis.py` | 3 4 5 6 7 8 9 | chapters 3-9 to results.json |
+| 11 | `10_analysis.py` | 1 2 | chapters 1 and 2 (run second so results.json keeps the published key order) |
+| 12 | `12_v2_analysis.py` | v2_1 v2_2 v2_3 v2_5_groups v2_5 report_card | chapters 10-14 to results.json |
+| 13 | `12b_analysis_ready.py` |  | the analysis-ready panel (CSV and Parquet): the panel with every covariate |
+| 14 | `15_external_validation.py` |  | external check against the FCC's 2017 season report (Harvey and Irma figures) |
+| 15 | `16_fema_ia.py` |  | v3.2.0: FEMA Individual Assistance by storm and county (from the stored OpenFEMA responses) |
+| 16 | `17_cable_wireline.py` |  | v3.2.0: cable and wireline subscribers out, per report and area |
+| 17 | `18_hazard_ncei.py` |  | v3.2.0: NCEI hazard flags and damage by storm and county (skipped unless the NCEI files are supplied: they are not redistributed) |
+| 18 | `15b_external_michael_olukola.py` |  | v3.2.0: external checks against the FCC's Michael report and Olukola et al. (2026) |
 
 `code/tests/test_reproduction.py` then compares `build/` with `data/analysis/`: `dirs_county_day.csv`, `storms.csv` and the validation tables byte for byte, `results.json` with numbers within a relative 1e-8 (absolute 1e-12 near zero) and everything else exactly, and the analysis-ready panel value by value. `code/tests/test_datapackage.py` checks `datapackage.json` with frictionless (`frictionless validate datapackage.json`: 0 errors).
 
@@ -232,7 +250,7 @@ The page numbers its chapters 1 to 12 (since November 25, 2026). The keys of `re
 
 ## How to cite
 
-The repository is archived on Zenodo. Cite the concept DOI for the data and code in general, and the version DOI when you use specific numbers:
+The repository is archived on Zenodo. For specific numbers, cite the version DOI shown on the Zenodo record of the version you used; for the work in general, cite the concept DOI:
 
 - In general (all versions; resolves to the latest): Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477809
 - Version 2.0.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 2.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24477811
@@ -242,13 +260,18 @@ The repository is archived on Zenodo. Cite the concept DOI for the data and code
 - Version 3.1.1: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.1.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24537335
 - Version 3.2.0: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.2.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24542647
 - Version 3.2.1: Spivey, T. D. (2026). When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code) (Version 3.2.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24595378
+- Version 4.0.0 (this one) gets its own DOI when it is released; until then, cite the concept DOI.
 
 `CITATION.cff` lists every DOI, and GitHub's "Cite this repository" button reads it.
 
 ## Corrections and contributing
 
-Every correction made so far is in `ERRATA.md` (generated from the decision log). To report a data error, use the issue form described in `CONTRIBUTING.md`; a change to a published number is a new major version.
+Every correction made so far is in `ERRATA.md` (generated from the decision log). To report a data error, use the issue form described in `CONTRIBUTING.md`.
+
+## Versions
+
+major: an existing published value, or the meaning of a variable, changes; minor: rows, storms, files or variables are added and every existing published value is unchanged; patch: no value changes (bytes may change, for example a format or documentation fix, and the changelog says so) (`CHANGELOG.md`).
 
 ## Disclosure
 
-The author works in the telecommunications industry. This analysis was done independently, on personal time, using only publicly available government data. It uses no employer data or confidential information, and the views are the author's alone. The author has no financial interest in any FCC proceeding. AI assistance: `AI_ASSISTANCE.md`.
+Competing interests: The author works for a cable operator. This is independent work on public data only; no employer data, time or resources were used, and the employer has no role in it. Funding: none. The views are the author's alone, and the author has no financial interest in any FCC proceeding. Contact: timothy@thresholddatasciences.com. AI assistance: `AI_ASSISTANCE.md`.

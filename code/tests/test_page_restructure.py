@@ -74,6 +74,9 @@ def uncollapse(md: str) -> str:
 
 
 @built
+@pytest.mark.skipif(int(importlib.import_module("14_data_repo").VERSION.split(".")[0]) > 3,
+                    reason="checks the 3.x restructure, which changed no number; 4.0.0 changes published values "
+                           "(ERRATA.md, docs/changes_4_0_0_results.csv)")
 def test_every_number_on_the_old_page_is_on_the_new_page():
     old = BEFORE.read_text(encoding="utf-8")
     new = uncollapse(step11.PAGE.read_text(encoding="utf-8"))

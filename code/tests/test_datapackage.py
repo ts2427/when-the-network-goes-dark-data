@@ -26,3 +26,16 @@ def test_every_resource_hash_matches():
         if "hash" in r:
             got = "sha256:" + hashlib.sha256((REPO / r["path"]).read_bytes()).hexdigest()
             assert got == r["hash"], r["path"]
+
+
+def test_byte_counts_match():
+    """bytes where the resource has the field; for the Parquet, the count in its description (4.0.0)."""
+    import json
+    import re
+    pkg = json.loads((REPO / "datapackage.json").read_text(encoding="utf-8"))
+    for r in pkg["resources"]:
+        size = (REPO / r["path"]).stat().st_size
+        if "bytes" in r:
+            assert r["bytes"] == size, r["path"]
+        elif r["format"] == "parquet":
+            assert re.search(rf"; {size} bytes\.", r["description"]), r["path"]

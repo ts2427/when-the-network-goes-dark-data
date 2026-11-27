@@ -41,3 +41,31 @@ Process corrections are not listed here: the 15 CORRECTION entries that changed 
 | Per-storm bootstrap intervals, for example Helene's peak sites out (chapter_3 to chapter_6; no estimate changes) | 3,541 to 5,675 | 3,593 to 5,651 | Each storm's seed now comes from its storm key (an engineering change), so every per-storm interval moved once. |
 | County name in Harvey Sep 3, 2017's Matagorda row | MATAGORD A | MATAGORDA | The table breaks the name across lines; the report's own county list spells it. |
 | Nicholas's site-days lost, as displayed | 114 | 115 | A value of exactly one half was stored just below the half; the page now rounds it up as its rule states. |
+
+## 4.0.0
+
+| What changed | Before | After | Why |
+|---|---|---|---|
+| Reports used | 169 | 174 | Four wrongly excluded reports restored; Helene 2024-10-03 kept as a known FCC inconsistency |
+| Reports excluded | 5 | 0 | As above |
+| County-report rows in the panel | 10,051 | 11,296 | The five reports' rows (1,245) |
+| Counties in the panel | 814 | 916 | Laura 2020-08-29 covers more counties |
+| Laura's peak (chapter_3) | 513 sites out (1.6%) | 852 sites out (2.7%) | The restored Aug 28-30, 2020 reports hold Laura's peak |
+| Median peak sites out across storms (chapter_3) | 570 | 650.5 | Laura's larger peak |
+| Median peak share across storms (chapter_3) | 9.8% (2.9 to 12.3) | 9.8% (3.0 to 12.3) | Bootstrap interval with Laura's new peak |
+| Pooled share of sites out, power (chapter_5) | 59.2% (52.5 to 64.6) | 58.0% (51.4 to 63.9) | The restored reports' cause columns |
+| Pooled share, transport (chapter_5) | 29.1% (21.5 to 33.6) | 30.1% (22.1 to 35.1) | As above |
+| Pooled share, damage (chapter_5) | 6.6% (2.3 to 15.4) | 6.4% (2.4 to 14.8) | As above |
+| Pooled share, no cause given (chapter_5) | 5.4% (2.2 to 7.9) | 5.9% (2.5 to 8.2) | As above |
+| Median rank correlation, power and cell outages (chapter_6) | 0.61 (0.46 to 0.67) | 0.61 (0.47 to 0.67) | More county-reports matched |
+| SVI hazard ratio, most vulnerable quartile (chapter_8) | 1.14 (0.90 to 1.45) | 1.21 (0.95 to 1.53) | More storm-counties and events |
+| SVI hazard ratio, second quartile (chapter_8) | 0.93 (0.73 to 1.20) | 0.96 (0.75 to 1.23) | As above |
+| SVI hazard ratio, third quartile (chapter_8) | 1.21 (0.95 to 1.54) | 1.23 (0.97 to 1.57) | As above |
+| Chapter 8's sensitivities, lowest interval end (chapter_8) | 0.81 | 0.88 | As above |
+| Peak share inside 64-knot winds (chapter_7) | 32.1% (26.4 to 38.0) | 32.4% (26.6 to 38.8) | The restored reports' counties |
+| Cell first, power first, same report (v2_3_power_cell_timing) | 159, 66, 127 of 352 determined (499 counties) | 168, 72, 124 of 364 determined (509 counties) | The restored reports' counties |
+| Median share of peak still out at the last report (v2_1_public_record_misses) | 9.0% | 8.9% | Laura's larger peak |
+| Recovery to half restored, range across storms (chapter_4) | 1 to 7 days | 1 to 4 days | Laura's restored reports |
+| eaglei_pct_out above 100% (analysis-ready panel) | 415 rows | 0 rows (blank where the MCC flag is not ok) | MCC below EAGLE-I's own outages; no result used it |
+| Harrison County, Texas, in DOC-375778A1 and DOC-375808A1 (2 rows) | Ida | Nicholas | Only Nicholas's notice covered Texas |
+| as_of_imputed, Laura 2020-09-01 (38 rows) | True | False | Its printed time is read |

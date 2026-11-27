@@ -7,12 +7,13 @@ Layouts vary by year, so this parser is deliberately tolerant:
     (Sally 2020 prints only sites served and out; pct_printed says whether the % column was printed)
   * a name wrapped onto the line above (indented capitals, e.g. "EAST BATON" over "LA ROUGE ...") is joined
   * a TOTAL whose numbers sit on a later line is joined. After rows from more than one state, a TOTAL that equals
-    the last state's rows is that state's total (Helene Sep 28, 2024 prints no Georgia TOTAL); one that equals all
+    the last state's rows is that state's total; one that equals all
     the rows is an overall total (overall_totals, Harvey 2017)
   * a wrapped name may also sit unindented above its row in PDF text ("EAST BATON" over "LA ROUGE ...", 2019-2020)
   * page footers ("As prepared by the Federal Communications Commission: <date> <time>", "Pa ge | 3") are removed
   * a percent after "more than", "less than", "over" or "under" is not the headline
-  * a bare "TOTAL" or "TOTAL -" row belongs to the state of the county rows above it
+  * a bare "TOTAL" or "TOTAL -" row belongs to the state of the county rows above it; "GA - <numbers>" is
+    Georgia's total (Helene Sep 28, 2024; 4.0.0)
   * a table with no State column (Debby 2024) takes the state from the report's county list, and only
     when no row in the report carries a state and the list names exactly one
   * the "% Out" column is detected by its percent sign, not by position
@@ -45,9 +46,12 @@ CODE_TO_STATE = dict(reversed(list(zip(_CODES, STATES, strict=True))))
 _STATE_RE = ("|".join(sorted((re.escape(s) for s in STATES), key=len, reverse=True))
              + "|(?-i:" + "|".join(CODE_TO_STATE) + ")")
 _NUM = r"-?[\d,]+(?:\.\d+)?%?"
-ROW_RE = re.compile(rf"^\s*(?P<state>{_STATE_RE})\s+(?P<county>[A-Za-z][A-Za-z .'\-]*?)\s+(?P<nums>(?:{_NUM}\s+){{1,7}}{_NUM})\s*$",
+ROW_RE = re.compile(rf"^\s*(?P<state>{_STATE_RE})\s+(?P<county>[A-Za-z][A-Za-z .'`’\-]*?)\s+(?P<nums>(?:{_NUM}\s+){{1,7}}{_NUM})\s*$",
                     re.IGNORECASE)
-TOTAL_ROW_RE = re.compile(rf"^\s*(?:TOTAL|Total)\s+(?:-\s+)?(?P<nums>(?:{_NUM}\s+){{1,7}}{_NUM})\s*$")
+# a state total may also start with the state's code and a dash: "GA - 13083 1293 9.88% ..." (Helene Sep 28, 2024;
+# 4.0.0). The dash is required, so a county row is never read as a total.
+TOTAL_ROW_RE = re.compile(rf"^\s*(?:(?:TOTAL|Total)\s+(?:-\s+)?|(?P<code>(?-i:[A-Z]{{2}}))\s+-\s+)"
+                          rf"(?P<nums>(?:{_NUM}\s+){{1,7}}{_NUM})\s*$")
 FOOTER_RE = re.compile(r"As prepared by the Federal Communications Commission:\s*\w+\s+\d{1,2},?\s*\d{4}\s*"
                        r"(?:\d{1,2}:\d{2}[ \t]*[ap]\.m\.(?:[ \t]*[ECMP][DS]T\b)?)?|Pa ge \| \d+")
 # (correction, 2026-11-24) the time zone must be a real one on the footer's own line: "[A-Z]{3}" after "\s*" had
@@ -64,7 +68,7 @@ def is_name_prefix(prefix: str) -> bool:
     """A line of capitals that can start a wrapped county name: not a state, a state code or table header words."""
     words = set(prefix.split())
     return prefix.title() not in STATES and prefix not in CODE_TO_STATE and not words & HEADER_WORDS
-NO_STATE_ROW_RE = re.compile(r"^\s*(?P<county>[A-Z][A-Za-z .'\-]*?)\s+"
+NO_STATE_ROW_RE = re.compile(r"^\s*(?P<county>[A-Z][A-Za-z .'`’\-]*?)\s+"
                              r"(?P<nums>[\d,]+\s+[\d,]+\s+\d+(?:\.\d+)?%(?:\s+[\d,]+){4})\s*$")
 TOTAL_WORDS = re.compile(r"\b(total|totals|all counties|overall)\b", re.IGNORECASE)
 CABLE_RE = re.compile(r"(?P<n>\d[\d,]+)\s+(?:\([^)]*\)\s+)?(?:(?:cable|wireline)[a-z/\s]*?\s+)?"
@@ -105,7 +109,8 @@ TWO_DAY_RE = re.compile(r"Out\s+on\s+(?P<prev>\d{1,2}/\d{1,2})\b.{0,120}?Out\s+T
                         re.IGNORECASE | re.DOTALL)
 
 
-AS_OF_RE = re.compile(r"\bas of\s+(?:(?P<date>[A-Z][a-z]+\.? \d{1,2},? \d{4}),?\s+(?:at\s+)?)?"
+# "September1, 2020" (Laura Sep 1, 2020) prints no space before the day (4.0.0)
+AS_OF_RE = re.compile(r"\bas of\s+(?:(?P<date>[A-Z][a-z]+\.? ?\d{1,2},? \d{4}),?\s+(?:at\s+)?)?"
                       r"(?P<h>\d{1,2})(?::(?P<m>\d{2}))?\s*(?P<ap>[ap])\.?\s*m\b\.?\s*(?P<tz>[ECMP][DS]T\b)?",
                       re.IGNORECASE)
 LATE_LIST_RE = re.compile(r"following (?:counties|parishes)[^.]{0,80}?(?:are|is) in the current geographic area")
@@ -134,6 +139,8 @@ def _clean_names(names: str) -> list[str]:
         parts.append(p)
         i += 1
     parts = [re.sub(r"^and ", "", p) for p in parts if p]
+    # a page number left in front of a name where the list runs across a page ("27 Guilford", Laura Aug 29, 2020)
+    parts = [re.sub(r"^\d+\s+(?=[A-Z])", "", p) for p in parts]
     if parts and " and " in parts[-1] and parts[-1] != "King and Queen":  # "A and B" with no comma
         parts[-1:] = parts[-1].rsplit(" and ", 1)
     return [p for p in parts if p]
@@ -214,7 +221,8 @@ def parse_text(text: str) -> ParsedReport:
         rep.as_of_time = f"{hour:02d}:{m.group('m') or '00'}"
         rep.as_of_tz = (m.group("tz") or "").upper()
         if m.group("date"):
-            rep.as_of_date = datetime.strptime(re.sub(r"[.,]", "", m.group("date")), "%B %d %Y").date().isoformat()
+            day = re.sub(r"([A-Za-z])(\d)", r"\1 \2", re.sub(r"[.,]", "", m.group("date")))  # "September1"
+            rep.as_of_date = datetime.strptime(day, "%B %d %Y").date().isoformat()
     for m in PCT_SITES_RE.finditer(text):
         if not THRESHOLD_RE.search(text[max(0, m.start() - 20):m.start()]):
             rep.pct_sites_out = float(m.group("pct"))
@@ -254,6 +262,15 @@ def parse_text(text: str) -> ParsedReport:
             continue
         held, prefix = prefix, None
         total = TOTAL_ROW_RE.match(line)
+        if total and total.group("code"):
+            code_state = CODE_TO_STATE.get(total.group("code"))
+            row = _row_from_tokens(code_state, "TOTAL", total.group("nums").split(), two_day) if code_state else None
+            if row:
+                rep.state_totals.append(row)
+            else:
+                rep.warnings.append(f"total with an unknown state code, or unreadable: {line.strip()}")
+            table_rows = []
+            continue
         if total:
             states = list(dict.fromkeys(r["state"] for r in table_rows))
             row = _row_from_tokens(states[-1], "TOTAL", total.group("nums").split(), two_day) if states else None

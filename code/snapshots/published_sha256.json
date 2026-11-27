@@ -1,0 +1,24 @@
+{
+ "major": 4,
+ "version": "4.0.0",
+ "files": {
+  "data/analysis/context/dirs_cable_wireline.csv": "1cf1597fb3dd98ae83fb1bae8698a31436dae10cb1562a04ff74f4d7d04f7a06",
+  "data/analysis/context/fema_ia_county_storm.csv": "2d99fa9c4a902e948fc87456ed2a07ccd62a99ed2646dcc2110c3eca485b60b4",
+  "data/analysis/context/fema_ia_set_aside.csv": "0d8eef751f95fa511de0775c4c31f5404be9cd41fc24038f97a402ea1ab4b650",
+  "data/analysis/context/hazard_ncei_county_storm.csv": "5c8acfffa45c6417a7815a36d0b8aa6a9a3ac3d905cf4bb62e76f143e7afcc62",
+  "data/analysis/context/hazard_ncei_storm_summary.csv": "1c01ff074089a6ea04e9a09a05a3e41d00cb14530bfa443ba78d7ce2111e512d",
+  "data/analysis/dirs_county_day.csv": "452b40792bf29c761f7b5e418d614a2a18ff474388f24c7e073652d8bd12d65e",
+  "data/analysis/panel_analysis_ready.csv": "027189402b0f7ea27006ca41ae4fbc9022a711506e242bf8265c63fc7290c6d3",
+  "data/analysis/panel_analysis_ready.parquet": "722d9b6700e690dd4c17b7d824d48431acab833e39fb8d62e835c1a212b66ac4",
+  "data/analysis/results.json": "8935224bbea018b5c9f9074aa9e5fc039ced576c0d091835dad39f58d42f0a65",
+  "data/analysis/storms.csv": "5a4a146957caeabc8234166addb140c033a59f37a1ab5fd0daa7bcc8321b200b",
+  "data/analysis/validation/area_status_counts.csv": "26e6676cde4cba86fd5f1b2c052dd35ea2110a8f7c60ac8349f2f455b4585fc5",
+  "data/analysis/validation/excluded_reports.csv": "ff08a934b02cc128e01dc06b3a45c3185422a29ebc43059ef56c663f0074bd7b",
+  "data/analysis/validation/external_validation_fcc_2017.csv": "38317bfa4eeb841bc047e976669d212852ad9ae35ece79b4dcd06282cf32bb22",
+  "data/analysis/validation/external_validation_fcc_21_99.csv": "92601d4fa8546dad40380fc262849cbcbfec034b91532dd56db0d107605dc250",
+  "data/analysis/validation/external_validation_fcc_michael.csv": "1bb17315b8fc06e845decbf600fa391102a4cd1f0d40bc86aec50a8cf3f5da7d",
+  "data/analysis/validation/external_validation_olukola.csv": "9d8f53a374373e2b6044a54821bb481940baf5fa4b329e41659d1307ebccfc51",
+  "data/analysis/validation/validation_dirs.csv": "0f5cc28f95fe7d524fc761ac0ae019662aa340fe562f30d9679c3f74b415546f",
+  "data/analysis/validation/validation_summary.csv": "a23381d36cb575812f0651e0af841c967b035ef548202f23183afb8609216d44"
+ }
+}

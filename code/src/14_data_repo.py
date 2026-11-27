@@ -21,6 +21,7 @@ Never copies .env, .venv, data/interim, data/raw/bdc, the EAGLE-I year files or 
 import hashlib
 import importlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -32,16 +33,21 @@ import load
 from config import (BDC_COUNTS, BDC_COUNTS_META, DOWNLOADS_LOG, EAGLEI_EXTRACT, EAGLEI_RAW_DIR, OUTPUT, PROCESSED,
                     RAW, REGIMES, ROOT)
 
-VERSION = "3.2.1"
+VERSION = "4.0.0"
 RELEASE_DATE = "2026-11-27"
 CREATED = f"{RELEASE_DATE}T12:00:00-06:00"  # datapackage.json created: ISO 8601 date-time (v2.2.0)
 # Set to True only after CI has passed on both ubuntu-latest and windows-latest (README then says so).
-CI_PASSED_ON_BOTH = True  # 3.2.1: CI passed on ubuntu-latest and windows-latest, commit cba5a46 (2026-11-27)
+CI_PASSED_ON_BOTH = False  # 4.0.0: not yet run on CI
+# Tim's versioning policy, 2026-11-27 (4.0.0): CHANGELOG, README, DATASHEET, CONTRIBUTING, docs/update_procedure.md
+POLICY_TEXT = ("major: an existing published value, or the meaning of a variable, changes; minor: rows, storms, files or variables are added and every existing published value is unchanged; patch: no value changes (bytes may change, for example a format or documentation fix, and the changelog says so)")
+MANIFEST_CSV = ROOT / "manifest" / "dirs_reports.csv"
+SNAPSHOTS = ROOT / "snapshots"  # the version guard's frozen record of each major version's published files
 GITHUB = "https://github.com/ts2427/when-the-network-goes-dark-data"
 BOOTSTRAP_NOTE = importlib.import_module("11_build_page").BOOTSTRAP_METHODS
 PUBLIC_REQUIREMENTS = [
     "pandas==2.3.3", "numpy==2.5.5", "scipy==1.18.1", "statsmodels==0.15.0", "scikit-learn==1.9.1",
-    "lifelines==0.30.3", "pdfplumber==0.11.11", "pdfminer.six==20260107", "geopandas==1.2.0", "shapely==2.2.0",
+    "lifelines==0.30.3", "pdfplumber==0.11.11", "pdfminer.six==20260107", "pypdfium2==5.15.2",  # 4.0.0: second reading
+    "geopandas==1.2.0", "shapely==2.2.0",
     "pyogrio==0.13.0", "pyproj==3.8.0", "pyarrow==26.0.1", "requests==2.34.2", "pytest==9.2.0",
     "frictionless==5.21.0", "matplotlib==3.11.2", "nbmake==1.5.5", "ipykernel==7.4.0", "ruff==0.17.6"]
 LOCKFILE = ROOT / "requirements.lock"  # uv pip compile requirements.txt --universal --generate-hashes (see README)
@@ -113,8 +119,11 @@ PANEL_FIELDS = [
      "known_fcc_inconsistency (a stated total the FCC's own rows do not sum to, listed in "
      "code/manifest/known_fcc_inconsistencies.csv).", "", "Excluded reports are not in the file."),
     ("state", "string", "State, as printed.", "", "Ten study states only."),
-    ("county", "string", "County as printed by the FCC (upper case).", "",
-     "Spellings vary between reports; use fips."),
+    ("county", "string", "County as printed by the FCC; case and suffix vary by report format.", "",
+     "Use fips or county_name_census."),
+    ("county_name_census", "string", "The county's 2020 Census name for its FIPS code (NAMELSAD form, e.g. "
+     "\"Baldwin County\", \"Orleans Parish\"), from data/input/census/national_county2020.txt.", "",
+     "Added in 4.0.0. One name per FIPS across every report."),
     ("fips", "string", "Five-digit county FIPS code (with leading zero).", "",
      "Mapped from the printed name with code/manifest/fips_exceptions.csv."),
     ("sites_served", "integer", "Cell sites served in the county, as reported.", "sites",
@@ -158,7 +167,9 @@ STORM_FIELDS = [
      "Superseded; not used for the main results."),
     ("interim_landfall_utc", "datetime", "Day 0 under the first 2026-11-23 rule (kept for comparison).", "UTC",
      "Superseded; not used for the main results."),
-    ("n_reports", "integer", "Reports in the panel.", "reports", "Blank for storms not in the panel."),
+    ("n_reports", "integer", "Reports in the panel.", "reports", "Blank for storms not in the panel. DOC-375778A1 "
+     "and DOC-375808A1 are shared by Ida and Nicholas and counted for both, so the column sums to more than the reports "
+     "used (README, Report counts)."),
     ("n_counties", "integer", "Counties in the panel.", "counties", "Blank for storms not in the panel."),
     ("first_report", "date", "First report date in the panel.", "", ""),
     ("last_report", "date", "Last report date in the panel.", "", "The FCC's last public report, not the end of outages."),
@@ -465,7 +476,8 @@ def addendum_as_committed(T: Path) -> dict:
 def copy_docs(T: Path) -> None:
     for name in ("analysis_plan.md", "analysis_plan_addendum_v2.md", "decisions.md", "data_sources.md",
                  "literature.md", "update_procedure.md", "external_validation.md", "restructure_plan.md",
-                 "analysis_plan_addendum_4x.md", "scoping_4x.md"):
+                 "analysis_plan_addendum_4x.md", "scoping_4x.md", "roadmap_modules.md", "dirs_activations.csv", "changes_4_0_0_results.csv",
+                 "scoping_earlier_years.md"):
         copy(ROOT / "docs" / name, T / "docs" / name)
     copy(ROOT / "examples" / "quickstart.ipynb", T / "examples" / "quickstart.ipynb")
     copy(ROOT / "ruff.toml", T / "ruff.toml")
@@ -496,6 +508,8 @@ def schema(fields, primary_key, missing=("",)) -> dict:
             f["limitations"] = limit
         if typ == "string" and name == "fips":
             f["constraints"] = {"pattern": "^[0-9]{5}$", "required": True}
+        if name == "eaglei_pct_out":  # 4.0.0: null unless eaglei_mcc_flag is ok
+            f["constraints"] = {"minimum": 0, "maximum": 100}
         if typ == "boolean":
             f["trueValues"], f["falseValues"] = ["True"], ["False"]
         if typ == "datetime":
@@ -623,6 +637,159 @@ def context_resources() -> list:
     ]
 
 
+V = "validation"
+VALIDATION_FIELDS = {  # 4.0.0 (Tim's item 12): every validation table documented
+    "validation_dirs": ("Validation of every report in scope", "One row per report: its status, what confirmed its rows "
+                        "and every failure and flag. Written by code/src/04_validate_dirs.py.", ["doc_id"], [
+        ("doc_id", "string", "FCC EDOCS document ID of the report.", "", ""),
+        ("storm", "string", "Storm of the report, as in the manifest (Ida for the reports Ida and Nicholas share).",
+         "", "Added in 4.0.0."),
+        ("status", "string", "ok, flagged, known_fcc_inconsistency, excluded or fail (fail stops the build).", "", ""),
+        ("n_rows", "integer", "County rows parsed.", "rows", ""),
+        ("second_reading", "string", "What confirmed every row: pdf_plain_text (the PDF's plain text, independent of "
+         "the parse, which used the .txt or the PDF's table cells), or, where the parse itself used plain PDF text, "
+         "txt, pdfium (PDFium's text) or pdf_cells (both pdfplumber readings), joined by \"and\".", "",
+         "Added in 4.0.0."),
+        ("fcc_multiple_causes_note", "boolean", "The report prints the FCC's note that a site can be out for more than "
+         "one cause.", "", ""),
+        ("computed_pct_out", "number", "Sites out over sites served, from the county rows.", "percent", ""),
+        ("stated_pct_out", "number", "The report's printed headline share of sites out.", "percent",
+         "Blank where none is printed."),
+        ("pct_out_used", "number", "The share used: always computed from the rows.", "percent", ""),
+        ("sites_unattributed", "integer", "Sum over rows of sites out with no cause given.", "cell sites",
+         "Blank where the report prints no causes."),
+        ("sites_overattributed", "integer", "Sum over rows of causes in excess of sites out.", "cell sites",
+         "Blank where the report prints no causes."),
+        ("failures", "string", "Why the report fails, if it does; ';'-separated.", "", ""),
+        ("flag_reasons", "string", "Known FCC inconsistencies and flags; ';'-separated.", "", "")]),
+    "validation_summary": ("Cause attribution by report (the table the page cites)", "One row per report: county rows "
+                           "and how their causes compare with sites out. n/a where the report prints no causes. "
+                           "Column names without spaces since 4.0.0.", ["report"], [
+        ("report", "string", "Storm, date and DOC ID.", "", ""),
+        ("rows", "integer", "County rows.", "rows", ""),
+        ("rows_causes_exact", "integer", "Rows whose causes sum to sites out.", "rows", "n/a: no causes printed."),
+        ("rows_causes_short_by_1", "integer", "Rows whose causes fall short of sites out by 1.", "rows", ""),
+        ("rows_causes_short_by_more", "integer", "Rows whose causes fall short by more than 1.", "rows", ""),
+        ("rows_causes_exceed_out", "integer", "Rows whose causes exceed sites out.", "rows", ""),
+        ("sites_with_no_cause", "string", "Sites out with no cause, \"N of M\" sites out.", "", "")]),
+    "excluded_reports": ("Excluded reports", "manifest/excluded_reports.csv with each report's status and failures "
+                         "(empty in 4.0.0: every report in scope passes).", ["doc_id"], [
+        ("doc_id", "string", "FCC EDOCS document ID.", "", ""), ("storm_name", "string", "Storm.", "", ""),
+        ("report_date", "date", "Report date.", "", ""), ("reason", "string", "Why it is excluded.", "", ""),
+        ("decided_on", "date", "When the exclusion was decided.", "", ""),
+        ("status", "string", "Its validation status.", "", ""), ("failures", "string", "Its failures.", "", "")]),
+    "area_status_counts": ("County rows by area status, per report", "Counts of each report's rows inside the storm's "
+                           "notice area, inside under a spelling variant, outside it, or in the table but not the "
+                           "report's list.", ["doc_id"], [
+        ("doc_id", "string", "FCC EDOCS document ID.", "", ""),
+        ("inside", "integer", "Rows inside the notice area.", "rows", ""),
+        ("inside_spelling_variant", "integer", "Rows inside under a checked spelling variant.", "rows", ""),
+        ("outside_notice_area", "integer", "Rows outside the notice area (kept, flagged).", "rows", ""),
+        ("table_not_in_list", "integer", "Rows in the table but not the report's county list.", "rows", ""),
+        ("confirmed_by_second_reading", "boolean", "Every row confirmed by the second reading.", "", "")]),
+}
+EXTERNAL_COMMON = [("id", "string", "Figure ID.", "", ""), ("where", "string", "Page and paragraph in the source.", "", ""),
+                   ("status", "string", "match, consistent, differs, or shown, not scored.", "", ""),
+                   ("explanation", "string", "Why a figure differs, where it does.", "", "")]
+EXTERNAL_FIELDS = {
+    "external_validation_fcc_2017": ("External check: the FCC's 2017 season report", ["id"], [
+        "id", "storm", "where", "fcc_text", "report_date", "doc_id", "area", "county", "measure", "fcc_value", "ours",
+        "ours_detail", "printed_in_report", "source", "status", "explanation"]),
+    "external_validation_fcc_michael": ("External check: the FCC's Hurricane Michael report", ["id"], [
+        "id", "where", "fcc_text", "report_date", "doc_id", "area", "county", "measure", "fcc_value", "ours",
+        "ours_detail", "status", "explanation"]),
+    "external_validation_olukola": ("External check: Olukola et al. (2026), Helene", ["id"], [
+        "id", "storm", "figure", "where", "theirs", "ours", "status", "explanation"]),
+    "external_validation_fcc_21_99": ("External check: FCC 21-99 on Ida", ["id"], [
+        "id", "where", "fcc_text", "doc_id", "report_date", "state", "measure", "fcc_value", "ours", "ours_detail",
+        "status", "explanation"]),
+}
+EXTERNAL_WORDS = {"storm": "Storm.", "fcc_text": "The source's figure, as printed.", "report_date": "Matching DIRS "
+                  "report date.", "doc_id": "Matching DIRS report.", "area": "State or area (';'-separated).",
+                  "county": "County, where the figure is for one.", "measure": "How the figure is tested.",
+                  "fcc_value": "The source's value (text: some are ranges or words).", "ours": "Our value.",
+                  "ours_detail": "Our counts behind the value.", "printed_in_report": "What the daily report prints.",
+                  "source": "Where our value comes from.", "figure": "What is compared.",
+                  "theirs": "Their value.", "state": "State."}
+
+
+def validation_resources() -> list:
+    def res(name, title, desc, key, fields, missing=("",)):
+        return {"name": name, "path": f"data/analysis/{V}/{name}.csv", "profile": "tabular-data-resource",
+                "format": "csv", "mediatype": "text/csv", "encoding": "utf-8", "title": title, "description": desc,
+                "schema": schema(fields, key, missing)}
+    out = [res(n, t, d, k, f, ("", "n/a") if n == "validation_summary" else ("",))
+           for n, (t, d, k, f) in VALIDATION_FIELDS.items()]
+    common = {f[0]: f for f in EXTERNAL_COMMON}
+    for n, (title, key, cols) in EXTERNAL_FIELDS.items():
+        fields = [common[c] if c in common else (c, "date" if c == "report_date" else "string", EXTERNAL_WORDS[c], "", "")
+                  for c in cols]
+        out.append(res(n, title, "One row per figure the source gives in its text; see docs/external_validation.md. "
+                       "Values are text, since some figures are ranges or words.", key, fields))
+    return out
+
+
+def report_counts() -> tuple[list, int, int]:
+    """(rows of the reconciliation table, sum of storms.csv n_reports, reports used): manifest to reports used."""
+    m = pd.read_csv(MANIFEST_CSV, dtype=str, keep_default_na=False)
+    v = pd.read_csv(OUTPUT / "validation_dirs.csv", dtype=str, keep_default_na=False)
+    used = pd.read_csv(PROCESSED / "dirs_county_day.csv", usecols=["doc_id"], dtype=str).doc_id.unique()
+    storms = pd.read_csv(PROCESSED / "storms.csv", dtype=str, keep_default_na=False)
+    oos = m[m.status == "out_of_scope"]
+    excluded = v[v.status == "excluded"]
+    outside = sorted(set(v.doc_id) - set(excluded.doc_id) - set(used))
+    out_rows = m.set_index("doc_id").loc[outside]
+    if len(m) - len(oos) != len(v) or len(v) - len(excluded) - len(outside) != len(used):
+        raise SystemExit("report counts do not reconcile")
+    rows = [("In the manifest (`code/manifest/dirs_reports.csv`)", len(m), "every FCC report listed from the FCC's "
+             "storm pages (Nicholas's rows are in two of Ida's reports)"),
+            ("Out of scope", len(oos), "; ".join(f"{r.storm_name} {r.report_date} ({r.doc_id})" for r in
+                                                 oos.itertuples()) + ": outside the study area (Puerto Rico; "
+             "Dorian's also the U.S. Virgin Islands); not parsed"),
+            ("Validated (step 4)", len(v), "parsed and checked"),
+            ("Excluded", len(excluded), "; ".join(f"{r.doc_id}" for r in excluded.itertuples()) or "none"),
+            ("Outside the study states", len(outside), "; ".join(f"{r.storm_name} {r.report_date} ({d})" for d, r in
+                                                                 zip(outside, out_rows.itertuples())) +
+             ": county rows only outside the ten study states"),
+            ("Used (in `dirs_county_day.csv`)", len(used), "")]
+    return rows, int(pd.to_numeric(storms.n_reports).sum()), len(used)
+
+
+def report_counts_md() -> list:
+    rows, n_sum, n_used = report_counts()
+    return ["| Step | Reports | Which |", "|---|---|---|", *[f"| {a} | {n} | {w} |" for a, n, w in rows], "",
+            f"In `storms.csv`, `n_reports` sums to {n_sum}, not {n_used}: DOC-375778A1 and DOC-375808A1 are shared by "
+            "Ida and Nicholas and counted for both."]
+
+
+def key_names(text: str) -> str:
+    """Chapter numbers to results.json key names (4.0.0, Tim's item 13: the datasheet names keys)."""
+    for a, b in (("chapters 3 to 6", "`chapter_3` to `chapter_6`"),
+                 ("chapters 8 and 13", "`chapter_8` and `v2_5_network_redundancy`"),
+                 ("chapter 7's zone shares, chapter 12)", "`chapter_7`'s zone shares, `v2_3_power_cell_timing`)"),
+                 ("chapters 7, 8 and 13", "`chapter_7`, `chapter_8` and `v2_5_network_redundancy`")):
+        if a not in text:
+            raise SystemExit(f"key_names: '{a}' not found; update the mapping")
+        text = text.replace(a, b)
+    return text
+
+
+def page_keys(text: str) -> str:
+    """The page's chapter numbers in the shared related-work text, as results.json keys (page chapter 4 is
+    chapter_5, page chapter 12 is chapter_9; README, Page chapters and results.json keys)."""
+    for a, b in (("(chapter 4 and the methods)", "(`chapter_5` and the methods)"),
+                 ("chapter 12 describes the periods", "`chapter_9` describes the periods")):
+        if a not in text:
+            raise SystemExit(f"page_keys: '{a}' not found; update the mapping")
+        text = text.replace(a, b)
+    return text
+
+
+def second_reading_counts() -> dict:
+    v = pd.read_csv(OUTPUT / "validation_dirs.csv", dtype=str, keep_default_na=False)
+    return v.second_reading.value_counts().to_dict()
+
+
 def datapackage(T: Path, plan: dict) -> dict:
     a = T / "data" / "analysis"
     panel_cols = list(pd.read_csv(a / "dirs_county_day.csv", nrows=0).columns)
@@ -673,14 +840,16 @@ def datapackage(T: Path, plan: dict) -> dict:
              "profile": "tabular-data-resource", "format": "parquet", "mediatype": "application/vnd.apache.parquet",
              "title": "Analysis-ready panel (Parquet)",
              "description": "The same table as panel_analysis_ready.csv, with its types (UTC datetimes, nullable "
-                            "integers) and full float precision.",
-             "schema": schema(ANALYSIS_READY_FIELDS, ["storm_key", "doc_id", "fips"])},
+                            "integers) and full float precision. A missing float is NaN, which frictionless reads as "
+                            "the text nan, so nan is a missing value here (4.0.0).",
+             "schema": schema(ANALYSIS_READY_FIELDS, ["storm_key", "doc_id", "fips"], ("", "nan"))},
             {"name": "bdc_county_provider_counts", "path": "data/input/bdc/bdc_county_provider_counts.csv",
              "profile": "tabular-data-resource", "format": "csv", "mediatype": "text/csv", "encoding": "utf-8",
              "title": "Broadband provider counts by county and BDC release (counts only)",
              "description": "Derived from FCC Broadband Data Collection public data; no provider is named or identified.",
              "schema": schema(BDC_FIELDS, ["release", "fips"])},
             *context_resources(),
+            *validation_resources(),
             {"name": "results", "path": "data/analysis/results.json", "format": "json", "mediatype": "application/json",
              "title": "Every number on the page",
              "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py "
@@ -706,8 +875,10 @@ def datapackage(T: Path, plan: dict) -> dict:
     for r in pkg["resources"]:
         if r["format"] == "parquet":  # frictionless reads Parquet through pyarrow and cannot check bytes or hash
             r["description"] += f" SHA-256 {sha256(T / r['path'])}; {(T / r['path']).stat().st_size} bytes."
-            # since 3.2.1 also as a field; frictionless does not check a Parquet hash (or byte count), so the build
-            # and code/tests/test_datapackage.py check every resource's hash themselves
+            # since 3.2.1 also as a field; frictionless does not check a Parquet hash, so the build and
+            # code/tests/test_datapackage.py check every resource's hash themselves. A "bytes" field fails frictionless
+            # validation for Parquet (it reads the size as None; 4.0.0, 2026-11-27), so the byte count stays in the
+            # description, and test_datapackage.py checks it there
             r["hash"] = "sha256:" + sha256(T / r["path"])
             continue
         if "hash" not in r:
@@ -788,6 +959,8 @@ def codebook_md(T: Path, pkg: dict) -> None:
           "| Level | Drops | Why |", "|---|---|---|"]
     L += [f"| `{k}` | {v['drops']} | {v['why']} |" for k, v in load.CLEAN_LEVELS.items()]
     L += [""]
+    L += ["## Report counts", "", "From the manifest to the reports in `dirs_county_day.csv` (4.0.0):", "",
+          *report_counts_md(), ""]
     L += codebook_report_notes()
     L += ["## `data/analysis/results.json`", "",
           "Nested JSON, one key per chapter (`chapter_1` to `chapter_9`, then `v2_1_public_record_misses`, "
@@ -909,6 +1082,8 @@ def datasheet_md(T: Path) -> None:
     if (dirs_when == "").any():
         raise SystemExit("INPUTS.csv: a DIRS report has no retrieval time")
     strict = load.clean_rows(ready, "strict")
+    act = importlib.import_module("19_activations")
+    sr = second_reading_counts()
     concept, _ = dois()
     years = f"{v('first_report')[:4]}-{v('last_report')[:4]}"
     L = [
@@ -924,9 +1099,10 @@ def datasheet_md(T: Path) -> None:
         "The FCC publishes the reports one PDF at a time, storm by storm, in layouts that change between years.",
         f"- **Created by** {AUTHOR['given']} {AUTHOR['family']} (ORCID {AUTHOR['orcid']}), Threshold Data Sciences, for "
         f"the page *When the Network Goes Dark* ({PAGE_URL}).",
-        f"- **Funding and independence.** {step11.DISCLOSURE}",
+        f"- **Funding.** {step11.FUNDING}",
+        f"- **Competing interests.** {step11.COMPETING_INTERESTS}",
         f"- **Novelty.** {step11.NOVELTY}",
-        "- **Related work.** " + " ".join(f"{c} {d}" for c, d in step11.RELATED_WORK_ITEMS), "",
+        "- **Related work.** " + page_keys(" ".join(f"{c} {d}" for c, d in step11.RELATED_WORK_ITEMS)), "",
         "## Composition", "",
         f"- **Instances.** One row per county per FCC DIRS report: {n0(v('n_county_days'))} county-report rows "
         f"(`data/analysis/dirs_county_day.csv`) from {v('n_reports_used')} reports for {v('n_storms')} storms, "
@@ -936,18 +1112,19 @@ def datasheet_md(T: Path) -> None:
         f"them, sites on backup power where printed, and the report's validation status. The analysis-ready panel "
         f"(`panel_analysis_ready.csv` and `.parquet`) has the same {n0(len(ready))} rows and {ready.shape[1]} columns, "
         "adding power outages, exposure, day 0, SVI, ACS and broadband provider counts. Every variable: `CODEBOOK.md`.",
-        "- **Is it a sample?** No: it covers every Atlantic storm with a DIRS activation in the ten study states, "
-        f"{years}, and every one of their reports. Of {v('n_reports_in_scope')} reports in scope, "
-        f"{v('n_reports_excluded')} are excluded because they fail validation "
-        f"({'; '.join(f'{e.storm_name} {e.report_date}' for e in excluded.itertuples())}) and "
-        f"{v('n_reports_in_scope') - v('n_reports_excluded') - v('n_reports_used')} have county rows only outside the "
-        f"study states, leaving {v('n_reports_used')}.",
+        f"- **Is it a sample?** No: it covers every activation the inclusion rule admits, {years}, and every one of "
+        f"their reports. **Inclusion rule.** {act.INCLUSION_RULE} {act.SUBSET_SENTENCE} The inventory of activations "
+        "known here, with each one's dates, geography, reports, table columns and decision, is "
+        "`docs/dirs_activations.csv`; later extensions are planned as separate modules (`docs/roadmap_modules.md`).",
+        f"- **Report counts.** From the manifest to the reports used ({'none' if excluded.empty else len(excluded)} "
+        "excluded):", "", *report_counts_md(), "",
         "- **Missing values.** Empty cells. Cause columns are missing where the FCC did not print them (below); backup "
         "power likewise; power outages are missing where EAGLE-I has no record or no release (below).",
         "- **People.** None. The data are county aggregates of cell sites; there are no individuals and no personal "
         "data.",
         # wording: Tim's instruction, 2026-11-25
-        "- **Providers.** The published files name no providers. Provider counts in chapter 9 come from the FCC's "
+        "- **Providers.** The published files name no providers. Provider counts in `v2_5_groups` and "
+        "`v2_5_network_redundancy` come from the FCC's "
         "Broadband Data Collection; raw BDC data is not redistributed.",
         "- **Confidential data.** None: every input is public (`SOURCES.md`).", "",
         "## Collection process", "",
@@ -965,10 +1142,16 @@ def datasheet_md(T: Path) -> None:
         f"- **Analysis plan.** {step11.PLAN_SENTENCE} It is not blind to some figures, which the plan lists. Every "
         "deviation from it is in `DEVIATIONS.md`.", "",
         "## Preprocessing and cleaning", "",
-        "- Each report is parsed from its text file or, when that is incomplete, its PDF; every county row is checked "
-        "against a second reading of the PDF; county rows must sum to the report's printed state and overall totals, "
-        "or the report is flagged or excluded with its reason. Counties are matched to FIPS codes with a checked "
-        "exception list.",
+        "- Each report is parsed from its text file or, when that is incomplete, its PDF; county rows must sum to "
+        "the report's printed state and overall totals, or the report is flagged or excluded with its reason. Every "
+        "county row is checked against a second reading: "
+        f"in {sr.get('pdf_plain_text', 0)} reports, the PDF's plain text, which is independent of the parse (the parse "
+        "used the .txt or the PDF's table cells); in the "
+        f"{sum(n for k, n in sr.items() if k != 'pdf_plain_text')} reports whose parse itself used plain PDF text, "
+        "where that reading would not be independent, the .txt "
+        f"({sr.get('txt', 0)}) or PDFium's text ({sr.get('pdfium', 0)}) instead. "
+        "`validation/validation_dirs.csv` names the reading for each report (`second_reading`). Counties are matched to "
+        "FIPS codes with a checked exception list.",
         "- Validation of the reports in scope: " + ", ".join(f"{n0(n)} {step11._status_label(k, n)}" for k, n in status.items())
         + " (`data/analysis/validation/`). The known FCC inconsistencies are printed figures that disagree with the report's own rows or totals, each checked against the PDF and kept as printed, with "
         "the figure computed from the rows used.",
@@ -981,6 +1164,11 @@ def datasheet_md(T: Path) -> None:
         f"`docs/external_validation.md`), and {ms['shown']} statements with no number are shown beside our series. "
         f"Olukola et al. (2026) extracted Helene from the same reports independently: the {ms['olukola_matches']} "
         "match exactly. " + step11.extra_checks_sentence(),
+        "- Independent re-extraction (2026-11-27): a reviewer checked the published v3.2.1 panel with an extractor, "
+        "scripts and sample of their own (pdftotext text, a seeded stratified sample), reporting 0 mismatches over "
+        "its 10,051 rows. It is an independent code path and reviewer, AI-assisted, and not a human-keyed sample; a "
+        "human-keyed sample is planned before the data paper. Its rerun against this version is pending "
+        "(`docs/external_validation.md`).",
         "- Context tables added in 3.2.0 (`data/analysis/context/`): cable and wireline subscribers out per report, "
         "FEMA Individual Assistance and NCEI Storm Events hazard by storm and county. Descriptive only, under "
         "addendum 4.x-1; the NCEI files themselves are not redistributed.",
@@ -1027,7 +1215,7 @@ def datasheet_md(T: Path) -> None:
         f"covered share below 0.75), {n0(cov.get('coverage_unknown', 0))} no published coverage (reports in "
         f"{', '.join(str(y) for y in cov_unknown_years)}), and {n0(cov.get('no_eaglei_release', 0))} no EAGLE-I release "
         f"yet ({_and_list(no_release)}).",
-        f"- **The county bootstrap.** {BOOTSTRAP_NOTE} (Chapter numbers here are those of the `results.json` keys; "
+        f"- **The county bootstrap.** {key_names(BOOTSTRAP_NOTE)} (Chapters are named by their `results.json` keys; "
         "the README maps them to the page's chapters.)",
         f"- **Flags.** Most reports carry at least one flag, most of them benign; `clean_rows(level=\"strict\")` keeps "
         f"{strict.storm_key.nunique()} of {ready.storm_key.nunique()} storms. Use it as a sensitivity check.", "",
@@ -1038,19 +1226,24 @@ def datasheet_md(T: Path) -> None:
         "(`SOURCES.md`). The EAGLE-I year files and raw BDC files are not redistributed (README, Data availability).", "",
         "## Maintenance", "",
         f"- **Maintainer.** {AUTHOR['given']} {AUTHOR['family']} (ORCID {AUTHOR['orcid']}).",
+        f"- **Contact.** {step11.CONTACT_EMAIL}",
         "- **Updates.** Once a year, after each hurricane season, when EAGLE-I's release covering that season is out "
         "(usually February to April); each season's analysis plan is committed before its reports are read "
         "(`docs/update_procedure.md`). Reports are collected and archived at each update.",
         "- **Reporting an error.** The \"Report a data error\" issue form (storm, report DOC, county, what is wrong, "
         "evidence); see `CONTRIBUTING.md`.",
         "- **Corrections.** Made in the code or a checked table, never by hand in a published file; logged in "
-        "`docs/decisions.md`; a change to a published number is a new major version, archived with its own DOI and "
-        "listed in `ERRATA.md` with before, after and why.",
+        "`docs/decisions.md`; listed in `ERRATA.md` with before, after and why.",
+        f"- **Versions.** {POLICY_TEXT}. Each version is archived with its own DOI.",
         f"- **If maintenance stops.** Every released version stays archived on Zenodo and citable: the concept DOI "
         f"({concept}) resolves to the latest version, and each version DOI to its own files.",
         "- **Contributions.** Welcome through issues and pull requests (`CONTRIBUTING.md`); they are applied to the "
         "working project and the repository is regenerated.", ""]
-    write(T / "DATASHEET.md", "\n".join(L))
+    text = "\n".join(L)
+    stray = re.findall(r"\b[Cc]hapters? \d+", text)
+    if stray:
+        raise SystemExit(f"DATASHEET.md: chapter numbers instead of results.json keys: {stray}")
+    write(T / "DATASHEET.md", text)
 
 
 def span(dates: pd.Series) -> str:
@@ -1112,11 +1305,56 @@ def changelog(T: Path) -> None:
 """ if VERSION in version_dois() else "")
     write(T / "CHANGELOG.md", f"""# Changelog
 
-This project follows [Semantic Versioning](https://semver.org/): a major version changes a published number or a
-variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
-any output.
+This project follows [Semantic Versioning](https://semver.org/) (since 4.0.0, stated exactly): {POLICY_TEXT}.
 
 {unreleased}## [{VERSION}] - {RELEASE_DATE}
+
+Corrections from an independent fine-tooth review of v3.2.1 and a search of the wider public FCC record. **Published
+numbers change**, so this is a major version: every changed value is in `ERRATA.md` (before, after and why). The
+FCC's reports were not re-keyed: an independent re-extraction of all 10,051 v3.2.1 rows found no transcription error;
+the changes come from reports wrongly excluded, a parser gap and documentation errors.
+
+### Fixed (published values change)
+- Four reports were excluded by this project's own checker, not by FCC errors, and are restored: Laura 2020-08-28,
+  08-29 and 08-30 (DOC-366519A1, DOC-366524A1, DOC-366526A1) and Helene 2024-10-04 (DOC-406197A1). The second reading
+  now confirms a row split across two or three lines of the PDF's plain text (\"SAN ... AUGUSTINE\"), and the parser
+  reads county names with a backquote (Prince George`s, Queen Anne`s, St. Mary`s). The recorded reason for
+  DOC-366524A1, that the FCC's Maryland rows do not add up, was wrong: its 24 rows sum to the printed 6,522; the
+  parser had skipped three of them.
+- Helene 2024-10-03 (DOC-406144A1), a one-cell FCC total misprint (Florida transport printed 1, its row 0), is a known
+  FCC inconsistency using the row sums, as Harvey 2017-09-04 and 09-05 are, instead of an exclusion. No report in
+  scope is excluded now.
+- Harrison County, Texas, in the reports Ida and Nicholas share (DOC-375778A1, DOC-375808A1) is keyed to Nicholas:
+  a row in a state only the second storm's notice covers takes the second storm's key.
+- `eaglei_pct_out` is blank wherever `eaglei_mcc_flag` is not ok (415 rows exceeded 100%, up to 296,546%), and the
+  schema constrains it to 0-100. No result used it.
+- Laura 2020-09-01 (DOC-366601A1): its printed time (\"September1, 2020 at 12:00 p.m.\") is read, so
+  `as_of_imputed` is False.
+
+### Fixed (no value changes)
+- State-code total lines (\"GA - 13083 1293 9.88% ...\", Helene 2024-09-28) are read; the note that this report
+  prints no Georgia total is removed (its Georgia rows reconcile to it).
+- The second reading is described as independent only where it is: where a report's parse used the PDF's plain text,
+  its rows are confirmed by the .txt or by PDFium's text instead (`second_reading` in `validation_dirs.csv`).
+
+### Added
+- `county_name_census` (the 2020 Census county name for each FIPS) in the panel and the analysis-ready panel.
+- `docs/dirs_activations.csv` (an inventory of DIRS activations 2016-2026 known here), `docs/roadmap_modules.md`
+  (later extensions as separate modules), a report-count reconciliation (README, `CODEBOOK.md`, `DATASHEET.md`),
+  every validation table documented in `datapackage.json` and `CODEBOOK.md` (a `storm` column in
+  `validation_dirs.csv`; no spaces in `validation_summary.csv`'s headers), and the Parquet resource's byte count.
+- The independent re-extraction and an E&E News comparison for Michael, in `docs/external_validation.md`.
+- A version guard: `code/snapshots/` (the SHA-256 of every published file and a frozen `results.json`) and
+  `code/tests/test_version_guard.py`.
+- `run_all.py` empties `build/` first and stamps the run; the reproduction tests read `WTNGD_BUILD` and fail on a
+  stale or partial build. `01_check_manifest.py` fails on any report not confirmed, and runs first.
+
+### Changed (documentation)
+- The datasheet gives a contact, funding (none) and a competing-interests statement, which the README and the page
+  share; it names chapters by their `results.json` keys.
+- The versioning policy is stated exactly (top of this file).
+
+## [3.2.1] - 2026-11-27
 
 Launch fixes from an independent review. **No published number changes**: every value in `data/analysis/` and
 `data/input/` is the same as in 3.2.0 (the reproduction test compares them).
@@ -1656,6 +1894,8 @@ def chapter_table() -> list:
 
 
 RUN_ORDER = [
+    ("01_check_manifest.py", "", "4.0.0: the report manifest; fails on any report whose status is not ok, excluded or "
+                                 "out_of_scope"),
     ("02b_reporting_areas.py", "", "each storm's reporting area from the FCC notices (rewrites code/manifest tables; "
                                    "the test checks they are unchanged)"),
     ("03_parse_dirs.py", "", "parse every DIRS report (text first, PDF fallback) into county rows and totals"),
@@ -1818,6 +2058,11 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
          f"Version {VERSION} ({RELEASE_DATE}). Data: CC BY 4.0 (`LICENSE-DATA.md`). Code: MIT (`LICENSE`).", "",
          summary_text(markdown=True), "",
          "What the data can and cannot be used for, and their known limitations: `DATASHEET.md`.", "",
+         "## Scope", "", importlib.import_module("19_activations").INCLUSION_RULE + " "
+         + importlib.import_module("19_activations").SUBSET_SENTENCE + " Later extensions (Matthew 2016, the "
+         "territories, other hazards) are planned as separate modules with their own versions, so the core numbers "
+         "do not change when one is added (`docs/roadmap_modules.md`).", "",
+         "### Report counts", "", *report_counts_md(), "",
          # the page's wording ("What the FCC's numbers measure"), since 3.1.0's documentation update
          f"Associations, not causes. Each FCC report carries this caveat: \"{importlib.import_module('11_build_page').FCC_CAVEAT}\" "
          "So the counts here describe the network, not how many people lost service.", "",
@@ -1937,8 +2182,8 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "original numbering and did not change; dated entries in `docs/decisions.md` use the chapter numbers the "
           "page had when they were written (the last column).", "", *chapter_table()]
     L += ["", "## How to cite", "",
-          "The repository is archived on Zenodo. Cite the concept DOI for the data and code in general, and the "
-          "version DOI when you use specific numbers:", "",
+          "The repository is archived on Zenodo. For specific numbers, cite the version DOI shown on the Zenodo "
+          "record of the version you used; for the work in general, cite the concept DOI:", "",
           f"- In general (all versions; resolves to the latest): Spivey, T. D. (2026). {TITLE} [Data set]. Zenodo. "
           f"https://doi.org/{concept}",
           *[f"- Version {ver}: Spivey, T. D. (2026). {TITLE} (Version {ver}) [Data set]. Zenodo. "
@@ -1949,12 +2194,12 @@ def readme(T: Path, idx: pd.DataFrame, plan: dict) -> None:
           "`CITATION.cff` lists every DOI, and GitHub's \"Cite this repository\" button reads it.", "",
           "## Corrections and contributing", "",
           "Every correction made so far is in `ERRATA.md` (generated from the decision log). To report a data error, "
-          "use the issue form described in `CONTRIBUTING.md`; a change to a published number is a new major version.", "",
+          "use the issue form described in `CONTRIBUTING.md`.", "",
+          "## Versions", "", f"{POLICY_TEXT} (`CHANGELOG.md`).", "",
           "## Disclosure", "",
-          "The author works in the telecommunications industry. This analysis was done independently, on personal "
-          "time, using only publicly available government data. It uses no employer data or confidential "
-          "information, and the views are the author's alone. The author has no financial interest in any FCC "
-          "proceeding. AI assistance: `AI_ASSISTANCE.md`.", ""]
+          f"Competing interests: {importlib.import_module('11_build_page').COMPETING_INTERESTS} Funding: none. The "
+          "views are the author's alone, and the author has no financial interest in any FCC proceeding. Contact: "
+          f"{importlib.import_module('11_build_page').CONTACT_EMAIL}. AI assistance: `AI_ASSISTANCE.md`.", ""]
     write(T / "README.md", "\n".join(L))
 
 
@@ -1962,7 +2207,16 @@ RUN_ALL = '''"""Rebuild the panel and results.json from data/input, into build/ 
 
 Runs the steps listed in README.md, in order, each in its own process, and stops at the first failure. Nothing is
 downloaded. Compare with: python -m pytest code/tests/test_reproduction.py
+
+It first empties build/interim, build/processed and build/output (4.0.0), so files from an earlier run can never pass
+or fail the tests, and writes build/run_stamp.json: the SHA-256 of every file in code/src and code/manifest when the
+run started. The reproduction tests fail if the stamp is missing or the code has changed since. WTNGD_BUILD sets
+another build folder; only those three folders and the stamp in it are removed.
 """
+import hashlib
+import json
+import os
+import shutil
 import subprocess
 import sys
 import time
@@ -1970,17 +2224,40 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent
 SRC = REPO / "code" / "src"
+BUILD = Path(os.environ.get("WTNGD_BUILD", str(REPO / "build")))
 STEPS = STEPS_LITERAL
+
+
+def code_digest() -> str:
+    h = hashlib.sha256()
+    for folder in (REPO / "code" / "src", REPO / "code" / "manifest"):
+        for p in sorted(folder.rglob("*")):
+            if p.is_file() and "__pycache__" not in p.parts:
+                h.update(p.relative_to(REPO).as_posix().encode() + b"\\0" + p.read_bytes() + b"\\0")
+    return h.hexdigest()
+
+
+def clear_build() -> None:
+    for name in ("interim", "processed", "output"):
+        shutil.rmtree(BUILD / name, ignore_errors=True)
+    (BUILD / "run_stamp.json").unlink(missing_ok=True)
+    BUILD.mkdir(parents=True, exist_ok=True)
 
 
 def main():
     t0 = time.time()
+    clear_build()
+    stamp = {"code_sha256": code_digest(), "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+             "complete": False}
+    (BUILD / "run_stamp.json").write_text(json.dumps(stamp, indent=2) + "\\n", encoding="utf-8")
     for script, args in STEPS:
         print(f"== {script} {' '.join(args)}", flush=True)
         r = subprocess.run([sys.executable, script, *args], cwd=SRC)
         if r.returncode:
             raise SystemExit(f"{script} failed (exit {r.returncode})")
-    print(f"done in {(time.time() - t0) / 60:.1f} min; outputs in build/")
+    stamp["complete"] = True
+    (BUILD / "run_stamp.json").write_text(json.dumps(stamp, indent=2) + "\\n", encoding="utf-8")
+    print(f"done in {(time.time() - t0) / 60:.1f} min; outputs in {BUILD}")
 
 
 if __name__ == "__main__":
@@ -1992,20 +2269,35 @@ TEST_REPRO = '''"""The code reproduces the published files: run python run_all.p
 CSVs must match byte for byte. results.json: numbers within a relative 1e-8 (or 1e-12 absolute, for values that are
 zero up to floating-point noise), everything else exactly (platforms' math libraries differ in the last bits). The
 analysis-ready panel: value by value at the same tolerance."""
+import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]
-BUILD = REPO / "build"
+BUILD = Path(os.environ.get("WTNGD_BUILD", str(REPO / "build")))  # the same folder run_all.py and config.py use
 PUBLISHED = REPO / "data" / "analysis"
 sys.path.insert(0, str(REPO / "code" / "src"))
 from compare import ATOL, RTOL, differences  # noqa: E402
 
 NOT_BUILT = "needs build/ (not committed): run python run_all.py first"
 built = pytest.mark.skipif(not (BUILD / "output" / "results.json").exists(), reason=NOT_BUILT)
+
+
+@built
+def test_build_is_from_a_complete_run_of_this_code():
+    """4.0.0: a stale or partial build/ can neither pass nor fail the comparisons below unnoticed."""
+    stamp_file = BUILD / "run_stamp.json"
+    assert stamp_file.exists(), "build/ has no run_stamp.json: rerun python run_all.py"
+    stamp = json.loads(stamp_file.read_text(encoding="utf-8"))
+    spec = importlib.util.spec_from_file_location("run_all", REPO / "run_all.py")
+    run_all = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(run_all)
+    assert stamp["complete"], "run_all.py did not finish: rerun it"
+    assert stamp["code_sha256"] == run_all.code_digest(), "code/src or code/manifest changed since the run: rerun"
 CSV_PAIRS = [("processed/dirs_county_day.csv", "dirs_county_day.csv"), ("processed/storms.csv", "storms.csv")] + [
     (f"output/{n}", f"validation/{n}") for n in ("validation_dirs.csv", "validation_summary.csv",
                                                  "excluded_reports.csv", "area_status_counts.csv",
@@ -2085,6 +2377,65 @@ def test_plan_as_committed_matches_its_hash():
     assert hashlib.sha256((REPO / "docs" / line[1]).read_bytes()).hexdigest() == line[0]
 '''
 
+def version_snapshot(T: Path) -> None:
+    """4.0.0 (Tim's item 17): the SHA-256 of every published file under data/analysis and a frozen copy of
+    results.json, written once per major version into snapshots/ (committed) and copied to code/snapshots/. Within a
+    major version they are never rewritten, so code/tests/test_version_guard.py catches any change to a published
+    file that a minor or patch release makes."""
+    major = int(VERSION.split(".")[0])
+    snap, frozen = SNAPSHOTS / "published_sha256.json", SNAPSHOTS / "results_frozen.json"
+    current = json.loads(snap.read_text(encoding="utf-8")) if snap.exists() else None
+    if current is None or current["major"] != major:
+        files = {p.relative_to(T).as_posix(): sha256(p) for p in sorted((T / "data" / "analysis").rglob("*"))
+                 if p.is_file()}
+        SNAPSHOTS.mkdir(exist_ok=True)
+        snap.write_text(json.dumps({"major": major, "version": VERSION, "files": files}, indent=1) + "\n",
+                        encoding="utf-8", newline="\n")
+        frozen.write_bytes((T / "data" / "analysis" / "results.json").read_bytes())
+        print(f"version guard: new snapshot for major version {major} ({len(files)} files)")
+    for p in (snap, frozen):
+        copy(p, T / "code" / "snapshots" / p.name)
+
+
+TEST_VERSION_GUARD = '''"""Version guard (4.0.0): no published file changes within a major version.
+
+code/snapshots/published_sha256.json holds the SHA-256 of every file under data/analysis when the current major
+version was first released, and code/snapshots/results_frozen.json a copy of its results.json. A minor version may add
+files; a patch may change no published file. If any listed file changes or disappears, this fails unless the major
+number in CITATION.cff differs from the snapshot's (a new major version, whose release writes a new snapshot)."""
+import hashlib
+import json
+import re
+from pathlib import Path
+
+import pytest
+
+REPO = Path(__file__).resolve().parents[2]
+SNAP = REPO / "code" / "snapshots"
+
+
+def cff_major() -> int:
+    text = (REPO / "CITATION.cff").read_text(encoding="utf-8")
+    return int(re.search(r'^version: "?(\\d+)\\.', text, re.M).group(1))
+
+
+def test_published_files_unchanged_within_the_major_version():
+    snap = json.loads((SNAP / "published_sha256.json").read_text(encoding="utf-8"))
+    if cff_major() != snap["major"]:
+        pytest.skip(f"CITATION.cff is a new major version ({cff_major()}); its release writes a new snapshot")
+    changed = [p for p, h in snap["files"].items()
+               if not (REPO / p).exists() or hashlib.sha256((REPO / p).read_bytes()).hexdigest() != h]
+    assert not changed, f"published files changed within major version {snap['major']}: {changed[:10]}"
+
+
+def test_results_json_matches_the_frozen_copy():
+    snap = json.loads((SNAP / "published_sha256.json").read_text(encoding="utf-8"))
+    if cff_major() != snap["major"]:
+        pytest.skip("a new major version")
+    got = json.loads((REPO / "data" / "analysis" / "results.json").read_text(encoding="utf-8"))
+    assert got == json.loads((SNAP / "results_frozen.json").read_text(encoding="utf-8"))
+'''
+
 TEST_DATAPACKAGE = '''"""datapackage.json is a valid Data Package: frictionless validate datapackage.json gives 0 errors (v2.2.0).
 
 Checks the descriptor and every tabular resource's rows against its schema (types, required values, primary keys)."""
@@ -2113,6 +2464,19 @@ def test_every_resource_hash_matches():
         if "hash" in r:
             got = "sha256:" + hashlib.sha256((REPO / r["path"]).read_bytes()).hexdigest()
             assert got == r["hash"], r["path"]
+
+
+def test_byte_counts_match():
+    """bytes where the resource has the field; for the Parquet, the count in its description (4.0.0)."""
+    import json
+    import re
+    pkg = json.loads((REPO / "datapackage.json").read_text(encoding="utf-8"))
+    for r in pkg["resources"]:
+        size = (REPO / r["path"]).stat().st_size
+        if "bytes" in r:
+            assert r["bytes"] == size, r["path"]
+        elif r["format"] == "parquet":
+            assert re.search(rf"; {size} bytes\\.", r["description"]), r["path"]
 '''
 
 # GitHub Actions pinned to commit SHAs (v3.1.0); Dependabot proposes updates weekly
@@ -2282,8 +2646,9 @@ and the corrections made so far in `ERRATA.md`.
    a test from the report's own text.
 3. It is logged in `docs/decisions.md` as a CORRECTION (date, what, why). `ERRATA.md`, `DEVIATIONS.md` and the
    page's Corrections list are generated from that log.
-4. The whole pipeline is rerun and the reproduction tests compared. A change to any published number is a new major
-   version (`CHANGELOG.md` states the rule), archived on Zenodo with its own DOI.
+4. The whole pipeline is rerun and the reproduction tests compared. Versions: {POLICY_TEXT}. Each is archived on
+   Zenodo with its own DOI; `code/tests/test_version_guard.py` fails if a published file changes while the major
+   number in `CITATION.cff` stays the same.
 
 ## Zenodo metadata
 
@@ -2386,6 +2751,7 @@ def scripts(T: Path) -> None:
         f"    ({s!r}, {a.split()!r}),\n" for s, a, _ in RUN_ORDER) + "]"))
     write(T / "code" / "tests" / "test_reproduction.py", TEST_REPRO)
     write(T / "code" / "tests" / "test_datapackage.py", TEST_DATAPACKAGE)
+    write(T / "code" / "tests" / "test_version_guard.py", TEST_VERSION_GUARD)
     write(T / ".github" / "workflows" / "ci.yml", CI_WORKFLOW)
     write(T / ".github" / "dependabot.yml", DEPENDABOT)
     write(T / ".github" / "ISSUE_TEMPLATE" / "data_error.yml", ISSUE_TEMPLATE)
@@ -2493,6 +2859,7 @@ def main():
     T.mkdir(parents=True, exist_ok=True)
     idx = copy_inputs(T)
     copy_analysis(T)
+    version_snapshot(T)
     copy_code(T)
     copy_docs(T)
     plan = plan_as_committed(T)

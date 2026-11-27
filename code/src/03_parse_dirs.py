@@ -38,23 +38,59 @@ def completeness(text: str) -> tuple[int, int]:
     return len(rows), sum(len(m.group("nums").split()) for m in rows)
 
 
-def page_text(page) -> str:
-    """The cell-by-cell reading keeps wrapped names whole (Isaias 2026), but pdfplumber's table cells sometimes
-    drop columns or merge rows (Zeta and Barry 2019-2020, Florence 2018). Use whichever reading recovers more
-    rows, then more numbers; on a tie, the cell reading."""
+def page_reading(page) -> tuple[str, str]:
+    """(text, "cells" or "plain"). The cell-by-cell reading keeps wrapped names whole (Isaias 2026), but pdfplumber's
+    table cells sometimes drop columns or merge rows (Zeta and Barry 2019-2020, Florence 2018). Use whichever reading
+    recovers more rows, then more numbers; on a tie, the cell reading."""
     cells = cell_text(page)
     plain = page.extract_text() or ""
-    return cells if completeness(cells) >= completeness(plain) else plain
+    return (cells, "cells") if completeness(cells) >= completeness(plain) else (plain, "plain")
+
+
+def page_text(page) -> str:
+    return page_reading(page)[0]
+
+
+def pdf_reading(path) -> tuple[str, int]:
+    """The PDF's text and how many table pages were read as plain text (the second reading's own method, 4.0.0)."""
+    import pdfplumber
+    with pdfplumber.open(path) as p:
+        read = [page_reading(page) for page in p.pages]
+    plain_tables = sum(1 for text, how in read if how == "plain" and completeness(text)[0])
+    return "\n".join(text for text, _ in read), plain_tables
 
 
 def pdf_text(path) -> str:
+    return pdf_reading(path)[0]
+
+
+def cell_lines(path) -> list[str]:
+    """The PDF read cell by cell (tables) as lines, for the second reading of reports parsed from plain text."""
     import pdfplumber
     with pdfplumber.open(path) as p:
-        return "\n".join(page_text(page) for page in p.pages)
+        return [line for page in p.pages for line in cell_text(page).splitlines()]
+
+
+def pdfium_lines(path) -> list[str]:
+    """The PDF read by PDFium (pypdfium2), an engine that shares no code with pdfminer/pdfplumber (4.0.0)."""
+    import pypdfium2 as pdfium
+    pdf = pdfium.PdfDocument(str(path))
+    try:
+        return [line for i in range(len(pdf)) for line in pdf[i].get_textpage().get_text_range().splitlines()]
+    finally:
+        pdf.close()
+
+
+def txt_lines(doc_id: str) -> list[str]:
+    txt = RAW / "dirs" / f"{doc_id}.txt"
+    if not txt.exists():
+        return []
+    return txt.read_text(encoding="utf-8", errors="replace").replace("\x00", "").splitlines()
 
 
 def pdf_lines(path) -> list[str]:
-    """A second, independent reading: plain lines, with no use of table cells or of the parser."""
+    """A second reading: plain lines, with no use of table cells or of the parser. It is independent of the parse
+    only where the parse used the .txt or the PDF's table cells; see step 4 (4.0.0)."""
     if not path.exists():
         return []
     import pdfplumber
@@ -88,17 +124,18 @@ def as_of_fields(rep, report_date: str) -> dict:
             "as_of_note": as_of_zone_note(date, rep.as_of_time, rep.as_of_tz)}
 
 
-def report_text(doc_id: str) -> tuple[str, str]:
-    """The .txt unless the PDF recovers more table rows, then more numbers (Harvey 2017 .txt files break rows across
-    lines; some .txt files run cells together or space out letters)."""
+def report_text(doc_id: str) -> tuple[str, str, int]:
+    """(text, source, table pages read as plain PDF text). The .txt unless the PDF recovers more table rows, then
+    more numbers (Harvey 2017 .txt files break rows across lines; some .txt files run cells together or space out
+    letters)."""
     txt = RAW / "dirs" / f"{doc_id}.txt"
     pdf = RAW / "dirs" / f"{doc_id}.pdf"
     text = txt.read_text(encoding="utf-8", errors="replace") if txt.exists() else ""
     if pdf.exists():
-        from_pdf = pdf_text(pdf)
+        from_pdf, plain_tables = pdf_reading(pdf)
         if not text or completeness(from_pdf) > completeness(text):
-            return from_pdf, "pdf"
-    return (text, "txt") if text else ("", "missing")
+            return from_pdf, "pdf", plain_tables
+    return (text, "txt", 0) if text else ("", "missing", 0)
 
 
 def add_area_status(rows: pd.DataFrame, lists: pd.DataFrame) -> pd.DataFrame:
@@ -122,10 +159,10 @@ def main():
         if m.get("status") == "out_of_scope":
             print(f"{m.doc_id}: out of scope, skipped")
             continue
-        text, src = report_text(m.doc_id)
+        text, src, plain_tables = report_text(m.doc_id)
         rep = parse_text(text) if text else None
         meta = {"doc_id": m.doc_id, "storm_name": m.storm_name, "nhc_id": m.nhc_id, "report_date": m.report_date}
-        reports.append({**meta, "source": src,
+        reports.append({**meta, "source": src, "pdf_plain_table_pages": plain_tables,
                         "n_county_rows": len(rep.rows) if rep else 0,
                         "pct_sites_out_stated": rep.pct_sites_out if rep else None,
                         "cable_wireline_subs_out": rep.cable_wireline_subs_out if rep else None,
@@ -136,21 +173,27 @@ def main():
             totals += [{**meta, **t} for t in rep.state_totals]
             lists += [{**meta, **c} for c in rep.county_list]
             overall += [{**meta, **t} for t in rep.overall_totals]
-        printed += [{"doc_id": m.doc_id, "line": line} for line in pdf_lines(RAW / "dirs" / f"{m.doc_id}.pdf")]
+        pdf = RAW / "dirs" / f"{m.doc_id}.pdf"
+        printed += [{"doc_id": m.doc_id, "reading": "pdf_plain", "line": line} for line in pdf_lines(pdf)]
+        if plain_tables:  # 4.0.0: the plain reading is the parse's own here; keep the .txt and the cell reading too
+            printed += [{"doc_id": m.doc_id, "reading": "txt", "line": line} for line in txt_lines(m.doc_id)]
+            printed += [{"doc_id": m.doc_id, "reading": "pdf_cells", "line": line} for line in cell_lines(pdf)]
+            printed += [{"doc_id": m.doc_id, "reading": "pdfium", "line": line} for line in pdfium_lines(pdf)]
         print(f"{m.doc_id}: {src}, {reports[-1]['n_county_rows']} county rows")
     INTERIM.mkdir(parents=True, exist_ok=True)
     county_rows = add_unattributed(pd.DataFrame(rows)) if rows else pd.DataFrame()
     if rows:  # each row's storm key (Nicholas counties in the shared Ida reports get Nicholas's)
         county_rows = assign_storm_keys(
             county_rows, pd.read_csv(ROOT / "manifest" / "shared_report_counties.csv", dtype=str, keep_default_na=False),
-            pd.read_csv(ROOT / "manifest" / "storms.csv", dtype=str, keep_default_na=False))
+            pd.read_csv(ROOT / "manifest" / "storms.csv", dtype=str, keep_default_na=False),
+            pd.read_csv(ROOT / "manifest" / "storm_states.csv", dtype=str, keep_default_na=False))
         county_rows = add_area_status(county_rows, pd.DataFrame(lists, columns=["doc_id", "state", "county"]))
     county_rows.to_parquet(INTERIM / "dirs_county_rows.parquet", index=False)
     pd.DataFrame(lists).to_parquet(INTERIM / "dirs_county_lists.parquet", index=False)
     pd.DataFrame(totals).to_parquet(INTERIM / "dirs_state_totals.parquet", index=False)
     pd.DataFrame(overall, columns=["doc_id", "states", "sites_served", "sites_out"] if not overall else None
                  ).to_parquet(INTERIM / "dirs_overall_totals.parquet", index=False)
-    pd.DataFrame(printed, columns=["doc_id", "line"]).to_parquet(INTERIM / "dirs_pdf_lines.parquet", index=False)
+    pd.DataFrame(printed, columns=["doc_id", "reading", "line"]).to_parquet(INTERIM / "dirs_pdf_lines.parquet", index=False)
     pd.DataFrame(reports).to_parquet(INTERIM / "dirs_reports.parquet", index=False)
 
 

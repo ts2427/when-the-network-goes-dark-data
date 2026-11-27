@@ -183,6 +183,10 @@ def main():
     out["eaglei_pct_out"] = 100 * out.eaglei_customers_out / out.eaglei_modeled_customers
     flags = mcc_flags(e, windows_for(rows, storms), mcc).rename(columns={"nhc_id": "row_nhc_id"})
     out = out.merge(flags, on=["row_nhc_id", "fips"], how="left", validate="many_to_one")
+    # 4.0.0: a percent only where the MCC denominator holds (flag ok); before, 415 rows exceeded 100% (to 296,546%)
+    out.loc[out.eaglei_mcc_flag != "ok", "eaglei_pct_out"] = np.nan
+    if (out.eaglei_pct_out.dropna() < 0).any() or (out.eaglei_pct_out.dropna() > 100).any():
+        raise SystemExit("eaglei_pct_out outside 0-100 where the MCC flag is ok")
     cov = state_coverage(pd.read_csv(EAGLEI_RAW_DIR / "coverage_history.csv"))
     out = out.merge(cov.rename(columns={"year": "storm_year", "min_pct_covered": "eaglei_state_min_covered",
                                         "max_pct_covered": "eaglei_state_max_covered"}),

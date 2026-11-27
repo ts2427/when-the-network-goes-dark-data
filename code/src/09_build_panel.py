@@ -42,7 +42,8 @@ STORMS = ROOT / "manifest" / "storms.csv"
 EASTERN = ZoneInfo("America/New_York")
 PERIOD_CODES = ["P0", "P1", "P2", "P3"]
 PUBLIC_COLUMNS = ["storm_key", "nhc_id", "storm", "dirs_activation_date", "rule_period", "doc_id", "report_date",
-                  "as_of_utc", "as_of_imputed", "report_status", "state", "county", "fips", "sites_served", "sites_out",
+                  "as_of_utc", "as_of_imputed", "report_status", "state", "county", "county_name_census", "fips",
+                  "sites_served", "sites_out",
                   "pct_out", "pct_printed", "out_damage", "out_transport", "out_power", "on_backup_power",
                   "out_unattributed", "out_overattributed", "area_status", "fema_declared", "time_flag"]
 # Written as integers in the CSV (v2.2.0).
@@ -195,6 +196,10 @@ def main():
         raise SystemExit("panel has a report with no validation status, or an excluded report")
     require_carried(p, "panel")
     PROCESSED.mkdir(parents=True, exist_ok=True)
+    census = pd.read_csv(CENSUS_COUNTIES, sep="|", dtype=str, encoding="latin-1")
+    p["county_name_census"] = p.fips.map(dict(zip(census.STATEFP + census.COUNTYFP, census.COUNTYNAME)))  # 4.0.0
+    if p.county_name_census.isna().any():
+        raise SystemExit(f"FIPS codes with no 2020 Census name: {sorted(p[p.county_name_census.isna()].fips.unique())}")
     p.to_parquet(PROCESSED / "panel.parquet", index=False)
 
     s = p.groupby("storm_key").agg(nhc_id=("nhc_id", "first"), storm=("storm", "first"),
@@ -212,6 +217,8 @@ def main():
         storm_key=lambda x: x.nhc_id + "_" + x.dirs_activation_date.astype(str))
     s = all_storms.merge(s.drop(columns=["nhc_id", "dirs_activation_date"]), on="storm_key", how="left")
     s["storm"] = s.storm.fillna(s.storm_name)
+    if ex_by_storm.empty:  # 4.0.0: no report is excluded
+        ex_by_storm = pd.Series(dtype=str)
     s["excluded_reports"] = s.nhc_id.map(ex_by_storm).fillna("")
     s["in_panel"] = s.n_reports.notna()
     s = s.drop(columns="storm_name")

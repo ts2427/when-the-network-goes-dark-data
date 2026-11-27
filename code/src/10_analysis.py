@@ -58,6 +58,7 @@ BENIGN_FLAGS = [r"rows short of sites out", r"^FCC spelling", r"rows inside_spel
                 r"^listed more than once by the FCC", r"^in table, not in the report's list, listed exception",
                 r"^headline [\d.]+% vs [\d.]+% from the report's own totals",
                 r"^rows confirmed by the next report's previous-day column",
+                r"^confirmed across split lines", r"^listed, printed with no sites and no data row",  # 4.0.0
                 # a printed state total off from its own rows, checked (manifest/known_fcc_inconsistencies.csv)
                 r": printed total [\d,]+ vs [\d,]+ from its rows \(checked, every row confirmed\)$",
                 r"^every row confirmed by second reading$", r"^other states reconcile\)$"]
@@ -1706,6 +1707,8 @@ FLAG_TYPES = [  # (pattern, label, class) for the validation table by flag type 
      "Known FCC inconsistency in a printed state total (rows confirmed)", "benign"),
     (r"^rows confirmed by the next report's previous-day column",
      "Rows confirmed by the next report's reprint (PDF rows broken)", "benign"),
+    (r"^confirmed across split lines", "Rows confirmed across lines the PDF text splits (4.0.0)", "benign"),
+    (r"^listed, printed with no sites and no data row", "Listed county printed with no sites (no data row)", "benign"),
     (r"^every row confirmed by second reading$|^other states reconcile\)$", None, None),  # parts of longer flags
 ]
 

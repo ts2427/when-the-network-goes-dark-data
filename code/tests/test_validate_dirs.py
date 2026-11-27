@@ -134,7 +134,7 @@ def test_shortfall_of_more_than_one_is_still_only_flagged(case):
     case.set_total("out_power", 11)
     case.reprint()
     assert case.run().status == "flagged"
-    assert case.summary["Short by more"] == 1
+    assert case.summary["rows_causes_short_by_more"] == 1
 
 
 def test_county_listed_twice_by_the_fcc_is_flagged(case):
@@ -151,7 +151,7 @@ def test_report_without_cause_columns_is_not_failed_or_counted_as_unattributed(c
     case.rows = add_unattributed(case.rows)
     case.reprint()
     assert case.run().status == "ok"
-    assert case.summary["Sites with no cause"] == "n/a"
+    assert case.summary["sites_with_no_cause"] == "n/a"
     assert case.rows.out_unattributed.isna().all()
 
 
@@ -309,7 +309,7 @@ def test_shortfall_and_excess_are_not_netted(case):
     case.allow_over()
     result = case.run()
     assert (result.sites_unattributed, result.sites_overattributed) == (3, 1)
-    assert case.summary["Sites with no cause"] == "3 of 21"
+    assert case.summary["sites_with_no_cause"] == "3 of 21"
 
 
 # --- headline percent ---
@@ -452,8 +452,8 @@ def test_flag_and_known_inconsistency_do_not_stop_the_build(case, tmp_path, monk
 def test_summary_file_has_the_agreed_columns_and_values(case, tmp_path, monkeypatch):
     run_main(case, tmp_path, monkeypatch)
     got = pd.read_csv(tmp_path / "output" / "validation_summary.csv")
-    assert list(got.columns) == ["Report", "Rows", "Exact", "Short by 1", "Short by more", "Causes exceed out",
-                                 "Sites with no cause"]
+    assert list(got.columns) == ["report", "rows", "rows_causes_exact", "rows_causes_short_by_1",
+                                 "rows_causes_short_by_more", "rows_causes_exceed_out", "sites_with_no_cause"]
     assert got.iloc[0].tolist() == ["Isaias, Oct 12, 2026 (DOC-1A1)", 12, 9, 3, 0, 0, "3 of 21"]
 
 
@@ -472,10 +472,12 @@ def test_only_the_helene_oct_1_headline_is_known():
     assert got[step4.HEADLINE_FIELDS].notna().all().all()
 
 
-def test_only_harvey_sep_4_and_5_texas_totals_are_known():
+def test_only_the_checked_one_cell_total_misprints_are_known():
+    """Harvey Sep 4 and 5, 2017, and (4.0.0) Helene Oct 3, 2024, treated alike."""
     got = step4.known_inconsistencies("state_total")
     assert sorted(zip(got.doc_id, got.state, got.column, got.printed_total, got.rows_sum)) == [
-        ("DOC-346482A1", "Texas", "sites_served", 4200, 4199), ("DOC-346499A1", "Texas", "sites_served", 4200, 4199)]
+        ("DOC-346482A1", "Texas", "sites_served", 4200, 4199), ("DOC-346499A1", "Texas", "sites_served", 4200, 4199),
+        ("DOC-406144A1", "Florida", "out_transport", 1, 0)]
     assert got[["page", "checked_on"]].notna().all().all()
 
 
@@ -494,7 +496,7 @@ def test_checked_unlisted_county_is_flagged_and_stays_in_sites_served(case):
     case.allow_unlisted()
     result = case.run()
     assert result.status == "flagged" and "kept in sites served" in result.flag_reasons
-    assert case.summary["Rows"] == 12
+    assert case.summary["rows"] == 12
     assert result.computed_pct_out == pytest.approx(100 * 21 / 1173)
 
 

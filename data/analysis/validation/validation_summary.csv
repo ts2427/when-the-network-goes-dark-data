@@ -1,4 +1,4 @@
-Report,Rows,Exact,Short by 1,Short by more,Causes exceed out,Sites with no cause
+report,rows,rows_causes_exact,rows_causes_short_by_1,rows_causes_short_by_more,rows_causes_exceed_out,sites_with_no_cause
 "Isaias, Oct 12, 2026 (DOC-425795A1)",44,40,4,0,0,4 of 75
 "Michael, Oct 20, 2018 (DOC-354667A1)",21,n/a,n/a,n/a,n/a,n/a
 "Ian, Sep 28, 2022 (DOC-387679A1)",64,64,0,0,0,0 of 188
@@ -60,7 +60,7 @@ Report,Rows,Exact,Short by 1,Short by more,Causes exceed out,Sites with no cause
 "Laura, Aug 26, 2020 (DOC-366433A1)",235,235,0,0,0,0 of 74
 "Laura, Aug 27, 2020 (DOC-366480A1)",462,448,8,5,1,27 of 519
 "Laura, Aug 28, 2020 (DOC-366519A1)",621,597,7,17,0,85 of 930
-"Laura, Aug 29, 2020 (DOC-366524A1)",778,756,10,9,3,49 of 671
+"Laura, Aug 29, 2020 (DOC-366524A1)",781,759,10,9,3,49 of 671
 "Laura, Aug 30, 2020 (DOC-366526A1)",178,157,9,9,3,48 of 440
 "Laura, Aug 31, 2020 (DOC-366550A1)",67,63,0,4,0,18 of 262
 "Laura, Sep 1, 2020 (DOC-366601A1)",38,34,2,2,0,9 of 199

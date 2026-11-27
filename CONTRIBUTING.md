@@ -16,8 +16,9 @@ and the corrections made so far in `ERRATA.md`.
    a test from the report's own text.
 3. It is logged in `docs/decisions.md` as a CORRECTION (date, what, why). `ERRATA.md`, `DEVIATIONS.md` and the
    page's Corrections list are generated from that log.
-4. The whole pipeline is rerun and the reproduction tests compared. A change to any published number is a new major
-   version (`CHANGELOG.md` states the rule), archived on Zenodo with its own DOI.
+4. The whole pipeline is rerun and the reproduction tests compared. Versions: major: an existing published value, or the meaning of a variable, changes; minor: rows, storms, files or variables are added and every existing published value is unchanged; patch: no value changes (bytes may change, for example a format or documentation fix, and the changelog says so). Each is archived on
+   Zenodo with its own DOI; `code/tests/test_version_guard.py` fails if a published file changes while the major
+   number in `CITATION.cff` stays the same.
 
 ## Zenodo metadata
 

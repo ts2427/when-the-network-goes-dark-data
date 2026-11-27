@@ -27,9 +27,10 @@ def test_manifest_check_accepts_out_of_scope():
     assert step1.check(man[man.status.isin(["ok", "out_of_scope"])]) == []  # "verify" rows are still open
 
 
-def test_manifest_check_still_counts_rows_to_verify():
+def test_manifest_check_fails_on_rows_still_to_verify():  # 4.0.0: a failure, no longer a warning
     man = pd.read_csv(ROOT / "manifest" / "dirs_reports.csv")
-    assert step1.check(man.assign(status="verify")) == [f"{len(man)} rows still need storm/date confirmation (status != ok)"]
+    [problem] = step1.check(man.assign(status="verify"))
+    assert problem.startswith(f"{len(man)} reports not confirmed (status not one of ok, excluded, out_of_scope")
 
 
 def test_step_3_skips_out_of_scope_reports(tmp_path, monkeypatch):
@@ -41,7 +42,7 @@ def test_step_3_skips_out_of_scope_reports(tmp_path, monkeypatch):
     monkeypatch.setattr(step3, "MANIFEST", tmp_path / "manifest.csv")
     monkeypatch.setattr(step3, "INTERIM", tmp_path)
     monkeypatch.setattr(step3, "RAW", tmp_path)
-    monkeypatch.setattr(step3, "report_text", lambda doc: read.append(doc) or ("", "missing"))
+    monkeypatch.setattr(step3, "report_text", lambda doc: read.append(doc) or ("", "missing", 0))
     step3.main()
     assert read == ["DOC-1A1"]
     assert pd.read_parquet(tmp_path / "dirs_reports.parquet").doc_id.tolist() == ["DOC-1A1"]
@@ -95,8 +96,8 @@ def test_report_text_keeps_the_more_complete_of_txt_and_pdf(tmp_path, monkeypatc
     (tmp_path / "dirs" / "DOC-1A1.pdf").write_bytes(b"stub")
     pdf = "TX ARANSAS 40 30 75.0%\nTX SAN PATRICIO 58 1 1.7%\n"
     monkeypatch.setattr(step3, "RAW", tmp_path)
-    monkeypatch.setattr(step3, "pdf_text", lambda path: pdf)
-    assert step3.report_text("DOC-1A1") == (pdf, "pdf")
+    monkeypatch.setattr(step3, "pdf_reading", lambda path: (pdf, 0))
+    assert step3.report_text("DOC-1A1") == (pdf, "pdf", 0)
 
 
 def test_report_text_prefers_txt_on_a_tie(tmp_path, monkeypatch):
@@ -105,8 +106,8 @@ def test_report_text_prefers_txt_on_a_tie(tmp_path, monkeypatch):
     (tmp_path / "dirs" / "DOC-1A1.txt").write_text(txt, encoding="utf-8")
     (tmp_path / "dirs" / "DOC-1A1.pdf").write_bytes(b"stub")
     monkeypatch.setattr(step3, "RAW", tmp_path)
-    monkeypatch.setattr(step3, "pdf_text", lambda path: txt)
-    assert step3.report_text("DOC-1A1") == (txt, "txt")
+    monkeypatch.setattr(step3, "pdf_reading", lambda path: (txt, 0))
+    assert step3.report_text("DOC-1A1") == (txt, "txt", 0)
 
 
 def test_listed_excluded_reports_have_a_reason_and_date():

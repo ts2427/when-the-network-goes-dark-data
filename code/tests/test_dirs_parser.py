@@ -186,8 +186,8 @@ def test_unusable_txt_falls_back_to_pdf(tmp_path, monkeypatch):
     (d / "DOC-1A1.txt").write_text("ALBALDWIN29410.3%00124ALBUTLER5100%00010", encoding="utf-8")
     (d / "DOC-1A1.pdf").write_bytes(b"stub")
     monkeypatch.setattr(step3, "RAW", tmp_path)
-    monkeypatch.setattr(step3, "pdf_text", lambda path: ISAIAS_2026, raising=False)
-    assert step3.report_text("DOC-1A1") == (ISAIAS_2026, "pdf")
+    monkeypatch.setattr(step3, "pdf_reading", lambda path: (ISAIAS_2026, 0), raising=False)
+    assert step3.report_text("DOC-1A1") == (ISAIAS_2026, "pdf", 0)  # 4.0.0: plus table pages read as plain text
 
 
 def test_real_county_name_wrapped_inside_its_cell():

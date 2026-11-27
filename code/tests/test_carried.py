@@ -47,7 +47,7 @@ def test_step_3_writes_the_column_and_the_county_list(tmp_path, monkeypatch):
                  ).to_csv(tmp_path / "manifest.csv", index=False)
     monkeypatch.setattr(step3, "MANIFEST", tmp_path / "manifest.csv")
     monkeypatch.setattr(step3, "INTERIM", tmp_path)
-    monkeypatch.setattr(step3, "report_text", lambda doc: (text, "txt"))
+    monkeypatch.setattr(step3, "report_text", lambda doc: (text, "txt", 0))
     step3.main()
     rows = pd.read_parquet(tmp_path / "dirs_county_rows.parquet")
     require_carried(rows, "step 3")

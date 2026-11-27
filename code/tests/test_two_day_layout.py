@@ -173,16 +173,19 @@ def test_a_row_the_pdf_cannot_confirm_is_confirmed_by_the_next_reports_reprint()
     assert step4.next_day_confirmations(rows, REPORTS) == {"D3": {"Texas/MATAGORD A"}}
 
 
-def test_only_harvey_sep_3_needs_the_next_report_rule():
+def test_harvey_sep_3_rows_are_confirmed_across_split_lines():
+    """4.0.0: the split-line second reading confirms Harvey Sep 3's broken rows (Matagorda, San Patricio) in the PDF
+    itself, so the next-report rule (correction, 2026-11-24) no longer applies to any report; it stays in the code."""
     out = OUTPUT / "validation_dirs.csv"
     if not out.exists():
         pytest.skip("needs the validation outputs from a build: run python run_all.py first")
     v = pd.read_csv(out)
-    hit = v[v.flag_reasons.fillna("").str.contains("confirmed by the next report")]
-    assert hit.doc_id.tolist() == ["DOC-346478A1"]
+    assert not v.flag_reasons.fillna("").str.contains("confirmed by the next report").any()
+    harvey = v[v.doc_id == "DOC-346478A1"].iloc[0]
+    assert "confirmed across split lines: Texas/MATAGORDA, Texas/SAN PATRICIO" in harvey.flag_reasons
     nate = v[v.doc_id == "DOC-347137A1"].iloc[0]
     assert nate.status == "flagged" and nate.flag_reasons.startswith("headline_missing")
-    assert v.status.eq("excluded").sum() == 5
+    assert v.status.eq("excluded").sum() == 0  # 4.0.0
 
 
 def test_a_name_broken_inside_a_word_is_rejoined_from_the_reports_own_list():

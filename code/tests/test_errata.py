@@ -22,7 +22,7 @@ def test_every_correction_is_classified_and_every_value_is_in_its_entry():
     t = step14().errata_rows((DOCS / "decisions.md").read_text(encoding="utf-8"))
     assert set(t.kind) == {"published", "process"}
     pub = t[t.kind == "published"]
-    assert set(pub.version) <= {"2.0.0", "3.0.0", "3.1.0"} and (pub[["what", "before", "after", "why"]] != "").all().all()
+    assert set(pub.version) <= {"2.0.0", "3.0.0", "3.1.0", "4.0.0"} and (pub[["what", "before", "after", "why"]] != "").all().all()
 
 
 def test_a_value_missing_from_its_entry_stops_the_build(tmp_path, monkeypatch):

@@ -270,6 +270,71 @@ def markdown(m: pd.DataFrame, o: pd.DataFrame, f: pd.DataFrame) -> str:
     return "\n".join(lines) + "\n"
 
 
+REVIEW = ROOT / "manifest" / "external_review_2026-11-27.csv"  # the review's own reported results (its README)
+REVIEW_ARCHIVE = "data/raw/external_review_2026-11-27.zip"  # in the private project; not yet published
+EENEWS_SOURCE = ("Frank, T. (2019, October 8). Hello? There's a hurricane and my phone won't work. *E&E News* "
+                 "(Climatewire). https://www.eenews.net/articles/hello-theres-a-hurricane-and-my-phone-wont-work/")
+EENEWS_SHARE = 70  # the article's figure, as read 2026-11-27 (docs/literature.md); its text is not copied
+EENEWS_DATE = "2018-10-17"  # one week after Michael's landfall (October 10, 2018)
+
+
+def review_section() -> list:
+    """4.0.0 (Tim's item 14): the independent re-extraction, described as what it is."""
+    t = pd.read_csv(REVIEW, dtype=str, keep_default_na=False)
+    lines = [
+        "", "# Independent check: a re-extraction of the panel (4.0.0)", "",
+        "**What it is.** On 2026-11-27 an independent reviewer checked the published v3.2.1 panel against the FCC's "
+        "reports without using this project's parsing code: its own extractor (pdftotext -layout text of each PDF, "
+        "table rows matched by regular expressions, names split across lines rebuilt from neighbouring lines), its "
+        "own scripts and its own sample. Its scripts, sample and results, with a README, are kept with the project "
+        "and are not yet in this repository. "
+        "It is an independent code path and an independent reviewer, and it was AI-assisted: an AI review agent "
+        "wrote and ran the scripts. It is **not** a human-keyed sample. A human double-keyed sample is planned "
+        "before the data paper.", "",
+        "**What it reported** (its README; v3.2.1 panel):", "",
+        "| Check | What | n | Result |", "|---|---|---|---|"]
+    lines += [f"| {r.check} | {r.what} | {r.n} | {r.result} |" for r in t.itertuples()]
+    lines += [
+        "", "It also found that four excluded reports (Laura, 2020-08-28 to 08-30; Helene, 2024-10-04) were legible "
+        "and excluded by this project's own checker, not by FCC errors, and that a one-cell FCC total misprint "
+        "(Helene, 2024-10-03) was treated differently from Harvey's. Version 4.0.0 corrects both (`ERRATA.md`).", "",
+        "**Rerun against 4.0.0.** Not yet done. The review's scripts read poppler's pdftotext layout; the only "
+        "pdftotext on the build machine is Xpdf's, which lays text out differently, so its comparison would test the "
+        "extractor, not the data (run with Xpdf, the same scripts report thousands of mismatches even against the "
+        "v3.2.1 panel the review found clean). The rerun waits for poppler's pdftotext or a Linux machine "
+        "(`docs/decisions.md`, 2026-11-27)."]
+    return lines
+
+
+def eenews_section() -> list:
+    """4.0.0 (Tim's item 15): context only, not scored."""
+    p = panel("Michael")
+    rows = p[p.state.eq("Florida") & p.county.str.upper().isin(["BAY", "GULF"])]
+    lines = ["", "# Context: E&E News on Michael, one week after landfall (4.0.0)", "",
+             f"**Source.** {EENEWS_SOURCE} Read 2026-11-27 (VERIFIED in `docs/literature.md`). Citing FCC records, "
+             f"the article puts the share of wireless sites not working in Bay and Gulf counties, Florida, one week "
+             f"after Michael's landfall at {EENEWS_SHARE}%. Context only, not scored; no data were changed.", "",
+             "| Report | Bay | Gulf | Bay and Gulf |", "|---|---|---|---|"]
+    for date, g in rows.groupby("report_date"):
+        if not "2018-10-15" <= date <= "2018-10-19":
+            continue
+        cells = []
+        for name in ("BAY", "GULF"):
+            x = g[g.county.str.upper() == name]
+            cells.append(f"{int(x.sites_out.sum()):,} of {int(x.sites_served.sum()):,} "
+                         f"({100 * x.sites_out.sum() / x.sites_served.sum():.1f}%)")
+        both = f"{int(g.sites_out.sum()):,} of {int(g.sites_served.sum()):,} ({100 * g.sites_out.sum() / g.sites_served.sum():.1f}%)"
+        lines.append(f"| {date} {g.doc_id.iloc[0]} | {cells[0]} | {cells[1]} | {both} |")
+    day = rows[rows.report_date == EENEWS_DATE]
+    pct = 100 * day.sites_out.sum() / day.sites_served.sum()
+    lines += ["", f"Side by side for {EENEWS_DATE}: the article's {EENEWS_SHARE}% against {pct:.1f}% in the "
+              "FCC's daily report of that date for the two counties together. The FCC's own Michael report (rows M1 "
+              "and M2 above, citing the same daily report) says over 46% for Bay County and nearly 35% for Gulf "
+              "County, which match the daily report's rows. The article does not say which record or measure gives "
+              f"{EENEWS_SHARE}%, so the difference is shown and not explained."]
+    return lines
+
+
 def main():
     m = check_michael(pd.read_csv(MICHAEL, dtype=str, keep_default_na=False))
     o = check_olukola(pd.read_csv(OLUKOLA, dtype=str, keep_default_na=False))
@@ -278,7 +343,7 @@ def main():
     o.to_csv(OUT_OLUKOLA, index=False, lineterminator="\n")
     f.to_csv(OUT_21_99, index=False, lineterminator="\n")
     figures = pd.read_csv(s15.FIGURES, dtype=str, keep_default_na=False)
-    text = s15.markdown(s15.check(figures)) + markdown(m, o, f)
+    text = s15.markdown(s15.check(figures)) + markdown(m, o, f) + "\n".join(review_section() + eenews_section()) + "\n"
     s15.OUT_MD.write_text(text, encoding="utf-8", newline="\n")
     print(m[["id", "fcc_value", "ours", "status"]].to_string(index=False))
     print(o[["id", "theirs", "ours", "status"]].to_string(index=False))

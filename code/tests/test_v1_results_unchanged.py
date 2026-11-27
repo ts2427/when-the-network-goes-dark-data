@@ -4,6 +4,8 @@ SHA-256 of each key).
 
 The snapshot holds the v1 keys as written by version 3.0.0 (floats to 10 significant digits), after the corrections
 of 2026-11-24 (Harvey's 2017 reports, Harvey Sep 3 and Nate restored), whose changes are listed in docs/decisions.md.
+Refreshed for 4.0.0 (2026-11-27), a major version: every changed value is in ERRATA.md and
+docs/changes_4_0_0_results.csv.
 """
 import json
 import sys
