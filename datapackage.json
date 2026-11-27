@@ -2,8 +2,8 @@
   "profile": "data-package",
   "name": "when-the-network-goes-dark-data",
   "title": "When the Network Goes Dark: Gulf Coast cell-site outages in hurricanes, 2017-2026 (data and code)",
-  "version": "3.2.0",
-  "created": "2026-11-25T12:00:00-06:00",
+  "version": "3.2.1",
+  "created": "2026-11-27T12:00:00-06:00",
   "homepage": "https://thresholddatasciences.com/analysis/when-the-network-goes-dark/",
   "description": "County-by-report panel of FCC Disaster Information Reporting System (DIRS) cell-site outages for 22 Atlantic hurricanes and tropical storms in ten Gulf and Southeast states, 2017-2026, checked against each report's printed totals, with the inputs and code that rebuild it.",
   "keywords": [
@@ -74,7 +74,7 @@
           {
             "name": "rule_period",
             "type": "string",
-            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present).",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Mandatory DIRS, with FCC 26-34 in effect from 2026-06-30 (its revised reporting list, 47 CFR 4.18, not yet in effect) (2026-06-30 to present).",
             "limitations": "Descriptive grouping only; periods differ in storms, hazards and filers."
           },
           {
@@ -279,7 +279,7 @@
           {
             "name": "rule_period",
             "type": "string",
-            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present).",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Mandatory DIRS, with FCC 26-34 in effect from 2026-06-30 (its revised reporting list, 47 CFR 4.18, not yet in effect) (2026-06-30 to present).",
             "limitations": "Blank for storms not in the panel."
           },
           {
@@ -399,7 +399,7 @@
           {
             "name": "rule_period",
             "type": "string",
-            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present).",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Mandatory DIRS, with FCC 26-34 in effect from 2026-06-30 (its revised reporting list, 47 CFR 4.18, not yet in effect) (2026-06-30 to present).",
             "limitations": "Descriptive grouping only; periods differ in storms, hazards and filers."
           },
           {
@@ -948,7 +948,7 @@
           {
             "name": "rule_period",
             "type": "string",
-            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely (2026-06-30 to present).",
+            "description": "FCC rule period by activation date. P0: Voluntary DIRS, voluntary Framework (2016-01-01 to 2024-04-30); P1: MDRI in force, DIRS voluntary (2024-05-01 to 2025-02-19); P2: MDRI + mandatory DIRS (2025-02-20 to 2026-06-29); P3: Mandatory DIRS, with FCC 26-34 in effect from 2026-06-30 (its revised reporting list, 47 CFR 4.18, not yet in effect) (2026-06-30 to present).",
             "limitations": "Descriptive grouping only; periods differ in storms, hazards and filers."
           },
           {
@@ -1458,7 +1458,8 @@
         "missingValues": [
           ""
         ]
-      }
+      },
+      "hash": "sha256:a60d61b6f9a7a0c5306ea5010e7b733afd428c84c439f3483d93dca35bc26195"
     },
     {
       "name": "bdc_county_provider_counts",
@@ -1997,8 +1998,8 @@
       "mediatype": "application/json",
       "title": "Every number on the page",
       "description": "Chapter results with intervals, n and method, written by code/src/10_analysis.py (chapters 1-9) and 12_v2_analysis.py (chapters 10-14); floats to 10 significant digits.",
-      "hash": "sha256:5e488ec9b9f64dd941560eb2782cd1695fd3bc24f9caa46a9a3a935759f84aff",
-      "bytes": 997899
+      "hash": "sha256:bbafb196c0abebc4e919598a5d637b158ddbe8f33c2f312d991bae98d7001918",
+      "bytes": 966461
     },
     {
       "name": "datasheet",
@@ -2007,8 +2008,8 @@
       "mediatype": "text/markdown",
       "title": "Datasheet for the dataset",
       "description": "Motivation, composition, collection, preprocessing, uses (and uses not supported), known limitations, distribution and maintenance, following Gebru et al.'s Datasheets for Datasets; every number generated from results.json or the data.",
-      "hash": "sha256:9c3865aacedb57c4be46aa222a79f5834ba081d53716ce80f2ed7f1d3367c522",
-      "bytes": 16165
+      "hash": "sha256:8bfa9322baebe818bb333501686b176aab5e064731039d9f8201f4f4d18f90ba",
+      "bytes": 16991
     },
     {
       "name": "analysis_plan_as_committed",

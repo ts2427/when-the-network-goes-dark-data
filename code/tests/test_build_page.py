@@ -1,6 +1,7 @@
 """Step 11: page build helpers."""
 import importlib
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -223,10 +224,39 @@ def test_pointer_readme_names_the_repository_and_both_dois(tmp_path, monkeypatch
         assert want in text
 
 
+def citation_cff() -> Path | None:
+    """CITATION.cff, written by step 14 into the data repository: the repository root in the public layout
+    (code/tests -> the repository), or the sibling data repository next to the private project."""
+    for p in (ROOT.parent / "CITATION.cff", ROOT.parents[1] / "when-the-network-goes-dark-data" / "CITATION.cff"):
+        if p.is_file():
+            return p
+    return None
+
+
 def test_dois_are_the_checked_concept_and_version_records():
-    assert step11.CONCEPT_DOI == "10.5281/zenodo.24477809" and step11.VERSION_DOI == "10.5281/zenodo.24537335"
+    """The page's DOIs are the ones CITATION.cff records (since 3.2.1: read from it, not pinned here)."""
+    cff = citation_cff()
+    if cff is None:
+        pytest.skip("CITATION.cff not found (the data repository is not next to this project)")
+    ids = re.findall(r'-\s*type:\s*doi\s*\n\s*value:\s*"([^"]+)"\s*\n\s*description:\s*"([^"]+)"',
+                     cff.read_text(encoding="utf-8"))
+    by_desc = {d: v for v, d in ids}
+    assert step11.CONCEPT_DOI == next(v for v, d in ids if d.startswith("Concept DOI"))
+    assert step11.VERSION_DOI == by_desc[f"Version {step11.DATA_VERSION}"]
     c = step11.dataset_citations()
     assert c["general"].endswith(step11.CONCEPT_DOI) and c["version"].endswith(step11.VERSION_DOI)
-    assert "Version 3.1.1" in c["version"]
+    assert f"Version {step11.DATA_VERSION}" in c["version"]
     assert step11.VERSION_DOIS["2.1.0"] == "10.5281/zenodo.24480432"
     assert step11.VERSION_DOIS["2.0.0"] == "10.5281/zenodo.24477811"
+
+
+def test_plan_sha256_on_the_page_is_the_published_plan_file():
+    """The Methods paragraph's SHA-256 (since 3.2.1) is the hash of the plan file as committed, in the data
+    repository (the repository root in the public layout, or the sibling data repository)."""
+    import hashlib
+    name = f"analysis_plan_as_committed_{step11.PLAN_COMMIT['hash']}.md"
+    for docs in (ROOT.parent / "docs", ROOT.parents[1] / "when-the-network-goes-dark-data" / "docs"):
+        if (docs / name).is_file():
+            assert hashlib.sha256((docs / name).read_bytes()).hexdigest() == step11.PLAN_SHA256
+            return
+    pytest.skip("the published plan file is not next to this project")

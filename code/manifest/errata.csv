@@ -10,7 +10,7 @@ CORRECTION (Laura's Aug 25,process,,,,,,
 CORRECTION (rule for time-flagged reports,process,,,,,,
 CORRECTION (V2-1 page text,process,,,,,,
 CORRECTION (V2-3 wording,process,,,,,,
-CORRECTION (release process,process,,,,,,
+"CORRECTION (release process, v3.1.1",process,,,,,,
 CORRECTION (chapter 5 not rerun,published,2.0.0,"results.json chapter_5 > storms > by_report > days_since_landfall (124 values; no number on the page uses them)",day 0 under the original rule,the current day 0,"still used day 0 under the original rule, because only chapters 3, 4, 8 and 9 were rerun when day 0 was corrected on 2026-11-23. Chapter 5 rerun under the current day 0",Chapter 5 had not been rerun when day 0 was corrected; found by the public repository's reproduction test.
 CORRECTION (Harvey Sep 4-5,published,3.0.0,"Harvey Sep 3, 4 and 5, 2017 county rows: sites out and % out (and the damage and transport columns)",the previous day's sites out and % out,today's sites out and % out,"print the previous day's sites out and % out before today's, and the parser had read the previous day as the report's own figures (today's count and % went into the damage and transport columns)",The reports print the previous day's figures before today's; the parser had read the previous day's.
 CORRECTION (combined effect,published,3.0.0,Storms in the panel,21,22,storms 21 to 22,Harvey Sep 3 and Nate restored.
@@ -41,3 +41,4 @@ CORRECTION (county name),published,3.0.0,"County name in Harvey Sep 3, 2017's Ma
 CORRECTION (display rounding),published,3.0.0,"Nicholas's site-days lost, as displayed",114,115,"Nicholas's site-days lost, 114 to 115",A value of exactly one half was stored just below the half; the page now rounds it up as its rule states.
 CORRECTION (cable and wireline parser and the log entry about it,process,,,,,,
 CORRECTION (rule dates in Tim's instructions,process,,,,,,
+"CORRECTION (release process, v3.2.0 DOI commit",process,,,,,,

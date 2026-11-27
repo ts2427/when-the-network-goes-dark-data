@@ -104,6 +104,16 @@ def readable(text: str) -> str:
     return text
 
 
+SVI_URL = "https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html"  # in CDC's own citation
+CENSUS_API_NOTICE = "This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau."
+
+
+def svi_access() -> str:
+    d = pd.read_csv(DOWNLOADS_LOG, dtype=str, keep_default_na=False)
+    w = pd.to_datetime(d[d.path.str.startswith("data/raw/svi/")].when, utc=True).min().tz_convert("America/New_York")
+    return f"{w:%B} {w.day}, {w.year}"
+
+
 def fema_access() -> str:
     d = pd.read_csv(DOWNLOADS_LOG, dtype=str, keep_default_na=False)
     w = pd.to_datetime(d[d.kind == "openfema"].when, utc=True)
@@ -545,15 +555,53 @@ def optimizer_note(c8: dict) -> str:
             "converge; the model and its likelihood are the same. ")
 
 
-SUPERSEDED_NOTES = [  # (condition on an entry, note appended on the page)
+SUPERSEDED_NOTES = [  # (condition on an entry, note appended on the page; {n_excluded} is filled in)
     (lambda d, w: w.startswith("CORRECTION (time origin; made after seeing results)"),
      "Superseded by the second time-origin correction below."),
-    (lambda d, w: d < "2026-11-23" and "landfall" in w,
-     "Superseded: day 0 is now the first time 34-knot winds reach a study-state county (2026-11-23 corrections).")]
+    (lambda d, w: d < "2026-11-23" and "landfall" in w and not w.startswith(EXHIBIT_DECISIONS),
+     "Superseded: day 0 is now the first time 34-knot winds reach a study-state county (2026-11-23 corrections)."),
+    (lambda d, w: w.startswith("DEVIATION from the plan (Validation: 'every report in scope must pass step 4"),
+     "Superseded by the combined correction of 2026-11-24 below: {n_excluded} reports are now excluded, and Nate's "
+     "report is in use.")]
+# Log entries the page shows beside the corrections because a correction refers to them ("the entry ... above")
+AUDIT_ALSO = ("Found while building the 3.2.0 cable and wireline table",  # "the entry of 2026-11-25 above"
+              "3.0.0 engineering: each storm's bootstrap seed")  # "(engineering change, 2026-11-24 below"
 
 
-def superseded_note(date: str, what: str) -> str:
-    return next((f" *{n}*" for c, n in SUPERSEDED_NOTES if c(date, what)), "")
+def superseded_note(date: str, what: str, n_excluded: int = 0) -> str:
+    return next((f" *{n.format(n_excluded=n_excluded)}*" for c, n in SUPERSEDED_NOTES if c(date, what)), "")
+
+
+def audit_rows(decisions: str, kind: str) -> list:
+    """(line number in docs/decisions.md, date, what, why) for the page's audit trail; kind is 'deviations',
+    'exhibits' or 'corrections' (the CORRECTION entries plus the entries they refer to, AUDIT_ALSO)."""
+    out = []
+    for no, ln in enumerate(decisions.splitlines(), 1):
+        if not ln.startswith("| 2026"):
+            continue
+        cells = [c.strip() for c in ln.strip("|").split("|")] + ["", ""]
+        date, what, why = cells[:3]
+        hit = {"deviations": "DEVIATION" in what, "exhibits": what.startswith(EXHIBIT_DECISIONS),
+               "corrections": "CORRECTION" in what or what.startswith(AUDIT_ALSO)}[kind]
+        if hit:
+            out.append((no, date, what, why))
+    return out
+
+
+class AuditTextError(SystemExit):
+    pass
+
+
+def check_entry(no: int, text: str) -> None:
+    """The word guard (since 3.2.1): the page shows each entry word for word, so instead of deleting words it stops
+    the build, naming the line of docs/decisions.md, when an entry's parentheses do not balance."""
+    depth = 0
+    for ch in text:
+        depth += {"(": 1, ")": -1}.get(ch, 0)
+        if depth < 0:
+            break
+    if depth != 0:
+        raise AuditTextError(f"docs/decisions.md line {no}: unbalanced parentheses in the audit-trail entry")
 
 
 # The page says what changed and why, without naming who proposed or chose it; docs/decisions.md keeps that record.
@@ -604,10 +652,12 @@ def neutral(text: str) -> str:
     return text[:1].upper() + text[1:] if text else text
 
 
-def entry(date: str, what: str, why: str, note: str = "") -> str:
-    hit = next((v for k, v in PAGE_REWORDS.items() if what.startswith(k)), None)
-    what, why = hit if hit else (neutral(what), neutral(why))
-    return f"- *{date}.* {what}" + (f" ({why})" if why else "") + note
+def entry(date: str, what: str, why: str, note: str = "", no: int = 0) -> str:
+    """One audit-trail entry, word for word from docs/decisions.md (since 3.2.1; until then names and the clauses
+    around them were cut, which damaged some entries). check_entry() stops the build on a malformed entry."""
+    text = f"{what}" + (f" ({why})" if why else "")
+    check_entry(no, text)
+    return f"- *{date}.* {text}" + note
 
 
 PLAN_SUBS = [
@@ -667,52 +717,59 @@ DISCLOSURE = ("The author works in the telecommunications industry. This analysi
               "the views are the author's alone. The author has no financial interest in any FCC proceeding.")
 # (citation, how it differs from this work): each citation VERIFIED in docs/literature.md; the sentences say only
 # what was read (2026-11-25 entries there). Shared with the README and the datasheet (step 14).
-RELATED_WORK_ITEMS = [
-    ("Olukola, O., Addeh, O. D., Konan, E. A., & Rahimi, N. (2026). The towers were standing: A cause decomposition of "
-     "cellular outages during Hurricane Helene. arXiv:2609.10944.",
+RELATED_WORK_ITEMS = [  # APA 7 (3.2.1), each checked against its DOI or official page (docs/literature.md)
+    ("Olukola, O., Addeh, O. D., Konan, E. A., & Rahimi, N. (2026). *The towers were standing: A cause decomposition "
+     "of cellular outages during Hurricane Helene* [Preprint]. arXiv. https://doi.org/10.48550/arXiv.2609.10944",
      "Helene only, from the same FCC reports; the preprint gives no link to its dataset, which is not yet deposited. "
      "This page uses it as a check (chapter 4 and the methods)."),
-    ("Du (2024). Data-driven telecommunication outage prediction during hurricane events. ASCE-ASME Journal of Risk "
-     "and Uncertainty in Engineering Systems, Part A. doi:10.1061/AJRUA6.RUENG-1285.",
-     "A model that predicts outages; this work is a checked record of the outages the FCC reported, not a "
-     "prediction."),
-    ("Anonymous. grid-to-lifeline-site: interactive companion site, cross-infrastructure dependency and resilience "
-     "across nine Florida hurricanes. GitHub repository ac5907846/grid-to-lifeline-site, accessed November 25, 2026.",
+    ("Du, A. (2024). Data-driven telecommunication outage prediction during hurricane events. *ASCE-ASME Journal of "
+     "Risk and Uncertainty in Engineering Systems, Part A: Civil Engineering, 10*(3), 04024046. "
+     "https://doi.org/10.1061/AJRUA6.RUENG-1285",
+     "Ten hurricanes in eight states at county level, to predict outages; we found no public data release. This work "
+     "is a checked record of the outages the FCC reported, not a prediction."),
+    ("Anonymous. (n.d.). *grid-to-lifeline-site: Interactive companion site, cross-infrastructure dependency and "
+     "resilience across nine Florida hurricanes* [Source code]. GitHub. Retrieved November 25, 2026, from "
+     "https://github.com/ac5907846/grid-to-lifeline-site",
      "Florida only, the companion to a manuscript under review, with no licence stated; this work covers ten states "
      "under CC BY 4.0."),
-    ("Reed & Wang (2018). Power and telecom modeling for Harvey and Irma. Forensic Engineering 2018. "
-     "doi:10.1061/9780784482018.097.",
+    ("Reed, D. A., & Wang, S. (2018). Numerical modeling of power delivery and telecommunications infrastructure for "
+     "Hurricanes Harvey and Irma. In *Forensic Engineering 2018* (pp. 1008–1016). American Society of Civil "
+     "Engineers. https://doi.org/10.1061/9780784482018.097",
      "Models power and telecommunications for two 2017 storms; this work records what the reports show for every "
      "storm in scope."),
     ("Feeny, N., White, A., & Guikema, S. (2026). A quantitative spatial approach to estimate cellular network coverage "
-     "during natural hazards using publicly available data. Journal of Infrastructure Preservation and Resilience, 7, "
-     "14. doi:10.1186/s43065-026-00176-0.",
+     "during natural hazards using publicly available data. *Journal of Infrastructure Preservation and Resilience, "
+     "7*, 14. https://doi.org/10.1186/s43065-026-00176-0",
      "Simulates where cell coverage is likely to be lost (Ann Arbor, Michigan, under high winds); this work uses "
      "observed outages."),
-    ("StEER (2022). Hurricane Ian Preliminary Virtual Reconnaissance Report (PRJ-3709). DesignSafe-CI. "
-     "doi:10.17603/ds2-kc9k-s242.",
+    ("Cortes, M., Arora, P., Ceferino, L., Ibrahim, H., Istrati, D., Reed, D., Roueche, D., Safiey, A., Tomiczek, T., "
+     "Zisis, I., Alam, M., Kijewski-Correa, T., Prevatt, D., & Robertson, I. (2022). *StEER: Hurricane Ian preliminary "
+     "virtual reconnaissance report (PVRR)* (PRJ-3709) [Data set]. DesignSafe-CI. "
+     "https://doi.org/10.17603/ds2-kc9k-s242",
      "One storm, from virtual (not field) reconnaissance across power, telecommunications and transportation; this "
      "work is cell sites only, across storms."),
-    ("claffy, k., & Clark, D. (2022). Challenges in measuring the Internet for the public interest. Journal of "
-     "Information Policy, 12, 195-233. doi:10.5325/jinfopoli.12.2022.0003.",
+    ("claffy, k., & Clark, D. (2022). Challenges in measuring the Internet for the public interest. *Journal of "
+     "Information Policy, 12*, 195–233. https://doi.org/10.5325/jinfopoli.12.2022.0003",
      "Describes the access limits on NORS/DIRS data that make an open panel useful."),
-    ("U.S. Government Accountability Office (2017). Telecommunications: FCC should improve monitoring of industry "
-     "efforts to strengthen wireless network resiliency (GAO-18-198); and (2021). Telecommunications: FCC assisted in "
-     "Hurricane Maria network restoration, but a clarified disaster response role and enhanced communication are "
-     "needed (GAO-21-297).",
-     "Audits of the FCC's role and of industry efforts; not outage datasets."),
-    ("Peskin, A. H. (2025). Cellular network outage reporting and restoration during disasters (CRS Report R48776); "
-     "Gallagher, J. C., & Peskin, A. H. (2024). Restoration of cell phone services: Hurricane Helene (CRS In Focus "
-     "IF12779). Congressional Research Service.",
-     "Reports to Congress on outage reporting and on Helene's restoration; not datasets."),
-    ("Federal Communications Commission. FCC 21-99 (Resilient Networks, notice of proposed rulemaking, 2021); FCC 24-5 "
-     "(mandatory DIRS, in force February 20, 2025, Federal Register 2025-00495); FCC 26-34 (Federal Register "
-     "2026-13155, 91 FR 39516, June 30, 2026).",
+    ("U.S. Government Accountability Office. (2017). *Telecommunications: FCC should improve monitoring of industry "
+     "efforts to strengthen wireless network resiliency* (GAO-18-198). https://www.gao.gov/products/gao-18-198",
+     "An audit of the FCC's role and of industry efforts; not an outage dataset."),
+    ("U.S. Government Accountability Office. (2021). *Telecommunications: FCC assisted in Hurricane Maria network "
+     "restoration, but a clarified disaster response role and enhanced communication are needed* (GAO-21-297). "
+     "https://www.gao.gov/products/gao-21-297",
+     "An audit of the FCC's role after Hurricane Maria; not an outage dataset."),
+    ("Peskin, A. H. (2025). *Cellular network outage reporting and restoration during disasters* (CRS Report R48776). "
+     "Congressional Research Service. https://www.congress.gov/crs-product/R48776",
+     "A report to Congress on outage reporting; not a dataset."),
+    ("Gallagher, J. C., & Peskin, A. H. (2024). *Restoration of cell phone services: Hurricane Helene* (CRS In Focus "
+     "IF12779). Congressional Research Service. https://www.congress.gov/crs-product/IF12779",
+     "A brief for Congress on Helene's restoration; not a dataset."),
+    ("Federal Communications Commission. (2021). *Resilient networks* (Notice of proposed rulemaking, FCC 21-99). "
+     "https://docs.fcc.gov/public/attachments/FCC-21-99A1.pdf; Federal Communications Commission. (2024). *Resilient "
+     "networks* (Second report and order, FCC 24-5), in force February 20, 2025 (Federal Register 2025-00495, 90 FR "
+     "6839); Federal Communications Commission. (2026). *Resilient networks* (Third report and order, FCC 26-34). "
+     "Federal Register 2026-13155, 91 FR 39516.",
      "The rules behind the reports; chapter 12 describes the periods they define."),
-    ("Federal Communications Commission, Public Safety and Homeland Security Bureau (2018). 2017 Atlantic Hurricane "
-     "Season Impact on Communications: Report and Recommendations (DOC-353805A1); and (2019). October 2018 Hurricane "
-     "Michael's Impact on Communications (DOC-357387A1).",
-     "The FCC's own summaries of three storms, used here as external checks."),
 ]
 RELATED_WORK = [f"{c} {d}" for c, d in RELATED_WORK_ITEMS]
 # README and datasheet only, not a page headline (Tim's wording, 2026-11-25)
@@ -813,6 +870,110 @@ RED_FLAG_LABELS = {
     "6_no_overlap_in_wind_or_peak": "Wind or peak outage has no overlap across periods"}
 
 
+ORDINAL = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth", 7: "seventh"}
+NUMBER_WORD = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven"}
+# the plan file as committed (docs/analysis_plan_as_committed_9fc17a4.md in the data repository); a test checks the
+# hash against that file
+PLAN_SHA256 = "d4aa966e3874d69bc256bbe1c8d1153da9fb35429551d2bae25403e61db1dd8e"  # PLAN_COMMIT["hash"]
+FCC_CAVEAT_SHORT = "a site out is not a count of people without service"
+
+
+Q4 = "svi_Q4 (most)"
+# the plan's censoring display (item 3) and its serious-flag display (item 5b), whose lower ends the claim quotes
+CH8_SENSITIVITIES_IN_CLAIM = ("censored_worst_case", "without_serious_flag_reports")
+CH8_SENSITIVITY_LABELS = [  # (key in results.json chapter_8.sensitivity, label on the page)
+    ("censored_best_case", "Counties that left while out counted as reaching 5% at their next report (plan item 3)"),
+    ("censored_worst_case", "Counties that left while out counted as never reaching 5% (plan item 3)"),
+    ("without_flagged_reports", "Without any flagged report (plan item 5)"),
+    ("without_serious_flag_reports", "Without reports with a serious flag (plan item 5b)"),
+    ("without_state_total_missing_reports", "Without the report kept by the state-total rule (plan item 6)"),
+    ("hold_sites_served_at_peak", "Sites served held at each county's peak (plan item 2)"),
+    ("first_crossing", "First crossing below 5% instead of staying below"),
+    ("national_svi_cut_points", "National SVI quartile cut points"),
+]
+
+
+def chapter8_claim(c8: dict) -> str:
+    """Chapter 8's claim (Tim's wording, 2026-11-27, with every number from results.json); no "rule out" or
+    "delay". The plan's all-flags display, whose lower end is much lower, is named beside it."""
+    h = c8["headlines"]["hazard_ratios"][Q4]
+    low = min(c8["sensitivity"][k]["hazard_ratios"][Q4]["ci_low"] for k in CH8_SENSITIVITIES_IN_CLAIM)
+    fl = c8["sensitivity"]["without_flagged_reports"]
+    allf = fl["hazard_ratios"][Q4]
+    raw = c8["headlines"]["raw_by_quartile"]
+    first = c8["page_text"]["headline"].split(". ")[0] + "."
+    if not first.startswith("In this data, counties"):
+        raise ValueError("chapter 8's stored headline changed; check the page's first sentence")
+    first = "Under the main model, " + first[len("In this data, "):]  # Tim's wording, 2026-11-27
+    return (f"{first} Under the main model the most vulnerable quartile's hazard ratio is {f1(h['value'], 2)} "
+            f"({ci(h, 2)}), consistent with no difference. Under the plan's censoring and serious-flag sensitivities the "
+            f"lower end falls to {f1(low, 2)}, so a modest slowdown can't be excluded; without any flagged report (plan "
+            f"item 5, a much smaller sample: {len(fl['storms_in_model'])} storms, {n0(fl['n_counties'])} storm-counties) "
+            f"the ratio is {f1(allf['value'], 2)} ({ci(allf, 2)}). The raw curves suggest a slower "
+            f"start in the first three days: {100 * raw['Q4 (most)']['share_below_5pct_by_day_3']['value']:.0f}% of the "
+            f"most vulnerable quartile's storm-counties were below 5% by day 3, against "
+            f"{min(100 * v['share_below_5pct_by_day_3']['value'] for q, v in raw.items() if q != 'Q4 (most)'):.0f}% to "
+            f"{max(100 * v['share_below_5pct_by_day_3']['value'] for q, v in raw.items() if q != 'Q4 (most)'):.0f}% in "
+            f"the other quartiles.")
+
+
+def chapter8_sensitivity_table(c8: dict) -> str:
+    """Every sensitivity display already in results.json for the most vulnerable quartile (3.2.1: shown on the page)."""
+    s = c8["sensitivity"]
+    rows = [("Main model", f"{f1(c8['headlines']['hazard_ratios'][Q4]['value'], 2)} "
+                           f"({ci(c8['headlines']['hazard_ratios'][Q4], 2)})")]
+    for key, label in CH8_SENSITIVITY_LABELS:
+        h = s[key]["hazard_ratios"][Q4]
+        rows.append((label, f"{f1(h['value'], 2)} ({ci(h, 2)})"))
+    for key, label in (("original", "Original day 0 (first landfall)"),
+                       ("landfall_or_closest_approach", "First corrected day 0 (landfall or closest approach)")):
+        h = s["earlier_time_origins"][key]["hazard_ratios"][Q4]
+        rows.append((label, f"{f1(h['value'], 2)} ({ci(h, 2)})"))
+    drops = [v[Q4] for v in s["drop_one_storm_svi_hazard_ratios"].values()]
+    rows.append(("Dropping one storm at a time (plan item 1)", f"{f1(min(drops), 2)} to {f1(max(drops), 2)} (points)"))
+    return ("Sensitivity displays for the most vulnerable quartile's hazard ratio (above 1 = reaches below 5% "
+            "sooner; 95% interval):\n\n" + table(["Display", "Hazard ratio, most vulnerable quartile"], rows))
+
+
+def lead_finding(r: dict) -> str:
+    """'In the median storm, half the sites out at the peak report were back by the second daily report after it;
+    the largest storms took about three days.' (Tim's wording, 2026-11-27), numbers from results.json: the median
+    time to 50% restored, and the times of the three storms with the most sites out at their peak."""
+    t50 = r["chapter_4"]["headlines"]["median_time_to_50pct_restored"]["value"]
+    peaks = {s["storm_key"]: s["peak_sites_out"] for s in r["chapter_3"]["storms"]}
+    times = {s["storm_key"]: s["time_to_50pct_restored"]["value"] for s in r["chapter_4"]["storms"]
+             if s["time_to_50pct_restored"]["value"] is not None}
+    largest = sorted(times, key=lambda k: -(peaks[k]["value"] if isinstance(peaks[k], dict) else peaks[k]))[:3]
+    big = sorted(times[k] for k in largest)[1]  # the middle of the three
+    return (f"In the median storm, half the sites out at the peak report were back by the {ORDINAL[round(t50)]} daily "
+            f"report after it; the largest storms took about {NUMBER_WORD[round(big)]} days.")
+
+
+def causes_finding(r: dict) -> str:
+    c5 = r["chapter_5"]["headlines"]
+    n = c5["n_storms_with_causes"]["value"]
+    first = min(int(s["storm_key"][4:8]) for s in r["chapter_5"]["storms"])
+    d = c5["pooled_all_storms"]["damage"]
+    return (f"In the {n} storms whose reports print causes ({first} on), lost power and lost network connections, not "
+            f"damage to the sites themselves ({f1(d['value'])}% of sites out, 95% interval {f1(d['ci_low'])} to "
+            f"{f1(d['ci_high'])}), account for most outages, and county-reports with more electricity customers "
+            f"without power tend to have more cell sites out.")
+
+
+def peak_is_last(r: dict) -> list:
+    """Storms whose last report is also their peak report (so 'still out at the last report' is the peak itself)."""
+    last = {s["storm_key"]: s["last_report"] for s in r["chapter_1"]["storms"]}
+    return [s["storm"] for s in r["chapter_3"]["storms"] if s["peak_report_date"] == last.get(s["storm_key"])]
+
+
+def peak_is_last_note(r: dict) -> str:
+    names = peak_is_last(r)
+    if not names:
+        return ""
+    who = names[0] if len(names) == 1 else " and ".join([", ".join(names[:-1]), names[-1]])
+    return f" For {who}, the last report is also the peak."
+
+
 def opening_numbers(r: dict) -> dict:
     """Every number in the opening, from results.json."""
     h1, h4 = r["chapter_1"]["headlines"], r["chapter_4"]["headlines"]
@@ -873,21 +1034,23 @@ def opening_section(r: dict) -> list:
         "How fast does it come back? What takes it down? Who waits longest?\n",
         "### What I found\n",
         '<div id="what-version-2-adds"></div>\n',  # the old "What version 2 adds" anchor, now part of this list
-        f"- Half of the sites that go dark are typically back within about {n['median_t50']} days.",
-        "- Lost power and lost network connections, not damage to the sites themselves, account for most outages, and "
-        "cell outages tend to rise and fall with power outages.",
-        "- Counties with higher social vulnerability did not take measurably longer for cell outages to fall below 5% of "
+        f"- {lead_finding(r)}",
+        f"- {causes_finding(r)}",
+        "- Under the main model, counties with higher social vulnerability did not take measurably longer for cell "
+        "outages to fall below 5% of "
         "sites.",
         f"- The FCC's reporting often ended before recovery could be confirmed: only {n['n90_low']} to {n['n90_high']} "
         f"of {n['n_storms_recovery']} storms reached 90% restored within the reports.",
-        *[x.replace("- ", "- *Exploratory.* ", 1) for x in v2_opening(r)],
-        "\nEach finding's uncertainty and limits are given in its chapter.\n",
+        *[x.replace("- ", "- *Exploratory.* ", 1) + (peak_is_last_note(r) if "last public report" in x else "")
+          for x in v2_opening(r)],
+        f"\nThese count cell sites as the FCC's reports do: {FCC_CAVEAT_SHORT}. Each finding's uncertainty and limits "
+        "are given in its chapter.\n",
         "### How to read it\n",
-        "Everything here is descriptive: it shows what happened together, not what caused what. The analysis plan was "
-        "committed on November 22, 2026, in the project's private version-controlled repository (commit 9fc17a4), "
-        "before any recovery outcome was computed. The plan file as committed is published in the data repository with "
-        "its SHA-256, so it can be checked against later changes. It is not blind to some figures, which are listed in "
-        "the methods. Every number is generated by code, and each chapter states its limits. "
+        "Everything here is descriptive: it shows what happened together, not what caused what. I wrote the analysis "
+        "plan before computing any recovery result, but after seeing some figures while building and checking the "
+        "parser (listed in the audit trail). Every later change, including two changes to how days are counted, is "
+        f"logged with its date. Each FCC report says: \"{FCC_CAVEAT}\" Every number is generated by code, and each "
+        "chapter states its limits. "
         f"{EXPLORATORY_NOTE} {BOOTSTRAP_READING} The data and code are public and archived on Zenodo; how to cite "
         "them is at the end of the page. It's written for emergency managers, utilities, carriers, regulators, "
         "and anyone who has lost signal in a storm.\n",
@@ -942,7 +1105,10 @@ def chapter_blocks(r: dict) -> dict:
     add("**What it means.** The tables combine all providers, so no single company's network is visible. Coverage "
         "changes during a storm: counties join and leave the reporting area, and the FCC narrows the area as outages "
         "fall. Reporting was voluntary before February 20, 2025 and mandatory after; from June 30, 2026, FCC 26-34 "
-        "exempts non-facilities-based providers and drops DIRS final reports. So who reports can change between storms. "
+        "exempts providers that do not own their own facilities (DIRS stays mandatory for those that do). So who "
+        "reports can change between storms. FCC 26-34 also ended the DIRS final report, a filing that, like every "
+        "DIRS filing, is presumptively confidential (FCC 26-34, citing 47 CFR 0.457(d)(1)(vi) and 4.2); the public "
+        "reports never included it, so ending it does not change what this page can see. "
         "The page groups storms by these rule periods, using each storm's DIRS activation date:\n")
     for code, label in PERIOD_LABELS.items():
         add(f"- **{code}:** {label}")
@@ -1029,7 +1195,7 @@ def chapter_blocks(r: dict) -> dict:
     add(f"\n**What it means.** Where it is seen, recovery to half takes from {f1(min(seen50), 0)} to "
         f"{f1(max(seen50), 0)} days. The last stretch to 90% is "
         f"not observed in {t90['n'] - t90['min']} of {t90['n']} storms if leaving counties are counted as still out, or "
-        f"{t90['n'] - t90['max']} if they are counted as restored, because the reports stop. {FINAL_REPORT_SENTENCE} "
+        f"{t90['n'] - t90['max']} if they are counted as restored, because the reports stop. "
         f"A time is the first report "
         f"from which the share restored stays "
         f"past the threshold in every later report; the true time falls after the report before. Site-days lost "
@@ -1045,7 +1211,9 @@ def chapter_blocks(r: dict) -> dict:
     ext = c5["external_check"]
     add(f"**Claim.** In the FCC's cause columns, loss of commercial power accounts for {f1(p['power']['value'])}% of "
         f"cell sites out (95% interval {ci(p['power'])}), loss of transport (backhaul) {f1(p['transport']['value'])}%, "
-        f"and damage to the site {f1(p['damage']['value'])}%, pooled over {p['power']['n']} storms' reports (each site "
+        f"and damage to the site {f1(p['damage']['value'])}% (95% interval {ci(p['damage'])}), pooled over the "
+        f"{p['power']['n']} storms whose reports print causes "
+        f"({min(int(s['storm_key'][4:8]) for s in c5['storms'])} on) (each site "
         f"counts once for every report in which it is out). {f1(p['unattributed']['value'])}% have no cause given, and "
         f"causes exceed sites out by {f1(p['overattributed']['value'])}%, consistent with some sites counted under more "
         f"than one cause.\n")
@@ -1102,7 +1270,7 @@ def chapter_blocks(r: dict) -> dict:
     L = S[8] = []
     add = L.append
     pt = c8["page_text"]
-    add(f"**Claim.** {pt['headline']} {pt['headline_bound']}\n")
+    add(f"**Claim.** {chapter8_claim(c8)}\n")
     add("**Exhibit.**\n\n[figure:fig-svi]\n")
     raw = c8["headlines"]["raw_by_quartile"]
     wrow = [(q, n0(v["median_days_since_landfall"]["n"]), f"{f1(v['svi_range'][0], 3)} to {f1(v['svi_range'][1], 3)}",
@@ -1120,7 +1288,8 @@ def chapter_blocks(r: dict) -> dict:
     line = earlier_origins_line(c8)
     if line:
         add(line + "\n")
-    add(f"**What it means.** {pt['wording']} What the data can't rule out:\n")
+    add("\n" + chapter8_sensitivity_table(c8) + "\n")
+    add(f"**What it means.** {pt['wording']} What these data cannot separate:\n")
     for x in pt["cannot_rule_out"]:
         add(f"- {x}")
     add(f"\n{pt['best_case_sensitivity']}\n")
@@ -1385,7 +1554,7 @@ def v2_blocks(r: dict) -> dict:
         text = "every storm's last report is unchanged."
     add(lead + text + "\n")
     add("**What it means.** \"Still out in the FCC's last report\" counts sites at the moment the public reporting "
-        f"stopped; it does not say how long they stayed out afterwards. {FINAL_REPORT_SENTENCE} The upper bound assumes every county that left the "
+        "stopped; it does not say how long they stayed out afterwards. The upper bound assumes every county that left the "
         "reports while still out stayed out, which the reports cannot confirm.\n")
 
     # 11. V2-2
@@ -1717,14 +1886,15 @@ def takeaways(r: dict) -> list:
     t50, t90 = h4["median_time_to_50pct_restored"], h4["n_storms_reaching_90pct_restored"]
     z = c7["by_wind_zone"]
     rho = r["chapter_6"]["headlines"]["comovement_at_as_of_time"]
-    o = r["v2_3_power_cell_timing"]["headlines"]["orders"]
     rc = r["v2_1_1_report_card"]["all_reports"]
     bk = r["v2_2_backup_power"]["headlines"]
     n_bk = len(bk["storms_collected"])
     _, ev, agree, compared = external_counts()
     rules = rules_wording(r["chapter_9"]["page_text"]["headline"]).split(":")[0]
     rules = rules.replace("The public reports can't yet show", "The reports can't yet show").replace("the FCC's ", "the ")
-    bound = re.search(r"more than (\d+)% slower", r["chapter_8"]["page_text"]["headline"]).group(1)
+    hq = r["chapter_8"]["headlines"]["hazard_ratios"][Q4]
+    n_causes = r["chapter_5"]["headlines"]["n_storms_with_causes"]["value"]
+    first_cause = min(int(s["storm_key"][4:8]) for s in r["chapter_5"]["storms"])
     lr = r["v2_1_public_record_misses"]["headlines"]
     n_out, n_lr = lr["n_storms_with_sites_out_at_last_report"], lr["n_storms"]
     still = (f"In all {n_lr} storms" if n_out == n_lr else f"In {n_out} of {n_lr} storms") + (
@@ -1733,30 +1903,30 @@ def takeaways(r: dict) -> list:
         ("emergency managers",
          f"The first half of recovery is fast, and the last stretch is often not visible. Half of the cell sites out at "
          f"a storm's peak were back within a median of {f1(t50['value'], 0)} days, but only {t90['value']} of "
-         f"{t90['n']} storms reached 90% restored before the FCC's reports ended. {still}. Exposure is "
+         f"{t90['n']} storms reached 90% restored before the FCC's reports ended. {still}.{peak_is_last_note(r)} "
+         f"Exposure is "
          f"associated with much larger outages: counties inside a storm's 64-knot winds peaked at "
          f"{f1(z['inside 64 kt']['value'])}% of sites out, against {f1(z['outside 34 kt']['value'])}% outside its "
          f"34-knot winds.", [4, 10, 7]),
         ("carriers",
-         f"In the FCC's cause columns, most sites out are attributed to lost power and lost backhaul, not damage to the "
-         f"site itself: commercial power accounts for {f1(c5['power']['value'])}% of sites out, transport (backhaul) "
-         f"for {f1(c5['transport']['value'])}%, and site damage for {f1(c5['damage']['value'])}%. Within a storm, cell "
-         f"outages tend to rise and fall with power outages (median rank correlation {f1(rho['value'], 2)}). Where the "
-         f"order could be determined, cell outages more often fell below 5% before power outages did than after "
-         f"({o['cell_first']['count']} vs {o['power_first']['count']} counties), though the two are measured on "
-         f"different scales. These describe what the reports record together; they do not show which measure would "
-         f"have kept sites up.", [5, 6, 12]),
+         f"In the {n_causes} storms whose reports print causes ({first_cause} on), most sites out are attributed to lost "
+         f"power and lost backhaul, not damage to the site itself: commercial power accounts for "
+         f"{f1(c5['power']['value'])}% of sites out, transport (backhaul) for {f1(c5['transport']['value'])}%, and site "
+         f"damage for {f1(c5['damage']['value'])}% (95% interval {f1(c5['damage']['ci_low'])} to "
+         f"{f1(c5['damage']['ci_high'])}). Within a storm, county-reports with more electricity customers without power "
+         f"tend to have more cell sites out (median rank correlation {f1(rho['value'], 2)}). These describe what the "
+         f"reports record together; they do not show which measure would have kept sites up.", [5, 6]),
         ("regulators",
          f"The public record often ends before recovery is complete, and what it prints varies. Cause columns appear in "
          f"{rc['cause_columns']['count']} of {rc['cause_columns']['of']} reports, and backup-power counts for {n_bk} of "
          f"{n_bk + len(bk['storms_not_collected'])} storms. The FCC's own 2017 season summary differs from its daily "
-         f"reports in {ev['differs']} of {compared} comparable figures. {rules}. Since June 30, 2026 (FCC 26-34), "
-         f"providers no longer file a DIRS final report after deactivation.", [14, 11, "external", 9, 1]),
+         f"reports in {ev['differs']} of {compared} comparable figures. {rules}.", [14, 11, "external", 9]),
         ("researchers",
          f"The panel supports descriptive work, within known limits. Its counts agree with the FCC's own 2017 season "
-         f"report in {agree} of {compared} comparable figures. Counties with higher social vulnerability did not take "
-         f"measurably longer for cell outages to fall below 5% of sites; the data rule out a delay of more than about "
-         f"{bound}% for the most vulnerable quartile. Mobile-provider counts show no consistent difference. Counties "
+         f"report in {agree} of {compared} comparable figures. Under the main model the most vulnerable SVI quartile's "
+         f"hazard ratio is {f1(hq['value'], 2)} ({ci(hq, 2)}), consistent with no difference; the plan's sensitivity "
+         f"displays bring the lower end down, so a modest slowdown can't be excluded. Mobile-provider counts show no "
+         f"consistent difference. Counties "
          f"leaving the reports are censored, not recovered, and the county bootstrap treats counties within a storm as "
          f"independent, so some intervals may be narrow.", ["external", 8, 13]),
     ]
@@ -1794,10 +1964,52 @@ def page_body(r: dict, mdata: dict, lookup: dict, methods: str) -> str:
     L.append(methods[:cut])
     reader = renumber("\n".join(L) + "\n" + MARK + "\n" + tail_sections())  # the dated logs keep their numbers
     head, tail = reader.split(MARK)
+    i = head.index("## Methods {#methods-data-and-licenses}")  # collapsed after renumbering (it reads the bold leads)
+    head = head[:i] + collapse_methods(head[i:])
     return head + methods[cut:] + tail
 
 
 MARK = "<!-- audit trail -->"
+
+# Page usability (2026-11-25, no content change): the detailed methods, the external checks, the context tables,
+# Related work and Sources sit in <details>, closed by default like the Audit trail. A method paragraph's bold lead
+# moves into its <summary>, so the words and their order are unchanged once opened; the short methods notes below stay
+# open. Anchors inside a closed section are opened by /static/js/page-sections.js (and every section opens for print).
+METHODS_OPEN = ("Analysis plan.", "Data and licenses.", "Reproduce it.", "Datasheet.", "Disclosure.")
+METHOD_LEAD = re.compile(r'^(?P<span>(?:<span id="[^"]+"></span>)?)(?P<tag>(?:\*Exploratory\.\* )?)\*\*(?P<lead>[^*]+?)\*\*'
+                         r'[ ]?(?P<rest>.*)\Z', re.S)
+EXCLUDED_LEAD = "Each report's flags and reasons are in the snapshot's"
+EXCLUDED_SUMMARY = "Excluded reports"
+
+
+def details(summary: str, body: str, cls: str) -> str:
+    return f'<details class="{cls}" markdown="1">\n<summary>{summary}</summary>\n\n{body.strip()}\n\n</details>'
+
+
+def collapse_methods(md: str) -> str:
+    """The Methods block, each detailed paragraph group in a closed <details> headed by its own bold lead."""
+    head, body = md.split("\n", 1)
+    groups = []  # [lead match or None, [paragraphs]]
+    for para in re.split(r"\n[ \t]*(?:\n[ \t]*)+", body.strip("\n")):  # any run of blank lines
+        m = METHOD_LEAD.match(para)
+        if m or para.startswith(EXCLUDED_LEAD) or not groups:
+            groups.append([m, [para], para.startswith(EXCLUDED_LEAD)])
+        else:
+            groups[-1][1].append(para)
+    out = [head, ""]
+    for m, paras, excluded in groups:
+        text = "\n\n".join(paras)
+        if excluded:
+            out.append(details(EXCLUDED_SUMMARY, text, "method-detail"))
+        elif m is None or m["lead"] in METHODS_OPEN:
+            out.append(text)
+        else:
+            tag = "<em>Exploratory.</em> " if m["tag"] else ""
+            rest = "\n\n".join([m["rest"], *paras[1:]])
+            out.append(details(f'{m["span"]}{tag}{m["lead"]}', rest, "method-detail"))
+        out.append("")
+    return "\n".join(out) + "\n"
+
 
 
 def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame, excluded: pd.DataFrame) -> str:
@@ -1806,6 +2018,12 @@ def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame
     L = []
     add = L.append
     add("## Methods {#methods-data-and-licenses}\n")
+    add(f"**Analysis plan.** The plan was committed on {PLAN_COMMIT['date']}, in the project's private "
+        f"version-controlled repository (commit {PLAN_COMMIT['hash']}), before any recovery result was computed, and "
+        f"after some figures had been seen while building and checking the parser (listed in the audit trail). The plan "
+        f"file as committed is published in the data repository "
+        f"(`docs/analysis_plan_as_committed_{PLAN_COMMIT['hash']}.md`), SHA-256 "
+        f"`{PLAN_SHA256}`, so it can be checked against later changes.\n")
     add("**Reading the reports.** Each FCC report is read from its text file or, when that is incomplete, its PDF, and "
         "every county row is checked against a second reading of the PDF. County rows must sum to the report's printed "
         "totals; a report that fails after one round of parser fixes is excluded with its reason. Counties are mapped to "
@@ -1880,15 +2098,18 @@ def methods_section(r: dict, decisions: str, plan: str, validation: pd.DataFrame
     trail = []
     add = trail.append  # the four dated logs, in full, in the collapsible Audit trail at the end of the methods
     add("\n**Deviations from the analysis plan**, each logged in `docs/decisions.md` before it was run:\n")
-    for date, what, why in deviations(decisions):
+    nx = len(excluded)
+    for no, date, what, why in audit_rows(decisions, "deviations"):
         sup = next((v for k, v in SUPERSEDED.items() if what.startswith(k)), None)
-        add(f"- *{date}.* {what.split(':')[0]}: {sup}" if sup else entry(date, what, why, superseded_note(date, what)))
+        add(f"- *{date}.* {what.split(':')[0]}: {sup}" if sup
+            else entry(date, what, why, superseded_note(date, what, nx), no))
     add("\n**Decisions on the exhibits**, logged before the charts were built:\n")
-    for date, what, why in exhibit_decisions(decisions):
-        add(entry(date, what, why, superseded_note(date, what)))
-    add("\n**Corrections**, made after results or an independent check were seen, also logged:\n")
-    for date, what, why in corrections(decisions):
-        add(entry(date, what, why, superseded_note(date, what)))
+    for no, date, what, why in audit_rows(decisions, "exhibits"):
+        add(entry(date, what, why, superseded_note(date, what, nx), no))
+    add("\n**Corrections**, made after results or an independent check were seen, also logged (with an entry a "
+        "correction refers to):\n")
+    for no, date, what, why in audit_rows(decisions, "corrections"):
+        add(entry(date, what, why, superseded_note(date, what, nx), no))
     add(f"\n**Seen before the plan was committed.** {PLAN_SENTENCE} It is not blind to some figures, as listed below. "
         f"From the plan:\n")
     for ln in neutral_plan(seen_before_registration(plan)).splitlines():
@@ -1943,12 +2164,10 @@ def tail_sections() -> str:
     L = []
     add = L.append
     add("## Related work\n")
-    for item in RELATED_WORK:
-        add(f"- {item}")
+    add(details("Show related work", "\n".join(f"- {item}" for item in RELATED_WORK), "section-collapse"))
     add("")
     add("## Sources\n")
-    for line in sources_list():
-        add(f"- {line}")
+    add(details("Show sources", "\n".join(f"- {line}" for line in sources_list()), "section-collapse"))
     add("")
     add(CITE_MARKER)
     add("## Download the data\n")
@@ -1965,43 +2184,70 @@ def link(url: str) -> str:
     return f"[{url}]({url})"
 
 
+EAGLEI_AUTHORS_19 = ("Brelsford, C., Tennille, S., Myers, A., Chinthavali, S., Tansakul, V., Denman, M., Coletti, M., "
+                     "Grant, J., Lee, S., Allen, K., Johnson, E., Huihui, J., Hamaker, A., Newby, S., Medlen, K., "
+                     "Maguire, D., Dunivan Stahl, C., Moehl, J.,")  # APA 7: the first 19 authors, then ". . ." and the last
+
+
 def sources_list() -> list:
-    """One list (2026-11-25): the former Sources list with the former Data sources box merged in, each source once,
-    with its link. (The former Method box repeated the methods and is not repeated here.)"""
+    """Sources in APA 7 (3.2.1), each checked against its DOI or official page; the FCC's two storm reports moved here
+    from Related work; CDC's suggested SVI citation, with its URL (one SVI URL everywhere) and the download date; the
+    Census Data API notice."""
     return [
-        "Brelsford, C., et al. (2024). A dataset of recorded electricity outages by United States county 2014–2022. "
-        f"*Scientific Data*, 11, 271. {link('https://doi.org/' + EAGLEI_DOIS[0])}. Data: ORNL/DOE EAGLE-I recorded "
-        f"electricity outages, 2014–2025 (figshare v4), {link('https://doi.org/' + EAGLEI_DOIS[1])}.",
-        "Olukola, O., Addeh, O. D., Konan, E. A., & Rahimi, N. (2026). The towers were standing: A cause "
-        "decomposition of cellular outages during Hurricane Helene. arXiv:2609.10944. "
-        f"{link('https://doi.org/10.48550/arXiv.2609.10944')}",
-        "Federal Communications Commission. Disaster Information Reporting System, Communications Status Reports, "
-        f"2017–2026, {link('https://www.fcc.gov/disaster-information-reporting-system-dirs-0')}; FCC 22-50 (Mandatory "
-        "Disaster Response Initiative, adopted June 27, 2022; compliance from May 1, "
-        "2024, per the FCC's MDRI page, https://www.fcc.gov/node/254876, accessed November 23, 2026); FCC 24-5 and DA 25-74 (mandatory DIRS from February 20, 2025; Federal Register 2025-00495); FCC 26-34 "
-        "(adopted May 20, 2026; Federal Register 2026-13155, 91 FR 39516, June 30, 2026).",
-        f"National Hurricane Center. HURDAT2 (1851–2025) and GIS best track for AL092026, {link('https://www.nhc.noaa.gov/data/')}.",
-        "Federal Communications Commission. Broadband Data Collection, National Broadband Map public data, Provider "
-        "Summary by Geography Type (releases of June 30, 2022, 2023, 2024 and 2026; provider counts, chapter 9), "
-        f"{link('https://broadbandmap.fcc.gov/data-download')}; Public Data API specification, revision 1.7 (June 8, "
+        f"{EAGLEI_AUTHORS_19} Redmon, D., . . . Bhaduri, B. (2024). A dataset of recorded electricity outages by United "
+        f"States county 2014–2022. *Scientific Data, 11*, 271. {link('https://doi.org/' + EAGLEI_DOIS[0])}",
+        f"{EAGLEI_AUTHORS_19} Redmond, D. P., . . . Bhaduri, B. (2026). *The Environment for Analysis of Geo-Located "
+        "Energy Information's recorded electricity outages 2014-2025* (Version 4) [Data set]. figshare. "
+        f"{link('https://doi.org/' + EAGLEI_DOIS[1] + '.v4')}",
+        "Olukola, O., Addeh, O. D., Konan, E. A., & Rahimi, N. (2026). *The towers were standing: A cause decomposition "
+        f"of cellular outages during Hurricane Helene* [Preprint]. arXiv. {link('https://doi.org/10.48550/arXiv.2609.10944')}",
+        "Federal Communications Commission. (2017–2026). *Communications status reports for areas impacted by* [each "
+        "storm] [Data set]. Disaster Information Reporting System. "
+        f"{link('https://www.fcc.gov/disaster-information-reporting-system-dirs-0')}",
+        "Federal Communications Commission, Public Safety and Homeland Security Bureau. (2018). *2017 Atlantic hurricane "
+        "season impact on communications: Report and recommendations* (DOC-353805A1). "
+        f"{link('https://docs.fcc.gov/public/attachments/DOC-353805A1.pdf')}",
+        "Federal Communications Commission, Public Safety and Homeland Security Bureau. (2019). *October 2018 Hurricane "
+        "Michael's impact on communications: Preparation, effect, and recovery* (PS Docket No. 18-339; DOC-357387A1). "
+        f"{link('https://docs.fcc.gov/public/attachments/DOC-357387A1.pdf')}",
+        "Federal Communications Commission. (2022). *Resilient networks; Mandatory Disaster Response Initiative* (Report "
+        f"and order, FCC 22-50), adopted June 27, 2022. {link('https://docs.fcc.gov/public/attachments/FCC-22-50A1.pdf')} "
+        "Compliance from May 1, 2024, per the FCC's MDRI page (https://www.fcc.gov/node/254876, accessed November 23, "
+        "2026). Mandatory DIRS (FCC 24-5 and DA 25-74) from February 20, 2025 (Federal Register 2025-00495); FCC 26-34 "
+        "adopted May 20, 2026 (Federal Register 2026-13155, 91 FR 39516, June 30, 2026).",
+        "National Hurricane Center. (2026). *HURDAT2: Atlantic hurricane database, 1851–2025*, and GIS best track for "
+        f"AL092026 [Data sets]. {link('https://www.nhc.noaa.gov/data/')}",
+        "Federal Communications Commission. (2022–2026). *Broadband Data Collection: Provider summary by geography type* "
+        "(releases of June 30, 2022, 2023, 2024 and 2026; provider counts, chapter 9) [Data set]. "
+        f"{link('https://broadbandmap.fcc.gov/data-download')} Public Data API specification, revision 1.7 (June 8, "
         "2026).",
-        "CDC/ATSDR Social Vulnerability Index 2022, "
-        f"{link('https://www.atsdr.cdc.gov/place-health/php/svi/svi-data-documentation-download.html')}.",
-        f"U.S. Census Bureau. ACS 5-year 2022 and 2020 county Gazetteer, {link('https://api.census.gov')}; 2022 "
-        f"cartographic boundary file, counties 1:500,000 (Isaias map), {link(boundary_download()['url'])}.",
-        "FEMA. OpenFEMA Disaster Declarations Summaries v2, "
-        f"{link('https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries')}; Registration Intake and "
-        "Individuals Household Program v2, "
-        f"{link('https://www.fema.gov/api/open/v2/RegistrationIntakeIndividualsHouseholdPrograms')}, and Housing "
-        "Assistance Program Data - Renters v2, "
-        f"{link('https://www.fema.gov/api/open/v2/HousingAssistanceRenters')} (context tables).",
-        "NOAA National Centers for Environmental Information. Storm Events Database, bulk details files 2017–2026 "
-        f"(context tables), {link('https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/')}; NWS "
-        f"zone-county correlation file, {link('https://www.weather.gov/gis/ZoneCounty')}.",
-        "Federal Communications Commission, Public Safety and Homeland Security Bureau (2019). October 2018 Hurricane "
-        "Michael's Impact on Communications: Preparation, Effect, and Recovery. PS Docket No. 18-339 (external "
-        f"check), {link('https://docs.fcc.gov/public/attachments/DOC-357387A1.pdf')}.",
+        # CDC's suggested citation, in CDC's own form, with its URL (one SVI URL everywhere, 3.2.1) and the download date
+        "Centers for Disease Control and Prevention/Agency for Toxic Substances and Disease Registry/Geospatial "
+        "Research, Analysis, and Services Program. CDC/ATSDR Social Vulnerability Index 2022 Database U.S. "
+        f"{link(SVI_URL)} Accessed on {svi_access()}.",
+        "U.S. Census Bureau. (2023). *American Community Survey 5-year estimates, 2018–2022*, and *2020 county "
+        f"Gazetteer* [Data sets]. {link('https://api.census.gov')} {CENSUS_API_NOTICE}",
+        "U.S. Census Bureau. (2023). *2022 cartographic boundary file, counties, 1:500,000* (Isaias map) [Data set]. "
+        f"{link(boundary_download()['url'])}",
+        "Federal Emergency Management Agency. (2026). *OpenFEMA Disaster Declarations Summaries v2* [Data set]. "
+        f"{link('https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries')} Context tables: *Registration Intake "
+        f"and Individuals Household Program v2*, {link('https://www.fema.gov/api/open/v2/RegistrationIntakeIndividualsHouseholdPrograms')}, "
+        f"and *Housing Assistance Program Data - Renters v2*, {link('https://www.fema.gov/api/open/v2/HousingAssistanceRenters')}.",
+        "NOAA National Centers for Environmental Information. (2026). *Storm Events Database: Bulk details files, "
+        f"2017–2026* (context tables) [Data set]. {link('https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/')} "
+        f"National Weather Service. *Zone-county correlation file* (bp16ap26). {link('https://www.weather.gov/gis/ZoneCounty')}",
     ]
+
+
+def meta_description(r: dict) -> str:
+    """The page's meta description (about 160 characters, 3.2.1), with the FCC's caveat in short."""
+    n = r["chapter_1"]["headlines"]["n_storms"]["value"]
+    t50 = r["chapter_4"]["headlines"]["median_time_to_50pct_restored"]["value"]
+    text = (f"FCC reports on cell sites out in {n} Gulf hurricanes, 2017–2026: half back within {f1(t50, 0)} days of "
+            f"the peak. Sites out are not people without service.")
+    if not 120 <= len(text) <= 165:
+        raise ValueError(f"meta description is {len(text)} characters; keep it near 160")
+    return text
 
 
 def work_summary(r: dict) -> str:
@@ -2010,8 +2256,8 @@ def work_summary(r: dict) -> str:
     return (f"Cell-site outages and recovery in {r['chapter_1']['headlines']['n_storms']['value']} Gulf and Southeast "
             f"hurricanes, 2017–2026: half the sites out at the peak were back within a median of {f1(t50['value'], 0)} "
             f"days, only {t90['value']} of {t90['n']} storms with a report after their peak reach 90% before the FCC's "
-            f"reports end, {'' if last_report_clause(r) else 'and '}cell outages tend to rise and fall with power "
-            f"outages{last_report_clause(r)}.")
+            f"reports end, {'' if last_report_clause(r) else 'and '}county-reports with more electricity customers "
+            f"without power tend to have more cell sites out{last_report_clause(r)}.")
 
 
 def last_report_clause(r: dict) -> str:
@@ -2066,18 +2312,18 @@ def _yaml(meta: dict) -> str:
 
 
 def front_matter(r: dict, figs: list) -> str:
-    t50 = r["chapter_4"]["headlines"]["median_time_to_50pct_restored"]
     meta = {
         "draft": DRAFT, "title": "When the Network Goes Dark", "date": DATE, "updated": UPDATED,
-        "summary": (f"Cell-site outages and recovery in {r['chapter_1']['headlines']['n_storms']['value']} Gulf and Southeast "
-                    f"hurricanes, 2017–2026, from FCC reports: half the sites out at the peak were back within a median "
-                    f"of {f1(t50['value'], 0)} days, the reports often end before 90% is back, and cell outages tend to rise and fall "
-                    f"with power outages."),
+        "summary": meta_description(r),
         # 2026-11-25: the Method, Data sources and Data boxes are merged into the page (Sources, Download the data);
         # the template puts How to cite at the page's marker
         "cite_inline": True,
+        "toc": True,  # the site builds the "On this page" navigation from the headings (2026-11-25)
         "dataset": dataset_meta(r),
         "figures": figs,
+        # the link preview (3.2.1)
+        "og_image": f"/static/img/og/{SLUG}.png", "og_image_alt": og_alt(r),
+        "og_image_width": OG_SIZE[0], "og_image_height": OG_SIZE[1],
     }
     return "---\n" + _yaml(meta) + "---\n"
 
@@ -2112,14 +2358,16 @@ def dataset_meta(r: dict) -> dict:
                         f"{panel.report_date.min()[:4]}-{panel.report_date.max()[:4]}, each report checked against its "
                         f"printed totals, with the public inputs and the code that rebuild the panel and every number "
                         f"on the page. Cell sites as reported to the FCC; not a count of people without service."),
-        "keywords": ["hurricanes", "cell sites", "telecommunications outages", "FCC DIRS", "disaster resilience",
-                     "power outages", "Gulf Coast"],
+        "keywords": list(step14.KEYWORDS),  # the archive's keywords (CITATION.cff, .zenodo.json), 2026-11-25
         "version": DATA_VERSION, "concept_doi": CONCEPT_DOI, "version_doi": VERSION_DOI, "repository": DATA_REPO,
         "license": "https://creativecommons.org/licenses/by/4.0/",
         "temporal_coverage": f"{panel.report_date.min()}/{panel.report_date.max()}",
         "spatial_coverage": sorted(panel.state.unique()),
         "variables": [{"name": n, "description": d, "unit": u} for n, _, d, u, _ in step14.PANEL_FIELDS],
         "distribution": {"url": ZENODO_FILE["url"], "bytes": ZENODO_FILE["bytes"], "format": "application/zip"},
+        # the page's own CSV of the panel (DIRS fields), a direct download for dataset search (2026-11-25)
+        "panel_csv": {"path": "/static/data/" + PANEL_PUBLIC.name, "bytes": PANEL_PUBLIC.stat().st_size,
+                      "format": "text/csv", "name": "County-report panel, DIRS fields only (CSV)"},
         "citations": dataset_citations(),
     }
 
@@ -2154,6 +2402,54 @@ def write_pointer(snapshot: Path = SNAPSHOT) -> Path:
     return dest
 
 
+OG_IMAGE = SITE / "static" / "img" / "og" / f"{SLUG}.png"
+OG_SIZE = (1200, 630)
+
+
+def og_strapline(r: dict) -> str:
+    h = {k: (v["value"] if isinstance(v, dict) else v) for k, v in r["chapter_1"]["headlines"].items()}
+    return (f"{h['n_storms']} hurricanes · {h['n_reports_used']} FCC reports · "
+            f"{str(h['first_report'])[:4]}–{str(h['last_report'])[:4]}")
+
+
+def og_alt(r: dict) -> str:
+    return (f"When the Network Goes Dark: {og_strapline(r).replace(' · ', ', ')}. A heatmap of the share of cell "
+            "sites out in each storm's FCC reports, by day.")
+
+
+def write_og_image(r: dict) -> None:
+    """The page's link preview (3.2.1): 1200 x 630, the title, the strapline from results.json, and the coverage
+    heatmap drawn from its verified figure CSV. Written without a timestamp, so a rebuild gives the same bytes."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import LinearSegmentedColormap
+    heat = pd.read_csv(FIG_DIR / "hurricane-coverage-heatmap.csv")
+    order = list(dict.fromkeys(heat.storm))
+    grid = heat.pivot_table(index="storm", columns="day", values="pct_out", aggfunc="max").reindex(order)
+    ink, field, signal = "#0F2338", "#F2F4F6", "#C7621B"
+    cmap = LinearSegmentedColormap.from_list("site", ["#FFFFFF", "#9FB6CC", "#2E5A88", ink])
+    cmap.set_bad(field)
+    w, h = OG_SIZE
+    fig = plt.figure(figsize=(w / 100, h / 100), dpi=100, facecolor=field)
+    fig.text(0.05, 0.86, "When the Network Goes Dark", fontsize=40, fontweight="bold", color=ink, va="top")
+    fig.text(0.05, 0.72, og_strapline(r), fontsize=22, color=signal, va="top")
+    fig.text(0.05, 0.08, "Share of cell sites out in each storm's FCC reports, by day · thresholddatasciences.com",
+             fontsize=13, color="#51626F")
+    ax = fig.add_axes([0.05, 0.16, 0.90, 0.46])
+    ax.imshow(grid.to_numpy(dtype=float), aspect="auto", cmap=cmap, vmin=0, vmax=25, interpolation="nearest")  # 25%: readable at thumbnail size
+    ax.set_xticks([])
+    ax.set_yticks([])
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+    OG_IMAGE.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(OG_IMAGE, dpi=100, facecolor=field, metadata={"Software": None})
+    plt.close(fig)
+    from PIL import Image
+    if Image.open(OG_IMAGE).size != OG_SIZE:
+        raise SystemExit(f"link preview is {Image.open(OG_IMAGE).size}, not {OG_SIZE}")
+
+
 def main():
     r = json.loads((OUTPUT / "results.json").read_text(encoding="utf-8"))
     for i in range(1, 10):
@@ -2163,6 +2459,7 @@ def main():
     write_figure_csvs(rows)
     verified = verify_figure_csvs(rows)
     figs = figures_front_matter(verified, r)
+    write_og_image(r)
     decisions = (ROOT / "docs" / "decisions.md").read_text(encoding="utf-8")
     plan = (ROOT / "docs" / "analysis_plan.md").read_text(encoding="utf-8")
     panel_public = pd.read_csv(PROCESSED / "dirs_county_day.csv", dtype={"fips": str}, keep_default_na=False,
@@ -2182,8 +2479,12 @@ def main():
                               pd.read_csv(OUTPUT / "excluded_reports.csv", keep_default_na=False))
     body = page_body(r, mdata, lookup, methods)
     page = front_matter(r, figs) + "\n" + body + "\n"
-    if "claude" in page.lower():
-        raise SystemExit("the page names the coding assistant; reword it (see neutral())")
+    # The page, audit trail included, does not name the coding assistant (the AI line discloses its use, and
+    # AI_ASSISTANCE.md names the tool); the log calls it "the AI coding assistant" (2026-11-27). A hit stops the
+    # build with its page line.
+    for no, line in enumerate(page.splitlines(), 1):
+        if "claude" in line.lower():
+            raise SystemExit(f"page line {no} names the coding assistant; reword the source (docs/decisions.md)")
     PAGE.write_text(page, encoding="utf-8", newline="\n")
     PANEL_PUBLIC.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(PROCESSED / "dirs_county_day.csv", PANEL_PUBLIC)

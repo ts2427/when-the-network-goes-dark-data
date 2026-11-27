@@ -15,3 +15,14 @@ def test_datapackage_validates_with_no_errors():
     for task in report.tasks:
         errors += [f"{task.name}: {e.message}" for e in task.errors]
     assert report.valid and not errors, errors[:20]
+
+
+def test_every_resource_hash_matches():
+    """Each resource's SHA-256 (since 3.2.1 the Parquet's too, which frictionless does not check) matches its file."""
+    import hashlib
+    import json
+    pkg = json.loads((REPO / "datapackage.json").read_text(encoding="utf-8"))
+    for r in pkg["resources"]:
+        if "hash" in r:
+            got = "sha256:" + hashlib.sha256((REPO / r["path"]).read_bytes()).hexdigest()
+            assert got == r["hash"], r["path"]

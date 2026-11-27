@@ -32,11 +32,11 @@ import load
 from config import (BDC_COUNTS, BDC_COUNTS_META, DOWNLOADS_LOG, EAGLEI_EXTRACT, EAGLEI_RAW_DIR, OUTPUT, PROCESSED,
                     RAW, REGIMES, ROOT)
 
-VERSION = "3.2.0"
-RELEASE_DATE = "2026-11-25"
+VERSION = "3.2.1"
+RELEASE_DATE = "2026-11-27"
 CREATED = f"{RELEASE_DATE}T12:00:00-06:00"  # datapackage.json created: ISO 8601 date-time (v2.2.0)
 # Set to True only after CI has passed on both ubuntu-latest and windows-latest (README then says so).
-CI_PASSED_ON_BOTH = True  # 3.2.0: CI passed on ubuntu-latest and windows-latest, commit 2e3cc63 (2026-11-25)
+CI_PASSED_ON_BOTH = False  # 3.2.1: not yet run on CI
 GITHUB = "https://github.com/ts2427/when-the-network-goes-dark-data"
 BOOTSTRAP_NOTE = importlib.import_module("11_build_page").BOOTSTRAP_METHODS
 PUBLIC_REQUIREMENTS = [
@@ -88,7 +88,8 @@ MAX_BYTES = 50 * 1024 * 1024
 # 26-34's DIRS streamlining (47 CFR 4.18, amendatory instruction 3, and the new forms) was not in force when Isaias was
 # reported. The stored label (config.REGIMES, results.json) changes only in the next major version.
 PERIOD_DISPLAY = {"Streamlined DIRS (FCC 26-34)":
-                  "After FCC 26-34 took effect (2026-06-30); its DIRS amendment (47 CFR 4.18) delayed indefinitely"}
+                  "Mandatory DIRS, with FCC 26-34 in effect from 2026-06-30 (its revised reporting list, 47 CFR 4.18, not "
+                  "yet in effect)"}  # 3.2.1: worded so it cannot be read as DIRS being suspended
 PERIODS = "; ".join(f"P{i}: {PERIOD_DISPLAY.get(name, name)} ({start} to {end if end < '2099' else 'present'})"
                     for i, (name, start, end) in enumerate(REGIMES))
 SITE_LIMIT = ("Cell sites as reported by providers to the FCC; a site out is not a count of people without service "
@@ -478,8 +479,9 @@ def deviations_md(T: Path) -> None:
              "entry marked CORRECTION, in the log's order and wording. The full log is `docs/decisions.md`.", "",
              "## Deviations", "", "| Date | Deviation | Reason |", "|---|---|---|"]
     lines += [f"| {d} | {w} | {y} |" for d, w, y in step11.deviations(text)]
-    lines += ["", "## Corrections", "", "| Date | Correction | Reason |", "|---|---|---|"]
-    lines += [f"| {d} | {w} | {y} |" for d, w, y in step11.corrections(text)]
+    lines += ["", "## Corrections", "", "With, since 3.2.1, the entries a correction refers to (\"the entry ... above\").",
+              "", "| Date | Correction | Reason |", "|---|---|---|"]
+    lines += [f"| {d} | {w} | {y} |" for _, d, w, y in step11.audit_rows(text, "corrections")]
     write(T / "DEVIATIONS.md", "\n".join(lines) + "\n")
 
 
@@ -704,6 +706,9 @@ def datapackage(T: Path, plan: dict) -> dict:
     for r in pkg["resources"]:
         if r["format"] == "parquet":  # frictionless reads Parquet through pyarrow and cannot check bytes or hash
             r["description"] += f" SHA-256 {sha256(T / r['path'])}; {(T / r['path']).stat().st_size} bytes."
+            # since 3.2.1 also as a field; frictionless does not check a Parquet hash (or byte count), so the build
+            # and code/tests/test_datapackage.py check every resource's hash themselves
+            r["hash"] = "sha256:" + sha256(T / r["path"])
             continue
         if "hash" not in r:
             r["hash"] = "sha256:" + sha256(T / r["path"])
@@ -1112,6 +1117,30 @@ variable's meaning, a minor version adds data or variables, a patch fixes docume
 any output.
 
 {unreleased}## [{VERSION}] - {RELEASE_DATE}
+
+Launch fixes from an independent review. **No published number changes**: every value in `data/analysis/` and
+`data/input/` is the same as in 3.2.0 (the reproduction test compares them).
+
+### Fixed
+- CI on `main` failed on both platforms after the 3.2.0 DOI commit (e0a4885): `code/tests/test_build_page.py` still
+  pinned the 3.1.1 DOI. The test now reads the version DOI from `CITATION.cff`.
+- `data/analysis/results.json` is strict JSON: the 30 `NaN` values (`chapter_9.storms`: `t50`, `t90` and `t90_best`
+  where a storm never reached the threshold) are written as `null`, and the file is written with LF line endings on
+  every platform (Windows builds wrote CRLF, so its hash depended on the platform). A format fix, not a number change:
+  every value is the same.
+- `datapackage.json`: hashes updated; the Parquet resource also carries its hash as a field. Frictionless does not
+  check a Parquet hash, so the build and `code/tests/test_datapackage.py` check every resource's hash.
+- The page's audit trail shows each `docs/decisions.md` entry word for word; it had cut names and, with them, words
+  from eight entries. `DEVIATIONS.md` lists, with the corrections, the entries a correction refers to.
+
+### Changed (documentation)
+- The README and `DATASHEET.md` take the page's corrected citations (APA 7, each checked against its DOI or official
+  page; Reed and Wang's full title, Du's initial and volume) and the reworded rule-period label for P3 ("Mandatory DIRS,
+  with FCC 26-34 in effect from 2026-06-30; its revised reporting list, 47 CFR 4.18, not yet in effect"; the stored
+  label is unchanged until the next major version).
+- The version 3.2.0 DOI (10.5281/zenodo.24542647) in `CITATION.cff` and the README, added after its release.
+
+## [3.2.0] - 2026-11-25
 
 Adds context tables, external checks and documentation. No published value changes: every file published in
 3.1.1 under `data/analysis/` and `data/input/` is byte for byte the same, `results.json` included (the reproduction
@@ -2073,6 +2102,17 @@ def test_datapackage_validates_with_no_errors():
     for task in report.tasks:
         errors += [f"{task.name}: {e.message}" for e in task.errors]
     assert report.valid and not errors, errors[:20]
+
+
+def test_every_resource_hash_matches():
+    """Each resource's SHA-256 (since 3.2.1 the Parquet's too, which frictionless does not check) matches its file."""
+    import hashlib
+    import json
+    pkg = json.loads((REPO / "datapackage.json").read_text(encoding="utf-8"))
+    for r in pkg["resources"]:
+        if "hash" in r:
+            got = "sha256:" + hashlib.sha256((REPO / r["path"]).read_bytes()).hexdigest()
+            assert got == r["hash"], r["path"]
 '''
 
 # GitHub Actions pinned to commit SHAs (v3.1.0); Dependabot proposes updates weekly
@@ -2368,6 +2408,9 @@ def validate_datapackage(T: Path) -> None:
     import frictionless
     report = frictionless.validate(str(T / "datapackage.json"))
     errors = [e.message for e in report.errors] + [f"{t.name}: {e.message}" for t in report.tasks for e in t.errors]
+    pkg = json.loads((T / "datapackage.json").read_text(encoding="utf-8"))
+    errors += [f"{r['name']}: hash does not match {r['path']}" for r in pkg["resources"]
+               if "hash" in r and r["hash"] != "sha256:" + sha256(T / r["path"])]
     if not report.valid or errors:
         raise SystemExit("datapackage.json does not validate:\n" + "\n".join(errors[:30]))
     print(f"datapackage.json: valid (frictionless {frictionless.__version__}, {len(report.tasks)} resources checked)")

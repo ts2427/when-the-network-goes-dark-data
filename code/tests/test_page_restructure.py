@@ -34,7 +34,19 @@ CHANGED = ("## ", "### What version 2 adds", "*Exploratory:", "Exploratory: adde
            "- Olukola, O.", "- Federal Communications Commission.", "- National Hurricane Center.", "- CDC/ATSDR",
            "**Claim.** The public reports can't yet show whether",  # the rules named 2024-2026 since 2026-11-25
            "- U.S. Government Accountability Office", "- Peskin, A. H.", "- Gallagher, J. C.",  # related work, 3.2.0
-           "- Federal Communications Commission, Public Safety")
+           "- Federal Communications Commission, Public Safety",
+           # 3.2.1 launch fixes (Tim's list, 2026-11-27): the meta description, the lead and cause findings, chapter 8's
+           # claim and wording, the cause claim's interval, the final-report sentences, and the audit trail, whose
+           # entries are now the log rows word for word (AUDIT_VERBATIM below)
+           'summary: "', "- Half of the sites that go dark", "**What it means.** The tables combine all providers",
+           "**What it means.** Where it is seen, recovery to half", "**Claim.** In the FCC's cause columns",
+           "**Claim.** In this data, counties with higher social vulnerability",
+           "**What it means.** Associations only: these results describe how long",
+           "**What it means.** \"Still out in the FCC's last report\"", "- Brelsford, C.",  # Sources in APA 7
+           "- Counties with higher social vulnerability")  # "Under the main model," 2026-11-27
+# Audit-trail entries are docs/decisions.md rows word for word since 3.2.1; before, some were reworded on the page
+# (one reworded entry printed 1,679, which the log row does not), so their numbers are checked against the log instead
+AUDIT_VERBATIM = "- *2026-"
 # Release metadata, not results: the data release moved from 3.0.0 to 3.1.0 (version, DOI, file, Updated date).
 RELEASE = ('updated: "', 'dataset: {"name": ', "**Reproduce it.**",
            "Each report's flags and reasons are in the snapshot's")  # its link is pinned to the release tag
@@ -47,21 +59,37 @@ def numbers(text: str) -> set:
     return {n.rstrip(".,") for n in NUMBER.findall(NOT_VALUES.sub(" ", text))}
 
 
+METHOD_SUMMARY = re.compile(r'<details class="method-detail" markdown="1">\n<summary>(?P<span>(?:<span id="[^"]+"></span>)?)'
+                            r'(?P<tag>(?:<em>Exploratory\.</em> )?)(?P<lead>[^<]+)</summary>\n\n')
+SECTION_SUMMARY = re.compile(r'<details class="(?:section-collapse|method-detail)" markdown="1">\n<summary>'
+                             r'(?:Show related work|Show sources|Excluded reports)</summary>\n\n')
+
+
+def uncollapse(md: str) -> str:
+    """The page as it was before the 2026-11-25 usability change: each method summary back to its bold lead, the
+    section wrappers removed. The test then shows the text is unchanged apart from the wrappers."""
+    md = METHOD_SUMMARY.sub(lambda m: f"{m['span']}{'*Exploratory.* ' if m['tag'] else ''}**{m['lead']}** ", md)
+    md = SECTION_SUMMARY.sub("", md)
+    return md.replace("\n\n</details>", "")
+
+
 @built
 def test_every_number_on_the_old_page_is_on_the_new_page():
     old = BEFORE.read_text(encoding="utf-8")
-    new = step11.PAGE.read_text(encoding="utf-8")
+    new = uncollapse(step11.PAGE.read_text(encoding="utf-8"))
     changed = [ln for ln in old.splitlines() if NUMBER.search(ln) and ln.strip() and ln not in new
                and not ln.startswith(RELEASE)]
-    unexpected = [ln for ln in changed if not ln.startswith(CHANGED)]
+    unexpected = [ln for ln in changed if not ln.startswith(CHANGED + (AUDIT_VERBATIM,))]
     assert not unexpected, unexpected[:5]
     new_numbers = numbers(new)
     for ln in changed:
-        assert numbers(ln) <= new_numbers, (ln[:120], numbers(ln) - new_numbers)
+        if not ln.startswith(AUDIT_VERBATIM):
+            assert numbers(ln) <= new_numbers, (ln[:120], numbers(ln) - new_numbers)
     kept = sum(1 for ln in old.splitlines() if NUMBER.search(ln) and ln.strip() and ln in new)
     # almost every line is unchanged, word for word (cap raised from 50 to 60 on 2026-11-25 for the 3.2.0 related
     # work, whose rewritten lines each still pass the checks above)
-    assert kept >= 400 and len(changed) <= 60
+    # 3.2.1: up to 80 (the audit trail's restored entries and the launch rewording)
+    assert kept >= 390 and len(changed) <= 80  # 3.2.1: 395 kept word for word
 
 
 @built

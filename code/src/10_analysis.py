@@ -103,10 +103,24 @@ def round_floats(obj, digits: int = SIGNIFICANT_DIGITS):
     return obj
 
 
+def nulls_for_nonfinite(obj):
+    """NaN and infinities become None (JSON null): results.json is strict JSON (allow_nan=False), since 3.2.1."""
+    if isinstance(obj, float) and not np.isfinite(obj):
+        return None
+    if isinstance(obj, dict):
+        return {k: nulls_for_nonfinite(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [nulls_for_nonfinite(v) for v in obj]
+    return obj
+
+
 def write_chapter(path, key: str, content: dict) -> None:
     results = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
     results[key] = round_floats(content)
-    path.write_text(json.dumps(results, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    results = nulls_for_nonfinite(results)
+    # LF on every platform (until 3.2.1 Windows builds wrote CRLF, so the file's hash depended on the platform)
+    path.write_text(json.dumps(results, indent=2, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8",
+                    newline="\n")
 
 
 # ---- chapter 3: peak outages ----

@@ -15,9 +15,16 @@ def _is_num(x) -> bool:
     return isinstance(x, (int, float)) and not isinstance(x, bool)
 
 
+def _is_nan(x) -> bool:
+    return isinstance(x, float) and math.isnan(x)
+
+
 def differences(got, want, rtol: float = RTOL, path: str = "", atol: float = ATOL) -> list:
     """Every place where got and want differ: a list of (path, got, want). Numbers compare with math.isclose(rel_tol=
     rtol, abs_tol=atol); an int and an equal float match. Strings, booleans, None, keys and list lengths must match."""
+    # since 3.2.1 results.json writes a missing number as null instead of NaN (valid JSON); older snapshots hold NaN
+    if (got is None and _is_nan(want)) or (want is None and _is_nan(got)):
+        return []
     if _is_num(got) and _is_num(want):
         both_nan = isinstance(got, float) and isinstance(want, float) and math.isnan(got) and math.isnan(want)
         same = got == want or both_nan or math.isclose(got, want, rel_tol=rtol, abs_tol=atol)

@@ -4,11 +4,29 @@ This project follows [Semantic Versioning](https://semver.org/): a major version
 variable's meaning, a minor version adds data or variables, a patch fixes documentation or code without changing
 any output.
 
-## [Unreleased]
+## [3.2.1] - 2026-11-27
 
-### Added
-- The version 3.2.0 DOI (10.5281/zenodo.24542647) in `CITATION.cff` and the README, added after the release.
-  Documentation only.
+Launch fixes from an independent review. **No published number changes**: every value in `data/analysis/` and
+`data/input/` is the same as in 3.2.0 (the reproduction test compares them).
+
+### Fixed
+- CI on `main` failed on both platforms after the 3.2.0 DOI commit (e0a4885): `code/tests/test_build_page.py` still
+  pinned the 3.1.1 DOI. The test now reads the version DOI from `CITATION.cff`.
+- `data/analysis/results.json` is strict JSON: the 30 `NaN` values (`chapter_9.storms`: `t50`, `t90` and `t90_best`
+  where a storm never reached the threshold) are written as `null`, and the file is written with LF line endings on
+  every platform (Windows builds wrote CRLF, so its hash depended on the platform). A format fix, not a number change:
+  every value is the same.
+- `datapackage.json`: hashes updated; the Parquet resource also carries its hash as a field. Frictionless does not
+  check a Parquet hash, so the build and `code/tests/test_datapackage.py` check every resource's hash.
+- The page's audit trail shows each `docs/decisions.md` entry word for word; it had cut names and, with them, words
+  from eight entries. `DEVIATIONS.md` lists, with the corrections, the entries a correction refers to.
+
+### Changed (documentation)
+- The README and `DATASHEET.md` take the page's corrected citations (APA 7, each checked against its DOI or official
+  page; Reed and Wang's full title, Du's initial and volume) and the reworded rule-period label for P3 ("Mandatory DIRS,
+  with FCC 26-34 in effect from 2026-06-30; its revised reporting list, 47 CFR 4.18, not yet in effect"; the stored
+  label is unchanged until the next major version).
+- The version 3.2.0 DOI (10.5281/zenodo.24542647) in `CITATION.cff` and the README, added after its release.
 
 ## [3.2.0] - 2026-11-25
 

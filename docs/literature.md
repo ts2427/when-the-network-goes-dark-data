@@ -33,7 +33,7 @@ VERIFIED = found in Nov 16, 2026 research. UNVERIFIED = check before citing.
 - VERIFIED — GAO-21-297, telecommunications after Hurricane Maria
 - VERIFIED — FCC PSHSB (Aug 2018), 2017 Atlantic Hurricane Season Impact on Communications (DOC-353805A1)
 - VERIFIED — CRS R48776 (Peskin, Dec 22, 2025), Cellular network outage reporting and restoration during disasters
-- VERIFIED — CRS IF12779, Restoration of cell phone services: Hurricane Helene
+- VERIFIED — CRS IF12779, Restoration of cell phone services: Hurricane Helene. Links https://www.congress.gov/crs-product/R48776 and https://www.congress.gov/crs-product/IF12779 opened by Tim in his browser on 2026-11-27: both load (automated reads are refused, HTTP 403)
 - VERIFIED — FCC 21-34; FCC 21-99; FCC 22-50 (MDRI); FCC 24-5; DA 25-74; FCC 26-34. Rechecked 2026-11-22: DA 25-74 = PSHSB notice of the Feb 20, 2025 mandatory-DIRS compliance date (FCC listing fcc.gov/node/267533; Federal Register 2025-00495); FCC 26-34 published in the Federal Register June 30, 2026 (2026-13155)
 - VERIFIED — FCC 07-107 / 07-177 Katrina Panel backup-power rule (stayed Feb 2008; OMB disapproved Nov 2008)
 - VERIFIED — CPUC D.20-07-011 and D.21-02-029 (72-hour backup power, California)
